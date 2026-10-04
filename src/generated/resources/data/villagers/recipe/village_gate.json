@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "minecraft:oak_door"
+    },
+    "F": {
+      "item": "minecraft:iron_bars"
+    }
+  },
+  "pattern": [
+    "DFD",
+    "DFD",
+    "DFD"
+  ],
+  "result": {
+    "count": 1,
+    "id": "villagers:village_gate"
+  }
+}

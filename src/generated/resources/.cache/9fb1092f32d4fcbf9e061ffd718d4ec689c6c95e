@@ -1,0 +1,15 @@
+// 1.21.1	2026-10-04T19:19:57.666894109	Recipes
+f257711620599bb98e6a033197edc737f18ab418 data/villagers/advancement/recipes/misc/armory.json
+91d6f727280e9ff88b981679f689f9d662c19b60 data/villagers/advancement/recipes/misc/barracks.json
+1df48347c75c7712fab87d982ac7ca89a232840c data/villagers/advancement/recipes/misc/mess_station.json
+b2982fd126dc1f3db3aa23ba6020f1edd1a5f01a data/villagers/advancement/recipes/misc/post_bed.json
+99dbf23a2ce73547735a9f4cb37c654c6ac1b777 data/villagers/advancement/recipes/misc/post_block.json
+647cc7c23f089fa3789cbce1de91e2667b50a525 data/villagers/advancement/recipes/misc/village_gate.json
+6ca3c6827ba00c5e0627ef36bd77147ef4a54ddb data/villagers/advancement/recipes/misc/watchtower.json
+6056349f86bc576e69fdbbffa3e63bed965bbb14 data/villagers/recipe/armory.json
+d6352163571275724b8bdd36b5b9205342870a4b data/villagers/recipe/barracks.json
+88a2918a42dd9f07aa1b0fcacbae0e9bb0900321 data/villagers/recipe/mess_station.json
+0e55f9ed8aaf76a475dfe720ccd980fdaea0c0b5 data/villagers/recipe/post_bed.json
+f392a4f0877a5d2bd4d3dbcc047ef23009bf9f69 data/villagers/recipe/post_block.json
+732e2e2b3f1984b17a3bcb2103170b9d968f7236 data/villagers/recipe/village_gate.json
+5b6a06189d307ef9f0407312501bb595462886b7 data/villagers/recipe/watchtower.json

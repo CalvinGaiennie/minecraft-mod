@@ -43,5 +43,40 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('I', Items.IRON_INGOT)
                 .unlockedBy("has_iron", has(Items.IRON_INGOT))
                 .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(VillagersMod.MODID, "post_block"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, VillagersMod.BARRACKS.get())
+                .pattern("PPP")
+                .pattern("PSP")
+                .pattern("PPP")
+                .define('P', Items.OAK_PLANKS)
+                .define('S', Items.CRAFTING_TABLE)
+                .unlockedBy("has_crafting_table", has(Items.CRAFTING_TABLE))
+                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(VillagersMod.MODID, "barracks"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, VillagersMod.WATCHTOWER.get())
+                .pattern("B B")
+                .pattern("B B")
+                .pattern("BBB")
+                .define('B', Items.BRICK)
+                .unlockedBy("has_brick", has(Items.BRICK))
+                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(VillagersMod.MODID, "watchtower"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, VillagersMod.ARMORY.get())
+                .pattern("III")
+                .pattern("ICI")
+                .pattern("III")
+                .define('I', Items.IRON_BLOCK)
+                .define('C', Items.CHEST)
+                .unlockedBy("has_iron_block", has(Items.IRON_BLOCK))
+                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(VillagersMod.MODID, "armory"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, VillagersMod.VILLAGE_GATE.get())
+                .pattern("DFD")
+                .pattern("DFD")
+                .pattern("DFD")
+                .define('D', Items.OAK_DOOR)
+                .define('F', Items.IRON_BARS)
+                .unlockedBy("has_iron_bars", has(Items.IRON_BARS))
+                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(VillagersMod.MODID, "village_gate"));
     }
 }

@@ -2,5 +2,9 @@
   "itemGroup.villagers": "Villagers Tab",
   "block.villagers.mess_station": "Mess Station",
   "block.villagers.post_bed": "Post Bed",
-  "block.villagers.post_block": "Post Block"
+  "block.villagers.post_block": "Post Block",
+  "block.villagers.barracks": "Barracks",
+  "block.villagers.watchtower": "Watchtower",
+  "block.villagers.armory": "Armory",
+  "block.villagers.village_gate": "Village Gate"
 }
