@@ -10,6 +10,8 @@ import com.villagers.mod.block.PostBlock;
 import com.villagers.mod.block.VillageMarkerBlock;
 import com.villagers.mod.block.entity.VillagerBlockEntities;
 import com.villagers.mod.entity.VillagerAttachments;
+import com.villagers.mod.item.AwakenHornItem;
+import com.villagers.mod.item.MusterRollItem;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -64,6 +66,9 @@ public class VillagersMod {
     public static final DeferredBlock<Block> VILLAGE_MARKER = BLOCKS.register("village_marker", () -> new VillageMarkerBlock());
     public static final DeferredItem<BlockItem> VILLAGE_MARKER_ITEM = ITEMS.register("village_marker", () -> new BlockItem(VILLAGE_MARKER.get(), new Item.Properties()));
 
+    public static final DeferredItem<AwakenHornItem> AWAKEN_HORN = ITEMS.register("awaken_horn", () -> new AwakenHornItem(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<MusterRollItem> MUSTER_ROLL = ITEMS.register("muster_roll", () -> new MusterRollItem(new Item.Properties().stacksTo(1)));
+
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> VILLAGERS_TAB = CREATIVE_MODE_TABS.register("villagers_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.villagers"))
             .icon(() -> MESS_STATION_ITEM.get().getDefaultInstance())
@@ -72,6 +77,8 @@ public class VillagersMod {
                 output.accept(POST_BED_ITEM.get());
                 output.accept(POST_BLOCK_ITEM.get());
                 output.accept(VILLAGE_MARKER_ITEM.get());
+                output.accept(AWAKEN_HORN.get());
+                output.accept(MUSTER_ROLL.get());
             })
             .withTabsAfter(CreativeModeTabs.SEARCH)
             .build());
@@ -124,6 +131,10 @@ public class VillagersMod {
             event.accept(POST_BED_ITEM);
             event.accept(POST_BLOCK_ITEM);
             event.accept(VILLAGE_MARKER_ITEM);
+        }
+        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+            event.accept(AWAKEN_HORN);
+            event.accept(MUSTER_ROLL);
         }
     }
 

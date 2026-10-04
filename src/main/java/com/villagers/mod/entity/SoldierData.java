@@ -7,6 +7,8 @@ public class SoldierData {
     private String rank = "Soldier";
     private int kills = 0;
     private String displayName;
+    private int homelessNights = 0;
+    private long lastFoodDay = 0;
 
     public SoldierData(UUID soldierUUID) {
         this.soldierUUID = soldierUUID;
@@ -25,4 +27,10 @@ public class SoldierData {
 
     public String getDisplayName() { return displayName; }
     public void setDisplayName(String name) { this.displayName = name; }
+
+    public int getHomelessNights() { return homelessNights; }
+    public void setHomelessNights(int nights) { this.homelessNights = nights; }
+
+    public long getLastFoodDay() { return lastFoodDay; }
+    public void setLastFoodDay(long day) { this.lastFoodDay = day; }
 }

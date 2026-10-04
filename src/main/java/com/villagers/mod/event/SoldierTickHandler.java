@@ -6,6 +6,7 @@ import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
 import com.villagers.mod.VillagersMod;
 import com.villagers.mod.entity.SoldierBehavior;
+import com.villagers.mod.entity.SoldierDesertion;
 import com.villagers.mod.entity.VillagerAttachments;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.level.Level;
@@ -26,10 +27,24 @@ public class SoldierTickHandler {
             for (var entity : allEntities) {
                 if (entity instanceof Villager villager) {
                     if (villager.hasData(VillagerAttachments.SOLDIER_DATA.get())) {
-                        SoldierBehavior.updateDailyRoutine(villager);
+                        if (SoldierDesertion.shouldDeserve(villager)) {
+                            SoldierDesertion.processDischarged(villager);
+                        } else if (hasLostSoldierEquipment(villager)) {
+                            SoldierDesertion.processDischarged(villager);
+                        } else {
+                            SoldierBehavior.updateDailyRoutine(villager);
+                        }
                     }
                 }
             }
         }
+    }
+
+    private static boolean hasLostSoldierEquipment(Villager villager) {
+        var mainHandItem = villager.getMainHandItem();
+        var chestArmor = villager.getItemBySlot(net.minecraft.world.entity.EquipmentSlot.CHEST);
+        var headArmor = villager.getItemBySlot(net.minecraft.world.entity.EquipmentSlot.HEAD);
+
+        return mainHandItem.isEmpty() || chestArmor.isEmpty() || headArmor.isEmpty();
     }
 }
