@@ -60,7 +60,6 @@ public class VillagersMod {
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> VILLAGERS_TAB = CREATIVE_MODE_TABS.register("villagers_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.villagers"))
-            .withTabsBefore(CreativeModeTabs.BUILDING_BLOCKS)
             .icon(() -> MESS_STATION_ITEM.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 output.accept(MESS_STATION_ITEM.get());
