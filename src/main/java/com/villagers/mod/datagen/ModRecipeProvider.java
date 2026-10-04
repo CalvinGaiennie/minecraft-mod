@@ -8,6 +8,7 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 
@@ -26,14 +27,14 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .pattern("BBB")
                 .define('B', Items.BARREL)
                 .unlockedBy("has_barrel", has(Items.BARREL))
-                .save(recipeOutput);
+                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(VillagersMod.MODID, "mess_station"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, VillagersMod.POST_BED.get())
                 .pattern("W W")
                 .pattern("WWW")
                 .define('W', Items.WHITE_BED)
                 .unlockedBy("has_bed", has(Items.WHITE_BED))
-                .save(recipeOutput);
+                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(VillagersMod.MODID, "post_bed"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, VillagersMod.POST_BLOCK.get())
                 .pattern("S")
@@ -41,6 +42,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('S', Items.COBBLESTONE_SLAB)
                 .define('I', Items.IRON_INGOT)
                 .unlockedBy("has_iron", has(Items.IRON_INGOT))
-                .save(recipeOutput);
+                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(VillagersMod.MODID, "post_block"));
     }
 }
