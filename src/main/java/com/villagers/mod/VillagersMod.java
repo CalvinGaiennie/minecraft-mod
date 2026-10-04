@@ -9,6 +9,7 @@ import com.villagers.mod.block.PostBedBlock;
 import com.villagers.mod.block.PostBlock;
 import com.villagers.mod.block.VillageMarkerBlock;
 import com.villagers.mod.block.entity.VillagerBlockEntities;
+import com.villagers.mod.entity.VillagerAttachments;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -89,6 +90,8 @@ public class VillagersMod {
         CREATIVE_MODE_TABS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so block entities get registered
         VillagerBlockEntities.BLOCK_ENTITIES.register(modEventBus);
+        // Register the Deferred Register to the mod event bus so attachments get registered
+        VillagerAttachments.ATTACHMENTS.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (ExampleMod) to respond directly to events.
