@@ -13,9 +13,8 @@ public class ModDatagen {
     public static void gatherData(GatherDataEvent event) {
         var gen = event.getGenerator();
         var output = gen.getPackOutput();
+        var lookupProvider = event.getLookupProvider();
 
-        if (event.includeRecipes()) {
-            gen.addProvider(new ModRecipeProvider(output));
-        }
+        gen.addProvider(event.includeRecipes(), new ModRecipeProvider(output, lookupProvider));
     }
 }
