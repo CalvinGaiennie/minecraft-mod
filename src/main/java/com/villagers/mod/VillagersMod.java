@@ -67,6 +67,7 @@ public class VillagersMod {
                 output.accept(POST_BED_ITEM.get());
                 output.accept(POST_BLOCK_ITEM.get());
             })
+            .withTabsAfter(CreativeModeTabs.SEARCH)
             .build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
