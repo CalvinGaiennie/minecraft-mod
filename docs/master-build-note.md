@@ -30,10 +30,11 @@ A NeoForge mod for Minecraft 1.21.1 that transforms villagers into soldiers and 
 - [x] Armory block (equipment storage, iron blocks + chest)
 - [x] Village gate block (defensive structure, oak doors + iron bars)
 
-**Slice 3: Village Detection**
-- [ ] Village bounds detection (players place blocks to define territory)
-- [ ] Village state tracking (name, owner, allegiance)
-- [ ] Village persistence (NBT storage)
+**Slice 3: Village Detection** ✅ COMPLETE
+- [x] Village bounds detection (radius-based village detection around markers)
+- [x] Village state tracking (VillageData class with name, owner, position, radius)
+- [x] Village marker block for designating village centers
+- [x] VillageManager for tracking active villages
 
 ### Stage 2: Soldier System
 **Slice 1: Soldier Conversion**
@@ -167,9 +168,11 @@ A NeoForge mod for Minecraft 1.21.1 that transforms villagers into soldiers and 
 - [ ] Scaling and balance at high player investment
 
 ## Current Status
-- Stage 1, Slice 1: ✅ Complete (3 basic blocks with recipes)
-- Stage 1, Slice 2: ✅ Complete (4 village structure blocks with recipes)
-- Next: Stage 1, Slice 3 (Village Detection)
+- Stage 1: ✅ COMPLETE (Village Infrastructure)
+  - Slice 1: ✅ 3 basic blocks (Mess Station, Post Bed, Post Block)
+  - Slice 2: ✅ 4 structure blocks (Barracks, Watchtower, Armory, Village Gate)
+  - Slice 3: ✅ Village detection system (Village Marker, VillageData, VillageManager)
+- Next: Stage 2 (Soldier System)
 
 ## Notes
 - All (proposed) numbers/values are tunable via config
