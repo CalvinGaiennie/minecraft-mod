@@ -22,16 +22,23 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     @Override
     protected void buildRecipes(RecipeOutput recipeOutput) {
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, VillagersMod.MESS_STATION.get())
-                .pattern("B_B")
-                .pattern("BBB")
-                .pattern("BBB")
+                .pattern("B")
+                .pattern("B")
+                .pattern("B")
+                .pattern("B")
+                .pattern("B")
+                .pattern("B")
+                .pattern("B")
                 .define('B', Items.BARREL)
                 .unlockedBy("has_barrel", has(Items.BARREL))
                 .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(VillagersMod.MODID, "mess_station"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, VillagersMod.POST_BED.get())
-                .pattern("W_W")
-                .pattern("WWW")
+                .pattern("W")
+                .pattern("W")
+                .pattern("W")
+                .pattern("W")
+                .pattern("W")
                 .define('W', Items.WHITE_BED)
                 .unlockedBy("has_bed", has(Items.WHITE_BED))
                 .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(VillagersMod.MODID, "post_bed"));
