@@ -35,7 +35,7 @@ Open this note first in Claude Code. It says what we're building, which technica
     - Overview: performance rules, platform notes, and the build order.
 - **"(proposed)" means a tunable default**, not a final number. Put every number in config and tune it in playtesting.
 - **Read before building:** before each task, read the part for that system. Don't work from memory of the rules.
-- **No custom art.** Reuse vanilla models, textures, and particles. Items with no vanilla equivalent (horns, plans, writs) get a vanilla stand-in look; ask the user which one if it isn't in the notes.
+- **Custom art encouraged.** Original models and textures for blocks, items, and structures are welcome. Use vanilla stand-ins when art isn't ready yet; ask the user if a look isn't specified in the notes.
 - **When the notes are silent or conflict, ask the user** instead of guessing. Write the answer into the notes or the decisions log at the end of this note.
 - **Source of truth:** once this file is split into the repo's `docs/` folder, the repo copy is the source of truth. Change the docs file in the same commit as the code that changes the rule.
 
@@ -200,7 +200,7 @@ A NeoForge mod for Minecraft 1.21.1 that turns villagers into soldiers and milit
 ## Rules
 - Read the matching docs/ file before building a system. "(proposed)" numbers are tunable defaults.
 - Every number goes in config.
-- No custom art. Use vanilla models, textures, and particles.
+- Custom art encouraged. Vanilla stand-ins are fine until art is ready.
 - Soldiers and militia are vanilla villagers with data attachments. Don't add a new entity type without asking.
 - NeoForge 1.21.1 attachments don't sync to clients; use our own payloads.
 - Respect mobGriefing. Store player IDs, not names.
@@ -227,6 +227,7 @@ Add one line per decision, newest last, with the date and the reason.
 - **2026-10-04:** platform set to Minecraft 1.21.1, NeoForge 21.1.x, Java 21, ModDevGradle, Parchment. Reason: official Create supports 1.21.1 and the design is meant to join modpacks. Revisit for 26.1.2 once Create ports.
 - **2026-10-04:** soldiers and militia are assumed to be vanilla villagers with data attachments. To be confirmed by spike A.
 - **2026-10-04:** the notes were drafted in a planning chat and split into parts: Overview, Soldiers and villages, War and defense, Necromancy, Threats and mobs, Endgame, Old kingdom lore, Config and recipes, and this note.
+- **2026-10-04:** custom art encouraged (blocks, items, structures); vanilla stand-ins OK until assets exist.
 
 ---
 
@@ -263,7 +264,7 @@ The mod targets NeoForge on Minecraft 1.21.1, with Java 21.
 - **Later:** port to 26.1 once official Create does. NeoForge expects 26.1 to replace 1.21.1 as the stable version, so plan for Java 25 and the API changes between 1.21.2 and 26.1. A Fabric version can wait until the mod is finished.
 - **Versions to pin:** Minecraft 1.21.1, NeoForge 21.1.x (pin the newest build when the project starts), Java 21, and the NeoForge 1.21.1 docs. Decided against 1.20.1: NeoForge only supports 1.20.2 and later, so 1.20.1 would mean Forge, with no data components and an older API, and official Create has moved its continued support to 1.21.1.
 - **Known gap on 1.21.1:** NeoForge's data attachments don't sync to clients on their own in this version, so soldier and village data that clients need (ranks, kill counts, badges) goes through our own network packets.
-- **Art:** keep it as easy to build as possible. Soldiers and militia reuse the vanilla villager model with normal armor and item rendering, and shields use vanilla banner patterns. No custom art for the first version. Looks are assigned from existing vanilla parts:
+- **Art:** custom art encouraged for blocks, items, banners, and structures. Soldiers and militia can reuse the vanilla villager model with normal armor and item rendering until custom models exist; shields can use vanilla banner patterns or custom art. Default looks from vanilla parts when no custom asset exists:
 
 | Who | Clothing | Badge (vanilla level badge on the belt) | Label over head |
 |---|---|---|---|
@@ -275,7 +276,7 @@ The mod targets NeoForge on Minecraft 1.21.1, with Java 21.
 | Recruiter | Same as his rank | Emerald | "Recruiter" + name |
 | Bandit | Nitwit clothes | None | "Bandit" |
 
-- **Structures:** the lore adds 17 acolyte refuges, 10 bandit fortresses, the End outpost, the Evoker Lord's castle, and the shrine sites. To keep them easy to build with no custom art, use a few reusable templates: about four refuge layouts and two fortress layouts, plus single layouts for the outpost, castle, and shrines.
+- **Structures:** the lore adds 17 acolyte refuges, 10 bandit fortresses, the End outpost, the Evoker Lord's castle, and the shrine sites. Custom art encouraged; limit scope with a few reusable templates: about four refuge layouts and two fortress layouts, plus single layouts for the outpost, castle, and shrines.
 
 ## Build order
 

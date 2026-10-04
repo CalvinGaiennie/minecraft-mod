@@ -2,81 +2,54 @@ package com.villagers.mod.entity;
 
 import net.minecraft.world.entity.npc.Villager;
 
-public class SoldierDesertion {
-    private static final int DAYS_UNTIL_HUNGRY_DESERTION = 7;
-    private static final int NIGHTS_UNTIL_HOMELESS_DESERTION = 3;
-    private static final long TICKS_PER_DAY = 24000;
+import com.villagers.mod.util.SoldierStructureHelper;
 
-    public static boolean shouldDeserve(Villager soldier) {
-        SoldierData data = soldier.getData(VillagerAttachments.SOLDIER_DATA.get());
-        if (data == null || soldier.getCommandSenderWorld() == null) {
+public class SoldierDesertion {
+    public static final int DAYS_UNTIL_HUNGRY_DESERTION = 7;
+    public static final int NIGHTS_UNTIL_HOMELESS_DESERTION = 3;
+    public static final long TICKS_PER_DAY = 24000;
+
+    public static boolean wouldDesertFromHomelessness(SoldierData data) {
+        return data.getHomelessNights() >= NIGHTS_UNTIL_HOMELESS_DESERTION;
+    }
+
+    public static boolean wouldDesertFromHunger(SoldierData data, long currentDay, boolean messStocked) {
+        if (messStocked) {
             return false;
         }
+        if (data.getLastFoodDay() < 0) {
+            return false;
+        }
+        return currentDay - data.getLastFoodDay() >= DAYS_UNTIL_HUNGRY_DESERTION;
+    }
 
-        if (!hasPostBed(soldier)) {
-            data.setHomelessNights(data.getHomelessNights() + 1);
-            if (data.getHomelessNights() >= NIGHTS_UNTIL_HOMELESS_DESERTION) {
-                return true;
-            }
-        } else {
+    public static void recordNightWithoutBed(Villager soldier, SoldierData data) {
+        if (SoldierStructureHelper.soldierHasAssignedBed(soldier.level(), soldier.getUUID(), soldier.blockPosition())) {
             data.setHomelessNights(0);
-        }
-
-        if (!hasStockedMessStation(soldier)) {
-            long currentDay = soldier.getCommandSenderWorld().getDayTime() / TICKS_PER_DAY;
-            if (currentDay - data.getLastFoodDay() >= DAYS_UNTIL_HUNGRY_DESERTION) {
-                return true;
-            }
         } else {
-            data.setLastFoodDay(soldier.getCommandSenderWorld().getDayTime() / TICKS_PER_DAY);
+            data.setHomelessNights(data.getHomelessNights() + 1);
         }
-
-        return false;
     }
 
-    private static boolean hasPostBed(Villager soldier) {
-        var level = soldier.getCommandSenderWorld();
-        if (level == null) return false;
-
-        int x = soldier.getBlockX();
-        int y = soldier.getBlockY();
-        int z = soldier.getBlockZ();
-
-        for (int dx = -16; dx <= 16; dx++) {
-            for (int dy = -5; dy <= 5; dy++) {
-                for (int dz = -16; dz <= 16; dz++) {
-                    var block = level.getBlockState(new net.minecraft.core.BlockPos(x + dx, y + dy, z + dz)).getBlock();
-                    if (block instanceof com.villagers.mod.block.PostBedBlock) {
-                        return true;
-                    }
-                }
-            }
+    public static boolean shouldDesertNow(Villager soldier) {
+        SoldierData data = soldier.getData(VillagerAttachments.SOLDIER_DATA.get());
+        if (data == null || soldier.level().isClientSide) {
+            return false;
         }
-        return false;
+        long currentDay = soldier.level().getDayTime() / TICKS_PER_DAY;
+        boolean messStocked = SoldierStructureHelper.hasStockedMessStation(soldier.level(), soldier.blockPosition());
+        if (messStocked) {
+            data.setLastFoodDay(currentDay);
+        }
+        if (wouldDesertFromHomelessness(data)) {
+            return true;
+        }
+        return wouldDesertFromHunger(data, currentDay, messStocked);
     }
 
-    private static boolean hasStockedMessStation(Villager soldier) {
-        var level = soldier.getCommandSenderWorld();
-        if (level == null) return false;
-
-        int x = soldier.getBlockX();
-        int y = soldier.getBlockY();
-        int z = soldier.getBlockZ();
-
-        for (int dx = -16; dx <= 16; dx++) {
-            for (int dy = -5; dy <= 5; dy++) {
-                for (int dz = -16; dz <= 16; dz++) {
-                    var block = level.getBlockState(new net.minecraft.core.BlockPos(x + dx, y + dy, z + dz)).getBlock();
-                    if (block instanceof com.villagers.mod.block.MessStationBlock) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    public static void processDischarged(Villager soldier) {
+    public static void desert(Villager soldier) {
         soldier.removeData(VillagerAttachments.SOLDIER_DATA.get());
+        SoldierStructureHelper.releasePostBedForSoldier(soldier.level(), soldier);
+        SoldierLabels.clear(soldier);
     }
 }

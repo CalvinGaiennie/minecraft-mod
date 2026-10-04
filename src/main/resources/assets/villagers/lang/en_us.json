@@ -7,5 +7,8 @@
   "block.villagers.watchtower": "Watchtower",
   "block.villagers.armory": "Armory",
   "block.villagers.village_gate": "Village Gate",
-  "block.villagers.village_marker": "Village Marker"
+  "block.villagers.village_marker": "Surveyor's Marker",
+  "block.villagers.rampart": "Rampart",
+  "item.villagers.awaken_horn": "Awaken Horn",
+  "item.villagers.muster_roll": "Muster Roll"
 }

@@ -15,7 +15,7 @@ Open this note first in Claude Code. It says what we're building, which technica
     - Overview: performance rules, platform notes, and the build order.
 - **"(proposed)" means a tunable default**, not a final number. Put every number in config and tune it in playtesting.
 - **Read before building:** before each task, read the part for that system. Don't work from memory of the rules.
-- **No custom art.** Reuse vanilla models, textures, and particles. Items with no vanilla equivalent (horns, plans, writs) get a vanilla stand-in look; ask the user which one if it isn't in the notes.
+- **Custom art encouraged.** Original models and textures for blocks, items, and structures are welcome. Use vanilla stand-ins when art isn't ready yet; ask the user if a look isn't specified in the notes.
 - **When the notes are silent or conflict, ask the user** instead of guessing. Write the answer into the notes or the decisions log at the end of this note.
 - **Source of truth:** once this file is split into the repo's `docs/` folder, the repo copy is the source of truth. Change the docs file in the same commit as the code that changes the rule.
 
@@ -180,7 +180,7 @@ A NeoForge mod for Minecraft 1.21.1 that turns villagers into soldiers and milit
 ## Rules
 - Read the matching docs/ file before building a system. "(proposed)" numbers are tunable defaults.
 - Every number goes in config.
-- No custom art. Use vanilla models, textures, and particles.
+- Custom art encouraged. Vanilla stand-ins are fine until art is ready.
 - Soldiers and militia are vanilla villagers with data attachments. Don't add a new entity type without asking.
 - NeoForge 1.21.1 attachments don't sync to clients; use our own payloads.
 - Respect mobGriefing. Store player IDs, not names.
@@ -207,3 +207,5 @@ Add one line per decision, newest last, with the date and the reason.
 - **2026-10-04:** platform set to Minecraft 1.21.1, NeoForge 21.1.x, Java 21, ModDevGradle, Parchment. Reason: official Create supports 1.21.1 and the design is meant to join modpacks. Revisit for 26.1.2 once Create ports.
 - **2026-10-04:** soldiers and militia are assumed to be vanilla villagers with data attachments. To be confirmed by spike A.
 - **2026-10-04:** the notes were drafted in a planning chat and split into parts: Overview, Soldiers and villages, War and defense, Necromancy, Threats and mobs, Endgame, Old kingdom lore, Config and recipes, and this note.
+- **2026-10-04:** custom art encouraged (blocks, items, structures); vanilla stand-ins OK until assets exist.
+- **2026-10-04:** Stage 1 GameTests green (8/8). GameTest templates live at `data/<modid>/structure/<name>.nbt` (e.g. `villagers:empty`).

@@ -15,7 +15,6 @@ public class MessStationPlacementHandler {
 
     @SubscribeEvent
     public static void onBlockPlace(BlockEvent.EntityPlaceEvent placeEvent) {
-
         var levelAccessor = placeEvent.getLevel();
         if (!(levelAccessor instanceof net.minecraft.server.level.ServerLevel serverLevel)) {
             return;
@@ -31,17 +30,26 @@ public class MessStationPlacementHandler {
 
         var pos = placeEvent.getPos();
         UUID playerId = player.getUUID();
-
         var manager = VillageManager.get(serverLevel);
 
-        VillageData existingVillage = manager.findVillageAt(pos.getX(), pos.getY(), pos.getZ());
+        if (!manager.canClaim(playerId, pos.getX(), pos.getZ(), VillageManager.HAMLET_RADIUS)) {
+            placeEvent.setCanceled(true);
+            player.displayClientMessage(
+                    net.minecraft.network.chat.Component.literal("That land is already claimed by another village."),
+                    true);
+            return;
+        }
 
+        VillageData existingVillage = manager.findVillageAt(pos.getX(), pos.getY(), pos.getZ());
         if (existingVillage == null) {
             String villageName = "Village of " + player.getName().getString();
             VillageData newVillage = new VillageData(villageName, playerId, pos.getX(), pos.getY(), pos.getZ());
+            newVillage.setRadius(VillageManager.HAMLET_RADIUS);
             manager.registerVillage(newVillage);
-        } else if (existingVillage.getOwnerId() == null || !existingVillage.getOwnerId().equals(playerId)) {
-            existingVillage.setOwnerId(playerId);
+        } else if (existingVillage.getOwnerId().equals(playerId)) {
+            // Same owner expanding an existing claim is allowed.
+        } else {
+            placeEvent.setCanceled(true);
         }
     }
 }

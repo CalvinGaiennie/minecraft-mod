@@ -1,14 +1,20 @@
 package com.villagers.mod.entity;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.Level;
+
+import com.villagers.mod.util.SoldierStructureHelper;
 
 public class SoldierConversion {
     public static boolean canBecomeSoldier(Villager villager) {
         if (villager == null || villager.getVillagerData().getProfession() != VillagerProfession.NONE) {
+            return false;
+        }
+        if (villager.hasData(VillagerAttachments.SOLDIER_DATA.get())) {
             return false;
         }
 
@@ -19,12 +25,24 @@ public class SoldierConversion {
         if (helmet.isEmpty() || chestplate.isEmpty() || mainHand.isEmpty()) {
             return false;
         }
-
         if (!isHelmet(helmet) || !isChestplate(chestplate) || !isWeapon(mainHand)) {
             return false;
         }
 
-        return hasRequiredStructures(villager);
+        Level level = villager.level();
+        BlockPos origin = villager.blockPosition();
+        if (SoldierStructureHelper.findFreePostBed(level, origin).isEmpty()) {
+            return false;
+        }
+        return SoldierStructureHelper.hasStockedMessStation(level, origin);
+    }
+
+    public static boolean tryConvert(Villager villager) {
+        if (!canBecomeSoldier(villager)) {
+            return false;
+        }
+        convertToSoldier(villager);
+        return true;
     }
 
     private static boolean isHelmet(ItemStack item) {
@@ -47,52 +65,41 @@ public class SoldierConversion {
                 || item.getItem() == Items.DIAMOND_AXE || item.getItem() == Items.NETHERITE_AXE;
     }
 
-    private static boolean hasRequiredStructures(Villager villager) {
-        var level = villager.getCommandSenderWorld();
-        if (level == null) return false;
-
-        int x = villager.getBlockX();
-        int y = villager.getBlockY();
-        int z = villager.getBlockZ();
-
-        for (int dx = -16; dx <= 16; dx++) {
-            for (int dy = -5; dy <= 5; dy++) {
-                for (int dz = -16; dz <= 16; dz++) {
-                    var block = level.getBlockState(new net.minecraft.core.BlockPos(x + dx, y + dy, z + dz)).getBlock();
-                    if (block instanceof com.villagers.mod.block.PostBedBlock) {
-                        if (!hasStockedMessStation(villager, x, y, z)) return false;
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    private static boolean hasStockedMessStation(Villager villager, int villagerX, int villagerY, int villagerZ) {
-        var level = villager.getCommandSenderWorld();
-        if (level == null) return false;
-
-        for (int dx = -16; dx <= 16; dx++) {
-            for (int dy = -5; dy <= 5; dy++) {
-                for (int dz = -16; dz <= 16; dz++) {
-                    var block = level.getBlockState(new net.minecraft.core.BlockPos(villagerX + dx, villagerY + dy, villagerZ + dz)).getBlock();
-                    if (block instanceof com.villagers.mod.block.MessStationBlock) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
     public static void convertToSoldier(Villager villager) {
-        if (villager == null || villager.getCommandSenderWorld() == null || villager.getCommandSenderWorld().isClientSide) {
+        if (villager.level().isClientSide) {
             return;
         }
 
+        Level level = villager.level();
+        BlockPos origin = villager.blockPosition();
+
         SoldierData data = new SoldierData(villager.getUUID());
         data.setDisplayName(villager.getName().getString());
+        if (villager.hasData(VillagerAttachments.VETERAN_DATA.get())) {
+            VeteranData veteran = villager.getData(VillagerAttachments.VETERAN_DATA.get());
+            if (veteran.getKills() > 0) {
+                data.setKills(veteran.getKills());
+                data.setRank(veteran.getRank());
+            }
+        }
+        long day = level.getDayTime() / 24000L;
+        data.setLastFoodDay(day);
+
         villager.setData(VillagerAttachments.SOLDIER_DATA.get(), data);
+        SoldierStructureHelper.findFreePostBed(level, origin).ifPresent(bedPos ->
+                SoldierStructureHelper.claimPostBed(level, bedPos, villager.getUUID()));
+        SoldierLabels.apply(villager, data);
+    }
+
+    public static void dischargeHonorable(Villager villager) {
+        SoldierData data = villager.getData(VillagerAttachments.SOLDIER_DATA.get());
+        if (data == null || villager.level().isClientSide) {
+            return;
+        }
+        VeteranData veteran = new VeteranData(data.getKills(), data.getRank());
+        villager.setData(VillagerAttachments.VETERAN_DATA.get(), veteran);
+        villager.removeData(VillagerAttachments.SOLDIER_DATA.get());
+        SoldierStructureHelper.releasePostBedForSoldier(villager.level(), villager);
+        SoldierLabels.clear(villager);
     }
 }

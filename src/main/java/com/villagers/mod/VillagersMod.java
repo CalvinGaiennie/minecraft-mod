@@ -7,6 +7,7 @@ import com.mojang.logging.LogUtils;
 import com.villagers.mod.block.MessStationBlock;
 import com.villagers.mod.block.PostBedBlock;
 import com.villagers.mod.block.PostBlock;
+import com.villagers.mod.block.RampartBlock;
 import com.villagers.mod.block.VillageMarkerBlock;
 import com.villagers.mod.block.entity.VillagerBlockEntities;
 import com.villagers.mod.entity.VillagerAttachments;
@@ -54,10 +55,10 @@ public class VillagersMod {
     // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "examplemod" namespace
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
-    public static final DeferredBlock<Block> MESS_STATION = BLOCKS.register("mess_station", MessStationBlock::new);
+    public static final DeferredBlock<Block> MESS_STATION = BLOCKS.register("mess_station", () -> new MessStationBlock());
     public static final DeferredItem<BlockItem> MESS_STATION_ITEM = ITEMS.register("mess_station", () -> new BlockItem(MESS_STATION.get(), new Item.Properties()));
 
-    public static final DeferredBlock<Block> POST_BED = BLOCKS.register("post_bed", PostBedBlock::new);
+    public static final DeferredBlock<Block> POST_BED = BLOCKS.register("post_bed", () -> new PostBedBlock());
     public static final DeferredItem<BlockItem> POST_BED_ITEM = ITEMS.register("post_bed", () -> new BlockItem(POST_BED.get(), new Item.Properties()));
 
     public static final DeferredBlock<Block> POST_BLOCK = BLOCKS.register("post_block", PostBlock::new);
@@ -65,6 +66,9 @@ public class VillagersMod {
 
     public static final DeferredBlock<Block> VILLAGE_MARKER = BLOCKS.register("village_marker", () -> new VillageMarkerBlock());
     public static final DeferredItem<BlockItem> VILLAGE_MARKER_ITEM = ITEMS.register("village_marker", () -> new BlockItem(VILLAGE_MARKER.get(), new Item.Properties()));
+
+    public static final DeferredBlock<Block> RAMPART = BLOCKS.register("rampart", RampartBlock::new);
+    public static final DeferredItem<BlockItem> RAMPART_ITEM = ITEMS.register("rampart", () -> new BlockItem(RAMPART.get(), new Item.Properties()));
 
     public static final DeferredItem<AwakenHornItem> AWAKEN_HORN = ITEMS.register("awaken_horn", () -> new AwakenHornItem(new Item.Properties().stacksTo(1)));
     public static final DeferredItem<MusterRollItem> MUSTER_ROLL = ITEMS.register("muster_roll", () -> new MusterRollItem(new Item.Properties().stacksTo(1)));
@@ -77,6 +81,7 @@ public class VillagersMod {
                 output.accept(POST_BED_ITEM.get());
                 output.accept(POST_BLOCK_ITEM.get());
                 output.accept(VILLAGE_MARKER_ITEM.get());
+                output.accept(RAMPART_ITEM.get());
                 output.accept(AWAKEN_HORN.get());
                 output.accept(MUSTER_ROLL.get());
             })
@@ -131,6 +136,7 @@ public class VillagersMod {
             event.accept(POST_BED_ITEM);
             event.accept(POST_BLOCK_ITEM);
             event.accept(VILLAGE_MARKER_ITEM);
+            event.accept(RAMPART_ITEM);
         }
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             event.accept(AWAKEN_HORN);

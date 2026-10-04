@@ -53,5 +53,13 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('C', Items.LAPIS_BLOCK)
                 .unlockedBy("has_lapis", has(Items.LAPIS_BLOCK))
                 .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(VillagersMod.MODID, "village_marker"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, VillagersMod.RAMPART.get())
+                .pattern("SIS")
+                .pattern("S S")
+                .define('S', Items.STONE_BRICKS)
+                .define('I', Items.IRON_INGOT)
+                .unlockedBy("has_stone_bricks", has(Items.STONE_BRICKS))
+                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(VillagersMod.MODID, "rampart"));
     }
 }
