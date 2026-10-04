@@ -24,11 +24,11 @@ A NeoForge mod for Minecraft 1.21.1 that transforms villagers into soldiers and 
 - [x] Custom textures and Villagers creative tab
 - [x] English translations
 
-**Slice 2: Village Structures** (Next)
-- [ ] Barracks block (training area)
-- [ ] Watchtower block (command center)
-- [ ] Armory block (equipment storage)
-- [ ] Village gate block (defensive structure)
+**Slice 2: Village Structures** ✅ COMPLETE
+- [x] Barracks block (training area, oak planks + crafting table)
+- [x] Watchtower block (command center, bricks)
+- [x] Armory block (equipment storage, iron blocks + chest)
+- [x] Village gate block (defensive structure, oak doors + iron bars)
 
 **Slice 3: Village Detection**
 - [ ] Village bounds detection (players place blocks to define territory)
@@ -167,8 +167,9 @@ A NeoForge mod for Minecraft 1.21.1 that transforms villagers into soldiers and 
 - [ ] Scaling and balance at high player investment
 
 ## Current Status
-- Stage 1, Slice 1: ✅ Complete
-- Next: Stage 1, Slice 2 (Village Structures)
+- Stage 1, Slice 1: ✅ Complete (3 basic blocks with recipes)
+- Stage 1, Slice 2: ✅ Complete (4 village structure blocks with recipes)
+- Next: Stage 1, Slice 3 (Village Detection)
 
 ## Notes
 - All (proposed) numbers/values are tunable via config
