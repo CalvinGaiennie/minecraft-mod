@@ -16,7 +16,7 @@ A NeoForge mod for Minecraft 1.21.1 that turns villagers into soldiers and milit
 ## Rules
 - Read the matching docs/ file before building a system. "(proposed)" numbers are tunable defaults.
 - Every number goes in config.
-- No custom art. Use vanilla models, textures, and particles.
+- Custom art allowed for blocks and items. Keep UI/HUD minimal and clean.
 - Soldiers and militia are vanilla villagers with data attachments. Don't add a new entity type without asking.
 - NeoForge 1.21.1 attachments don't sync to clients; use our own payloads.
 - Respect mobGriefing. Store player IDs, not names.
