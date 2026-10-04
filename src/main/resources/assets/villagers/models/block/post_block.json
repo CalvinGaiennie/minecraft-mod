@@ -1,9 +1,6 @@
 {
-  "parent": "block/slab",
+  "parent": "block/cube_all",
   "textures": {
-    "particle": "block/cobblestone",
-    "bottom": "block/cobblestone",
-    "top": "block/cobblestone",
-    "side": "block/cobblestone"
+    "all": "villagers:block/post_block"
   }
 }

@@ -1,12 +1,6 @@
 {
-  "parent": "block/cube",
+  "parent": "block/cube_all",
   "textures": {
-    "particle": "block/barrel_top",
-    "down": "block/barrel_bottom",
-    "up": "block/barrel_top",
-    "north": "block/barrel_side",
-    "south": "block/barrel_side",
-    "east": "block/barrel_side",
-    "west": "block/barrel_side"
+    "all": "villagers:block/mess_station"
   }
 }
