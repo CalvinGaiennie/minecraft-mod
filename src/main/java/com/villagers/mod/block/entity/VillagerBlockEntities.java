@@ -12,4 +12,8 @@ public class VillagerBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PostBedBlockEntity>> POST_BED =
             BLOCK_ENTITIES.register("post_bed", () ->
                 BlockEntityType.Builder.of(PostBedBlockEntity::new, VillagersMod.POST_BED.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<VillageMarkerBlockEntity>> VILLAGE_MARKER =
+            BLOCK_ENTITIES.register("village_marker", () ->
+                BlockEntityType.Builder.of(VillageMarkerBlockEntity::new, VillagersMod.VILLAGE_MARKER.get()).build(null));
 }

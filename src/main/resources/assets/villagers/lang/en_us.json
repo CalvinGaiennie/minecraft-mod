@@ -6,5 +6,6 @@
   "block.villagers.barracks": "Barracks",
   "block.villagers.watchtower": "Watchtower",
   "block.villagers.armory": "Armory",
-  "block.villagers.village_gate": "Village Gate"
+  "block.villagers.village_gate": "Village Gate",
+  "block.villagers.village_marker": "Village Marker"
 }

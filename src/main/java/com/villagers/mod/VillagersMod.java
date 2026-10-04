@@ -10,6 +10,7 @@ import com.villagers.mod.block.MessStationBlock;
 import com.villagers.mod.block.PostBedBlock;
 import com.villagers.mod.block.PostBlock;
 import com.villagers.mod.block.VillageGateBlock;
+import com.villagers.mod.block.VillageMarkerBlock;
 import com.villagers.mod.block.WatchtowerBlock;
 import com.villagers.mod.block.entity.VillagerBlockEntities;
 
@@ -75,6 +76,9 @@ public class VillagersMod {
     public static final DeferredBlock<Block> VILLAGE_GATE = BLOCKS.register("village_gate", VillageGateBlock::new);
     public static final DeferredItem<BlockItem> VILLAGE_GATE_ITEM = ITEMS.register("village_gate", () -> new BlockItem(VILLAGE_GATE.get(), new Item.Properties()));
 
+    public static final DeferredBlock<Block> VILLAGE_MARKER = BLOCKS.register("village_marker", () -> new VillageMarkerBlock());
+    public static final DeferredItem<BlockItem> VILLAGE_MARKER_ITEM = ITEMS.register("village_marker", () -> new BlockItem(VILLAGE_MARKER.get(), new Item.Properties()));
+
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> VILLAGERS_TAB = CREATIVE_MODE_TABS.register("villagers_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.villagers"))
             .icon(() -> MESS_STATION_ITEM.get().getDefaultInstance())
@@ -86,6 +90,7 @@ public class VillagersMod {
                 output.accept(WATCHTOWER_ITEM.get());
                 output.accept(ARMORY_ITEM.get());
                 output.accept(VILLAGE_GATE_ITEM.get());
+                output.accept(VILLAGE_MARKER_ITEM.get());
             })
             .withTabsAfter(CreativeModeTabs.SEARCH)
             .build());
@@ -139,6 +144,7 @@ public class VillagersMod {
             event.accept(WATCHTOWER_ITEM);
             event.accept(ARMORY_ITEM);
             event.accept(VILLAGE_GATE_ITEM);
+            event.accept(VILLAGE_MARKER_ITEM);
         }
     }
 
