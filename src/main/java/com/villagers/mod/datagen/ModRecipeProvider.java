@@ -22,7 +22,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
     @Override
     protected void buildRecipes(RecipeOutput recipeOutput) {
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, VillagersMod.MESS_STATION.get())
-                .pattern("B B")
+                .pattern("B_B")
                 .pattern("BBB")
                 .pattern("BBB")
                 .define('B', Items.BARREL)
@@ -30,7 +30,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(VillagersMod.MODID, "mess_station"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, VillagersMod.POST_BED.get())
-                .pattern("W W")
+                .pattern("W_W")
                 .pattern("WWW")
                 .define('W', Items.WHITE_BED)
                 .unlockedBy("has_bed", has(Items.WHITE_BED))
