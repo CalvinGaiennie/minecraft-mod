@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "villagers:block/post_block"
+    }
+  }
+}

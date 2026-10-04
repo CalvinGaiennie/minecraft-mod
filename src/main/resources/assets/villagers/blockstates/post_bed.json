@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north,half=foot,occupied=false": {"model": "block/white_bed", "y": 0},
+    "facing=south,half=foot,occupied=false": {"model": "block/white_bed", "y": 180},
+    "facing=west,half=foot,occupied=false": {"model": "block/white_bed", "y": 90},
+    "facing=east,half=foot,occupied=false": {"model": "block/white_bed", "y": 270},
+    "facing=north,half=head,occupied=false": {"model": "block/white_bed_head", "y": 0},
+    "facing=south,half=head,occupied=false": {"model": "block/white_bed_head", "y": 180},
+    "facing=west,half=head,occupied=false": {"model": "block/white_bed_head", "y": 90},
+    "facing=east,half=head,occupied=false": {"model": "block/white_bed_head", "y": 270},
+    "facing=north,half=foot,occupied=true": {"model": "block/white_bed", "y": 0},
+    "facing=south,half=foot,occupied=true": {"model": "block/white_bed", "y": 180},
+    "facing=west,half=foot,occupied=true": {"model": "block/white_bed", "y": 90},
+    "facing=east,half=foot,occupied=true": {"model": "block/white_bed", "y": 270},
+    "facing=north,half=head,occupied=true": {"model": "block/white_bed_head", "y": 0},
+    "facing=south,half=head,occupied=true": {"model": "block/white_bed_head", "y": 180},
+    "facing=west,half=head,occupied=true": {"model": "block/white_bed_head", "y": 90},
+    "facing=east,half=head,occupied=true": {"model": "block/white_bed_head", "y": 270}
+  }
+}
