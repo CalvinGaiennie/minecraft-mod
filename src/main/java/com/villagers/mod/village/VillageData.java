@@ -67,4 +67,5 @@ public class VillageData {
 
     public void setRadius(int radius) { this.radius = radius; }
     public void setActive(boolean active) { this.active = active; }
+    public void setOwnerId(UUID ownerId) { this.ownerId = ownerId; }
 }
