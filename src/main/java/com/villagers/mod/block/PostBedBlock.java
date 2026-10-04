@@ -1,7 +1,6 @@
 package com.villagers.mod.block;
 
 import com.villagers.mod.block.entity.PostBedBlockEntity;
-import com.villagers.mod.block.entity.VillagerBlockEntities;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -22,10 +21,5 @@ public class PostBedBlock extends Block {
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new PostBedBlockEntity(pos, state);
-    }
-
-    @Override
-    public boolean isSignalSource(BlockState state) {
-        return true;
     }
 }
