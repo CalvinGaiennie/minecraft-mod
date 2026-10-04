@@ -14,10 +14,7 @@ import java.util.UUID;
 public class MessStationPlacementHandler {
 
     @SubscribeEvent
-    public static void onBlockPlace(BlockEvent event) {
-        if (!(event instanceof BlockEvent.EntityPlaceEvent placeEvent)) {
-            return;
-        }
+    public static void onBlockPlace(BlockEvent.EntityPlaceEvent placeEvent) {
 
         var levelAccessor = placeEvent.getLevel();
         if (!(levelAccessor instanceof net.minecraft.server.level.ServerLevel serverLevel)) {
