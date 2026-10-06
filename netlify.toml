@@ -1,0 +1,3 @@
+# Static site: site/index.html + site/development-plan.html (no build step)
+[build]
+  publish = "site"

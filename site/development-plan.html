@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Development plan — Minecraft Kingdom</title>
+  <style>
+    :root {
+      --bg: #ebe6dc;
+      --surface: #faf8f4;
+      --surface2: #e3ddd2;
+      --text: #2a3038;
+      --muted: #5a6572;
+      --gold: #9a7b1a;
+      --gold-dim: #b8922a;
+      --armies: #2d6a4f;
+      --citadel: #5c3d7a;
+      --border: #c9c0b0;
+      --link: #1a5fb4;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      background: linear-gradient(180deg, #f5f1ea 0%, var(--bg) 40%, #e5dfd3 100%);
+      color: var(--text);
+      line-height: 1.55;
+      min-height: 100vh;
+    }
+    a { color: var(--link); }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 920px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    header {
+      padding: 2rem 0 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    header h1 { font-size: clamp(1.5rem, 3.5vw, 2.1rem); margin: 0 0 0.5rem; }
+    header .brand { color: var(--gold); }
+    header p { margin: 0.35rem 0; color: var(--muted); max-width: 42em; }
+    .tag {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      margin: 0 0 0.5rem;
+    }
+    nav.top {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+    }
+    nav.top a {
+      font-weight: 600;
+      text-decoration: none;
+      padding: 0.45rem 0.9rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+    nav.top a.marketing { border-color: var(--gold-dim); color: var(--gold); background: #faf6eb; }
+
+    main.dev-body h2 {
+      font-size: 1.45rem;
+      margin: 2.25rem 0 0.75rem;
+      color: var(--gold);
+    }
+    main.dev-body h2:first-of-type { margin-top: 1.5rem; }
+    main.dev-body h3 {
+      font-size: 1.05rem;
+      margin: 1rem 0 0.5rem;
+      color: var(--text);
+    }
+    main.dev-body p, main.dev-body li { margin: 0.5rem 0; }
+    main.dev-body ul, main.dev-body ol { padding-left: 1.25rem; }
+    main.dev-body .box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.15rem;
+      margin: 1rem 0;
+    }
+    main.dev-body .box.want { border-left: 4px solid var(--armies); }
+    main.dev-body .box.avoid { border-left: 4px solid #a63d3d; }
+    main.dev-body .box.process { border-left: 4px solid var(--citadel); }
+    main.dev-body .box.planned { border-left: 4px solid var(--gold-dim); }
+    main.dev-body .two { display: grid; gap: 1rem; }
+    @media (min-width: 640px) { main.dev-body .two { grid-template-columns: 1fr 1fr; } }
+    main.dev-body .two .box h3:first-child { margin-top: 0; }
+    main.dev-body .two .box:first-child h3 { color: var(--armies); }
+    main.dev-body .two .box:last-child h3 { color: var(--citadel); }
+    main.dev-body table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      margin: 0.75rem 0;
+    }
+    main.dev-body th, main.dev-body td {
+      border: 1px solid var(--border);
+      padding: 0.5rem 0.65rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    main.dev-body th { background: var(--surface2); }
+    main.dev-body code { font-size: 0.88em; }
+
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <p class="tag">Internal / design-facing</p>
+      <h1><span class="brand">Minecraft Kingdom</span> — development plan</h1>
+      <p>
+        Goals, process, backlog, and <strong>optional mod compatibility</strong> for Armies and Citadel.
+        Not a modpack manifest — we ship with <strong>no required dependencies</strong>.
+      </p>
+      <nav class="top">
+        <a class="marketing" href="./index.html">← Marketing overview</a>
+        <a href="#goals">Mod goals</a>
+        <a href="#mods">Two mods</a>
+        <a href="#process">How we plan</a>
+        <a href="#backlog">Design backlog</a>
+        <a href="#compat">Mod compatibility</a>
+      </nav>
+    </header>
+
+    <main class="dev-body">
+<h2 id="goals">Mod goals</h2>
+<div class="box want">
+<h3>What we want players to feel</h3>
+<ul>
+<li><strong>More interactive Minecraft</strong> — better NPCs: named followers, named enemies, factions that react to you.</li>
+<li><strong>Decisions that stick</strong> — choices that <em>permanently</em> open or close paths (Order vs committed necromancer, opt-out, no Order after citadel claim, etc.).</li>
+<li><strong>Objectives that matter</strong> — goals that feel necessary or worth it to unlock places, gear, stations, and story — not checklist busywork for its own sake.</li>
+<li><strong>A longer game than the dragon</strong> — meaningful <strong>pre-dragon</strong> and <strong>post-dragon</strong> arcs. The citadel seal, kingdom play, and army campaigns are part of the real timeline.</li>
+<li><strong>Vanilla still works</strong> — never block the normal loop: build, farm, trade hall, redstone, explore your way. Mods <em>encourage</em> quests, empires, and story; they don&#x27;t replace survival.</li>
+<li><strong>Two kinds of story</strong> — <strong>Citadel</strong>: main lore, citadel, Order, necromancer path, relics, Minecraft tie-ins (TBD). <strong>Armies</strong>: your emergent kingdom <em>plus</em> authored bandit kings, named foes, loot and intel that unlocks the next threat — optional alliance with bandits, forced solo beats, emotional strife.</li>
+<li><strong>Progression that feels different</strong> — not just better gear: titles, taxes, stations, paths, and <strong>character stats</strong> (see backlog).</li>
+</ul>
+</div>
+<div class="box avoid">
+<h3>What we do not want</h3>
+<ul>
+<li>Minecraft feeling <strong>broken</strong> or &quot;wrong&quot; if you ignore our quests.</li>
+<li>Optimal play being <strong>only</strong> vanilla farms and trading halls — they should stay viable, but feel <strong>less mandatory</strong> when the mod&#x27;s stories and empire loop are engaging.</li>
+<li>Armies becoming a spreadsheet that kills roleplay — or Citadel becoming a gate that hard-blocks creative builders.</li>
+<li>Copy-paste quest design — Order is <strong>work → reward</strong>; necromancer path is <strong>decision → reward + weakness</strong> (see <code>docs/necromancer-path.md</code>).</li>
+</ul>
+</div>
+<h2 id="mods">Two mods, one vision</h2>
+<div class="two">
+<div class="box">
+<h3>Minecraft Kingdom: Armies</h3>
+<p>Villages, soldiers, taxes, horns, campaigns, bandits. Build towns and cities that <strong>behave a bit like farms</strong> — recurring tax and supply — while generating <strong>your</strong> story.</p>
+<p>Planned: named bandit leaders, chained intel/loot, moral grey (help or hinder bandits), moments where you leave the army behind.</p>
+</div>
+<div class="box">
+<h3>Minecraft Kingdom: Citadel</h3>
+<p>Black Citadel, Corrupted King, Kingstree, Order acolyte path, necromancer path, relics, refuges. Main <strong>Minecraft-world</strong> story spine.</p>
+<p>Optional with Armies; kingdom scope amplifies when both are loaded.</p>
+</div>
+</div>
+<h2 id="process">How we plan (plans to plan the plans)</h2>
+<div class="box process">
+<p>Design is <strong>author-owned</strong>. Implementation follows written docs in <code>docs/</code>, not the other way around.</p>
+<ol>
+<li><strong>Intake</strong> — raw notes land in dated files under <code>docs/notes/</code> (not canon until merged).</li>
+<li><strong>Section order</strong> — <code>docs/notes/2026-10-05-discussion-plan.md</code> lists topics (lore, paths, feats, layout). We do <strong>one section at a time</strong>.</li>
+<li><strong>Discuss → decide → merge</strong> — you call the shot; we update the real doc (<code>acolyte-path.md</code>, <code>endgame.md</code>, etc.) and log the row in the discussion plan.</li>
+<li><strong>No skip ahead</strong> on canon until the current section is merged (unless you explicitly defer a block, e.g. lore §2–6).</li>
+<li><strong>This section</strong> — high-level goals and process; detail stays in markdown for implementers.</li>
+</ol>
+<p><strong>Status snapshot (2026-10-06):</strong> Order flow + feat gates (§8) merged; necromancer philosophy + fork documented; homecoming/escort rules set; lore and full necromancer arc deferred.</p>
+</div>
+<h2 id="backlog">Design backlog (from goals — not all implemented)</h2>
+<div class="box planned">
+<p>Items called out in goal-setting that still need specs in <code>docs/</code> and then code:</p>
+<table><thead><tr><th>Item</th><th>Mod</th><th>Intent</th></tr></thead><tbody><tr><td><strong>Permanent max-health boost</strong> when Maelor locks Order specialty</td><td>Citadel</td><td>Progression reward for acolyte commit; tune in config.</td></tr><tr><td><strong>Larger permanent max-HP boost</strong> for locked <strong>War Leader</strong> acolyte</td><td>Citadel (Order)</td><td>Bigger than other three specialties; amount TBD config.</td></tr><tr><td><strong>War Leader acolyte: no damage to own troops unless sneaking</strong></td><td>Citadel (Order)</td><td>See callout below — locked War Leader specialty only.</td></tr><tr><td>Named bandit kings, loot/intel chains, optional bandit alliance, solo-forced quests</td><td>Armies (+ Citadel hooks)</td><td>Army-side storylines; less &quot;main lore&quot; than citadel, still authored.</td></tr><tr><td>Tax / claim loop as soft &quot;farm&quot; replacement</td><td>Armies</td><td>Empire income without requiring vanilla iron farms for fun.</td></tr></tbody></table>
+</div>
+<div class="box planned">
+<h3>War Leader acolyte — friendly-fire rule (design intent)</h3>
+<p>A player whose Order specialty is <strong>locked as War Leader</strong> (<code>acolyte-path.md</code>) <strong>cannot hurt their own soldiers or militia</strong> with direct player damage (melee, arrows, tridents, etc.) while <strong>not sneaking</strong>.</p>
+<ul>
+<li><strong>Default:</strong> hits against <em>your</em> soldiers/militia do not apply (cancelled or no damage).</li>
+<li><strong>Sneaking:</strong> you <em>can</em> damage your own troops — intentional only (discipline, mutiny edge cases per Armies rules).</li>
+<li><strong>Other specialties</strong> (Arcane, Alchemist, Smith) follow normal Armies friendly-fire rules.</li>
+<li><strong>Not</strong> kingdom NPC &quot;Warlords&quot; raids or a separate kingdom title — Order War Leader only.</li>
+<li>Explosions, lava, and fire may still harm troops unless we add exceptions later (TBD).</li>
+</ul>
+</div>
+<h2 id="compat">Mod compatibility targets</h2>
+<div class="box process">
+<p><strong>Not dependencies.</strong> Armies and Citadel must run on their own. When other mods are in the pack we aim for two levels:</p>
+<ul>
+<li><strong>Coexist</strong> — verify claims, quests, spawns, death/loot, and UI don&#x27;t fight each other (smoke-test per release).</li>
+<li><strong>Extend</strong> — optional integration that wakes <strong>dormant</strong> content in our mobs, quests, or abilities only when that mod is loaded (no crash if absent).</li>
+</ul>
+<p>Pack makers pin versions we test against; nothing here is required to play.</p>
+</div>
+<p>Priority list (initial — expand in <code>docs/integration.md</code> when specced):</p>
+<table><thead><tr><th>Mod</th><th>Kind</th><th>Intent</th></tr></thead><tbody><tr><td><a href="https://modrinth.com/mod/small-ships">Small Ships</a></td><td>Coexist + extend</td><td>Naval campaigns; future soldier crew aboard ship entities (not vanilla boats).</td></tr><tr><td><a href="https://www.curseforge.com/minecraft/mc-mods/ice-and-fire-community-edition">Ice and Fire: Community Edition</a></td><td>Coexist + extend</td><td>Mythic mobs and dragons alongside citadel lore; parallel fantasy, not a hard gate.</td></tr><tr><td><a href="https://www.curseforge.com/minecraft/mc-mods/mowzies-mobs">Mowzie&#x27;s Mobs</a></td><td>Extend</td><td>Selected bosses/mobs feed quests or unlock abilities in our content when present.</td></tr><tr><td><a href="https://www.curseforge.com/minecraft/mc-mods/alexs-mobs">Alex&#x27;s Mobs</a></td><td>Extend</td><td>Same pattern — optional encounter/quest hooks, not replacements for our roster.</td></tr><tr><td><a href="https://modrinth.com/mod/corpse">Corpse</a></td><td>Coexist</td><td>Death body / loot recovery compatible with army wipes and citadel defeats.</td></tr><tr><td><a href="https://modrinth.com/mod/comforts">Comforts</a></td><td>Coexist</td><td>Sleeping bags/hammocks don&#x27;t break campaign pacing or claim rules.</td></tr><tr><td><a href="https://modrinth.com/mod/grappling-hooks">Grappling Hooks</a></td><td>Coexist</td><td>Traversal during citadel exploration and siege prep.</td></tr><tr><td>World map mod (<strong>TBD</strong>)</td><td>Coexist</td><td>Waypoints/markers for refuges, claims, citadel — <strong>confirm Xaero&#x27;s vs JourneyMap</strong> with author.</td></tr><tr><td><a href="https://modrinth.com/mod/biomes-o-plenty">Biomes O&#x27; Plenty</a></td><td>Coexist</td><td>Extra biomes for worldgen; quest placement and structures must still find valid terrain.</td></tr><tr><td><a href="https://modrinth.com/mod/create">Create</a></td><td>Coexist</td><td>Village protection vs moving contraptions; factory bases beside claims.</td></tr><tr><td><a href="https://modrinth.com/mod/epic-knights-shields-armor-and-weapons">Epic Knights: Shields, Armor and Weapons</a></td><td>Coexist + gear</td><td>Soldier kits and supply accept modded medieval gear.</td></tr><tr><td><a href="https://modrinth.com/mod/medieval-siege-machines">Medieval Siege Machines</a></td><td>Coexist + extend (planned)</td><td>Player siege complements walls; soldier-operated siege is integration target, not day-one AI.</td></tr></tbody></table>
+<h3>Canonical doc index (implementers)</h3>
+<ul>
+<li><code>docs/overview.md</code> — scope and build order</li>
+<li><code>docs/acolyte-path.md</code> — Order quest + feats</li>
+<li><code>docs/necromancer-path.md</code> — dark path philosophy + fork</li>
+<li><code>docs/endgame.md</code>, <code>docs/citadel-claim.md</code> — citadel loop</li>
+<li><code>docs/soldiers-and-villages.md</code>, <code>docs/war-and-defense.md</code> — Armies</li>
+<li><code>docs/notes/2026-10-05-discussion-plan.md</code> — section queue + decision log</li>
+</ul>
+</main>
+
+    <footer>
+      <a href="./index.html">Marketing overview</a> · Source: <code>docs/marketing/development-plan.md</code> · WIP
+    </footer>
+  </div>
+</body>
+</html>
