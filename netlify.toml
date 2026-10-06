@@ -1,4 +1,3 @@
-# Netlify: connect this repo and use defaults below (no UI overrides needed).
+# Static site: site/index.html + site/development-plan.html (no build step)
 [build]
   publish = "site"
-  command = "python3 docs/marketing/build_marketing.py"
