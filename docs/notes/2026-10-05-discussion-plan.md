@@ -36,7 +36,7 @@
 | **7** | Necromancer **skills / tracks** (weather, animals, bard, enchant/potion, horcruxes — not Order mirror) | `necromancer-path.md`, `necromancy.md`, `config-and-recipes.md` | After path shape is clear. |
 | **8** | **Acolyte feat gates** (Smith / Brewer / Enchanter / Warlord + Maelor collections) | `acolyte-path.md`, `config-and-recipes.md` | Parallel track; can follow 1 or run after 6. |
 | **9** | **Other notes:** orphanage, warlord 1000 candles, deserter → sorcerer % | `soldiers-and-villages.md`, `threats-and-mobs.md`, `acolyte-path.md` | World systems, not core brothers plot. |
-| **10** | **Citadel layout / features** | `endgame.md`, `citadel-claim.md`, `villager-mod-design-and-build.md` | Structure list vs what’s already documented. |
+| **10** | **Citadel layout / features** | `citadel-layout.md`, `endgame.md`, `citadel-claim.md`, `villager-mod-design-and-build.md` | Structure list vs what’s already documented. |
 
 ---
 
@@ -58,6 +58,7 @@
 | 2026-10-06 | **8** (partial) | Quest flow: basic → brother **light** → Maelor **light ×3** → pick **hard** one → **lock** → Annals + escort. Feat numbers **TBD**. | `acolyte-path.md` |
 | 2026-10-06 | **8** | **Closed:** basic (clear + necromancer + oath); light×4 (one task each, counts toward hard); hard×4 (Smith/Alchemist/Arcane books+proofs TBD/WL gear); flow + homecoming A + Friend of the Order + Annals on claim. | `acolyte-path.md`, `endgame.md`, `citadel-claim.md` |
 | 2026-10-06 | **6 / path** | Necromancer path **design philosophy:** opposite acolyte — decision + reward/**weakness** together, not grind-then-reward (`necromancer-path.md`). |
+| 2026-10-06 | **§10** (partial) | Layout + **assault defensive mode**: one main entrance, closable inner gate, trap/narrow corridors, MC hazards (web/water/ice/lava); spawners + bosses; spawner mix incl. ravagers (few). Mockup for counts/triggers. **`citadel-layout.md`**, **`citadel-defenders.md`**. |
 
 ---
 
@@ -65,10 +66,12 @@
 
 **Deferred for later:** §2, §3, §4, §5, §6, §8.
 
-**Active sequence:** **§7 → §9 → §10**, then return to deferred sections.
+**Active sequence:** **§10** (finishing TBDs) → **§9** → **§7**, then return to deferred sections.
 
 ---
 
 ## Current status
 
-**Next up (when you return):** deferred **§2–6**, **§7** affinities, or **§9** / **§10**. **§8 + Order flow** treated as decided in docs.
+**§10:** author decisions merged; close remaining **TBD** rows in `citadel-layout.md` when answered.
+
+**Next after §10 closes:** **§9** or **§7** affinities, or deferred lore **§2–6**. **§8 + Order flow** treated as decided in docs.

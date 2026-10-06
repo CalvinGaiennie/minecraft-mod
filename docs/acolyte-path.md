@@ -6,7 +6,7 @@ Optional **player status** for Citadel, aimed especially at **solo players with 
 - **Throne:** you **can** still become citadel king as an acolyte. **Active necromancer** rules (relic ban, throne penalties, etc.) still apply if you are a necromancer — see `necromancy.md`, `citadel-claim.md`.
 - **Timing:** the Order arc must **finish before citadel claim** — training, Maelor lock, and reunite escort are **pre-claim only**. **No joining the Order after claim** (see below).
 
-NPC acolytes remain the fixed **17** veterans; see **`endgame.md`** for refuges, homecoming, stations, and death rules.
+NPC acolytes remain the fixed **17** veterans; see **`endgame.md`** for refuges, homecoming, stations, and death rules. **Two** of the 17 are **citadel-dungeon prisoners** (War Leader + one craft brother), not overworld refuges — **`citadel-layout.md`**.
 
 ## Mutual exclusion (Order vs necromancer questline)
 
@@ -108,6 +108,20 @@ After lock, he assigns:
 **Minimum brothers:** required floor + **better outcome for more** (TBD; config `acolyteBrothersMinimum`). Treat escort as the **capstone feat** after specialty lock.
 
 **Why keep brothers alive:** each brother is **permanently lost** if killed (`endgame.md`); escort fights and Corpse-style deaths are real risks.
+
+### Citadel-trapped brothers (§10)
+
+Two brothers were **never** at overworld refuges — they hold the inner ward during the purge and were **caged in the citadel dungeon** (lore: ordered to stand down / hold, not flee).
+
+| Brother | Specialty |
+| --- | --- |
+| **First** | **War Leader** (always) |
+| **Second** | **Arcane, Alchemist, or Smith** — **random per world** at world gen |
+
+- **Rescue:** after seal break, **player flips a lever** in/near the dungeon to open Order cells; then talk / escort as usual.
+- **Annals:** trapped brothers do **not** carry Annals volumes — copies only in overworld **refuge chests** (twelve locked Annals chests).
+- **Reunite:** they count for escort only after rescue; deliver to **Maelor’s refuge** before claim to join homecoming roster.
+- **Stations:** only **Arcane / Alchemist / Smith** fill royal lecterns. Trapping one craft brother **does not** replace escorting the others — skip too many overworld escorts and lecterns stay empty (Maelor can fill one dead brother’s slot only).
 
 ### Escort → homecoming (**model A — chosen**)
 

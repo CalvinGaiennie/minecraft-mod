@@ -54,6 +54,11 @@ Raid size is random, not tied to the village's defenses:
 - **Necromancer robes don't protect against bandits,** since bandits are villagers, not hostile mobs.
 - **Bandits and swarms** are enemies and fight each other.
 - **Bandit camps:** small structures that generate in the world like pillager outposts, each with 3-5 bandits and a leader. Every world has some bands from the start.
+- **Citadel shadow (Armies loaded — proposed):** within **~256–512 blocks** of the Black Citadel:
+  - **Ruined hamlets** — village-scale wrecks (mess hall, beds, walls broken); **bandits occupy** them; **some villagers** may remain (few traders / nitwits, not a healthy economy).
+  - **Bandit camps** — smaller outpost structures **in addition** to ruins (same band rules as normal camps).
+  - **Higher** bandit camp/band density than the rest of the overworld (multiplier **TBD**).
+  - Lore: places that **sheltered in the citadel’s shadow** **fell** when the kingdom did — danger on the approach before the seal breaks. **No** shadow content if Armies absent.
 - **Lone recruiting:** a lone bandit can turn a nitwit or unemployed villager in an unguarded village (no soldiers) into a bandit, once a day.
 - **Runaways:** every adult non-soldier villager has a 0.1% daily chance to leave home and become a wandering bandit. A 20-villager village loses about one every 50 in-game days.
 - **Leader buffs:** 50 HP, +25% damage, and 50% knockback resistance. Bandits near him get +10% damage.
