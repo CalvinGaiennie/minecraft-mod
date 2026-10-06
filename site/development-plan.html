@@ -178,7 +178,26 @@
 <li><strong>No skip ahead</strong> on canon until the current section is merged (unless you explicitly defer a block, e.g. lore §2–6).</li>
 <li><strong>This section</strong> — high-level goals and process; detail stays in markdown for implementers.</li>
 </ol>
-<p><strong>Status snapshot (2026-10-06):</strong> Order flow + feat gates (§8) merged; necromancer philosophy + fork documented; homecoming/escort rules set; lore and full necromancer arc deferred.</p>
+<p><strong>Status snapshot (2026-10-06):</strong> Order flow + feat gates (§8) merged; <strong>§10 citadel layout/siege</strong> and <strong>§7 necromancer items/horcrux</strong> documented (mockup + tuning TBD); necromancer philosophy + fork set; lore §2–6 and full necromancer story arc (§6) deferred. Active queue: finish §10 TBDs → §9 world notes → §7 implementation specs.</p>
+</div>
+<h2 id="progress">Design progress (canon docs)</h2>
+<div class="box process">
+<h3>Black Citadel — layout &amp; assault (§10, in progress)</h3>
+<p>Written to <code>docs/citadel-layout.md</code> and <code>docs/citadel-defenders.md</code>:</p>
+<ul>
+<li>Template fortress: strong shell, guttable wings, <strong>30-block</strong> soft dig, <strong>no lava moat</strong>.</li>
+<li><strong>Defensive mode:</strong> one main entrance, closable inner gate, trap corridors (tripwire/plate potion traps, webs, water, ice, lava lanes), <strong>breakable spawners</strong> and trap parts mid-assault.</li>
+<li>Garrison mix: undead, skeletons, wither skeletons, spiders, baby zombies, witches, <strong>few ravagers</strong>; difficulty from layout, effects, and kit — not HP bloat.</li>
+<li><strong>Player-driven</strong> post-claim: levers, dismantle traps, break spawners. Blockout still needed for lever map, wing volumes, shadow-ring counts.</li>
+</ul>
+<h3>Necromancer path — items &amp; horcrux (§7, in progress)</h3>
+<p>Written to <code>docs/necromancer-path.md</code> and <code>docs/necromancy.md</code>:</p>
+<ul>
+<li>Progression = <strong>quest items + sacrifices</strong> (flutes/pipes, cursed armor), not Order-style class grids.</li>
+<li><strong>Horcrux:</strong> ritual craft (shard + power item in hotbar + kill on soul list); <strong>many jars</strong> limited by permanent hearts; stored in <strong>chests</strong>; pseudo-death instead of dying; destroy via <strong>Dragon’s Well</strong> (anytime), wither, ghast, lightning, etc.</li>
+<li><strong>Wild lich</strong> crypt rogues (subset) teach hunt/destroy before players commit; <strong>Dragon’s Well</strong> also fills breath bottles (unlimited cap; well is hard to find).</li>
+<li><strong>Consider:</strong> horcrux <strong>corruption</strong> of weak nearby soldiers — not specced yet.</li>
+</ul>
 </div>
 <h2 id="backlog">Design backlog (from goals — not all implemented)</h2>
 <div class="box planned">
@@ -212,7 +231,8 @@
 <li><code>docs/overview.md</code> — scope and build order</li>
 <li><code>docs/acolyte-path.md</code> — Order quest + feats</li>
 <li><code>docs/necromancer-path.md</code> — dark path philosophy + fork</li>
-<li><code>docs/endgame.md</code>, <code>docs/citadel-claim.md</code> — citadel loop</li>
+<li><code>docs/endgame.md</code>, <code>docs/citadel-claim.md</code>, <code>docs/citadel-layout.md</code>, <code>docs/citadel-defenders.md</code> — citadel loop &amp; siege</li>
+<li><code>docs/necromancy.md</code> — wand, crypts, horcrux design</li>
 <li><code>docs/soldiers-and-villages.md</code>, <code>docs/war-and-defense.md</code> — Armies</li>
 <li><code>docs/notes/2026-10-05-discussion-plan.md</code> — section queue + decision log</li>
 </ul>

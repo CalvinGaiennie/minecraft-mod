@@ -64,6 +64,11 @@ Every number a server owner might want to tune, with its default.
 | Wand permanent heart loss chance | 3% |
 | Wand side effect chance | 5% |
 | Necromancer recruiter interval multiplier | 3× |
+| `necromancerWorldHavocEnabled` — chunk-wide flute havoc (e.g. mass animal dirge), large summons | **true** (set **false** on peaceful/co-op servers) |
+| `necromancerHorcruxEnabled` — poison/pot immunity, pseudo-death instead of dying | **true** (set **false** to disable lich rules) |
+| `necromancerHorcruxDestroyers` — ways to destroy a horcrux item | **dragons_well**, **ghast_fireball**, **wither**, **wither_skull**, **lightning**, **dragon_breath_bottle** (proposed; servers may extend) |
+| `necromancerQuestHeartThreshold` — hearts lost before intro NPC | **3** |
+| `necromancerIntroMinDistanceFromAcolyte` — blocks intro near refuges | **128** |
 | Robe stigma fraction (non-necromancer in hood/robe) | 0.5 |
 | Minion decay | 30 in-game days |
 | Simplified AI distance | 48 blocks |
@@ -90,7 +95,7 @@ Every number a server owner might want to tune, with its default.
 | Night penalties for unlit soldiers | 5% stumble chance per in-game hour (no other penalties) |
 | Mutiny triggers | 1 grumble point per costly victory (40%+ losses) or friendly kill; mutiny chance per new point 2% / 8% / 15% / 25% / 35% at 1 / 2 / 3 / 4 / 5+ points; daily roll while upset of 1% per point, max 5% |
 | Mutiny join chance (soldier / seasoned / hero and Legend) | See the join table under Mutiny |
-| Dragon's Well | 1 bottle per player per in-game day |
+| Dragon's Well breath fills per player per day | **0** = unlimited (default); set **>0** only if a server wants a daily cap |
 | Kingstree sapling interval | 30 in-game days |
 | Acolyte refuges per world | 17 (12 with Royal Annals copies, 1 Horn-keeper, 4 ordinary) |
 | Acolyte specialties (NPC) | 16 brothers: 4 Arcane, 4 Alchemist, 4 Smith, 4 War Leader; plus Maelor |

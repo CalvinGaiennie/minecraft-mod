@@ -50,7 +50,29 @@ Design is **author-owned**. Implementation follows written docs in `docs/`, not 
 4. **No skip ahead** on canon until the current section is merged (unless you explicitly defer a block, e.g. lore §2–6).
 5. **This section** — high-level goals and process; detail stays in markdown for implementers.
 
-**Status snapshot (2026-10-06):** Order flow + feat gates (§8) merged; necromancer philosophy + fork documented; homecoming/escort rules set; lore and full necromancer arc deferred.
+**Status snapshot (2026-10-06):** Order flow + feat gates (§8) merged; **§10 citadel layout/siege** and **§7 necromancer items/horcrux** documented (mockup + tuning TBD); necromancer philosophy + fork set; lore §2–6 and full necromancer story arc (§6) deferred. Active queue: finish §10 TBDs → §9 world notes → §7 implementation specs.
+:::
+
+## Design progress (canon docs) {#progress}
+
+::: process
+### Black Citadel — layout & assault (§10, in progress)
+
+Written to `docs/citadel-layout.md` and `docs/citadel-defenders.md`:
+
+- Template fortress: strong shell, guttable wings, **30-block** soft dig, **no lava moat**.
+- **Defensive mode:** one main entrance, closable inner gate, trap corridors (tripwire/plate potion traps, webs, water, ice, lava lanes), **breakable spawners** and trap parts mid-assault.
+- Garrison mix: undead, skeletons, wither skeletons, spiders, baby zombies, witches, **few ravagers**; difficulty from layout, effects, and kit — not HP bloat.
+- **Player-driven** post-claim: levers, dismantle traps, break spawners. Blockout still needed for lever map, wing volumes, shadow-ring counts.
+
+### Necromancer path — items & horcrux (§7, in progress)
+
+Written to `docs/necromancer-path.md` and `docs/necromancy.md`:
+
+- Progression = **quest items + sacrifices** (flutes/pipes, cursed armor), not Order-style class grids.
+- **Horcrux:** ritual craft (shard + power item in hotbar + kill on soul list); **many jars** limited by permanent hearts; stored in **chests**; pseudo-death instead of dying; destroy via **Dragon’s Well** (anytime), wither, ghast, lightning, etc.
+- **Wild lich** crypt rogues (subset) teach hunt/destroy before players commit; **Dragon’s Well** also fills breath bottles (unlimited cap; well is hard to find).
+- **Consider:** horcrux **corruption** of weak nearby soldiers — not specced yet.
 :::
 
 ## Design backlog (from goals — not all implemented) {#backlog}
@@ -112,6 +134,7 @@ Priority list (initial — expand in `docs/integration.md` when specced):
 - `docs/overview.md` — scope and build order
 - `docs/acolyte-path.md` — Order quest + feats
 - `docs/necromancer-path.md` — dark path philosophy + fork
-- `docs/endgame.md`, `docs/citadel-claim.md` — citadel loop
+- `docs/endgame.md`, `docs/citadel-claim.md`, `docs/citadel-layout.md`, `docs/citadel-defenders.md` — citadel loop & siege
+- `docs/necromancy.md` — wand, crypts, horcrux design
 - `docs/soldiers-and-villages.md`, `docs/war-and-defense.md` — Armies
 - `docs/notes/2026-10-05-discussion-plan.md` — section queue + decision log

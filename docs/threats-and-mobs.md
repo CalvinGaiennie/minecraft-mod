@@ -54,6 +54,13 @@ Raid size is random, not tied to the village's defenses:
 - **Necromancer robes don't protect against bandits,** since bandits are villagers, not hostile mobs.
 - **Bandits and swarms** are enemies and fight each other.
 - **Bandit camps:** small structures that generate in the world like pillager outposts, each with 3-5 bandits and a leader. Every world has some bands from the start.
+
+### Necromancer crypts and wild liches
+
+- **Crypts:** rare underground sites with a **rogue necromancer** and minions (`necromancy.md`). Clearing the rogue resets the crypt on a later **new moon** (proposed).
+- **Wild lich:** author term = **crypt rogue necromancer + horcrux in a hidden chest** (NPC tutorial boss, not a player lich). **Some** rogues spawn this way. They **pseudo-die** until every jar is destroyed; teaches **chunk hints**, **jar hunts**, and **Dragon’s Well** (works **before or after** Ender Dragon death) / wither / lightning **without** the hunter on the necromancer quest.
+- **Count:** **TBD** fraction of crypts (e.g. **25%**) plus optional **one guaranteed** early lich for tutorial; structure pass sets chest locations.
+- **Rewards:** phylactery **shards**, gear, and **TBD** lore item pointing at player horcrux craft + **Dragon’s Well** disposal.
 - **Citadel shadow (Armies loaded — proposed):** within **~256–512 blocks** of the Black Citadel:
   - **Ruined hamlets** — village-scale wrecks (mess hall, beds, walls broken); **bandits occupy** them; **some villagers** may remain (few traders / nitwits, not a healthy economy).
   - **Bandit camps** — smaller outpost structures **in addition** to ruins (same band rules as normal camps).

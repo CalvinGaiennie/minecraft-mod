@@ -59,6 +59,9 @@
 | 2026-10-06 | **8** | **Closed:** basic (clear + necromancer + oath); light×4 (one task each, counts toward hard); hard×4 (Smith/Alchemist/Arcane books+proofs TBD/WL gear); flow + homecoming A + Friend of the Order + Annals on claim. | `acolyte-path.md`, `endgame.md`, `citadel-claim.md` |
 | 2026-10-06 | **6 / path** | Necromancer path **design philosophy:** opposite acolyte — decision + reward/**weakness** together, not grind-then-reward (`necromancer-path.md`). |
 | 2026-10-06 | **§10** (partial) | Layout + **assault defensive mode**: one main entrance, closable inner gate, trap/narrow corridors, MC hazards (web/water/ice/lava); spawners + bosses; spawner mix incl. ravagers (few). Mockup for counts/triggers. **`citadel-layout.md`**, **`citadel-defenders.md`**. |
+| 2026-10-06 | **§7** (partial) | Progression = **quest items + sacrifices**. **Flutes/pipes** (havoc OK, **`necromancerWorldHavocEnabled`**). Horcrux: **relics + kill** (acolyte, **player**, or **defined necromancer roster TBD**). Flute lockout on horcrux **deferred**. Hunt/steal/destroy power items. **`necromancer-path.md`**, **`necromancy.md`**, **`config-and-recipes.md`**. |
+| 2026-10-06 | **§7** (horcrux) | **Hotbar** shard + power item → **kill** valid target → horcrux; **−1 heart** each; **many** jars heart-limited; **chest-stored**. **Immune** poison/harm pots; pseudo-death 3m no clicks (**teleport TBD**). **Destroy jar** = vanilla **hard** hits (ghast, wither, **TBD** whitelist). Binding = no unequip, not vanish on death. Chunk hints **TBD**. |
+| 2026-10-06 | **§7** (wild lich) | **Subset** of crypt rogues have **horcrux in chest** — on-ramp for **destroy** (and lore for **create**). Count/placement **TBD**. **`necromancy.md`**, **`threats-and-mobs.md`**, **`necromancer-path.md`**. |
 
 ---
 

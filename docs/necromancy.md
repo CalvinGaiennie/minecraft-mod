@@ -158,6 +158,29 @@ Cursed effigy (carved pumpkin, bone, hay bale, stick), a scarecrow shape:
 
 Hunting rogue necromancers earns rewards found nowhere else.
 
-- **Necromancer crypts:** rare underground structures, each home to a rogue necromancer with 6-12 minions. Killing him clears the crypt; a new necromancer moves in after the next new moon (proposed).
+- **Necromancer crypts:** rare underground structures, each home to a **rogue necromancer** with 6–12 minions. Killing him clears the crypt; a new necromancer moves in after the next new moon (proposed).
+- **Wild lich (term):** a **rogue necromancer NPC** with a **horcrux in a crypt chest** — not a player, not the Corrupted King. **Some** crypts spawn one (`necromancer-path.md`).
+- **Wild liches (subset):** they use **pseudo-death**, chunk hints, and **destroy-the-jar** rules so **all players** learn the hunt **before** anyone commits to the questline. **Intro/on-ramp:** find ping → find chest → unmake jar (**Dragon’s Well** works **before or after** dragon kill; wither/lightning/etc.) → then kill the rogue for **shards** and loot hints.
 - **Phylactery shard:** dropped by rogue necromancers (1–2 each) and the **two named bound necromancers** in the citadel (`endgame.md`, names TBD). A player necromancer killed by another player drops 1, at most once per in-game day.
-- **Bone whistle:** 2 phylactery shards + a bone + a goat horn. Blowing it summons 3 wolves that fight for the player for 3 minutes, once per in-game day; 20 uses (proposed).
+- **Which crypts get a horcrux:** **TBD** ratio (e.g. **1 in 4** crypts, or one **guaranteed** lich crypt within ~**512** blocks of spawn for early tutorial — placement pass with structures).
+- **Bone whistle:** 2 phylactery shards + a bone + a goat horn. Blowing it summons 3 wolves that fight for the player for 3 minutes, once per in-game day; 20 uses (proposed). **Not** the same as committed-quest **flutes/pipes** (`necromancer-path.md`).
+
+### Horcrux (committed quest — design)
+
+**Casual** necromancers use shards for the bone whistle only. **Committed** questline can create **many horcruxes** — each costs **1 permanent heart** until the **1-heart floor** (`necromancer-path.md`). **Wild liches** in crypts demonstrate the system first (see crypts above).
+
+**Ritual:** **Phylactery shard** + **named item of power** (list **TBD**) in **hotbar** while killing an **acolyte**, **player**, or **listed necromancer NPC** (includes **wild lich** rogues and other **TBD** named necromancers).
+
+**Storage:** Each horcrux in a **chest** anywhere; passives while **≥1** exists. **Detection:** nearby loaded chunk → “somewhere in a nearby loaded chunk”; in **correct chunk** → “in this chunk” but **not** exact block.
+
+**Passives:**
+
+- **Immune** to **poison** and **harm / damage potions** (long **cursed armor** wear).
+- **Lethal damage** → **pseudo-death** (3 min no clicks, move, keep inv). **TBD:** teleport to **nearest horcrux** on trigger.
+- **True death** when **all** horcruxes destroyed (**TBD** partial jar rules).
+
+**Destroy horcrux:** survives normal mining/fire. **Primary:** **throw into the Dragon’s Well** — **anytime** (dragon alive or dead). **Also:** ghast fireball, wither, lightning (rod/channeling), optional **breath bottle** splash. Config `necromancerHorcruxDestroyers`. **Binding armor:** no manual unequip; **pseudo-death keeps armor**; true death uses normal drop rules.
+
+**Consider:** active horcrux **corrupts weak nearby units** (soldiers, etc.) — **`necromancer-path.md`**; not implemented.
+
+**Config:** **`necromancerHorcruxEnabled`** (default **true**). Must not bypass **relic ban** or throne rules.
