@@ -1,7 +1,5 @@
 {
   "variants": {
-    "": {
-      "model": "villagers:block/village_marker"
-    }
+    "": { "model": "villagers:block/village_marker" }
   }
 }

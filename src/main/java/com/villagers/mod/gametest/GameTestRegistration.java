@@ -10,9 +10,13 @@ import com.villagers.mod.VillagersMod;
 public class GameTestRegistration {
     @SubscribeEvent
     public static void registerGameTests(RegisterGameTestsEvent event) {
-        for (var method : Stage1GameTests.class.getDeclaredMethods()) {
-            if (method.isAnnotationPresent(net.minecraft.gametest.framework.GameTest.class)) {
-                event.register(method);
+        for (var testClass : new Class<?>[] {
+                Stage1GameTests.class, Stage23GameTests.class, Stage34GameTests.class, Stage56GameTests.class, MilitiaGameTests.class
+        }) {
+            for (var method : testClass.getDeclaredMethods()) {
+                if (method.isAnnotationPresent(net.minecraft.gametest.framework.GameTest.class)) {
+                    event.register(method);
+                }
             }
         }
     }

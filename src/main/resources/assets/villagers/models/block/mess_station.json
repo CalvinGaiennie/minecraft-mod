@@ -1,6 +1,5 @@
 {
-  "parent": "block/cube_all",
+  "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "villagers:block/mess_station"
+    "all": "minecraft:block/barrel_top"
   }
-}

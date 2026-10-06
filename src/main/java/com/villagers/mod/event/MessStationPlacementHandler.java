@@ -5,6 +5,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.level.BlockEvent;
 
 import com.villagers.mod.VillagersMod;
+import com.villagers.mod.village.VillageClaimService;
 import com.villagers.mod.village.VillageData;
 import com.villagers.mod.village.VillageManager;
 
@@ -41,11 +42,11 @@ public class MessStationPlacementHandler {
         }
 
         VillageData existingVillage = manager.findVillageAt(pos.getX(), pos.getY(), pos.getZ());
+        com.villagers.mod.player.EnlistmentService.enlistOnFirstMess(player);
+
         if (existingVillage == null) {
-            String villageName = "Village of " + player.getName().getString();
-            VillageData newVillage = new VillageData(villageName, playerId, pos.getX(), pos.getY(), pos.getZ());
-            newVillage.setRadius(VillageManager.HAMLET_RADIUS);
-            manager.registerVillage(newVillage);
+            VillageClaimService.tryCreateHamletAtMess(
+                    serverLevel, playerId, player.getName().getString(), pos);
         } else if (existingVillage.getOwnerId().equals(playerId)) {
             // Same owner expanding an existing claim is allowed.
         } else {

@@ -1,0 +1,16 @@
+{
+  "display": {
+    "icon": { "item": "villagers:mess_station" },
+    "title": { "translate": "advancements.villagers.root.title" },
+    "description": { "translate": "advancements.villagers.root.description" },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "place_mess": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [{ "items": ["villagers:mess_station"] }] }
+    }
+  }
+}

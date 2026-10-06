@@ -33,6 +33,18 @@ public class VillageMarkerPlacementHandler {
             player.displayClientMessage(
                     net.minecraft.network.chat.Component.literal("Surveyor's markers can't overlap another player's village."),
                     true);
+            return;
+        }
+
+        var be = serverLevel.getBlockEntity(pos);
+        if (be instanceof com.villagers.mod.block.entity.VillageMarkerBlockEntity marker) {
+            marker.setOwnerId(playerId);
+            var village = manager.findVillageAt(pos.getX(), pos.getY(), pos.getZ());
+            if (village != null && village.getOwnerId().equals(playerId)) {
+                marker.setVillageId(village.getVillageId());
+                marker.setVillageName(village.getVillageName());
+            }
+            marker.setChanged();
         }
     }
 }

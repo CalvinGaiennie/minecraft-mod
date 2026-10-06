@@ -63,6 +63,8 @@ Every number a server owner might want to tune, with its default.
 | Runaway chance per villager per day | 0.1% |
 | Wand permanent heart loss chance | 3% |
 | Wand side effect chance | 5% |
+| Necromancer recruiter interval multiplier | 3× |
+| Robe stigma fraction (non-necromancer in hood/robe) | 0.5 |
 | Minion decay | 30 in-game days |
 | Simplified AI distance | 48 blocks |
 | Respect mobGriefing | On |
@@ -91,6 +93,29 @@ Every number a server owner might want to tune, with its default.
 | Dragon's Well | 1 bottle per player per in-game day |
 | Kingstree sapling interval | 30 in-game days |
 | Acolyte refuges per world | 17 (12 with Royal Annals copies, 1 Horn-keeper, 4 ordinary) |
+| Acolyte specialties (NPC) | 16 brothers: 4 Arcane, 4 Alchemist, 4 Smith, 4 War Leader; plus Maelor |
+| Acolyte HP (brother / War Leader / Maelor) | 30 / 50 / 30 |
+| Acolyte soldier aura (brothers + Maelor) | 10% DR, 1 heart / 10s OOC within 16 blocks |
+| Acolyte soldier aura (War Leader) | 15% DR, 1 heart / 8s OOC within 16 blocks |
+| Acolyte escort regen (base + per nearby brother within 8 blocks) | ½ heart / 15s each, +½ heart / 15s per other brother |
+| Acolyte zombie-villager cure range | 2 blocks, presence over a few seconds |
+| Player acolyte — Maelor brothers minimum | TBD (`acolyteBrothersMinimum`) |
+| Order quest — block if owner's soldiers within | 32 blocks (`acolyteSoldierBlockRadius`) |
+| Player War Leader aura radius | 16 blocks (you, citadel allies, your soldiers/militia) |
+| Player War Leader aura (pre-tree) | 15% DR, 1 heart / 8s OOC |
+| Player War Leader aura (post-tree) | 20% DR, 1 heart / 6s OOC |
+| Player War Leader escort regen bonus | +25% to brother escort regen within 16 blocks |
+| Player Smith pre-tree — repair durability | +50% per material (`steadyHand`) |
+| Player Smith pre-tree — anvil XP cost | −1 level, min 0 (`frugalRepair`) |
+| Player Smith pre-tree — gear wear | −10% durability loss on worn gear (`hardWear`) |
+| Player Smith pre-tree — smithing template | not consumed on player upgrades (`temperedUpgrade`) |
+| Royal station — ask smith repair material discount | 40% |
+| Royal station — ask smith repair XP discount | 50% |
+| Royal station — major smith repair material discount | 70% |
+| Royal station — major smith repair XP discount | 75% |
+| Royal station — major Arcane enchant | 0 levels, 0 lapis; chosen level = vanilla max + 2 (gear or book) |
+| Royal station — minor Arcane enchant | random roll, up to vanilla max + 1 (gear or book) |
+| Royal station — major Alchemist duration multiplier | 3× (minor ask 2×; pre-tree alchemist 1.5× on own brews) |
 | Abandoned kingdom threshold | 60 in-game days since the owner last logged in |
 | King's Horn duration | 1 minute, once per in-game day |
 | Sapper time on obsidian (diamond or netherite pickaxe) | 12 minutes per block |

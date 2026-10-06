@@ -7,8 +7,12 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+
+import com.villagers.mod.client.VillagerGearScreen;
+import com.villagers.mod.menu.VillagerMenus;
 
 // This class will not load on dedicated servers. Accessing client side code from here is safe.
 @Mod(value = VillagersMod.MODID, dist = Dist.CLIENT)
@@ -20,6 +24,11 @@ public class VillagersModClient {
         // The config screen is accessed by going to the Mods screen > clicking on your mod > clicking on config.
         // Do not forget to add translations for your config options to the en_us.json file.
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+    }
+
+    @SubscribeEvent
+    static void registerScreens(RegisterMenuScreensEvent event) {
+        event.register(VillagerMenus.VILLAGER_GEAR.get(), VillagerGearScreen::new);
     }
 
     @SubscribeEvent

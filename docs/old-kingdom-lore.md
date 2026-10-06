@@ -40,7 +40,7 @@ The kings in the middle, from Marek to Torvald, had a spotty relationship with t
 
 **Oswin and Hakon:** Oswin had adopted the orphan Hakon as his hunting squire and was starting to treat him as heir, which threatened his friend Lord Harren, next in line for the throne. When the scariest necromancer came for the tree's first sapling, Harren hid and refused to cover Oswin. Oswin died, the sapling jumped out of the ground into Hakon's hand and became his bow, and Harren took the shield from the dirt. Hakon was one of the few witnesses. When Hakon came back from the End and confronted him, the shield wouldn't protect a coward from its own twig arrows. Harren is not one of the twelve.
 
-**The fall:** two of the necromancer's goons returned from the End in disguise and beguiled Thornwald's son Maldric, ending the line of good kings. He signed the Black Treaty on their advice, the tree was poisoned and became the Blighted Tree, and after Maldric died the necromancers raised him and bound the citadel's seal to the dragon.
+**The fall:** two of the necromancer's goons returned from the End in disguise and beguiled Thornwald's son Maldric, ending the line of good kings. He signed the Black Treaty on their advice, the tree was poisoned and became the Blighted Tree, and after Maldric died the necromancers raised him and bound the citadel's seal to the dragon. Those **same two** still hold the citadel as **named boss necromancers** until players kill them in the Corrupted King fight — **names TBD**, story roles in `necromancer-path.md` (`endgame.md`).
 
 ## How the god tree made each relic
 
@@ -63,7 +63,7 @@ The kings in the middle, from Marek to Torvald, had a spotty relationship with t
 - **Founding:** Kaelen decided to guard them more closely. He gathered 17 of his veterans, all men, who had seen what the tree did for the world: its sap closing wounds, its fruit feeding armies. They became the Order of the Well and vowed to guard the Annals, the Well, and the tree, and to serve whoever tends the tree, not whoever wears the crown.
 - **Maelor:** the eldest founder and Kaelen's campaign scribe. Kaelen asked him to continue the Annals, and helped him write. He's the last founder alive, and the acolytes today trained under Kaelen or Thornwald.
 - **The purge:** after the Black Treaty, the necromancers drove the Order out. Each member fled with one Annals volume so the story couldn't be erased, and four also carried relics out of the treasury.
-- **Now:** they hide in refuges, still hunted, hoping someone will take the citadel and heal the tree.
+- **Now:** they hide in refuges, still hunted, hoping someone will take the citadel and heal the tree. **Maelor** still wants the brothers united, the Annals saved, and a champion who can retake the citadel and **release the Corrupted King to the afterlife** (player acolyte quest — `acolyte-path.md`).
 
 ## Books
 
@@ -122,7 +122,7 @@ Eight short books about heroes who weren't kings. Each has a random chance to ap
 | Horns of the Valley | A horn-maker explains each horn she crafts through the battles they decided | Horns, levers and buttons, flares, ranges, the village bell |
 | The Long Herd | A wandering rancher drives his herd from village to village, looking for a home | Animal farmers, wild ranches, pens, feed, meat and leather taxes |
 | Two Banners | Two rival lords claim neighboring villages, then must decide whether to fight or ally | Ownership, mess stations and claims, borders, allies and ranks, village banners |
-| The Last Good King | Thornwald, the last good king, who hatched a dragon out of kindness and died in the End | Citadel backstory; names the kings in the Hall of Fallen Heroes |
+| The Last Good King | Thornwald, the last good king, who hatched a dragon out of kindness and died in the End | Citadel backstory; names the kings in the Hall of the Twelve Kings |
 | The Cruel Crown | Maldric, the last of the twelve kings, beguiled into the Black Treaty by two disguised advisers, then poisoned and raised by them | Who the Corrupted King is; hints at the necromancers' role in the fight |
 | The Sealing | How, after Maldric's death, the necromancers bound the citadel's seal to the life of the Ender Dragon Thornwald hatched | Why the dragon must die first |
 | A Spy's Letter | A captured spy's last report from inside the citadel (rare) | Tips: the beacon's hidden pyramid room, guard positions, and the citadel doors only players can break |

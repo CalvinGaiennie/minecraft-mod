@@ -1,0 +1,4 @@
+# Netlify: connect this repo and use defaults below (no UI overrides needed).
+[build]
+  publish = "site"
+  command = "python3 docs/marketing/build_marketing.py"

@@ -1,6 +1,5 @@
 {
-  "parent": "block/cube_all",
+  "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "villagers:block/post_block"
+    "all": "minecraft:block/stone_bricks"
   }
-}

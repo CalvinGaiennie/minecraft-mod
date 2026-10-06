@@ -8,11 +8,8 @@ public final class SoldierLabels {
     }
 
     public static void apply(Villager villager, SoldierData data) {
-        if (data.getKills() > 0) {
-            villager.setCustomName(Component.literal(data.getRank() + " " + data.getDisplayName() + " (" + data.getKills() + " kills)"));
-        } else {
-            villager.setCustomName(Component.literal(data.getRank()));
-        }
+        villager.setCustomName(Component.literal(
+                VillagerPersonalNames.soldierLabel(data.getRank(), data.getDisplayName(), data.getKills())));
         villager.setCustomNameVisible(true);
     }
 

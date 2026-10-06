@@ -10,6 +10,10 @@ import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
 import com.villagers.mod.VillagersMod;
+import com.villagers.mod.block.entity.MessStationBlockEntity;
+import com.villagers.mod.bed.SoldierBedClaims;
+import com.villagers.mod.bed.VanillaBedHelper;
+import com.villagers.mod.util.SoldierStructureHelper;
 import com.villagers.mod.entity.SoldierBehavior;
 import com.villagers.mod.entity.SoldierConversion;
 import com.villagers.mod.entity.SoldierData;
@@ -35,6 +39,80 @@ public class Stage1GameTests {
         helper.assertTrue(SoldierConversion.tryConvert(villager), "Conversion should succeed");
         helper.assertTrue(villager.hasData(VillagerAttachments.SOLDIER_DATA.get()), "Soldier attachment should exist");
         helper.assertTrue(villager.getCustomName() != null, "Soldier label should sync to clients via custom name");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public static void soldierBed_freesWhenSoldierDies(GameTestHelper helper) {
+        Stage1GameTestSupport.placeCoreStructures(helper);
+        BlockPos bedRel = new BlockPos(0, 1, 1);
+        BlockPos bedAbs = helper.absolutePos(bedRel);
+        BlockPos foot = VanillaBedHelper.footPosition(helper.getLevel(), bedAbs);
+        Villager villager = Stage1GameTestSupport.spawnEquippedVillager(helper, BlockPos.ZERO);
+        helper.assertTrue(SoldierConversion.tryConvert(villager), "Conversion should succeed");
+        helper.assertTrue(
+                SoldierBedClaims.get(helper.getLevel()).getSoldierAt(foot) != null,
+                "Vanilla bed should be claimed");
+
+        villager.hurt(helper.getLevel().damageSources().genericKill(), Float.MAX_VALUE);
+        helper.assertTrue(!villager.isAlive(), "Soldier should die");
+        helper.assertTrue(
+                SoldierBedClaims.get(helper.getLevel()).getSoldierAt(foot) == null,
+                "Bed claim should clear after death");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public static void soldierConversion_noVanillaBedFails(GameTestHelper helper) {
+        helper.setBlock(new BlockPos(1, 1, 0), VillagersMod.MESS_STATION.get());
+        Stage1GameTestSupport.stockMessStation(helper, new BlockPos(1, 1, 0));
+        helper.setBlock(new BlockPos(0, 1, 1), VillagersMod.POST_BLOCK.get());
+        Villager villager = Stage1GameTestSupport.spawnEquippedVillager(helper, BlockPos.ZERO);
+
+        var reason = SoldierConversion.blockReason(villager);
+        helper.assertTrue(
+                reason != null && reason.equals(net.minecraft.network.chat.Component.translatable(
+                        "message.villagers.convert_need_bed")),
+                "Post block alone does not count as a bed");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public static void soldierConversion_emptyMessFails(GameTestHelper helper) {
+        helper.setBlock(new BlockPos(1, 1, 0), VillagersMod.MESS_STATION.get());
+        Stage1GameTestSupport.placeRedBed(helper, new BlockPos(0, 1, 1));
+        Villager villager = Stage1GameTestSupport.spawnEquippedVillager(helper, BlockPos.ZERO);
+
+        helper.assertFalse(SoldierConversion.canBecomeSoldier(villager), "Empty mess should block conversion");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public static void messStation_hasBlockEntityWhenPlaced(GameTestHelper helper) {
+        helper.setBlock(new BlockPos(0, 1, 0), VillagersMod.MESS_STATION.get());
+        var be = helper.getLevel().getBlockEntity(helper.absolutePos(new BlockPos(0, 1, 0)));
+        helper.assertTrue(be instanceof MessStationBlockEntity, "Placed mess station should have block entity");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public static void messStation_acceptsSoldierFood(GameTestHelper helper) {
+        helper.setBlock(new BlockPos(0, 1, 0), VillagersMod.MESS_STATION.get());
+        var be = helper.getLevel().getBlockEntity(helper.absolutePos(new BlockPos(0, 1, 0)));
+        helper.assertTrue(be instanceof MessStationBlockEntity, "Mess block entity should exist");
+        MessStationBlockEntity mess = (MessStationBlockEntity) be;
+        helper.assertTrue(mess.tryInsertOne(new ItemStack(Items.BREAD)), "Bread should insert");
+        helper.assertTrue(mess.hasSoldierFood(), "Mess should count as stocked");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public static void messStation_rejectsNonFood(GameTestHelper helper) {
+        helper.setBlock(new BlockPos(0, 1, 0), VillagersMod.MESS_STATION.get());
+        var be = helper.getLevel().getBlockEntity(helper.absolutePos(new BlockPos(0, 1, 0)));
+        MessStationBlockEntity mess = (MessStationBlockEntity) be;
+        helper.assertFalse(mess.tryInsertOne(new ItemStack(Items.IRON_INGOT)), "Non-food should not insert");
+        helper.assertFalse(mess.hasSoldierFood(), "Mess should stay empty");
         helper.succeed();
     }
 
@@ -92,7 +170,7 @@ public class Stage1GameTests {
 
         VillageData villageA = new VillageData("A", ownerA, 0, 0, 0);
         villageA.setRadius(VillageManager.HAMLET_RADIUS);
-        VillageManager.get(helper.getLevel()).registerVillage(villageA);
+        VillageManager.get(helper.getLevel()).registerVillage(villageA, helper.getLevel());
 
         helper.assertFalse(
                 VillageManager.get(helper.getLevel()).canClaim(ownerB, 10, 0, VillageManager.HAMLET_RADIUS),
@@ -100,6 +178,23 @@ public class Stage1GameTests {
         helper.assertTrue(
                 VillageManager.get(helper.getLevel()).canClaim(ownerB, 100, 0, VillageManager.HAMLET_RADIUS),
                 "Distant claim should be allowed");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public static void musterRoll_ownedVillageRollup(GameTestHelper helper) {
+        VillageManager.clearForLevel(helper.getLevel());
+        UUID owner = UUID.randomUUID();
+        VillageData village = new VillageData("North Hold", owner, 0, 64, 0);
+        village.setRadius(VillageManager.HAMLET_RADIUS);
+        VillageManager.get(helper.getLevel()).registerVillage(village, helper.getLevel());
+
+        helper.assertValueEqual(
+                1,
+                VillageManager.get(helper.getLevel()).getVillagesOwnedBy(owner).size(),
+                "Owner should have one village");
+        MusterRollHelper.Summary inVillage = MusterRollHelper.summarizeInVillage(helper.getLevel(), village);
+        helper.assertValueEqual(0, inVillage.soldierCount(), "No soldiers until enlisted");
         helper.succeed();
     }
 

@@ -1,7 +1,5 @@
 {
   "variants": {
-    "": {
-      "model": "villagers:block/mess_station"
-    }
+    "": { "model": "villagers:block/mess_station" }
   }
 }

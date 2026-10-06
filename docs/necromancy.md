@@ -2,16 +2,20 @@
 
 The necromancer's hood and robe keep hostile mobs off the player; the wand turns hostile mobs into minions at a cost in hearts.
 
+**Planned player questline:** **`docs/necromancer-path.md`**. Wand use and rules below apply **independently** of the quest until the intro arc’s **commit** choice. **Commit** closes the Order path and makes **absolution impossible**. **Opt out** of the quest keeps absolution and the Order (see acolyte doc); you can remain an active necromancer either way.
+
+
 ### Hood and robe
 
-| Worn | Effect |
-|---|---|
-| Hood or robe (one piece) | Undead mobs (zombies, skeletons, husks, strays, drowned, phantoms, wither skeletons) can't attack him |
-| Hood and robe (full set) | All hostile mobs can't attack him |
+| Wearer | One piece (hood or robe) | Full set (hood + robe) |
+|---|---|---|
+| **Non-necromancer** (incl. absolved) | Undead won't attack; undead **swarms** ignore wearer | Other hostiles won't attack **except Wither and Warden** |
+| **Active necromancer** | Same undead rule | All hostiles won't attack, **including Wither and Warden** |
 
-- **Full protection:** while he wears it, those mobs can't attack him, even if he attacks them first. This includes the Wither and the Warden. The Ender Dragon, guardians, and elder guardians are unaffected and always attack.
+- The Ender Dragon, guardians, and elder guardians always attack. **Bandits** are not hostiles — robes don't stop them.
 - **Durability:** about the same as leather (hood 55, robe 80). Repaired with phantom membranes.
-- **Villages:** villagers who see a robed player flee to a haven block. Other players' soldiers attack him on sight; his own soldiers don't.
+- **Stigma (anyone in hood/robe):** ~**half** of necromancer social penalties (config `stigmaRobeFraction`, default 0.5): e.g. +25% villager trades, 1.25× soldier desertion, **3×** slower recruiters for **necromancers only** (see penalties), 50% chance villagers flee / others' soldiers attack per check.
+- **Necromancer-only penalties** while active (full strength, not half): +50% trades in robes, **double fear tax** in **your** villages (robes alone do **not** add fear tax), **3×** recruiter interval, double desertion, mutiny double-roll (soldier mod).
 
 ### Wand
 
@@ -78,17 +82,22 @@ A 100-minion army costs about 3 hearts to build, then about 3 more each month to
 
 ### Necromancer penalties
 
-A player becomes a necromancer the first time he uses a wand. Until he drinks a potion of absolution, he lives with these penalties:
+A player becomes an **active necromancer** the first time he uses a wand (convert or renew), unless the questline gates the wand until later (**TBD**). Penalties below apply while active.
 
-- **No recruiters:** his recruiter boxes won't take a recruiter, and any recruiter he had goes back to being a regular soldier. He can still make soldiers by hand.
-- **Distrust:** his soldiers have double the normal desertion chances from hunger and morale.
-- **Shrinking army:** he can have at most 3 soldiers per heart of max health (30 at full health). If he drops below what his army needs, his newest soldiers desert until he's under the limit.
+**Absolution:** clears **active** necromancer status **only if** the player has **not** **committed** to the necromancer questline (`necromancer-path.md`). **Opt-out** players remain eligible. After **commit**, absolution **does not work** (implementation TBD: drink fails, recipe hidden, etc.).
+
+While active and **eligible** for absolution:
+
+- **Slow recruiting:** recruiters still work, but take **3×** as long between recruits (configurable).
+- **Distrust:** his soldiers have double the normal desertion chances from hunger and morale (soldier mod).
 - **Bad reputation:** while wearing the hood or robe, villagers charge him 50% more in trades.
-- **Fear tax:** villagers in his villages pay double taxes, because they fear him.
+- **Fear tax:** villagers in **his** claimed villages pay double taxes (not applied to non-necromancers in robes alone).
 
 ### Potion of absolution
 
-Drinking it clears necromancer status: recruiters work again and every penalty above ends. Permanently lost hearts stay lost, and his wand crumbles. Using a new wand makes him a necromancer again.
+Drinking it (when still **eligible** — before necromancer commitment) clears active necromancer status: penalties end. **Permanently lost hearts stay lost.** His **wand crumbles.** **Minions** revert to **hostile** and stop following. Using a new wand makes him active again. Hood/robe **combat** rules stay as for any non-necromancer wearer (Wither/Warden can attack).
+
+After **necromancer commitment**, the potion fails or has no effect (implementation TBD); the player is on the questline for good.
 
 1. **Potion of penance:** brew an awkward potion with an enchanted golden apple.
 2. **Potion of absolution:** brew the potion of penance with a nether star.
@@ -150,6 +159,5 @@ Cursed effigy (carved pumpkin, bone, hay bale, stick), a scarecrow shape:
 Hunting rogue necromancers earns rewards found nowhere else.
 
 - **Necromancer crypts:** rare underground structures, each home to a rogue necromancer with 6-12 minions. Killing him clears the crypt; a new necromancer moves in after the next new moon (proposed).
-- **Phylactery shard:** dropped by rogue necromancers (1-2 each) and the citadel's necromancers. A player necromancer killed by another player drops 1, at most once per in-game day.
+- **Phylactery shard:** dropped by rogue necromancers (1–2 each) and the **two named bound necromancers** in the citadel (`endgame.md`, names TBD). A player necromancer killed by another player drops 1, at most once per in-game day.
 - **Bone whistle:** 2 phylactery shards + a bone + a goat horn. Blowing it summons 3 wolves that fight for the player for 3 minutes, once per in-game day; 20 uses (proposed).
-- **Blessed incense:** a phylactery shard + glowstone dust + a honey bottle. Given to a cleric in the player's own village, it lets him cure zombie villagers and zombie soldiers within 32 blocks of his brewing stand over one day, with no weakness potion or golden apple. Zombie soldiers cured this way return as soldiers 90% of the time instead of 60% (proposed).

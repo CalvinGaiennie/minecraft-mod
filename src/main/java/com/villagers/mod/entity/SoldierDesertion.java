@@ -1,7 +1,9 @@
 package com.villagers.mod.entity;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.npc.Villager;
 
+import com.villagers.mod.combat.SoldierCombat;
 import com.villagers.mod.util.SoldierStructureHelper;
 
 public class SoldierDesertion {
@@ -24,7 +26,11 @@ public class SoldierDesertion {
     }
 
     public static void recordNightWithoutBed(Villager soldier, SoldierData data) {
-        if (SoldierStructureHelper.soldierHasAssignedBed(soldier.level(), soldier.getUUID(), soldier.blockPosition())) {
+        if (!(soldier.level() instanceof ServerLevel level)) {
+            return;
+        }
+        SoldierStructureHelper.ensureAssignedBedCached(level, soldier.getUUID(), data, soldier.blockPosition());
+        if (SoldierStructureHelper.soldierOwnsAssignedBed(level, soldier.getUUID(), data.getAssignedPostBed())) {
             data.setHomelessNights(0);
         } else {
             data.setHomelessNights(data.getHomelessNights() + 1);
@@ -48,8 +54,16 @@ public class SoldierDesertion {
     }
 
     public static void desert(Villager soldier) {
+        SoldierData data = soldier.getData(VillagerAttachments.SOLDIER_DATA.get());
+        if (soldier.level() instanceof ServerLevel level) {
+            if (data != null) {
+                SoldierStructureHelper.releaseSoldierBed(level, soldier.getUUID(), data.getAssignedPostBed());
+            }
+            com.villagers.mod.combat.RampartClaims.get(level).releaseDefender(soldier.getUUID());
+        }
+        SoldierCombat.disableCombatGoals(soldier);
         soldier.removeData(VillagerAttachments.SOLDIER_DATA.get());
-        SoldierStructureHelper.releasePostBedForSoldier(soldier.level(), soldier);
         SoldierLabels.clear(soldier);
+        com.villagers.mod.threat.BanditService.tryConvertDeserter(soldier);
     }
 }

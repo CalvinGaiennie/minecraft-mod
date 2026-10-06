@@ -17,7 +17,7 @@ Open this note first in Claude Code. It says what we're building, which technica
 - **Read before building:** before each task, read the part for that system. Don't work from memory of the rules.
 - **Custom art encouraged.** Original models and textures for blocks, items, and structures are welcome. Use vanilla stand-ins when art isn't ready yet; ask the user if a look isn't specified in the notes.
 - **When the notes are silent or conflict, ask the user** instead of guessing. Write the answer into the notes or the decisions log at the end of this note.
-- **Source of truth:** once this file is split into the repo's `docs/` folder, the repo copy is the source of truth. Change the docs file in the same commit as the code that changes the rule.
+- **Source of truth:** the repo's `docs/` folder is the source of truth. Change the docs file in the same commit as the code that changes the rule. **Mod split:** `docs/mod-split.md`; **citadel ownership:** `docs/citadel-claim.md`; **cross-mod hooks:** `docs/integration.md`.
 
 ## 2. What we're building
 
@@ -82,7 +82,7 @@ The stages match the build order in the Overview part. Test each before starting
 4. Ownership and village area: first mess station claims land; surveyor's markers (1 per 5 members); no overlap.
 5. Desertion, discharge, the awaken horn, and the muster roll.
 
-**Done when (GameTests):** a villager becomes a soldier only when every requirement is met; a hungry soldier deserts on day 7; a soldier with no home bed for 3 nights deserts; taking a soldier's weapon discharges him and he keeps his kills; two players can't claim overlapping land; the muster roll counts match.
+**Done when (GameTests):** a villager becomes a soldier only when every requirement is met; a hungry soldier deserts on day 7; a soldier with no home bed for 3 nights deserts; taking a soldier's weapon discharges him and he keeps his kills; two players can't claim overlapping land; the muster roll counts match. Full checklist: `docs/stage-1-tests.md`.
 
 ### Stage 2: Economy
 
@@ -98,13 +98,31 @@ The stages match the build order in the Overview part. Test each before starting
 
 **Scope:** allies, campaigns, camp blocks, blockades, assaults, sappers and axemen, siege ladders, boat plans, plank bridges and bridge plans, laced rations, mutiny, no building in enemy land, wanted posters, the reassignment writ, and village banners. **Read:** War and defense, Soldiers and villages (mutiny, ownership).
 
+**Stages 1–4 shipped (MVP):** see `docs/stages-1-4-completion.md`. Notable plan changes from the original design text:
+
+- **Tax:** collected on **tax box open**, not on a world scan timer; **no pathfind** requirement; **128+** village zone with surveyor markers and population-based claim growth.
+- **Combat / AI:** militia, rampart claims, crossbow, doors, hold ground, performance stagger (not full squad pathfinding spec).
+- **Ranks:** **Sergeant** tier at 12 kills; veteran defend **128** blocks.
+- **Stage 3–4 gaps closed in code:** caltrops (block), village protection + explosion cancel, arrow pickup, beacon buffs, banner on mess, enemy build block, **visible soldier armor** (kit attachment sync + villager armor render layer).
+- **Still deferred past Stage 4 (soldier mod):** **wanted posters**, allies co-owner list, full recruiter POI, client attachment sync.
+- **Cut from scope (not planned MVP):** siege assault kit (sappers, ladders, boat/bridge plans, laced rations).
+- **Mod split:** see `docs/mod-split.md`, `docs/citadel-claim.md`, `docs/integration.md`.
+
 ### Stage 5: Threats
 
 **Scope:** new moon raids, swarms, bandits, bandit camps and cave hideouts, and vanilla mob changes. **Read:** Threats and mobs. Build the enlisted-player rule here, so a player who ignores the mod isn't affected.
 
 ### Stage 6: Extras
 
-**Scope:** necromancy with necromancer crypts and phylactery shards, animal farmers and wild ranches, mob spawners, Village Chronicles, the training dummy, advancements, the village map, and the kingdom map. **Read:** Necromancy, Threats and mobs, Old kingdom lore (chronicles), War and defense (items).
+**Scope:** necromancy with necromancer crypts and phylactery shards, animal farmers and wild ranches, mob spawners, Village Chronicles, the training dummy, advancements, the **village map** (soldier). **Read:** Necromancy, Threats and mobs, Old kingdom lore (chronicles), War and defense (items). Necro/endgame split: `docs/mod-split.md`.
+
+**Stages 5–6 shipped (MVP):** see `docs/stages-5-6-completion.md`. Highlights:
+
+- **Enlistment:** mess-station claim + `/villagers enlist|optout`; threat ticks respect enlisted/opt-out state where wired.
+- **Threats:** new-moon raid window, nightly swarm spawn hooks, bandit data + deserter conversion stubs, bandit camp marker block.
+- **Stage 6 blocks/items:** crypt, ranch, farmer station, spawner cap (BE tick), training dummy (practice kills), grave/effigy markers, necromancy gear + village map/chronicle, root advancement.
+- **Art:** run `python3 scripts/generate_vanilla_assets.py` after adding IDs — all registered blocks/items use vanilla-parent models/textures (no missing purple-black cubes).
+- **Still deferred past Stage 6:** full raid waves, swarm merge AI, farmer job AI, grave/effigy behavior, bandit camps as structures, citadel/endgame structures (necro mod).
 
 ### Stage 7: Endgame
 

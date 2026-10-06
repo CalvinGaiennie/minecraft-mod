@@ -1,6 +1,1 @@
-{
-  "parent": "item/generated",
-  "textures": {
-    "layer0": "villagers:block/village_marker"
-  }
-}
+{"parent": "minecraft:item/lodestone"}

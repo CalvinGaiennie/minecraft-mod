@@ -29,13 +29,6 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .unlockedBy("has_barrel", has(Items.BARREL))
                 .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(VillagersMod.MODID, "mess_station"));
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, VillagersMod.POST_BED.get())
-                .pattern("W W")
-                .pattern("WWW")
-                .define('W', Items.WHITE_BED)
-                .unlockedBy("has_bed", has(Items.WHITE_BED))
-                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(VillagersMod.MODID, "post_bed"));
-
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, VillagersMod.POST_BLOCK.get())
                 .pattern("S")
                 .pattern("I")

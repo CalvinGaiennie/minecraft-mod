@@ -1,8 +1,14 @@
 package com.villagers.mod.entity;
 
+import net.minecraft.core.BlockPos;
+
+import org.jetbrains.annotations.Nullable;
+
 public class VeteranData {
     private int kills;
     private String rank = "Soldier";
+    @Nullable
+    private BlockPos homeBed;
 
     public VeteranData() {
     }
@@ -26,5 +32,14 @@ public class VeteranData {
 
     public void setRank(String rank) {
         this.rank = rank;
+    }
+
+    @Nullable
+    public BlockPos getHomeBed() {
+        return homeBed;
+    }
+
+    public void setHomeBed(@Nullable BlockPos homeBed) {
+        this.homeBed = homeBed == null ? null : homeBed.immutable();
     }
 }

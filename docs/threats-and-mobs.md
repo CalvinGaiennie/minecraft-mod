@@ -37,7 +37,7 @@ Raid size is random, not tied to the village's defenses:
 - **Growth:** zombie swarms grow by turning villagers they kill into zombie villagers. Other types only grow by merging.
 - **Movement:** a swarm heads for the nearest village within 256 blocks, and moves on once that village has no villagers left.
 - **Daylight:** zombie and skeleton swarms hide in shade or caves during the day and move at night. Spider and creeper swarms move any time.
-- **Targets:** everyone, including villagers, soldiers, golems, players, and bandits. Robed necromancers are immune.
+- **Targets:** everyone, including villagers, soldiers, golems, players, and bandits. Players wearing the **necromancer hood or robe** are ignored: **undead swarms** if one piece; **other swarm types** if full set (same rules as hood/robe combat pacification).
 - **No despawning:** swarm mobs stay until killed.
 - **Necromancy:** necromancers can convert swarm mobs into minions; each conversion is a normal wand use with the usual heart risk.
 - **While unloaded:** a swarm in unloaded chunks keeps marching toward its target as stored data, without fighting. When a player loads the area, it appears where it would have arrived. Combat only happens in loaded chunks.

@@ -118,7 +118,8 @@ What counts as a kill:
 - **Friendly arrows pass through:** arrows from a player's soldiers and militia, and his own arrows, fly through him, his soldiers, his allies, and their soldiers.
 - **No accidental hits:** a player's melee hits do nothing to his own soldiers unless he's sneaking.
 - **Careful fire arrows:** soldiers won't shoot fire arrows at a target with a friendly within 3 blocks of it.
-- **What still hurts friends:** explosions, lava, fire, and sneaking hits. These are the only ways a player can kill his own soldiers, so friendly kills (see Mutiny) are always on him.
+- **What still hurts friends:** explosions, lava, fire, and (for most players) **sneaking** melee/ranged hits. Friendly kills (see Mutiny) are always on the player.
+- **Order War Leader acolyte (locked):** you **cannot** damage **your** soldiers or militia with direct attacks **unless sneaking** (`acolyte-path.md`). Non-sneak friendly hits are blocked/cancelled. Sneaking still counts as a deliberate friendly kill for mutiny if applicable.
 
 ### Gear wear
 
