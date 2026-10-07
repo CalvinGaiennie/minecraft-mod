@@ -103,6 +103,18 @@
     }
     main.dev-body th { background: var(--surface2); }
     main.dev-body code { font-size: 0.88em; }
+    main.dev-body .mermaid-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1.25rem 0;
+      overflow-x: auto;
+    }
+    main.dev-body .mermaid-wrap .mermaid {
+      font-size: 0.85rem;
+      text-align: center;
+    }
 
     footer {
       margin-top: 3rem;
@@ -125,8 +137,10 @@
       <nav class="top">
         <a class="marketing" href="./index.html">← Marketing overview</a>
         <a href="#goals">Mod goals</a>
+        <a href="#solo-paths">Solo path locks</a>
         <a href="#mods">Two mods</a>
         <a href="#process">How we plan</a>
+        <a href="#progress">Design progress</a>
         <a href="#backlog">Design backlog</a>
         <a href="#compat">Mod compatibility</a>
       </nav>
@@ -168,6 +182,60 @@
 <p>Optional with Armies; kingdom scope amplifies when both are loaded.</p>
 </div>
 </div>
+<h2 id="solo-paths">Solo player — permanent forks</h2>
+<p>Citadel solo design assumes <strong>one player UUID</strong> making irreversible calls. Multiplayer adds PvP and race-for-claim; the <strong>locks below still apply per player</strong>.</p>
+<p><strong>Diagram:</strong> green = still available; red = closed; gold = citadel throne / owner perks; purple = necromancer quest; blue = Order. <strong>§6 brother endings</strong> (partner vs betrayal) are <strong>in discussion</strong> — dashed in chart.</p>
+<div class="mermaid-wrap"><div class="mermaid">
+flowchart TB
+  subgraph entry["Before paths lock"]
+    S([Start / wand optional])
+    S --> H{Lost 3 hearts<br/>to wand?}
+    H -->|No| PRE[Pre-path play:<br/>Order open until claim deadline<br/>Necro quest not offered]
+    H -->|Yes| INTRO[Intro NPC arc]
+    INTRO --> CH{Final choice}
+    CH -->|Opt out| OPT[Necro questline CLOSED forever<br/>Order stays OPEN<br/>Absolution still OK]
+    CH -->|Commit| COM[Order CLOSED forever<br/>Absolution CLOSED<br/>Necro main arc OPEN]
+  end
+
+  PRE --> CLAIM1{Claim throne<br/>before Order lock?}
+  OPT --> ORD[Order: basic → light → hard → Maelor lock<br/>must finish BEFORE claim]
+  ORD --> LOCK{Specialty locked<br/>pre-claim?}
+  LOCK -->|Yes| ORDOK[Locked acolyte — can claim throne<br/>if not active necromancer on sit]
+  LOCK -->|No| ORDMIS[Claim without lock → Order progress CLOSED<br/>No Maelor lock / homecoming perks]
+  CLAIM1 -->|Yes| ORDMIS
+
+  COM --> NECRO[Committed arc: flutes, horcrux, citadel assault<br/>Emphasis pre-claim — §6 TBD post-claim]
+  NECRO --> ASSAULT[Kill both bound necromancers + Corrupted King]
+  ASSAULT --> BR{§6 brother choice<br/>TBD names}
+  BR -->|Trust seeming-good brother| ENDG[Ending A TBD — partner]
+  BR -->|Trust seeming-bad brother| ENDB[Ending B TBD — betrayal later]
+
+  subgraph throne["Citadel throne sit — owner"]
+    T{Attempt 60s throne sit}
+    T -->|Active necromancer<br/>healthy Kingstree| DEATH[Instant death — cannot own]
+    T -->|Active necromancer<br/>blighted tree| BLOCK[Blocked — must absolve first]
+    T -->|Absolved / never active| OWN[Can become owner<br/>restoration + perks]
+    T -->|Committed — no absolution| DEATH
+    WAND[Owner uses wand again] --> FORFEIT[Forfeit claim + 7d window<br/>Permanent citadel ownership ban]
+  end
+
+  ORDOK --> T
+  ORDMIS --> T
+  PRE --> T
+  OPT --> T
+
+  style DEATH fill:#fdd
+  style BLOCK fill:#fdd
+  style FORFEIT fill:#fdd
+  style COM fill:#ecd9ff
+  style OPT fill:#e8f4ec
+  style ORDMIS fill:#fdd
+  style ENDG fill:#fef6d8
+  style ENDB fill:#fef6d8
+</div></div>
+<h3>Fork cheat sheet (canon today)</h3>
+<table><thead><tr><th>You do this</th><th>Order acolyte path</th><th>Necromancer questline</th><th>Throne ownership</th></tr></thead><tbody><tr><td><strong>Opt out</strong> at intro</td><td>Open until <strong>claim</strong> (must <strong>lock</strong> pre-claim for full perks)</td><td><strong>Closed</strong></td><td>OK if <strong>not active</strong> necromancer on sit (<code>citadel-claim.md</code>)</td></tr><tr><td><strong>Commit</strong> at intro</td><td><strong>Closed</strong></td><td>Open (§6 main arc)</td><td><strong>Blocked</strong> while <strong>active</strong> necromancer — commit removes absolution → effectively <strong>no throne</strong> unless rules change</td></tr><tr><td><strong>Claim citadel</strong> before Maelor lock</td><td><strong>Closed</strong> for new progress</td><td>Intro may still trigger if 3 hearts; arc <strong>pre-claim</strong></td><td>Owner perks if sit succeeds</td></tr><tr><td><strong>Locked acolyte</strong> + absolved / non-active necro</td><td>Perks + stations after claim</td><td>Only if committed before commit lock</td><td><strong>Yes</strong></td></tr><tr><td><strong>Wand forfeit</strong> as owner</td><td>—</td><td>—</td><td><strong>Permanent ban</strong> from owning citadel</td></tr></tbody></table>
+<p><strong>Wild cards:</strong> horcrux pseudo-death (3 min, <strong>no teleport</strong>), relic ban on active necromancers, <strong>horcrux compass</strong> (strong early, noisy after map exploration). Rogue sites ~<strong>half</strong> outpost density; <strong>~4%</strong> wild lich horcruxes.</p>
 <h2 id="process">How we plan (plans to plan the plans)</h2>
 <div class="box process">
 <p>Design is <strong>author-owned</strong>. Implementation follows written docs in <code>docs/</code>, not the other way around.</p>
@@ -178,31 +246,28 @@
 <li><strong>No skip ahead</strong> on canon until the current section is merged (unless you explicitly defer a block, e.g. lore §2–6).</li>
 <li><strong>This section</strong> — high-level goals and process; detail stays in markdown for implementers.</li>
 </ol>
-<p><strong>Status snapshot (2026-10-06):</strong> Order flow + feat gates (§8) merged; <strong>§10 citadel layout/siege</strong> and <strong>§7 necromancer items/horcrux</strong> documented (mockup + tuning TBD); necromancer philosophy + fork set; lore §2–6 and full necromancer story arc (§6) deferred. Active queue: finish §10 TBDs → §9 world notes → §7 implementation specs.</p>
+<p><strong>Status snapshot (2026-10-06):</strong> Order flow + feat gates (§8) merged. <strong>§6 necromancer main arc</strong> active (<code>necromancer-path.md</code>). <strong>§7</strong> horcrux/flutes/rogues/compass largely decided; tuning + flute placements TBD. <strong>§10 citadel layout</strong> documented; mockup TBDs paused. Lore §2–6 deferred.</p>
 </div>
 <h2 id="progress">Design progress (canon docs)</h2>
 <div class="box process">
-<h3>Black Citadel — layout &amp; assault (§10, in progress)</h3>
-<p>Written to <code>docs/citadel-layout.md</code> and <code>docs/citadel-defenders.md</code>:</p>
+<h3>Necromancer path — items, hunt, rogues (§7)</h3>
+<p>Written to <code>docs/necromancer-path.md</code>, <code>docs/necromancy.md</code>, <code>docs/config-and-recipes.md</code>:</p>
 <ul>
-<li>Template fortress: strong shell, guttable wings, <strong>30-block</strong> soft dig, <strong>no lava moat</strong>.</li>
-<li><strong>Defensive mode:</strong> one main entrance, closable inner gate, trap corridors (tripwire/plate potion traps, webs, water, ice, lava lanes), <strong>breakable spawners</strong> and trap parts mid-assault.</li>
-<li>Garrison mix: undead, skeletons, wither skeletons, spiders, baby zombies, witches, <strong>few ravagers</strong>; difficulty from layout, effects, and kit — not HP bloat.</li>
-<li><strong>Player-driven</strong> post-claim: levers, dismantle traps, break spawners. Blockout still needed for lever map, wing volumes, shadow-ring counts.</li>
+<li>Progression = <strong>unique quest items + sacrifices</strong> (not Order feat grids). <strong>Flutes</strong> = one per world, relic indestructibility, consumed for horcrux / crafts.</li>
+<li><strong>Horcrux:</strong> shard + flute, god-wizard set, or king relic + soul-list kill; chest storage; pseudo-death <strong>without teleport</strong>; destroy at <strong>Dragon’s Well</strong> + whitelist.</li>
+<li><strong>Rogues:</strong> ~<strong>half</strong> pillager-outpost density; <strong>80%</strong> surface structures; <strong>~4%</strong> wild lich horcrux; shards from all rogues.</li>
+<li><strong>Horcrux compass:</strong> shapeless — compass, phylactery shard, soul sand, wither rose; points to <strong>nearest horcrux chunk</strong>; best <strong>early</strong>, weaker after exploration.</li>
+<li><strong>Beast Dirge:</strong> 50% of eligible mobs in loaded chunks take 4–12 hearts blight; flutes never hurt the player.</li>
 </ul>
-<h3>Necromancer path — items &amp; horcrux (§7, in progress)</h3>
-<p>Written to <code>docs/necromancer-path.md</code> and <code>docs/necromancy.md</code>:</p>
-<ul>
-<li>Progression = <strong>quest items + sacrifices</strong> (flutes/pipes, cursed armor), not Order-style class grids.</li>
-<li><strong>Horcrux:</strong> ritual craft (shard + power item in hotbar + kill on soul list); <strong>many jars</strong> limited by permanent hearts; stored in <strong>chests</strong>; pseudo-death instead of dying; destroy via <strong>Dragon’s Well</strong> (anytime), wither, ghast, lightning, etc.</li>
-<li><strong>Wild lich</strong> crypt rogues (subset) teach hunt/destroy before players commit; <strong>Dragon’s Well</strong> also fills breath bottles (unlimited cap; well is hard to find).</li>
-<li><strong>Consider:</strong> horcrux <strong>corruption</strong> of weak nearby soldiers — not specced yet.</li>
-</ul>
+<h3>Necromancer path — story (§6, in discussion)</h3>
+<p>Outline in <code>necromancer-path.md</code> <strong>Main quest arc</strong>: intro → mentor → citadel climax → <strong>misleading brother choice</strong> → branch endings (mega End portal ending <strong>TBD</strong> vs post-claim citadel).</p>
+<h3>Black Citadel — layout &amp; assault (§10, paused)</h3>
+<p>Written to <code>docs/citadel-layout.md</code> and <code>docs/citadel-defenders.md</code> — siege ladder <strong>20</strong> blocks; defensive mode, spawners, traps. Remaining TBDs wait on Creative mockup debrief.</p>
 </div>
 <h2 id="backlog">Design backlog (from goals — not all implemented)</h2>
 <div class="box planned">
 <p>Items called out in goal-setting that still need specs in <code>docs/</code> and then code:</p>
-<table><thead><tr><th>Item</th><th>Mod</th><th>Intent</th></tr></thead><tbody><tr><td><strong>Permanent max-health boost</strong> when Maelor locks Order specialty</td><td>Citadel</td><td>Progression reward for acolyte commit; tune in config.</td></tr><tr><td><strong>Larger permanent max-HP boost</strong> for locked <strong>War Leader</strong> acolyte</td><td>Citadel (Order)</td><td>Bigger than other three specialties; amount TBD config.</td></tr><tr><td><strong>War Leader acolyte: no damage to own troops unless sneaking</strong></td><td>Citadel (Order)</td><td>See callout below — locked War Leader specialty only.</td></tr><tr><td>Named bandit kings, loot/intel chains, optional bandit alliance, solo-forced quests</td><td>Armies (+ Citadel hooks)</td><td>Army-side storylines; less &quot;main lore&quot; than citadel, still authored.</td></tr><tr><td>Tax / claim loop as soft &quot;farm&quot; replacement</td><td>Armies</td><td>Empire income without requiring vanilla iron farms for fun.</td></tr></tbody></table>
+<table><thead><tr><th>Item</th><th>Mod</th><th>Intent</th></tr></thead><tbody><tr><td><strong>Permanent max-health boost</strong> when Maelor locks Order specialty</td><td>Citadel</td><td>Progression reward for acolyte commit; tune in config.</td></tr><tr><td><strong>Larger permanent max-HP boost</strong> for locked <strong>War Leader</strong> acolyte</td><td>Citadel (Order)</td><td>Bigger than other three specialties; amount TBD config.</td></tr><tr><td><strong>War Leader acolyte: no damage to own troops unless sneaking</strong></td><td>Citadel (Order)</td><td>See callout below — locked War Leader specialty only.</td></tr><tr><td>Named bandit kings, loot/intel chains, optional bandit alliance, solo-forced quests</td><td>Armies (+ Citadel hooks)</td><td>Army-side storylines; less &quot;main lore&quot; than citadel, still authored.</td></tr><tr><td>Tax / claim loop as soft &quot;farm&quot; replacement</td><td>Armies</td><td>Empire income without requiring vanilla iron farms for fun.</td></tr><tr><td><strong>§6</strong> intro NPC, mentor, citadel access beats, brother endings</td><td>Citadel</td><td>Player-facing main necromancer arc.</td></tr><tr><td>Per-flute <strong>world placement</strong> (structures / quests)</td><td>Citadel</td><td>Seven unique sites + Lament of Ash mentor handoff.</td></tr><tr><td><code>necromancerRogueSiteSpacing</code> playtest value</td><td>Citadel</td><td>~400–512 blocks initial target.</td></tr></tbody></table>
 </div>
 <div class="box planned">
 <h3>War Leader acolyte — friendly-fire rule (design intent)</h3>
@@ -230,9 +295,9 @@
 <ul>
 <li><code>docs/overview.md</code> — scope and build order</li>
 <li><code>docs/acolyte-path.md</code> — Order quest + feats</li>
-<li><code>docs/necromancer-path.md</code> — dark path philosophy + fork</li>
+<li><code>docs/necromancer-path.md</code> — dark path philosophy, §6 arc, §7 items</li>
 <li><code>docs/endgame.md</code>, <code>docs/citadel-claim.md</code>, <code>docs/citadel-layout.md</code>, <code>docs/citadel-defenders.md</code> — citadel loop &amp; siege</li>
-<li><code>docs/necromancy.md</code> — wand, crypts, horcrux design</li>
+<li><code>docs/necromancy.md</code> — wand, rogues, horcrux design</li>
 <li><code>docs/soldiers-and-villages.md</code>, <code>docs/war-and-defense.md</code> — Armies</li>
 <li><code>docs/notes/2026-10-05-discussion-plan.md</code> — section queue + decision log</li>
 </ul>
@@ -242,5 +307,9 @@
       <a href="./index.html">Marketing overview</a> · Source: <code>docs/marketing/development-plan.md</code> · WIP
     </footer>
   </div>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true, theme: "neutral", securityLevel: "loose" });
+  </script>
 </body>
 </html>

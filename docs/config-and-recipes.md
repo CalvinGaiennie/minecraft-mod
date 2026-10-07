@@ -33,6 +33,10 @@ Recipes for blocks and items not covered in their own sections. All use vanilla 
 | Slop bucket (pig) | Bucket + carrot + emerald block |
 | Hitching post (horse) | Fence + lead + gold block |
 
+| Necromancer item | Recipe |
+|---|---|
+| Horcrux compass | Compass + phylactery shard + soul sand + wither rose (shapeless). Full detail: `necromancy.md`. |
+
 ## Config settings
 
 Every number a server owner might want to tune, with its default.
@@ -67,6 +71,12 @@ Every number a server owner might want to tune, with its default.
 | `necromancerWorldHavocEnabled` — chunk-wide flute havoc (e.g. mass animal dirge), large summons | **true** (set **false** on peaceful/co-op servers) |
 | `necromancerHorcruxEnabled` — poison/pot immunity, pseudo-death instead of dying | **true** (set **false** to disable lich rules) |
 | `necromancerHorcruxDestroyers` — ways to destroy a horcrux item | **dragons_well**, **ghast_fireball**, **wither**, **wither_skull**, **lightning**, **dragon_breath_bottle** (proposed; servers may extend) |
+| `necromancerHorcruxPingRadiusChunks` — hunter “near jar” particle ping (**circular**, chunk-center distance) | **10** |
+| `necromancerGodWizardMeleeBonus` — bonus melee damage with full cursed netherite set | **0.25** (+25%) |
+| `necromancerRogueHorcruxChance` — rogue spawns with one horcrux in hidden chest | **0.04** (~4%) |
+| `necromancerRogueSurfaceFraction` — rogue sites above ground (vs underground crypt) | **0.80** |
+| `necromancerRogueSiteSpacing` — average distance between rogue sites (~**2×** pillager outpost spacing = **half** as many) | **TBD** (~**400–512** blocks; tune in playtest) |
+| `necromancerHorcruxCompassEnabled` — craftable compass to nearest horcrux chunk (stackable, unlimited crafts) | **true** |
 | `necromancerQuestHeartThreshold` — hearts lost before intro NPC | **3** |
 | `necromancerIntroMinDistanceFromAcolyte` — blocks intro near refuges | **128** |
 | Robe stigma fraction (non-necromancer in hood/robe) | 0.5 |
@@ -82,7 +92,7 @@ Every number a server owner might want to tune, with its default.
 | Raid chance near spawn before the citadel falls (under 1,000 / 1,000-3,000 blocks) | 60% / 25% and 50% / 20% |
 | Natural militia near spawn (under 1,000 / 1,000-3,000 blocks) | 4 / 3 |
 | Arrow cap per soldier or militiaman | 16 |
-| Siege ladder max height | 25 blocks |
+| Siege ladder max height | 20 blocks |
 | Camp block storage | 54 slots |
 | Veteran defense radius | 32 blocks |
 | Cleanup timers (stray arrows / mob drops / soldier drops) | 30 seconds / 5 minutes / 10 minutes |

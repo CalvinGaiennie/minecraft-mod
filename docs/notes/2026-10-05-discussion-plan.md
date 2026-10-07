@@ -62,6 +62,8 @@
 | 2026-10-06 | **§7** (partial) | Progression = **quest items + sacrifices**. **Flutes/pipes** (havoc OK, **`necromancerWorldHavocEnabled`**). Horcrux: **relics + kill** (acolyte, **player**, or **defined necromancer roster TBD**). Flute lockout on horcrux **deferred**. Hunt/steal/destroy power items. **`necromancer-path.md`**, **`necromancy.md`**, **`config-and-recipes.md`**. |
 | 2026-10-06 | **§7** (horcrux) | **Hotbar** shard + power item → **kill** valid target → horcrux; **−1 heart** each; **many** jars heart-limited; **chest-stored**. **Immune** poison/harm pots; pseudo-death 3m no clicks (**teleport TBD**). **Destroy jar** = vanilla **hard** hits (ghast, wither, **TBD** whitelist). Binding = no unequip, not vanish on death. Chunk hints **TBD**. |
 | 2026-10-06 | **§7** (wild lich) | **Subset** of crypt rogues have **horcrux in chest** — on-ramp for **destroy** (and lore for **create**). Count/placement **TBD**. **`necromancy.md`**, **`threats-and-mobs.md`**, **`necromancer-path.md`**. |
+| 2026-10-06 | **§7** | Pseudo-death: **no teleport** on trigger. | `necromancer-path.md`, `necromancy.md` |
+| 2026-10-06 | **§6** | **Started** — main arc outline + open questions in `necromancer-path.md`; lore brothers **§3–5** still deferred. | `necromancer-path.md`, this plan |
 
 ---
 
@@ -69,7 +71,7 @@
 
 **Deferred for later:** §2, §3, §4, §5, §6, §8.
 
-**Active sequence:** **§10** (finishing TBDs) → **§9** → **§7**, then return to deferred sections.
+**Active sequence:** **§6** (main necromancer arc) → **§9** → **§7** leftovers, then **§10** / deferred lore **§2–5**.
 
 ---
 
@@ -77,4 +79,4 @@
 
 **§10:** author decisions merged; close remaining **TBD** rows in `citadel-layout.md` when answered.
 
-**Next after §10 closes:** **§9** or **§7** affinities, or deferred lore **§2–6**. **§8 + Order flow** treated as decided in docs.
+**Active:** **§6** main quest arc (`necromancer-path.md` **Main quest arc**). **§10** paused. **§8 + Order flow** decided in docs.

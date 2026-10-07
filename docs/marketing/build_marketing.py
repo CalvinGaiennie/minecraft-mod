@@ -108,12 +108,27 @@ def block_to_html(block: str, box_class: str | None) -> str:
     return "\n".join(out)
 
 
+def render_mermaid_block(code: str) -> str:
+    # Author-controlled markdown only — mermaid needs raw `<br/>` etc. in labels.
+    return f'<div class="mermaid-wrap"><div class="mermaid">\n{code.strip()}\n</div></div>'
+
+
 def render_section_body(body: str) -> str:
     lines = body.splitlines()
     out: list[str] = []
     i = 0
     while i < len(lines):
         line = lines[i]
+        if line.strip() == "```mermaid":
+            i += 1
+            mermaid_lines: list[str] = []
+            while i < len(lines) and lines[i].strip() != "```":
+                mermaid_lines.append(lines[i])
+                i += 1
+            if i < len(lines) and lines[i].strip() == "```":
+                i += 1
+            out.append(render_mermaid_block("\n".join(mermaid_lines)))
+            continue
         if line.startswith("::: "):
             spec = line[4:].strip()
             i += 1
@@ -139,9 +154,12 @@ def render_section_body(body: str) -> str:
         if line.startswith("### ") or line.strip():
             chunk_lines: list[str] = []
             while i < len(lines) and not lines[i].startswith("::: "):
+                if lines[i].strip() == "```mermaid":
+                    break
                 chunk_lines.append(lines[i])
                 i += 1
-            out.append(block_to_html("\n".join(chunk_lines), None))
+            if chunk_lines:
+                out.append(block_to_html("\n".join(chunk_lines), None))
             continue
         i += 1
     return "\n".join(out)

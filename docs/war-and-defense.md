@@ -79,7 +79,7 @@ The player sets a target with an attack plan, then launches the assault with the
 
 ### Siege ladders
 
-- **What it is:** a single large ladder object that two soldiers carry together and stand up against an enemy wall in one motion. Its height fits the wall automatically, up to 25 blocks. It reuses the vanilla ladder texture on a tall, flat shape. Recipe: 8 ladders + 2 iron ingots. Soldiers and militia follow the same rules.
+- **What it is:** a single large ladder object that two soldiers carry together and stand up against an enemy wall in one motion. Its height fits the wall automatically, up to **20 blocks**. It reuses the vanilla ladder texture on a tall, flat shape. Recipe: 8 ladders + 2 iron ingots. Soldiers and militia follow the same rules.
 - **Supply:** siege ladders are stored in the camp block. The attack plan says how many to bring, and up to that many are taken out of the camp block for the assault, only as many as the player stocked. Each is carried by a pair of soldiers.
 - **Climbing:** vanilla mobs only climb ladders they bump into; they don't plan routes with them. So soldiers get a simple scripted action instead: walk to the siege ladder's base, climb straight up, and step off at the top.
 - **Counterplay:** defenders can push a standing siege ladder over by hitting its top a few times, dropping anyone climbing it, or break it entirely. Standing one up follows mobGriefing.

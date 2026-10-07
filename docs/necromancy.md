@@ -154,32 +154,37 @@ Cursed effigy (carved pumpkin, bone, hay bale, stick), a scarecrow shape:
 | Bone | Hay bale | Bone |
 |  | Stick |  |
 
-### Necromancer crypts and phylactery shards
+**Horcrux compass** (shapeless): **compass**, **phylactery shard**, **soul sand**, **wither rose** → 1 horcrux compass. Craftable in unlimited quantity; points to nearest horcrux chunk (`necromancer-path.md`).
 
-Hunting rogue necromancers earns rewards found nowhere else.
+### Rogue necromancers and phylactery shards
 
-- **Necromancer crypts:** rare underground structures, each home to a **rogue necromancer** with 6–12 minions. Killing him clears the crypt; a new necromancer moves in after the next new moon (proposed).
-- **Wild lich (term):** a **rogue necromancer NPC** with a **horcrux in a crypt chest** — not a player, not the Corrupted King. **Some** crypts spawn one (`necromancer-path.md`).
-- **Wild liches (subset):** they use **pseudo-death**, chunk hints, and **destroy-the-jar** rules so **all players** learn the hunt **before** anyone commits to the questline. **Intro/on-ramp:** find ping → find chest → unmake jar (**Dragon’s Well** works **before or after** dragon kill; wither/lightning/etc.) → then kill the rogue for **shards** and loot hints.
+Hunting **rogue necromancers** earns rewards found nowhere else.
+
+- **Sites (author):** **~half** as dense as **pillager outposts** (~2× spacing). **80%** **surface**: mod **custom structure** and/or **retrofitted vanilla structure** (outpost, mansion, **TBD**). **20%** **underground crypts** with 6–12 minions. Killing the rogue clears the site; a new one moves in after the next **new moon** (proposed). Details: `necromancer-path.md`.
+- **Horcrux compass:** **craft many**; points to **nearest horcrux** chunk (player or wild lich). **Stronger early** (few wild decoys), **weaker late** as exploration adds closer rogue horcruxes — chunk-level only (`necromancer-path.md`).
+- **Wild lich (term):** a rogue with **one horcrux** (item) in a **hidden chest** — **very rare**; almost all rogues have **none** (`necromancer-path.md`).
+- **Optional preview:** if you find one, same pseudo-death / ping / destroy rules as player liches — **not** a required tutorial step.
 - **Phylactery shard:** dropped by rogue necromancers (1–2 each) and the **two named bound necromancers** in the citadel (`endgame.md`, names TBD). A player necromancer killed by another player drops 1, at most once per in-game day.
-- **Which crypts get a horcrux:** **TBD** ratio (e.g. **1 in 4** crypts, or one **guaranteed** lich crypt within ~**512** blocks of spawn for early tutorial — placement pass with structures).
+- **Horcrux on rogues:** **~4%**, **max one** horcrux each; config `necromancerRogueHorcruxChance`. No fixed tutorial site.
 - **Bone whistle:** 2 phylactery shards + a bone + a goat horn. Blowing it summons 3 wolves that fight for the player for 3 minutes, once per in-game day; 20 uses (proposed). **Not** the same as committed-quest **flutes/pipes** (`necromancer-path.md`).
 
 ### Horcrux (committed quest — design)
 
 **Casual** necromancers use shards for the bone whistle only. **Committed** questline can create **many horcruxes** — each costs **1 permanent heart** until the **1-heart floor** (`necromancer-path.md`). **Wild liches** in crypts demonstrate the system first (see crypts above).
 
-**Ritual:** **Phylactery shard** + **named item of power** (list **TBD**) in **hotbar** while killing an **acolyte**, **player**, or **listed necromancer NPC** (includes **wild lich** rogues and other **TBD** named necromancers).
+**Ritual:** **Phylactery shard** + **any quest flute**, **full god wizard armor set**, or **any kings’ relic** (consumed) in **hotbar** while killing an **acolyte**, **player**, or **listed necromancer NPC**.
 
-**Storage:** Each horcrux in a **chest** anywhere; passives while **≥1** exists. **Detection:** nearby loaded chunk → “somewhere in a nearby loaded chunk”; in **correct chunk** → “in this chunk” but **not** exact block.
+**Storage:** Each horcrux in a **chest** anywhere; passives while **≥1** exists. **Ping:** environmental — dark particles, **poisoned animals** in horcrux chunk (`necromancer-path.md`).
+
+**Quest flutes:** **never damage the player** who plays them; **one per world**, **relic-style** indestructibility; **only** removed by **horcrux** (or other **TBD** quest rituals) — **not** rogue drops (`necromancer-path.md`).
 
 **Passives:**
 
 - **Immune** to **poison** and **harm / damage potions** (long **cursed armor** wear).
-- **Lethal damage** → **pseudo-death** (3 min no clicks, move, keep inv). **TBD:** teleport to **nearest horcrux** on trigger.
-- **True death** when **all** horcruxes destroyed (**TBD** partial jar rules).
+- **Lethal damage** → **pseudo-death** (3 min no clicks, move, keep inv). **No teleport** on trigger.
+- **True death** when **all** horcruxes destroyed (**TBD** partial rules).
 
-**Destroy horcrux:** survives normal mining/fire. **Primary:** **throw into the Dragon’s Well** — **anytime** (dragon alive or dead). **Also:** ghast fireball, wither, lightning (rod/channeling), optional **breath bottle** splash. Config `necromancerHorcruxDestroyers`. **Binding armor:** no manual unequip; **pseudo-death keeps armor**; true death uses normal drop rules.
+**Destroy horcrux:** survives normal mining/fire. **Primary:** **throw into the Dragon’s Well** — **anytime** (dragon alive or dead). **Also:** ghast fireball, wither, lightning (rod/channeling), optional **breath bottle** splash. Config `necromancerHorcruxDestroyers`. **God wizard armor:** **indestructible** like relics; **binding** — no manual unequip; **pseudo-death keeps armor**; consumable only via **horcrux** (or **TBD** rituals). True death drops pieces normally.
 
 **Consider:** active horcrux **corrupts weak nearby units** (soldiers, etc.) — **`necromancer-path.md`**; not implemented.
 
