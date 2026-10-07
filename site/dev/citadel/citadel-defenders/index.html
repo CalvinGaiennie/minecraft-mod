@@ -28,6 +28,59 @@
 <p><strong>§10:</strong> <strong>Three boss NPCs</strong> + <strong>citadel spawners</strong> through the fortress (<strong>breakable mid-assault</strong>). Works <strong>without Armies</strong>. Difficulty = <strong>boss kits</strong>, <strong>spawner types/places</strong>, <strong>layout</strong> (funnels, traps, hazards), and <strong>effect / counter-play</strong> — see <code>citadel-layout.md</code> <strong>Assault defensive mode</strong>.</p>
 <p><strong>Not a tank check:</strong> the citadel should feel like a <strong>wave of different problems</strong> — blindness in a web hall, slowness on ice under archer fire, weakness before a ravager set-piece, poison + milk timing, lava under fire res pressure. HP and armor matter, but <strong>tools, consumables, and tactics</strong> matter as much.</p>
 <p>---</p>
+<h2 id="the-three-bosses">The three bosses</h2>
+<table><thead><tr><th>Boss</th><th>Role</th></tr></thead><tbody><tr><td><strong>Corrupted King</strong></td><td>Final fight; throne / keep.</td></tr><tr><td><strong>Bound necromancer A</strong></td><td>Mini-boss; fixed chamber.</td></tr><tr><td><strong>Bound necromancer B</strong></td><td>Mini-boss; fixed chamber.</td></tr></tbody></table>
+<p>---</p>
+<h2 id="spawner-mix-author-mockup-tunes-counts">Spawner mix (author — mockup tunes counts)</h2>
+<p><strong>Citadel spawner blocks</strong> — <strong>not</strong> on the unbreakable list (except <strong>Roost</strong> phantom spawner — post-claim feature, <code>citadel-layout.md</code>). Once the seal is open, attackers <strong>mine them like normal spawners</strong> if they can reach them. Placement and <strong>reachability</strong> (overwatch, height, lava moats) do the guarding. Global/per-spawner caps <strong>TBD</strong>.</p>
+<table><thead><tr><th>Spawn type</th><th>Role (typical placement)</th></tr></thead><tbody><tr><td><strong>Citadel undead</strong></td><td>Core “soldier” pressure — gate, keep (<code>citadel</code> custom mob when Armies absent <strong>TBD</strong>).</td></tr><tr><td><strong>Skeletons</strong></td><td>Wall walks, overwatch.</td></tr><tr><td><strong>Wither skeletons</strong></td><td>Bridge choke, slow + wither stack in funnels.</td></tr><tr><td><strong>Cave spiders</strong></td><td>Narrow trap corridors (poison in webs).</td></tr><tr><td><strong>Spiders</strong></td><td>Web zones, ceiling ambush <strong>TBD</strong>.</td></tr><tr><td><strong>Baby zombies</strong></td><td>Fast swarms in tight halls.</td></tr><tr><td><strong>Witches</strong></td><td>Splash / debuff behind chokepoints (blindness, slowness, poison, weakness, harming — <strong>limited</strong> spawners; stacks with dispenser traps).</td></tr><tr><td><strong>Ravagers</strong></td><td><strong>Few</strong> — “siege beast” set pieces (vanilla ravager scale); not spammed.</td></tr></tbody></table>
+<p>Placement + <strong>defensive mode</strong> hazard blocks (water, ice, lava lanes, webs) + <strong>tripwire / pressure-plate potion &amp; lava traps</strong> (<code>citadel-layout.md</code>) do most of the work; modest stat tweaks <strong>TBD</strong>.</p>
+<p>---</p>
+<h2 id="siege-prep-effects-author-intent">Siege prep &amp; effects (author intent)</h2>
+<p><strong>Bring a kit</strong>, not just enchanted diamond:</p>
+<table><thead><tr><th>Category</th><th>Why</th></tr></thead><tbody><tr><td><strong>Strong armor + food</strong></td><td>Baseline survival through long pushes and boss phases.</td></tr><tr><td><strong>Milk buckets</strong></td><td>Clears <strong>witch + dispenser</strong> debuffs; timing and stock matter (multiple segments back-to-back).</td></tr><tr><td><strong>Own potions</strong></td><td>Fire resistance (lava lanes), regeneration / healing, strength for burst windows, night vision in basements <strong>TBD</strong>, water breathing if water-lock segments exist.</td></tr><tr><td><strong>Blocks &amp; movement tools</strong></td><td>Buckets, boats, blocks to bridge or block lava, pick for ice/webs/trap dismantling.</td></tr><tr><td><strong>Ranged weapon(s)</strong></td><td><strong>Required in practice</strong> for key segments: gate gauntlet, wall walks, witch alcoves, courtyard overwatch — <strong>melee-only groups should stall or wipe</strong> unless they cheat sightlines (<code>citadel-layout.md</code>). Hard <strong>mod gate</strong> (e.g. cannot enter tower X without ranged) <strong>optional TBD</strong> mockup; default is <strong>layout + spawner pressure</strong>.</td></tr><tr><td><strong>Quest / relic tools</strong></td><td>Strong gear and undead-bonus weapons (<code>endgame.md</code>) — expected for serious attempts, not optional flavor.</td></tr></tbody></table>
+<h3>Dispenser trap palette (splash + lingering)</h3>
+<p>Mix per corridor; avoid “all instant damage” repeats.</p>
+<table><thead><tr><th>Effect</th><th>Typical pairing</th></tr></thead><tbody><tr><td><strong>Blindness</strong></td><td>Webs, tight turns, melee swarms — forces sound/memory or milk.</td></tr><tr><td><strong>Slowness</strong></td><td>Packed ice, waterfall push, archer lines — punishes panic retreat.</td></tr><tr><td><strong>Weakness</strong></td><td>Before undead rush or ravager room — shifts time-to-kill.</td></tr><tr><td><strong>Poison</strong></td><td>Stacks with cave spiders / lingering clouds.</td></tr><tr><td><strong>Instant damage / harming</strong></td><td>Spike pressure after debuffs, not the only tool.</td></tr><tr><td><strong>Nausea</strong></td><td>Optional disorient segments <strong>TBD</strong> sparingly.</td></tr></tbody></table>
+<p><strong>Lava traps</strong> pair with <strong>fire res</strong> planning or block placement; <strong>milk does not</strong> replace fire res for lava.</p>
+<p>Mockup tags each trap segment with <strong>intended counter</strong> (milk, fire res, ranged clear, dismantle, rush) for playtest.</p>
+<p>---</p>
+<h2 id="traps-vs-spawners-break-rules">Traps vs spawners (break rules)</h2>
+<table><thead><tr><th>Piece</th><th>During assault (king alive)</th><th>After king + claim</th></tr></thead><tbody><tr><td><strong>Tripwire, plates, dispensers, exposed redstone</strong></td><td><strong>Breakable / removable</strong> where reachable — many corridors can be <strong>safed mid-push</strong>.</td></tr><tr><td><strong>Garrison spawner blocks</strong></td><td><strong>Breakable</strong> once seal open — valid mid-assault <strong>sapper</strong> play; silences that spawn source immediately.</td></tr><tr><td><strong>Static hazards</strong> (webs, ice, water, lava lanes)</td><td>Mine/clear like normal blocks once in reach.</td></tr><tr><td><strong>Inner gates / ward doors</strong></td><td><strong>Closed</strong> in defensive mode; <strong>player</strong> uses <strong>levers</strong> (post-claim setup) to open routes — not a global auto-open <strong>TBD</strong> mockup.</td></tr></tbody></table>
+<p>---</p>
+<h2 id="when-spawners-traps-run">When spawners / traps run</h2>
+<table><thead><tr><th>Phase</th><th>Spawners &amp; traps</th></tr></thead><tbody><tr><td><strong>Seal closed</strong></td><td>Off.</td></tr><tr><td><strong>Seal open, king alive</strong></td><td>Spawners <strong>on</strong> until broken; corridors + <strong>potion/lava redstone traps</strong> + hazards <strong>live</strong>; <strong>main inner gate closed</strong> (<code>citadel-layout.md</code>). Attackers may <strong>dismantle traps</strong> and <strong>break spawners</strong> they can reach.</td></tr><tr><td><strong>Both necromancers dead</strong></td><td>Rez stops per <code>endgame.md</code>; remaining spawners still run until <strong>mined</strong> or king milestone <strong>TBD</strong> (auto-off for boss-linked reserves <strong>optional</strong> mockup).</td></tr><tr><td><strong>King dead</strong></td><td>Any <strong>leftover</strong> garrison spawners <strong>off</strong> <strong>TBD</strong> vs player-cleared; traps/hazards <strong>stay</strong> until players strip or mine.</td></tr></tbody></table>
+<p>---</p>
+<h2 id="difficulty-intent">Difficulty intent</h2>
+<ul>
+<li><strong>Solo:</strong> multiple failures without strong gear, <strong>consumables</strong>, and quest tools — wrong kit (no milk, no ranged, no fire res for lava wing) should <strong>lose to mechanics</strong>, not raw DPS check.</li>
+<li><strong>Group/army:</strong> roles help (archer clears overwatch, milk runner, trap dismantler) — still hard, not impossible.</li>
+<li><strong>No player-count scaling.</strong></li>
+</ul>
+<p>---</p>
+<h2 id="beacon-room">Beacon room</h2>
+<p>Guards only — beacon/pyramid <strong>mineable</strong> mid-siege once room cleared.</p>
+<p>---</p>
+<h2 id="fight-flow">Fight flow</h2>
+<ol>
+<li>Breach <strong>outer</strong> entrance (player-mined citadel doors).</li>
+<li>Push <strong>defensive mode</strong> corridors (webs, water, ice, lava lanes, <strong>tripwire/plate potion traps</strong>, spawners) — <strong>dismantle traps</strong> and <strong>break spawners</strong> where reachable (tower saps, side rooms).</li>
+<li>Kill <strong>both necromancers</strong> → reduce/ stop spawns.</li>
+<li><strong>Corrupted King</strong>; then claim / open inner ward.</li>
+</ol>
+<p>---</p>
+<h2 id="armies-optional">Armies (optional)</h2>
+<p>Player soldiers fight spawns; <strong>cannot</strong> break citadel doors.</p>
+<p>---</p>
+<h2 id="mockup-playtest-tbd">Mockup / playtest TBD</h2>
+<ul>
+<li>Rez vs spawners-only; ravager count; witch cap; <strong>boss-linked spawner auto-off</strong> on king/necromancer death vs mine-only; default <strong>lever</strong> map for inner gates; tunnel during defensive mode; per-segment <strong>effect + counter</strong> tags; any <strong>hard ranged</strong> gate vs layout-only.</li>
+</ul>
+<p>---</p>
+<h2 id="cross-links">Cross-links</h2>
+<ul>
+<li><code>endgame.md</code>, <code>citadel-layout.md</code></li>
+</ul>
       </main>
     </div>
   </div>

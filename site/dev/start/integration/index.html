@@ -27,6 +27,19 @@
         <p class="source">Source: <code>docs/integration.md</code></p><h1>Cross-mod integration</h1>
 <p>Implement with <strong><code>ModList.get().isLoaded(&quot;other_mod_id&quot;)</code></strong> or NeoForge <strong>InterModComms</strong> / <strong>events</strong> on a shared bus. Prefer <strong>necromancer publishes world state</strong>, <strong>soldier subscribes</strong> (and vice versa for village data).</p>
 <p>Mod IDs: <strong><code>minecraft_kingdom_armies</code></strong>, <strong><code>minecraft_kingdom_citadel</code></strong>. Display: <strong>Minecraft Kingdom: Armies</strong> / <strong>Citadel</strong>. Monolith today: <strong><code>villagers</code></strong>.</p>
+<h2 id="necromancer-soldier-optional">Necromancer → Soldier (optional)</h2>
+<table><thead><tr><th>Event / query</th><th>Payload</th><th>Soldier use</th></tr></thead><tbody><tr><td><code>CitadelEvents.KING_DEFEATED</code></td><td>ServerLevel, game time</td><td>Raise/lower spawn raid odds &amp; natural militia near spawn</td></tr><tr><td><code>CitadelQueries.isCitadelFallen(level)</code></td><td>boolean</td><td>Threat tuning</td></tr><tr><td><code>CitadelQueries.getOwner(level)</code></td><td>UUID or empty</td><td>Display, warlords (if owner kingdom size)</td></tr><tr><td><code>CitadelQueries.isOwnerOrAlly(level, playerUuid)</code></td><td>boolean</td><td>Rarely needed on soldier side</td></tr></tbody></table>
+<h2 id="soldier-necromancer-optional">Soldier → Necromancer (optional)</h2>
+<table><thead><tr><th>Event / query</th><th>Payload</th><th>Necromancer use</th></tr></thead><tbody><tr><td><code>VillageQueries.getOwnedVillageCount(uuid)</code></td><td>int</td><td>High King / golden age scope</td></tr><tr><td><code>VillageQueries.getAllyUuids(ownerUuid)</code></td><td>set UUID</td><td>Barrier allowlist, Roost, Well ally XP</td></tr><tr><td><code>VillageQueries.isEnlisted(uuid)</code></td><td>boolean</td><td>Not required for citadel; do not tie wand to enlist</td></tr><tr><td><code>VillageQueries.hasPlayerSoldiersNear(uuid, pos, radius)</code></td><td>boolean</td><td>Citadel: acolyte escort / Order quests refuse if true (<code>acolyte-path.md</code>, default radius 32)</td></tr><tr><td><code>CitadelQueries.hasNecromancerKit(player)</code></td><td>boolean</td><td>Wand, hood, or robe in inventory or armor slots (<code>acolyte-path.md</code>, <code>necromancy.md</code>)</td></tr><tr><td><code>CitadelQueries.nearestAcolyteRefugeDistance(pos)</code></td><td>blocks</td><td>Necromancer intro quest spawn gate (<code>necromancer-path.md</code>)</td></tr></tbody></table>
+<h2 id="shared-conventions">Shared conventions</h2>
+<ul>
+<li>Store <strong>player IDs</strong>, not names, for owner, allies, credits, ban list, wanted posters.</li>
+<li><strong>Fortress spawn:</strong> if soldier loaded, spawn soldier <strong>bandit</strong>; else necro <strong>fortress raider</strong> (fortress-only).</li>
+<li><strong>Relics:</strong> necro registers items; on equip tick, if <code>NecromancerQueries.isActiveNecromancer(uuid)</code> → block equip.</li>
+<li><strong>Citadel mess:</strong> soldier registers block; necro cancel placement if <code>!isCitadelOwner(uuid)</code> in citadel bounds.</li>
+</ul>
+<h2 id="versioning">Versioning</h2>
+<p>Document breaking changes to payloads in <code>mod-split.md</code> decisions log. First split may invalidate old <code>villagers_*</code> SavedData keys — migration note in release notes.</p>
       </main>
     </div>
   </div>

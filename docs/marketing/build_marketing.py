@@ -17,6 +17,7 @@ from site_structure import (
     MARKETING_SOURCE,
     REPO_ROOT,
     DevDoc,
+    dev_doc_url_slug,
     doc_slug,
 )
 
@@ -365,93 +366,31 @@ def render_layout(spec: PageSpec) -> str:
     )
 
 
-def _truncate_markdown_chunk(chunk: str, *, max_chars: int = 2800) -> str:
-    chunk = chunk.strip()
-    if len(chunk) > max_chars:
-        chunk = chunk[:max_chars].rsplit("\n", 1)[0] + "\n\n…"
-    return chunk
+def doc_full_body_html(relpath: str) -> str:
+    text = (DOCS_DIR / relpath).read_text(encoding="utf-8")
+    return render_markdown(text, skip_leading_h1=True, plain_internal=True)
 
 
-def _take_markdown_lines(
-    lines: list[str],
-    *,
-    max_paragraphs: int,
-    stop_at_h2: bool = True,
-) -> str:
-    out_lines: list[str] = []
-    skipped_h1 = False
-    para_count = 0
-    for line in lines:
-        if line.startswith("# ") and not skipped_h1:
-            skipped_h1 = True
-            continue
-        if stop_at_h2 and line.startswith("## "):
-            break
-        if line.strip().startswith("```"):
-            break
-        out_lines.append(line)
-        if line.strip() == "" and any(l.strip() for l in out_lines):
-            para_count += 1
-            if para_count >= max_paragraphs:
-                break
-    return "\n".join(out_lines).strip()
-
-
-def doc_intro_excerpt(relpath: str, *, max_paragraphs: int = 8) -> str:
-    """Intro or opening of first ## section, for group / dev hub previews."""
-    raw = (DOCS_DIR / relpath).read_text(encoding="utf-8")
-    cleaned = re.sub(r"<!--.*?-->", "", raw, flags=re.DOTALL)
-    chunk = _take_markdown_lines(
-        cleaned.splitlines(), max_paragraphs=max_paragraphs, stop_at_h2=True
-    )
-    if not chunk:
-        parsed = parse_document(cleaned)
-        if parsed.intro.strip():
-            chunk = _take_markdown_lines(
-                parsed.intro.splitlines(),
-                max_paragraphs=max_paragraphs,
-                stop_at_h2=False,
-            )
-        elif parsed.sections:
-            sec = parsed.sections[0]
-            body_bit = _take_markdown_lines(
-                sec.body.splitlines(),
-                max_paragraphs=max_paragraphs,
-                stop_at_h2=True,
-            )
-            chunk = f"### {sec.title}\n\n{body_bit}".strip()
-    chunk = _truncate_markdown_chunk(chunk)
-    if not chunk:
-        return ""
-    return render_markdown(chunk, plain_internal=True)
-
-
-def dev_doc_preview_html(doc: DevDoc, *, max_paragraphs: int = 8) -> str:
-    excerpt = doc_intro_excerpt(doc.relpath, max_paragraphs=max_paragraphs)
+def dev_doc_full_section_html(doc: DevDoc) -> str:
+    body = doc_full_body_html(doc.relpath)
     return (
-        f'<section class="dev-doc-preview" id="{html.escape(doc_slug(doc.relpath))}">'
+        f'<section class="dev-doc-full" id="{html.escape(dev_doc_url_slug(doc))}">'
         f"<h2>{html.escape(doc.title)}</h2>"
         f'<p class="source">Source: <code>docs/{html.escape(doc.relpath)}</code></p>'
-        f'<div class="dev-doc-excerpt">{excerpt}</div>'
+        f'<div class="dev-doc-body">{body}</div>'
         f"</section>"
     )
 
 
-def dev_hub_body_html(
-    title: str,
-    lede: str,
-    docs: list[DevDoc],
-    *,
-    max_paragraphs: int = 8,
-) -> str:
-    previews = [
-        dev_doc_preview_html(doc, max_paragraphs=max_paragraphs)
+def dev_hub_body_html(title: str, lede: str, docs: list[DevDoc]) -> str:
+    sections = [
+        dev_doc_full_section_html(doc)
         for doc in sorted(docs, key=lambda d: d.title.lower())
     ]
     return (
         f'<div class="dev-hub"><h1>{html.escape(title)}</h1>'
         f'<p class="dev-group-lede">{html.escape(lede)}</p>'
-        + "".join(previews)
+        + "".join(sections)
         + "</div>"
     )
 
@@ -565,7 +504,7 @@ def build_dev_doc(group_id: str, doc: "DevDoc") -> list[Path]:
     src = DOCS_DIR / doc.relpath
     text = src.read_text(encoding="utf-8")
     parsed = parse_document(text)
-    dslug = doc_slug(doc.relpath)
+    dslug = dev_doc_url_slug(doc)
     base_dir = SITE_DIR / "dev" / group_id / dslug
     written: list[Path] = []
 
@@ -599,13 +538,11 @@ def build_dev_doc(group_id: str, doc: "DevDoc") -> list[Path]:
     index_out = base_dir / "index.html"
     pages_meta.append(("index", "Overview", index_out))
 
-    intro_html = (
-        render_markdown(parsed.intro, plain_internal=True) if parsed.intro else ""
-    )
+    full_html = render_markdown(text, skip_leading_h1=True, plain_internal=True)
     index_content = (
         f'<p class="source">Source: <code>docs/{html.escape(doc.relpath)}</code></p>'
         f"<h1>{html.escape(parsed.title)}</h1>\n"
-        f"{intro_html}"
+        f"{full_html}"
     )
     sidebar = sidebar_html(index_out, pages_meta, "index", None)
     write_page(
@@ -663,7 +600,7 @@ def build_dev_group_index(
     lede = GROUP_BLURBS.get(group_id, "Design docs in this section.")
     docs = [doc for doc, _ in entries]
     sidebar_pages = [
-        (doc_slug(doc.relpath), doc.title, path)
+        (dev_doc_url_slug(doc), doc.title, path)
         for doc, path in sorted(entries, key=lambda x: x[0].title.lower())
     ]
     sidebar = sidebar_html(
@@ -705,7 +642,7 @@ def build_dev_root() -> None:
     for group in DEV_GROUPS:
         lede = GROUP_BLURBS.get(group.id, "")
         previews = [
-            dev_doc_preview_html(doc, max_paragraphs=5)
+            dev_doc_full_section_html(doc)
             for doc in sorted(group.docs, key=lambda d: d.title.lower())
         ]
         sections.append(

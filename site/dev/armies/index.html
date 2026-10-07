@@ -24,7 +24,7 @@
     <div class="page-shell has-sidebar">
       <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Documents</p><ul><li><a href="soldiers-and-villages/index.html">Soldiers &amp; villages</a></li><li><a href="threats-and-mobs/index.html">Threats &amp; mobs</a></li><li><a href="war-and-defense/index.html">War &amp; defense</a></li></ul></aside>
       <main class="doc-main">
-        <div class="dev-hub"><h1>Armies</h1><p class="dev-group-lede">Soldiers, villages, war, defense, and hostile threats.</p><section class="dev-doc-preview" id="soldiers-and-villages"><h2>Soldiers &amp; villages</h2><p class="source">Source: <code>docs/soldiers-and-villages.md</code></p><div class="dev-doc-excerpt"><h3>Villager roles</h3>
+        <div class="dev-hub"><h1>Armies</h1><p class="dev-group-lede">Soldiers, villages, war, defense, and hostile threats.</p><section class="dev-doc-full" id="soldiers-and-villages"><h2>Soldiers &amp; villages</h2><p class="source">Source: <code>docs/soldiers-and-villages.md</code></p><div class="dev-doc-body"><h2 id="villager-roles">Villager roles</h2>
 <p>A villager&#x27;s job and setup decide whether a weapon makes them a soldier or a militiaman.</p>
 <table><thead><tr><th>Role</th><th>How they get it</th><th>Gear allowed</th><th>Notes</th></tr></thead><tbody><tr><td>Soldier</td><td>Villager with no trade is given a weapon, chestplate, and helmet, and has a free post bed and a stocked mess station</td><td>Full armor</td><td>Unequipping can turn them into a trader, but a trader can never become a soldier again, unless he served as a soldier before he ever traded (see Veterans)</td></tr><tr><td>Militiaman</td><td>Trader or unemployed villager is given a weapon. Unemployed villagers who meet every soldier requirement become soldiers instead</td><td>Helmet, chestplate, and boots; no leggings or shields</td><td>Can&#x27;t trade while in the militia; sometimes run from enemies</td></tr><tr><td>Bandit</td><td>Soldier deserts (<strong>45%</strong> outcome — keeps gear)</td><td>Whatever they kept</td><td>See Threats</td></tr><tr><td>Troubled youth</td><td>Born from bandit-occupied villages (80% chance)</td><td>n/a</td><td>Can never trade; can become soldiers or bandits (see Bandits)</td></tr></tbody></table>
 <ul>
@@ -39,8 +39,264 @@
 <li><strong>Bow militia</strong> have no melee weapon, so they back away to keep their distance; near their home bed, they fight with their fists.</li>
 <li><strong>Refilling arrows:</strong> at 16 arrows max, archers refill often from arrow bins at home or the camp block on campaign, and by picking up shot arrows.</li>
 <li>Special armor (campaign boots, nightwatch, royal guard) uses the normal armor slots.</li>
+<li><strong>Depositing arrows:</strong> a soldier or militiaman carrying arrows without a bow or crossbow drops them off at the nearest camp block or arrow bin.</li>
 </ul>
-<p>…</p></div></section><section class="dev-doc-preview" id="threats-and-mobs"><h2>Threats &amp; mobs</h2><p class="source">Source: <code>docs/threats-and-mobs.md</code></p><div class="dev-doc-excerpt"><h3>Threats</h3>
+<h3>Militia</h3>
+<p>Militia are traders or unemployed villagers who take up arms: a cheap home guard that backs up soldiers.</p>
+<ul>
+<li><strong>Gear:</strong> helmet, chestplate, and boots. No leggings or shields.</li>
+<li><strong>Food:</strong> they eat 1 meal a day from the mess station, but don&#x27;t need a post bed. If they go 2 days without food, they drop their weapon and go back to trading.</li>
+<li><strong>Ranks:</strong> militia have one rank. At 10 kills a militiaman becomes seasoned militia: +10 HP, and he no longer flees from being outnumbered. His kills carry over if he upgrades to soldier.</li>
+<li><strong>Orders:</strong> they follow horns, but not flares.</li>
+<li><strong>Campaigns:</strong> they can go on campaign wearing campaign boots.</li>
+<li><strong>Home bonus:</strong> +25% damage within 128 blocks of their home bed.</li>
+<li><strong>Disarming:</strong> taking away their weapon turns them back into a normal villager.</li>
+<li><strong>Trade-offs:</strong> they flee from fights going badly (see Fleeing), don&#x27;t count toward tax coverage, and make bandits burn the village instead of just occupying it.</li>
+<li><strong>Upgrading:</strong> an unemployed militiaman becomes a soldier automatically as soon as he meets every soldier requirement. Traders in the militia can never become soldiers.</li>
+<li><strong>No trading:</strong> militiamen can&#x27;t trade while in the militia. Disarming them lets them trade again.</li>
+</ul>
+<p><strong>Fleeing:</strong> militia use the vanilla villager panic behavior. They flee when any of these happen:</p>
+<ul>
+<li><strong>Low health:</strong> below 50% health.</li>
+<li><strong>Badly outnumbered:</strong> at least 2 enemies for every friendly fighter within 16 blocks.</li>
+<li><strong>A comrade dies:</strong> 30% chance when a nearby militiaman dies.</li>
+<li><strong>Mounted enemies:</strong> 92% chance, as before.</li>
+</ul>
+<p>Fleeing militia drop their weapon, which turns them back into normal villagers until a player re-arms them. They flee to their camp block on campaign, or to the nearest fallback block at home. If there&#x27;s neither, they just run away from the enemy. None of this applies within 128 blocks of their home bed: there, militia never flee.</p>
+<h2 id="ownership-and-allies">Ownership and allies</h2>
+<ul>
+<li><strong>Owning a village:</strong> the first player to have both a soldier and a mess station in a village claims it, including natural villages. The claim holds until all of the owner&#x27;s mess stations in the village are destroyed and another player places his own. Soldiers belong to the owner of the village they were recruited in. A village changes hands the moment another player places his mess station after every one of the owner&#x27;s has been destroyed. Then its soldiers, militia, post beds, recruiters, and tax box all convert to the new owner; soldiers away on campaign keep serving the old owner until they come home, then convert.</li>
+<li><strong>Ally book:</strong> each player keeps an ally list through an ally book (recipe: book and quill + emerald). Right-clicking it opens a screen to add or remove players and set their rank. Allying is one-way: adding someone protects them from your forces and gives them their rank&#x27;s powers, but doesn&#x27;t make you their ally. The list is saved to the player, not the book, so losing the book doesn&#x27;t lose allies. It saves player IDs, so name changes don&#x27;t matter.</li>
+<li><strong>Allies:</strong> your soldiers, militia, and minions never attack allies, and your soldiers and your allies&#x27; soldiers don&#x27;t fight each other.</li>
+<li><strong>Village area:</strong> vanilla has no real village object, so the mod defines one. A village needs at least one mess station to exist, but its area is set by surveyor&#x27;s markers. Each marker claims the area around it, from bedrock to the build limit, with a radius that grows with the village&#x27;s size: 32 blocks for a hamlet (1-5 members), 48 for a small village (6-10), 64 for a village (11-20), 96 for a town (21-35), and 128 for a city (36+). The village&#x27;s first mess station claims land around it just like a marker, so every village has some land. On top of that, the village can place one surveyor&#x27;s marker for every 5 members it has in total, wherever they live, so land can only be claimed by growing the village. If the village shrinks, its existing markers keep working, but no new ones can be placed until the population supports them.</li>
+<li><strong>Members:</strong> villagers whose bed or job block is inside the area belong to the village, including soldiers and militia. Members decide the village&#x27;s size. Soldiers and militia away on campaign still count as members, since their beds stay reserved at home.</li>
+<li><strong>No overlap:</strong> a player can&#x27;t place a mess station or surveyor&#x27;s marker inside another player&#x27;s village area unless he&#x27;s that owner&#x27;s co-owner, in which case it counts as the owner&#x27;s. When a village grows into another&#x27;s area, its growth stops at the border, and land both could claim belongs to the older village.</li>
+<li><strong>Natural villages:</strong> a natural village is a vanilla village bell with at least 3 villagers within 48 blocks and no mess station; its area is 48 blocks around the bell, and it becomes a normal mod village the moment someone claims it with a mess station and a soldier. Natural villages spawn with 2 militiamen (more near spawn while the Black Citadel stands), traders armed for defense. Each gets one random armor piece (helmet, chestplate, or boots; leather, chainmail, or iron) and an iron sword or iron axe. Each has a 25% chance to carry a bow and 16 arrows instead.</li>
+</ul>
+<h3>Orphanages (§9 — author direction)</h3>
+<ul>
+<li><strong>Structure style:</strong> orphanage prefab uses the <strong>same village style as vanilla’s largest standard village type</strong> (largest jigsaw / footprint class at implementation — one consistent biome look for the building).</li>
+<li><strong>Which villages get one:</strong> <strong>only vanilla world-gen villages</strong> (POI cluster at gen). <strong>Not</strong> mess-only player towns or authored sites (intro town, citadel, etc.). At <strong>world gen</strong> (one-time scan on first load): graft orphanage if cluster has <strong>more than 20 beds</strong> (<code>orphanageMinBedCount</code>, default <strong>21</strong> — i.e. <strong>≥21</strong> beds). Large plains/taiga villages often reach that; tune <strong>down</strong> (e.g. <strong>16–18</strong>) in config if a seed has too few. <strong>No</strong> rescan if the village grows later.</li>
+<li><strong>Who counts as “orphan-raised”:</strong> any villager whose <strong>home bed</strong> is in the orphanage structure (spawned there or assigned there). Persistent world flag on the villager.</li>
+<li><strong>Why they skew “great” (author — §9):</strong> no extra rolls at birth. <strong>Padded combat stats</strong> help orphan-raised <strong>soldiers / militia</strong> survive and earn <strong>real kills</strong> toward Hero / Legend. <strong>Higher desertion odds</strong> push more of them onto the <strong>bandit</strong> / <strong>wandering necromancer</strong> paths (<code>threats-and-mobs.md</code>). <strong>Bandit leaders</strong> still = <strong>most kills</strong> in the band — padded stats + more fights before desert can still produce scary leaders.</li>
+</ul>
+<p><strong>Orphan-raised soldiers / militia (while flag active):</strong></p>
+<table><thead><tr><th>Boost</th><th>Default (config)</th><th>Notes</th></tr></thead><tbody><tr><td><strong>Max HP</strong></td><td><strong>+4</strong> flat on top of rank HP (<code>orphanSoldierBonusHealth</code>)</td><td>Applies at enlist; stacks with Seasoned / Hero / Legend table</td></tr><tr><td><strong>Damage</strong></td><td><strong>+15%</strong> melee and arrows (<code>orphanSoldierBonusDamage</code>)</td><td>Same idea as rank bonuses — more likely to secure killing blows</td></tr><tr><td><strong>Desertion</strong></td><td>Hunger / morale desert <strong>probability × 1.5</strong> (<code>orphanDesertionMultiplier</code>)</td><td><strong>Same 50 / 45 / 5 outcome split</strong> as everyone when they actually desert. <strong>Does not</strong> bypass rank rules (Seasoned+ still immune to hunger/home desert; Heroes/Legends still immune to morale desert).</td></tr></tbody></table>
+<p>Flag stays on the villager for life (discharge, trader stint, bandit — <strong>TBD</strong> if bandits keep stat padding when re-captured).</p>
+<ul>
+<li><strong>Strangers:</strong> by default, soldiers leave non-allied players alone unless they&#x27;re wanted, steal from the tax box, or are a charge horn target. Servers can turn on an option for soldiers to attack any non-ally on sight.</li>
+<li><strong>Village protection:</strong> inside a claimed village&#x27;s area, from bedrock to the sky, players who aren&#x27;t the owner or his allies break blocks more slowly. Protection depends on how many of the owner&#x27;s soldiers are actually inside the village area at the time, so an army away on campaign leaves its home softer: 0 soldiers, normal speed; 1-9, 3 times slower; 10-24, 5 times slower; 25 or more, 10 times slower. This covers walls, gates, and the ground under the walls. Explosions caused by non-allied players do no block damage inside a claimed village.</li>
+<li><strong>Kingdom:</strong> all the villages a player owns together make up his kingdom. Kingdom titles count them, and kingdom-wide effects (like the golden age) apply to all of them.</li>
+<li><strong>Surveyor&#x27;s marker (block):</strong> markers owned by the same player whose areas overlap or touch form one village, chaining across as many markers as he places. A group of markers only counts as a village if it contains at least one of his mess stations. Markers can only be broken with a surveyor&#x27;s knife. While the village has any mess station left, only the owner and his co-owners can break them. Once every mess station in the village is destroyed, the claim ends and anyone with a surveyor&#x27;s knife can break its markers. Recipe (proposed): lodestone-style, a compass surrounded by stone bricks with an iron ingot.</li>
+<li><strong>Surveyor&#x27;s knife (item):</strong> lets the owner or a co-owner pick up their markers instantly. Right-clicking with it shows the village&#x27;s borders for a few seconds. Recipe (proposed): iron ingot, stick, and string.</li>
+<li><strong>Merging and splitting:</strong> if two of a player&#x27;s villages grow until their marker areas touch, they become one village; if both had tax boxes, the older stays active and the other becomes plain storage. If removing a marker breaks a village into two groups, each becomes its own village; the group with the tax box keeps it, and the other needs its own.</li>
+<li><strong>Size is per village:</strong> members are counted across the whole connected village, so every marker in a city gets the city radius.</li>
+</ul>
+<ul>
+<li><strong>Abandoned kingdoms:</strong> if an owner hasn&#x27;t logged in for 60 in-game days (proposed), his villages lose village protection and stop recruiting, and another player can take them by placing a mess station once all of his are destroyed. His soldiers keep defending. In-game days only pass while the world is running, so on a server this counts days other players are online.</li>
+</ul>
+<ul>
+<li><strong>No building in enemy land:</strong> players who aren&#x27;t the owner or his allies can&#x27;t place blocks anywhere in a claimed village&#x27;s area, bedrock to sky, while at least one of the owner&#x27;s soldiers is in the village. With no soldiers home, they can place only one block every 2 seconds (proposed). Siege gear deployed by soldiers (siege ladders, plank bridges, boats) is exempt. This stops players pillaring over walls or boxing in defenders. The ban also covers emptying water and lava buckets; lighting fires is still allowed.</li>
+<li><strong>Citadel blocks (inside outer wall — <code>citadel-layout.md</code>):</strong> <strong>Soft</strong> generated blocks (most interiors, decor, partitions) may be <strong>broken by any player who can enter</strong> (seal open / barrier allows entry). <strong>Protected</strong> blocks (shell, throne, king statues + pedestals, royal stations, Well, etc.) stay unbreakable. <strong>Placing</strong> blocks: after the Corrupted King falls, <strong>owner + allies</strong> place freely; with <strong>Armies</strong> loaded, <strong>non-allies</strong> inside citadel bounds follow <strong>village protection</strong> slowdown (same soldier-count tiers as claimed villages — proposed). <strong>No</strong> placing blocks until the king falls (except <strong>TBD</strong> siege gear).</li>
+<li><strong>Building under attack:</strong> while a village is under attack (same test as the royal guard post, except a blockade alone doesn&#x27;t count), everyone in its area, the owner included, can place at most one block per second (proposed). Defenders can still repair walls and replace sapped blocks, but can&#x27;t instantly wall themselves in mid-fight.</li>
+</ul>
+<table><thead><tr><th>Rank</th><th>What they can do</th></tr></thead><tbody><tr><td>Friend</td><td>Not attacked by your forces</td></tr><tr><td>Officer</td><td>Can use horns and flares on your soldiers, and use attack plans at your camps</td></tr><tr><td>Co-owner</td><td>Everything an officer can do, plus open your tax box, place recruiter boxes, and manage your post beds</td></tr></tbody></table>
+<h2 id="soldier-behavior">Soldier behavior</h2>
+<p>Soldiers rank up with kills, follow a daily routine, and have a few weaknesses.</p>
+<h3>Ranks</h3>
+<table><thead><tr><th>Kills</th><th>Rank</th></tr></thead><tbody><tr><td>5</td><td>Seasoned soldier</td></tr><tr><td>20</td><td>Hero</td></tr><tr><td>50</td><td>Legend</td></tr></tbody></table>
+<p>Each rank gets combat effects, including archery effects.</p>
+<p>What counts as a kill:</p>
+<ul>
+<li><strong>Counts:</strong> hostile mobs (zombies, skeletons, spiders, creepers), raiders (pillagers, vindicators, ravagers, evokers), bandits, and enemy soldiers or militia.</li>
+<li><strong>Doesn&#x27;t count:</strong> animals, friendly villagers, and tiny mobs like silverfish and endermites.</li>
+<li><strong>Credit:</strong> whoever lands the killing blow gets the kill.</li>
+</ul>
+<h3>Combat</h3>
+<ul>
+<li>Any mob hit with the gold-outline arrow is targeted first by soldiers and militiamen.</li>
+<li>Soldiers use up real arrows: each shot spends one. Soldiers with a bow pathfind to arrow bins until they run out, then to the nearest rampart. If an enemy gets close, they switch to melee (see Inventory).</li>
+<li>Soldiers can light fire arrows at any open flame, one arrow at a time: light one, fire it, light the next. Fire arrows can set blocks, crops, and buildings on fire.</li>
+<li>Enemy soldiers flee from mounted players 50% of the time; militia flee 92% of the time.</li>
+<li>Soldiers can carry shields, which show the village banner, but don&#x27;t block with them. Militia can&#x27;t carry shields.</li>
+<li><strong>Home bonus:</strong> soldiers get +10% damage within 128 blocks of their own post bed.</li>
+<li><strong>Arrow recovery:</strong> out of combat, soldiers pick up any shot arrows stuck in the ground within 16 blocks that they can reach: their own, other soldiers&#x27;, players&#x27;, and skeletons&#x27;. Tipped and spectral arrows stay what they are. Arrows they can&#x27;t reach, like ones high in walls or across water, are skipped.</li>
+</ul>
+<ul>
+<li><strong>Friendly arrows pass through:</strong> arrows from a player&#x27;s soldiers and militia, and his own arrows, fly through him, his soldiers, his allies, and their soldiers.</li>
+<li><strong>No accidental hits:</strong> a player&#x27;s melee hits do nothing to his own soldiers unless he&#x27;s sneaking.</li>
+<li><strong>Careful fire arrows:</strong> soldiers won&#x27;t shoot fire arrows at a target with a friendly within 3 blocks of it.</li>
+<li><strong>What still hurts friends:</strong> explosions, lava, fire, and (for most players) <strong>sneaking</strong> melee/ranged hits. Friendly kills (see Mutiny) are always on the player.</li>
+<li><strong>Order War Leader acolyte (locked):</strong> you <strong>cannot</strong> damage <strong>your</strong> soldiers or militia with direct attacks <strong>unless sneaking</strong> (<code>acolyte-path.md</code>). Non-sneak friendly hits are blocked/cancelled. Sneaking still counts as a deliberate friendly kill for mutiny if applicable.</li>
+</ul>
+<h3>Gear wear</h3>
+<ul>
+<li>Soldiers&#x27; and militia&#x27;s armor, weapons, and shields lose durability the way a player&#x27;s do. They can&#x27;t use XP, so Mending never repairs their gear.</li>
+<li><strong>Replacements:</strong> when an item breaks, the soldier goes to his recruiter box for a replacement of the same kind from the issued gear. Until then, a soldier without a weapon fights with his fists.</li>
+<li><strong>Militia without a weapon</strong> don&#x27;t fight with fists. They flee, unless they&#x27;re within 128 blocks of their home bed, where they fight with their fists to defend it.</li>
+<li><strong>Death drops:</strong> soldiers and militia drop everything they&#x27;re wearing and holding when they die, at its current durability. Anyone can pick it up, so the winner of a battle can collect the loser&#x27;s gear.</li>
+</ul>
+<h3>Daily routine</h3>
+<ul>
+<li>Each day, soldiers find the nearest mess station and take two meals: bread, cooked meat, baked potato, or sweet berries (2 berries make 1 meal).</li>
+<li>When not eating or sleeping, soldiers pathfind to ramparts.</li>
+<li>Soldiers sleep in post beds and treat them as home.</li>
+</ul>
+<h3>Health and healing</h3>
+<p>Soldiers heal through their daily routine and fall back before they die, so good care lets them rank up.</p>
+<ul>
+<li><strong>Heal in post beds:</strong> soldiers fully heal when they sleep in their post bed. Post beds only work out of combat (no enemy within 16 blocks and no damage taken in the last 30 seconds).</li>
+<li><strong>Heal on meals:</strong> each meal from the mess station restores 3 hearts (6 HP).</li>
+<li><strong>Retreat when hurt:</strong> below 30% health, soldiers fall back to the nearest fallback block.</li>
+<li><strong>More health per rank:</strong></li>
+<li><strong>Retreat after heavy losses:</strong> if 65% of a squad is killed in one fight, the survivors retreat to the nearest fallback block (or camp block on campaign). This doesn&#x27;t apply within 128 blocks of their own post bed, where they hold their ground.</li>
+</ul>
+<table><thead><tr><th>Rank</th><th>Max health</th><th>Melee and arrow damage</th><th>Damage resistance</th><th>Knockback resistance</th></tr></thead><tbody><tr><td>Soldier</td><td>20 HP</td><td>Normal</td><td>None</td><td>None</td></tr><tr><td>Seasoned soldier</td><td>30 HP</td><td>+15%</td><td>None</td><td>25%</td></tr><tr><td>Hero</td><td>50 HP</td><td>+30%</td><td>20%</td><td>50%</td></tr><tr><td>Legend</td><td>100 HP</td><td>+50%</td><td>40%</td><td>100%</td></tr></tbody></table>
+<p>A Legend in iron armor takes several minutes for a well-geared player to kill alone. Optional flavor: a Legend takes double damage from hits to his back, his one weakness.</p>
+<h3>Desertion</h3>
+<p>Soldiers desert when they go hungry, lose their home, or see their squad wiped out. Seasoned soldiers, heroes, and Legends are far more loyal.</p>
+<ul>
+<li><strong>Hunger:</strong> a soldier who misses meals for 2 days becomes hungry (slower, weaker attacks). From day 3 to day 6 he has a daily chance to desert: 10%, 20%, 35%, then 50%. On day 7 he deserts for sure.</li>
+<li><strong>No home:</strong> if his post bed is destroyed and not replaced within 3 nights, he deserts.</li>
+<li><strong>Broken morale:</strong> if more than half of a squad dies in one fight, each survivor has a 10% chance to desert. Seasoned soldiers have 5%; heroes and Legends never desert from morale. This doesn&#x27;t apply within 128 blocks of the soldier&#x27;s own post bed.</li>
+<li><strong>Ranked soldiers:</strong> seasoned soldiers, heroes, and Legends never get hungry or desert from hunger or homelessness.</li>
+<li><strong>Warnings:</strong> hungry or homeless soldiers show angry-villager particles. The player gets a chat message when a soldier becomes hungry or loses his bed, and again the day before he would be forced to desert.</li>
+<li><strong>What happens (one roll per desert):</strong> <strong>50%</strong> drop gear, walk to the nearest other village, and become <strong>regular unemployed villagers</strong> there. <strong>45%</strong> <strong>keep gear</strong> and become <strong>bandits</strong> (nearest band or new band). <strong>5%</strong> <strong>keep gear</strong> and become <strong>wandering necromancers</strong> (<code>threats-and-mobs.md</code>). Config: <code>deserterOutcomeVillager</code> / <code>deserterOutcomeBandit</code> / <code>deserterOutcomeNecromancer</code> (defaults <strong>0.50 / 0.45 / 0.05</strong>). <strong>Orphan-raised:</strong> same outcome split; <strong><code>orphanDesertionMultiplier</code></strong> applies only to <strong>hunger / morale</strong> desert <strong>triggers</strong> (§ Orphanages).</li>
+<li><strong>Slots open up:</strong> a deserter frees his post bed and recruit slot, so the recruiter can replace him.</li>
+<li><strong>Honorable discharge:</strong> the owner (or a co-owner) can take a soldier&#x27;s weapon to discharge him. He drops the rest of his gear and becomes an unemployed villager, freeing his post bed and recruit slot. He keeps his kill count, so if he&#x27;s re-enlisted later he comes back at his old rank. Nobody else can discharge another player&#x27;s soldiers.</li>
+</ul>
+<h3>Mutiny</h3>
+<p>Soldiers who feel thrown away may turn on their own lord. Every costly victory or friendly kill raises the chance, but no mutiny is ever certain, and the player is only told his soldiers are upset.</p>
+<ul>
+<li><strong>Grumble points:</strong> each group of soldiers (a camp, or a village&#x27;s soldiers at home) keeps a grumble count. It gains 1 point for each costly victory: a fight the player started (an assault or a battle on campaign) that the army wins while losing at least 40% of its soldiers. Defending against raids, swarms, and bandits never counts. It also gains 1 point each time the player kills one of its soldiers; killing his own zombie soldiers doesn&#x27;t count. Points travel with the soldiers: when they leave for or return from campaign they bring their points, and when two groups merge the higher count stands.</li>
+<li><strong>Cooling off:</strong> the count drops by 1 for every 3 in-game days without a new point. A clean victory (losses under 10%) removes 2 points, and a feast (every mess station in that village or camp fully stocked at the next meal) clears them all.</li>
+<li><strong>Warnings:</strong> while a group has any points, its soldiers show angry-villager particles, and the player gets a chat message that his soldiers at that village or camp are upset. Nothing ever says a mutiny is coming.</li>
+<li><strong>Mutiny chance:</strong> each time a point is added, the group rolls for a mutiny: 2% at 1 point, 8% at 2, 15% at 3, 25% at 4, and 35% at 5 or more (proposed). It&#x27;s never certain, however many points pile up. With no cooling off, the chance a group has mutinied by the time it reaches 3 points is about 23%, by 5 points about 63%, and by 7 points about 84%. Points have no cap, but every point past 5 uses the 5+ odds. While a group has any points, it also rolls once a day as it cools off: 1% per point, up to 5% at 5 or more points (proposed). The figures above don&#x27;t include these daily rolls.</li>
+<li><strong>Joining:</strong> when a mutiny starts, every soldier in the group rolls to join, using the table below. The more points the group had, the more join.</li>
+</ul>
+<table><thead><tr><th>Rank</th><th>1-2 points</th><th>3 points</th><th>4 points</th><th>5+ points</th></tr></thead><tbody><tr><td>Soldier</td><td>25%</td><td>40%</td><td>55%</td><td>70%</td></tr><tr><td>Seasoned soldier</td><td>15%</td><td>25%</td><td>40%</td><td>55%</td></tr><tr><td>Hero</td><td>5%</td><td>10%</td><td>20%</td><td>30%</td></tr><tr><td>Legend</td><td>2%</td><td>3%</td><td>5%</td><td>8%</td></tr></tbody></table>
+<ul>
+<li><strong>The mutiny:</strong> the joiner with the most kills leads it. Mutineers attack the player on sight and try to kill him; survivors become a bandit band under the leader. Soldiers who don&#x27;t join stay loyal and fight the mutineers. If nobody joins, the mutiny fizzles and the points stay.</li>
+<li><strong>Who never mutinies:</strong> royal guards, soldiers within 30 days of royal training, and soldiers carrying the banner of the old kingdom. A necromancer&#x27;s soldiers roll twice to join and join if either roll succeeds.</li>
+</ul>
+<h3>Veterans</h3>
+<p>A discharged soldier can be given a veteran&#x27;s sword to defend his home for free, and called back to service later.</p>
+<ul>
+<li><strong>Veteran&#x27;s sword:</strong> an iron sword + an iron nugget (shapeless). It fights like an iron sword.</li>
+<li><strong>Who can use it:</strong> only honorably discharged soldiers. Given to anyone else, it counts as a normal weapon.</li>
+<li><strong>What a veteran does:</strong> he claims a normal villager bed like any villager, lives as a normal villager, and carries the sword. He fights anything that threatens the area within 32 blocks of his home bed. Outside that area he acts like a civilian.</li>
+<li><strong>No upkeep:</strong> veterans don&#x27;t eat from the mess, don&#x27;t need a post bed, never desert, and don&#x27;t count toward tax coverage.</li>
+<li><strong>Looks:</strong> he keeps his old rank badge, labeled &quot;Veteran&quot; + name.</li>
+<li><strong>Recalling him:</strong> give him a better weapon. Kills he made as a veteran carry over. If he meets every soldier requirement, he&#x27;s a soldier again at his rank; otherwise he becomes a militiaman and upgrades once he meets them.</li>
+<li><strong>Trading:</strong> what a villager was first decides it. A villager who was a trader first can never become a soldier. A villager who served as a soldier first, at any rank, can switch back and forth between soldier and trader as often as the player likes: he keeps his kills and rank while trading, and his trades while serving, but doesn&#x27;t trade while serving. The risk is that a valuable trader sent back to the front can die.</li>
+</ul>
+<h3>Zombie soldiers</h3>
+<ul>
+<li>A soldier killed by a zombie can turn into a zombie soldier, like vanilla zombie villagers. He keeps his gear and rank.</li>
+<li><strong>Curing (proposed odds):</strong> cured the vanilla way, he comes back as one of these:</li>
+</ul>
+<p>- 60%: a soldier again, with his gear, rank, and kills. - 25%: he drops his gear and refuses to serve. He can take a trade, but can never become a soldier or militiaman again. - 15%: he deserts, following the normal desertion rules.</p>
+<h3>Quirks</h3>
+<ul>
+<li>Soldiers within 2 blocks of a loose brewing stand (not a villager&#x27;s job block or one in the citadel), axolotl, frog, or decorated pot have a 20% chance to take on negative effects and behavior. Each soldier is only checked once per day.</li>
+<li>Soldiers close to a mushroom or poppy have a 20% chance to eat it, with the same result.</li>
+<li>Either case gives 2 minutes of &quot;Tripping Nuts&quot;: they wander aimlessly and hit anything they bump into, but don&#x27;t target anything on purpose.</li>
+<li>Soldiers can drive boats and ride in each other&#x27;s boats. They only carry and place boats during a boat plan.</li>
+</ul>
+<h3>Night fighting</h3>
+<p>Soldiers in the dark sometimes stumble, so lit villages and lantern-carrying armies keep their footing and dark ground gives swarms, minions, and necromancers an edge. Stumbling is the only night penalty.</p>
+<ul>
+<li><strong>Who stumbles:</strong> soldiers and militia between dusk and dawn, while standing in light below level 8 and not carrying a light. In a well-lit village, soldiers never stumble.</li>
+<li><strong>Stumbling:</strong> an unlit soldier who&#x27;s moving has a 5% chance each in-game hour to stumble (proposed). He loses 2 hearts and is slowed for 3 seconds, but a stumble never drops him below 1 heart. The slowness is a built-in stat, not a potion effect, so endermen ignore it.</li>
+<li><strong>Carried lights:</strong> soldiers and militia can carry a torch, lantern, or soul lantern in the utility slot when it isn&#x27;t holding a boat, and never stumble while carrying one. Torches burn out after one night; lanterns last. Players hand lights over by right-clicking, and soldiers restock torches from arrow bins and camp blocks. Held lights don&#x27;t light up the world (vanilla has no moving light), so this is a stat, not a visual.</li>
+<li><strong>Lighting the village:</strong> placed light counts. Torches, lanterns, candles, and glowstone around ramparts and paths keep defenders on their feet.</li>
+<li><strong>Exempt:</strong> nightwatch soldiers, heroes, and Legends never stumble.</li>
+<li><strong>Minions:</strong> necromancer minions deal 10% more damage at night (proposed).</li>
+</ul>
+<h2 id="village-economy">Village economy</h2>
+<p>Food keeps soldiers fed, taxes fund the village, and recruiters turn both into more soldiers.</p>
+<h3>Mess station</h3>
+<ul>
+<li>Holds soldier food: bread, cooked meat, baked potatoes, and sweet berries (2 berries count as 1 meal). Multiple blocks can be joined to make a bigger one.</li>
+<li>Soldiers who can&#x27;t get food go hungry and may desert (see Desertion).</li>
+</ul>
+<h3>Taxes</h3>
+<ul>
+<li>A village stores taxes in a tax box if it has a player-owned mess block and at least one active soldier.</li>
+<li>Militiamen don&#x27;t make a village store taxes; only soldiers do.</li>
+<li>Each taxable villager adds 1 of the biome&#x27;s base tax item per collection (see Tax by biome).</li>
+<li>If anyone other than the village owner or a co-owner opens the tax box, all nearby soldiers attack them; militia attack 50% of the time.</li>
+</ul>
+<h3>Who pays taxes</h3>
+<p>A villager is taxable only if all of these are true:</p>
+<ul>
+<li><strong>Covered by a soldier:</strong> each soldier covers up to 5 villagers. A village with 3 soldiers taxes at most 15 villagers; the rest pay nothing.</li>
+<li><strong>Can reach the tax box:</strong> the villager must be able to pathfind to it. Villagers locked in trading cells or walled off pay nothing.</li>
+<li><strong>Rolls netherite only if eligible:</strong> only armorers, weaponsmiths, and toolsmiths can roll netherite. Other traders skip that roll.</li>
+</ul>
+<h3>Tax box cap</h3>
+<p>The tax box stops collecting once it&#x27;s full. Players have to empty it regularly to keep taxes coming in. Big villages can upgrade it; it stays a single box, so it&#x27;s always one target worth defending.</p>
+<table><thead><tr><th>Tier</th><th>Holds</th><th>Upgrade cost</th></tr></thead><tbody><tr><td>Tax box</td><td>1 stack of base items + 9 slots for trader items</td><td>Normal recipe</td></tr><tr><td>Reinforced tax box</td><td>3 stacks + 18 slots</td><td>Tax box + 4 iron blocks</td></tr><tr><td>Treasury</td><td>9 stacks + 27 slots</td><td>Reinforced box + 4 diamond blocks + 1 netherite ingot</td></tr></tbody></table>
+<h3>Tax by trader level</h3>
+<p>At each tax collection, every trader rolls once per item below. Higher levels pay more; the old &quot;high-level&quot; odds are now the Master row.</p>
+<table><thead><tr><th>Trader level</th><th>Bread</th><th>Emerald</th><th>Iron ingot</th><th>Gold ingot</th><th>Diamond</th><th>Netherite</th></tr></thead><tbody><tr><td>Novice</td><td>20%</td><td>2%</td><td>2%</td><td>0%</td><td>0%</td><td>0%</td></tr><tr><td>Apprentice</td><td>30%</td><td>4%</td><td>4%</td><td>1%</td><td>0%</td><td>0%</td></tr><tr><td>Journeyman</td><td>40%</td><td>6%</td><td>6%</td><td>2%</td><td>1%</td><td>0%</td></tr><tr><td>Expert</td><td>45%</td><td>8%</td><td>8%</td><td>3%</td><td>2%</td><td>0%</td></tr><tr><td>Master</td><td>50%</td><td>11%</td><td>11%</td><td>4%</td><td>3%</td><td>0.5%</td></tr></tbody></table>
+<h3>Tax by biome</h3>
+<p>The biome sets the base tax item.</p>
+<table><thead><tr><th>Village biome</th><th>Base tax item</th></tr></thead><tbody><tr><td>Plains</td><td>Bread</td></tr><tr><td>Savanna</td><td>Bread</td></tr><tr><td>Desert</td><td>Wheat (harsh biome: 3 wheat make 1 meal)</td></tr><tr><td>Taiga</td><td>Sweet berries (2 berries make 1 meal)</td></tr><tr><td>Snowy</td><td>Potatoes</td></tr></tbody></table>
+<p>Most base tax items are worth one meal, so each covered villager pays one meal per collection. Taiga villagers pay half a meal in sweet berries, and desert is the harshest: its villagers pay a third of a meal in wheat.</p>
+<h3>Tax by village size</h3>
+<p>Village size sets how often taxes are collected.</p>
+<table><thead><tr><th>Village size</th><th>Villagers</th><th>Collects taxes every</th></tr></thead><tbody><tr><td>Hamlet</td><td>1-5</td><td>3 days</td></tr><tr><td>Small village</td><td>6-10</td><td>2 days</td></tr><tr><td>Village</td><td>11-20</td><td>2 days</td></tr><tr><td>Town</td><td>21-35</td><td>1 day</td></tr><tr><td>City</td><td>36+</td><td>1 day</td></tr></tbody></table>
+<h3>Recruiting</h3>
+<ul>
+<li><strong>Job block:</strong> the recruiter box is a job block like other villager job blocks. One recruiter per box. A nearby soldier who reaches an unclaimed box takes the job.</li>
+<li><strong>Recruits:</strong> the recruiter turns unemployed villagers (no trade) into soldiers, so the village needs enough of them. Breeding keeps the supply going.</li>
+<li><strong>Capacity:</strong> each recruiter can have up to 10 recruits at a time. A recruit&#x27;s death frees his slot.</li>
+<li><strong>Post beds:</strong> 1 post bed = 1 recruit. The recruiter buys post beds for 5 emeralds each, paid from the tax box or the recruiter box, and places them on post blocks.</li>
+<li><strong>Post block:</strong> a block the mod defines that marks where recruiters may place post beds. Recipe: a cobblestone slab and an iron ingot.</li>
+<li><strong>Feeding:</strong> the recruiter keeps nearby mess stations stocked with food from the tax box. He only moves food that&#x27;s ready to eat. He never crafts or cooks: raw items (wheat, raw potatoes, raw meat) stay in the tax box until a player turns them into bread, baked potatoes, or cooked meat.</li>
+<li><strong>Gear:</strong> blacksmiths, fletchers, and armorers can be set to fill the recruiter box over time (see the supply tables below). Supplied gear is issued gear: only the recruiter can take it out of the box, not players.</li>
+<li><strong>Recruiter in combat:</strong> the recruiter only fights within 32 blocks of his recruiter box, so he isn&#x27;t lost chasing enemies across the map.</li>
+</ul>
+<ul>
+<li><strong>Breaking the box:</strong> anyone can break a recruiter box, though village protection slows non-allies. When it breaks, its emeralds and food drop as normal items, but issued gear is destroyed, so raiders hurt a village&#x27;s supply and no one can farm issued gear by breaking and replacing boxes. An owner moving a box loses its issued gear.</li>
+</ul>
+<h3>Soldier requirements</h3>
+<p>Every soldier, including the first one the player makes by hand, needs all of these:</p>
+<ul>
+<li>No trade (unemployed villager)</li>
+<li>A weapon (a melee weapon, a bow or crossbow, or a pickaxe on its own all count), chestplate, and helmet</li>
+<li>A free post bed</li>
+<li>A well-stocked mess station</li>
+<li>No hostile mob nearby: with one nearby, making a soldier fails 90% of the time. The player&#x27;s own minions don&#x27;t count, and making militia isn&#x27;t affected.</li>
+</ul>
+<h3>Rank bonus</h3>
+<p>Seasoned soldiers are common, so they add little; heroes and Legends are rare and add more.</p>
+<table><thead><tr><th>Soldier near the recruiter</th><th>Kills needed</th><th>Extra recruit slots</th></tr></thead><tbody><tr><td>Seasoned soldier</td><td>5</td><td>+1 each, up to 3 seasoned soldiers (+3)</td></tr><tr><td>Hero</td><td>20</td><td>+5</td></tr><tr><td>Legend</td><td>50</td><td>+10</td></tr></tbody></table>
+<ul>
+<li>Seasoned soldier bonuses stack up to +3. For heroes and Legends, only the best one near the recruiter counts: two heroes still give +5.</li>
+<li><strong>If a bonus soldier dies:</strong> the extra slots disappear, but soldiers already recruited stay. The recruiter is over capacity and can&#x27;t recruit again until deaths bring him back under his new limit.</li>
+</ul>
+<p>To set up a recruiter, the player:</p>
+<ol>
+<li>Places enough post blocks on the ground.</li>
+<li>Makes the first soldier by hand: gives an unemployed villager a weapon, chestplate, and helmet (he still needs a free post bed and a stocked mess station).</li>
+<li>Places the recruiter box near that soldier so he takes the job.</li>
+<li>Keeps the recruiter supplied with emeralds, gear, and food in the tax box or recruiter box.</li>
+</ol>
+<h3>Blacksmith supply</h3>
+<p>A weaponsmith assigned to a recruiter box adds one weapon a week; his level sets which weapons he can add. He only adds an item on days he works at his job block, and stops when the box is full.</p>
+<table><thead><tr><th>Blacksmith level</th><th>Items he can add (1 per week)</th></tr></thead><tbody><tr><td>Novice</td><td>Stone sword, stone axe</td></tr><tr><td>Apprentice</td><td>Above + iron axe</td></tr><tr><td>Journeyman</td><td>Above + iron sword</td></tr><tr><td>Expert</td><td>Iron sword, iron axe, shield</td></tr><tr><td>Master</td><td>Expert items + 5% chance of a diamond sword</td></tr></tbody></table>
+<ul>
+<li>Shields only go to soldiers, since militiamen can&#x27;t use them.</li>
+<li>Bows, crossbows, and arrows come from fletchers, not blacksmiths (see Fletcher supply).</li>
+</ul>
+<h3>Fletcher supply</h3>
+<p>A fletcher assigned to a recruiter box adds ranged gear on the same rules as the blacksmith: only on days he works at his job block, and never past a full box.</p>
+<table><thead><tr><th>Fletcher level</th><th>Items he can add (1 per week)</th></tr></thead><tbody><tr><td>Novice</td><td>20 arrows</td></tr><tr><td>Apprentice</td><td>Above + bow</td></tr><tr><td>Journeyman</td><td>Above + crossbow</td></tr><tr><td>Expert</td><td>Bow, crossbow, 32 arrows</td></tr><tr><td>Master</td><td>Bow, crossbow, 48 arrows + 5% chance of a gold-outline arrow</td></tr></tbody></table>
+<h3>Armorer supply</h3>
+<p>An armorer assigned to a recruiter box adds armor on the same rules as the blacksmith and fletcher. He only adds helmets and chestplates, since those are what soldiers need to enlist and all militia can wear.</p>
+<table><thead><tr><th>Armorer level</th><th>Items he can add (1 per week)</th></tr></thead><tbody><tr><td>Novice</td><td>Chainmail helmet, chainmail chestplate</td></tr><tr><td>Apprentice</td><td>Above + iron helmet</td></tr><tr><td>Journeyman</td><td>Above + iron chestplate</td></tr><tr><td>Expert</td><td>Iron helmet, iron chestplate</td></tr><tr><td>Master</td><td>Expert items + 5% chance of a diamond helmet or chestplate</td></tr></tbody></table></div></section><section class="dev-doc-full" id="threats-and-mobs"><h2>Threats &amp; mobs</h2><p class="source">Source: <code>docs/threats-and-mobs.md</code></p><div class="dev-doc-body"><h2 id="threats">Threats</h2>
 <p>Three new enemy systems pressure villages: raids, roving swarms, and bandits.</p>
 <h3>New moon raids</h3>
 <ul>
@@ -69,10 +325,263 @@
 <li><strong>Size cap:</strong> swarms max out at 30. Extra mobs from a merge stay as a second swarm. Creeper swarms max out at 8.</li>
 <li><strong>Growth:</strong> zombie swarms grow by turning villagers they kill into zombie villagers. Other types only grow by merging.</li>
 <li><strong>Movement:</strong> a swarm heads for the nearest village within 256 blocks, and moves on once that village has no villagers left.</li>
+<li><strong>Daylight:</strong> zombie and skeleton swarms hide in shade or caves during the day and move at night. Spider and creeper swarms move any time.</li>
+<li><strong>Targets:</strong> everyone, including villagers, soldiers, golems, players, and bandits. Players wearing the <strong>necromancer hood or robe</strong> are ignored: <strong>undead swarms</strong> if one piece; <strong>other swarm types</strong> if full set (same rules as hood/robe combat pacification).</li>
+<li><strong>No despawning:</strong> swarm mobs stay until killed.</li>
+<li><strong>Necromancy:</strong> necromancers can convert swarm mobs into minions; each conversion is a normal wand use with the usual heart risk.</li>
+<li><strong>While unloaded:</strong> a swarm in unloaded chunks keeps marching toward its target as stored data, without fighting. When a player loads the area, it appears where it would have arrived. Combat only happens in loaded chunks.</li>
 </ul>
-<p>…</p></div></section><section class="dev-doc-preview" id="war-and-defense"><h2>War &amp; defense</h2><p class="source">Source: <code>docs/war-and-defense.md</code></p><div class="dev-doc-excerpt"><h3>Defense blocks</h3>
+<h3>Bandits</h3>
+<ul>
+<li>Formed from deserting soldiers — <strong>45%</strong> of all deserters (<code>deserterOutcomeBandit</code>); they <strong>keep their items</strong>. Outcomes on every soldier desert: <strong>50%</strong> villager reset, <strong>45%</strong> bandit, <strong>5%</strong> wandering necromancer (<code>config-and-recipes.md</code>).</li>
+<li>Band together and roam like swarms, but stay at a captured village until its mess stations are empty.</li>
+<li>Kill only soldiers, not villagers, and destroy tax boxes.</li>
+<li>A band without a leader forms one: after 1 day, the bandit with the most kills takes over.</li>
+<li><strong>Joining up:</strong> a new bandit heads for the nearest band within 256 blocks. If there isn&#x27;t one, he wanders alone until he meets other bandits. A band forms at 3.</li>
+<li><strong>Band size:</strong> bands max out at 12. When a 13th bandit joins, the band splits into two bands of about 6, each forming its own leader. A world holds at most 25 bands (proposed); past that, new runaways and troubled youth stay villagers, and deserters who would turn bandit become villagers instead.</li>
+<li><strong>Growth:</strong> bands grow through new deserters, troubled youth, lone recruiting, and villagers who run away (below).</li>
+<li><strong>Necromancer robes don&#x27;t protect against bandits,</strong> since bandits are villagers, not hostile mobs.</li>
+<li><strong>Bandits and swarms</strong> are enemies and fight each other.</li>
+<li><strong>Bandit camps:</strong> small structures that generate in the world like pillager outposts, each with 3-5 bandits and a leader. Every world has some bands from the start.</li>
+</ul>
+<h3>Wandering necromancers (deserters — §9)</h3>
+<ul>
+<li><strong>Source:</strong> <strong>5%</strong> of soldier deserts (<code>deserterOutcomeNecromancer</code> — not player necromancers; no Order/wand intro). <strong>Orphan-raised</strong> use the <strong>same 5%</strong>; they hit desert <strong>more often</strong> via hunger/morale multiplier (<code>soldiers-and-villages.md</code> § Orphanages).</li>
+<li><strong>Role:</strong> <strong>mobile rogue</strong> — <strong>no</strong> crypt site, <strong>no</strong> new-moon respawn. <strong>Dead forever</strong> when killed.</li>
+<li><strong>Grudge target:</strong> <strong>ex-owner only</strong> — the player who <strong>owned the village</strong> they deserted from (UUID saved on desert).</li>
+<li><strong>Each strike (50 / 50):</strong> <strong>ambush</strong> the ex-owner (necro + personal undead swarm nearby) <strong>or</strong> send a swarm at <strong>one of the ex-owner’s claimed villages</strong> (weakest by soldiers per villager; same march rules as roving swarms). If they have <strong>no</strong> villages, <strong>ambush</strong> only.</li>
+<li><strong>How often (high encounter odds):</strong> while the necro lives and the ex-owner has been online at least once since desert, roll <strong>every 2 in-game days</strong> (<code>wanderingNecromancerStrikeIntervalDays</code>, default <strong>2</strong>) — then 50/50 ambush vs village. Only runs in <strong>loaded</strong> chunks (stored march when unloaded). Optional <strong>chat line</strong> to ex-owner when a strike is scheduled (<strong>TBD</strong> wording) so it feels personal, not random noise.</li>
+<li><strong>Identity:</strong> keeps deserter <strong>name</strong>, <strong>kills</strong>, <strong>gear</strong>; hood/robe; ~bandit-leader combat tier; <strong>not</strong> a player necromancer (no wand hearts).</li>
+<li><strong>Loot:</strong> <strong>phylactery shard</strong> on kill (same family as rogue drops — <code>necromancy.md</code>); <strong>no</strong> horcrux chest by default.</li>
+</ul>
+<h3>Rogue necromancers and wild liches</h3>
+<p><strong>Not bandits:</strong> overworld <strong>rogues</strong> are <strong>necromancer NPCs</strong> (camps/crypts). <strong>Bandits</strong> = deserter soldiers (<code>Bandits</code> above). <strong>Wandering necromancers</strong> = <strong>5%</strong> deserter outcome (§9).</p>
+<ul>
+<li><strong>Rogue sites:</strong> <strong>~half</strong> pillager-outpost density (~2× spacing). <strong>Necromancer</strong> camps only — <strong>cave crypt</strong>, <strong>crypt + surface entrance</strong>, <strong>taken village</strong>, or <strong>dark tower</strong> (<code>necromancy.md</code>). Clear on <strong>new moon</strong> respawn (proposed).</li>
+<li><strong>Wild lich:</strong> rogue + <strong>one horcrux</strong> in a hidden chest — <strong>~4%</strong> of rogues (most <strong>none</strong>). Optional lich-hunt preview (ping, unmake horcrux, then kill).</li>
+<li><strong>Rewards:</strong> phylactery <strong>shards</strong>, gear, lore — <strong>not</strong> quest <strong>flutes</strong> (unique world items — <code>necromancer-path.md</code>).</li>
+<li><strong>Citadel shadow (Armies loaded — proposed):</strong> within <strong>~256–512 blocks</strong> of the Black Citadel:</li>
+</ul>
+<p>- <strong>Ruined hamlets</strong> — village-scale wrecks (mess hall, beds, walls broken); <strong>bandits occupy</strong> them; <strong>some villagers</strong> may remain (few traders / nitwits, not a healthy economy). - <strong>Bandit camps</strong> — smaller outpost structures <strong>in addition</strong> to ruins (same band rules as normal camps). - <strong>Higher</strong> bandit camp/band density than the rest of the overworld (multiplier <strong>TBD</strong>). - Lore: places that <strong>sheltered in the citadel’s shadow</strong> <strong>fell</strong> when the kingdom did — danger on the approach before the seal breaks. <strong>No</strong> shadow content if Armies absent.</p>
+<ul>
+<li><strong>Lone recruiting:</strong> a lone bandit can turn a nitwit or unemployed villager in an unguarded village (no soldiers) into a bandit, once a day.</li>
+<li><strong>Runaways:</strong> every adult non-soldier villager has a 0.1% daily chance to leave home and become a wandering bandit. A 20-villager village loses about one every 50 in-game days.</li>
+<li><strong>Leader buffs:</strong> 50 HP, +25% damage, and 50% knockback resistance. Bandits near him get +10% damage.</li>
+<li><strong>Killing the leader:</strong> the band breaks into lone bandits who wander and regroup. The leader drops his gear and the band&#x27;s loot.</li>
+<li><strong>Targets:</strong> bands go for the most weakly defended village nearby, measured by soldiers per villager.</li>
+<li><strong>Occupation:</strong> villagers flee to havens and taxes stop. Bandits kill soldiers, sleep in post beds, and each bandit eats one food item a day from the mess stations. When the mess stations are empty, they destroy the tax box and leave.</li>
+<li><strong>Loot:</strong> bandits take the tax box contents before destroying it, and the leader carries them. Kill him and you get your taxes back.</li>
+<li><strong>While unloaded:</strong> bands follow the same rule as swarms. They keep traveling while unloaded, but only occupy villages, eat, and fight in loaded chunks.</li>
+</ul>
+<p>If the captured village is owned by a player and has militia, bandits instead:</p>
+<ol>
+<li>Burn it, destroy crops, and kill animals.</li>
+<li>Kill all militia and half the other villagers.</li>
+<li>Breed, with an 80% chance of producing troubled youth villagers.</li>
+</ol>
+<p>Troubled youth can never take a trade, so they can never become traders or militia. They can become soldiers, with a 5% daily chance to desert. Left unemployed, they have a 10% daily chance to turn bandit.</p>
+<h3>Cave hideouts</h3>
+<ul>
+<li><strong>What they are:</strong> bandit lairs built into large caves, rarer than bandit camps, each with 6-10 bandits and a leader. Inside are caltrop corridors and pit traps, so they teach players to watch their footing.</li>
+<li><strong>Inside:</strong> sleeping bays, a chest of stolen taxes, and a cell with 1-2 captive villagers who join the player&#x27;s nearest village as unemployed villagers when freed. A small chance of a rare chronicle.</li>
+<li><strong>Behavior:</strong> hideout bandits follow normal band rules but travel through caves when they can.</li>
+</ul>
+<h3>Underground villages</h3>
+<p>Player-made cave villages mostly work as is, since village areas already run from bedrock to sky. Five things need rules:</p>
+<table><thead><tr><th>Mechanic</th><th>Problem underground</th><th>Rule</th></tr></thead><tbody><tr><td>Recruiting</td><td>Dark caves spawn mobs inside the village, and a hostile mob nearby fails soldier creation 90% of the time</td><td>No change; lighting is the player&#x27;s job, and The Recruiter&#x27;s Handbook says so</td></tr><tr><td>New moon raids</td><td>Raiders spawn 64-96 blocks out on the surface and may find no way in</td><td>Raiders spawn at the nearest open cave or surface spot with a path in. With no path at all, the raid brings 2 pillager sappers who dig at sapper speed</td></tr><tr><td>Swarms</td><td>Zombie and skeleton swarms hide in caves by day, so they can wander into a cave village in daylight</td><td>Keep it: cave villages fight swarms by day as well as night</td></tr><tr><td>Night penalties</td><td>Caves stay dark all day</td><td>Penalties only apply at night, whatever the light underground</td></tr><tr><td>Sieges</td><td>Siege ladders are useless underground</td><td>Sappers, axemen, and plank bridges over ravines carry cave sieges; village protection slows tunneling as on the surface</td></tr></tbody></table>
+<h2 id="animal-farmers">Animal farmers</h2>
+<p>Five new villager types raise animals: cattle, chicken, pig, and horse traders, plus sheep herders. Each one tends a herd, farms its own feed, and supplies the village with soldier food and leather. They pay these taxes instead of the biome&#x27;s base tax item.</p>
+<ul>
+<li><strong>Job blocks:</strong> created only with expensive, player-crafted job blocks.</li>
+<li><strong>Pens:</strong> farmers don&#x27;t build or repair pens. Wild ranches generate with large fenced pens, like vanilla village farms but much bigger, and players are responsible for fixing them. In a player&#x27;s village, the player builds the pen.</li>
+<li><strong>Feed:</strong> each farmer plants and harvests the crop his animals breed with. Horse traders also need gold from players to make golden carrots.</li>
+<li><strong>Herd cap:</strong> each farmer stops breeding at his max herd size.</li>
+<li><strong>Horse traders:</strong> breed horses, and also donkeys and mules if given a donkey or two. All three count toward his herd cap.</li>
+</ul>
+<table><thead><tr><th>Farmer</th><th>Job block</th><th>Herd cap</th><th>Farms</th><th>Pays taxes in</th></tr></thead><tbody><tr><td>Cattle trader</td><td>Feed trough</td><td>8</td><td>Wheat</td><td>Raw beef, leather</td></tr><tr><td>Sheep herder</td><td>Shearing post</td><td>10</td><td>Wheat</td><td>Raw mutton</td></tr><tr><td>Chicken trader</td><td>Nesting box</td><td>16</td><td>Wheat (for seeds)</td><td>Raw chicken</td></tr><tr><td>Pig trader</td><td>Slop bucket</td><td>10</td><td>Carrots</td><td>Raw porkchops</td></tr><tr><td>Horse trader</td><td>Hitching post</td><td>8</td><td>Carrots (made golden with players&#x27; gold)</td><td>Leather</td></tr></tbody></table>
+<p><strong>Trades:</strong></p>
+<ul>
+<li>They sell their products to players for emeralds. Horse traders sell for gold instead.</li>
+<li>They also sell gear like feathers, saddles, shears, and buckets.</li>
+<li>They buy the crops their animals breed with (wheat, carrots, golden carrots) to top up their own farming.</li>
+</ul>
+<p><strong>Wild ranchers:</strong> animal traders also spawn outside villages, near each village, with 2-4 of their animals. They build a small pen and farm where they spawn. Each village gets 0-3 nearby ranches, averaging a little over 1, so most villages have one but some are duds:</p>
+<table><thead><tr><th>Ranches near a village</th><th>Chance</th></tr></thead><tbody><tr><td>0</td><td>25%</td></tr><tr><td>1</td><td>40%</td></tr><tr><td>2</td><td>25%</td></tr><tr><td>3</td><td>10%</td></tr></tbody></table>
+<p>That averages 1.2 ranches per village. Like vanilla villagers, a wild rancher can be moved to a player&#x27;s village, where he claims a free matching job block. Which traders spawn depends on the biome:</p>
+<table><thead><tr><th>Biome</th><th>Animal traders that spawn</th></tr></thead><tbody><tr><td>Plains</td><td>Cattle, horse</td></tr><tr><td>Savanna</td><td>Horse, cattle</td></tr><tr><td>Meadow</td><td>Sheep</td></tr><tr><td>Forest</td><td>Pig, chicken</td></tr><tr><td>Taiga</td><td>Sheep, pig</td></tr><tr><td>Snowy plains</td><td>Sheep</td></tr><tr><td>Jungle</td><td>Chicken</td></tr></tbody></table>
+<h2 id="vanilla-mob-changes">Vanilla mob changes</h2>
+<table><thead><tr><th>Mob</th><th>Change</th></tr></thead><tbody><tr><td>Zombies</td><td>Can break wooden doors on every difficulty (vanilla only allows it on Hard)</td></tr><tr><td>Spiders</td><td>Drop a web block when damaged. Each web dissolves after a random time between 30 seconds and 7 minutes</td></tr><tr><td>Endermen</td><td>Attack anything with a potion effect. Soldier rank bonuses are built-in stats, not potion effects, so they don&#x27;t count; beacon effects don&#x27;t count either; real potions and tripping do</td></tr><tr><td>Skeletons</td><td>Arrows have an 80% chance to pass through undead, creepers, and spiders</td></tr><tr><td>Mob spawners</td><td>Craftable but expensive (see Mob spawners)</td></tr><tr><td>Iron golems</td><td>Attack anything that attacks a villager (soldiers and militia included), and nothing else. Attacking a soldier doesn&#x27;t affect the player&#x27;s reputation with the village</td></tr><tr><td>Zombies, skeletons, and combat villagers</td><td>Break glass blocks and panes in their way, the way zombies break doors. Scope to settle: see Effect on players who ignore the mod</td></tr></tbody></table>
+<h3>Mob spawners</h3>
+<p>Players build a spawner in two steps: craft an empty cage, then bind a mob&#x27;s souls to it.</p>
+<ol>
+<li><strong>Empty spawner cage:</strong> 4 diamonds in the corners, 4 iron bars on the sides, and a netherite ingot in the center.</li>
+<li><strong>Setting the mob:</strong> right-click the cage with a bottle of souls while holding that mob&#x27;s drop:</li>
+</ol>
+<table><thead><tr><th>Mob</th><th>Drop needed</th></tr></thead><tbody><tr><td>Zombie</td><td>16 rotten flesh</td></tr><tr><td>Skeleton</td><td>16 bones</td></tr><tr><td>Spider</td><td>16 string</td></tr><tr><td>Creeper</td><td>16 gunpowder</td></tr><tr><td>Enderman</td><td>8 ender pearls</td></tr><tr><td>Blaze</td><td>8 blaze rods</td></tr></tbody></table>
+<p>Bosses, villagers, and the mod&#x27;s own mobs can&#x27;t be put in a spawner.</p>
+<h2 id="effect-on-players-who-ignore-the-mod">Effect on players who ignore the mod</h2>
+<p>As written, the mod would noticeably change normal play even for players who never make a soldier. The worst offenders are swarms, mod raids on natural villages, and the enderman and golem changes; each has a proposed fix.</p>
+<table><thead><tr><th>System</th><th>What a player ignoring the mod sees</th><th>Severity</th><th>Proposed fix</th></tr></thead><tbody><tr><td>Roving swarms</td><td>A 5% roll per player per night: about one swarm every 20 nights per player, or every 5 nights with 4 players on. Swarms never despawn, travel while unloaded, kill every villager they reach, and zombie swarms grow. Trading halls and natural villages get wiped</td><td>High</td><td>Only roll swarms for enlisted players; swarms that form can still hit natural villages, but only while an enlisted player is within 256 blocks of the swarm</td></tr><tr><td>New moon raids</td><td>Every village near any player rolls 40% + 15% + 15% per lunar cycle: about 0.7 raids every 8 days, 1.1 near spawn before the citadel falls. Natural villages defend with 2 militia in one armor piece each</td><td>High</td><td>Mod raids hit only claimed villages by default; a config option adds natural villages</td></tr><tr><td>Endermen and potion effects</td><td>Any player with a potion effect, including beacon effects, Night Vision, Fire Resistance, and Hero of the Village, is attacked by every enderman nearby</td><td>High</td><td>Apply only to non-player targets (soldiers, militia, villagers), and never count beacon effects</td></tr><tr><td>Iron golems</td><td>Golems stop attacking hostile mobs unless a villager is hit, so golem-guarded bases and villages lose their mob defense</td><td>High</td><td>Keep vanilla golem targeting and only add &quot;attacks anything that attacks a villager&quot;</td></tr><tr><td>Runaways</td><td>0.1% per villager per day: a 30-villager trading hall loses a villager, trade and all, about every 33 days</td><td>Medium</td><td>Only from claimed villages, and only villagers who can path out of the village</td></tr><tr><td>Natural militia</td><td>2 villagers per natural village (3-4 near spawn) are armed traders who can&#x27;t trade</td><td>Medium</td><td>Arm nitwits and unemployed villagers first; arm traders only if there aren&#x27;t enough</td></tr><tr><td>Zombie door breaking</td><td>Zombies break wooden doors on Easy and Normal, not just Hard</td><td>Medium</td><td>Only inside claimed village areas, or only for swarm zombies</td></tr><tr><td>Glass breaking (new)</td><td>If every zombie and skeleton breaks glass, every window in every base becomes a door</td><td>High as asked</td><td>Soldiers, militia, and bandits only during assaults; zombies and skeletons only in swarms, raids, or as minions; ordinary mobs only on Hard; follows mobGriefing</td></tr><tr><td>Shadow over spawn</td><td>More raids and militia near spawn until someone beats the citadel</td><td>Medium for spawn bases</td><td>Only claimed villages near spawn get the extra raids</td></tr><tr><td>Spider webs</td><td>Temporary webs in caves and bases</td><td>Low</td><td>Config switch only</td></tr><tr><td>Skeleton arrows</td><td>Pass through undead, creepers, and spiders, so fewer mob infights</td><td>Low</td><td>None</td></tr><tr><td>New structures</td><td>Bandit camps, hideouts, crypts, acolyte refuges, ranches, fortresses, and a citadel with an unbreakable road 1,000-2,000 blocks from spawn</td><td>Low</td><td>Generate only in new chunks; added to an existing world, place the citadel in ungenerated land</td></tr><tr><td>Bandits</td><td>Lone bandits recruit nitwits from natural villages, since those have no soldiers</td><td>Low</td><td>Bandits only burn player-owned villages with militia; lone recruiting only near enlisted players</td></tr></tbody></table>
+<p><strong>Proposed rule, enlisted players:</strong> a player becomes enlisted the first time he makes a soldier, claims a village, or uses a wand. Swarm rolls, mod raids, and runaways only happen around enlisted players and their villages. Mod raids only hit claimed villages, but swarms near an enlisted player can hit natural villages too, so the countryside around him feels the war. A server option can enlist everyone for all-out war servers. With these fixes, a player who ignores the mod sees new structures, armed villagers, and a few extra mobs, but keeps his villages and trading halls.</p></div></section><section class="dev-doc-full" id="war-and-defense"><h2>War &amp; defense</h2><p class="source">Source: <code>docs/war-and-defense.md</code></p><div class="dev-doc-body"><h2 id="defense-blocks">Defense blocks</h2>
 <p>These blocks tell soldiers and villagers where to stand guard or retreat.</p>
-<table><thead><tr><th>Block</th><th>What it does</th></tr></thead><tbody><tr><td>Arrow bin</td><td>Restocks arrows for soldiers and militiamen. When turned on, the nearest one with a bow guards it. Holds up to 1 stack of arrows, refilled by players or nearby fletchers. A fletcher adds arrows at the same rate he supplies recruiter boxes (one load a week, see Fletcher supply)</td></tr><tr><td>Rampart</td><td>A single block that marks a guard spot. Soldiers pathfind here when not eating or sleeping.</td></tr><tr><td>Fallback block</td><td>Soldiers go to the nearest one when the fallback horn blows</td></tr><tr><td>Haven block</td><td>Attracts retreating non-soldier villagers</td></tr><tr><td>Castle gate</td><td>A thick door, 4 blocks wide and 8 tall, meant to be placed in pairs for an 8-wide gateway. Opens and closes with redstone, so it works with levers, buttons, and lever horns. Comes in wood (axemen can break it during assaults) and iron (only sappers can). Players break castle gates about as slowly as obsidian, using an axe for wood gates or an iron pickaxe or better for iron gates (village protection slows non-allies further). For soldiers, each gate breaks as one piece and takes a long time: about 3 minutes for a wood gate and 6 minutes for an iron gate (proposed), with permanent progress like other sapper work. Recipes (proposed): wood gate is 6 logs, 2 iron blocks, and a chain in the center (about 19 iron each); iron gate is 8 iron blocks around an obsidian block (72 iron each, 144 for a pair)</td></tr></tbody></table></div></section></div>
+<table><thead><tr><th>Block</th><th>What it does</th></tr></thead><tbody><tr><td>Arrow bin</td><td>Restocks arrows for soldiers and militiamen. When turned on, the nearest one with a bow guards it. Holds up to 1 stack of arrows, refilled by players or nearby fletchers. A fletcher adds arrows at the same rate he supplies recruiter boxes (one load a week, see Fletcher supply)</td></tr><tr><td>Rampart</td><td>A single block that marks a guard spot. Soldiers pathfind here when not eating or sleeping.</td></tr><tr><td>Fallback block</td><td>Soldiers go to the nearest one when the fallback horn blows</td></tr><tr><td>Haven block</td><td>Attracts retreating non-soldier villagers</td></tr><tr><td>Castle gate</td><td>A thick door, 4 blocks wide and 8 tall, meant to be placed in pairs for an 8-wide gateway. Opens and closes with redstone, so it works with levers, buttons, and lever horns. Comes in wood (axemen can break it during assaults) and iron (only sappers can). Players break castle gates about as slowly as obsidian, using an axe for wood gates or an iron pickaxe or better for iron gates (village protection slows non-allies further). For soldiers, each gate breaks as one piece and takes a long time: about 3 minutes for a wood gate and 6 minutes for an iron gate (proposed), with permanent progress like other sapper work. Recipes (proposed): wood gate is 6 logs, 2 iron blocks, and a chain in the center (about 19 iron each); iron gate is 8 iron blocks around an obsidian block (72 iron each, 144 for a pair)</td></tr></tbody></table>
+<h2 id="housing-and-field-blocks">Housing and field blocks</h2>
+<p>These blocks are where soldiers live at home and on campaign.</p>
+<table><thead><tr><th>Block</th><th>What it does</th></tr></thead><tbody><tr><td>Post bed</td><td>Soldiers sleep here, treat it as home, and fully heal when they sleep out of combat. Players can craft them (any bed and an iron ingot, shapeless) and place them anywhere; recruiters buy theirs and place them on post blocks. Post beds don&#x27;t count as beds for villager breeding. A post bed&#x27;s color shows its owner&#x27;s rank, using vanilla bed colors: white when empty, gray for a soldier, light gray for a seasoned soldier, yellow for a hero, cyan for a Legend, and green for a recruiter. Right-clicking it shows the owner&#x27;s name, rank, kills, and whether he&#x27;s home, away on campaign, or missing</td></tr><tr><td>Camp block</td><td>Home base for soldiers on campaign: a field mess and field bed in one (see Campaigns)</td></tr></tbody></table>
+<h3>Campaigns</h3>
+<p>Soldiers in campaign boots leave the village with the player and live off a camp block until they come home.</p>
+<ul>
+<li><strong>Starting:</strong> soldiers wearing campaign boots follow the player. Removing the boots sends a soldier home to his post bed.</li>
+<li><strong>Cost at home:</strong> soldiers on campaign don&#x27;t count toward tax coverage and leave the village less defended. Their post beds and recruit slots stay reserved while they&#x27;re away.</li>
+<li><strong>Food:</strong> soldiers still eat 2 meals a day. If the camp block runs out, the normal hunger rules apply (see Desertion).</li>
+<li><strong>Portals:</strong> booted soldiers follow the player through Nether and End portals, so camps can be set up in other dimensions.</li>
+</ul>
+<h3>Camp block</h3>
+<ul>
+<li><strong>Hold point:</strong> once placed, booted soldiers stop following the player and stay within about 16 blocks of it, fighting anything that comes close. It stays until the player breaks it or enemies destroy it.</li>
+<li><strong>Field mess:</strong> stores food, siege ladders, boats, and arrows, with as much room as a double chest (54 slots). Soldiers eat from it daily.</li>
+<li><strong>Field bed:</strong> soldiers sleep at the camp and fully heal out of combat, like a post bed.</li>
+<li><strong>No soldier cap:</strong> a player can bring as many booted soldiers as they want.</li>
+<li><strong>One camp per player:</strong> placing a new one replaces the old one, and every booted soldier moves to the new camp. Breaking it is how you move camp.</li>
+<li><strong>Enemies can destroy it:</strong> bandits, raiders, and hostile mobs can attack it. When it breaks, it drops its stored food, and soldiers go back to following the player if he&#x27;s within 128 blocks; otherwise they march home to their post beds.</li>
+<li><strong>Horns:</strong> on campaign, the fallback horn sends soldiers to the camp block.</li>
+<li><strong>Not a village:</strong> no recruiting, taxes, or rank bonuses at a camp, and raids and swarms don&#x27;t target it specifically.</li>
+</ul>
+<p>Recipe, crafting grid top to bottom:</p>
+<table><thead><tr><th></th><th></th><th></th></tr></thead><tbody><tr><td>Wool</td><td>Wool</td><td>Wool</td></tr><tr><td>Log</td><td>Campfire</td><td>Log</td></tr><tr><td>Log</td><td>Barrel</td><td>Log</td></tr></tbody></table>
+<h3>Blockades</h3>
+<p>A camp near an enemy village with enough soldiers starves it out.</p>
+<ul>
+<li><strong>Starting a blockade:</strong> a camp within 64 blocks of another player&#x27;s village border besieges it while it holds at least 15 soldiers.</li>
+<li><strong>Effects on the enemy village:</strong> its tax box stops collecting, its recruiters can&#x27;t recruit, and its recruiters can&#x27;t restock mess stations from the tax box.</li>
+<li><strong>Ending a blockade:</strong> the siege ends when the camp is destroyed or drops below 15 soldiers.</li>
+</ul>
+<h3>Assaults</h3>
+<p>The player sets a target with an attack plan, then launches the assault with the charge horn.</p>
+<ul>
+<li><strong>Attack plan (item):</strong> the player writes target coordinates and how many siege ladders to bring into it, then uses it on a camp block. It&#x27;s consumed, and every soldier at that camp sets those coordinates as the target for their next charge. Recipe: paper, ink sac, and feather, shapeless.</li>
+<li><strong>Launching:</strong> blowing the charge horn sends the camp&#x27;s soldiers to the target. They attack enemy combatants within 32 blocks of the target: soldiers, militia, iron golems, hostile players, and bandits.</li>
+<li><strong>Civilians are spared:</strong> soldiers don&#x27;t kill traders or other non-combat villagers.</li>
+<li><strong>Timing:</strong> assaults work day or night, but only on the player&#x27;s order.</li>
+<li><strong>Hurt soldiers:</strong> below 30% health, they fall back to the camp block.</li>
+<li><strong>Ending:</strong> the assault ends when no enemies are within 128 blocks of the target for 60 seconds, or when the fallback horn blows. Survivors return to camp.</li>
+<li><strong>Doors:</strong> during an assault, soldiers can break wooden doors.</li>
+<li><strong>Blockades hold:</strong> soldiers away on an assault still count toward their camp&#x27;s blockade.</li>
+<li><strong>Camp guards:</strong> sneak-right-click a soldier to keep him back as a camp guard. Guards ignore attack plans and charge horns until you sneak-right-click them again. Guards wear a red plume on their helmet and show a &quot;Camp Guard&quot; name tag when you look at them.</li>
+<li><strong>Breaking mess stations:</strong> soldiers on campaign attack and break enemy mess stations they find. Destroying every mess station in a village ends its owner&#x27;s claim. This follows mobGriefing: with it off, players have to break them by hand.</li>
+</ul>
+<h3>Pickaxe soldiers</h3>
+<ul>
+<li>A player can give a soldier a pickaxe, which goes in his bow slot instead of a bow. It only counts when given directly by a player; soldiers never pick up pickaxes on their own.</li>
+<li>During an assault, pickaxe soldiers can break through iron doors as well as wooden ones.</li>
+</ul>
+<h3>Siege ladders</h3>
+<ul>
+<li><strong>What it is:</strong> a single large ladder object that two soldiers carry together and stand up against an enemy wall in one motion. Its height fits the wall automatically, up to <strong>20 blocks</strong>. It reuses the vanilla ladder texture on a tall, flat shape. Recipe: 8 ladders + 2 iron ingots. Soldiers and militia follow the same rules.</li>
+<li><strong>Supply:</strong> siege ladders are stored in the camp block. The attack plan says how many to bring, and up to that many are taken out of the camp block for the assault, only as many as the player stocked. Each is carried by a pair of soldiers.</li>
+<li><strong>Climbing:</strong> vanilla mobs only climb ladders they bump into; they don&#x27;t plan routes with them. So soldiers get a simple scripted action instead: walk to the siege ladder&#x27;s base, climb straight up, and step off at the top.</li>
+<li><strong>Counterplay:</strong> defenders can push a standing siege ladder over by hitting its top a few times, dropping anyone climbing it, or break it entirely. Standing one up follows mobGriefing.</li>
+<li><strong>Carrying:</strong> the two carriers walk slower and can&#x27;t attack while carrying.</li>
+<li><strong>Automatic use:</strong> carriers stand the ladder up against any wall 2 or more blocks high that&#x27;s between them and an enemy whenever they can&#x27;t pathfind any closer.</li>
+</ul>
+<h3>Boat plans</h3>
+<ul>
+<li>Soldiers only carry boats while carrying out a boat plan. Boats are stored in the camp block.</li>
+<li><strong>Boat plan (item):</strong> the player writes target coordinates into it and uses it on a camp block. It&#x27;s consumed. Recipe (proposed): paper, ink sac, and any boat, shapeless.</li>
+<li><strong>What happens:</strong> every soldier at that camp, camp guards included, grabs a boat, as long as the camp has boats left, and walks to the shore. Each waits up to 10 seconds for another soldier to climb in if one is within 20 blocks, then rows to the target coordinates. Soldiers without a boat ride as passengers when there&#x27;s room.</li>
+<li><strong>Landing:</strong> at the target, soldiers get out and drop their boats on the ground as items, then hold position there until given new orders.</li>
+</ul>
+<h3>Sappers</h3>
+<ul>
+<li>During an assault, pickaxe soldiers dig through walls that block the way to the target. They mine very slowly (dirt 30 seconds, stone 60 seconds, stone bricks and deepslate 90 seconds; obsidian and similar blocks take about 12 minutes each, and only with a diamond or netherite pickaxe (proposed)). Sappers can&#x27;t mine wood.</li>
+<li><strong>Progress is permanent:</strong> each block remembers how much it&#x27;s been mined and shows vanilla&#x27;s cracking effect. If a sapper dies, another can pick up where he left off. Progress only resets if the block is broken or replaced, so defenders can repair a wall by replacing damaged blocks.</li>
+<li>Wall digging follows mobGriefing.</li>
+<li><strong>Axemen:</strong> during an assault, soldiers with axes break anything made of wood at 60 seconds per block, with the same permanent progress.</li>
+<li><strong>Beacons:</strong> soldiers and militia get beacon effects like players do. Haste speeds up sappers and axemen, and strength, speed, resistance, and regeneration work on them too.</li>
+</ul>
+<h3>Plank bridges</h3>
+<ul>
+<li><strong>What it is:</strong> a portable span two soldiers carry like a siege ladder and lay across a creek, moat, or ditch up to 4 blocks wide (proposed). Once laid it becomes a row of temporary bridge blocks, so soldiers and players path over it normally. Recipe (proposed): 6 wooden slabs, 2 chains, and an iron ingot.</li>
+<li><strong>Supply:</strong> stored in the camp block. The attack plan says how many bridges to bring, the same way it does siege ladders.</li>
+<li><strong>Automatic use:</strong> carriers lay a bridge whenever a gap of water or air up to 4 blocks wide is all that stands between them and an enemy or their target. Out of combat, soldiers lay one when their path crosses such a gap.</li>
+<li><strong>Bridge plan (item):</strong> written with target coordinates and used on a camp block, like a boat plan. Soldiers carry bridges to the nearest crossing, lay them, and hold there. Recipe (proposed): paper, ink sac, and a wooden slab (shapeless).</li>
+<li><strong>Counterplay:</strong> defenders knock a bridge into the water by hitting its far end 3 times, or break it. Laying one follows mobGriefing.</li>
+<li><strong>At home:</strong> players can lay bridges by hand on their own land, and soldiers use them in their daily routine.</li>
+</ul>
+<h3>Traps</h3>
+<p>Caltrops can only be placed on the player&#x27;s own land or unclaimed land, never in enemy land or the citadel.</p>
+<ul>
+<li><strong>Caltrops:</strong> a floor layer, like carpet. Anything that steps on it takes 1 heart and is slowed for 3 seconds (the slow is a built-in stat, not a potion effect, so endermen ignore it), and it hurts everyone, the owner, his villagers, and golems included; each caltrop breaks after 8 hits. The owner&#x27;s and his allies&#x27; soldiers path around them, as do enemy seasoned soldiers and above. Plain enemy soldiers, militia, bandits, and hostile mobs walk straight in. Recipe (proposed): 4 iron nuggets and a flint make 4.</li>
+</ul>
+<h3>Laced rations</h3>
+<p>Spoiled food lets a player weaken an enemy army without a fight.</p>
+<ul>
+<li><strong>Lacing:</strong> any soldier food + a fermented spider eye (shapeless) makes a laced version that looks the same. Only the player who made it sees &quot;Laced&quot; on it. Mushroom stew, rabbit stew, and beetroot soup can be laced the same way to give to players.</li>
+<li><strong>Filling enemy messes:</strong> anyone can right-click any mess station with soldier food (or a laced version) to add one item per click, like filling a composter. Nothing else can be put in, and only the owner and co-owners can open it to see or take food. Soldiers who see a non-ally put food in attack him, as with tax box theft.</li>
+<li><strong>Soldiers who eat it:</strong> lose 5 hearts over 10 seconds (never below 1 heart) and are weakened for 3 minutes. Each has a 25% chance to fall sick: he stays in his post bed for a day and only fights if attacked (proposed).</li>
+<li><strong>Getting caught:</strong> each sick soldier has a 50% chance to expose the station. The owner gets a chat warning, and soldiers skip that station until a player empties it.</li>
+<li><strong>Players:</strong> laced stew gives Poison II for 8 seconds, Nausea for 10 seconds, and Hunger.</li>
+<li><strong>Bandits eat too:</strong> occupying bandits take their daily food from the mess, so lacing your own occupied village thins out the band.</li>
+</ul>
+<ul>
+<li><strong>Potion lacing:</strong> any soldier food + any drinkable potion (shapeless) makes food that gives that potion&#x27;s effect at half its duration. It looks like normal food, and only its maker sees what&#x27;s in it. Harmful potions (Poison, Weakness, Slowness, Harming) weaken enemy soldiers, but Harming never drops one below 1 heart. Helpful potions work too, so a player can feed his own army Strength or Regeneration before a big fight. Potion-laced food goes into mess stations like any other soldier food.</li>
+</ul>
+<h2 id="horns-and-signals">Horns and signals</h2>
+<p>Horns only work on soldiers you own, or whose owner made you an officer or co-owner. Any horn blow sends nearby non-soldier, non-militia villagers, including other players&#x27; villagers, to their bed or the nearest haven block.</p>
+<p><strong>Range:</strong> a horn blown in a village reaches every soldier registered to that village (by post bed or mess station) and every villager who lives there, however far away they are. Anyone not registered to the village, such as soldiers on campaign, reacts only within 256 blocks of the player.</p>
+<ul>
+<li><strong>Loaded soldiers</strong> react right away.</li>
+<li><strong>Unloaded soldiers</strong> pick up the order when their chunk loads. If enough time has passed for them to march there, they appear at their destination.</li>
+<li>This keeps lag low, since faraway soldiers only act once they load.</li>
+</ul>
+<table><thead><tr><th>Horn</th><th>Effect</th></tr></thead><tbody><tr><td>Awaken</td><td>All soldiers and militia go to the nearest arrow bin or rampart</td></tr><tr><td>Fallback</td><td>Soldiers retreat to fallback blocks, even if sleeping. Soldiers on campaign go to their camp block instead. Nearby non-soldier villagers go to the nearest haven block</td></tr><tr><td>Charge</td><td>Soldiers pursue enemies: all players not on the owner&#x27;s ally list, hostile mobs, and soldiers or militia not in their group</td></tr><tr><td>Guard chief</td><td>All soldiers rush to the player and guard him. Works on only 10% of militia</td></tr></tbody></table>
+<h3>Levers and buttons</h3>
+<ul>
+<li>Soldiers pull a soldier&#x27;s lever, or push a soldier&#x27;s button, on a horn blast.</li>
+<li>Lever horns come in 8 pairs, one per dye color. Soldiers pull their matching lever when that horn sounds.</li>
+<li>Two horn levels: one triggers all levers of a color, the other one random lever of that color.</li>
+<li>Flares work like horns but act where they burst, not where the player stands (see Flares).</li>
+</ul>
+<h3>Flares</h3>
+<p>Flares let the player point at a spot from a distance. They can be fired by hand or from a crossbow, and only affect soldiers the player owns or commands as an officer or co-owner. Like fireworks, they come in three levels set by gunpowder; higher levels reach more soldiers and cover a bigger area:</p>
+<table><thead><tr><th>Flare</th><th>Effect</th><th>Recipe</th></tr></thead><tbody><tr><td>Rally flare</td><td>Soldiers walk to where it bursts and hold that spot. They only fight if attacked or approached</td><td>Firework rocket + white dye</td></tr><tr><td>Strike flare</td><td>Soldiers attack enemies around where it bursts</td><td>Firework rocket + red dye</td></tr></tbody></table>
+<table><thead><tr><th>Level</th><th>Gunpowder in the rocket</th><th>Soldiers respond within</th><th>Strike area</th></tr></thead><tbody><tr><td>1</td><td>1</td><td>32 blocks</td><td>8 blocks</td></tr><tr><td>2</td><td>2</td><td>64 blocks</td><td>16 blocks</td></tr><tr><td>3</td><td>3</td><td>128 blocks</td><td>32 blocks</td></tr></tbody></table>
+<h2 id="gear-and-special-items">Gear and special items</h2>
+<p>Armor changes what a villager does; items give the player extra control.</p>
+<h3>Armor</h3>
+<table><thead><tr><th>Gear</th><th>Who it affects</th><th>Effect on the wearer</th><th>Recipe</th></tr></thead><tbody><tr><td>Nightwatch armor</td><td>Soldiers and militia</td><td>Sleeps in his post bed during the day, patrols between ramparts and arrow bins at night</td><td>Any helmet or chestplate + black dye (shapeless); keeps its armor value</td></tr><tr><td>Royal guard armor</td><td>Soldiers</td><td>Follows the player everywhere like a tamed wolf, teleporting to him if more than 16 blocks behind (with limits, see below). Never stays at a camp</td><td>Any helmet or chestplate + gold ingot (shapeless); keeps its armor value, adds gold trim</td></tr><tr><td>Campaign boots</td><td>Soldiers</td><td>Follows the player until a camp block is placed, then stays there</td><td>Any boots + compass (shapeless)</td></tr></tbody></table>
+<ul>
+<li><strong>Feeding royal guards:</strong> the player can hand-feed them by right-clicking with soldier food, and they also eat at any mess station they pass.</li>
+</ul>
+<ul>
+<li><strong>Royal guard limit:</strong> a player can have royal guards up to 10% of his soldier cap, rounded down, minimum 1 (proposed). The cap is the server&#x27;s max soldiers per player if set, otherwise his current number of soldiers. Guards over the limit stop following and go home to their post beds, newest first.</li>
+<li><strong>Teleporting:</strong> a royal guard only teleports on safe ground. He never teleports into, within, or out of another player&#x27;s village area (unless that player lists him as an ally), a bandit fortress, or the Black Citadel unless the player owns it, and never across the ender barrier. He also won&#x27;t teleport while 5 or more hostile mobs or enemy soldiers are within 16 blocks of the player or of himself (proposed). He walks instead, so guards can&#x27;t be used to drop an escort into a fight or an enemy base.</li>
+<li><strong>Royal guard post (block):</strong> marks a spot for one royal guard to hold. Right-click the post with an empty hand, then right-click a royal guard within 10 seconds to assign him; repeat to release him. A posted guard stops following the player and stays within 3 blocks of the post, leaving only to eat and sleep. When the village is under attack (a raid, an enemy army in the village area, a non-ally player who has hit a villager or soldier there in the last 5 minutes, a blockade, or the bell rung in the last 5 minutes), he fights anywhere in the village like a normal soldier, then returns once it&#x27;s quiet. Posted guards still count toward the limit. Recipe (proposed): rampart + gold ingot (shapeless).</li>
+</ul>
+<h3>Items</h3>
+<ul>
+<li><strong>Wanted poster:</strong> hung on a wall in the player&#x27;s village. His soldiers anywhere in that village attack the listed players on sight. Right-clicking it opens a text box, like editing a sign, to type up to 4 player names. It saves player IDs, so changing a name doesn&#x27;t clear a record. Recipe: paper, ink sac, and iron nugget.</li>
+<li><strong>Village map:</strong> sold by cartographers and found in bandit camp loot. Shows the nearest village the player hasn&#x27;t visited, like a vanilla explorer map.</li>
+<li><strong>Fire arrows:</strong> see Soldier behavior.</li>
+</ul>
+<ul>
+<li><strong>Kingdom map (item):</strong> shows every village a player owns in one place. Right-clicking opens a screen with a top-down dot map of his kingdom and a list beside it. Each village shows as its banner with its name, size, and soldier count; allied villages show in a second color, and his camp is marked. Villages under attack flash, and the list flags hungry or homeless soldiers, full tax boxes, and blockades. The map always shows the kingdom of whoever made it, so a stolen one is real intelligence for the thief.</li>
+<li><strong>Getting one:</strong> when a player claims his second village, he receives the chronicle <em>The Royal Surveyor</em>. From then on, every cartographer in his villages offers one extra trade: a royal charter for 16 emeralds, a village map, and a compass (proposed). A royal charter, a cartography table, and a gold block (shapeless) make a kingdom table. A kingdom table turns an empty map and a gold ingot into a kingdom map; copies work like vanilla map copies.</li>
+</ul>
+<h2 id="player-tools">Player tools</h2>
+<p>Tools that make the army easier to manage and easier to care about.</p>
+<ul>
+<li><strong>Muster roll (item):</strong> shows a village&#x27;s status at a glance. Use it anywhere in a village you own or command, or right-click a mess station with an empty hand. It lists total members, villagers by job and trade level (for example, 3 master librarians), soldiers by rank, militia, days of food left at the current rate, open post beds, recruiter slots in use, arrows in bins, tax box fill, any hungry or homeless soldiers, and whether the village is under blockade. Recipe: book + iron ingot.</li>
+<li><strong>Names:</strong> a soldier gets a name after his first real kill; practice on a training dummy doesn&#x27;t count. His name tag then shows his name, rank, and kill count.</li>
+<li><strong>Village banners:</strong> the owner right-clicks the village&#x27;s mess station with any banner to set its design. His soldiers carry it on their shields, and it flies over his camps, so armies are easy to tell apart.</li>
+<li><strong>Training dummy (block):</strong> idle soldiers practice on it. Every 2 days of practice counts as 1 kill, up to 5, so practice alone can make a seasoned soldier but nothing higher. Recipe: armor stand + hay bale + stick.</li>
+<li><strong>Guided start:</strong> the first time a player makes a soldier, he gets the Village Chronicle about soldiers, mess stations, beds, and horns.</li>
+<li><strong>Advancements:</strong> a mod advancement tree that shows players what&#x27;s possible: first soldier, first named soldier, first seasoned soldier, first hero, first Legend, survive a new moon raid, start a blockade, break a blockade, become a necromancer, drink the potion of absolution.</li>
+<li><strong>Village bell:</strong> ringing a village&#x27;s bell works like the awaken horn for that village: its soldiers and militia go to the nearest arrow bin or rampart. Soldiers who see a non-ally ring it attack him, as with tax box theft. Soldiers ring it themselves when they spot a raid captain, a bandit leader, or another player&#x27;s army, or when one soldier can see at least 3 enemies and at least 2/5 as many enemies as the village has defenders (soldiers and militia within 64 blocks of the bell). Enemies only count if he has line of sight to them. When it triggers, the nearest soldier within 64 blocks of the bell runs to ring it, nightwatch soldiers first. Soldiers can ring a village&#x27;s bell at most once every 5 minutes.</li>
+</ul>
+<ul>
+<li><strong>Reassignment writ (item):</strong> moves a soldier&#x27;s home to another post bed, in another village or elsewhere in the same one. Right-click the soldier with it, then right-click a free post bed. The writ holds his name until it&#x27;s used on a bed or on another soldier. The soldier keeps his gear, rank, and kills, and his old post bed becomes free at once, so it never needs to be touched. He claims the new bed instantly, wherever he is, and stays where he is; the new bed is simply his home from now on. Anyone not in combat can be reassigned. Soldiers on campaign and camp guards keep their duty. Recipe (proposed): paper, ink sac, and an iron ingot (shapeless).</li>
+</ul></div></section></div>
       </main>
     </div>
   </div>

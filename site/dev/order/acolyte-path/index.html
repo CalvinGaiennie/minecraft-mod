@@ -32,6 +32,234 @@
 <li><strong>Timing:</strong> the Order arc must <strong>finish before citadel claim</strong> — training, Maelor lock, and reunite escort are <strong>pre-claim only</strong>. <strong>No joining the Order after claim</strong> (see below).</li>
 </ul>
 <p>NPC acolytes remain the fixed <strong>17</strong> veterans; see <strong><code>endgame.md</code></strong> for refuges, homecoming, stations, and death rules. <strong>Two</strong> of the 17 are <strong>citadel-dungeon prisoners</strong> (War Leader + one craft brother), not overworld refuges — <strong><code>citadel-layout.md</code></strong>.</p>
+<h2 id="mutual-exclusion-order-vs-necromancer-questline">Mutual exclusion (Order vs necromancer questline)</h2>
+<p><strong>Casual necromancy</strong> (wand, minions, penalties, absolution) and the <strong>Order</strong> can overlap until the player finishes the <strong>intro quest</strong> and chooses <strong>commit</strong> or <strong>opt out</strong> (<code>necromancer-path.md</code>).</p>
+<table><thead><tr><th>Player state</th><th>Order acolyte path</th><th>Necromancer questline</th></tr></thead><tbody><tr><td>Never started intro arc</td><td>Open (subject to pre–claim timing)</td><td>Not started until <strong>3 permanent hearts lost</strong> triggers the offer</td></tr><tr><td>In <strong>intro quest</strong> (before final choice)</td><td>Open</td><td>In progress</td></tr><tr><td><strong>Opt out</strong> at end of intro</td><td><strong>Stays open</strong> (intended through <strong>citadel claim</strong> at minimum; post-claim Order role TBD)</td><td><strong>Permanently closed</strong> — no story perks/skills track</td></tr><tr><td><strong>Committed</strong> at end of intro</td><td><strong>Closed</strong> — no Maelor lock, brothers refuse (dialogue TBD)</td><td>Open through main arc</td></tr></tbody></table>
+<p><strong>Commit</strong> closes the Order only. <strong>Creating a horcrux</strong> makes <strong>absolution impossible</strong> (<code>necromancy.md</code>). <strong>Opt out</strong> does <strong>not</strong> clear necromancer mechanics — you can stay an active necromancer, absolve, and still walk the Order; you only forfeit the <strong>questline</strong>.</p>
+<p><strong>Active necromancers</strong> cannot use <strong>citadel Order stations</strong> (minor ask or major block use) and cannot gain <strong>Well of Kings</strong> XP or <strong>Kingstree</strong> heal aura (<code>endgame.md</code>).</p>
+<p><strong>After citadel claim:</strong> <strong>no new Order progress</strong> — no basic training, light/hard specialty, Maelor lock, or reunite quest for players who were not already a <strong>locked acolyte</strong> before claim. Opt-out necromancers who waited still <strong>lose</strong> the Order path at claim if they never locked.</p>
+<p><strong>Pre-claim only:</strong> “Acolyte open until claim” is a <strong>deadline</strong>, not a post-claim opportunity.</p>
+<h3>Necromancer gear at refuges</h3>
+<p>Brothers <strong>recognize</strong> necromancy on sight. While you carry <strong><code>necromancy.md</code> necromancer kit</strong> on your person — at minimum <strong>wand</strong>, <strong>hood</strong>, or <strong>robe</strong> (inventory or equipped; bottles of souls / minions <strong>TBD</strong>) — within <strong>32</strong> blocks of a refuge <strong>acolyte</strong> (same radius as soldiers):</p>
+<ul>
+<li>No <strong>basic training</strong>, specialty quests, Maelor chain, <strong>escort handoff</strong>, or Annals-open dialogue until the kit is <strong>gone</strong> (stash away from refuge, absolve and crumble wand, etc.).</li>
+<li>Acolyte <strong>warns</strong> you: lose the wand and robes or leave. Repeated tries or refusing to leave → <strong>chase off</strong> (hostile or drive away — implementation TBD; should not permakill brothers).</li>
+</ul>
+<p>So dabbling and Order <strong>can</strong> coexist, but <strong>not in the same visit</strong> — drop necromancer gear before Order business. The <strong>necromancer intro</strong> can still fire <strong>at a refuge</strong>; if an acolyte is <strong>in sight</strong> during the <strong>intro lightning storm</strong>, the mother’s bolt <strong>kills</strong> him and leaves a <strong>tombstone</strong> inscribed <strong>“She smote him.”</strong> (<code>necromancer-path.md</code>). Not the Smite enchantment. That brother is <strong>lost</strong> for the world.</p>
+<h2 id="four-specialties">Four specialties</h2>
+<p>Each of the <strong>16</strong> brothers (every acolyte except <strong>Maelor</strong>) is one of four specialties, <strong>four per specialty</strong> (assigned at world gen):</p>
+<table><thead><tr><th>Specialty</th><th>Citadel role (post-tree)</th></tr></thead><tbody><tr><td><strong>Arcane</strong></td><td>Royal enchanting table lectern</td></tr><tr><td><strong>Alchemist</strong></td><td>Royal brewing stand lectern</td></tr><tr><td><strong>Smith</strong></td><td>Royal anvil lectern</td></tr><tr><td><strong>War Leader</strong></td><td>No fourth station; campaign support, aura, and field role (pairs with Armies when loaded)</td></tr></tbody></table>
+<p><strong>Maelor</strong> is the <strong>17th</strong> — founder-scribe, head of the Order (<code>old-kingdom-lore.md</code>). He does not count toward the 4×4 split. His refuge is the one that holds <strong>Kaelen’s</strong> Royal Annals copy and <em>The Order of the Well</em> (proposed fixed placement).</p>
+<p>The <strong>player</strong> commits to <strong>one</strong> specialty (Arcane, Alchemist, Smith, or War Leader). <strong>Only Maelor</strong> may <strong>lock</strong> it. Field brothers teach <strong>only their own</strong> specialty. No respec after lock.</p>
+<p><strong>No specialty powers during training</strong> — basic and light/hard training are tasks and story only until Maelor <strong>locks</strong> your specialty. Then <strong>Player specialty perks</strong> apply.</p>
+<h2 id="quest-flow-player">Quest flow (player)</h2>
+<pre><code class="language-text">Save a refuge acolyte → basic training
+  → that brother: **light** training in **his** specialty only
+  → he sends you to find **Maelor**
+  → Maelor: **light** training in the **other three** specialties (he teaches — brothers do not teach outside their craft)
+  → Maelor: you **pick one** specialty for **hard** mastery
+  → complete **hard** training with **brother(s) of that specialty** in the world (Maelor assigns; you report back)
+  → Maelor **locks** specialty — **player perks begin**
+  → Maelor: Royal Annals + **escort brothers** to him (capstone feat / scaling)
+  → (post-escort scaling — TBD)</code></pre>
+<h3>1. First contact</h3>
+<p>Any acolyte you <strong>save</strong> (clear refuge undead, then talk) offers <strong>basic training</strong> because you helped him — <strong>unless</strong> you still carry necromancer <strong>wand / hood / robe</strong> (see <strong>Necromancer gear at refuges</strong>). Includes <strong>training tasks</strong> and <strong>lore</strong> (Order, purge, hope that Maelor still lives).</p>
+<h3>2. Light training (first brother)</h3>
+<p>After basic training, the brother who saved you runs the <strong>light</strong> chapter of <strong>his specialty only</strong> (short tasks + lore — no perks). He does <strong>not</strong> train other specialties.</p>
+<p>When light training is done, he <strong> sends you to find Maelor</strong> (map hint / Annals tie — TBD). He also tells you <strong>other brothers are alive</strong> and that the Order <strong>needs Maelor</strong>.</p>
+<p><strong>Which brother you save first</strong> only decides which specialty you sample first; it is <strong>not</strong> your final specialty until Maelor locks you after <strong>hard</strong> mastery.</p>
+<h3>3. Find Maelor</h3>
+<p>Hidden until the first brother sends you. Maelor is <strong>one of the 17</strong>, not a separate NPC.</p>
+<h3>4. Maelor — breadth (light three)</h3>
+<p>At Maelor’s refuge, he teaches the <strong>light</strong> version of the <strong>three specialties you have not</strong> done with the first brother (tasks + lore, no perks). Only Maelor runs this breadth step at his lectern / refuge — field brothers stay specialists.</p>
+<p><strong>Annals chests:</strong> when this chapter begins (first substantial Maelor dialogue — exact step TBD), Maelor <strong>speaks the twelve refuge Annals chests open at once</strong> (<code>acolyte-path.md</code> § Annals chests).</p>
+<h3>5. Maelor — choose and hard mastery</h3>
+<p>Maelor offers the <strong>hard</strong> path for <strong>one</strong> specialty of your choice (Arcane, Alchemist, Smith, or War Leader).</p>
+<ul>
+<li><strong>Hard</strong> = feat-grade training and quests for that specialty only (<strong>difficulty tables TBD</strong> — relaxed vs strict config).</li>
+<li><strong>Hard training</strong> is done with <strong>field brothers</strong> of that specialty (Maelor gives the quest; they teach <strong>hard</strong> only in their craft). Return to Maelor to <strong>lock</strong>.</li>
+<li>If you <strong>fail or abandon</strong> hard training before lock, you may <strong>pick a different hard specialty</strong> (Maelor allows retrial — limits TBD).</li>
+<li>When <strong>hard</strong> is complete, <strong>Maelor locks</strong> your specialty. <strong>Only Maelor</strong> can lock.</li>
+</ul>
+<h3>6. Maelor — reunite the Order (after lock)</h3>
+<p><strong>Why Maelor asks:</strong> reunite the <strong>brothers</strong>, <strong>save the Royal Annals</strong>, and find someone who can <strong>retake the citadel</strong> and <strong>release the Corrupted King</strong> (lay him to rest — same story as the Crown on his statue in <code>endgame.md</code>).</p>
+<p>After lock, he assigns:</p>
+<ol>
+<li><strong>All 12 volumes</strong> of the Royal Annals (from the now-open refuge chests).</li>
+<li><strong>Escort as many brothers as you can</strong> to <strong>Maelor’s refuge</strong> before the citadel is claimed.</li>
+</ol>
+<p><strong>Minimum brothers:</strong> required floor + <strong>better outcome for more</strong> (TBD; config <code>acolyteBrothersMinimum</code>). Treat escort as the <strong>capstone feat</strong> after specialty lock.</p>
+<p><strong>Why keep brothers alive:</strong> each brother is <strong>permanently lost</strong> if killed (<code>endgame.md</code>); escort fights and Corpse-style deaths are real risks.</p>
+<h3>Citadel-trapped brothers (§10)</h3>
+<p>Two brothers were <strong>never</strong> at overworld refuges — they hold the inner ward during the purge and were <strong>caged in the citadel dungeon</strong> (lore: ordered to stand down / hold, not flee).</p>
+<table><thead><tr><th>Brother</th><th>Specialty</th></tr></thead><tbody><tr><td><strong>First</strong></td><td><strong>War Leader</strong> (always)</td></tr><tr><td><strong>Second</strong></td><td><strong>Arcane, Alchemist, or Smith</strong> — <strong>random per world</strong> at world gen</td></tr></tbody></table>
+<ul>
+<li><strong>Rescue:</strong> after seal break, <strong>player flips a lever</strong> in/near the dungeon to open Order cells; then talk / escort as usual.</li>
+<li><strong>Annals:</strong> trapped brothers do <strong>not</strong> carry Annals volumes — copies only in overworld <strong>refuge chests</strong> (twelve locked Annals chests).</li>
+<li><strong>Reunite:</strong> they count for escort only after rescue; deliver to <strong>Maelor’s refuge</strong> before claim to join homecoming roster.</li>
+<li><strong>Stations:</strong> only <strong>Arcane / Alchemist / Smith</strong> fill royal lecterns. Trapping one craft brother <strong>does not</strong> replace escorting the others — skip too many overworld escorts and lecterns stay empty (Maelor can fill one dead brother’s slot only).</li>
+</ul>
+<h3>Escort → homecoming (<strong>model A — chosen</strong>)</h3>
+<p>For players who <strong>locked</strong> specialty <strong>before claim</strong> and finished Maelor’s reunite:</p>
+<ul>
+<li>Only brothers <strong>delivered to Maelor’s refuge</strong> (handoff at Maelor) are on <strong>Maelor’s roster</strong>.</li>
+<li>On <strong>claim</strong>, <strong>Maelor + roster</strong> walk to the citadel (~3 in-game days). They staff lecterns/auras per <code>endgame.md</code>.</li>
+<li>Brothers <strong>not</strong> on the roster <strong>stay</strong> at their refuges (or recruited villages) — alive, <strong>not</strong> auto teleported.</li>
+</ul>
+<p><strong>Claim without Maelor reunite</strong> (no locked acolyte roster): <strong>no</strong> automatic 17-acolyte homecoming. See <strong><code>endgame.md</code> — Citadel escort (any player)</strong>.</p>
+<p><strong>Player power (TBD):</strong> optional bonus stacks for large roster at lock — not required for model A.</p>
+<h3>Annals chests</h3>
+<p>While the <strong>citadel is unclaimed</strong>:</p>
+<ul>
+<li>The <strong>twelve refuge chests</strong> that hold Royal Annals copies are <strong>unbreakable and locked</strong>.</li>
+<li><strong>Open when either:</strong></li>
+</ul>
+<p>1. <strong>Maelor</strong> speaks them all open at once (start of his breadth chapter — <code>§ 4</code>), <strong>or</strong> 2. <strong>First successful citadel claim</strong> in that world, if they were <strong>never</strong> opened before.</p>
+<ul>
+<li>Relics and other items <strong>in those same chests</strong> stay locked with the chest until it opens.</li>
+<li>Horn-keeper and ordinary refuge chests are <strong>not</strong> part of this lock (<strong>Annals chests only</strong>).</li>
+</ul>
+<p>After claim, unlooted refuge chests follow normal rules in <code>endgame.md</code>.</p>
+<h3>Escort brothers</h3>
+<p>When <strong>Maelor’s reunite quest</strong> starts (<strong>after specialty lock</strong>), brothers you have already <strong>saved</strong> (cleared refuge, talked) can be <strong>called to follow</strong>: while you are <strong>near</strong> a brother, he <strong>joins your escort</strong> and paths with you until you deliver him to <strong>Maelor’s refuge</strong>. Repeat until you meet the minimum and as many above that as you want for bonuses.</p>
+<ul>
+<li>Brothers already following stay with the group until handoff or death.</li>
+<li><strong>No soldiers (Armies):</strong> if <strong>your</strong> soldiers (or militia) are within <strong>32</strong> blocks of a brother, he <strong>will not</strong> start escort, <strong>will not</strong> hand out Maelor-chain quests, and says clearly to <strong>come back without your goons</strong> — the Order trusts a person, not an army camped on the refuge. Send soldiers away, then talk again.</li>
+<li><strong>No necromancer kit:</strong> same radius — wand / hood / robe must not be on you (see <strong>Necromancer gear at refuges</strong>).</li>
+<li><strong>Corpse mod:</strong> play-test escort + player death so following brothers and Annals progress do not soft-lock (<code>compatibility-planned-mods.md</code>).</li>
+</ul>
+<h3>Open design (TBD)</h3>
+<ul>
+<li>Post-escort <strong>ongoing duties</strong> and <strong>reward scaling</strong> for brother count.</li>
+</ul>
+<h2 id="specialty-feat-gates-8">Specialty feat gates (§8)</h2>
+<table><thead><tr><th>Phase</th><th>Who</th><th>Purpose</th></tr></thead><tbody><tr><td><strong>Basic training</strong></td><td>First saved brother</td><td>Join the Order — no specialty yet.</td></tr><tr><td><strong>Light ×4</strong></td><td>First brother (<strong>1</strong>) + Maelor (<strong>3</strong>)</td><td>Taste every specialty; no perks.</td></tr><tr><td><strong>Hard ×1</strong></td><td>Field brother of <strong>chosen</strong> specialty</td><td><strong>Only your pick</strong> — complete <strong>all</strong> hard steps for that specialty, then report to Maelor for <strong>lock</strong>. Other three hard tracks are defined but not required.</td></tr><tr><td><strong>Escort + Annals</strong></td><td>After lock</td><td>Reunite quest (<code>acolyteBrothersMinimum</code> + bonus).</td></tr></tbody></table>
+<p>Brothers <strong>verify</strong> via turn-in, counters, or matching advancements where they exist.</p>
+<p>---</p>
+<h3>Basic training (all specialties — first brother)</h3>
+<p><strong>Order work, not generic fetch.</strong> After you save him:</p>
+<ol>
+<li><strong>Clear the refuge</strong> — kill <strong>every</strong> necromancer-tainted mob tied to his structure (initial spawn <strong>plus</strong> any waves the brother flags until he says the site is <strong>clean</strong>). No oath until the structure is clear.</li>
+<li><strong>Break the nearby curse</strong> — defeat the <strong>necromancer threat</strong> the brother points to (implementation: <strong>rogue necromancer</strong> from the nearest <strong>necromancer crypt</strong> within ~<strong>512</strong> blocks, <strong>or</strong> a refuge-specific mini-boss if no crypt — TBD placement). Personal kill or kill credit on the necromancer NPC required.</li>
+<li><strong>Oath</strong> — vow at the brother (serve the tree, deny the wand, retake the citadel in time).</li>
+</ol>
+<p>Then <strong>light</strong> training in <strong>his</strong> specialty (<code>§ Light training</code> below).</p>
+<p>---</p>
+<h3>Hard mastery (one specialty — before Maelor lock)</h3>
+<p>Maelor assigns a <strong>field brother</strong> (<strong>master</strong>) of your <strong>chosen</strong> specialty. Turn in <strong>physical proof</strong> to the master; complete <strong>every</strong> bullet for <strong>that</strong> specialty, then report to Maelor to <strong>lock</strong>.</p>
+<p>See <strong><code>§ Light training</code></strong> for all four light chapters.</p>
+<h4>Smith (hard) — agreed</h4>
+<p>Turn in to the Smith master:</p>
+<ol>
+<li><strong>Every weapon and armor category</strong> craftable in survival — <strong>sword, axe, pickaxe, shovel, hoe</strong>, <strong>helmet, chestplate, leggings, boots</strong> (one of each <strong>type</strong>).</li>
+<li><strong>Every material tier</strong> the Order counts for those crafts — at least <strong>one crafted item</strong> from <strong>each</strong> of: <strong>leather, wood, stone, iron, gold, diamond, netherite</strong> (where vanilla allows that material on that item; netherite via smithing upgrade counts). The full turn-in set must <strong>cover all types</strong> and <strong>cover all materials</strong> across the set (exact matrix in config <code>acolyteSmithHardTurnIn</code>).</li>
+</ol>
+<h4>Alchemist (hard) — agreed</h4>
+<p>Turn in to the Alchemist master:</p>
+<ol>
+<li><strong>One potion</strong> (any vessel type) for <strong>each distinct effect</strong> in config <code>acolyteAlchemistHardEffects</code> (all brewable/obtainable effects in survival for this version).</li>
+<li><strong>Vessel proof:</strong> among the turn-in set, include <strong>at least one</strong> <strong>normal (drink)</strong>, <strong>one splash</strong>, and <strong>one lingering</strong> (three different bottles; effects may differ — e.g. drink healing, splash poison, lingering slowness).</li>
+</ol>
+<h4>Arcane (hard) — agreed (books) + proposed (proofs)</h4>
+<p>Turn-in + proofs to the Arcane master:</p>
+<ol>
+<li><strong>Enchanted books (agreed):</strong> turn in <strong>one enchanted book of each enchantment type</strong> on config <strong><code>acolyteArcaneHardEnchantList</code></strong> — every distinct <strong>enchantment</strong> that can appear on an <strong>enchanted book</strong> from a <strong>vanilla enchanting table</strong> in <strong>1.21.1</strong> (one book per type; level on the book = any level you obtained for that type). <strong>Treasure-only</strong> enchants (Mending, Frost Walker, Soul Speed, Swift Sneak, Wind Burst, curses) are <strong>not</strong> on this list unless we extend a separate optional museum turn-in.</li>
+<li><strong>Proof feats (proposed — confirm or cut):</strong> complete <strong>each</strong> row below while holding/wearing the stated enchant (vanilla table levels). Config <code>acolyteArcaneHardProofs</code> mirrors this list.</li>
+</ol>
+<table><thead><tr><th>#</th><th>Proof (you must…)</th><th>Enchant on gear</th></tr></thead><tbody><tr><td>1</td><td>Fall <strong>≥ 40</strong> blocks and survive without totem</td><td><strong>Feather Falling IV</strong> boots</td></tr><tr><td>2</td><td>Kill <strong>1</strong> hostile mob</td><td><strong>Looting III</strong> sword</td></tr><tr><td>3</td><td>Pick up <strong>grass block</strong> or <strong>deepslate</strong> as item</td><td><strong>Silk Touch</strong> tool</td></tr><tr><td>4</td><td>Kill <strong>1</strong> undead (zombie/skeleton/drowned/husk/stray)</td><td><strong>Smite V</strong> sword <em>(not same sword as Sharpness)</em></td></tr><tr><td>5</td><td>Kill <strong>1</strong> spider or cave spider</td><td><strong>Bane of Arthropods V</strong> sword</td></tr><tr><td>6</td><td>Kill <strong>1</strong> mob from <strong>≥ 20</strong> blocks away</td><td><strong>Power V</strong> bow</td></tr><tr><td>7</td><td>Kill <strong>1</strong> mob while it is on fire from your <strong>bow</strong></td><td><strong>Flame</strong> bow</td></tr><tr><td>8</td><td>During <strong>thunder</strong>, hit a mob with a <strong>thrown trident</strong> (lightning strike)</td><td><strong>Channeling</strong> trident <em>(needs storm — not thunderless)</em></td></tr><tr><td>9</td><td><strong>Throw</strong> trident and catch it on return</td><td><strong>Loyalty III</strong> trident <em>(clear weather; separate trident from #8)</em></td></tr><tr><td>10</td><td>Break blocks <strong>underwater</strong> continuously <strong>30</strong> seconds without surfacing</td><td><strong>Aqua Affinity</strong> + <strong>Respiration III</strong> helmet</td></tr><tr><td>11</td><td>Travel <strong>40</strong> blocks in <strong>water</strong> in under <strong>25</strong> seconds</td><td><strong>Depth Strider III</strong> boots</td></tr><tr><td>12</td><td>Hit <strong>2+</strong> hostiles with <strong>one</strong> sweep attack (Java sweep)</td><td><strong>Sweeping Edge III</strong> sword</td></tr><tr><td>13</td><td><strong>Catch 3</strong> fish</td><td><strong>Lure III</strong> or <strong>Luck of the Sea III</strong> rod</td></tr><tr><td>14</td><td><strong>Fire</strong> a crossbow shot after full Quick Charge</td><td><strong>Quick Charge III</strong> crossbow</td></tr><tr><td>15</td><td>With <strong>Density V</strong> mace, kill a mob after you fell <strong>≥ 4</strong> blocks this tick <strong>or</strong> with <strong>Breach IV</strong> mace, hit a mob wearing <strong>iron+</strong> armor</td><td><strong>Density V</strong> or <strong>Breach IV</strong> mace <em>(mace + breeze rod from Trial Chambers — 1.21)</em></td></tr></tbody></table>
+<p><strong>Not proofs:</strong> Knockback, Punch, Infinity, Impaling, Riptide, Thorns, Unbreaking, and the extra Protection variants — those are satisfied by the <strong>book turn-in</strong> only. <strong>Riptide</strong> optional swap for proof #9 — TBD.</p>
+<h4>War Leader (hard) — agreed</h4>
+<p><strong>Worn gear turn-in only</strong> — bring to the War Leader master <strong>each</strong> item below with <strong>≤ 20% durability remaining</strong> (worn down through <strong>combat use</strong>, not crafted low or commands):</p>
+<table><thead><tr><th>Item</th></tr></thead><tbody><tr><td><strong>Diamond sword</strong></td></tr><tr><td><strong>Diamond axe</strong></td></tr><tr><td><strong>Bow</strong></td></tr><tr><td><strong>Crossbow</strong></td></tr><tr><td><strong>Mace</strong></td></tr><tr><td><strong>Full diamond armor</strong> (helmet, chestplate, leggings, boots)</td></tr><tr><td><strong>3 shields</strong></td></tr></tbody></table>
+<p>Master verifies durability on turn-in.</p>
+<p>---</p>
+<h3>Light training (agreed)</h3>
+<p><strong>Who:</strong> first brother runs <strong>light</strong> for <strong>his</strong> specialty; <strong>Maelor</strong> runs the <strong>other three</strong> before you pick <strong>hard</strong>.</p>
+<p><strong>One hard task each</strong> — same <em>kind</em> of work as hard mastery, but a <strong>single</strong> bite. Progress <strong>counts toward hard</strong> (flags on the hard checklist; do not repeat completed slots).</p>
+<p>After all <strong>four</strong> lights → Maelor offers <strong>hard</strong> → field master → <strong>lock</strong> when hard is complete.</p>
+<table><thead><tr><th>Specialty</th><th>Light (one task)</th><th>Counts toward hard</th></tr></thead><tbody><tr><td><strong>Smith</strong></td><td><strong>Craft</strong> a <strong>netherite helmet</strong> and <strong>netherite chestplate</strong> (smithing upgrade counts). Turn in to brother/Maelor.</td><td><strong>Helmet</strong> + <strong>chestplate</strong> types; <strong>netherite</strong> material on hard matrix (<code>acolyteSmithHardTurnIn</code>).</td></tr><tr><td><strong>Alchemist</strong></td><td>Brew and turn in <strong>Turtle Master II</strong> and <strong>Regeneration II</strong> (see below).</td><td>Those <strong>two effects</strong> on <code>acolyteAlchemistHardEffects</code>; vessel types can count toward hard <strong>drink / splash / lingering</strong> proof if you use different forms.</td></tr><tr><td><strong>Arcane</strong></td><td>Turn in one <strong>perfect mace</strong> (<strong>Density V</strong> + <strong>Unbreaking III</strong>) and one <strong>perfect shield</strong> (<strong>Unbreaking III</strong>, full durability) — see below.</td><td>Credits <strong>two</strong> enchant <strong>types</strong> on the hard book list from the enchants on those items. If <strong>proof feats</strong> are enabled, mace can satisfy <strong>Density</strong> proof row when rules match.</td></tr><tr><td><strong>War Leader</strong></td><td>Turn in <strong>one sword</strong> and <strong>one shield</strong> (diamond recommended) with <strong>less than one-fifth durability left</strong> (<strong>&lt; 20%</strong> remaining; combat wear, not broken).</td><td>Credits <strong>sword</strong> + <strong>1 shield</strong> toward hard turn-in set; hard still requires the <strong>full</strong> kit at <strong>≤ 20%</strong> (light slots count — do not re-craft; wear down or deliver same categories at hard completion).</td></tr></tbody></table>
+<h4>Alchemist light — agreed</h4>
+<p><strong>Turtle Master II</strong> (turtle scutes / breeding grind) and <strong>Regeneration II</strong> (ghast tear + glowstone).</p>
+<h4>Arcane light — agreed</h4>
+<p><strong>Perfect mace:</strong> <strong>Density V</strong> + <strong>Unbreaking III</strong> (table max; <strong>Density</strong> chosen over <strong>Breach</strong>). <strong>Perfect shield:</strong> <strong>Unbreaking III</strong>, full durability. Turn in <strong>items</strong>; enchants credit two hard <strong>book</strong> types.</p>
+<p>---</p>
+<h3>Maelor museum (optional — after lock)</h3>
+<p>Separate from hard lock: hand in <strong>categories</strong> Maelor requests (intake: <strong>every weapon type</strong>, <strong>every armor type</strong>, <strong>every potion</strong>, <strong>every book</strong> — run as <strong>rotating bundles</strong>, not one mega turn-in). Improves <strong>escort bonus</strong> scaling only.</p>
+<p>---</p>
+<h3>Config keys (§8)</h3>
+<table><thead><tr><th>Key</th><th>Default / role</th></tr></thead><tbody><tr><td><code>acolyteSmithHardCraftList</code></td><td>Data-driven craft checklist for Smith hard</td></tr><tr><td><code>acolyteAlchemistHardEffects</code></td><td>All required potion effect IDs</td></tr><tr><td><code>acolyteArcaneHardEnchantList</code></td><td>All required enchant book types</td></tr><tr><td><code>acolyteArcaneHardProofs</code></td><td>Fall, Looting, etc.</td></tr><tr><td><code>acolyteArcaneFallMinBlocks</code></td><td>50 (tune toward max fall)</td></tr><tr><td><code>acolyteWarLeaderHardMobList</code></td><td>Hostiles requiring 100 kills each</td></tr></tbody></table>
+<h2 id="player-specialty-perks">Player specialty perks</h2>
+<p><strong>Zero mechanical perks until Maelor locks your specialty.</strong> Basic and specialty <strong>training</strong> are tasks and story only.</p>
+<p>After <strong>lock</strong>, perks below apply.</p>
+<p><strong>Citadel stations (post-tree):</strong> see <strong><code>endgame.md</code> — two tiers:</strong></p>
+<ul>
+<li><strong>Minor:</strong> any owner/allied player <strong>asks</strong> the acolyte at the lectern — small station benefit, <strong>no</strong> matching specialty required.</li>
+<li><strong>Major:</strong> <strong>you</strong> use the job block directly — <strong>only</strong> if your <strong>locked specialty matches</strong> that station (full royal power). NPC must still be at the lectern (or Maelor filling in). You do <strong>not</strong> stand at the lectern; the brother does.</li>
+</ul>
+<p><strong>Post-tree</strong> = royal <strong>major</strong> tier + anything marked post-tree below. <strong>Pre-tree</strong> perks work anywhere.</p>
+<h3>Arcane (locked)</h3>
+<ul>
+<li><strong>Pre-tree:</strong> <strong>vanilla</strong> enchanting tables — enchant without spending <strong>XP or lapis</strong> (tier rules unchanged).</li>
+<li><strong>Post-tree — major (you at royal enchant table):</strong> <strong>locked Arcane only</strong> — you pick one enchant on <strong>gear or book</strong> at <strong>vanilla max + 2</strong> (e.g. Sharp <strong>VII</strong>), <strong>0</strong> XP, <strong>0</strong> lapis (<code>endgame.md</code>).</li>
+<li><strong>Post-tree — minor:</strong> <strong>any owner/ally</strong> asks Arcane brother — <strong>random</strong> roll, up to vanilla+1, gear or book, no lapis.</li>
+</ul>
+<h3>Alchemist (locked)</h3>
+<ul>
+<li><strong>Pre-tree:</strong> potions <strong>you brew</strong> last <strong>+50%</strong> longer.</li>
+<li><strong>Post-tree — major:</strong> <strong>locked Alchemist only</strong> at stand — tier <strong>III</strong>, <strong>3×</strong> duration, Resolve + Rallying, no blaze/coal (<code>endgame.md</code>).</li>
+<li><strong>Post-tree — minor:</strong> <strong>any owner/ally</strong> asks — <strong>2×</strong> duration, no tier III, no Resolve/Rally, no blaze/coal.</li>
+</ul>
+<h3>Smith (locked)</h3>
+<p><strong>Pre-tree (works alone, no citadel)</strong> — all of the following stack:</p>
+<ul>
+<li><strong>Steady hand:</strong> at a <strong>vanilla anvil</strong>, each repair material restores <strong>50% more durability</strong> than normal (same iron/diamond spent).</li>
+<li><strong>Frugal repair:</strong> anvil repair <strong>XP level cost −1</strong>, minimum <strong>0</strong>.</li>
+<li><strong>Hard wear:</strong> gear in your <strong>armor and main-hand slots</strong> loses durability <strong>10%</strong> slower.</li>
+<li><strong>Tempered upgrade:</strong> at a <strong>smithing table</strong>, diamond → netherite (and other template upgrades you perform) <strong>never consume the smithing template</strong> (ingots and items still consumed as normal).</li>
+</ul>
+<p><strong>Post-tree — major (you at royal anvil / forge):</strong> template-less netherite reforge, <strong>70% / 75%</strong> off royal repair mat/XP, one <strong>full repair</strong> per day at half material (<code>endgame.md</code>).</p>
+<p><strong>Post-tree — minor:</strong> ask — repairs <strong>40% / 50%</strong> off mat/XP; no netherite reforge.</p>
+<h3>War Leader (locked)</h3>
+<p>War Leader is the <strong>combat / escort</strong> specialty: strong alone, stronger with Armies soldiers in range. Arcane / Alchemist / Smith stay <strong>crafting-focused</strong>; only War Leader gets the field aura.</p>
+<h4>Aura (pre-tree and post-tree)</h4>
+<p><strong>Who it affects:</strong> <strong>you</strong>, <strong>citadel allies</strong>, and <strong>your soldiers and militia</strong> (Armies) within <strong>16</strong> blocks of you — same radius as NPC War Leader soldier aura (<code>endgame.md</code>).</p>
+<p><strong>Out of combat (OOC):</strong> no hostile within <strong>16</strong> blocks and no damage taken in the last <strong>30</strong> seconds.</p>
+<table><thead><tr><th>Phase</th><th>Damage reduction</th><th>Heal (OOC)</th></tr></thead><tbody><tr><td><strong>Pre-tree</strong> (locked, before Kingstree blooms)</td><td><strong>15%</strong></td><td><strong>1 heart</strong> every <strong>8</strong> s</td></tr><tr><td><strong>Post-tree</strong></td><td><strong>20%</strong></td><td><strong>1 heart</strong> every <strong>6</strong> s</td></tr></tbody></table>
+<p><strong>Solo:</strong> you always count — the aura is self-sustain while exploring or escorting brothers.</p>
+<p><strong>With soldiers:</strong> your troops in <strong>16</strong> blocks get these numbers too. For soldiers, <strong>player War Leader aura</strong> competes with <strong>NPC acolyte aura</strong> and Kingstree / Kingswood / beacons — <strong>strongest DR</strong> and <strong>strongest heal tick</strong> each win separately (<code>endgame.md</code>).</p>
+<h4>Other War Leader perks</h4>
+<p><strong>Friendly fire (locked War Leader only):</strong></p>
+<ul>
+<li>You <strong>cannot damage your own soldiers or militia</strong> with direct attacks (melee, arrows, tridents, etc.) unless <strong>sneaking</strong>. Sneaking allows deliberate hits (mutiny / discipline rules in <code>soldiers-and-villages.md</code> still apply).</li>
+<li>Other Order specialties and non-acolytes use normal Armies friendly-fire rules.</li>
+</ul>
+<p><strong>Permanent max health (planned):</strong> all locked acolytes gain <strong>+max HP</strong> on lock; <strong>War Leader</strong> gains a <strong>larger</strong> boost than Arcane / Alchemist / Smith (amounts TBD config).</p>
+<p><strong>Pre-tree:</strong></p>
+<ul>
+<li><strong>Escort captain:</strong> brothers <strong>following you</strong> on Maelor’s escort within <strong>16</strong> blocks gain <strong>+25%</strong> to their <strong>escort regen</strong> (<code>endgame.md</code> brother regen) — solo escort survives ambushes better.</li>
+</ul>
+<p><strong>Post-tree:</strong></p>
+<ul>
+<li><strong>Stronger aura</strong> (table above: 20% DR, 1 heart / 6 s) — main post-tree combat upgrade for solo and for soldiers/allies in range.</li>
+<li><strong>Post-tree War Leader bonus (Armies / solo):</strong> TBD — <strong>not</strong> campaign boots or camp blocks (those are normal Armies items any player uses for <strong>soldiers</strong>; see below).</li>
+</ul>
+<p><strong>Campaign boots / camp block (clarification):</strong> In <strong>Armies</strong>, <strong>campaign boots</strong> go on <strong>soldiers</strong> (boots + compass); a <strong>camp block</strong> is the field mess/bed soldiers hold. <strong>Any player</strong> with Armies can place a camp and boot soldiers — that is <strong>not</strong> a War Leader perk. <strong>NPC War Leader acolytes</strong> are special: only they can be sent on campaign with boots like a field chaplain (<code>endgame.md</code>). Player War Leader power is the <strong>aura</strong> and <strong>escort captain</strong>, not duplicating camp placement.</p>
+<h2 id="player-status-implementation-notes">Player status (implementation notes)</h2>
+<ul>
+<li>Track per-player: basic training done, specialty (pending / locked), Annals progress, brothers delivered, Maelor chapter complete, <strong>necromancer quest</strong> (none / intro / committed / opted_out), <strong>Order blocked</strong> (committed only).</li>
+<li><strong>Citadel owner</strong> and <strong>relic rules</strong> are separate flags; <strong>Order progress</strong> is blocked by <strong>raised dead</strong>, not by owning the throne.</li>
+</ul>
+<h2 id="corpse-mod-compatibility">Corpse mod compatibility</h2>
+<p>Quests that depend on <strong>talking to acolytes</strong>, <strong>escorting</strong>, or <strong>recovering items from fights</strong> must remain fair when <strong>Corpse <span class="doc-ref-url">(https://modrinth.com/mod/corpse)</span></strong> is installed (NeoForge <strong>1.21.1</strong> target).</p>
+<p><strong>Design requirements (Citadel mod):</strong></p>
+<ul>
+<li>Acolyte deaths should not <strong>soft-lock</strong> the quest line: quest-critical items (Annals entrusted to the player, brother tokens, etc.) need defined behavior on acolyte or player death (e.g. return to refuge chest, persist on acolyte corpse entity, or player corpse inventory — align with Corpse’s item retention).</li>
+<li><strong>Play-test</strong> with Corpse on 1.21.1: refuge clear → train → specialty → Maelor rally with player death and acolyte death cases.</li>
+<li>No hard dependency on Corpse; when absent, use vanilla death drops.</li>
+</ul>
+<p>See <strong><code>compatibility-planned-mods.md</code></strong>.</p>
+<h2 id="config-proposed">Config (proposed)</h2>
+<table><thead><tr><th>Key</th><th>Default</th><th>Meaning</th></tr></thead><tbody><tr><td><code>acolyteBrothersMinimum</code></td><td>TBD</td><td>Minimum brothers for Maelor’s quest to complete</td></tr><tr><td><code>acolyteBrothersMaximum</code></td><td>16</td><td>Brothers countable toward bonus (excludes Maelor)</td></tr><tr><td><code>acolyteNecromancerGearBlockRadius</code></td><td>32</td><td>No Order dialogue if player has wand/hood/robe within this range of a refuge acolyte</td></tr></tbody></table>
       </main>
     </div>
   </div>

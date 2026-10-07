@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Marketing site (sources) — Minecraft Kingdom</title>
+  <link rel="stylesheet" href="../../../assets/site.css" />
+  
+</head>
+<body class="scope-dev">
+  <header class="site-chrome site-header">
+    <div class="header-inner">
+      <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
+    </div>
+  </header>
+  <div class="page-area">
+    <div class="main-nav-bar">
+      <nav class="main-nav" aria-label="Site">
+        <a href="../../../index.html" class="">Marketing</a>
+        <a href="../../index.html" class="active">Dev docs</a>
+      </nav>
+    </div>
+    <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../index.html" class="active">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav></div>
+    <div class="page-shell">
+      
+      <main class="doc-main">
+        <p class="source">Source: <code>docs/marketing/README.md</code></p><h1>Marketing site (sources)</h1>
+<p>Built output is published from <strong><code>site/</code></strong> at the repo root (Netlify <code>publish</code> directory).</p>
+<table><thead><tr><th>Role</th><th>Path</th></tr></thead><tbody><tr><td>Templates + markdown</td><td><code>docs/marketing/</code> (here)</td></tr><tr><td>Deployable HTML</td><td><code>site/index.html</code> (marketing), <code>site/dev/**</code></td></tr><tr><td>Netlify config</td><td><code>netlify.toml</code></td></tr></tbody></table>
+<h2 id="build">Build</h2>
+<pre><code class="language-bash">python3 docs/marketing/build_marketing.py</code></pre>
+<p>Commit <strong><code>site/</code></strong> after content changes so previews match production (Netlify also runs the build command on deploy).</p>
+<p>Implementer mirror: <strong><code>docs/mod-goals.md</code></strong>.</p>
+      </main>
+    </div>
+  </div>
+  <footer class="site-footer">
+    Source: <code>docs/marketing/README.md</code>
+  </footer>
+  
+</body>
+</html>

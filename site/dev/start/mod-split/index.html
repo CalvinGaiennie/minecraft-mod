@@ -26,6 +26,45 @@
       <main class="doc-main">
         <p class="source">Source: <code>docs/mod-split.md</code></p><h1>Mod split (soldier vs necromancer/endgame)</h1>
 <p>Two optional NeoForge mods from this repo long-term. <strong>Soldier</strong> = villages, economy, war, threats, farmers. <strong>Necromancer</strong> = wand, citadel, relics, acolytes, fortress endgame. Neither hard-depends on the other; <strong>integration</strong> enhances both.</p>
+<h2 id="mod-packaging-plain-language">Mod packaging (plain language)</h2>
+<p><strong>Brand:</strong> <strong>Minecraft Kingdom</strong> (two optional mods in one series).</p>
+<table><thead><tr><th>Jar</th><th>Mod ID</th><th>Display name</th></tr></thead><tbody><tr><td>Armies</td><td><code>minecraft_kingdom_armies</code></td><td><strong>Minecraft Kingdom: Armies</strong></td></tr><tr><td>Citadel</td><td><code>minecraft_kingdom_citadel</code></td><td><strong>Minecraft Kingdom: Citadel</strong></td></tr></tbody></table>
+<p>Short IDs (<code>mk_armies</code> / <code>mk_citadel</code>) are fine for code if the long IDs feel heavy.</p>
+<p><strong>Current monolith</strong> (until Gradle split): <code>villagers</code> / <strong>Villagers Mod</strong> — <code>gradle.properties</code> unchanged.</p>
+<ul>
+<li><strong>One repo, two Gradle subprojects</strong> (future): two JARs, shared docs, e.g. <code>minecraft_kingdom_armies-1.0.0</code> / <code>minecraft_kingdom_citadel-1.0.0</code>.</li>
+<li><strong>Naming note:</strong> “Minecraft Kingdoms” (plural) is an existing <strong>modpack</strong> on CurseForge/Modrinth; “Minecraft: Kingdom” is a <strong>resource pack</strong>. This series is <strong>Minecraft Kingdom</strong> (singular) + subtitle — distinct enough for listings, but use consistent spelling in descriptions to reduce search confusion.</li>
+<li><strong>Save data</strong> splits by domain: village claims / enlistment → soldier; citadel owner, credits, ban list → necromancer.</li>
+<li><strong>Players</strong> install one or both; modpacks list soldier alone, or both with optional dependency metadata.</li>
+</ul>
+<p>See <code>integration.md</code> for cross-mod hooks (no third API jar required at first).</p>
+<h2 id="soldier-mod-default-home-for">Soldier mod (default home for…)</h2>
+<p>Village military loop, mess/tax/recruiters/supply, defense blocks, horns/camps/campaigns/blockades, <strong>wanted posters</strong> (planned — see <code>war-and-defense.md</code>), training dummy, animal farmers, village <strong>map</strong> (muster roll), enlisted threats (raids, swarms, bandits), warlords (large kingdom raids — soldier-only feature).</p>
+<p><strong>Cut from soldier plan (not deferred):</strong> full siege assault kit (sappers, ladders, boat/bridge plans, laced rations as MVP scope).</p>
+<p><strong>Still deferred on soldier side:</strong> allies co-owner list, full recruiter POI, client kit sync polish.</p>
+<h2 id="necromancer-endgame-mod">Necromancer / endgame mod</h2>
+<p>Wand, hood/robe, minions, crypts, phylactery, bone whistle, mob spawner crafting, citadel + throne rules (<code>citadel-claim.md</code>), 17 refuges, player acolyte questline (<code>acolyte-path.md</code>), necromancer questline TBD (<code>necromancer-path.md</code>), 10 <strong>bandit fortresses</strong> (structures + relic rooms), relics/Annals/compass, acolytes, Well, Roost, King’s Horn, golden age <strong>owner</strong> side.</p>
+<p><strong>Bandits:</strong> roaming system = soldier. Fortress garrison = soldier bandit entity if loaded; else necro fallback mob in fortress only.</p>
+<p><strong>Cut:</strong> kingdom table block, <strong>blessed incense</strong>, separate <strong>kingdom map</strong> item (use Annals, relic compass, citadel war-room burial maps instead).</p>
+<p><strong>Maps:</strong> <strong>Village map</strong> (soldier) opens muster roll / owned villages. No second map item in necro until a clear purpose exists.</p>
+<h2 id="both-mods-integration">Both mods (integration)</h2>
+<table><thead><tr><th>Feature</th><th>Soldier</th><th>Necromancer</th></tr></thead><tbody><tr><td>Kingdom titles (Lord→King)</td><td>Village + living soldier counts</td><td>—</td></tr><tr><td>High King / golden age</td><td>Villages in kingdom</td><td>Citadel owner</td></tr><tr><td>Ironroot / Oathkeeper / Crown (full)</td><td>Recruits, tax, soldiers, raids</td><td>Relic items + wear rules</td></tr><tr><td>Citadel mess placement</td><td>Block</td><td>Owner-only rule in citadel</td></tr><tr><td>Royal training grounds</td><td>Royal soldier tag</td><td>Citadel blocks</td></tr><tr><td><code>citadelFallen</code> flag</td><td>Raid/militia near spawn</td><td>Set on Corrupted King death</td></tr><tr><td>Phantom Roost access</td><td>Ally UUIDs if loaded</td><td>Owner + cage spawner</td></tr><tr><td>Enlistment</td><td>Mess + <code>/enlist</code></td><td>— (wand does not enlist)</td></tr></tbody></table>
+<h2 id="relics-wear-solo-fallbacks">Relics (wear + solo fallbacks)</h2>
+<ul>
+<li><strong>Active necromancers cannot wear any of the 12 relics.</strong></li>
+<li>With <strong>both</strong> mods: use full design in <code>endgame.md</code> where it applies to soldiers/villages.</li>
+<li><strong>Necro-only</strong> (no soldier mod) simplified effects:</li>
+</ul>
+<p>- <strong>Ironroot Helm:</strong> −25% damage from undead while worn. - <strong>Oathkeeper:</strong> −20% damage taken ( wearer only ). - <strong>Corrupted Crown:</strong> once per day, fatal hit while worn → survive at 1 HP + short knockback pulse (no raised soldiers). - <strong>Greaves of the Long March:</strong> wearer never loses hunger. - Other combat relics: player gear as documented.</p>
+<h2 id="config-proposed-defaults-from-design-chat">Config (proposed defaults from design chat)</h2>
+<table><thead><tr><th>Setting</th><th>Default</th></tr></thead><tbody><tr><td>Necromancer recruit interval multiplier</td><td><strong>3×</strong> (vs normal)</td></tr><tr><td>Robe stigma fraction (non-necromancer in hood/robe)</td><td><strong>0.5</strong> of necromancer penalties</td></tr><tr><td>Citadel ban: sit damage on blighted tree</td><td><strong>Per tick</strong></td></tr><tr><td>Citadel ban: sit on healthy tree</td><td><strong>Instant death</strong> (no totem)</td></tr><tr><td>Spectral Thornwald</td><td>Despawn when wearer <strong>above 3 hearts</strong> OR Thornwald <strong>dies</strong>; no trigger if max HP <strong>&amp;lt; 3</strong> from wand heart loss</td></tr></tbody></table>
+<h2 id="doc-index">Doc index</h2>
+<ul>
+<li><code>citadel-claim.md</code> — throne, credits, barrier, usurp, wand forfeit</li>
+<li><code>integration.md</code> — events and optional hooks</li>
+<li><code>necromancy.md</code> — wand, robes, absolution</li>
+<li><code>endgame.md</code> — citadel content, relics, acolytes, Roost</li>
+</ul>
       </main>
     </div>
   </div>

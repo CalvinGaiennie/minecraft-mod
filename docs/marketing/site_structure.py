@@ -17,6 +17,7 @@ class DevDoc:
     relpath: str  # under docs/
     title: str
     split_h2_min: int = 2  # split into subpages when >= this many ## sections
+    url_slug: str | None = None  # output folder under site/dev/{group}/
 
 
 @dataclass(frozen=True)
@@ -37,6 +38,11 @@ DEV_GROUPS: tuple[DevGroup, ...] = (
             DevDoc("integration.md", "Integration"),
             DevDoc("marketing/development-plan.md", "Development plan", split_h2_min=2),
             DevDoc("compatibility-planned-mods.md", "Compatibility targets"),
+            DevDoc(
+                "marketing/README.md",
+                "Marketing site (README)",
+                url_slug="marketing-readme",
+            ),
         ),
     ),
     DevGroup(
@@ -119,3 +125,7 @@ def doc_slug(relpath: str) -> str:
     if name.endswith(".md"):
         name = name[:-3]
     return name.replace("_", "-")
+
+
+def dev_doc_url_slug(doc: DevDoc) -> str:
+    return doc.url_slug if doc.url_slug else doc_slug(doc.relpath)

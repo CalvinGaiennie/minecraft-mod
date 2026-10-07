@@ -26,6 +26,51 @@
       <main class="doc-main">
         <p class="source">Source: <code>docs/overview.md</code></p><h1>Overview</h1>
 <p>A Minecraft mod that turns villagers into soldiers and militia, backed by a village economy, horn commands, and new threats.</p>
+<h2 id="performance">Performance</h2>
+<p>Big fights stay playable by cutting the heaviest AI work, mostly invisibly to players.</p>
+<ul>
+<li><strong>Squad pathfinding:</strong> soldiers moving together share one path calculated by a squad leader; the rest follow him.</li>
+<li><strong>Lazy idle AI:</strong> soldiers who are guarding, sleeping, or standing at a rampart think about once every 2 seconds instead of 20 times a second, and wake fully the instant they take damage or something hostile comes within 16 blocks.</li>
+<li><strong>Shared target scanning:</strong> squads look for enemies once a second and share the result, instead of every soldier scanning every tick.</li>
+<li><strong>Reduced AI far from players:</strong> soldiers and minions more than 48 blocks from any player run simplified AI. They still move and fight, with cheaper calculations.</li>
+<li><strong>Travel while unloaded:</strong> swarms and bandit bands travel as stored data in unloaded chunks and only fight when loaded (see Threats).</li>
+<li><strong>Particle setting:</strong> a client option to reduce the mod&#x27;s particles (angry villagers, soul particles, plumes).</li>
+<li><strong>Server cap:</strong> server owners can set a max number of soldiers and minions per player; the default is no cap.</li>
+<li><strong>Block damage:</strong> the mod respects vanilla&#x27;s mobGriefing rule. With it off, fire arrows, door breaking, and bandit burning don&#x27;t damage blocks.</li>
+<li><strong>Spread the work across ticks:</strong> each soldier thinks on his own tick slot instead of all 100 at once, so the load is smooth rather than spiky.</li>
+<li><strong>React to events:</strong> rosters, bed status, and the muster roll update when something happens (a death, a bed broken, a mess station placed), not by checking constantly.</li>
+<li><strong>Tax math once per collection:</strong> coverage, reachability, and trader rolls run once per collection per village, with the results cached.</li>
+<li><strong>Swarms move as one unit:</strong> one leader pathfinds and the rest follow, so a 30-mob swarm costs about as much pathfinding as one mob.</li>
+<li><strong>Limit what clients draw:</strong> name tags, badges, and plumes only render within a short distance of the player.</li>
+<li><strong>Measure from day one:</strong> use the spark profiler mod while building, set a performance target (for example, 100 soldiers fighting a 30-mob swarm stays under a fixed share of each tick), and test it after every build stage.</li>
+<li><strong>Cleanup timers:</strong> arrows that missed vanish after 30 seconds (vanilla: 1 minute). Mob drops from swarms, raids, and bandits use vanilla&#x27;s 5 minutes. Soldier and militia death drops last 10 minutes, so there&#x27;s time to recover gear after a battle.</li>
+</ul>
+<h2 id="platform">Platform</h2>
+<p>The mod targets NeoForge on Minecraft 1.21.1, with Java 21.</p>
+<ul>
+<li><strong>Why NeoForge:</strong> its built-in API covers much of what this mod needs (events, saved data on entities and worlds, inventories, config, networking), and it&#x27;s where big content modpacks live.</li>
+<li><strong>Why 1.21.1:</strong> it&#x27;s the version official Create still supports (its 26.1 port is in progress), and Ice and Fire Community Edition has a stable release there, so the mod can join existing modpacks. NeoForge&#x27;s docs for it are frozen but complete.</li>
+<li><strong>Later:</strong> port to 26.1 once official Create does. NeoForge expects 26.1 to replace 1.21.1 as the stable version, so plan for Java 25 and the API changes between 1.21.2 and 26.1. A Fabric version can wait until the mod is finished.</li>
+<li><strong>Versions to pin:</strong> Minecraft 1.21.1, NeoForge 21.1.x (pin the newest build when the project starts), Java 21, and the NeoForge 1.21.1 docs. Decided against 1.20.1: NeoForge only supports 1.20.2 and later, so 1.20.1 would mean Forge, with no data components and an older API, and official Create has moved its continued support to 1.21.1.</li>
+<li><strong>Known gap on 1.21.1:</strong> NeoForge&#x27;s data attachments don&#x27;t sync to clients on their own in this version, so soldier and village data that clients need (ranks, kill counts, badges) goes through our own network packets.</li>
+<li><strong>Art:</strong> custom art encouraged for blocks, items, banners, and structures. Soldiers and militia can reuse the vanilla villager model with normal armor and item rendering until custom models exist; shields can use vanilla banner patterns or custom art. Default looks from vanilla parts when no custom asset exists:</li>
+</ul>
+<table><thead><tr><th>Who</th><th>Clothing</th><th>Badge (vanilla level badge on the belt)</th><th>Label over head</th></tr></thead><tbody><tr><td>Soldier</td><td>Plain villager of his biome, no profession clothes</td><td>Stone</td><td>&quot;Soldier&quot;, or his name once he has a kill</td></tr><tr><td>Seasoned soldier</td><td>Same</td><td>Iron</td><td>&quot;Seasoned&quot; + name</td></tr><tr><td>Hero</td><td>Same</td><td>Gold</td><td>&quot;Hero&quot; + name</td></tr><tr><td>Legend</td><td>Same</td><td>Diamond</td><td>&quot;Legend&quot; + name</td></tr><tr><td>Militiaman</td><td>His own trade clothes (or plain if unemployed)</td><td>None</td><td>&quot;Militia&quot;</td></tr><tr><td>Recruiter</td><td>Same as his rank</td><td>Emerald</td><td>&quot;Recruiter&quot; + name</td></tr><tr><td>Bandit</td><td>Nitwit clothes</td><td>None</td><td>&quot;Bandit&quot;</td></tr></tbody></table>
+<ul>
+<li><strong>Structures:</strong> the lore adds 17 acolyte refuges, 10 bandit fortresses, the End outpost, the Evoker Lord&#x27;s castle, and the shrine sites. Custom art encouraged; limit scope with a few reusable templates: about four refuge layouts and two fortress layouts, plus single layouts for the outpost, castle, and shrines.</li>
+</ul>
+<h2 id="build-order">Build order</h2>
+<p>Build in eight stages, testing each before starting the next. Every stage depends on the ones before it.</p>
+<ol>
+<li><strong>Core:</strong> soldiers and militia (roles, inventory slots, gear, food, desertion, honorable discharge), mess stations, post beds, ownership, village area with surveyor&#x27;s markers and the surveyor&#x27;s knife, the awaken horn, and the muster roll.</li>
+<li><strong>Economy:</strong> tax box and its tiers, tax coverage, recruiters, blacksmith, fletcher, and armorer supply, gear wear and death drops, ranks, veterans and the veteran&#x27;s sword, and zombie soldiers.</li>
+<li><strong>Defense:</strong> ramparts, arrow bins, fallback and haven blocks, the remaining horns, levers and buttons, flares, the village bell, nightwatch and royal guard armor, royal guard posts, night fighting and carried lights, caltrops, castle gates, village protection, arrow recovery, and beacon effects on soldiers.</li>
+<li><strong>War:</strong> allies, campaigns, camp blocks, blockades, assaults, sappers and axemen, siege ladders, boat plans, plank bridges and bridge plans, laced rations, mutiny, no building in enemy land, wanted posters, the reassignment writ, and village banners.</li>
+<li><strong>Threats:</strong> new moon raids, swarms, bandits, bandit camps and cave hideouts, and vanilla mob changes.</li>
+<li><strong>Extras:</strong> necromancy with necromancer crypts and phylactery shards, animal farmers and wild ranches, mob spawners, Village Chronicles, the training dummy, advancements, the village map, and the kingdom map.</li>
+<li><strong>Endgame:</strong> bandit fortresses, kingdom titles, warlords, monuments, the Black Citadel with its chronicles, the Dragon&#x27;s Well, the Phantom Roost, the royal enchanting table, brewing stand, and anvil, and the Blighted Tree.</li>
+<li><strong>Lore:</strong> the 12 kings&#x27; relics and their tree origins, the 17 acolyte refuges and the Order of the Well, the 10 bandit fortresses, the End outpost, the Evoker Lord&#x27;s castle, Torvald&#x27;s and Valen&#x27;s shrines, the Royal Annals and other books, and the hero legends.</li>
+</ol>
       </main>
     </div>
   </div>
