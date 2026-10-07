@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Soldiers and villages — Villager roles — Minecraft Kingdom</title>
+  <link rel="stylesheet" href="../../../assets/site.css" />
+  
+</head>
+<body class="scope-dev">
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-top">
+        <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
+        <nav class="main-nav" aria-label="Site">
+          <a href="../../../index.html" class="">Marketing</a>
+          <a href="../../index.html" class="active">Dev docs</a>
+        </nav>
+      </div>
+      <nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../index.html" class="active">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav>
+    </div>
+  </header>
+  <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="villager-roles.html" class="active">Villager roles</a></li><li><a href="ownership-and-allies.html">Ownership and allies</a></li><li><a href="soldier-behavior.html">Soldier behavior</a></li><li><a href="village-economy.html">Village economy</a></li></ul></aside>
+    <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="villager-roles.html" class="active">Villager roles</a></li><li><a href="ownership-and-allies.html">Ownership and allies</a></li><li><a href="soldier-behavior.html">Soldier behavior</a></li><li><a href="village-economy.html">Village economy</a></li></ul></aside>
+    <main class="doc-main">
+      <p class="source">Source: <code>docs/soldiers-and-villages.md</code> · <a href="index.html">Soldiers and villages</a></p><h1>Villager roles</h1>
+<p>A villager&#x27;s job and setup decide whether a weapon makes them a soldier or a militiaman.</p>
+<table><thead><tr><th>Role</th><th>How they get it</th><th>Gear allowed</th><th>Notes</th></tr></thead><tbody><tr><td>Soldier</td><td>Villager with no trade is given a weapon, chestplate, and helmet, and has a free post bed and a stocked mess station</td><td>Full armor</td><td>Unequipping can turn them into a trader, but a trader can never become a soldier again, unless he served as a soldier before he ever traded (see Veterans)</td></tr><tr><td>Militiaman</td><td>Trader or unemployed villager is given a weapon. Unemployed villagers who meet every soldier requirement become soldiers instead</td><td>Helmet, chestplate, and boots; no leggings or shields</td><td>Can&#x27;t trade while in the militia; sometimes run from enemies</td></tr><tr><td>Bandit</td><td>Soldier deserts (<strong>45%</strong> outcome — keeps gear)</td><td>Whatever they kept</td><td>See Threats</td></tr><tr><td>Troubled youth</td><td>Born from bandit-occupied villages (80% chance)</td><td>n/a</td><td>Can never trade; can become soldiers or bandits (see Bandits)</td></tr></tbody></table>
+<ul>
+<li>Villagers with a trade cannot become soldiers, unless they served as soldiers before they ever traded.</li>
+<li>Soldiers cannot breed with soldiers, bandits cannot breed with bandits, and soldiers and bandits cannot breed with each other.</li>
+<li>Out of combat, soldiers and militiamen pick up any item they&#x27;re allowed to use if that slot is empty and the item is on the ground. They never take items from chests.</li>
+</ul>
+<h3>Inventory</h3>
+<table><thead><tr><th>Slot</th><th>Soldier</th><th>Militia</th></tr></thead><tbody><tr><td>Weapon</td><td>Melee weapon (sword or axe)</td><td>Either a melee weapon or a bow, not both</td></tr><tr><td>Shield</td><td>Shield</td><td>None</td></tr><tr><td>Bow</td><td>Bow, crossbow, or pickaxe (sappers)</td><td>(uses the weapon slot)</td></tr><tr><td>Arrows</td><td>Up to 16</td><td>Up to 16 (bow militia only)</td></tr><tr><td>Utility</td><td>One boat, only while carrying out a boat plan</td><td>One boat, only while carrying out a boat plan</td></tr><tr><td>Armor</td><td>Helmet, chestplate, leggings, boots</td><td>Helmet, chestplate, boots</td></tr></tbody></table>
+<ul>
+<li><strong>Switching:</strong> soldiers use their bow at range and switch to melee weapon and shield when an enemy gets within 4 blocks, or when they run out of arrows. If a soldier has to switch away from the item in his bow slot during combat, he drops it: an archer switching to melee drops his bow, and a sapper drawing his sword drops his pickaxe. Switching from his melee weapon to his bow never drops anything. Dropped items can be picked back up after the fight.</li>
+<li><strong>Bow militia</strong> have no melee weapon, so they back away to keep their distance; near their home bed, they fight with their fists.</li>
+<li><strong>Refilling arrows:</strong> at 16 arrows max, archers refill often from arrow bins at home or the camp block on campaign, and by picking up shot arrows.</li>
+<li>Special armor (campaign boots, nightwatch, royal guard) uses the normal armor slots.</li>
+<li><strong>Depositing arrows:</strong> a soldier or militiaman carrying arrows without a bow or crossbow drops them off at the nearest camp block or arrow bin.</li>
+</ul>
+<h3>Militia</h3>
+<p>Militia are traders or unemployed villagers who take up arms: a cheap home guard that backs up soldiers.</p>
+<ul>
+<li><strong>Gear:</strong> helmet, chestplate, and boots. No leggings or shields.</li>
+<li><strong>Food:</strong> they eat 1 meal a day from the mess station, but don&#x27;t need a post bed. If they go 2 days without food, they drop their weapon and go back to trading.</li>
+<li><strong>Ranks:</strong> militia have one rank. At 10 kills a militiaman becomes seasoned militia: +10 HP, and he no longer flees from being outnumbered. His kills carry over if he upgrades to soldier.</li>
+<li><strong>Orders:</strong> they follow horns, but not flares.</li>
+<li><strong>Campaigns:</strong> they can go on campaign wearing campaign boots.</li>
+<li><strong>Home bonus:</strong> +25% damage within 128 blocks of their home bed.</li>
+<li><strong>Disarming:</strong> taking away their weapon turns them back into a normal villager.</li>
+<li><strong>Trade-offs:</strong> they flee from fights going badly (see Fleeing), don&#x27;t count toward tax coverage, and make bandits burn the village instead of just occupying it.</li>
+<li><strong>Upgrading:</strong> an unemployed militiaman becomes a soldier automatically as soon as he meets every soldier requirement. Traders in the militia can never become soldiers.</li>
+<li><strong>No trading:</strong> militiamen can&#x27;t trade while in the militia. Disarming them lets them trade again.</li>
+</ul>
+<p><strong>Fleeing:</strong> militia use the vanilla villager panic behavior. They flee when any of these happen:</p>
+<ul>
+<li><strong>Low health:</strong> below 50% health.</li>
+<li><strong>Badly outnumbered:</strong> at least 2 enemies for every friendly fighter within 16 blocks.</li>
+<li><strong>A comrade dies:</strong> 30% chance when a nearby militiaman dies.</li>
+<li><strong>Mounted enemies:</strong> 92% chance, as before.</li>
+</ul>
+<p>Fleeing militia drop their weapon, which turns them back into normal villagers until a player re-arms them. They flee to their camp block on campaign, or to the nearest fallback block at home. If there&#x27;s neither, they just run away from the enemy. None of this applies within 128 blocks of their home bed: there, militia never flee.</p>
+    </main>
+  </div>
+  <footer class="site-footer">
+    Source: <code>docs/soldiers-and-villages.md</code>
+  </footer>
+  
+</body>
+</html>

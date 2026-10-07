@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Player acolyte path — Player specialty perks — Minecraft Kingdom</title>
+  <link rel="stylesheet" href="../../../assets/site.css" />
+  
+</head>
+<body class="scope-dev">
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-top">
+        <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
+        <nav class="main-nav" aria-label="Site">
+          <a href="../../../index.html" class="">Marketing</a>
+          <a href="../../index.html" class="active">Dev docs</a>
+        </nav>
+      </div>
+      <nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../index.html" class="active">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav>
+    </div>
+  </header>
+  <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="mutual-exclusion-order-vs-necromancer-questline.html">Mutual exclusion (Order vs necromancer questline)</a></li><li><a href="four-specialties.html">Four specialties</a></li><li><a href="quest-flow-player.html">Quest flow (player)</a></li><li><a href="specialty-feat-gates-8.html">Specialty feat gates (§8)</a></li><li><a href="player-specialty-perks.html" class="active">Player specialty perks</a></li><li><a href="player-status-implementation-notes.html">Player status (implementation notes)</a></li><li><a href="corpse-mod-compatibility.html">Corpse mod compatibility</a></li><li><a href="config-proposed.html">Config (proposed)</a></li></ul><p class="sidebar-label">Subsections</p><ul><li><a href="#arcane-locked">Arcane (locked)</a></li><li><a href="#alchemist-locked">Alchemist (locked)</a></li><li><a href="#smith-locked">Smith (locked)</a></li><li><a href="#war-leader-locked">War Leader (locked)</a></li></ul></aside>
+    <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="mutual-exclusion-order-vs-necromancer-questline.html">Mutual exclusion (Order vs necromancer questline)</a></li><li><a href="four-specialties.html">Four specialties</a></li><li><a href="quest-flow-player.html">Quest flow (player)</a></li><li><a href="specialty-feat-gates-8.html">Specialty feat gates (§8)</a></li><li><a href="player-specialty-perks.html" class="active">Player specialty perks</a></li><li><a href="player-status-implementation-notes.html">Player status (implementation notes)</a></li><li><a href="corpse-mod-compatibility.html">Corpse mod compatibility</a></li><li><a href="config-proposed.html">Config (proposed)</a></li></ul><p class="sidebar-label">Subsections</p><ul><li><a href="#arcane-locked">Arcane (locked)</a></li><li><a href="#alchemist-locked">Alchemist (locked)</a></li><li><a href="#smith-locked">Smith (locked)</a></li><li><a href="#war-leader-locked">War Leader (locked)</a></li></ul></aside>
+    <main class="doc-main">
+      <p class="source">Source: <code>docs/acolyte-path.md</code> · <a href="index.html">Player acolyte path</a></p><h1>Player specialty perks</h1>
+<p><strong>Zero mechanical perks until Maelor locks your specialty.</strong> Basic and specialty <strong>training</strong> are tasks and story only.</p>
+<p>After <strong>lock</strong>, perks below apply.</p>
+<p><strong>Citadel stations (post-tree):</strong> see <strong><code>endgame.md</code> — two tiers:</strong></p>
+<ul>
+<li><strong>Minor:</strong> any owner/allied player <strong>asks</strong> the acolyte at the lectern — small station benefit, <strong>no</strong> matching specialty required.</li>
+<li><strong>Major:</strong> <strong>you</strong> use the job block directly — <strong>only</strong> if your <strong>locked specialty matches</strong> that station (full royal power). NPC must still be at the lectern (or Maelor filling in). You do <strong>not</strong> stand at the lectern; the brother does.</li>
+</ul>
+<p><strong>Post-tree</strong> = royal <strong>major</strong> tier + anything marked post-tree below. <strong>Pre-tree</strong> perks work anywhere.</p>
+<h3>Arcane (locked)</h3>
+<ul>
+<li><strong>Pre-tree:</strong> <strong>vanilla</strong> enchanting tables — enchant without spending <strong>XP or lapis</strong> (tier rules unchanged).</li>
+<li><strong>Post-tree — major (you at royal enchant table):</strong> <strong>locked Arcane only</strong> — you pick one enchant on <strong>gear or book</strong> at <strong>vanilla max + 2</strong> (e.g. Sharp <strong>VII</strong>), <strong>0</strong> XP, <strong>0</strong> lapis (<code>endgame.md</code>).</li>
+<li><strong>Post-tree — minor:</strong> <strong>any owner/ally</strong> asks Arcane brother — <strong>random</strong> roll, up to vanilla+1, gear or book, no lapis.</li>
+</ul>
+<h3>Alchemist (locked)</h3>
+<ul>
+<li><strong>Pre-tree:</strong> potions <strong>you brew</strong> last <strong>+50%</strong> longer.</li>
+<li><strong>Post-tree — major:</strong> <strong>locked Alchemist only</strong> at stand — tier <strong>III</strong>, <strong>3×</strong> duration, Resolve + Rallying, no blaze/coal (<code>endgame.md</code>).</li>
+<li><strong>Post-tree — minor:</strong> <strong>any owner/ally</strong> asks — <strong>2×</strong> duration, no tier III, no Resolve/Rally, no blaze/coal.</li>
+</ul>
+<h3>Smith (locked)</h3>
+<p><strong>Pre-tree (works alone, no citadel)</strong> — all of the following stack:</p>
+<ul>
+<li><strong>Steady hand:</strong> at a <strong>vanilla anvil</strong>, each repair material restores <strong>50% more durability</strong> than normal (same iron/diamond spent).</li>
+<li><strong>Frugal repair:</strong> anvil repair <strong>XP level cost −1</strong>, minimum <strong>0</strong>.</li>
+<li><strong>Hard wear:</strong> gear in your <strong>armor and main-hand slots</strong> loses durability <strong>10%</strong> slower.</li>
+<li><strong>Tempered upgrade:</strong> at a <strong>smithing table</strong>, diamond → netherite (and other template upgrades you perform) <strong>never consume the smithing template</strong> (ingots and items still consumed as normal).</li>
+</ul>
+<p><strong>Post-tree — major (you at royal anvil / forge):</strong> template-less netherite reforge, <strong>70% / 75%</strong> off royal repair mat/XP, one <strong>full repair</strong> per day at half material (<code>endgame.md</code>).</p>
+<p><strong>Post-tree — minor:</strong> ask — repairs <strong>40% / 50%</strong> off mat/XP; no netherite reforge.</p>
+<h3>War Leader (locked)</h3>
+<p>War Leader is the <strong>combat / escort</strong> specialty: strong alone, stronger with Armies soldiers in range. Arcane / Alchemist / Smith stay <strong>crafting-focused</strong>; only War Leader gets the field aura.</p>
+<h4>Aura (pre-tree and post-tree)</h4>
+<p><strong>Who it affects:</strong> <strong>you</strong>, <strong>citadel allies</strong>, and <strong>your soldiers and militia</strong> (Armies) within <strong>16</strong> blocks of you — same radius as NPC War Leader soldier aura (<code>endgame.md</code>).</p>
+<p><strong>Out of combat (OOC):</strong> no hostile within <strong>16</strong> blocks and no damage taken in the last <strong>30</strong> seconds.</p>
+<table><thead><tr><th>Phase</th><th>Damage reduction</th><th>Heal (OOC)</th></tr></thead><tbody><tr><td><strong>Pre-tree</strong> (locked, before Kingstree blooms)</td><td><strong>15%</strong></td><td><strong>1 heart</strong> every <strong>8</strong> s</td></tr><tr><td><strong>Post-tree</strong></td><td><strong>20%</strong></td><td><strong>1 heart</strong> every <strong>6</strong> s</td></tr></tbody></table>
+<p><strong>Solo:</strong> you always count — the aura is self-sustain while exploring or escorting brothers.</p>
+<p><strong>With soldiers:</strong> your troops in <strong>16</strong> blocks get these numbers too. For soldiers, <strong>player War Leader aura</strong> competes with <strong>NPC acolyte aura</strong> and Kingstree / Kingswood / beacons — <strong>strongest DR</strong> and <strong>strongest heal tick</strong> each win separately (<code>endgame.md</code>).</p>
+<h4>Other War Leader perks</h4>
+<p><strong>Friendly fire (locked War Leader only):</strong></p>
+<ul>
+<li>You <strong>cannot damage your own soldiers or militia</strong> with direct attacks (melee, arrows, tridents, etc.) unless <strong>sneaking</strong>. Sneaking allows deliberate hits (mutiny / discipline rules in <code>soldiers-and-villages.md</code> still apply).</li>
+<li>Other Order specialties and non-acolytes use normal Armies friendly-fire rules.</li>
+</ul>
+<p><strong>Permanent max health (planned):</strong> all locked acolytes gain <strong>+max HP</strong> on lock; <strong>War Leader</strong> gains a <strong>larger</strong> boost than Arcane / Alchemist / Smith (amounts TBD config).</p>
+<p><strong>Pre-tree:</strong></p>
+<ul>
+<li><strong>Escort captain:</strong> brothers <strong>following you</strong> on Maelor’s escort within <strong>16</strong> blocks gain <strong>+25%</strong> to their <strong>escort regen</strong> (<code>endgame.md</code> brother regen) — solo escort survives ambushes better.</li>
+</ul>
+<p><strong>Post-tree:</strong></p>
+<ul>
+<li><strong>Stronger aura</strong> (table above: 20% DR, 1 heart / 6 s) — main post-tree combat upgrade for solo and for soldiers/allies in range.</li>
+<li><strong>Post-tree War Leader bonus (Armies / solo):</strong> TBD — <strong>not</strong> campaign boots or camp blocks (those are normal Armies items any player uses for <strong>soldiers</strong>; see below).</li>
+</ul>
+<p><strong>Campaign boots / camp block (clarification):</strong> In <strong>Armies</strong>, <strong>campaign boots</strong> go on <strong>soldiers</strong> (boots + compass); a <strong>camp block</strong> is the field mess/bed soldiers hold. <strong>Any player</strong> with Armies can place a camp and boot soldiers — that is <strong>not</strong> a War Leader perk. <strong>NPC War Leader acolytes</strong> are special: only they can be sent on campaign with boots like a field chaplain (<code>endgame.md</code>). Player War Leader power is the <strong>aura</strong> and <strong>escort captain</strong>, not duplicating camp placement.</p>
+    </main>
+  </div>
+  <footer class="site-footer">
+    Source: <code>docs/acolyte-path.md</code>
+  </footer>
+  
+</body>
+</html>

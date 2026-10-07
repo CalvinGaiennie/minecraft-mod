@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Threats and mobs — Threats — Minecraft Kingdom</title>
+  <link rel="stylesheet" href="../../../assets/site.css" />
+  
+</head>
+<body class="scope-dev">
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-top">
+        <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
+        <nav class="main-nav" aria-label="Site">
+          <a href="../../../index.html" class="">Marketing</a>
+          <a href="../../index.html" class="active">Dev docs</a>
+        </nav>
+      </div>
+      <nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../index.html" class="active">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav>
+    </div>
+  </header>
+  <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="threats.html" class="active">Threats</a></li><li><a href="animal-farmers.html">Animal farmers</a></li><li><a href="vanilla-mob-changes.html">Vanilla mob changes</a></li><li><a href="effect-on-players-who-ignore-the-mod.html">Effect on players who ignore the mod</a></li></ul><p class="sidebar-label">Subsections</p><ul><li><a href="#new-moon-raids">New moon raids</a></li><li><a href="#roving-swarms">Roving swarms</a></li><li><a href="#bandits">Bandits</a></li><li><a href="#wandering-necromancers-deserters-9">Wandering necromancers (deserters — §9)</a></li><li><a href="#rogue-necromancers-and-wild-liches">Rogue necromancers and wild liches</a></li><li><a href="#cave-hideouts">Cave hideouts</a></li><li><a href="#underground-villages">Underground villages</a></li></ul></aside>
+    <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="threats.html" class="active">Threats</a></li><li><a href="animal-farmers.html">Animal farmers</a></li><li><a href="vanilla-mob-changes.html">Vanilla mob changes</a></li><li><a href="effect-on-players-who-ignore-the-mod.html">Effect on players who ignore the mod</a></li></ul><p class="sidebar-label">Subsections</p><ul><li><a href="#new-moon-raids">New moon raids</a></li><li><a href="#roving-swarms">Roving swarms</a></li><li><a href="#bandits">Bandits</a></li><li><a href="#wandering-necromancers-deserters-9">Wandering necromancers (deserters — §9)</a></li><li><a href="#rogue-necromancers-and-wild-liches">Rogue necromancers and wild liches</a></li><li><a href="#cave-hideouts">Cave hideouts</a></li><li><a href="#underground-villages">Underground villages</a></li></ul></aside>
+    <main class="doc-main">
+      <p class="source">Source: <code>docs/threats-and-mobs.md</code> · <a href="index.html">Threats and mobs</a></p><h1>Threats</h1>
+<p>Three new enemy systems pressure villages: raids, roving swarms, and bandits.</p>
+<h3>New moon raids</h3>
+<ul>
+<li>Raids can happen on the 3 darkest nights: the new moon and the nights before and after it. Each village near a player has a 40% chance of a raid on new moon night and 15% on the nights either side (higher near spawn until the Black Citadel falls), rolled separately, so a village can get none, one, or several.</li>
+<li>Only hit villages a player is currently near.</li>
+<li>Work differently from vanilla raids.</li>
+</ul>
+<ul>
+<li><strong>Warning:</strong> about 1 minute before a raid arrives, a distant war horn sounds.</li>
+<li><strong>One big push:</strong> raiders spawn 64-96 blocks out and march in together from one direction, instead of coming in waves.</li>
+<li><strong>Raiders (kept weak):</strong> mostly pillagers and vindicators, led by a raid captain with modest buffs (40 HP, +20% damage). Witches: 0-2 per raid. Evokers and ravagers only in large raids, at most 1 of each.</li>
+<li><strong>Targets:</strong> soldiers and iron golems first, then civilians. Raiders also try to wreck post beds and mess stations.</li>
+<li><strong>Ending:</strong> the raid ends when every raider is dead, or at dawn. Raiders still alive at dawn loot the tax box and leave.</li>
+<li><strong>Winning:</strong> soldiers earn kills toward rank-ups, making raids the main way seasoned soldiers and heroes are made. The raid captain drops emeralds, a raid banner, and gear.</li>
+<li><strong>No Bad Omen:</strong> these raids come from the moon, not from killing pillager captains. Vanilla raids still work as normal alongside them.</li>
+<li><strong>Leaving mid-raid:</strong> if the player leaves and the village unloads, the raid pauses. It picks up where it left off when a player returns, even if dawn has passed in the meantime.</li>
+</ul>
+<p>Raid size is random, not tied to the village&#x27;s defenses:</p>
+<table><thead><tr><th>Raid size</th><th>Raiders</th><th>Chance</th></tr></thead><tbody><tr><td>Small</td><td>3-6</td><td>60%</td></tr><tr><td>Medium</td><td>7-10</td><td>30%</td></tr><tr><td>Large</td><td>11-14</td><td>10%</td></tr></tbody></table>
+<h3>Roving swarms</h3>
+<ul>
+<li>Travel village to village killing villagers.</li>
+<li>When two swarms meet, they merge.</li>
+<li>Any hostile mob type can swarm with its own type: zombie swarms, skeleton swarms, spider swarms, and so on. Swarms only merge with swarms of the same type.</li>
+<li><strong>Spawning:</strong> each night, every player gets one roll with about a 5% chance of a swarm spawning in the area around him: 5-10 mobs of one type. A player gets no new swarm while 2 of his swarms are still alive (proposed).</li>
+<li><strong>Size cap:</strong> swarms max out at 30. Extra mobs from a merge stay as a second swarm. Creeper swarms max out at 8.</li>
+<li><strong>Growth:</strong> zombie swarms grow by turning villagers they kill into zombie villagers. Other types only grow by merging.</li>
+<li><strong>Movement:</strong> a swarm heads for the nearest village within 256 blocks, and moves on once that village has no villagers left.</li>
+<li><strong>Daylight:</strong> zombie and skeleton swarms hide in shade or caves during the day and move at night. Spider and creeper swarms move any time.</li>
+<li><strong>Targets:</strong> everyone, including villagers, soldiers, golems, players, and bandits. Players wearing the <strong>necromancer hood or robe</strong> are ignored: <strong>undead swarms</strong> if one piece; <strong>other swarm types</strong> if full set (same rules as hood/robe combat pacification).</li>
+<li><strong>No despawning:</strong> swarm mobs stay until killed.</li>
+<li><strong>Necromancy:</strong> necromancers can convert swarm mobs into minions; each conversion is a normal wand use with the usual heart risk.</li>
+<li><strong>While unloaded:</strong> a swarm in unloaded chunks keeps marching toward its target as stored data, without fighting. When a player loads the area, it appears where it would have arrived. Combat only happens in loaded chunks.</li>
+</ul>
+<h3>Bandits</h3>
+<ul>
+<li>Formed from deserting soldiers — <strong>45%</strong> of all deserters (<code>deserterOutcomeBandit</code>); they <strong>keep their items</strong>. Outcomes on every soldier desert: <strong>50%</strong> villager reset, <strong>45%</strong> bandit, <strong>5%</strong> wandering necromancer (<code>config-and-recipes.md</code>).</li>
+<li>Band together and roam like swarms, but stay at a captured village until its mess stations are empty.</li>
+<li>Kill only soldiers, not villagers, and destroy tax boxes.</li>
+<li>A band without a leader forms one: after 1 day, the bandit with the most kills takes over.</li>
+<li><strong>Joining up:</strong> a new bandit heads for the nearest band within 256 blocks. If there isn&#x27;t one, he wanders alone until he meets other bandits. A band forms at 3.</li>
+<li><strong>Band size:</strong> bands max out at 12. When a 13th bandit joins, the band splits into two bands of about 6, each forming its own leader. A world holds at most 25 bands (proposed); past that, new runaways and troubled youth stay villagers, and deserters who would turn bandit become villagers instead.</li>
+<li><strong>Growth:</strong> bands grow through new deserters, troubled youth, lone recruiting, and villagers who run away (below).</li>
+<li><strong>Necromancer robes don&#x27;t protect against bandits,</strong> since bandits are villagers, not hostile mobs.</li>
+<li><strong>Bandits and swarms</strong> are enemies and fight each other.</li>
+<li><strong>Bandit camps:</strong> small structures that generate in the world like pillager outposts, each with 3-5 bandits and a leader. Every world has some bands from the start.</li>
+</ul>
+<h3>Wandering necromancers (deserters — §9)</h3>
+<ul>
+<li><strong>Source:</strong> <strong>5%</strong> of soldier deserts (<code>deserterOutcomeNecromancer</code> — not player necromancers; no Order/wand intro). <strong>Orphan-raised</strong> use the <strong>same 5%</strong>; they hit desert <strong>more often</strong> via hunger/morale multiplier (<code>soldiers-and-villages.md</code> § Orphanages).</li>
+<li><strong>Role:</strong> <strong>mobile rogue</strong> — <strong>no</strong> crypt site, <strong>no</strong> new-moon respawn. <strong>Dead forever</strong> when killed.</li>
+<li><strong>Grudge target:</strong> <strong>ex-owner only</strong> — the player who <strong>owned the village</strong> they deserted from (UUID saved on desert).</li>
+<li><strong>Each strike (50 / 50):</strong> <strong>ambush</strong> the ex-owner (necro + personal undead swarm nearby) <strong>or</strong> send a swarm at <strong>one of the ex-owner’s claimed villages</strong> (weakest by soldiers per villager; same march rules as roving swarms). If they have <strong>no</strong> villages, <strong>ambush</strong> only.</li>
+<li><strong>How often (high encounter odds):</strong> while the necro lives and the ex-owner has been online at least once since desert, roll <strong>every 2 in-game days</strong> (<code>wanderingNecromancerStrikeIntervalDays</code>, default <strong>2</strong>) — then 50/50 ambush vs village. Only runs in <strong>loaded</strong> chunks (stored march when unloaded). Optional <strong>chat line</strong> to ex-owner when a strike is scheduled (<strong>TBD</strong> wording) so it feels personal, not random noise.</li>
+<li><strong>Identity:</strong> keeps deserter <strong>name</strong>, <strong>kills</strong>, <strong>gear</strong>; hood/robe; ~bandit-leader combat tier; <strong>not</strong> a player necromancer (no wand hearts).</li>
+<li><strong>Loot:</strong> <strong>phylactery shard</strong> on kill (same family as rogue drops — <code>necromancy.md</code>); <strong>no</strong> horcrux chest by default.</li>
+</ul>
+<h3>Rogue necromancers and wild liches</h3>
+<p><strong>Not bandits:</strong> overworld <strong>rogues</strong> are <strong>necromancer NPCs</strong> (camps/crypts). <strong>Bandits</strong> = deserter soldiers (<code>Bandits</code> above). <strong>Wandering necromancers</strong> = <strong>5%</strong> deserter outcome (§9).</p>
+<ul>
+<li><strong>Rogue sites:</strong> <strong>~half</strong> pillager-outpost density (~2× spacing). <strong>Necromancer</strong> camps only — <strong>cave crypt</strong>, <strong>crypt + surface entrance</strong>, <strong>taken village</strong>, or <strong>dark tower</strong> (<code>necromancy.md</code>). Clear on <strong>new moon</strong> respawn (proposed).</li>
+<li><strong>Wild lich:</strong> rogue + <strong>one horcrux</strong> in a hidden chest — <strong>~4%</strong> of rogues (most <strong>none</strong>). Optional lich-hunt preview (ping, unmake horcrux, then kill).</li>
+<li><strong>Rewards:</strong> phylactery <strong>shards</strong>, gear, lore — <strong>not</strong> quest <strong>flutes</strong> (unique world items — <code>necromancer-path.md</code>).</li>
+<li><strong>Citadel shadow (Armies loaded — proposed):</strong> within <strong>~256–512 blocks</strong> of the Black Citadel:</li>
+</ul>
+<p>- <strong>Ruined hamlets</strong> — village-scale wrecks (mess hall, beds, walls broken); <strong>bandits occupy</strong> them; <strong>some villagers</strong> may remain (few traders / nitwits, not a healthy economy). - <strong>Bandit camps</strong> — smaller outpost structures <strong>in addition</strong> to ruins (same band rules as normal camps). - <strong>Higher</strong> bandit camp/band density than the rest of the overworld (multiplier <strong>TBD</strong>). - Lore: places that <strong>sheltered in the citadel’s shadow</strong> <strong>fell</strong> when the kingdom did — danger on the approach before the seal breaks. <strong>No</strong> shadow content if Armies absent.</p>
+<ul>
+<li><strong>Lone recruiting:</strong> a lone bandit can turn a nitwit or unemployed villager in an unguarded village (no soldiers) into a bandit, once a day.</li>
+<li><strong>Runaways:</strong> every adult non-soldier villager has a 0.1% daily chance to leave home and become a wandering bandit. A 20-villager village loses about one every 50 in-game days.</li>
+<li><strong>Leader buffs:</strong> 50 HP, +25% damage, and 50% knockback resistance. Bandits near him get +10% damage.</li>
+<li><strong>Killing the leader:</strong> the band breaks into lone bandits who wander and regroup. The leader drops his gear and the band&#x27;s loot.</li>
+<li><strong>Targets:</strong> bands go for the most weakly defended village nearby, measured by soldiers per villager.</li>
+<li><strong>Occupation:</strong> villagers flee to havens and taxes stop. Bandits kill soldiers, sleep in post beds, and each bandit eats one food item a day from the mess stations. When the mess stations are empty, they destroy the tax box and leave.</li>
+<li><strong>Loot:</strong> bandits take the tax box contents before destroying it, and the leader carries them. Kill him and you get your taxes back.</li>
+<li><strong>While unloaded:</strong> bands follow the same rule as swarms. They keep traveling while unloaded, but only occupy villages, eat, and fight in loaded chunks.</li>
+</ul>
+<p>If the captured village is owned by a player and has militia, bandits instead:</p>
+<ol>
+<li>Burn it, destroy crops, and kill animals.</li>
+<li>Kill all militia and half the other villagers.</li>
+<li>Breed, with an 80% chance of producing troubled youth villagers.</li>
+</ol>
+<p>Troubled youth can never take a trade, so they can never become traders or militia. They can become soldiers, with a 5% daily chance to desert. Left unemployed, they have a 10% daily chance to turn bandit.</p>
+<h3>Cave hideouts</h3>
+<ul>
+<li><strong>What they are:</strong> bandit lairs built into large caves, rarer than bandit camps, each with 6-10 bandits and a leader. Inside are caltrop corridors and pit traps, so they teach players to watch their footing.</li>
+<li><strong>Inside:</strong> sleeping bays, a chest of stolen taxes, and a cell with 1-2 captive villagers who join the player&#x27;s nearest village as unemployed villagers when freed. A small chance of a rare chronicle.</li>
+<li><strong>Behavior:</strong> hideout bandits follow normal band rules but travel through caves when they can.</li>
+</ul>
+<h3>Underground villages</h3>
+<p>Player-made cave villages mostly work as is, since village areas already run from bedrock to sky. Five things need rules:</p>
+<table><thead><tr><th>Mechanic</th><th>Problem underground</th><th>Rule</th></tr></thead><tbody><tr><td>Recruiting</td><td>Dark caves spawn mobs inside the village, and a hostile mob nearby fails soldier creation 90% of the time</td><td>No change; lighting is the player&#x27;s job, and The Recruiter&#x27;s Handbook says so</td></tr><tr><td>New moon raids</td><td>Raiders spawn 64-96 blocks out on the surface and may find no way in</td><td>Raiders spawn at the nearest open cave or surface spot with a path in. With no path at all, the raid brings 2 pillager sappers who dig at sapper speed</td></tr><tr><td>Swarms</td><td>Zombie and skeleton swarms hide in caves by day, so they can wander into a cave village in daylight</td><td>Keep it: cave villages fight swarms by day as well as night</td></tr><tr><td>Night penalties</td><td>Caves stay dark all day</td><td>Penalties only apply at night, whatever the light underground</td></tr><tr><td>Sieges</td><td>Siege ladders are useless underground</td><td>Sappers, axemen, and plank bridges over ravines carry cave sieges; village protection slows tunneling as on the surface</td></tr></tbody></table>
+    </main>
+  </div>
+  <footer class="site-footer">
+    Source: <code>docs/threats-and-mobs.md</code>
+  </footer>
+  
+</body>
+</html>

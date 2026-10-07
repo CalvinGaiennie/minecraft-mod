@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cross-mod integration — Necromancer → Soldier (optional) — Minecraft Kingdom</title>
+  <link rel="stylesheet" href="../../../assets/site.css" />
+  
+</head>
+<body class="scope-dev">
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-top">
+        <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
+        <nav class="main-nav" aria-label="Site">
+          <a href="../../../index.html" class="">Marketing</a>
+          <a href="../../index.html" class="active">Dev docs</a>
+        </nav>
+      </div>
+      <nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../index.html" class="active">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav>
+    </div>
+  </header>
+  <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="necromancer-soldier-optional.html" class="active">Necromancer → Soldier (optional)</a></li><li><a href="soldier-necromancer-optional.html">Soldier → Necromancer (optional)</a></li><li><a href="shared-conventions.html">Shared conventions</a></li><li><a href="versioning.html">Versioning</a></li></ul></aside>
+    <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="necromancer-soldier-optional.html" class="active">Necromancer → Soldier (optional)</a></li><li><a href="soldier-necromancer-optional.html">Soldier → Necromancer (optional)</a></li><li><a href="shared-conventions.html">Shared conventions</a></li><li><a href="versioning.html">Versioning</a></li></ul></aside>
+    <main class="doc-main">
+      <p class="source">Source: <code>docs/integration.md</code> · <a href="index.html">Cross-mod integration</a></p><h1>Necromancer → Soldier (optional)</h1>
+<table><thead><tr><th>Event / query</th><th>Payload</th><th>Soldier use</th></tr></thead><tbody><tr><td><code>CitadelEvents.KING_DEFEATED</code></td><td>ServerLevel, game time</td><td>Raise/lower spawn raid odds &amp; natural militia near spawn</td></tr><tr><td><code>CitadelQueries.isCitadelFallen(level)</code></td><td>boolean</td><td>Threat tuning</td></tr><tr><td><code>CitadelQueries.getOwner(level)</code></td><td>UUID or empty</td><td>Display, warlords (if owner kingdom size)</td></tr><tr><td><code>CitadelQueries.isOwnerOrAlly(level, playerUuid)</code></td><td>boolean</td><td>Rarely needed on soldier side</td></tr></tbody></table>
+    </main>
+  </div>
+  <footer class="site-footer">
+    Source: <code>docs/integration.md</code>
+  </footer>
+  
+</body>
+</html>

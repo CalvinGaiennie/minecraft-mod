@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>War and defense — Housing and field blocks — Minecraft Kingdom</title>
+  <link rel="stylesheet" href="../../../assets/site.css" />
+  
+</head>
+<body class="scope-dev">
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-top">
+        <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
+        <nav class="main-nav" aria-label="Site">
+          <a href="../../../index.html" class="">Marketing</a>
+          <a href="../../index.html" class="active">Dev docs</a>
+        </nav>
+      </div>
+      <nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../index.html" class="active">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav>
+    </div>
+  </header>
+  <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="defense-blocks.html">Defense blocks</a></li><li><a href="housing-and-field-blocks.html" class="active">Housing and field blocks</a></li><li><a href="horns-and-signals.html">Horns and signals</a></li><li><a href="gear-and-special-items.html">Gear and special items</a></li><li><a href="player-tools.html">Player tools</a></li></ul><p class="sidebar-label">Subsections</p><ul><li><a href="#campaigns">Campaigns</a></li><li><a href="#camp-block">Camp block</a></li><li><a href="#blockades">Blockades</a></li><li><a href="#assaults">Assaults</a></li><li><a href="#pickaxe-soldiers">Pickaxe soldiers</a></li><li><a href="#siege-ladders">Siege ladders</a></li><li><a href="#boat-plans">Boat plans</a></li><li><a href="#sappers">Sappers</a></li><li><a href="#plank-bridges">Plank bridges</a></li><li><a href="#traps">Traps</a></li><li><a href="#laced-rations">Laced rations</a></li></ul></aside>
+    <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="defense-blocks.html">Defense blocks</a></li><li><a href="housing-and-field-blocks.html" class="active">Housing and field blocks</a></li><li><a href="horns-and-signals.html">Horns and signals</a></li><li><a href="gear-and-special-items.html">Gear and special items</a></li><li><a href="player-tools.html">Player tools</a></li></ul><p class="sidebar-label">Subsections</p><ul><li><a href="#campaigns">Campaigns</a></li><li><a href="#camp-block">Camp block</a></li><li><a href="#blockades">Blockades</a></li><li><a href="#assaults">Assaults</a></li><li><a href="#pickaxe-soldiers">Pickaxe soldiers</a></li><li><a href="#siege-ladders">Siege ladders</a></li><li><a href="#boat-plans">Boat plans</a></li><li><a href="#sappers">Sappers</a></li><li><a href="#plank-bridges">Plank bridges</a></li><li><a href="#traps">Traps</a></li><li><a href="#laced-rations">Laced rations</a></li></ul></aside>
+    <main class="doc-main">
+      <p class="source">Source: <code>docs/war-and-defense.md</code> · <a href="index.html">War and defense</a></p><h1>Housing and field blocks</h1>
+<p>These blocks are where soldiers live at home and on campaign.</p>
+<table><thead><tr><th>Block</th><th>What it does</th></tr></thead><tbody><tr><td>Post bed</td><td>Soldiers sleep here, treat it as home, and fully heal when they sleep out of combat. Players can craft them (any bed and an iron ingot, shapeless) and place them anywhere; recruiters buy theirs and place them on post blocks. Post beds don&#x27;t count as beds for villager breeding. A post bed&#x27;s color shows its owner&#x27;s rank, using vanilla bed colors: white when empty, gray for a soldier, light gray for a seasoned soldier, yellow for a hero, cyan for a Legend, and green for a recruiter. Right-clicking it shows the owner&#x27;s name, rank, kills, and whether he&#x27;s home, away on campaign, or missing</td></tr><tr><td>Camp block</td><td>Home base for soldiers on campaign: a field mess and field bed in one (see Campaigns)</td></tr></tbody></table>
+<h3>Campaigns</h3>
+<p>Soldiers in campaign boots leave the village with the player and live off a camp block until they come home.</p>
+<ul>
+<li><strong>Starting:</strong> soldiers wearing campaign boots follow the player. Removing the boots sends a soldier home to his post bed.</li>
+<li><strong>Cost at home:</strong> soldiers on campaign don&#x27;t count toward tax coverage and leave the village less defended. Their post beds and recruit slots stay reserved while they&#x27;re away.</li>
+<li><strong>Food:</strong> soldiers still eat 2 meals a day. If the camp block runs out, the normal hunger rules apply (see Desertion).</li>
+<li><strong>Portals:</strong> booted soldiers follow the player through Nether and End portals, so camps can be set up in other dimensions.</li>
+</ul>
+<h3>Camp block</h3>
+<ul>
+<li><strong>Hold point:</strong> once placed, booted soldiers stop following the player and stay within about 16 blocks of it, fighting anything that comes close. It stays until the player breaks it or enemies destroy it.</li>
+<li><strong>Field mess:</strong> stores food, siege ladders, boats, and arrows, with as much room as a double chest (54 slots). Soldiers eat from it daily.</li>
+<li><strong>Field bed:</strong> soldiers sleep at the camp and fully heal out of combat, like a post bed.</li>
+<li><strong>No soldier cap:</strong> a player can bring as many booted soldiers as they want.</li>
+<li><strong>One camp per player:</strong> placing a new one replaces the old one, and every booted soldier moves to the new camp. Breaking it is how you move camp.</li>
+<li><strong>Enemies can destroy it:</strong> bandits, raiders, and hostile mobs can attack it. When it breaks, it drops its stored food, and soldiers go back to following the player if he&#x27;s within 128 blocks; otherwise they march home to their post beds.</li>
+<li><strong>Horns:</strong> on campaign, the fallback horn sends soldiers to the camp block.</li>
+<li><strong>Not a village:</strong> no recruiting, taxes, or rank bonuses at a camp, and raids and swarms don&#x27;t target it specifically.</li>
+</ul>
+<p>Recipe, crafting grid top to bottom:</p>
+<table><thead><tr><th></th><th></th><th></th></tr></thead><tbody><tr><td>Wool</td><td>Wool</td><td>Wool</td></tr><tr><td>Log</td><td>Campfire</td><td>Log</td></tr><tr><td>Log</td><td>Barrel</td><td>Log</td></tr></tbody></table>
+<h3>Blockades</h3>
+<p>A camp near an enemy village with enough soldiers starves it out.</p>
+<ul>
+<li><strong>Starting a blockade:</strong> a camp within 64 blocks of another player&#x27;s village border besieges it while it holds at least 15 soldiers.</li>
+<li><strong>Effects on the enemy village:</strong> its tax box stops collecting, its recruiters can&#x27;t recruit, and its recruiters can&#x27;t restock mess stations from the tax box.</li>
+<li><strong>Ending a blockade:</strong> the siege ends when the camp is destroyed or drops below 15 soldiers.</li>
+</ul>
+<h3>Assaults</h3>
+<p>The player sets a target with an attack plan, then launches the assault with the charge horn.</p>
+<ul>
+<li><strong>Attack plan (item):</strong> the player writes target coordinates and how many siege ladders to bring into it, then uses it on a camp block. It&#x27;s consumed, and every soldier at that camp sets those coordinates as the target for their next charge. Recipe: paper, ink sac, and feather, shapeless.</li>
+<li><strong>Launching:</strong> blowing the charge horn sends the camp&#x27;s soldiers to the target. They attack enemy combatants within 32 blocks of the target: soldiers, militia, iron golems, hostile players, and bandits.</li>
+<li><strong>Civilians are spared:</strong> soldiers don&#x27;t kill traders or other non-combat villagers.</li>
+<li><strong>Timing:</strong> assaults work day or night, but only on the player&#x27;s order.</li>
+<li><strong>Hurt soldiers:</strong> below 30% health, they fall back to the camp block.</li>
+<li><strong>Ending:</strong> the assault ends when no enemies are within 128 blocks of the target for 60 seconds, or when the fallback horn blows. Survivors return to camp.</li>
+<li><strong>Doors:</strong> during an assault, soldiers can break wooden doors.</li>
+<li><strong>Blockades hold:</strong> soldiers away on an assault still count toward their camp&#x27;s blockade.</li>
+<li><strong>Camp guards:</strong> sneak-right-click a soldier to keep him back as a camp guard. Guards ignore attack plans and charge horns until you sneak-right-click them again. Guards wear a red plume on their helmet and show a &quot;Camp Guard&quot; name tag when you look at them.</li>
+<li><strong>Breaking mess stations:</strong> soldiers on campaign attack and break enemy mess stations they find. Destroying every mess station in a village ends its owner&#x27;s claim. This follows mobGriefing: with it off, players have to break them by hand.</li>
+</ul>
+<h3>Pickaxe soldiers</h3>
+<ul>
+<li>A player can give a soldier a pickaxe, which goes in his bow slot instead of a bow. It only counts when given directly by a player; soldiers never pick up pickaxes on their own.</li>
+<li>During an assault, pickaxe soldiers can break through iron doors as well as wooden ones.</li>
+</ul>
+<h3>Siege ladders</h3>
+<ul>
+<li><strong>What it is:</strong> a single large ladder object that two soldiers carry together and stand up against an enemy wall in one motion. Its height fits the wall automatically, up to <strong>20 blocks</strong>. It reuses the vanilla ladder texture on a tall, flat shape. Recipe: 8 ladders + 2 iron ingots. Soldiers and militia follow the same rules.</li>
+<li><strong>Supply:</strong> siege ladders are stored in the camp block. The attack plan says how many to bring, and up to that many are taken out of the camp block for the assault, only as many as the player stocked. Each is carried by a pair of soldiers.</li>
+<li><strong>Climbing:</strong> vanilla mobs only climb ladders they bump into; they don&#x27;t plan routes with them. So soldiers get a simple scripted action instead: walk to the siege ladder&#x27;s base, climb straight up, and step off at the top.</li>
+<li><strong>Counterplay:</strong> defenders can push a standing siege ladder over by hitting its top a few times, dropping anyone climbing it, or break it entirely. Standing one up follows mobGriefing.</li>
+<li><strong>Carrying:</strong> the two carriers walk slower and can&#x27;t attack while carrying.</li>
+<li><strong>Automatic use:</strong> carriers stand the ladder up against any wall 2 or more blocks high that&#x27;s between them and an enemy whenever they can&#x27;t pathfind any closer.</li>
+</ul>
+<h3>Boat plans</h3>
+<ul>
+<li>Soldiers only carry boats while carrying out a boat plan. Boats are stored in the camp block.</li>
+<li><strong>Boat plan (item):</strong> the player writes target coordinates into it and uses it on a camp block. It&#x27;s consumed. Recipe (proposed): paper, ink sac, and any boat, shapeless.</li>
+<li><strong>What happens:</strong> every soldier at that camp, camp guards included, grabs a boat, as long as the camp has boats left, and walks to the shore. Each waits up to 10 seconds for another soldier to climb in if one is within 20 blocks, then rows to the target coordinates. Soldiers without a boat ride as passengers when there&#x27;s room.</li>
+<li><strong>Landing:</strong> at the target, soldiers get out and drop their boats on the ground as items, then hold position there until given new orders.</li>
+</ul>
+<h3>Sappers</h3>
+<ul>
+<li>During an assault, pickaxe soldiers dig through walls that block the way to the target. They mine very slowly (dirt 30 seconds, stone 60 seconds, stone bricks and deepslate 90 seconds; obsidian and similar blocks take about 12 minutes each, and only with a diamond or netherite pickaxe (proposed)). Sappers can&#x27;t mine wood.</li>
+<li><strong>Progress is permanent:</strong> each block remembers how much it&#x27;s been mined and shows vanilla&#x27;s cracking effect. If a sapper dies, another can pick up where he left off. Progress only resets if the block is broken or replaced, so defenders can repair a wall by replacing damaged blocks.</li>
+<li>Wall digging follows mobGriefing.</li>
+<li><strong>Axemen:</strong> during an assault, soldiers with axes break anything made of wood at 60 seconds per block, with the same permanent progress.</li>
+<li><strong>Beacons:</strong> soldiers and militia get beacon effects like players do. Haste speeds up sappers and axemen, and strength, speed, resistance, and regeneration work on them too.</li>
+</ul>
+<h3>Plank bridges</h3>
+<ul>
+<li><strong>What it is:</strong> a portable span two soldiers carry like a siege ladder and lay across a creek, moat, or ditch up to 4 blocks wide (proposed). Once laid it becomes a row of temporary bridge blocks, so soldiers and players path over it normally. Recipe (proposed): 6 wooden slabs, 2 chains, and an iron ingot.</li>
+<li><strong>Supply:</strong> stored in the camp block. The attack plan says how many bridges to bring, the same way it does siege ladders.</li>
+<li><strong>Automatic use:</strong> carriers lay a bridge whenever a gap of water or air up to 4 blocks wide is all that stands between them and an enemy or their target. Out of combat, soldiers lay one when their path crosses such a gap.</li>
+<li><strong>Bridge plan (item):</strong> written with target coordinates and used on a camp block, like a boat plan. Soldiers carry bridges to the nearest crossing, lay them, and hold there. Recipe (proposed): paper, ink sac, and a wooden slab (shapeless).</li>
+<li><strong>Counterplay:</strong> defenders knock a bridge into the water by hitting its far end 3 times, or break it. Laying one follows mobGriefing.</li>
+<li><strong>At home:</strong> players can lay bridges by hand on their own land, and soldiers use them in their daily routine.</li>
+</ul>
+<h3>Traps</h3>
+<p>Caltrops can only be placed on the player&#x27;s own land or unclaimed land, never in enemy land or the citadel.</p>
+<ul>
+<li><strong>Caltrops:</strong> a floor layer, like carpet. Anything that steps on it takes 1 heart and is slowed for 3 seconds (the slow is a built-in stat, not a potion effect, so endermen ignore it), and it hurts everyone, the owner, his villagers, and golems included; each caltrop breaks after 8 hits. The owner&#x27;s and his allies&#x27; soldiers path around them, as do enemy seasoned soldiers and above. Plain enemy soldiers, militia, bandits, and hostile mobs walk straight in. Recipe (proposed): 4 iron nuggets and a flint make 4.</li>
+</ul>
+<h3>Laced rations</h3>
+<p>Spoiled food lets a player weaken an enemy army without a fight.</p>
+<ul>
+<li><strong>Lacing:</strong> any soldier food + a fermented spider eye (shapeless) makes a laced version that looks the same. Only the player who made it sees &quot;Laced&quot; on it. Mushroom stew, rabbit stew, and beetroot soup can be laced the same way to give to players.</li>
+<li><strong>Filling enemy messes:</strong> anyone can right-click any mess station with soldier food (or a laced version) to add one item per click, like filling a composter. Nothing else can be put in, and only the owner and co-owners can open it to see or take food. Soldiers who see a non-ally put food in attack him, as with tax box theft.</li>
+<li><strong>Soldiers who eat it:</strong> lose 5 hearts over 10 seconds (never below 1 heart) and are weakened for 3 minutes. Each has a 25% chance to fall sick: he stays in his post bed for a day and only fights if attacked (proposed).</li>
+<li><strong>Getting caught:</strong> each sick soldier has a 50% chance to expose the station. The owner gets a chat warning, and soldiers skip that station until a player empties it.</li>
+<li><strong>Players:</strong> laced stew gives Poison II for 8 seconds, Nausea for 10 seconds, and Hunger.</li>
+<li><strong>Bandits eat too:</strong> occupying bandits take their daily food from the mess, so lacing your own occupied village thins out the band.</li>
+</ul>
+<ul>
+<li><strong>Potion lacing:</strong> any soldier food + any drinkable potion (shapeless) makes food that gives that potion&#x27;s effect at half its duration. It looks like normal food, and only its maker sees what&#x27;s in it. Harmful potions (Poison, Weakness, Slowness, Harming) weaken enemy soldiers, but Harming never drops one below 1 heart. Helpful potions work too, so a player can feed his own army Strength or Regeneration before a big fight. Potion-laced food goes into mess stations like any other soldier food.</li>
+</ul>
+    </main>
+  </div>
+  <footer class="site-footer">
+    Source: <code>docs/war-and-defense.md</code>
+  </footer>
+  
+</body>
+</html>

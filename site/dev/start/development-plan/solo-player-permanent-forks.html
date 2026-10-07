@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Document — Solo player — permanent forks — Minecraft Kingdom</title>
+  <link rel="stylesheet" href="../../../assets/site.css" />
+  
+</head>
+<body class="scope-dev">
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-top">
+        <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
+        <nav class="main-nav" aria-label="Site">
+          <a href="../../../index.html" class="">Marketing</a>
+          <a href="../../index.html" class="active">Dev docs</a>
+        </nav>
+      </div>
+      <nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../index.html" class="active">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav>
+    </div>
+  </header>
+  <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="mod-goals.html">Mod goals</a></li><li><a href="two-mods-one-vision.html">Two mods, one vision</a></li><li><a href="solo-player-permanent-forks.html" class="active">Solo player — permanent forks</a></li><li><a href="how-we-plan-plans-to-plan-the-plans.html">How we plan (plans to plan the plans)</a></li><li><a href="design-progress-canon-docs.html">Design progress (canon docs)</a></li><li><a href="design-backlog-from-goals-not-all-implemented.html">Design backlog (from goals — not all implemented)</a></li><li><a href="mod-compatibility-targets.html">Mod compatibility targets</a></li></ul></aside>
+    <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="mod-goals.html">Mod goals</a></li><li><a href="two-mods-one-vision.html">Two mods, one vision</a></li><li><a href="solo-player-permanent-forks.html" class="active">Solo player — permanent forks</a></li><li><a href="how-we-plan-plans-to-plan-the-plans.html">How we plan (plans to plan the plans)</a></li><li><a href="design-progress-canon-docs.html">Design progress (canon docs)</a></li><li><a href="design-backlog-from-goals-not-all-implemented.html">Design backlog (from goals — not all implemented)</a></li><li><a href="mod-compatibility-targets.html">Mod compatibility targets</a></li></ul></aside>
+    <main class="doc-main">
+      <p class="source">Source: <code>docs/marketing/development-plan.md</code> · <a href="index.html">Document</a></p><h1>Solo player — permanent forks</h1>
+<p>Citadel solo design assumes <strong>one player UUID</strong> making irreversible calls. Multiplayer adds PvP and race-for-claim; the <strong>locks below still apply per player</strong>.</p>
+<p><strong>Diagram:</strong> green = still available; red = closed; gold = citadel throne / owner perks; purple = necromancer quest; blue = Order. <strong>§6 brother endings</strong> (partner vs betrayal) are <strong>in discussion</strong> — dashed in chart.</p>
+<div class="mermaid-wrap"><div class="mermaid">
+flowchart TB
+  subgraph entry["Before paths lock"]
+    S([Start / wand optional])
+    S --> H{Lost 3 hearts<br/>to wand?}
+    H -->|No| PRE[Pre-path play:<br/>Order open until claim deadline<br/>Necro quest not offered]
+    H -->|Yes| INTRO[Intro NPC arc]
+    INTRO --> CH{Final choice}
+    CH -->|Opt out| OPT[Necro questline CLOSED forever<br/>Order stays OPEN<br/>Absolution still OK]
+    CH -->|Commit| COM[Order CLOSED forever<br/>Necro main arc OPEN]
+  end
+
+  PRE --> CLAIM1{Claim throne<br/>before Order lock?}
+  OPT --> ORD[Order: basic → light → hard → Maelor lock<br/>must finish BEFORE claim]
+  ORD --> LOCK{Specialty locked<br/>pre-claim?}
+  LOCK -->|Yes| ORDOK[Locked acolyte — can claim throne<br/>if not active necromancer on sit]
+  LOCK -->|No| ORDMIS[Claim without lock → Order progress CLOSED<br/>No Maelor lock / homecoming perks]
+  CLAIM1 -->|Yes| ORDMIS
+
+  COM --> NECRO[Committed arc: flutes, horcrux, citadel assault<br/>Emphasis pre-claim — §6 TBD post-claim]
+  NECRO --> ASSAULT[Kill both bound necromancers + Corrupted King]
+  ASSAULT --> BR{§6 brother choice<br/>TBD names}
+  BR -->|Trust seeming-good brother| ENDG[Ending A TBD — partner]
+  BR -->|Trust seeming-bad brother| ENDB[Ending B TBD — betrayal later]
+
+  subgraph throne["Citadel throne sit — owner"]
+    T{Attempt 60s throne sit}
+    T -->|Active necromancer<br/>healthy Kingstree| DEATH[Instant death — cannot own]
+    T -->|Active necromancer<br/>blighted tree| BLOCK[Blocked — must absolve first]
+    T -->|Absolved / never active| OWN[Can become owner<br/>restoration + perks]
+    T -->|Horcrux created — no absolution| DEATH
+    WAND[Owner uses wand again] --> FORFEIT[Forfeit claim + 7d window<br/>Permanent citadel ownership ban]
+  end
+
+  ORDOK --> T
+  ORDMIS --> T
+  PRE --> T
+  OPT --> T
+
+  style DEATH fill:#fdd
+  style BLOCK fill:#fdd
+  style FORFEIT fill:#fdd
+  style COM fill:#ecd9ff
+  style OPT fill:#e8f4ec
+  style ORDMIS fill:#fdd
+  style ENDG fill:#fef6d8
+  style ENDB fill:#fef6d8
+</div></div>
+<h3>Fork cheat sheet (canon today)</h3>
+<table><thead><tr><th>You do this</th><th>Order acolyte path</th><th>Necromancer questline</th><th>Throne ownership</th></tr></thead><tbody><tr><td><strong>Opt out</strong> at intro</td><td>Open until <strong>claim</strong> (must <strong>lock</strong> pre-claim for full perks)</td><td><strong>Closed</strong></td><td>OK if <strong>not active</strong> necromancer on sit (<code>citadel-claim.md</code>)</td></tr><tr><td><strong>Commit</strong> at intro</td><td><strong>Closed</strong></td><td>Open (§6 main arc)</td><td><strong>Blocked</strong> while <strong>active</strong> necromancer; <strong>blighted</strong> tree → absolve if <strong>no horcrux</strong> yet</td></tr><tr><td><strong>Claim citadel</strong> before Maelor lock</td><td><strong>Closed</strong> for new progress</td><td>Intro may still trigger if 3 hearts; arc <strong>pre-claim</strong></td><td>Owner perks if sit succeeds</td></tr><tr><td><strong>Locked acolyte</strong> + absolved / non-active necro</td><td>Perks + stations after claim</td><td>Only if committed before commit lock</td><td><strong>Yes</strong></td></tr><tr><td><strong>Wand forfeit</strong> as owner</td><td>—</td><td>—</td><td><strong>Permanent ban</strong> from owning citadel</td></tr></tbody></table>
+<p><strong>Wild cards:</strong> horcrux pseudo-death (3 min, <strong>no teleport</strong>), relic ban on active necromancers, <strong>horcrux compass</strong> (<strong>no range cap</strong>, always points at nearest horcrux chunk including your own — hunter tool). Rogue sites ~<strong>half</strong> outpost density; <strong>~4%</strong> wild lich horcruxes.</p>
+    </main>
+  </div>
+  <footer class="site-footer">
+    Source: <code>docs/marketing/development-plan.md</code>
+  </footer>
+    <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true, theme: "neutral", securityLevel: "loose" });
+  </script>
+</body>
+</html>
