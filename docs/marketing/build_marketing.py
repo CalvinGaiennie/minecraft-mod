@@ -363,18 +363,16 @@ def sidebar_html(
             )
         parts.append("</ul>")
     parts.append("</aside>")
-    shell = '<div class="page-shell has-sidebar">'
-    return shell + "".join(parts)
+    return "".join(parts)
 
 
 def write_page(spec: PageSpec) -> None:
     spec.out_path.parent.mkdir(parents=True, exist_ok=True)
     body = render_layout(spec)
-    if spec.sidebar_html.startswith('<div class="page-shell has-sidebar">'):
-        aside = spec.sidebar_html.replace('<div class="page-shell has-sidebar">', "", 1)
+    if spec.sidebar_html.strip():
         body = body.replace(
             '<div class="page-shell">',
-            f'<div class="page-shell has-sidebar">{aside}',
+            '<div class="page-shell has-sidebar">',
             1,
         )
     spec.out_path.write_text(body, encoding="utf-8")
@@ -384,7 +382,6 @@ def marketing_sidebar(parsed: ParsedDoc) -> str:
     if not parsed.sections:
         return ""
     parts = [
-        '<div class="page-shell has-sidebar">',
         '<aside class="doc-sidebar" aria-label="On this page">',
         '<p class="sidebar-label">On this page</p><ul>',
     ]

@@ -21,8 +21,8 @@
       </nav>
     </div>
     <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../index.html" class="active">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav></div>
-    <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html" class="active">Overview</a></li></ul></aside>
-      <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html" class="active">Overview</a></li></ul></aside>
+    <div class="page-shell has-sidebar">
+      <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html" class="active">Overview</a></li></ul></aside>
       <main class="doc-main">
         <p class="source">Source: <code>docs/integration.md</code></p><h1>Cross-mod integration</h1>
 <p>Implement with <strong><code>ModList.get().isLoaded(&quot;other_mod_id&quot;)</code></strong> or NeoForge <strong>InterModComms</strong> / <strong>events</strong> on a shared bus. Prefer <strong>necromancer publishes world state</strong>, <strong>soldier subscribes</strong> (and vice versa for village data).</p>

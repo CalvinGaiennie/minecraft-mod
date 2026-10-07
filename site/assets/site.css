@@ -117,7 +117,13 @@ a:hover { text-decoration: underline; }
 }
 @media (min-width: 900px) {
   .page-shell.has-sidebar {
-    grid-template-columns: 220px minmax(0, 1fr);
+    grid-template-columns: 200px minmax(0, 1fr);
+    align-items: start;
+  }
+}
+@media (max-width: 899px) {
+  .page-shell.has-sidebar .doc-sidebar {
+    display: none;
   }
 }
 
@@ -167,7 +173,30 @@ a:hover { text-decoration: underline; }
   border-top: 1px solid var(--border);
   color: var(--gold);
 }
-.doc-main h2:first-child { border-top: none; margin-top: 0; padding-top: 0; }
+.doc-main > h2:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+
+body.scope-marketing .doc-main h2#minecraft-kingdom-armies {
+  color: var(--armies);
+  border-top: 2px solid var(--border);
+  border-left: 4px solid var(--armies);
+  padding: 0.65rem 0 0.65rem 0.75rem;
+  margin-top: 2.25rem;
+}
+body.scope-marketing .doc-main h2#minecraft-kingdom-citadel {
+  color: var(--citadel);
+  border-top: 2px solid var(--border);
+  border-left: 4px solid var(--citadel);
+  padding: 0.65rem 0 0.65rem 0.75rem;
+  margin-top: 2.25rem;
+}
+body.scope-marketing .doc-main > p:nth-of-type(2) {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+body.scope-marketing .doc-main h2#what-vanilla-gets-wrong {
+  border-left: 4px solid var(--gold-dim);
+  padding-left: 0.75rem;
+}
 .doc-main h3 { font-size: 1.1rem; margin: 1.35rem 0 0.5rem; color: var(--text); }
 .doc-main h4 { font-size: 1rem; margin: 1rem 0 0.4rem; }
 .doc-main p { margin: 0.65rem 0; }
