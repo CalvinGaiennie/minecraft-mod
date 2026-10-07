@@ -57,9 +57,13 @@ Raid size is random, not tied to the village's defenses:
 
 ### Authored bandit kings (Armies mod)
 
-**Separate from Citadel’s ten relic fortresses** (`endgame.md`, Citadel mod only). Armies adds **authored** bandit bosses with **fixed names** and **bases** (outpost-scale, defenders inside, same broad feel as pillager outposts). Payoff is **loot** and **quest progression** (intel chain **TBD** with the Armies bandit-king questline). Roster, site count, and discovery **TBD**; not the same kings as the six relic fortress lords unless lore explicitly links them.
+**Separate from Citadel’s ten relic fortresses** (`endgame.md`, Citadel mod only). Armies adds **authored** bandit bosses with **fixed names** and **bases** (outpost-scale, defenders inside, same broad feel as pillager outposts). Payoff is **loot** and **quest progression**; main arc **O1/O2** in `armies-questline.md`. Roster size **TBD** (lean **3–5** kings). Not the same characters as relic fortress lords unless lore explicitly links them.
 
 **Help/hinder bandits** (truce, alliance, bribes): **possible future**; not MVP.
+
+### Warlords
+
+See **`endgame.md`** (kingdom size) and **`armies-questline.md`** (**D2** intro). Recurring **named** raiders; **medium** raid scale cap; **not** an insane endgame boss.
 
 ### Enlistment and threats
 

@@ -73,6 +73,7 @@
 | 2026-10-06 | **§9** (orphan + wander) | Orphanage: vanilla gen only, **≥21 beds** at gen. Wandering necro: **ex-owner**, **50/50** ambush/village, strike every **2** days, **permanent** death, **shard** loot. | same + `threats-and-mobs.md` |
 | 2026-10-06 | **§7** (partial) | **8** End tyrants on **outer End** (not dragon island); home-bound aggro; **6** use **flutes** in fight; rogue sites = cave crypt / surface crypt / taken village / dark tower; god wizard **full set from mother at commit**; rot **1 heart / 15s**; flute stats closed. | `necromancer-path.md`, `endgame.md`, `config-and-recipes.md` |
 | 2026-10-07 | **Bandit split (author)** | **10 fortresses = Citadel mod only** (named kings; relic forts in lore books). **Armies** gets separate **authored bandit kings** + quest TBD. Forts = outpost-style bases, anytime; loot-focused. Opt-out skips **player-hunt** threats only; structures stay hostile. Warlords **undecided**. Bandit grey morality **future TBD**. | `endgame.md`, `mod-split.md`, `threats-and-mobs.md` |
+| 2026-10-07 | **Armies arc + warlords** | **Armies-only** spine: **2 defensive** (hold claim, warlord probe) + **2 offensive** (first king, break the ring). Warlords **stay**, **toned down** (slow timer, medium raid cap, one village). | `armies-questline.md`, `endgame.md` |
 
 ---
 

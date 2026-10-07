@@ -24,7 +24,7 @@ See `integration.md` for cross-mod hooks (no third API jar required at first).
 
 ## Soldier mod (default home for…)
 
-Village military loop, mess/tax/recruiters/supply, defense blocks, horns/camps/campaigns/blockades, **wanted posters** (planned, see `war-and-defense.md`), training dummy, animal farmers, village **map** (muster roll), enlisted threats (raids, swarms, bandits), **authored bandit kings** (Armies-only story sites, `threats-and-mobs.md`). **No** ten relic fortresses (Citadel mod). **Warlords:** TBD (`endgame.md`).
+Village military loop, mess/tax/recruiters/supply, defense blocks, horns/camps/campaigns/blockades, **wanted posters** (planned, see `war-and-defense.md`), training dummy, animal farmers, village **map** (muster roll), enlisted threats (raids, swarms, bandits), **authored bandit kings** (Armies-only story sites, `threats-and-mobs.md`). **No** ten relic fortresses (Citadel mod). **Warlords:** yes, **toned down** (`endgame.md`, `armies-questline.md`).
 
 **Cut from soldier plan (not deferred):** full siege assault kit (sappers, ladders, boat/bridge plans, laced rations as MVP scope).
 

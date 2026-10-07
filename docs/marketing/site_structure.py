@@ -80,6 +80,7 @@ DEV_GROUPS: tuple[DevGroup, ...] = (
         "armies",
         "Armies",
         (
+            DevDoc("armies-questline.md", "Armies storyline"),
             DevDoc("soldiers-and-villages.md", "Soldiers & villages", split_h2_min=2),
             DevDoc("war-and-defense.md", "War & defense", split_h2_min=2),
             DevDoc("threats-and-mobs.md", "Threats & mobs", split_h2_min=2),
@@ -114,7 +115,7 @@ GROUP_BLURBS: dict[str, str] = {
         "Player necromancer questline (commit vs opt out), casual wand play, "
         "horcruxes, flutes, and how the path relates to the Order."
     ),
-    "armies": "Soldiers, villages, war, defense, and hostile threats.",
+    "armies": "Kingdom questline, soldiers, villages, war, defense, and threats.",
     "build": "Implementation notes for builders and mod structure.",
     "lore": "Old kingdom background and narrative canon.",
 }

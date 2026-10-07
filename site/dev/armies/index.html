@@ -23,7 +23,48 @@
     <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../start/index.html">Start</a><a href="../notes/index.html">Notes</a><a href="../citadel/index.html">Citadel</a><a href="../order/index.html">Order</a><a href="../necromancer/index.html">Necromancer</a><a href="index.html" class="active">Armies</a><a href="../build/index.html">Build</a><a href="../lore/index.html">Lore</a></nav></div>
     <div class="page-shell has-sidebar">
       <main class="doc-main">
-        <div class="dev-hub"><h1>Armies</h1><p class="dev-group-lede">Soldiers, villages, war, defense, and hostile threats.</p><section class="dev-doc-full" id="soldiers-and-villages"><h2>Soldiers &amp; villages</h2><p class="source">Source: <code>docs/soldiers-and-villages.md</code></p><div class="dev-doc-body"><h2 id="villager-roles">Villager roles</h2>
+        <div class="dev-hub"><h1>Armies</h1><p class="dev-group-lede">Kingdom questline, soldiers, villages, war, defense, and threats.</p><section class="dev-doc-full" id="armies-questline"><h2>Armies storyline</h2><p class="source">Source: <code>docs/armies-questline.md</code></p><div class="dev-doc-body"><p><strong>Scope:</strong> Main <strong>optional</strong> quest arc when <strong>Minecraft Kingdom: Armies</strong> is installed <strong>without</strong> Citadel. Citadel adds its own spine (<code>acolyte-path.md</code>, <code>necromancer-path.md</code>, <code>endgame.md</code>); this doc is the <strong>kingdom</strong> arc only.</p>
+<p><strong>Design intent:</strong> A few <strong>big set-piece quests</strong>, not a checklist grid. Mix <strong>defense</strong> (hold what you built) and <strong>offense</strong> (hunt named bandit kings). Emergent play (raids, swarms, deserters) continues between beats.</p>
+<p><strong>Status:</strong> <strong>Author direction, 2026-10-07.</strong> Counts, names, triggers, and rewards <strong>TBD</strong>.</p>
+<p>---</p>
+<h2 id="shape-two-defensive-two-offensive">Shape: two defensive, two offensive</h2>
+<table><thead><tr><th>#</th><th>Type</th><th>Working title</th><th>Fantasy</th></tr></thead><tbody><tr><td><strong>D1</strong></td><td>Defensive</td><td><strong>Hold the claim</strong></td><td>Your first real kingdom moment: a <strong>coordinated hit</strong> on an <strong>owned village</strong> (band + raid pressure). Win by <strong>keeping the mess up</strong> and soldiers alive through one bad night. Teaches horns, havens, supply.</td></tr><tr><td><strong>D2</strong></td><td>Defensive</td><td><strong>Warlord probe</strong></td><td>After the realm grows (<strong>Baron+</strong>, TBD), a <strong>named Warlord</strong> (see <code>endgame.md</code>) strikes <strong>one</strong> village. Bigger than a normal new-moon raid, <strong>not</strong> a server-wipe. Goal: <strong>repel</strong> without losing the village economy.</td></tr><tr><td><strong>O1</strong></td><td>Offensive</td><td><strong>First crowned thief</strong></td><td>First <strong>authored bandit king</strong> (<code>threats-and-mobs.md</code>): intel from camp loot / village rumor → <strong>outpost base</strong> → kill the named king, recover loot + <strong>lead on the network</strong>.</td></tr><tr><td><strong>O2</strong></td><td>Offensive</td><td><strong>Break the ring</strong></td><td>Capstone <strong>authored king</strong> (strongest base, TBD roster size). Closes the <strong>Armies-only</strong> bandit-king thread; leaves room for Citadel fortresses if both mods are loaded later.</td></tr></tbody></table>
+<p><strong>Order (proposed):</strong> D1 early (first or second village). O1 mid (after Lord/Baron). D2 mid-late (Baron/Duke). O2 late (Duke/King). Exact gates <strong>TBD</strong>; should follow <strong>kingdom titles</strong> and enlistment, not grind walls.</p>
+<p>---</p>
+<h2 id="authored-bandit-kings-armies">Authored bandit kings (Armies)</h2>
+<ul>
+<li><strong>Separate</strong> from Citadel’s <strong>ten relic fortresses</strong> (<code>endgame.md</code>).</li>
+<li>Each king: <strong>fixed name</strong>, <strong>outpost-scale base</strong>, <strong>defenders inside</strong> (pillager-outpost feel).</li>
+<li><strong>Intel chain</strong> for O1→O2 lives here (drops, books, NPC lines), <strong>TBD</strong> detail.</li>
+<li>Payoff: <strong>loot</strong>, quest flags, maybe a <strong>unique horn/item</strong> (not a relic).</li>
+</ul>
+<p><strong>Roster size:</strong> <strong>TBD</strong> (author leaning: <strong>3–5</strong> kings total, with <strong>2</strong> as the “big” offensive beats O1/O2 and smaller optional sites <strong>TBD</strong>).</p>
+<p>---</p>
+<h2 id="warlords-ongoing-pressure-not-a-fifth-mega-quest">Warlords (ongoing pressure, not a fifth mega-quest)</h2>
+<p>Warlords stay as <strong>recurring kingdom pressure</strong>, tuned <strong>down</strong> from early drafts:</p>
+<ul>
+<li>Trigger only at <strong>Duke+</strong> (or <strong>Baron+</strong>, TBD), not while learning the loop.</li>
+<li><strong>Every 6–8 new-moon cycles</strong> (not 4–8), one <strong>named</strong> general targets <strong>one</strong> claimed village near an enlisted player.</li>
+<li><strong>Size cap:</strong> at most a <strong>medium</strong> new-moon raid plus the warlord NPC (modest buffs), <strong>no</strong> extra sappers/ladders/siege engines beyond normal raids.</li>
+<li><strong>Not</strong> a parallel citadel; losing should hurt <strong>one</strong> village, not delete the kingdom.</li>
+</ul>
+<p>D2 is the <strong>scripted intro</strong> to warlords; later hits use the same rules.</p>
+<p>---</p>
+<h2 id="with-citadel-installed">With Citadel installed</h2>
+<ul>
+<li>This arc <strong>still runs</strong> unless we add explicit mutual exclusion later (<strong>none now</strong>).</li>
+<li><strong>No</strong> relic fortresses in Armies-only logic; Citadel fortresses are <strong>discovery/endgame</strong>, not replacements for O2.</li>
+<li>Optional cross-links <strong>TBD</strong> (e.g. chronicle mentions a king who fled toward the great road).</li>
+</ul>
+<p>---</p>
+<h2 id="still-to-decide">Still to decide</h2>
+<ul>
+<li>Exact <strong>trigger</strong> conditions per beat (title, soldier count, quest flags).</li>
+<li><strong>Failure</strong> rules (retry, permanent stain, village loss).</li>
+<li><strong>Multiplayer</strong> which player owns quest state.</li>
+<li>Whether <strong>D1</strong> fires once per world or once per player.</li>
+</ul>
+<p>Cross-links: <code>threats-and-mobs.md</code>, <code>endgame.md</code> (titles, warlords), <code>soldiers-and-villages.md</code>, <code>mod-split.md</code>.</p></div></section><section class="dev-doc-full" id="soldiers-and-villages"><h2>Soldiers &amp; villages</h2><p class="source">Source: <code>docs/soldiers-and-villages.md</code></p><div class="dev-doc-body"><h2 id="villager-roles">Villager roles</h2>
 <p>A villager&#x27;s job and setup decide whether a weapon makes them a soldier or a militiaman.</p>
 <table><thead><tr><th>Role</th><th>How they get it</th><th>Gear allowed</th><th>Notes</th></tr></thead><tbody><tr><td>Soldier</td><td>Villager with no trade is given a weapon, chestplate, and helmet, and has a free post bed and a stocked mess station</td><td>Full armor</td><td>Unequipping can turn them into a trader, but a trader can never become a soldier again, unless he served as a soldier before he ever traded (see Veterans)</td></tr><tr><td>Militiaman</td><td>Trader or unemployed villager is given a weapon. Unemployed villagers who meet every soldier requirement become soldiers instead</td><td>Helmet, chestplate, and boots; no leggings or shields</td><td>Can&#x27;t trade while in the militia; sometimes run from enemies</td></tr><tr><td>Bandit</td><td>Soldier deserts (<strong>45%</strong> outcome, keeps gear)</td><td>Whatever they kept</td><td>See Threats</td></tr><tr><td>Troubled youth</td><td>Born from bandit-occupied villages (80% chance)</td><td>n/a</td><td>Can never trade; can become soldiers or bandits (see Bandits)</td></tr></tbody></table>
 <ul>
@@ -344,8 +385,10 @@
 <li><strong>Bandit camps:</strong> small structures that generate in the world like pillager outposts, each with 3-5 bandits and a leader. Every world has some bands from the start.</li>
 </ul>
 <h3>Authored bandit kings (Armies mod)</h3>
-<p><strong>Separate from Citadel’s ten relic fortresses</strong> (<code>endgame.md</code>, Citadel mod only). Armies adds <strong>authored</strong> bandit bosses with <strong>fixed names</strong> and <strong>bases</strong> (outpost-scale, defenders inside, same broad feel as pillager outposts). Payoff is <strong>loot</strong> and <strong>quest progression</strong> (intel chain <strong>TBD</strong> with the Armies bandit-king questline). Roster, site count, and discovery <strong>TBD</strong>; not the same kings as the six relic fortress lords unless lore explicitly links them.</p>
+<p><strong>Separate from Citadel’s ten relic fortresses</strong> (<code>endgame.md</code>, Citadel mod only). Armies adds <strong>authored</strong> bandit bosses with <strong>fixed names</strong> and <strong>bases</strong> (outpost-scale, defenders inside, same broad feel as pillager outposts). Payoff is <strong>loot</strong> and <strong>quest progression</strong>; main arc <strong>O1/O2</strong> in <code>armies-questline.md</code>. Roster size <strong>TBD</strong> (lean <strong>3–5</strong> kings). Not the same characters as relic fortress lords unless lore explicitly links them.</p>
 <p><strong>Help/hinder bandits</strong> (truce, alliance, bribes): <strong>possible future</strong>; not MVP.</p>
+<h3>Warlords</h3>
+<p>See <strong><code>endgame.md</code></strong> (kingdom size) and <strong><code>armies-questline.md</code></strong> (<strong>D2</strong> intro). Recurring <strong>named</strong> raiders; <strong>medium</strong> raid scale cap; <strong>not</strong> an insane endgame boss.</p>
 <h3>Enlistment and threats</h3>
 <ul>
 <li><strong>Opt-out</strong> (<code>/villagers optout</code>): skips <strong>player-targeted</strong> pressure (e.g. new-moon raids near you, roving swarms rolled on you, <strong>wandering necromancer</strong> grudge strikes on the ex-owner).</li>
@@ -590,7 +633,7 @@
 <li><strong>Reassignment writ (item):</strong> moves a soldier&#x27;s home to another post bed, in another village or elsewhere in the same one. Right-click the soldier with it, then right-click a free post bed. The writ holds his name until it&#x27;s used on a bed or on another soldier. The soldier keeps his gear, rank, and kills, and his old post bed becomes free at once, so it never needs to be touched. He claims the new bed instantly, wherever he is, and stays where he is; the new bed is simply his home from now on. Anyone not in combat can be reassigned. Soldiers on campaign and camp guards keep their duty. Recipe (proposed): paper, ink sac, and an iron ingot (shapeless).</li>
 </ul></div></section></div>
       </main>
-      <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Documents</p><ul><li><a href="soldiers-and-villages/index.html">Soldiers &amp; villages</a></li><li><a href="threats-and-mobs/index.html">Threats &amp; mobs</a></li><li><a href="war-and-defense/index.html">War &amp; defense</a></li></ul></aside>
+      <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Documents</p><ul><li><a href="armies-questline/index.html">Armies storyline</a></li><li><a href="soldiers-and-villages/index.html">Soldiers &amp; villages</a></li><li><a href="threats-and-mobs/index.html">Threats &amp; mobs</a></li><li><a href="war-and-defense/index.html">War &amp; defense</a></li></ul></aside>
     </div>
   </div>
   <footer class="site-footer">

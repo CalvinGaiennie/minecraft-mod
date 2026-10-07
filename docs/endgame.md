@@ -1,6 +1,6 @@
 # Endgame
 
-Details still to decide: kingdom titles, warlords (author reviewing), monuments, and fine points of the Black Citadel. The lore behind it is in the Old kingdom lore part.
+Details still to decide: fine points of kingdom titles, monuments, and the Black Citadel. The lore behind it is in the Old kingdom lore part. **Armies-only storyline:** `armies-questline.md`.
 
 - **Bandit fortresses (Citadel mod only):** **Ten** fixed structures per world, placed from SavedData like refuges. **Do not generate** if only **Minecraft Kingdom: Armies** is installed. Scale and feel: a **defended base** (pillager-outpost class), **not** a full siege-campaign fortress (no ladders/sappers requirement). Clear anytime after worldgen; **not** gated on the Ender Dragon except where relic lore says otherwise. Each fortress has a **named Bandit King**; kings tied to a **relic** (six forts) appear in **lore books** (`old-kingdom-lore.md`, Annals, treatises). Non-relic forts still have named kings and **treasury loot**. Discovery: Royal Annals hints, burial maps, relic compass when Citadel is loaded (Armies-only worlds have **no** fortresses, so no fortress discovery loop). Garrison strength **TBD** (proposed: king + defenders comparable to a tough outpost, tune in playtest).
 - **Kingdom titles:** a player's title depends on how many villages he owns. A village only counts while at least one of his soldiers there is alive. Perks are a chat title, extra recruiter slots, and better odds on rare tax items (gold, diamonds, and netherite) only.
@@ -12,7 +12,7 @@ Details still to decide: kingdom titles, warlords (author reviewing), monuments,
 | Duke | 6 | +2 | +20% |
 | King | 10 | +3 | +30% |
 
-- **Warlords (TBD, author reviewing):** draft idea was a **named enemy general** who raids **large kingdoms** on a new-moon timer with extra siege gear, scaling with title (Lord→King). **Not decided** whether this ships; if cut, kingdom pressure stays raids + swarms + bandits + Armies-authored kings (`threats-and-mobs.md`).
+- **Warlords (Armies mod, toned down):** **Named** generals who hit **large kingdoms** on a **slow** new-moon timer. **Not** a citadel-scale threat. **Proposed:** first warlord event at **Baron+** (see `armies-questline.md` **D2**); recurring rolls every **6–8** new-moon cycles at **Duke+**; **one** village targeted; raid size capped at **medium** new-moon raid **plus** one buffed warlord NPC (**no** extra siege kit beyond normal raids). Losing is painful for **that** village, not a kingdom delete.
 - **Monuments:** when a hero or Legend dies, he drops a service record, a paper with his name and stats. Players can craft and place statues in several sizes at any time, but they look rough and unfinished until a service record is applied. Then the statue takes on that soldier's look, name, rank, and kill count. With **Armies** at the citadel, use **scattered plinths** in courts and yards (`citadel-layout.md`); without Armies, monuments stay kingdom-wide only.
 
 ## The Black Citadel
