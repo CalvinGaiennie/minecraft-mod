@@ -1,49 +1,45 @@
 # Minecraft Kingdom
 
-Two optional NeoForge mods for **1.21.1**: build living armies from real villagers, or chase a medieval endgame at the Black Citadel. Install one or both; no required modpack dependencies.
+**NeoForge 1.21.1** · **Java 21** · Two mods, one world. Install **Armies**, **Citadel**, or both. No required modpack dependencies.
 
-**NeoForge 1.21.1** · **Java 21** · **Modpack-friendly**
+Recruit villagers. March on horns. Storm a sealed fortress and claim a throne. Or pick up a wand, raise the dead, and pay for it in hearts and reputation. Vanilla survival still works; this is the chapter after the dragon.
 
-Full design canon lives in **[Dev documentation](dev/index.html)**.
+Design details: **[Dev documentation](dev/index.html)**.
 
-## What vanilla gets wrong
+## Why this exists
 
-**It gets lonely.** You do almost everything yourself. Villagers trade; they don’t run your base. The farms that actually help are exploit builds you babysit while online or AFK, so survival often feels like a solo grind, not a kingdom with people in it.
+**Minecraft is solo by default.** You trade with villagers, you don't lead them. The "helpful" farms are usually machines you babysit. We wanted a world that fights back and people who fight for you.
 
-**Endgame stops at the dragon.** Credits roll and the “main” story is over. Elytra and End cities are optional extras, not a next chapter. The Wither mostly means a beacon; the Warden drops a sculk catalyst while the good Deep Dark loot sits in city chests. Harder bosses don’t really change where the game is going.
+**The dragon isn't an ending.** We built a real post-dragon arc: kingdoms on the surface and a cursed citadel in the End, with choices that stick.
 
 ## Minecraft Kingdom: Armies
 
-*villages, economy, war*
+*villages, war, your banner on the map*
 
-Turn unemployed villagers into **soldiers and militia** tied to mess halls, taxes, and post beds. Command them with horns, march on campaign, and defend claims that feel like kingdoms, not redstone contraptions.
+**Make soldiers from real villagers.** Unemployed villagers can become militia and ranked soldiers. They wear armor, hold the line, and die on your orders.
 
-### What you get
+**Command from the field.** Horns rally squads, send them to guard a wall, charge a breach, or fall back. You are the general, not a guy clicking one iron golem.
 
-A way to turn villages into **yours**: recruit from real villagers, feed and pay them through mess halls and taxes, and send ranked soldiers and militia to hold walls you actually built. Horns, camps, and maps tie command to the ground, not a mod menu replacing the world.
+**Turn villages into territory.** Recruit, supply, and defend places you care about. Raids, swarms, and bandits scale with how much land you hold. Grow big enough and the game treats you like a kingdom, titles, pressure, and rewards included.
 
-Defense and economy grow together: supply, recruiters, farmers, and protection blocks so a hamlet behaves like a place worth keeping, not a trading hall behind a door. When you enlist, the world pushes back, raids, swarms, and bandits that care about claimed land (opt out if you only want building and machines).
-
-Scale up and the game notices: kingdom titles from owned villages, bigger threats for bigger realms, and tools like wanted posters (planned) so your army enforces borders instead of you standing on every rampart alone.
+**Play your way.** Want Create and peaceful building? Threats can stay optional. Want conquest? Campaign against bandit fortresses and named enemies for loot and intel that opens the next fight.
 
 ::: future
-**Modpacks:** No required companion mods. We design for optional coexistence and deeper hooks when popular content mods are present, see [mod compatibility](dev/start/development-plan/mod-compatibility-targets.html) in dev docs.
+**Modpacks:** No hard dependencies. We target coexistence with popular content mods, see [mod compatibility](dev/start/development-plan/mod-compatibility-targets.html).
 :::
 
 ## Minecraft Kingdom: Citadel
 
-*necromancy & endgame*
+*necromancy, siege, throne*
 
-Break the seal on the **Black Citadel**, survive a **siege** built for traps, spawners, and debuff pressure, not a pure tank check, then slay the Corrupted King and two bound necromancers. Hold the throne, heal the Kingstree, restore the Hall of the Twelve Kings. An optional **Order acolyte** path (train, feats, escort brothers) runs **before claim**; necromancy stays optional darkness alongside it.
+**A second act in the End.** After the dragon, the Black Citadel waits behind a seal you break yourself. Fight through a fortress built to hurt you: traps, spawners, blindness, slowness, not just a HP sponge. Kill the Corrupted King and his bound necromancers, then decide who sits the throne.
 
-### What you get
+**Own the citadel.** Claim it, remodel the interior, wake royal stations, heal the Blighted Tree, restore the Hall of the Twelve Kings. With Armies installed, kingdom perks and citadel-side content stack on top.
 
-A **second act** after the dragon: breach player-mined gates under overwatch, push **defensive-mode** corridors, and win a citadel you can **remodel**: strong shell, soft interiors, deep basements. Restoration wakes royal stations, acolytes, and relic lore; with Armies, kingdom perks and citadel shadow content amplify the approach.
+**Necromancy is power with a receipt.** The wand turns hostiles into minions; each use costs permanent hearts. Hood and robe buy peace from monsters and cost you goodwill with everyone else. **Horcruxes** make you nearly impossible to kill for a few minutes at a time, poison-immune, harm-immune, fake death and all, but each one locks away max health forever and closes the path to absolution. Other players can hunt you with a compass that never runs out of range.
 
-The overworld feeds the arc, refuges, bandit fortresses with relics, and **rogue necromancer** sites (common; rare **wild lich** horcruxes teach hunt + **Dragon’s Well** disposal). Casual wand play always exists; a **committed questline** adds End-boss **flutes** (craft charges to play), god-wizard armor, player horcruxes, and a craftable **horcrux compass** with no range cap, permanent forks, real hunt stakes.
-
-You can ignore Order and quest necromancy and still run the citadel; paths are **permanent forks**, not required checklist.
+**Optional story, permanent forks.** Train with the Order of the Flame before claim, or walk the necromancer road, or ignore both and still siege the citadel. Commit to the dark quest and the Order closes. Create a horcrux and there is no walking back.
 
 ::: future
-Install **Citadel** without **Armies** for a standalone endgame; install both for kingdom titles, soldier-linked relic powers, and citadel mess ownership.
+**Citadel alone** is a full endgame mod. **Citadel + Armies** adds kingdom titles, shared relic perks, and citadel mess ownership.
 :::
