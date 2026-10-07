@@ -4,7 +4,9 @@ import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
 
+import com.villagers.mod.armies.BanditSiteGenerator;
 import com.villagers.mod.block.ArrowBinBlock;
+import com.villagers.mod.block.BanditCampBlock;
 import com.villagers.mod.block.CaltropBlock;
 import com.villagers.mod.block.CampBlock;
 import com.villagers.mod.block.FallbackBlock;
@@ -24,6 +26,10 @@ import com.villagers.mod.block.entity.VillagerBlockEntities;
 import com.villagers.mod.entity.VillagerAttachments;
 import com.villagers.mod.event.VillagerAttributeSetup;
 import com.villagers.mod.item.AwakenHornItem;
+import com.villagers.mod.item.BanditLedgerItem;
+import com.villagers.mod.item.GarlandQuestCompassItem;
+import com.villagers.mod.item.GarlandSignetItem;
+import com.villagers.mod.item.TornMapHalfItem;
 import com.villagers.mod.item.CaltropsItem;
 import com.villagers.mod.item.CampaignBootsItem;
 import com.villagers.mod.item.VillageBannerItem;
@@ -136,8 +142,17 @@ public class VillagersMod {
     public static final DeferredItem<AwakenHornItem> AWAKEN_HORN = ITEMS.register("awaken_horn", () -> new AwakenHornItem(new Item.Properties().stacksTo(1)));
     public static final DeferredItem<MusterRollItem> MUSTER_ROLL = ITEMS.register("muster_roll", () -> new MusterRollItem(new Item.Properties().stacksTo(1)));
 
-    public static final DeferredBlock<Block> BANDIT_CAMP = BLOCKS.register("bandit_camp", () -> new SimpleModBlock(Blocks.RED_WOOL));
+    public static final DeferredBlock<Block> BANDIT_CAMP = BLOCKS.register("bandit_camp",
+            () -> new BanditCampBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.RED_WOOL)));
     public static final DeferredItem<BlockItem> BANDIT_CAMP_ITEM = ITEMS.register("bandit_camp", () -> new BlockItem(BANDIT_CAMP.get(), new Item.Properties()));
+    public static final DeferredItem<BanditLedgerItem> BANDIT_LEDGER =
+            ITEMS.register("bandit_ledger", () -> new BanditLedgerItem(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<TornMapHalfItem> TORN_MAP_HALF =
+            ITEMS.register("torn_map_half", () -> new TornMapHalfItem(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<GarlandSignetItem> GARLAND_SIGNET =
+            ITEMS.register("garland_signet", () -> new GarlandSignetItem(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<GarlandQuestCompassItem> GARLAND_QUEST_COMPASS =
+            ITEMS.register("garland_quest_compass", () -> new GarlandQuestCompassItem(new Item.Properties().stacksTo(1)));
     public static final DeferredBlock<Block> NECROMANCER_CRYPT = BLOCKS.register("necromancer_crypt", () -> new SimpleModBlock(Blocks.DEEPSLATE_BRICKS));
     public static final DeferredItem<BlockItem> NECROMANCER_CRYPT_ITEM = ITEMS.register("necromancer_crypt", () -> new BlockItem(NECROMANCER_CRYPT.get(), new Item.Properties()));
     public static final DeferredBlock<Block> WILD_RANCH = BLOCKS.register("wild_ranch", () -> new SimpleModBlock(Blocks.HAY_BLOCK));
@@ -210,6 +225,10 @@ public class VillagersMod {
                 output.accept(GRAVE_SHROUD.get());
                 output.accept(VILLAGE_CHRONICLE.get());
                 output.accept(VILLAGE_MAP.get());
+                output.accept(BANDIT_LEDGER.get());
+                output.accept(TORN_MAP_HALF.get());
+                output.accept(GARLAND_SIGNET.get());
+                output.accept(GARLAND_QUEST_COMPASS.get());
             })
             .withTabsAfter(CreativeModeTabs.SEARCH)
             .build());
@@ -247,16 +266,7 @@ public class VillagersMod {
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
-        // Some common setup code
-        LOGGER.info("HELLO FROM COMMON SETUP");
-
-        if (Config.LOG_DIRT_BLOCK.getAsBoolean()) {
-            LOGGER.info("DIRT BLOCK >> {}", BuiltInRegistries.BLOCK.getKey(Blocks.DIRT));
-        }
-
-        LOGGER.info("{}{}", Config.MAGIC_NUMBER_INTRODUCTION.get(), Config.MAGIC_NUMBER.getAsInt());
-
-        Config.ITEM_STRINGS.get().forEach((item) -> LOGGER.info("ITEM >> {}", item));
+        LOGGER.info("Villagers mod common setup");
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
@@ -275,7 +285,6 @@ public class VillagersMod {
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
-        // Do something when the server starts
-        LOGGER.info("HELLO from server starting");
+        event.getServer().getAllLevels().forEach(BanditSiteGenerator::ensureGenerated);
     }
 }

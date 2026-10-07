@@ -68,6 +68,10 @@ ITEMS = {
     "village_chronicle": ("minecraft:item/writable_book", None),
     "village_map": ("minecraft:item/map", None),
     "grave_shroud": ("minecraft:item/chainmail_helmet", None),
+    "bandit_ledger": ("minecraft:item/writable_book", None),
+    "torn_map_half": ("minecraft:item/map", None),
+    "garland_signet": ("minecraft:item/gold_nugget", None),
+    "garland_quest_compass": ("minecraft:item/compass_16", None),
 }
 
 
@@ -95,7 +99,7 @@ def main() -> None:
                 write(ROOT / f"models/item/{bid}.json", f'{{"parent": "{parent}"}}\n')
 
     for iid, (parent, _) in ITEMS.items():
-        if (ROOT / f"models/item/{iid}.json").exists():
+        if iid in BLOCKS:
             continue
         write(ROOT / f"models/item/{iid}.json", f'{{"parent": "{parent}"}}\n')
 

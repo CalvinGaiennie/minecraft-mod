@@ -99,5 +99,21 @@
   "item.villagers.village_chronicle.read": "You read a village chronicle.",
   "item.villagers.village_map": "Village Map",
   "advancements.villagers.root.title": "Village Life",
-  "advancements.villagers.root.description": "Obtain a mess station."
+  "advancements.villagers.root.description": "Obtain a mess station.",
+  "item.villagers.bandit_ledger": "Blood-stained Ledger",
+  "item.villagers.torn_map_half": "Torn Map Half",
+  "item.villagers.garland_signet": "Garland's Signet",
+  "item.villagers.garland_signet.lore": "Trophy. The Rook is finished.",
+  "item.villagers.garland_quest_compass": "Rook's Trail Compass",
+  "quest.villagers.d1_waiting": "Your muster is large enough to draw unwanted attention. Return to that village.",
+  "quest.villagers.d1_start": "Bandits assault your village!",
+  "quest.villagers.o1_ledger": "Halvek dropped a blood-stained ledger.",
+  "quest.villagers.corvin_bearing": "The ledger names Corvin. Search near X=%s Z=%s.",
+  "quest.villagers.corvin_line": "You absolute mule. I'm not the Rook. I'm what keeps his books. Run home, lordling, before Garland turns your pretty village into ash.",
+  "quest.villagers.d2_armed": "Garland the Rook will hit your largest village when you return.",
+  "quest.villagers.d2_start": "Garland the Rook is attacking your largest village!",
+  "quest.villagers.garland_fled": "Garland fled, leaving half a map behind.",
+  "quest.villagers.garland_bearing": "Combine the ledger, torn map, and a compass. Garland hides near X=%s Z=%s.",
+  "quest.villagers.rookbreaker": "Title earned: Rookbreaker. Desertion in your villages is reduced.",
+  "quest.villagers.d2_failed": "Garland broke your village. Rebuild the mess and beds, then return to your largest village."
 }

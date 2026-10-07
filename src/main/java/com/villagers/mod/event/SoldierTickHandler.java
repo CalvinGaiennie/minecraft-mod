@@ -26,6 +26,7 @@ import com.villagers.mod.defense.BeaconSoldierBuffs;
 import com.villagers.mod.combat.CombatDoorOpening;
 import com.villagers.mod.gear.GearReplacement;
 import com.villagers.mod.gear.VillagerGearRules;
+import com.villagers.mod.combat.BanditCombat;
 import com.villagers.mod.threat.BanditService;
 import com.villagers.mod.war.CampaignService;
 import com.villagers.mod.war.MutinyService;
@@ -68,7 +69,7 @@ public class SoldierTickHandler {
                 tickVeteran(villager, level, gameTime);
             } else if (villager.hasData(VillagerAttachments.BANDIT_DATA.get())) {
                 if (level.getGameTime() % 10 == villager.getId() % 10) {
-                    BanditService.tick(villager);
+                    BanditCombat.tick(villager);
                 }
             } else if (tryConversion) {
                 GearReplacement.tryPullEnlistGearFromNearestRecruiter(villager);
@@ -102,8 +103,7 @@ public class SoldierTickHandler {
         if (newDay) {
             var data = villager.getData(VillagerAttachments.SOLDIER_DATA.get());
             SoldierDesertion.recordNightWithoutBed(villager, data);
-            if (SoldierDesertion.shouldDesertNow(villager)) {
-                SoldierDesertion.desert(villager);
+            if (SoldierDesertion.tryDesert(villager)) {
                 return;
             }
         }

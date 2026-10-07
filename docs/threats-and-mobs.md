@@ -55,6 +55,12 @@ Raid size is random, not tied to the village's defenses:
 - **Bandits and swarms** are enemies and fight each other.
 - **Bandit camps:** small structures that generate in the world like pillager outposts, each with 3-5 bandits and a leader. Every world has some bands from the start.
 
+**Camp loot and respawn (author, 2026-10-07):**
+
+- **Respawn:** defender repop follows **pillager outpost** rules (leave the area, bandits return on the same kind of timer; tune to vanilla parity in playtest). **Chest loot does not refill** when the garrison respawns (same as outpost barrels/chests: one payout per structure generation / first clear).
+- **Chests:** stolen-kingdom **blocks** (iron, gold, emerald, etc.) plus **enchanted weapons and armor** — enough, spread across camp chests and leader gear, to **decently outfit about three or four players** (mostly iron with some diamond and useful enchants; exact weights **TBD** in loot tables).
+- **Intel (unchanged):** **village map** (`war-and-defense.md`); **hero legend** books (~**5%** per camp roll); **Village Chronicles** (`old-kingdom-lore.md`).
+
 ### Authored bandit kings (Armies mod)
 
 **Separate from Citadel’s ten relic fortresses** (`endgame.md`, Citadel mod only). Armies adds **authored** bandit bosses with **fixed names** and **bases** (outpost-scale, defenders inside, same broad feel as pillager outposts). Payoff is **loot** and **quest progression**; arc **D1→O1→D2→O2** in `armies-questline.md` (**O1** identifies who hit you in **D1**; **D2** after **O1** feeds **O2**). Roster size **TBD** (lean **3–5** kings). Not the same characters as relic fortress lords unless lore explicitly links them.
@@ -113,6 +119,7 @@ Troubled youth can never take a trade, so they can never become traders or milit
 
 - **What they are:** bandit lairs built into large caves, rarer than bandit camps, each with 6-10 bandits and a leader. Inside are caltrop corridors and pit traps, so they teach players to watch their footing.
 - **Inside:** sleeping bays, a chest of stolen taxes, and a cell with 1-2 captive villagers who join the player's nearest village as unemployed villagers when freed. A small chance of a rare chronicle.
+- **Loot (author, 2026-10-07):** **one tier above bandit camps** — same categories (blocks, enchanted gear, maps, lore books) but **richer counts and stronger enchants**; still **below** authored quest finales and **far below** Citadel relic fortresses. Garrison **respawn** matches **pillager outpost** rules; chest loot **one-time** like camps.
 - **Behavior:** hideout bandits follow normal band rules but travel through caves when they can.
 
 ### Underground villages

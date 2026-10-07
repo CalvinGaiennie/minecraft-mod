@@ -20,6 +20,7 @@ import com.villagers.mod.entity.SoldierBedSleep;
 import com.villagers.mod.entity.SoldierData;
 import com.villagers.mod.entity.VeteranData;
 import com.villagers.mod.entity.VillagerAttachments;
+import com.villagers.mod.threat.BanditService;
 import com.villagers.mod.item.VeteranSwordItem;
 import org.jetbrains.annotations.Nullable;
 
@@ -138,6 +139,19 @@ public final class SoldierCombat {
             if (dist < bestDist) {
                 bestDist = dist;
                 best = entity;
+            }
+        }
+        for (Villager other : level.getEntitiesOfClass(Villager.class, box)) {
+            if (other == villager || !BanditService.isBandit(other) || !other.isAlive()) {
+                continue;
+            }
+            if (!villager.hasLineOfSight(other)) {
+                continue;
+            }
+            double dist = villager.distanceToSqr(other);
+            if (dist < bestDist) {
+                bestDist = dist;
+                best = other;
             }
         }
         return best;

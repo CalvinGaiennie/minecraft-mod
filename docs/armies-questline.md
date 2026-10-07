@@ -43,7 +43,7 @@ O2 — hunt and kill the big bandit leader (player finish only)
 
 **Goal:** Ledger names **Corvin** and a bearing (flavor text only). **Quest compass** or **journal waypoint** to a **pre-placed outpost** (**Corvin’s camp**, SavedData, one site per world, distance rules **TBD** placement).
 
-**Middle manager:** **Corvin** (not the big leader). Outpost: **8–12** bandits + Corvin.
+**Middle manager:** **Corvin** (not the big leader). Outpost: **8–12** bandits + Corvin. Chests use **bandit camp loot** (`threats-and-mobs.md`) with a **modest bump** to **ores and valuables** (extra **diamonds, emeralds**, iron/gold ingots and blocks) — bookkeeper’s cut, not hideout-tier enchants. No extra unique drop beyond the quest beat.
 
 **Rules:**
 
@@ -73,14 +73,14 @@ O2 — hunt and kill the big bandit leader (player finish only)
 
 **Start:** **`torn_map_half`** + journal line from a villager (proposed): *“He went to the broken tower beyond the birch swamp!”*
 
-**Find:** Combine **`torn_map_half`** with **ledger** (crafting grid or anvil **TBD**) → compass unlock to **Garland’s camp** (SavedData outpost, stronger than Corvin’s).
+**Find:** Shapeless craft **`torn_map_half`** + **ledger** + **compass** → **Rook's Trail Compass**; journal bearing to **Garland’s camp** (SavedData outpost, stronger than Corvin’s).
 
 **Goal:** Kill **Garland the Rook**. **Player finish only**.
 
 **Rewards:**
 
-- Large treasury chest (mixed loot, **no** relic).
-- **Garland’s Signet** (slot **TBD**): **trophy only**, no stat perks.
+- **Garland’s treasury:** **hideout-tier or better** blocks and enchanted gear (still **no** relic), on top of normal outpost chests — enough to feel like the Rook’s main stash; tune above hideouts in playtest.
+- **Garland’s Signet**: **trophy only** (normal inventory item), no stat perks.
 - Permanent chat title **Rookbreaker** (from his nickname **the Rook**). While you hold this title: **−10% soldier desertion** in owned villages (`titleRookbreakerDesertionMultiplier` **0.90**, config). Same perk style as kingdom titles in `endgame.md` (title-gated, not item-gated).
 - Arc **complete**; Halvek, Corvin, Garland **do not** respawn.
 

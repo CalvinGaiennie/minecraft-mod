@@ -44,4 +44,8 @@ public class VillagerBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MobSpawnerCapBlockEntity>> MOB_SPAWNER_CAP =
             BLOCK_ENTITIES.register("mob_spawner_cap", () ->
                     BlockEntityType.Builder.of(MobSpawnerCapBlockEntity::new, VillagersMod.MOB_SPAWNER_CAP.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BanditCampBlockEntity>> BANDIT_CAMP =
+            BLOCK_ENTITIES.register("bandit_camp", () ->
+                    BlockEntityType.Builder.of(BanditCampBlockEntity::new, VillagersMod.BANDIT_CAMP.get()).build(null));
 }

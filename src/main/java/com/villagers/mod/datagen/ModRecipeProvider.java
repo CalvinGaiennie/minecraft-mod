@@ -7,6 +7,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
@@ -54,5 +55,12 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
                 .define('I', Items.IRON_INGOT)
                 .unlockedBy("has_stone_bricks", has(Items.STONE_BRICKS))
                 .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(VillagersMod.MODID, "rampart"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, VillagersMod.GARLAND_QUEST_COMPASS.get())
+                .requires(VillagersMod.BANDIT_LEDGER.get())
+                .requires(VillagersMod.TORN_MAP_HALF.get())
+                .requires(Items.COMPASS)
+                .unlockedBy("has_ledger", has(VillagersMod.BANDIT_LEDGER.get()))
+                .save(recipeOutput, ResourceLocation.fromNamespaceAndPath(VillagersMod.MODID, "garland_quest_compass"));
     }
 }

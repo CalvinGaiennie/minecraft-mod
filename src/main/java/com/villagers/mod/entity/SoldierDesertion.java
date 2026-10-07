@@ -3,8 +3,10 @@ package com.villagers.mod.entity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.npc.Villager;
 
+import com.villagers.mod.armies.ArmiesQuestService;
 import com.villagers.mod.combat.SoldierCombat;
 import com.villagers.mod.util.SoldierStructureHelper;
+import com.villagers.mod.village.VillageManager;
 
 public class SoldierDesertion {
     public static final int DAYS_UNTIL_HUNGRY_DESERTION = 7;
@@ -51,6 +53,31 @@ public class SoldierDesertion {
             return true;
         }
         return wouldDesertFromHunger(data, currentDay, messStocked);
+    }
+
+    /** Returns true if desertion should proceed; false if Rookbreaker (or similar) reprieved the soldier. */
+    public static boolean tryDesert(Villager soldier) {
+        if (!shouldDesertNow(soldier)) {
+            return false;
+        }
+        if (soldier.level() instanceof ServerLevel level) {
+            var village = VillageManager.get(level).findVillageAt(soldier.getBlockX(), soldier.getBlockY(), soldier.getBlockZ());
+            if (village != null) {
+                double mult = ArmiesQuestService.desertionMultiplierForOwner(level, village.getOwnerId());
+                if (level.random.nextDouble() > mult) {
+                    SoldierData data = soldier.getData(VillagerAttachments.SOLDIER_DATA.get());
+                    if (data != null) {
+                        data.setHomelessNights(Math.max(0, data.getHomelessNights() - 1));
+                        if (data.getLastFoodDay() >= 0) {
+                            data.setLastFoodDay(data.getLastFoodDay() + 1);
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+        desert(soldier);
+        return true;
     }
 
     public static void desert(Villager soldier) {

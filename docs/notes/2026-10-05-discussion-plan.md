@@ -78,6 +78,8 @@
 | 2026-10-07 | **Armies arc (story)** | **D1:** **30** soldiers one village → attack (no moon). Leader **player-kill** → **notebook** → **O1**. **O1:** middle manager **player-kill**, taunt, rush home. **D2:** biggest village under **big leader**; repel, he **escapes**. **O2:** hunt and kill big leader. | `armies-questline.md` |
 | 2026-10-07 | **Armies arc (approved)** | Names **Halvek / Corvin / Garland** only. D1 requires owner **in village zone**; **−10%** desertion signet (**0.90**). | `armies-questline.md` |
 | 2026-10-07 | **Armies arc (tweak)** | D1 starts **on enter** first **30**-soldier village; **Garland the Rook** nickname; **Rookbreaker** title **−10%** desertion (not signet). | `armies-questline.md` |
+| 2026-10-07 | **Bandit camp loot** | Camps: **pillager outpost** garrison respawn; chests = blocks + enchants for **~3–4 players**, one-time. Hideouts: **one tier up**. Garland treasury **≥ hideout**. | `threats-and-mobs.md`, `armies-questline.md` |
+| 2026-10-07 | **Corvin camp loot** | **Camp baseline** + extra **diamond/emerald/ore** valuables; not hideout enchant tier. | `armies-questline.md` |
 
 ---
 
