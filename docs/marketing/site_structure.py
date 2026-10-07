@@ -1,0 +1,110 @@
+"""Site information architecture for marketing + dev HTML export."""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+DOCS_DIR = REPO_ROOT / "docs"
+
+MARKETING_PAGES = [
+    ("home", "Home", "pages/home.md"),
+    ("vanilla", "Vanilla gaps", "pages/vanilla.md"),
+    ("armies", "Armies", "pages/armies.md"),
+    ("citadel", "Citadel", "pages/citadel.md"),
+]
+
+
+@dataclass(frozen=True)
+class DevDoc:
+    relpath: str  # under docs/
+    title: str
+    split_h2_min: int = 2  # split into subpages when >= this many ## sections
+
+
+@dataclass(frozen=True)
+class DevGroup:
+    id: str
+    title: str
+    docs: tuple[DevDoc, ...]
+
+
+DEV_GROUPS: tuple[DevGroup, ...] = (
+    DevGroup(
+        "start",
+        "Start",
+        (
+            DevDoc("overview.md", "Overview"),
+            DevDoc("mod-goals.md", "Mod goals"),
+            DevDoc("mod-split.md", "Mod split"),
+            DevDoc("integration.md", "Integration"),
+            DevDoc("marketing/development-plan.md", "Development plan", split_h2_min=2),
+            DevDoc("compatibility-planned-mods.md", "Compatibility targets"),
+        ),
+    ),
+    DevGroup(
+        "notes",
+        "Notes",
+        (
+            DevDoc("notes/2026-10-05-discussion-plan.md", "Discussion plan"),
+            DevDoc("notes/2026-10-05-design-notes-intake.md", "Design intake"),
+        ),
+    ),
+    DevGroup(
+        "citadel",
+        "Citadel",
+        (
+            DevDoc("endgame.md", "Endgame", split_h2_min=2),
+            DevDoc("citadel-claim.md", "Citadel claim"),
+            DevDoc("citadel-layout.md", "Citadel layout", split_h2_min=2),
+            DevDoc("citadel-defenders.md", "Citadel defenders", split_h2_min=2),
+        ),
+    ),
+    DevGroup(
+        "order",
+        "Order",
+        (DevDoc("acolyte-path.md", "Acolyte path", split_h2_min=2),),
+    ),
+    DevGroup(
+        "necromancer",
+        "Necromancer",
+        (
+            DevDoc("necromancer-path.md", "Necromancer path", split_h2_min=2),
+            DevDoc("necromancy.md", "Necromancy"),
+        ),
+    ),
+    DevGroup(
+        "armies",
+        "Armies",
+        (
+            DevDoc("soldiers-and-villages.md", "Soldiers & villages", split_h2_min=2),
+            DevDoc("war-and-defense.md", "War & defense", split_h2_min=2),
+            DevDoc("threats-and-mobs.md", "Threats & mobs", split_h2_min=2),
+        ),
+    ),
+    DevGroup(
+        "build",
+        "Build",
+        (
+            DevDoc("config-and-recipes.md", "Config & recipes"),
+            DevDoc("master-build-note.md", "Master build note", split_h2_min=2),
+            DevDoc("stages-1-4-completion.md", "Stages 1–4"),
+            DevDoc("stages-5-6-completion.md", "Stages 5–6"),
+            DevDoc("stages-1-3-tests.md", "Stages 1–3 tests"),
+            DevDoc("stage-1-tests.md", "Stage 1 tests"),
+        ),
+    ),
+    DevGroup(
+        "lore",
+        "Lore",
+        (DevDoc("old-kingdom-lore.md", "Old kingdom lore", split_h2_min=2),),
+    ),
+)
+
+
+def doc_slug(relpath: str) -> str:
+    name = Path(relpath).name
+    if name.endswith(".md"):
+        name = name[:-3]
+    return name.replace("_", "-")

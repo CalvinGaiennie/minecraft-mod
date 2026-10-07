@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Necromancy — Minecraft Kingdom</title>
+  <link rel="stylesheet" href="../../../assets/site.css" />
+  
+</head>
+<body class="scope-dev">
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-top">
+        <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
+        <nav class="main-nav" aria-label="Site">
+          <a href="../../../index.html" class="">Marketing</a>
+          <a href="../../index.html" class="active">Dev docs</a>
+        </nav>
+      </div>
+      <nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../index.html" class="active">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav>
+    </div>
+  </header>
+  <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Subsections</p><ul><li><a href="#hood-and-robe">Hood and robe</a></li><li><a href="#wand">Wand</a></li><li><a href="#charging-the-wand">Charging the wand</a></li><li><a href="#minions">Minions</a></li><li><a href="#commanding-minions">Commanding minions</a></li><li><a href="#risks">Risks</a></li><li><a href="#necromancer-penalties">Necromancer penalties</a></li><li><a href="#potion-of-absolution">Potion of absolution</a></li><li><a href="#recipes">Recipes</a></li><li><a href="#rogue-necromancers-and-phylactery-shards">Rogue necromancers and phylactery shards</a></li><li><a href="#horcrux-player-created">Horcrux (player-created)</a></li></ul></aside>
+    <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Subsections</p><ul><li><a href="#hood-and-robe">Hood and robe</a></li><li><a href="#wand">Wand</a></li><li><a href="#charging-the-wand">Charging the wand</a></li><li><a href="#minions">Minions</a></li><li><a href="#commanding-minions">Commanding minions</a></li><li><a href="#risks">Risks</a></li><li><a href="#necromancer-penalties">Necromancer penalties</a></li><li><a href="#potion-of-absolution">Potion of absolution</a></li><li><a href="#recipes">Recipes</a></li><li><a href="#rogue-necromancers-and-phylactery-shards">Rogue necromancers and phylactery shards</a></li><li><a href="#horcrux-player-created">Horcrux (player-created)</a></li></ul></aside>
+    <main class="doc-main">
+      <p class="source">Source: <code>docs/necromancy.md</code></p><h1>Necromancy</h1>
+<p>The necromancer&#x27;s hood and robe keep hostile mobs off the player; the wand turns hostile mobs into minions at a cost in hearts.</p>
+<p><strong>Planned player questline:</strong> <strong><code>docs/necromancer-path.md</code></strong>. Wand use and rules below apply <strong>independently</strong> of the quest until the intro arc’s <strong>commit</strong> choice. <strong>Commit</strong> closes the Order path only. <strong>Opt out</strong> keeps the Order (see acolyte doc); you can remain an active necromancer either way. <strong>Absolution</strong> is blocked by <strong>creating a horcrux</strong> (see below), not by commit.</p>
+<h3>Hood and robe</h3>
+<table><thead><tr><th>Wearer</th><th>One piece (hood or robe)</th><th>Full set (hood + robe)</th></tr></thead><tbody><tr><td><strong>Non-necromancer</strong> (incl. absolved)</td><td>Undead won&#x27;t attack; undead <strong>swarms</strong> ignore wearer</td><td>Other hostiles won&#x27;t attack <strong>except Wither and Warden</strong></td></tr><tr><td><strong>Active necromancer</strong></td><td>Same undead rule</td><td>All hostiles won&#x27;t attack, <strong>including Wither and Warden</strong></td></tr></tbody></table>
+<ul>
+<li>The Ender Dragon, guardians, and elder guardians always attack. <strong>Bandits</strong> are not hostiles — robes don&#x27;t stop them.</li>
+<li><strong>Durability:</strong> about the same as leather (hood 55, robe 80). Repaired with phantom membranes.</li>
+<li><strong>Stigma (anyone in hood/robe):</strong> ~<strong>half</strong> of necromancer social penalties (config <code>stigmaRobeFraction</code>, default 0.5): e.g. +25% villager trades, 1.25× soldier desertion, <strong>3×</strong> slower recruiters for <strong>necromancers only</strong> (see penalties), 50% chance villagers flee / others&#x27; soldiers attack per check.</li>
+<li><strong>Necromancer-only penalties</strong> while active (full strength, not half): +50% trades in robes, <strong>double fear tax</strong> in <strong>your</strong> villages (robes alone do <strong>not</strong> add fear tax), <strong>3×</strong> recruiter interval, double desertion, mutiny double-roll (soldier mod).</li>
+</ul>
+<h3>Wand</h3>
+<ul>
+<li>Hitting a hostile mob with a charged wand turns it into a minion that fights for the player, including spiders and creepers.</li>
+<li>The wand holds up to 20 charges.</li>
+<li>Each conversion costs charges by mob:</li>
+</ul>
+<table><thead><tr><th>Mob</th><th>Charges</th></tr></thead><tbody><tr><td>Zombie, skeleton, spider, husk, stray, drowned</td><td>1</td></tr><tr><td>Creeper, witch, cave spider</td><td>2</td></tr><tr><td>Enderman, wither skeleton, blaze</td><td>3</td></tr><tr><td>Bosses</td><td>Can&#x27;t be converted</td></tr></tbody></table>
+<h3>Charging the wand</h3>
+<ul>
+<li>The wand is charged with a <strong>bottle of souls</strong>: 1 glass bottle, 1 ghast tear, 1 soul sand (shapeless).</li>
+<li>Each bottle adds 20 charges, a full refill.</li>
+</ul>
+<h3>Minions</h3>
+<ul>
+<li><strong>Max minions:</strong> no cap. The permanent heart loss from each wand use is what limits a necromancer&#x27;s army. Server owners can set a max soldiers and minions per player; the default is no cap.</li>
+<li><strong>No food or beds:</strong> minions don&#x27;t use mess stations or post beds, and don&#x27;t count toward tax coverage.</li>
+<li><strong>Sunlight:</strong> zombies and skeletons still burn in daylight unless they wear a helmet.</li>
+<li><strong>Allies:</strong> the player&#x27;s own soldiers treat his minions as allies. Everyone else&#x27;s soldiers attack them.</li>
+<li><strong>Decay:</strong> minions crumble after 30 in-game days (one month) unless the player hits them with the wand again. Renewing costs 1 charge and counts as a wand use, with the same heart risk. Warnings: with 5 days left, a minion gives off faint soul particles; with 1 day left, the particles turn heavy and the player gets a chat message. Right-clicking with the wand lists how many minions expire in the next 5 days.</li>
+</ul>
+<h3>Commanding minions</h3>
+<p>A necromancer can shield minions from the sun, park them at a base, and send them against a marked target at night.</p>
+<table><thead><tr><th>Item</th><th>What it does</th></tr></thead><tbody><tr><td>Grave shroud (minion helmet)</td><td>Put on a minion to stop it burning in daylight. In direct sunlight it won&#x27;t attack or step out of the shade; in shade or at night it acts normally</td></tr><tr><td>Grave marker (block)</td><td>Parks minions. Shift-right-click it with the wand and all following minions stay within 16 blocks of it. Shift-right-click again to have them follow you</td></tr><tr><td>Cursed effigy (block)</td><td>Marks a target. At night, following minions within 64 blocks of it break off and attack everything within 32 blocks of it except the player, his soldiers, and his minions</td></tr></tbody></table>
+<ul>
+<li><strong>Effigy timing:</strong> effigies only activate between dusk and dawn. At dawn, minions stop attacking and go back to following the player, or to their last grave marker if he&#x27;s out of range. The effigy stays in place and works again the next night.</li>
+<li><strong>Effigy defense:</strong> other players&#x27; soldiers attack an effigy only if they come within 4 blocks of it.</li>
+<li><strong>Unlimited effigies:</strong> a player can place as many as he wants. Minions attack around the nearest active effigy within 64 blocks.</li>
+<li><strong>Parked minions still decay:</strong> renewal timers keep running at a grave marker, so a hidden army still needs visits.</li>
+</ul>
+<p>Example raid: park the army at a grave marker in your base, sneak a cursed effigy into the enemy base, return and shift-right-click the marker so the army follows you, lead it within 64 blocks of the effigy, and wait for night.</p>
+<h3>Risks</h3>
+<ul>
+<li>Each wand use: 3% chance to lose a heart permanently in that world, and a 5% chance of a short side effect: blindness (2 minutes), slowness (30 seconds), or weakness (30 seconds).</li>
+<li>Using a wand makes the player a necromancer, with heavy penalties (see Necromancer penalties).</li>
+<li>A necromancer&#x27;s own minions don&#x27;t count as hostile mobs when he makes soldiers (see Soldier requirements).</li>
+</ul>
+<ul>
+<li>A player can&#x27;t drop below 1 heart of max health from permanent loss. At 1 heart, the wand keeps working with no further heart cost, on purpose: a necromancer willing to live on 1 heart can raise as many minions as he wants, limited only by charges, mobs, and the server cap.</li>
+</ul>
+<p>Expected heart loss from wand uses (conversions and renewals both count):</p>
+<table><thead><tr><th>Wand uses</th><th>Permanent hearts lost (avg)</th><th>Hearts left (from 10)</th><th>Chance of losing at least 1</th></tr></thead><tbody><tr><td>10</td><td>0.3</td><td>about 10</td><td>26%</td></tr><tr><td>50</td><td>1.5</td><td>about 8.5</td><td>78%</td></tr><tr><td>100</td><td>3</td><td>about 7</td><td>95%</td></tr><tr><td>200</td><td>6</td><td>about 4</td><td>over 99%</td></tr><tr><td>300</td><td>9 (floor)</td><td>1</td><td>about 100%</td></tr></tbody></table>
+<p>A 100-minion army costs about 3 hearts to build, then about 3 more each month to renew.</p>
+<h3>Necromancer penalties</h3>
+<p>A player becomes an <strong>active necromancer</strong> the first time he uses a wand (convert or renew), unless the questline gates the wand until later (<strong>TBD</strong>). Penalties below apply while active.</p>
+<p><strong>Absolution:</strong> clears <strong>active</strong> necromancer status <strong>only if</strong> the player has <strong>never created a horcrux</strong> (player horcrux ritual below). <strong>Commit</strong> to the necromancer quest at the Well does <strong>not</strong> block absolution. <strong>First horcrux = commitment to the necromancer life:</strong> absolution <strong>forever impossible</strong> afterward (potion fails — <strong>TBD</strong> UX). <strong>Destroying</strong> horcruxes does <strong>not</strong> restore eligibility. A committed quest necromancer who <strong>never</strong> made a horcrux may still <strong>retake the citadel</strong>, <strong>heal the tree</strong>, <strong>absolve</strong>, and <strong>sit the throne</strong> as a non-active necromancer (<code>citadel-claim.md</code>).</p>
+<p>While active and <strong>eligible</strong> for absolution:</p>
+<ul>
+<li><strong>Slow recruiting:</strong> recruiters still work, but take <strong>3×</strong> as long between recruits (configurable).</li>
+<li><strong>Distrust:</strong> his soldiers have double the normal desertion chances from hunger and morale (soldier mod).</li>
+<li><strong>Bad reputation:</strong> while wearing the hood or robe, villagers charge him 50% more in trades.</li>
+<li><strong>Fear tax:</strong> villagers in <strong>his</strong> claimed villages pay double taxes (not applied to non-necromancers in robes alone).</li>
+</ul>
+<h3>Potion of absolution</h3>
+<p>Drinking it (when still <strong>eligible</strong> — no player horcrux ever created) clears active necromancer status: penalties end. <strong>Permanently lost hearts stay lost.</strong> His <strong>wand crumbles.</strong> <strong>Minions</strong> revert to <strong>hostile</strong> and stop following. Using a new wand makes him active again. Hood/robe <strong>combat</strong> rules stay as for any non-necromancer wearer (Wither/Warden can attack).</p>
+<p>After the player <strong>creates a horcrux</strong>, the potion fails or has no effect (<strong>TBD</strong>).</p>
+<ol>
+<li><strong>Potion of penance:</strong> brew an awkward potion with an enchanted golden apple.</li>
+<li><strong>Potion of absolution:</strong> brew the potion of penance with a nether star.</li>
+</ol>
+<p>Enchanted golden apples only come from loot chests, and nether stars only from killing the Wither, so absolution is a major undertaking.</p>
+<h3>Recipes</h3>
+<p>Hood (black wool, phantom membrane, bone):</p>
+<table><thead><tr><th></th><th></th><th></th></tr></thead><tbody><tr><td>Black wool</td><td>Phantom membrane</td><td>Black wool</td></tr><tr><td>Black wool</td><td>Bone</td><td>Black wool</td></tr><tr><td></td><td></td><td></td></tr></tbody></table>
+<p>Robe (black wool, phantom membrane, soul sand):</p>
+<table><thead><tr><th></th><th></th><th></th></tr></thead><tbody><tr><td>Black wool</td><td></td><td>Black wool</td></tr><tr><td>Phantom membrane</td><td>Soul sand</td><td>Phantom membrane</td></tr><tr><td>Black wool</td><td>Black wool</td><td>Black wool</td></tr></tbody></table>
+<p>Wand (echo shard, wither skeleton skull, blaze rod), diagonal:</p>
+<table><thead><tr><th></th><th></th><th></th></tr></thead><tbody><tr><td></td><td></td><td>Echo shard</td></tr><tr><td></td><td>Wither skeleton skull</td><td></td></tr><tr><td>Blaze rod</td><td></td><td></td></tr></tbody></table>
+<p>Grave shroud (black wool, soul sand):</p>
+<table><thead><tr><th></th><th></th><th></th></tr></thead><tbody><tr><td>Black wool</td><td>Black wool</td><td>Black wool</td></tr><tr><td>Black wool</td><td>Soul sand</td><td>Black wool</td></tr><tr><td></td><td></td><td></td></tr></tbody></table>
+<p>Grave marker (soul lantern, bone block, cobblestone):</p>
+<table><thead><tr><th></th><th></th><th></th></tr></thead><tbody><tr><td></td><td>Soul lantern</td><td></td></tr><tr><td></td><td>Bone block</td><td></td></tr><tr><td>Cobblestone</td><td>Cobblestone</td><td>Cobblestone</td></tr></tbody></table>
+<p>Cursed effigy (carved pumpkin, bone, hay bale, stick), a scarecrow shape:</p>
+<table><thead><tr><th></th><th></th><th></th></tr></thead><tbody><tr><td></td><td>Carved pumpkin</td><td></td></tr><tr><td>Bone</td><td>Hay bale</td><td>Bone</td></tr><tr><td></td><td>Stick</td><td></td></tr></tbody></table>
+<p><strong>Horcrux compass</strong> (shapeless): <strong>compass</strong>, <strong>phylactery shard</strong>, <strong>soul sand</strong>, <strong>wither rose</strong> → 1 horcrux compass. Craftable in unlimited quantity; points to nearest horcrux chunk (<code>necromancer-path.md</code>).</p>
+<h3>Rogue necromancers and phylactery shards</h3>
+<p>Hunting <strong>rogue necromancers</strong> earns rewards found nowhere else.</p>
+<ul>
+<li><strong>Sites (author):</strong> <strong>~half</strong> as dense as <strong>pillager outposts</strong> (~2× spacing). <strong>Rogues = necromancer NPCs</strong>, not bandits. <strong>Site roll:</strong> cave crypt, <strong>surface-entrance crypt</strong>, <strong>taken village</strong>, or <strong>dark tower</strong> (<code>necromancer-path.md</code>). Killing the rogue clears the site; a new one moves in after the next <strong>new moon</strong> (proposed).</li>
+<li><strong>Horcrux compass:</strong> <strong>craft many</strong>; <strong>no range cap</strong>; <strong>always</strong> includes <strong>your own</strong> horcruxes; points to <strong>nearest horcrux</strong> chunk (player or wild lich). <strong>Stronger early</strong> (few wild decoys), <strong>weaker late</strong> as exploration adds closer rogue horcruxes — chunk-level only (<code>necromancer-path.md</code>).</li>
+<li><strong>Wild lich (term):</strong> a rogue with <strong>one horcrux</strong> (item) in a <strong>hidden chest</strong> — <strong>very rare</strong>; almost all rogues have <strong>none</strong> (<code>necromancer-path.md</code>).</li>
+<li><strong>Optional preview:</strong> if you find one, same pseudo-death / ping / destroy rules as player liches — <strong>not</strong> a required tutorial step.</li>
+<li><strong>Phylactery shard:</strong> dropped by rogue necromancers (1–2 each) and the <strong>two named bound necromancers</strong> in the citadel (<code>endgame.md</code>, names TBD). A player necromancer killed by another player drops 1, at most once per in-game day.</li>
+<li><strong>Horcrux on rogues:</strong> <strong>~4%</strong>, <strong>max one</strong> horcrux each; config <code>necromancerRogueHorcruxChance</code>. No fixed tutorial site.</li>
+<li><strong>Bone whistle:</strong> 2 phylactery shards + a bone + a goat horn. Blowing it summons 3 wolves that fight for the player for 3 minutes, once per in-game day; 20 uses (proposed). <strong>Not</strong> the same as committed-quest <strong>flutes/pipes</strong> (<code>necromancer-path.md</code>).</li>
+</ul>
+<h3>Horcrux (player-created)</h3>
+<p><strong>Not quest-gated</strong> — any player may attempt the ritual <strong>when they have</strong> the ingredients (<code>necromancer-path.md</code>). <strong>Many horcruxes</strong> allowed; each costs <strong>1 permanent heart</strong> until the <strong>1-heart floor</strong>. <strong>Casual</strong> necromancers often use shards for the <strong>bone whistle</strong> only; <strong>quest flutes / god wizard set / relics</strong> are optional power-item fuels. <strong>Wild liches</strong> in crypts demonstrate destroy flow first (see crypts above).</p>
+<p><strong>Ritual:</strong> <strong>Phylactery shard</strong> + <strong>any quest flute</strong>, <strong>full god wizard armor set</strong>, or <strong>any kings’ relic</strong> (consumed) in <strong>hotbar</strong> while killing a <strong>soul</strong> on the closed list: <strong>any player</strong>, <strong>any acolyte</strong> (NPC or Order player), or <strong>any End flute tyrant</strong> (<code>necromancer-path.md</code>). On <strong>first successful</strong> ritual, the player <strong>permanently</strong> loses <strong>absolution</strong> eligibility (<code>Potion of absolution</code> above).</p>
+<p><strong>Storage:</strong> Each horcrux in a <strong>chest</strong> anywhere; passives while <strong>≥1</strong> exists. <strong>Ping:</strong> environmental — dark particles, <strong>poisoned animals</strong> in horcrux chunk (<code>necromancer-path.md</code>).</p>
+<p><strong>Quest flutes:</strong> <strong>never damage the player</strong> who plays them; <strong>one per type per world</strong> on <strong>End flute tyrants</strong>; <strong>any player</strong> may loot and use; <strong>relic-style</strong> indestructibility; <strong>1 charge per play</strong> — <strong>non-necromancers</strong> refill after <strong>every</strong> use; <strong>committed necromancers</strong> get <strong>3</strong> plays per refill; <strong>recharge</strong> = craft <strong>flute charge</strong> (glowstone dust + blaze powder + ender pearl), then shapeless <strong>flute + charge</strong> (<code>necromancer-path.md</code>); removed only by <strong>ritual consumption</strong>.</p>
+<p><strong>Passives:</strong></p>
+<ul>
+<li><strong>Immune</strong> to <strong>poison</strong> and <strong>harm / damage potions</strong> (long <strong>cursed armor</strong> wear).</li>
+<li><strong>Lethal damage</strong> → <strong>pseudo-death</strong> (3 min no clicks, move, keep inv). <strong>No teleport</strong> on trigger.</li>
+<li><strong>True death</strong> only when <strong>all</strong> horcruxes are <strong>destroyed</strong> (not merely dropped or stolen).</li>
+</ul>
+<p><strong>Destroy horcrux:</strong> survives normal mining/fire. <strong>Primary (hunter finish):</strong> <strong>throw into the Dragon’s Well</strong> — <strong>anytime</strong> (dragon alive or dead). <strong>Also:</strong> ghast fireball, wither, lightning (rod/channeling), optional <strong>breath bottle</strong> splash. Config <code>necromancerHorcruxDestroyers</code>. <strong>Intro quest:</strong> the mother’s hint covers <strong>monster / storm</strong> methods only — <strong>not</strong> the Well (<code>necromancer-path.md</code>). <strong>God wizard armor:</strong> <strong>indestructible</strong> like relics; <strong>binding</strong> — no manual unequip; <strong>pseudo-death keeps armor</strong>; consumable only via <strong>horcrux</strong> (or <strong>TBD</strong> rituals). True death drops pieces normally.</p>
+<p><strong>Consider:</strong> active horcrux <strong>corrupts weak nearby units</strong> (soldiers, etc.) — <strong><code>necromancer-path.md</code></strong>; not implemented.</p>
+<p><strong>Config:</strong> <strong><code>necromancerHorcruxEnabled</code></strong> (default <strong>true</strong>). Must not bypass <strong>relic ban</strong> or throne rules.</p>
+    </main>
+  </div>
+  <footer class="site-footer">
+    Source: <code>docs/necromancy.md</code>
+  </footer>
+  
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Soldiers and villages — Village economy — Minecraft Kingdom</title>
+  <link rel="stylesheet" href="../../../assets/site.css" />
+  
+</head>
+<body class="scope-dev">
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-top">
+        <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
+        <nav class="main-nav" aria-label="Site">
+          <a href="../../../index.html" class="">Marketing</a>
+          <a href="../../index.html" class="active">Dev docs</a>
+        </nav>
+      </div>
+      <nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../index.html" class="active">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav>
+    </div>
+  </header>
+  <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="villager-roles.html">Villager roles</a></li><li><a href="ownership-and-allies.html">Ownership and allies</a></li><li><a href="soldier-behavior.html">Soldier behavior</a></li><li><a href="village-economy.html" class="active">Village economy</a></li></ul><p class="sidebar-label">Subsections</p><ul><li><a href="#mess-station">Mess station</a></li><li><a href="#taxes">Taxes</a></li><li><a href="#who-pays-taxes">Who pays taxes</a></li><li><a href="#tax-box-cap">Tax box cap</a></li><li><a href="#tax-by-trader-level">Tax by trader level</a></li><li><a href="#tax-by-biome">Tax by biome</a></li><li><a href="#tax-by-village-size">Tax by village size</a></li><li><a href="#recruiting">Recruiting</a></li><li><a href="#soldier-requirements">Soldier requirements</a></li><li><a href="#rank-bonus">Rank bonus</a></li><li><a href="#blacksmith-supply">Blacksmith supply</a></li><li><a href="#fletcher-supply">Fletcher supply</a></li><li><a href="#armorer-supply">Armorer supply</a></li></ul></aside>
+    <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="villager-roles.html">Villager roles</a></li><li><a href="ownership-and-allies.html">Ownership and allies</a></li><li><a href="soldier-behavior.html">Soldier behavior</a></li><li><a href="village-economy.html" class="active">Village economy</a></li></ul><p class="sidebar-label">Subsections</p><ul><li><a href="#mess-station">Mess station</a></li><li><a href="#taxes">Taxes</a></li><li><a href="#who-pays-taxes">Who pays taxes</a></li><li><a href="#tax-box-cap">Tax box cap</a></li><li><a href="#tax-by-trader-level">Tax by trader level</a></li><li><a href="#tax-by-biome">Tax by biome</a></li><li><a href="#tax-by-village-size">Tax by village size</a></li><li><a href="#recruiting">Recruiting</a></li><li><a href="#soldier-requirements">Soldier requirements</a></li><li><a href="#rank-bonus">Rank bonus</a></li><li><a href="#blacksmith-supply">Blacksmith supply</a></li><li><a href="#fletcher-supply">Fletcher supply</a></li><li><a href="#armorer-supply">Armorer supply</a></li></ul></aside>
+    <main class="doc-main">
+      <p class="source">Source: <code>docs/soldiers-and-villages.md</code> · <a href="index.html">Soldiers and villages</a></p><h1>Village economy</h1>
+<p>Food keeps soldiers fed, taxes fund the village, and recruiters turn both into more soldiers.</p>
+<h3>Mess station</h3>
+<ul>
+<li>Holds soldier food: bread, cooked meat, baked potatoes, and sweet berries (2 berries count as 1 meal). Multiple blocks can be joined to make a bigger one.</li>
+<li>Soldiers who can&#x27;t get food go hungry and may desert (see Desertion).</li>
+</ul>
+<h3>Taxes</h3>
+<ul>
+<li>A village stores taxes in a tax box if it has a player-owned mess block and at least one active soldier.</li>
+<li>Militiamen don&#x27;t make a village store taxes; only soldiers do.</li>
+<li>Each taxable villager adds 1 of the biome&#x27;s base tax item per collection (see Tax by biome).</li>
+<li>If anyone other than the village owner or a co-owner opens the tax box, all nearby soldiers attack them; militia attack 50% of the time.</li>
+</ul>
+<h3>Who pays taxes</h3>
+<p>A villager is taxable only if all of these are true:</p>
+<ul>
+<li><strong>Covered by a soldier:</strong> each soldier covers up to 5 villagers. A village with 3 soldiers taxes at most 15 villagers; the rest pay nothing.</li>
+<li><strong>Can reach the tax box:</strong> the villager must be able to pathfind to it. Villagers locked in trading cells or walled off pay nothing.</li>
+<li><strong>Rolls netherite only if eligible:</strong> only armorers, weaponsmiths, and toolsmiths can roll netherite. Other traders skip that roll.</li>
+</ul>
+<h3>Tax box cap</h3>
+<p>The tax box stops collecting once it&#x27;s full. Players have to empty it regularly to keep taxes coming in. Big villages can upgrade it; it stays a single box, so it&#x27;s always one target worth defending.</p>
+<table><thead><tr><th>Tier</th><th>Holds</th><th>Upgrade cost</th></tr></thead><tbody><tr><td>Tax box</td><td>1 stack of base items + 9 slots for trader items</td><td>Normal recipe</td></tr><tr><td>Reinforced tax box</td><td>3 stacks + 18 slots</td><td>Tax box + 4 iron blocks</td></tr><tr><td>Treasury</td><td>9 stacks + 27 slots</td><td>Reinforced box + 4 diamond blocks + 1 netherite ingot</td></tr></tbody></table>
+<h3>Tax by trader level</h3>
+<p>At each tax collection, every trader rolls once per item below. Higher levels pay more; the old &quot;high-level&quot; odds are now the Master row.</p>
+<table><thead><tr><th>Trader level</th><th>Bread</th><th>Emerald</th><th>Iron ingot</th><th>Gold ingot</th><th>Diamond</th><th>Netherite</th></tr></thead><tbody><tr><td>Novice</td><td>20%</td><td>2%</td><td>2%</td><td>0%</td><td>0%</td><td>0%</td></tr><tr><td>Apprentice</td><td>30%</td><td>4%</td><td>4%</td><td>1%</td><td>0%</td><td>0%</td></tr><tr><td>Journeyman</td><td>40%</td><td>6%</td><td>6%</td><td>2%</td><td>1%</td><td>0%</td></tr><tr><td>Expert</td><td>45%</td><td>8%</td><td>8%</td><td>3%</td><td>2%</td><td>0%</td></tr><tr><td>Master</td><td>50%</td><td>11%</td><td>11%</td><td>4%</td><td>3%</td><td>0.5%</td></tr></tbody></table>
+<h3>Tax by biome</h3>
+<p>The biome sets the base tax item.</p>
+<table><thead><tr><th>Village biome</th><th>Base tax item</th></tr></thead><tbody><tr><td>Plains</td><td>Bread</td></tr><tr><td>Savanna</td><td>Bread</td></tr><tr><td>Desert</td><td>Wheat (harsh biome: 3 wheat make 1 meal)</td></tr><tr><td>Taiga</td><td>Sweet berries (2 berries make 1 meal)</td></tr><tr><td>Snowy</td><td>Potatoes</td></tr></tbody></table>
+<p>Most base tax items are worth one meal, so each covered villager pays one meal per collection. Taiga villagers pay half a meal in sweet berries, and desert is the harshest: its villagers pay a third of a meal in wheat.</p>
+<h3>Tax by village size</h3>
+<p>Village size sets how often taxes are collected.</p>
+<table><thead><tr><th>Village size</th><th>Villagers</th><th>Collects taxes every</th></tr></thead><tbody><tr><td>Hamlet</td><td>1-5</td><td>3 days</td></tr><tr><td>Small village</td><td>6-10</td><td>2 days</td></tr><tr><td>Village</td><td>11-20</td><td>2 days</td></tr><tr><td>Town</td><td>21-35</td><td>1 day</td></tr><tr><td>City</td><td>36+</td><td>1 day</td></tr></tbody></table>
+<h3>Recruiting</h3>
+<ul>
+<li><strong>Job block:</strong> the recruiter box is a job block like other villager job blocks. One recruiter per box. A nearby soldier who reaches an unclaimed box takes the job.</li>
+<li><strong>Recruits:</strong> the recruiter turns unemployed villagers (no trade) into soldiers, so the village needs enough of them. Breeding keeps the supply going.</li>
+<li><strong>Capacity:</strong> each recruiter can have up to 10 recruits at a time. A recruit&#x27;s death frees his slot.</li>
+<li><strong>Post beds:</strong> 1 post bed = 1 recruit. The recruiter buys post beds for 5 emeralds each, paid from the tax box or the recruiter box, and places them on post blocks.</li>
+<li><strong>Post block:</strong> a block the mod defines that marks where recruiters may place post beds. Recipe: a cobblestone slab and an iron ingot.</li>
+<li><strong>Feeding:</strong> the recruiter keeps nearby mess stations stocked with food from the tax box. He only moves food that&#x27;s ready to eat. He never crafts or cooks: raw items (wheat, raw potatoes, raw meat) stay in the tax box until a player turns them into bread, baked potatoes, or cooked meat.</li>
+<li><strong>Gear:</strong> blacksmiths, fletchers, and armorers can be set to fill the recruiter box over time (see the supply tables below). Supplied gear is issued gear: only the recruiter can take it out of the box, not players.</li>
+<li><strong>Recruiter in combat:</strong> the recruiter only fights within 32 blocks of his recruiter box, so he isn&#x27;t lost chasing enemies across the map.</li>
+</ul>
+<ul>
+<li><strong>Breaking the box:</strong> anyone can break a recruiter box, though village protection slows non-allies. When it breaks, its emeralds and food drop as normal items, but issued gear is destroyed, so raiders hurt a village&#x27;s supply and no one can farm issued gear by breaking and replacing boxes. An owner moving a box loses its issued gear.</li>
+</ul>
+<h3>Soldier requirements</h3>
+<p>Every soldier, including the first one the player makes by hand, needs all of these:</p>
+<ul>
+<li>No trade (unemployed villager)</li>
+<li>A weapon (a melee weapon, a bow or crossbow, or a pickaxe on its own all count), chestplate, and helmet</li>
+<li>A free post bed</li>
+<li>A well-stocked mess station</li>
+<li>No hostile mob nearby: with one nearby, making a soldier fails 90% of the time. The player&#x27;s own minions don&#x27;t count, and making militia isn&#x27;t affected.</li>
+</ul>
+<h3>Rank bonus</h3>
+<p>Seasoned soldiers are common, so they add little; heroes and Legends are rare and add more.</p>
+<table><thead><tr><th>Soldier near the recruiter</th><th>Kills needed</th><th>Extra recruit slots</th></tr></thead><tbody><tr><td>Seasoned soldier</td><td>5</td><td>+1 each, up to 3 seasoned soldiers (+3)</td></tr><tr><td>Hero</td><td>20</td><td>+5</td></tr><tr><td>Legend</td><td>50</td><td>+10</td></tr></tbody></table>
+<ul>
+<li>Seasoned soldier bonuses stack up to +3. For heroes and Legends, only the best one near the recruiter counts: two heroes still give +5.</li>
+<li><strong>If a bonus soldier dies:</strong> the extra slots disappear, but soldiers already recruited stay. The recruiter is over capacity and can&#x27;t recruit again until deaths bring him back under his new limit.</li>
+</ul>
+<p>To set up a recruiter, the player:</p>
+<ol>
+<li>Places enough post blocks on the ground.</li>
+<li>Makes the first soldier by hand: gives an unemployed villager a weapon, chestplate, and helmet (he still needs a free post bed and a stocked mess station).</li>
+<li>Places the recruiter box near that soldier so he takes the job.</li>
+<li>Keeps the recruiter supplied with emeralds, gear, and food in the tax box or recruiter box.</li>
+</ol>
+<h3>Blacksmith supply</h3>
+<p>A weaponsmith assigned to a recruiter box adds one weapon a week; his level sets which weapons he can add. He only adds an item on days he works at his job block, and stops when the box is full.</p>
+<table><thead><tr><th>Blacksmith level</th><th>Items he can add (1 per week)</th></tr></thead><tbody><tr><td>Novice</td><td>Stone sword, stone axe</td></tr><tr><td>Apprentice</td><td>Above + iron axe</td></tr><tr><td>Journeyman</td><td>Above + iron sword</td></tr><tr><td>Expert</td><td>Iron sword, iron axe, shield</td></tr><tr><td>Master</td><td>Expert items + 5% chance of a diamond sword</td></tr></tbody></table>
+<ul>
+<li>Shields only go to soldiers, since militiamen can&#x27;t use them.</li>
+<li>Bows, crossbows, and arrows come from fletchers, not blacksmiths (see Fletcher supply).</li>
+</ul>
+<h3>Fletcher supply</h3>
+<p>A fletcher assigned to a recruiter box adds ranged gear on the same rules as the blacksmith: only on days he works at his job block, and never past a full box.</p>
+<table><thead><tr><th>Fletcher level</th><th>Items he can add (1 per week)</th></tr></thead><tbody><tr><td>Novice</td><td>20 arrows</td></tr><tr><td>Apprentice</td><td>Above + bow</td></tr><tr><td>Journeyman</td><td>Above + crossbow</td></tr><tr><td>Expert</td><td>Bow, crossbow, 32 arrows</td></tr><tr><td>Master</td><td>Bow, crossbow, 48 arrows + 5% chance of a gold-outline arrow</td></tr></tbody></table>
+<h3>Armorer supply</h3>
+<p>An armorer assigned to a recruiter box adds armor on the same rules as the blacksmith and fletcher. He only adds helmets and chestplates, since those are what soldiers need to enlist and all militia can wear.</p>
+<table><thead><tr><th>Armorer level</th><th>Items he can add (1 per week)</th></tr></thead><tbody><tr><td>Novice</td><td>Chainmail helmet, chainmail chestplate</td></tr><tr><td>Apprentice</td><td>Above + iron helmet</td></tr><tr><td>Journeyman</td><td>Above + iron chestplate</td></tr><tr><td>Expert</td><td>Iron helmet, iron chestplate</td></tr><tr><td>Master</td><td>Expert items + 5% chance of a diamond helmet or chestplate</td></tr></tbody></table>
+    </main>
+  </div>
+  <footer class="site-footer">
+    Source: <code>docs/soldiers-and-villages.md</code>
+  </footer>
+  
+</body>
+</html>

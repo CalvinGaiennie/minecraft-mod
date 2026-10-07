@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Overview — Performance — Minecraft Kingdom</title>
+  <link rel="stylesheet" href="../../../assets/site.css" />
+  
+</head>
+<body class="scope-dev">
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-top">
+        <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
+        <nav class="main-nav" aria-label="Site">
+          <a href="../../../index.html" class="">Marketing</a>
+          <a href="../../index.html" class="active">Dev docs</a>
+        </nav>
+      </div>
+      <nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../index.html" class="active">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav>
+    </div>
+  </header>
+  <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="performance.html" class="active">Performance</a></li><li><a href="platform.html">Platform</a></li><li><a href="build-order.html">Build order</a></li></ul></aside>
+    <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="performance.html" class="active">Performance</a></li><li><a href="platform.html">Platform</a></li><li><a href="build-order.html">Build order</a></li></ul></aside>
+    <main class="doc-main">
+      <p class="source">Source: <code>docs/overview.md</code> · <a href="index.html">Overview</a></p><h1>Performance</h1>
+<p>Big fights stay playable by cutting the heaviest AI work, mostly invisibly to players.</p>
+<ul>
+<li><strong>Squad pathfinding:</strong> soldiers moving together share one path calculated by a squad leader; the rest follow him.</li>
+<li><strong>Lazy idle AI:</strong> soldiers who are guarding, sleeping, or standing at a rampart think about once every 2 seconds instead of 20 times a second, and wake fully the instant they take damage or something hostile comes within 16 blocks.</li>
+<li><strong>Shared target scanning:</strong> squads look for enemies once a second and share the result, instead of every soldier scanning every tick.</li>
+<li><strong>Reduced AI far from players:</strong> soldiers and minions more than 48 blocks from any player run simplified AI. They still move and fight, with cheaper calculations.</li>
+<li><strong>Travel while unloaded:</strong> swarms and bandit bands travel as stored data in unloaded chunks and only fight when loaded (see Threats).</li>
+<li><strong>Particle setting:</strong> a client option to reduce the mod&#x27;s particles (angry villagers, soul particles, plumes).</li>
+<li><strong>Server cap:</strong> server owners can set a max number of soldiers and minions per player; the default is no cap.</li>
+<li><strong>Block damage:</strong> the mod respects vanilla&#x27;s mobGriefing rule. With it off, fire arrows, door breaking, and bandit burning don&#x27;t damage blocks.</li>
+<li><strong>Spread the work across ticks:</strong> each soldier thinks on his own tick slot instead of all 100 at once, so the load is smooth rather than spiky.</li>
+<li><strong>React to events:</strong> rosters, bed status, and the muster roll update when something happens (a death, a bed broken, a mess station placed), not by checking constantly.</li>
+<li><strong>Tax math once per collection:</strong> coverage, reachability, and trader rolls run once per collection per village, with the results cached.</li>
+<li><strong>Swarms move as one unit:</strong> one leader pathfinds and the rest follow, so a 30-mob swarm costs about as much pathfinding as one mob.</li>
+<li><strong>Limit what clients draw:</strong> name tags, badges, and plumes only render within a short distance of the player.</li>
+<li><strong>Measure from day one:</strong> use the spark profiler mod while building, set a performance target (for example, 100 soldiers fighting a 30-mob swarm stays under a fixed share of each tick), and test it after every build stage.</li>
+<li><strong>Cleanup timers:</strong> arrows that missed vanish after 30 seconds (vanilla: 1 minute). Mob drops from swarms, raids, and bandits use vanilla&#x27;s 5 minutes. Soldier and militia death drops last 10 minutes, so there&#x27;s time to recover gear after a battle.</li>
+</ul>
+    </main>
+  </div>
+  <footer class="site-footer">
+    Source: <code>docs/overview.md</code>
+  </footer>
+  
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Player acolyte path — Quest flow (player) — Minecraft Kingdom</title>
+  <link rel="stylesheet" href="../../../assets/site.css" />
+  
+</head>
+<body class="scope-dev">
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-top">
+        <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
+        <nav class="main-nav" aria-label="Site">
+          <a href="../../../index.html" class="">Marketing</a>
+          <a href="../../index.html" class="active">Dev docs</a>
+        </nav>
+      </div>
+      <nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../index.html" class="active">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav>
+    </div>
+  </header>
+  <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="mutual-exclusion-order-vs-necromancer-questline.html">Mutual exclusion (Order vs necromancer questline)</a></li><li><a href="four-specialties.html">Four specialties</a></li><li><a href="quest-flow-player.html" class="active">Quest flow (player)</a></li><li><a href="specialty-feat-gates-8.html">Specialty feat gates (§8)</a></li><li><a href="player-specialty-perks.html">Player specialty perks</a></li><li><a href="player-status-implementation-notes.html">Player status (implementation notes)</a></li><li><a href="corpse-mod-compatibility.html">Corpse mod compatibility</a></li><li><a href="config-proposed.html">Config (proposed)</a></li></ul><p class="sidebar-label">Subsections</p><ul><li><a href="#1-first-contact">1. First contact</a></li><li><a href="#2-light-training-first-brother">2. Light training (first brother)</a></li><li><a href="#3-find-maelor">3. Find Maelor</a></li><li><a href="#4-maelor-breadth-light-three">4. Maelor — breadth (light three)</a></li><li><a href="#5-maelor-choose-and-hard-mastery">5. Maelor — choose and hard mastery</a></li><li><a href="#6-maelor-reunite-the-order-after-lock">6. Maelor — reunite the Order (after lock)</a></li><li><a href="#citadel-trapped-brothers-10">Citadel-trapped brothers (§10)</a></li><li><a href="#escort-homecoming-model-a-chosen">Escort → homecoming (**model A — chosen**)</a></li><li><a href="#annals-chests">Annals chests</a></li><li><a href="#escort-brothers">Escort brothers</a></li><li><a href="#open-design-tbd">Open design (TBD)</a></li></ul></aside>
+    <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="mutual-exclusion-order-vs-necromancer-questline.html">Mutual exclusion (Order vs necromancer questline)</a></li><li><a href="four-specialties.html">Four specialties</a></li><li><a href="quest-flow-player.html" class="active">Quest flow (player)</a></li><li><a href="specialty-feat-gates-8.html">Specialty feat gates (§8)</a></li><li><a href="player-specialty-perks.html">Player specialty perks</a></li><li><a href="player-status-implementation-notes.html">Player status (implementation notes)</a></li><li><a href="corpse-mod-compatibility.html">Corpse mod compatibility</a></li><li><a href="config-proposed.html">Config (proposed)</a></li></ul><p class="sidebar-label">Subsections</p><ul><li><a href="#1-first-contact">1. First contact</a></li><li><a href="#2-light-training-first-brother">2. Light training (first brother)</a></li><li><a href="#3-find-maelor">3. Find Maelor</a></li><li><a href="#4-maelor-breadth-light-three">4. Maelor — breadth (light three)</a></li><li><a href="#5-maelor-choose-and-hard-mastery">5. Maelor — choose and hard mastery</a></li><li><a href="#6-maelor-reunite-the-order-after-lock">6. Maelor — reunite the Order (after lock)</a></li><li><a href="#citadel-trapped-brothers-10">Citadel-trapped brothers (§10)</a></li><li><a href="#escort-homecoming-model-a-chosen">Escort → homecoming (**model A — chosen**)</a></li><li><a href="#annals-chests">Annals chests</a></li><li><a href="#escort-brothers">Escort brothers</a></li><li><a href="#open-design-tbd">Open design (TBD)</a></li></ul></aside>
+    <main class="doc-main">
+      <p class="source">Source: <code>docs/acolyte-path.md</code> · <a href="index.html">Player acolyte path</a></p><h1>Quest flow (player)</h1>
+<pre><code class="language-text">Save a refuge acolyte → basic training
+  → that brother: **light** training in **his** specialty only
+  → he sends you to find **Maelor**
+  → Maelor: **light** training in the **other three** specialties (he teaches — brothers do not teach outside their craft)
+  → Maelor: you **pick one** specialty for **hard** mastery
+  → complete **hard** training with **brother(s) of that specialty** in the world (Maelor assigns; you report back)
+  → Maelor **locks** specialty — **player perks begin**
+  → Maelor: Royal Annals + **escort brothers** to him (capstone feat / scaling)
+  → (post-escort scaling — TBD)</code></pre>
+<h3>1. First contact</h3>
+<p>Any acolyte you <strong>save</strong> (clear refuge undead, then talk) offers <strong>basic training</strong> because you helped him — <strong>unless</strong> you still carry necromancer <strong>wand / hood / robe</strong> (see <strong>Necromancer gear at refuges</strong>). Includes <strong>training tasks</strong> and <strong>lore</strong> (Order, purge, hope that Maelor still lives).</p>
+<h3>2. Light training (first brother)</h3>
+<p>After basic training, the brother who saved you runs the <strong>light</strong> chapter of <strong>his specialty only</strong> (short tasks + lore — no perks). He does <strong>not</strong> train other specialties.</p>
+<p>When light training is done, he <strong> sends you to find Maelor</strong> (map hint / Annals tie — TBD). He also tells you <strong>other brothers are alive</strong> and that the Order <strong>needs Maelor</strong>.</p>
+<p><strong>Which brother you save first</strong> only decides which specialty you sample first; it is <strong>not</strong> your final specialty until Maelor locks you after <strong>hard</strong> mastery.</p>
+<h3>3. Find Maelor</h3>
+<p>Hidden until the first brother sends you. Maelor is <strong>one of the 17</strong>, not a separate NPC.</p>
+<h3>4. Maelor — breadth (light three)</h3>
+<p>At Maelor’s refuge, he teaches the <strong>light</strong> version of the <strong>three specialties you have not</strong> done with the first brother (tasks + lore, no perks). Only Maelor runs this breadth step at his lectern / refuge — field brothers stay specialists.</p>
+<p><strong>Annals chests:</strong> when this chapter begins (first substantial Maelor dialogue — exact step TBD), Maelor <strong>speaks the twelve refuge Annals chests open at once</strong> (<code>acolyte-path.md</code> § Annals chests).</p>
+<h3>5. Maelor — choose and hard mastery</h3>
+<p>Maelor offers the <strong>hard</strong> path for <strong>one</strong> specialty of your choice (Arcane, Alchemist, Smith, or War Leader).</p>
+<ul>
+<li><strong>Hard</strong> = feat-grade training and quests for that specialty only (<strong>difficulty tables TBD</strong> — relaxed vs strict config).</li>
+<li><strong>Hard training</strong> is done with <strong>field brothers</strong> of that specialty (Maelor gives the quest; they teach <strong>hard</strong> only in their craft). Return to Maelor to <strong>lock</strong>.</li>
+<li>If you <strong>fail or abandon</strong> hard training before lock, you may <strong>pick a different hard specialty</strong> (Maelor allows retrial — limits TBD).</li>
+<li>When <strong>hard</strong> is complete, <strong>Maelor locks</strong> your specialty. <strong>Only Maelor</strong> can lock.</li>
+</ul>
+<h3>6. Maelor — reunite the Order (after lock)</h3>
+<p><strong>Why Maelor asks:</strong> reunite the <strong>brothers</strong>, <strong>save the Royal Annals</strong>, and find someone who can <strong>retake the citadel</strong> and <strong>release the Corrupted King</strong> (lay him to rest — same story as the Crown on his statue in <code>endgame.md</code>).</p>
+<p>After lock, he assigns:</p>
+<ol>
+<li><strong>All 12 volumes</strong> of the Royal Annals (from the now-open refuge chests).</li>
+<li><strong>Escort as many brothers as you can</strong> to <strong>Maelor’s refuge</strong> before the citadel is claimed.</li>
+</ol>
+<p><strong>Minimum brothers:</strong> required floor + <strong>better outcome for more</strong> (TBD; config <code>acolyteBrothersMinimum</code>). Treat escort as the <strong>capstone feat</strong> after specialty lock.</p>
+<p><strong>Why keep brothers alive:</strong> each brother is <strong>permanently lost</strong> if killed (<code>endgame.md</code>); escort fights and Corpse-style deaths are real risks.</p>
+<h3>Citadel-trapped brothers (§10)</h3>
+<p>Two brothers were <strong>never</strong> at overworld refuges — they hold the inner ward during the purge and were <strong>caged in the citadel dungeon</strong> (lore: ordered to stand down / hold, not flee).</p>
+<table><thead><tr><th>Brother</th><th>Specialty</th></tr></thead><tbody><tr><td><strong>First</strong></td><td><strong>War Leader</strong> (always)</td></tr><tr><td><strong>Second</strong></td><td><strong>Arcane, Alchemist, or Smith</strong> — <strong>random per world</strong> at world gen</td></tr></tbody></table>
+<ul>
+<li><strong>Rescue:</strong> after seal break, <strong>player flips a lever</strong> in/near the dungeon to open Order cells; then talk / escort as usual.</li>
+<li><strong>Annals:</strong> trapped brothers do <strong>not</strong> carry Annals volumes — copies only in overworld <strong>refuge chests</strong> (twelve locked Annals chests).</li>
+<li><strong>Reunite:</strong> they count for escort only after rescue; deliver to <strong>Maelor’s refuge</strong> before claim to join homecoming roster.</li>
+<li><strong>Stations:</strong> only <strong>Arcane / Alchemist / Smith</strong> fill royal lecterns. Trapping one craft brother <strong>does not</strong> replace escorting the others — skip too many overworld escorts and lecterns stay empty (Maelor can fill one dead brother’s slot only).</li>
+</ul>
+<h3>Escort → homecoming (<strong>model A — chosen</strong>)</h3>
+<p>For players who <strong>locked</strong> specialty <strong>before claim</strong> and finished Maelor’s reunite:</p>
+<ul>
+<li>Only brothers <strong>delivered to Maelor’s refuge</strong> (handoff at Maelor) are on <strong>Maelor’s roster</strong>.</li>
+<li>On <strong>claim</strong>, <strong>Maelor + roster</strong> walk to the citadel (~3 in-game days). They staff lecterns/auras per <code>endgame.md</code>.</li>
+<li>Brothers <strong>not</strong> on the roster <strong>stay</strong> at their refuges (or recruited villages) — alive, <strong>not</strong> auto teleported.</li>
+</ul>
+<p><strong>Claim without Maelor reunite</strong> (no locked acolyte roster): <strong>no</strong> automatic 17-acolyte homecoming. See <strong><code>endgame.md</code> — Citadel escort (any player)</strong>.</p>
+<p><strong>Player power (TBD):</strong> optional bonus stacks for large roster at lock — not required for model A.</p>
+<h3>Annals chests</h3>
+<p>While the <strong>citadel is unclaimed</strong>:</p>
+<ul>
+<li>The <strong>twelve refuge chests</strong> that hold Royal Annals copies are <strong>unbreakable and locked</strong>.</li>
+<li><strong>Open when either:</strong></li>
+</ul>
+<p>1. <strong>Maelor</strong> speaks them all open at once (start of his breadth chapter — <code>§ 4</code>), <strong>or</strong> 2. <strong>First successful citadel claim</strong> in that world, if they were <strong>never</strong> opened before.</p>
+<ul>
+<li>Relics and other items <strong>in those same chests</strong> stay locked with the chest until it opens.</li>
+<li>Horn-keeper and ordinary refuge chests are <strong>not</strong> part of this lock (<strong>Annals chests only</strong>).</li>
+</ul>
+<p>After claim, unlooted refuge chests follow normal rules in <code>endgame.md</code>.</p>
+<h3>Escort brothers</h3>
+<p>When <strong>Maelor’s reunite quest</strong> starts (<strong>after specialty lock</strong>), brothers you have already <strong>saved</strong> (cleared refuge, talked) can be <strong>called to follow</strong>: while you are <strong>near</strong> a brother, he <strong>joins your escort</strong> and paths with you until you deliver him to <strong>Maelor’s refuge</strong>. Repeat until you meet the minimum and as many above that as you want for bonuses.</p>
+<ul>
+<li>Brothers already following stay with the group until handoff or death.</li>
+<li><strong>No soldiers (Armies):</strong> if <strong>your</strong> soldiers (or militia) are within <strong>32</strong> blocks of a brother, he <strong>will not</strong> start escort, <strong>will not</strong> hand out Maelor-chain quests, and says clearly to <strong>come back without your goons</strong> — the Order trusts a person, not an army camped on the refuge. Send soldiers away, then talk again.</li>
+<li><strong>No necromancer kit:</strong> same radius — wand / hood / robe must not be on you (see <strong>Necromancer gear at refuges</strong>).</li>
+<li><strong>Corpse mod:</strong> play-test escort + player death so following brothers and Annals progress do not soft-lock (<code>compatibility-planned-mods.md</code>).</li>
+</ul>
+<h3>Open design (TBD)</h3>
+<ul>
+<li>Post-escort <strong>ongoing duties</strong> and <strong>reward scaling</strong> for brother count.</li>
+</ul>
+    </main>
+  </div>
+  <footer class="site-footer">
+    Source: <code>docs/acolyte-path.md</code>
+  </footer>
+  
+</body>
+</html>

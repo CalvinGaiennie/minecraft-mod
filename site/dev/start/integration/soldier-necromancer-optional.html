@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cross-mod integration — Soldier → Necromancer (optional) — Minecraft Kingdom</title>
+  <link rel="stylesheet" href="../../../assets/site.css" />
+  
+</head>
+<body class="scope-dev">
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-top">
+        <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
+        <nav class="main-nav" aria-label="Site">
+          <a href="../../../index.html" class="">Marketing</a>
+          <a href="../../index.html" class="active">Dev docs</a>
+        </nav>
+      </div>
+      <nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../index.html" class="active">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav>
+    </div>
+  </header>
+  <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="necromancer-soldier-optional.html">Necromancer → Soldier (optional)</a></li><li><a href="soldier-necromancer-optional.html" class="active">Soldier → Necromancer (optional)</a></li><li><a href="shared-conventions.html">Shared conventions</a></li><li><a href="versioning.html">Versioning</a></li></ul></aside>
+    <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="necromancer-soldier-optional.html">Necromancer → Soldier (optional)</a></li><li><a href="soldier-necromancer-optional.html" class="active">Soldier → Necromancer (optional)</a></li><li><a href="shared-conventions.html">Shared conventions</a></li><li><a href="versioning.html">Versioning</a></li></ul></aside>
+    <main class="doc-main">
+      <p class="source">Source: <code>docs/integration.md</code> · <a href="index.html">Cross-mod integration</a></p><h1>Soldier → Necromancer (optional)</h1>
+<table><thead><tr><th>Event / query</th><th>Payload</th><th>Necromancer use</th></tr></thead><tbody><tr><td><code>VillageQueries.getOwnedVillageCount(uuid)</code></td><td>int</td><td>High King / golden age scope</td></tr><tr><td><code>VillageQueries.getAllyUuids(ownerUuid)</code></td><td>set UUID</td><td>Barrier allowlist, Roost, Well ally XP</td></tr><tr><td><code>VillageQueries.isEnlisted(uuid)</code></td><td>boolean</td><td>Not required for citadel; do not tie wand to enlist</td></tr><tr><td><code>VillageQueries.hasPlayerSoldiersNear(uuid, pos, radius)</code></td><td>boolean</td><td>Citadel: acolyte escort / Order quests refuse if true (<code>acolyte-path.md</code>, default radius 32)</td></tr><tr><td><code>CitadelQueries.hasNecromancerKit(player)</code></td><td>boolean</td><td>Wand, hood, or robe in inventory or armor slots (<code>acolyte-path.md</code>, <code>necromancy.md</code>)</td></tr><tr><td><code>CitadelQueries.nearestAcolyteRefugeDistance(pos)</code></td><td>blocks</td><td>Necromancer intro quest spawn gate (<code>necromancer-path.md</code>)</td></tr></tbody></table>
+    </main>
+  </div>
+  <footer class="site-footer">
+    Source: <code>docs/integration.md</code>
+  </footer>
+  
+</body>
+</html>

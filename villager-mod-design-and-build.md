@@ -35,7 +35,7 @@ Open this note first in Claude Code. It says what we're building, which technica
     - Overview: performance rules, platform notes, and the build order.
 - **"(proposed)" means a tunable default**, not a final number. Put every number in config and tune it in playtesting.
 - **Read before building:** before each task, read the part for that system. Don't work from memory of the rules.
-- **No custom art.** Reuse vanilla models, textures, and particles. Items with no vanilla equivalent (horns, plans, writs) get a vanilla stand-in look; ask the user which one if it isn't in the notes.
+- **Custom art encouraged.** Original models and textures for blocks, items, and structures are welcome. Use vanilla stand-ins when art isn't ready yet; ask the user if a look isn't specified in the notes.
 - **When the notes are silent or conflict, ask the user** instead of guessing. Write the answer into the notes or the decisions log at the end of this note.
 - **Source of truth:** once this file is split into the repo's `docs/` folder, the repo copy is the source of truth. Change the docs file in the same commit as the code that changes the rule.
 
@@ -200,7 +200,7 @@ A NeoForge mod for Minecraft 1.21.1 that turns villagers into soldiers and milit
 ## Rules
 - Read the matching docs/ file before building a system. "(proposed)" numbers are tunable defaults.
 - Every number goes in config.
-- No custom art. Use vanilla models, textures, and particles.
+- Custom art encouraged. Vanilla stand-ins are fine until art is ready.
 - Soldiers and militia are vanilla villagers with data attachments. Don't add a new entity type without asking.
 - NeoForge 1.21.1 attachments don't sync to clients; use our own payloads.
 - Respect mobGriefing. Store player IDs, not names.
@@ -227,6 +227,7 @@ Add one line per decision, newest last, with the date and the reason.
 - **2026-10-04:** platform set to Minecraft 1.21.1, NeoForge 21.1.x, Java 21, ModDevGradle, Parchment. Reason: official Create supports 1.21.1 and the design is meant to join modpacks. Revisit for 26.1.2 once Create ports.
 - **2026-10-04:** soldiers and militia are assumed to be vanilla villagers with data attachments. To be confirmed by spike A.
 - **2026-10-04:** the notes were drafted in a planning chat and split into parts: Overview, Soldiers and villages, War and defense, Necromancy, Threats and mobs, Endgame, Old kingdom lore, Config and recipes, and this note.
+- **2026-10-04:** custom art encouraged (blocks, items, structures); vanilla stand-ins OK until assets exist.
 
 ---
 
@@ -263,7 +264,7 @@ The mod targets NeoForge on Minecraft 1.21.1, with Java 21.
 - **Later:** port to 26.1 once official Create does. NeoForge expects 26.1 to replace 1.21.1 as the stable version, so plan for Java 25 and the API changes between 1.21.2 and 26.1. A Fabric version can wait until the mod is finished.
 - **Versions to pin:** Minecraft 1.21.1, NeoForge 21.1.x (pin the newest build when the project starts), Java 21, and the NeoForge 1.21.1 docs. Decided against 1.20.1: NeoForge only supports 1.20.2 and later, so 1.20.1 would mean Forge, with no data components and an older API, and official Create has moved its continued support to 1.21.1.
 - **Known gap on 1.21.1:** NeoForge's data attachments don't sync to clients on their own in this version, so soldier and village data that clients need (ranks, kill counts, badges) goes through our own network packets.
-- **Art:** keep it as easy to build as possible. Soldiers and militia reuse the vanilla villager model with normal armor and item rendering, and shields use vanilla banner patterns. No custom art for the first version. Looks are assigned from existing vanilla parts:
+- **Art:** custom art encouraged for blocks, items, banners, and structures. Soldiers and militia can reuse the vanilla villager model with normal armor and item rendering until custom models exist; shields can use vanilla banner patterns or custom art. Default looks from vanilla parts when no custom asset exists:
 
 | Who | Clothing | Badge (vanilla level badge on the belt) | Label over head |
 |---|---|---|---|
@@ -275,7 +276,7 @@ The mod targets NeoForge on Minecraft 1.21.1, with Java 21.
 | Recruiter | Same as his rank | Emerald | "Recruiter" + name |
 | Bandit | Nitwit clothes | None | "Bandit" |
 
-- **Structures:** the lore adds 17 acolyte refuges, 10 bandit fortresses, the End outpost, the Evoker Lord's castle, and the shrine sites. To keep them easy to build with no custom art, use a few reusable templates: about four refuge layouts and two fortress layouts, plus single layouts for the outpost, castle, and shrines.
+- **Structures:** the lore adds 17 acolyte refuges, 10 bandit fortresses, the End outpost, the Evoker Lord's castle, and the shrine sites. Custom art encouraged; limit scope with a few reusable templates: about four refuge layouts and two fortress layouts, plus single layouts for the outpost, castle, and shrines.
 
 ## Build order
 
@@ -754,7 +755,7 @@ The player sets a target with an attack plan, then launches the assault with the
 
 ### Siege ladders
 
-- **What it is:** a single large ladder object that two soldiers carry together and stand up against an enemy wall in one motion. Its height fits the wall automatically, up to 25 blocks. It reuses the vanilla ladder texture on a tall, flat shape. Recipe: 8 ladders + 2 iron ingots. Soldiers and militia follow the same rules.
+- **What it is:** a single large ladder object that two soldiers carry together and stand up against an enemy wall in one motion. Its height fits the wall automatically, up to 20 blocks. It reuses the vanilla ladder texture on a tall, flat shape. Recipe: 8 ladders + 2 iron ingots. Soldiers and militia follow the same rules.
 - **Supply:** siege ladders are stored in the camp block. The attack plan says how many to bring, and up to that many are taken out of the camp block for the assault, only as many as the player stocked. Each is carried by a pair of soldiers.
 - **Climbing:** vanilla mobs only climb ladders they bump into; they don't plan routes with them. So soldiers get a simple scripted action instead: walk to the siege ladder's base, climb straight up, and step off at the top.
 - **Counterplay:** defenders can push a standing siege ladder over by hitting its top a few times, dropping anyone climbing it, or break it entirely. Standing one up follows mobGriefing.
@@ -1038,7 +1039,7 @@ Cursed effigy (carved pumpkin, bone, hay bale, stick), a scarecrow shape:
 Hunting rogue necromancers earns rewards found nowhere else.
 
 - **Necromancer crypts:** rare underground structures, each home to a rogue necromancer with 6-12 minions. Killing him clears the crypt; a new necromancer moves in after the next new moon (proposed).
-- **Phylactery shard:** dropped by rogue necromancers (1-2 each) and the citadel's necromancers. A player necromancer killed by another player drops 1, at most once per in-game day.
+- **Phylactery shard:** dropped by rogue necromancers (1–2 each) and the **two named bound necromancers** in the citadel (`docs/endgame.md`). A player necromancer killed by another player drops 1, at most once per in-game day.
 - **Bone whistle:** 2 phylactery shards + a bone + a goat horn. Blowing it summons 3 wolves that fight for the player for 3 minutes, once per in-game day; 20 uses (proposed).
 - **Blessed incense:** a phylactery shard + glowstone dust + a honey bottle. Given to a cleric in the player's own village, it lets him cure zombie villagers and zombie soldiers within 32 blocks of his brewing stand over one day, with no weakness potion or golden apple. Zombie soldiers cured this way return as soldiers 90% of the time instead of 60% (proposed).
 
@@ -1256,11 +1257,11 @@ Details still to decide: bandit fortresses, kingdom titles, warlords, monuments,
 A post-End boss fortress that uses the mod's war systems.
 
 - **The structure:** one huge fortress per world, 1,000 to 2,000 blocks from spawn, with a great road running straight from spawn to its gates. Its walls are made of a block nothing can break or breach, about 40 blocks tall (too tall for siege ladders) and several blocks thick with lava inside. Beneath the citadel, a lava lake sits under an unbreakable foundation, so no one can dig in from below. Its gates are special citadel doors that only players can break; soldiers can't. An ender barrier seals the whole fortress until the Ender Dragon has been killed in that world and a player uses the Seal-Breaker on its gate (see Breaking the seal). The barrier is completely impassable: it surrounds the citadel on every side, above and below ground, can't be broken, dug under, flown over, or crossed with ender pearls or any other teleport.
-- **The boss:** the Corrupted King, a cruel king raised from the dead by his necromancers, extremely hard to kill. He leads a garrison of about 100 defenders (at least 50; to be tuned for lag), undead soldiers and living militia, plus a few necromancers with their own minions. The fortress is built so a small force can defend it well: high walls, few entrances, chokepoints, and archer towers. Attackers need a big army.
+- **The boss:** the Corrupted King, a cruel king raised from the dead by his necromancers, extremely hard to kill. He leads a garrison of about 100 defenders (at least 50; to be tuned for lag), undead soldiers and living militia, plus **two named bound necromancers** (see `docs/endgame.md`). The fortress is built so a small force can defend it well: high walls, few entrances, chokepoints, and archer towers. Attackers need a big army.
 - **The fight:**
     1. **The siege:** the walls can't be breached or climbed, so the only ways in are the citadel doors, which players must break themselves while their army covers them, or the secret tunnel.
     2. **Starving them out (optional):** blockading the citadel makes its living garrison desert over time under the normal desertion rules.
-    3. **The necromancers:** while they live, they raise fallen defenders back up, so they have to be killed first.
+    3. **The two bound necromancers:** kill both (`docs/endgame.md`); while either lives, fallen defenders keep rising.
     4. **The duel:** the Corrupted King has 300 HP (Wither-level), 40% damage resistance, and Legend-level melee damage, and takes double damage from behind (proposed).
 - **The Corrupted King's Crown:** his reward, worn in the helmet slot. While worn, soldiers of the wearer who die within 32 blocks of him rise after 10 seconds as zombie soldiers that keep their gear and rank, fight on for 2 minutes, then crumble to dust, gone for good. Each fight in which it raises anyone adds one grumble point to its group (proposed). It's the 12th relic, belonging to the Corrupted King's own statue: placing it there lays him to rest and finishes restoring the Hall. The wearer can keep it as long as he likes, but the Hall isn't fully restored until he gives it up.
 - **One crown per world:** the Corrupted King can only be defeated once, so there's a single crown for players to fight over. All 12 relics, the crown included, can't be destroyed and never despawn. If the crown is lost anyway, it returns to the citadel's throne. A lost relic stays wherever it was lost; if it falls into the void, it reappears on the last solid ground it touched. Players can track one down with a relic compass.
@@ -1268,7 +1269,7 @@ A post-End boss fortress that uses the mod's war systems.
 - **The treasury:** a stocked treasury block, plus gold, diamond, and emerald blocks piled around the room.
 - **The library:** full bookshelves, chests of strong enchanted books, the royal enchanting table (see Acolytes), plus the Royal Annals: 12 volumes, one for each king (the 12th is the Corrupted King's), each also kept as a copy in an acolyte's refuge (see Acolytes), telling his life, his famous relic and its power, and the battle where he died. Each volume hints at where that king's relic lies. Volumes can be copied the way vanilla written books are (the volume plus a book and quill), and copies work in the relic compass recipe. The library also holds two enchanted books impossible in vanilla, one copy each: Sharpness VII and Looting V (proposed levels). They work on any weapon that can take that enchantment. The Seal-Breaker holds only one enchantment, so putting one on it means choosing between them. Both books sit in a sealed vault that only opens once the Corrupted King is defeated, so nobody can sneak in through the tunnel and grab them early.
 - **The alchemy room:** brewing stands, chests of strong potions, and the royal brewing stand (see Acolytes).
-- **The Hall of Fallen Heroes:** statues of the old kingdom's 12 kings, the last of them the Corrupted King, all named in the Village Chronicles. Their relics are missing.
+- **The Hall of the Twelve Kings:** statues of the old kingdom's 12 kings, the last of them the Corrupted King, all named in the Village Chronicles. Their relics are missing.
 - **The story:** the citadel was once the seat of a great kingdom. Its twelfth and last king was cruel and weak, and when he died his necromancers raised him back to rule forever as the Corrupted King. To keep anyone from ever reaching him, they bound the citadel's seal to the life of the Ender Dragon, which is why the dragon has to die first. Chronicles about the old kings, the fallen heroes, and the sealing tell the full story, and tie to the statues in the hall.
 - **The secret tunnel:** a hidden, half-collapsed tunnel runs from outside the walls into the lower keep. Only a super rare chronicle hints at where it starts.
 - **The dungeon:** about 8 captives (proposed) the garrison took from nearby villages, locked in cells: mostly master-level traders, plus a few small-time local heroes from recent years. Freed traders go to the player's nearest village as normal villagers at their trade level, and the heroes join as named soldiers, seasoned soldiers or heroes at most. They have nothing to do with the old kingdom.
@@ -1287,7 +1288,7 @@ A post-End boss fortress that uses the mod's war systems.
         - **Royal training grounds:** permanent, unbreakable training dummies that only work inside the citadel. They don't give kills. A soldier who practices on them for 3 days becomes royal-trained for good, with +10% damage. For 30 in-game days after training he also never deserts from morale or joins a mutiny, and one more day on the dummies renews it (proposed). Royal-trained soldiers show "Royal" before their label (for example, "Royal Hero" + name), and their post bed has a gold trim.
     2. **Restoring the Hall** (placing all 12 relics, the Crown last) gives:
         - **The kings return:** each great king rises as a spectral guardian as his relic is placed, and defends the citadel forever. Each has 100 HP, 30% damage resistance, Legend-level melee damage, and no knockback (proposed), and fights with the power of his own relic (see the relics table): the Dawnbreaker king burns undead, the Stormcaller king calls lightning, the Long Hunt king shoots from range, the Kingsmaul king stuns, the Oathkeeper king shields his allies, the Last Mantle king survives one lethal hit, and so on. They fight the owner's enemies only and stay inside the citadel; the kings the horn summons are temporary copies.
-        - **The King's Horn:** the horn lies in a sealed vault beneath the Hall of Fallen Heroes. It opens when a player uses a water bucket on the feet of the Tidespear king's statue, the same king in every world, but only once the Tidespear relic has been placed on that statue (proposed). This is a special action, not a placed block, so the citadel's building ban doesn't stop it. The Rhyme of the Twelve in the Horn-keeper's refuge chest (a normal book, copyable) holds a riddle that points to the Tidespear king, and his Royal Annals volume confirms it. Water at any other statue's feet does nothing. The horn only works for the citadel's owner. It summons one king, the best match for his main opponent, picked from the kings whose relic is on their statue, which may be only the Tidespear king at first. The king fights beside him anywhere in his kingdom for 1 minute, once per in-game day (proposed). The main opponent is the biggest enemy force within 64 blocks, checked in this order (proposed): ravagers and other heavy mobs call the Kingsmaul king; mostly archers and crossbowmen call the Long Hunt king; undead, minions, and zombie swarms call the Dawnbreaker king; any group of 10 or more calls the Stormcaller king; raiders and bandits call the Oathkeeper king; anything else calls the Tidespear king. If the best match's statue isn't restored, the Tidespear king comes instead. The summoned king only fights hostile mobs, raiders, bandits, and swarms, never players or soldiers. It can't be destroyed, and if it's lost it returns to its vault.
+        - **The King's Horn:** the horn lies in a sealed vault beneath the Hall of the Twelve Kings. It opens when a player uses a water bucket on the feet of the Tidespear king's statue, the same king in every world, but only once the Tidespear relic has been placed on that statue (proposed). This is a special action, not a placed block, so the citadel's building ban doesn't stop it. The Rhyme of the Twelve in the Horn-keeper's refuge chest (a normal book, copyable) holds a riddle that points to the Tidespear king, and his Royal Annals volume confirms it. Water at any other statue's feet does nothing. The horn only works for the citadel's owner. It summons one king, the best match for his main opponent, picked from the kings whose relic is on their statue, which may be only the Tidespear king at first. The king fights beside him anywhere in his kingdom for 1 minute, once per in-game day (proposed). The main opponent is the biggest enemy force within 64 blocks, checked in this order (proposed): ravagers and other heavy mobs call the Kingsmaul king; mostly archers and crossbowmen call the Long Hunt king; undead, minions, and zombie swarms call the Dawnbreaker king; any group of 10 or more calls the Stormcaller king; raiders and bandits call the Oathkeeper king; anything else calls the Tidespear king. If the best match's statue isn't restored, the Tidespear king comes instead. The summoned king only fights hostile mobs, raiders, bandits, and swarms, never players or soldiers. It can't be destroyed, and if it's lost it returns to its vault.
         - **High King:** a title above King, with +4 recruiter slots and +40% odds on rare tax items (proposed).
         - **The shadow lifts:** mod raids worldwide drop below normal (proposed: 20% on new moon night, 8% on the nights either side), and no swarms form anywhere in his kingdom.
         - **A golden age:** villagers in his kingdom breed faster and restock trades more often, and all villager trades there are cheaper for everyone (proposed: 40% cheaper, stacking with vanilla discounts down to vanilla's 1-emerald minimum).
@@ -1389,7 +1390,7 @@ The Black Citadel was the seat of a kingdom of twelve kings, who ruled one after
 | Garrick Kingsmaul | The Kingsmaul (mace) | Hunted down and killed the bandit king, then built the outer wall around the tree. |
 | Marek Tidespear | Tidespear (trident) | Sank the drowned fleet and took the ocean monument from its elder guardians. |
 | Valen Dawnbreaker | Dawnbreaker (sword) | Killed the villager-made Wither and lit the citadel beacon from its nether star in a tower on Garrick's wall; Corwin later built the keep around it. |
-| Corwin the Good | Stormstriders (boots) | Hunted the phantoms in their mountain roosts, caged them in the Roost atop the inner keep he built, and sealed the Warden. |
+| Corwin the Good | Stormstriders (boots) | Hunted the phantoms in their mountain roosts, caged them in the Roost atop the inner keep he built, and drove a **Warden** that was **harrying villagers** back to its **ancient city** (not imprisoned in the citadel). |
 | Torvald of the Long March | Greaves of the Long March (leggings) | Laid the Great Road, marched through the Nether and returned with the secret of netherite, and killed the Evoker Lord to end the illager war. |
 | Aldric the Founder | Ironroot Helm (helmet) | Made the walled hill a kingdom, wrote the first charter, and broke the Great Swarm, the last straw that won the villagers over. |
 | Oswin Oathkeeper | Oathkeeper (shield) | Killed a famous necromancer, starting the feud, and kept Aldric's pact by driving the world's scariest necromancer away from his villagers. |
@@ -1501,7 +1502,7 @@ Eight short books about heroes who weren't kings. Each has a random chance to ap
 | Horns of the Valley | A horn-maker explains each horn she crafts through the battles they decided | Horns, levers and buttons, flares, ranges, the village bell |
 | The Long Herd | A wandering rancher drives his herd from village to village, looking for a home | Animal farmers, wild ranches, pens, feed, meat and leather taxes |
 | Two Banners | Two rival lords claim neighboring villages, then must decide whether to fight or ally | Ownership, mess stations and claims, borders, allies and ranks, village banners |
-| The Last Good King | Thornwald, the last good king, who hatched a dragon out of kindness and died in the End | Citadel backstory; names the kings in the Hall of Fallen Heroes |
+| The Last Good King | Thornwald, the last good king, who hatched a dragon out of kindness and died in the End | Citadel backstory; names the kings in the Hall of the Twelve Kings |
 | The Cruel Crown | Maldric, the last of the twelve kings, beguiled into the Black Treaty by two disguised advisers, then poisoned and raised by them | Who the Corrupted King is; hints at the necromancers' role in the fight |
 | The Sealing | How, after Maldric's death, the necromancers bound the citadel's seal to the life of the Ender Dragon Thornwald hatched | Why the dragon must die first |
 | A Spy's Letter | A captured spy's last report from inside the citadel (rare) | Tips: the beacon's hidden pyramid room, guard positions, and the citadel doors only players can break |
@@ -1586,7 +1587,7 @@ Every number a server owner might want to tune, with its default.
 | Raid chance near spawn before the citadel falls (under 1,000 / 1,000-3,000 blocks) | 60% / 25% and 50% / 20% |
 | Natural militia near spawn (under 1,000 / 1,000-3,000 blocks) | 4 / 3 |
 | Arrow cap per soldier or militiaman | 16 |
-| Siege ladder max height | 25 blocks |
+| Siege ladder max height | 20 blocks |
 | Camp block storage | 54 slots |
 | Veteran defense radius | 32 blocks |
 | Cleanup timers (stray arrows / mob drops / soldier drops) | 30 seconds / 5 minutes / 10 minutes |

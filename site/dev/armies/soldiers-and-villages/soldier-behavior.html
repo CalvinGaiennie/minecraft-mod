@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Soldiers and villages — Soldier behavior — Minecraft Kingdom</title>
+  <link rel="stylesheet" href="../../../assets/site.css" />
+  
+</head>
+<body class="scope-dev">
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-top">
+        <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
+        <nav class="main-nav" aria-label="Site">
+          <a href="../../../index.html" class="">Marketing</a>
+          <a href="../../index.html" class="active">Dev docs</a>
+        </nav>
+      </div>
+      <nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../index.html" class="active">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav>
+    </div>
+  </header>
+  <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="villager-roles.html">Villager roles</a></li><li><a href="ownership-and-allies.html">Ownership and allies</a></li><li><a href="soldier-behavior.html" class="active">Soldier behavior</a></li><li><a href="village-economy.html">Village economy</a></li></ul><p class="sidebar-label">Subsections</p><ul><li><a href="#ranks">Ranks</a></li><li><a href="#combat">Combat</a></li><li><a href="#gear-wear">Gear wear</a></li><li><a href="#daily-routine">Daily routine</a></li><li><a href="#health-and-healing">Health and healing</a></li><li><a href="#desertion">Desertion</a></li><li><a href="#mutiny">Mutiny</a></li><li><a href="#veterans">Veterans</a></li><li><a href="#zombie-soldiers">Zombie soldiers</a></li><li><a href="#quirks">Quirks</a></li><li><a href="#night-fighting">Night fighting</a></li></ul></aside>
+    <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="villager-roles.html">Villager roles</a></li><li><a href="ownership-and-allies.html">Ownership and allies</a></li><li><a href="soldier-behavior.html" class="active">Soldier behavior</a></li><li><a href="village-economy.html">Village economy</a></li></ul><p class="sidebar-label">Subsections</p><ul><li><a href="#ranks">Ranks</a></li><li><a href="#combat">Combat</a></li><li><a href="#gear-wear">Gear wear</a></li><li><a href="#daily-routine">Daily routine</a></li><li><a href="#health-and-healing">Health and healing</a></li><li><a href="#desertion">Desertion</a></li><li><a href="#mutiny">Mutiny</a></li><li><a href="#veterans">Veterans</a></li><li><a href="#zombie-soldiers">Zombie soldiers</a></li><li><a href="#quirks">Quirks</a></li><li><a href="#night-fighting">Night fighting</a></li></ul></aside>
+    <main class="doc-main">
+      <p class="source">Source: <code>docs/soldiers-and-villages.md</code> · <a href="index.html">Soldiers and villages</a></p><h1>Soldier behavior</h1>
+<p>Soldiers rank up with kills, follow a daily routine, and have a few weaknesses.</p>
+<h3>Ranks</h3>
+<table><thead><tr><th>Kills</th><th>Rank</th></tr></thead><tbody><tr><td>5</td><td>Seasoned soldier</td></tr><tr><td>20</td><td>Hero</td></tr><tr><td>50</td><td>Legend</td></tr></tbody></table>
+<p>Each rank gets combat effects, including archery effects.</p>
+<p>What counts as a kill:</p>
+<ul>
+<li><strong>Counts:</strong> hostile mobs (zombies, skeletons, spiders, creepers), raiders (pillagers, vindicators, ravagers, evokers), bandits, and enemy soldiers or militia.</li>
+<li><strong>Doesn&#x27;t count:</strong> animals, friendly villagers, and tiny mobs like silverfish and endermites.</li>
+<li><strong>Credit:</strong> whoever lands the killing blow gets the kill.</li>
+</ul>
+<h3>Combat</h3>
+<ul>
+<li>Any mob hit with the gold-outline arrow is targeted first by soldiers and militiamen.</li>
+<li>Soldiers use up real arrows: each shot spends one. Soldiers with a bow pathfind to arrow bins until they run out, then to the nearest rampart. If an enemy gets close, they switch to melee (see Inventory).</li>
+<li>Soldiers can light fire arrows at any open flame, one arrow at a time: light one, fire it, light the next. Fire arrows can set blocks, crops, and buildings on fire.</li>
+<li>Enemy soldiers flee from mounted players 50% of the time; militia flee 92% of the time.</li>
+<li>Soldiers can carry shields, which show the village banner, but don&#x27;t block with them. Militia can&#x27;t carry shields.</li>
+<li><strong>Home bonus:</strong> soldiers get +10% damage within 128 blocks of their own post bed.</li>
+<li><strong>Arrow recovery:</strong> out of combat, soldiers pick up any shot arrows stuck in the ground within 16 blocks that they can reach: their own, other soldiers&#x27;, players&#x27;, and skeletons&#x27;. Tipped and spectral arrows stay what they are. Arrows they can&#x27;t reach, like ones high in walls or across water, are skipped.</li>
+</ul>
+<ul>
+<li><strong>Friendly arrows pass through:</strong> arrows from a player&#x27;s soldiers and militia, and his own arrows, fly through him, his soldiers, his allies, and their soldiers.</li>
+<li><strong>No accidental hits:</strong> a player&#x27;s melee hits do nothing to his own soldiers unless he&#x27;s sneaking.</li>
+<li><strong>Careful fire arrows:</strong> soldiers won&#x27;t shoot fire arrows at a target with a friendly within 3 blocks of it.</li>
+<li><strong>What still hurts friends:</strong> explosions, lava, fire, and (for most players) <strong>sneaking</strong> melee/ranged hits. Friendly kills (see Mutiny) are always on the player.</li>
+<li><strong>Order War Leader acolyte (locked):</strong> you <strong>cannot</strong> damage <strong>your</strong> soldiers or militia with direct attacks <strong>unless sneaking</strong> (<code>acolyte-path.md</code>). Non-sneak friendly hits are blocked/cancelled. Sneaking still counts as a deliberate friendly kill for mutiny if applicable.</li>
+</ul>
+<h3>Gear wear</h3>
+<ul>
+<li>Soldiers&#x27; and militia&#x27;s armor, weapons, and shields lose durability the way a player&#x27;s do. They can&#x27;t use XP, so Mending never repairs their gear.</li>
+<li><strong>Replacements:</strong> when an item breaks, the soldier goes to his recruiter box for a replacement of the same kind from the issued gear. Until then, a soldier without a weapon fights with his fists.</li>
+<li><strong>Militia without a weapon</strong> don&#x27;t fight with fists. They flee, unless they&#x27;re within 128 blocks of their home bed, where they fight with their fists to defend it.</li>
+<li><strong>Death drops:</strong> soldiers and militia drop everything they&#x27;re wearing and holding when they die, at its current durability. Anyone can pick it up, so the winner of a battle can collect the loser&#x27;s gear.</li>
+</ul>
+<h3>Daily routine</h3>
+<ul>
+<li>Each day, soldiers find the nearest mess station and take two meals: bread, cooked meat, baked potato, or sweet berries (2 berries make 1 meal).</li>
+<li>When not eating or sleeping, soldiers pathfind to ramparts.</li>
+<li>Soldiers sleep in post beds and treat them as home.</li>
+</ul>
+<h3>Health and healing</h3>
+<p>Soldiers heal through their daily routine and fall back before they die, so good care lets them rank up.</p>
+<ul>
+<li><strong>Heal in post beds:</strong> soldiers fully heal when they sleep in their post bed. Post beds only work out of combat (no enemy within 16 blocks and no damage taken in the last 30 seconds).</li>
+<li><strong>Heal on meals:</strong> each meal from the mess station restores 3 hearts (6 HP).</li>
+<li><strong>Retreat when hurt:</strong> below 30% health, soldiers fall back to the nearest fallback block.</li>
+<li><strong>More health per rank:</strong></li>
+<li><strong>Retreat after heavy losses:</strong> if 65% of a squad is killed in one fight, the survivors retreat to the nearest fallback block (or camp block on campaign). This doesn&#x27;t apply within 128 blocks of their own post bed, where they hold their ground.</li>
+</ul>
+<table><thead><tr><th>Rank</th><th>Max health</th><th>Melee and arrow damage</th><th>Damage resistance</th><th>Knockback resistance</th></tr></thead><tbody><tr><td>Soldier</td><td>20 HP</td><td>Normal</td><td>None</td><td>None</td></tr><tr><td>Seasoned soldier</td><td>30 HP</td><td>+15%</td><td>None</td><td>25%</td></tr><tr><td>Hero</td><td>50 HP</td><td>+30%</td><td>20%</td><td>50%</td></tr><tr><td>Legend</td><td>100 HP</td><td>+50%</td><td>40%</td><td>100%</td></tr></tbody></table>
+<p>A Legend in iron armor takes several minutes for a well-geared player to kill alone. Optional flavor: a Legend takes double damage from hits to his back, his one weakness.</p>
+<h3>Desertion</h3>
+<p>Soldiers desert when they go hungry, lose their home, or see their squad wiped out. Seasoned soldiers, heroes, and Legends are far more loyal.</p>
+<ul>
+<li><strong>Hunger:</strong> a soldier who misses meals for 2 days becomes hungry (slower, weaker attacks). From day 3 to day 6 he has a daily chance to desert: 10%, 20%, 35%, then 50%. On day 7 he deserts for sure.</li>
+<li><strong>No home:</strong> if his post bed is destroyed and not replaced within 3 nights, he deserts.</li>
+<li><strong>Broken morale:</strong> if more than half of a squad dies in one fight, each survivor has a 10% chance to desert. Seasoned soldiers have 5%; heroes and Legends never desert from morale. This doesn&#x27;t apply within 128 blocks of the soldier&#x27;s own post bed.</li>
+<li><strong>Ranked soldiers:</strong> seasoned soldiers, heroes, and Legends never get hungry or desert from hunger or homelessness.</li>
+<li><strong>Warnings:</strong> hungry or homeless soldiers show angry-villager particles. The player gets a chat message when a soldier becomes hungry or loses his bed, and again the day before he would be forced to desert.</li>
+<li><strong>What happens (one roll per desert):</strong> <strong>50%</strong> drop gear, walk to the nearest other village, and become <strong>regular unemployed villagers</strong> there. <strong>45%</strong> <strong>keep gear</strong> and become <strong>bandits</strong> (nearest band or new band). <strong>5%</strong> <strong>keep gear</strong> and become <strong>wandering necromancers</strong> (<code>threats-and-mobs.md</code>). Config: <code>deserterOutcomeVillager</code> / <code>deserterOutcomeBandit</code> / <code>deserterOutcomeNecromancer</code> (defaults <strong>0.50 / 0.45 / 0.05</strong>). <strong>Orphan-raised:</strong> same outcome split; <strong><code>orphanDesertionMultiplier</code></strong> applies only to <strong>hunger / morale</strong> desert <strong>triggers</strong> (§ Orphanages).</li>
+<li><strong>Slots open up:</strong> a deserter frees his post bed and recruit slot, so the recruiter can replace him.</li>
+<li><strong>Honorable discharge:</strong> the owner (or a co-owner) can take a soldier&#x27;s weapon to discharge him. He drops the rest of his gear and becomes an unemployed villager, freeing his post bed and recruit slot. He keeps his kill count, so if he&#x27;s re-enlisted later he comes back at his old rank. Nobody else can discharge another player&#x27;s soldiers.</li>
+</ul>
+<h3>Mutiny</h3>
+<p>Soldiers who feel thrown away may turn on their own lord. Every costly victory or friendly kill raises the chance, but no mutiny is ever certain, and the player is only told his soldiers are upset.</p>
+<ul>
+<li><strong>Grumble points:</strong> each group of soldiers (a camp, or a village&#x27;s soldiers at home) keeps a grumble count. It gains 1 point for each costly victory: a fight the player started (an assault or a battle on campaign) that the army wins while losing at least 40% of its soldiers. Defending against raids, swarms, and bandits never counts. It also gains 1 point each time the player kills one of its soldiers; killing his own zombie soldiers doesn&#x27;t count. Points travel with the soldiers: when they leave for or return from campaign they bring their points, and when two groups merge the higher count stands.</li>
+<li><strong>Cooling off:</strong> the count drops by 1 for every 3 in-game days without a new point. A clean victory (losses under 10%) removes 2 points, and a feast (every mess station in that village or camp fully stocked at the next meal) clears them all.</li>
+<li><strong>Warnings:</strong> while a group has any points, its soldiers show angry-villager particles, and the player gets a chat message that his soldiers at that village or camp are upset. Nothing ever says a mutiny is coming.</li>
+<li><strong>Mutiny chance:</strong> each time a point is added, the group rolls for a mutiny: 2% at 1 point, 8% at 2, 15% at 3, 25% at 4, and 35% at 5 or more (proposed). It&#x27;s never certain, however many points pile up. With no cooling off, the chance a group has mutinied by the time it reaches 3 points is about 23%, by 5 points about 63%, and by 7 points about 84%. Points have no cap, but every point past 5 uses the 5+ odds. While a group has any points, it also rolls once a day as it cools off: 1% per point, up to 5% at 5 or more points (proposed). The figures above don&#x27;t include these daily rolls.</li>
+<li><strong>Joining:</strong> when a mutiny starts, every soldier in the group rolls to join, using the table below. The more points the group had, the more join.</li>
+</ul>
+<table><thead><tr><th>Rank</th><th>1-2 points</th><th>3 points</th><th>4 points</th><th>5+ points</th></tr></thead><tbody><tr><td>Soldier</td><td>25%</td><td>40%</td><td>55%</td><td>70%</td></tr><tr><td>Seasoned soldier</td><td>15%</td><td>25%</td><td>40%</td><td>55%</td></tr><tr><td>Hero</td><td>5%</td><td>10%</td><td>20%</td><td>30%</td></tr><tr><td>Legend</td><td>2%</td><td>3%</td><td>5%</td><td>8%</td></tr></tbody></table>
+<ul>
+<li><strong>The mutiny:</strong> the joiner with the most kills leads it. Mutineers attack the player on sight and try to kill him; survivors become a bandit band under the leader. Soldiers who don&#x27;t join stay loyal and fight the mutineers. If nobody joins, the mutiny fizzles and the points stay.</li>
+<li><strong>Who never mutinies:</strong> royal guards, soldiers within 30 days of royal training, and soldiers carrying the banner of the old kingdom. A necromancer&#x27;s soldiers roll twice to join and join if either roll succeeds.</li>
+</ul>
+<h3>Veterans</h3>
+<p>A discharged soldier can be given a veteran&#x27;s sword to defend his home for free, and called back to service later.</p>
+<ul>
+<li><strong>Veteran&#x27;s sword:</strong> an iron sword + an iron nugget (shapeless). It fights like an iron sword.</li>
+<li><strong>Who can use it:</strong> only honorably discharged soldiers. Given to anyone else, it counts as a normal weapon.</li>
+<li><strong>What a veteran does:</strong> he claims a normal villager bed like any villager, lives as a normal villager, and carries the sword. He fights anything that threatens the area within 32 blocks of his home bed. Outside that area he acts like a civilian.</li>
+<li><strong>No upkeep:</strong> veterans don&#x27;t eat from the mess, don&#x27;t need a post bed, never desert, and don&#x27;t count toward tax coverage.</li>
+<li><strong>Looks:</strong> he keeps his old rank badge, labeled &quot;Veteran&quot; + name.</li>
+<li><strong>Recalling him:</strong> give him a better weapon. Kills he made as a veteran carry over. If he meets every soldier requirement, he&#x27;s a soldier again at his rank; otherwise he becomes a militiaman and upgrades once he meets them.</li>
+<li><strong>Trading:</strong> what a villager was first decides it. A villager who was a trader first can never become a soldier. A villager who served as a soldier first, at any rank, can switch back and forth between soldier and trader as often as the player likes: he keeps his kills and rank while trading, and his trades while serving, but doesn&#x27;t trade while serving. The risk is that a valuable trader sent back to the front can die.</li>
+</ul>
+<h3>Zombie soldiers</h3>
+<ul>
+<li>A soldier killed by a zombie can turn into a zombie soldier, like vanilla zombie villagers. He keeps his gear and rank.</li>
+<li><strong>Curing (proposed odds):</strong> cured the vanilla way, he comes back as one of these:</li>
+</ul>
+<p>- 60%: a soldier again, with his gear, rank, and kills. - 25%: he drops his gear and refuses to serve. He can take a trade, but can never become a soldier or militiaman again. - 15%: he deserts, following the normal desertion rules.</p>
+<h3>Quirks</h3>
+<ul>
+<li>Soldiers within 2 blocks of a loose brewing stand (not a villager&#x27;s job block or one in the citadel), axolotl, frog, or decorated pot have a 20% chance to take on negative effects and behavior. Each soldier is only checked once per day.</li>
+<li>Soldiers close to a mushroom or poppy have a 20% chance to eat it, with the same result.</li>
+<li>Either case gives 2 minutes of &quot;Tripping Nuts&quot;: they wander aimlessly and hit anything they bump into, but don&#x27;t target anything on purpose.</li>
+<li>Soldiers can drive boats and ride in each other&#x27;s boats. They only carry and place boats during a boat plan.</li>
+</ul>
+<h3>Night fighting</h3>
+<p>Soldiers in the dark sometimes stumble, so lit villages and lantern-carrying armies keep their footing and dark ground gives swarms, minions, and necromancers an edge. Stumbling is the only night penalty.</p>
+<ul>
+<li><strong>Who stumbles:</strong> soldiers and militia between dusk and dawn, while standing in light below level 8 and not carrying a light. In a well-lit village, soldiers never stumble.</li>
+<li><strong>Stumbling:</strong> an unlit soldier who&#x27;s moving has a 5% chance each in-game hour to stumble (proposed). He loses 2 hearts and is slowed for 3 seconds, but a stumble never drops him below 1 heart. The slowness is a built-in stat, not a potion effect, so endermen ignore it.</li>
+<li><strong>Carried lights:</strong> soldiers and militia can carry a torch, lantern, or soul lantern in the utility slot when it isn&#x27;t holding a boat, and never stumble while carrying one. Torches burn out after one night; lanterns last. Players hand lights over by right-clicking, and soldiers restock torches from arrow bins and camp blocks. Held lights don&#x27;t light up the world (vanilla has no moving light), so this is a stat, not a visual.</li>
+<li><strong>Lighting the village:</strong> placed light counts. Torches, lanterns, candles, and glowstone around ramparts and paths keep defenders on their feet.</li>
+<li><strong>Exempt:</strong> nightwatch soldiers, heroes, and Legends never stumble.</li>
+<li><strong>Minions:</strong> necromancer minions deal 10% more damage at night (proposed).</li>
+</ul>
+    </main>
+  </div>
+  <footer class="site-footer">
+    Source: <code>docs/soldiers-and-villages.md</code>
+  </footer>
+  
+</body>
+</html>

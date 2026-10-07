@@ -3,219 +3,41 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Minecraft Kingdom — Armies &amp; Citadel</title>
-  <style>
-    :root {
-      --bg: #ebe6dc;
-      --surface: #faf8f4;
-      --surface2: #e3ddd2;
-      --text: #2a3038;
-      --muted: #5a6572;
-      --gold: #9a7b1a;
-      --gold-dim: #b8922a;
-      --armies: #2d6a4f;
-      --citadel: #5c3d7a;
-      --border: #c9c0b0;
-      --link: #1a5fb4;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-      background: linear-gradient(180deg, #f5f1ea 0%, var(--bg) 40%, #e5dfd3 100%);
-      color: var(--text);
-      line-height: 1.55;
-      min-height: 100vh;
-    }
-    a { color: var(--link); }
-    a:hover { text-decoration: underline; }
-    .wrap { max-width: 920px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
-    header {
-      text-align: center;
-      padding: 2.5rem 0 2rem;
-      border-bottom: 1px solid var(--border);
-    }
-    header h1 {
-      font-size: clamp(1.75rem, 4vw, 2.5rem);
-      font-weight: 700;
-      margin: 0 0 0.5rem;
-      letter-spacing: 0.02em;
-    }
-    header .brand { color: var(--gold); }
-    header p.lead {
-      max-width: 36em;
-      margin: 0 auto;
-      color: var(--muted);
-      font-size: 1.05rem;
-    }
-    .badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      justify-content: center;
-      margin-top: 1.25rem;
-    }
-    .badge {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      padding: 0.35rem 0.65rem;
-      border-radius: 4px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      color: var(--muted);
-    }
-    nav.toc {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin: 1.5rem 0 0;
-    }
-    nav.toc a {
-      font-weight: 600;
-      text-decoration: none;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-    }
-    nav.toc a.armies { border-color: var(--armies); color: var(--armies); background: #eef6f1; }
-    nav.toc a.citadel { border-color: var(--citadel); color: var(--citadel); background: #f3eef8; }
-    nav.toc a.plan { border-color: var(--gold-dim); color: var(--gold); background: #faf6eb; }
-
-    section.vanilla { margin-top: 2.5rem; }
-    section.vanilla h2 {
-      font-size: 1.65rem;
-      margin: 0 0 0.75rem;
-      color: var(--gold);
-    }
-    section.mod {
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-    }
-    section.mod h2 {
-      font-size: 1.65rem;
-      margin: 0 0 0.25rem;
-    }
-    section.mod h2 .sub { font-weight: 400; color: var(--muted); font-size: 0.95rem; }
-    section.mod.armies h2 { color: var(--armies); }
-    section.mod.citadel h2 { color: var(--citadel); }
-
-    h3 {
-      font-size: 1.1rem;
-      margin: 1.75rem 0 0.65rem;
-      color: var(--gold);
-    }
-    p { margin: 0.65rem 0; }
-    .fix-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-left: 4px solid var(--gold-dim);
-      padding: 1rem 1.15rem;
-      border-radius: 0 8px 8px 0;
-      margin: 1rem 0;
-    }
-    .fix-box strong { color: var(--gold); }
-    .future {
-      margin-top: 1.25rem;
-      padding: 1rem;
-      background: var(--surface2);
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      font-size: 0.92rem;
-      color: var(--muted);
-    }
-
-    footer {
-      margin-top: 3rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border);
-      font-size: 0.8rem;
-      color: var(--muted);
-      text-align: center;
-    }
-  </style>
+  <title>Minecraft Kingdom — Minecraft Kingdom</title>
+  <link rel="stylesheet" href="assets/site.css" />
+  
 </head>
-<body>
-  <div class="wrap">
-    <header>
-      <h1><span class="brand">Minecraft Kingdom</span></h1>
-      <p class="lead">
-        Two optional NeoForge mods for <strong>1.21.1</strong> — build living armies from real villagers,
-        or chase a medieval endgame at the Black Citadel. Install one or both; no required modpack dependencies.
-      </p>
-      <div class="badges">
-        <span class="badge">NeoForge 1.21.1</span>
-        <span class="badge">Java 21</span>
-        <span class="badge">Modpack-friendly</span>
+<body class="scope-marketing">
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-top">
+        <p class="site-title"><a href="index.html"><span class="brand">Minecraft Kingdom</span></a></p>
+        <nav class="main-nav" aria-label="Site">
+          <a href="index.html" class="active">Marketing</a>
+          <a href="dev/index.html" class="">Dev docs</a>
+        </nav>
       </div>
-      <nav class="toc">
-        <a href="#vanilla">What vanilla gets wrong</a>
-        <a class="armies" href="#armies">Armies</a>
-        <a class="citadel" href="#citadel">Citadel</a>
-        <a class="plan" href="./development-plan.html">Development plan</a>
-      </nav>
-    </header>
-
-    <section class="vanilla" id="vanilla">
-      <h2>What vanilla gets wrong</h2>
-      <div class="fix-box">
-        <p><strong>It gets lonely.</strong> You do almost everything yourself. Villagers trade; they don’t run your base. The farms that actually help are exploit builds you babysit while online or AFK—so survival often feels like a solo grind, not a kingdom with people in it.</p>
-        <p><strong>Endgame stops at the dragon.</strong> Credits roll and the “main” story is over. Elytra and End cities are optional extras, not a next chapter. The Wither mostly means a beacon; the Warden drops a sculk catalyst while the good Deep Dark loot sits in city chests. Harder bosses don’t really change where the game is going.</p>
-      </div>
-    </section>
-
-    <section class="mod armies" id="armies">
-      <h2>Minecraft Kingdom: Armies <span class="sub">— villages, economy, war</span></h2>
-      <p>
-        Turn unemployed villagers into <strong>soldiers and militia</strong> tied to mess halls, taxes, and post beds.
-        Command them with horns, march on campaign, and defend claims that feel like kingdoms — not redstone contraptions.
-      </p>
-
-      <h3>What you get</h3>
-      <p>
-        A way to turn villages into <strong>yours</strong>: recruit from real villagers, feed and pay them through mess halls and taxes, and send ranked soldiers and militia to hold walls you actually built. Horns, camps, and maps tie command to the ground—not a mod menu replacing the world.
-      </p>
-      <p>
-        Defense and economy grow together: supply, recruiters, farmers, and protection blocks so a hamlet behaves like a place worth keeping, not a trading hall behind a door. When you enlist, the world pushes back—raids, swarms, and bandits that care about claimed land (opt out if you only want building and machines).
-      </p>
-      <p>
-        Scale up and the game notices: kingdom titles from owned villages, bigger threats for bigger realms, and tools like wanted posters (planned) so your army enforces borders instead of you standing on every rampart alone.
-      </p>
-      <p class="future">
-        <strong>Modpacks:</strong> No required companion mods. We design for optional coexistence and deeper hooks when popular content mods are present — see the
-        <a href="./development-plan.html#compat">compatibility list</a> on the development plan.
-      </p>
-    </section>
-
-    <section class="mod citadel" id="citadel">
-      <h2>Minecraft Kingdom: Citadel <span class="sub">— necromancy &amp; endgame</span></h2>
-      <p>
-        Break the seal on the <strong>Black Citadel</strong>, survive a **siege** built for traps, spawners, and debuff pressure—not a pure tank check—then slay the Corrupted King and two bound necromancers. Hold the throne, heal the Kingstree, restore the Hall of the Twelve Kings. An optional <strong>Order acolyte</strong> path (train, feats, escort brothers) runs **before claim**; necromancy stays optional darkness alongside it.
-      </p>
-
-      <h3>What you get</h3>
-      <p>
-        A <strong>second act</strong> after the dragon: breach player-mined gates under overwatch, push **defensive-mode** corridors, and win a citadel you can **remodel**—strong shell, soft interiors, deep basements. Restoration wakes royal stations, acolytes, and relic lore; with Armies, kingdom perks and citadel shadow content amplify the approach.
-      </p>
-      <p>
-        The overworld feeds the arc—refuges, bandit fortresses with relics, **crypts** (some **wild liches** with horcruxes teach how to hunt and unmake them at the hidden **Dragon’s Well**). Casual wand necromancy always exists; a **committed necromancer questline** adds flutes, cursed armor, and player horcruxes with real PvP hunt stakes.
-      </p>
-      <p>
-        You can ignore Order and quest necromancy and still run the citadel; paths are **permanent forks**, not required checklist.
-      </p>
-      <p class="future">
-        Install <strong>Citadel</strong> without <strong>Armies</strong> for a standalone endgame; install both for kingdom titles, soldier-linked relic powers, and citadel mess ownership.
-      </p>
-    </section>
-
-    <footer>
-      Minecraft Kingdom: Armies (<code>minecraft_kingdom_armies</code>) &amp; Citadel (<code>minecraft_kingdom_citadel</code>) ·
-      <a href="./development-plan.html">Development plan</a> · Design docs in repo <code>docs/</code> · Work in progress<br />
-      Not affiliated with the &ldquo;Minecraft Kingdoms&rdquo; modpack or the &ldquo;Minecraft: Kingdom&rdquo; resource pack.
-    </footer>
+      <nav class="sub-nav scope-marketing" aria-label="Marketing"><a href="index.html" class=" active">Home</a><a href="marketing/vanilla.html">Vanilla gaps</a><a href="marketing/armies.html" class="armies">Armies</a><a href="marketing/citadel.html" class="citadel">Citadel</a></nav>
+    </div>
+  </header>
+  <div class="page-shell">
+    
+    <main class="doc-main">
+      <h1>Minecraft Kingdom</h1>
+<p>Two optional NeoForge mods for <strong>1.21.1</strong> — build living armies from real villagers, or chase a medieval endgame at the Black Citadel. Install one or both; no required modpack dependencies.</p>
+<p><strong>NeoForge 1.21.1</strong> · <strong>Java 21</strong> · <strong>Modpack-friendly</strong></p>
+<h2 id="on-this-site">On this site</h2>
+<ul>
+<li><strong><a href="marketing/vanilla.html">What vanilla gets wrong</a></strong> — why we built this</li>
+<li><strong><a href="marketing/armies.html">Minecraft Kingdom: Armies</a></strong> — villages, economy, war</li>
+<li><strong><a href="marketing/citadel.html">Minecraft Kingdom: Citadel</a></strong> — necromancy &amp; endgame</li>
+<li><strong><a href="dev/index.html">Dev documentation</a></strong> — full design canon (every merged doc and note)</li>
+</ul>
+    </main>
   </div>
+  <footer class="site-footer">
+    Minecraft Kingdom: Armies & Citadel · <a href="dev/index.html">Dev docs</a> · WIP
+  </footer>
+  
 </body>
 </html>

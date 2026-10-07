@@ -103,6 +103,18 @@
     }
     main.dev-body th { background: var(--surface2); }
     main.dev-body code { font-size: 0.88em; }
+    main.dev-body .mermaid-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 1.25rem 0;
+      overflow-x: auto;
+    }
+    main.dev-body .mermaid-wrap .mermaid {
+      font-size: 0.85rem;
+      text-align: center;
+    }
 
     footer {
       margin-top: 3rem;
@@ -125,8 +137,10 @@
       <nav class="top">
         <a class="marketing" href="./index.html">← Marketing overview</a>
         <a href="#goals">Mod goals</a>
+        <a href="#solo-paths">Solo path locks</a>
         <a href="#mods">Two mods</a>
         <a href="#process">How we plan</a>
+        <a href="#progress">Design progress</a>
         <a href="#backlog">Design backlog</a>
         <a href="#compat">Mod compatibility</a>
       </nav>
@@ -138,5 +152,9 @@
       <a href="./index.html">Marketing overview</a> · Source: <code>docs/marketing/development-plan.md</code> · WIP
     </footer>
   </div>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true, theme: "neutral", securityLevel: "loose" });
+  </script>
 </body>
 </html>
