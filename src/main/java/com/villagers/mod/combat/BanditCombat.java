@@ -7,7 +7,9 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 
+import com.villagers.mod.entity.MilitiaLabels;
 import com.villagers.mod.entity.VillagerAttachments;
+import com.villagers.mod.gear.VillagerGearRules;
 import com.villagers.mod.threat.BanditService;
 
 import java.util.HashSet;
@@ -35,6 +37,7 @@ public final class BanditCombat {
         if (!BanditService.isBandit(villager) || !(villager instanceof Mob mob)) {
             return;
         }
+        sanitizeBanditIdentity(villager);
         enableCombatGoals(villager);
         SoldierCombat.suppressPanic(villager);
         if (mob.getTarget() == null || !mob.getTarget().isAlive()) {
@@ -59,5 +62,21 @@ public final class BanditCombat {
             }
         }
         return best;
+    }
+
+    /** Repair saves where bandit gear was imported into kit and tagged as militia/soldier. */
+    private static void sanitizeBanditIdentity(Villager villager) {
+        if (villager.hasData(VillagerAttachments.MILITIA_DATA.get())) {
+            villager.removeData(VillagerAttachments.MILITIA_DATA.get());
+            MilitiaLabels.clear(villager);
+        }
+        if (villager.hasData(VillagerAttachments.SOLDIER_DATA.get())) {
+            villager.removeData(VillagerAttachments.SOLDIER_DATA.get());
+        }
+        VillagerGearRules.clearKitForVanillaEquipmentMob(villager);
+        if (villager.getCustomName() == null) {
+            villager.setCustomName(net.minecraft.network.chat.Component.translatable("entity.villagers.bandit"));
+            villager.setCustomNameVisible(true);
+        }
     }
 }

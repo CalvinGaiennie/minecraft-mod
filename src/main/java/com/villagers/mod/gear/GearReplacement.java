@@ -10,6 +10,7 @@ import com.villagers.mod.block.RecruiterBlock;
 import com.villagers.mod.block.entity.RecruiterBlockEntity;
 import com.villagers.mod.entity.SoldierConversion;
 import com.villagers.mod.entity.VillagerAttachments;
+import com.villagers.mod.threat.BanditService;
 
 public final class GearReplacement {
     private static final int SCAN = 32;
@@ -22,7 +23,8 @@ public final class GearReplacement {
         if (villager.level().isClientSide || !(villager.level() instanceof ServerLevel level)) {
             return;
         }
-        if (villager.isBaby() || villager.hasData(VillagerAttachments.SOLDIER_DATA.get())) {
+        if (villager.isBaby() || villager.hasData(VillagerAttachments.SOLDIER_DATA.get())
+                || BanditService.isBandit(villager)) {
             return;
         }
         if (!lacksEnlistGear(villager)) {

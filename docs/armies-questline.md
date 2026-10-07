@@ -51,7 +51,7 @@ O2 — hunt and kill the big bandit leader (player finish only)
 
 - Corvin: **player finish only**.
 - **Death line:** *“You absolute mule. I’m not the Rook. I’m what keeps his books. Run home, lordling, before Garland turns your pretty village into ash.”*
-- Sets flag **`armiesQuestD2Armed`**.
+- Sets flag **`armiesQuestD2Armed`** — player is **sent home** to face D2 (not a march to Garland yet).
 
 ---
 
@@ -69,15 +69,25 @@ O2 — hunt and kill the big bandit leader (player finish only)
 
 **Garland cannot be fully killed in D2.**
 
+**Capture & guide (author draft, not implemented):** During the assault, player may **capture** one Garland soldier alive. He offers to lead the owner to **the Rook’s castle** only if the expedition musters **≥ N soldiers** from **camp**. On the march he **prompts recruiting more** at checkpoints (**TBD**). Route passes a **village near the castle**; the guide **escapes** there. **Kidnap** follows shortly after (**prison arc** — see `notes/tbd-garland-fortress-prison-arena.md`). **`torn_map_half`** may merge with guide intel **TBD**.
+
 ---
 
 ## O2 — **No more running**
 
-**Start:** **`torn_map_half`** (no fixed villager journal line for now).
+**Start:** After **O1** (Corvin dead) and **D2** flee item **`torn_map_half`**; quest stage **O2 armed** (**TBD** exact flag).
 
-**Find:** Shapeless craft **`torn_map_half`** + **ledger** + **compass** → **Rook's Trail Compass** (points at camp); chat bearing to **Garland’s camp** (SavedData, farther than Corvin’s).
+**Find Garland (no compass):** Captured **guide** leads the march after D2; **≥ N soldiers** required to **start** and soft targets to **recruit more** along the way. **No** Rook's Trail Compass (**remove** craft if still in data).
 
-**Goal:** Kill **Garland the Rook**. **Player finish only**.
+**Kidnap gate:** After **guide escapes** at the **approach village**, not on first region visit. Army remains **outside** when owner is taken into the **prison** (Act 2 in draft doc).
+
+**Goal (surface):** Kill **Garland the Rook**. **Player finish only** (after prison arc **TBD**).
+
+### Draft — Fortress approach & prison arena (not implemented)
+
+**Discussion doc:** [`notes/tbd-garland-fortress-prison-arena.md`](notes/tbd-garland-fortress-prison-arena.md).
+
+**Prison flow (author):** **Cell** + fellow prisoner → **tower** (see army) → **main arena** (warm-ups, waves, gear ladder) → optional prisoner forks (**steal**, **throw fight** = −1 upgrade, **beat/kill bad prisoner**) → **mace champion** (**lose if below 2 hearts**). **Win:** Garland hauls you to **tower** to **watch** his men hit your army → **naked escape race** to camp → **lead survivors** (escape **easier** if two prisoners helped: **intel** saves men, **ally** on final egress). **No execution.** **Lose** mace: bad end **TBD** (not win-path race). **Rookbreaker** **TBD**.
 
 **Rewards:**
 

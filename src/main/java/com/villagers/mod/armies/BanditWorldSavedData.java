@@ -88,6 +88,13 @@ public class BanditWorldSavedData extends SavedData {
         setDirty();
     }
 
+    /** Retry world gen when a prior pass marked generated but placed no sites. */
+    public void resetGenerationState() {
+        generated = false;
+        sites.clear();
+        setDirty();
+    }
+
     public void addSite(SiteRecord site) {
         sites.add(site);
         setDirty();

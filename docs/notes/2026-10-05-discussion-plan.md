@@ -98,4 +98,8 @@
 
 **Citadel mod planning finish line:** `citadel-mod-plan.md` — scope, locked canon, open decision queue (A–F), implementation phases. Close planning when **A1–A3, B1–B3, B5–B6, C1–C2, D1–D2, E1** are decided.
 
-**Active:** **§7** (necromancer quest items, flutes, god wizard armor, horcrux). **§9** closed. **§10** next after §7.
+| 2026-10-07 | **Citadel author batch** | A1 brothers merged; B2 no single lever; B5 break spawners; B6 vanilla spawners; C1/C2; D1 **3500** ring, D2 **20**, D4 v1; E3 explosions hurt; F2 pillagers. **Open:** A3 End-move, B1 tunnel yes/no, E1 refuges confirm, B3 post-NBT. | `citadel-mod-plan.md`, `endgame.md`, layout/defenders, necro/acolyte paths |
+| 2026-10-07 | **Citadel author batch 2** | A3 End-move = **v1 real branch**; B1 secret tunnel **off v1**; E1 **15 unique refuge archetypes** (witch hut, cave, village house, …), one per overworld brother. | `citadel-mod-plan.md`, `endgame.md`, `acolyte-path.md`, `citadel-layout.md` |
+| 2026-10-07 | **Garland O2 TBD (author sketch)** | **Kidnap → cell/waves** (death **respawns in cell**, capped); **final fight → branching endings**; timeout **ambushes army**; **nicknames** from bandits/troops. Not approved. | `notes/tbd-garland-fortress-prison-arena.md`, `armies-questline.md` |
+
+**Active:** **§7** (necromancer quest items, flutes, god wizard armor, horcrux). **§9** closed. **§10** next after §7. **Garland prison arena** and **citadel biome placement (B7)** queued for dedicated discussion.

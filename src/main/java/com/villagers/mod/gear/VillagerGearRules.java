@@ -18,6 +18,8 @@ import com.villagers.mod.entity.SoldierData;
 import com.villagers.mod.entity.VillagerAttachments;
 import com.villagers.mod.entity.VillagerKitData;
 import com.villagers.mod.item.CampaignBootsItem;
+import com.villagers.mod.threat.BanditService;
+import com.villagers.mod.threat.WanderingNecromancerService;
 
 public final class VillagerGearRules {
     public static final int MAX_ARROWS = 16;
@@ -144,8 +146,16 @@ public final class VillagerGearRules {
         }
     }
 
+    /** Threat mobs wear gear via vanilla slots only; kit import would treat them as militia/soldiers. */
+    public static void clearKitForVanillaEquipmentMob(Villager villager) {
+        villager.removeData(VillagerAttachments.VILLAGER_KIT.get());
+    }
+
     /** Pull legacy equipment into kit once (GameTests / old saves). */
     private static void ensureImportedFromEntity(Villager villager, VillagerGearSlot slot) {
+        if (BanditService.isBandit(villager) || WanderingNecromancerService.isWanderingNecromancer(villager)) {
+            return;
+        }
         VillagerKitData data = kit(villager);
         if (!data.get(slot).isEmpty()) {
             return;

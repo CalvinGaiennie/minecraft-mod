@@ -8,6 +8,13 @@ Optional **player status** for Citadel, aimed especially at **solo players with 
 
 NPC acolytes remain the fixed **17** veterans; see **`endgame.md`** for refuges, homecoming, stations, and death rules. **Two** of the 17 are **citadel-dungeon prisoners** (War Leader + one craft brother), not overworld refuges, **`citadel-layout.md`**.
 
+### Refuge sites (author 2026-10-07)
+
+- **One overworld refuge per brother** who escaped the purge (**15** placed sites, including **Maelor**).
+- **Two brothers** have **no** overworld hideout until the dungeon rescue (cells only).
+- **Each refuge uses a different archetype** at world gen — e.g. **repurposed witch hut**, **small cave**, **house in a village**, hermit shack, ruined chapel, **not** one template cloned 15 times. SavedData records **which brother** maps to **which archetype + position**.
+- Distance/spacing: **`endgame.md`** (500–4,000 from spawn, ≥700 apart, proposed).
+
 ## Mutual exclusion (Order vs necromancer questline)
 
 **Casual necromancy** (wand, minions, penalties, absolution) and the **Order** can overlap until the player finishes the **intro quest** and chooses **commit** or **opt out** (`necromancer-path.md`).
@@ -120,7 +127,7 @@ Two brothers were **never** at overworld refuges, they hold the inner ward durin
 | **First** | **War Leader** (always) |
 | **Second** | **Arcane, Alchemist, or Smith**: **random per world** at world gen |
 
-- **Rescue:** after seal break, **player flips a lever** in/near the dungeon to open Order cells; then talk / escort as usual.
+- **Rescue:** after seal break, **player opens each Order cell separately** (**not** one lever for both cells, author **2026-10-07**); then talk / escort as usual.
 - **Annals:** trapped brothers do **not** carry Annals volumes, copies only in overworld **refuge chests** (twelve locked Annals chests).
 - **Reunite:** they count for escort only after rescue; deliver to **Maelor’s refuge** before claim to join homecoming roster.
 - **Stations:** only **Arcane / Alchemist / Smith** fill royal lecterns. Trapping one craft brother **does not** replace escorting the others, skip too many overworld escorts and lecterns stay empty (Maelor can fill one dead brother’s slot only).

@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.villagers.mod.VillagersMod;
+import com.villagers.mod.armies.BanditGenerationScheduler;
 import com.villagers.mod.threat.NewMoonRaidService;
 import com.villagers.mod.threat.SwarmService;
 import com.villagers.mod.threat.WanderingNecromancerService;
@@ -25,6 +26,7 @@ public class ThreatTickHandler {
         if (event.getLevel().isClientSide || !(event.getLevel() instanceof ServerLevel level)) {
             return;
         }
+        BanditGenerationScheduler.tick(level);
         if (level.getGameTime() % 20 == 0) {
             SwarmService.tick(level);
         }

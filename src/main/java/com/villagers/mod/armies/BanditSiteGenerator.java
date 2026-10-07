@@ -2,6 +2,7 @@ package com.villagers.mod.armies;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -15,41 +16,85 @@ import com.villagers.mod.integration.CitadelAnchorSavedData;
 import java.util.UUID;
 
 public final class BanditSiteGenerator {
-    private static final int MIN_SPAWN_DIST = 800;
-    private static final int MAX_SPAWN_DIST = 4000;
+    public static final int MIN_SPAWN_DIST = 800;
+    public static final int MAX_SPAWN_DIST = 4000;
     private static final int MIN_SITE_SEPARATION = 700;
 
     private BanditSiteGenerator() {
     }
 
-    public static void ensureGenerated(ServerLevel level) {
+    public static boolean needsGeneration(ServerLevel level) {
         if (!level.dimension().equals(Level.OVERWORLD)) {
-            return;
+            return false;
         }
         BanditWorldSavedData data = BanditWorldSavedData.get(level);
-        if (data.isGenerated()) {
-            return;
+        if (data.isGenerated() && !data.sites().isEmpty()) {
+            return false;
         }
-        BlockPos spawn = level.getSharedSpawnPos();
-        var random = level.getRandom();
-        int camps = Config.BANDIT_CAMP_COUNT.get();
-        int hideouts = Config.BANDIT_HIDEOUT_COUNT.get();
-        for (int i = 0; i < camps; i++) {
-            tryPlaceSite(level, data, spawn, random, BanditWorldSavedData.SiteKind.CAMP, MIN_SPAWN_DIST, MAX_SPAWN_DIST);
-        }
-        for (int i = 0; i < hideouts; i++) {
-            tryPlaceSite(level, data, spawn, random, BanditWorldSavedData.SiteKind.HIDEOUT, MIN_SPAWN_DIST, MAX_SPAWN_DIST);
-        }
-        tryPlaceQuestCamp(level, data, spawn, random, BanditWorldSavedData.SiteKind.CORVIN,
-                Config.CORVIN_CAMP_MIN_DISTANCE.get(), Config.CORVIN_CAMP_MAX_DISTANCE.get(), false);
-        tryPlaceQuestCamp(level, data, spawn, random, BanditWorldSavedData.SiteKind.GARLAND,
-                Config.GARLAND_CAMP_MIN_DISTANCE.get(), Config.GARLAND_CAMP_MAX_DISTANCE.get(), true);
-        placeCitadelShadowCamps(level, data, spawn, random);
-        data.setGenerated();
+        return true;
     }
 
-    private static void placeCitadelShadowCamps(ServerLevel level, BanditWorldSavedData data, BlockPos spawn,
-            net.minecraft.util.RandomSource random) {
+    /** @deprecated Prefer {@link BanditGenerationScheduler#scheduleIfNeeded}; kept for tests and locate flush. */
+    public static void ensureGenerated(ServerLevel level) {
+        BanditGenerationScheduler.scheduleIfNeeded(level);
+        BanditGenerationScheduler.runUntilDoneOrTimeout(level, 20_000);
+    }
+
+    public static void finishGeneration(ServerLevel level) {
+        BanditWorldSavedData data = BanditWorldSavedData.get(level);
+        if (data.sites().isEmpty()) {
+            VillagersMod.LOGGER.error(
+                    "Bandit site generation placed nothing (check terrain); will retry next load");
+            return;
+        }
+        data.setGenerated();
+        VillagersMod.LOGGER.info("Placed {} bandit sites in overworld", data.sites().size());
+    }
+
+    public static boolean tryOnePlacementAttempt(
+            ServerLevel level,
+            BanditWorldSavedData data,
+            BlockPos spawn,
+            RandomSource random,
+            BanditWorldSavedData.SiteKind kind,
+            int minDist,
+            int maxDist,
+            BanditGenerationScheduler.ChunkGenBudget chunkBudget) {
+        BlockPos surface = BanditSitePlacement.sampleSiteOrigin(level, data, spawn, random, kind, minDist, maxDist, chunkBudget);
+        if (surface == null) {
+            return false;
+        }
+        if (!farEnough(data, surface)) {
+            return false;
+        }
+        if ((kind == BanditWorldSavedData.SiteKind.CORVIN || kind == BanditWorldSavedData.SiteKind.GARLAND)
+                && !farEnoughFromOtherQuestCamp(data, surface, kind)) {
+            return false;
+        }
+        placeSite(level, data, surface, kind);
+        return true;
+    }
+
+    public static BlockPos samplePlacementPos(
+            ServerLevel level,
+            BlockPos spawn,
+            RandomSource random,
+            int minDist,
+            int maxDist,
+            BanditGenerationScheduler.ChunkGenBudget chunkBudget) {
+        double angle = random.nextDouble() * Math.PI * 2;
+        int dist = minDist + random.nextInt(Math.max(1, maxDist - minDist));
+        int x = spawn.getX() + (int) (Math.cos(angle) * dist);
+        int z = spawn.getZ() + (int) (Math.sin(angle) * dist);
+        return pickCampSurface(level, x, z, chunkBudget);
+    }
+
+    static void placeCitadelShadowCamps(
+            ServerLevel level,
+            BanditWorldSavedData data,
+            BlockPos spawn,
+            RandomSource random,
+            BanditGenerationScheduler.ChunkGenBudget chunkBudget) {
         var citadel = CitadelAnchorSavedData.citadelCenter(level);
         if (citadel.isEmpty()) {
             return;
@@ -63,51 +108,16 @@ public final class BanditSiteGenerator {
             int dist = approach + random.nextInt(jitter * 2 + 1) - jitter;
             int x = anchor.getX() + (int) (Math.cos(angle) * dist);
             int z = anchor.getZ() + (int) (Math.sin(angle) * dist);
-            BlockPos surface = level.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, new BlockPos(x, 0, z));
-            if (farEnough(data, surface) && level.getBlockState(surface.below()).isSolidRender(level, surface.below())) {
+            BlockPos search = new BlockPos(x, 64, z);
+            BlockPos surface = BanditSitePlacement.sampleShadowCampAtVillage(level, data, search, chunkBudget);
+            if (surface != null && farEnough(data, surface)) {
                 placeSite(level, data, surface, BanditWorldSavedData.SiteKind.CAMP);
             }
         }
     }
 
-    private static void tryPlaceQuestCamp(ServerLevel level, BanditWorldSavedData data, BlockPos spawn,
-            net.minecraft.util.RandomSource random, BanditWorldSavedData.SiteKind kind, int minDist, int maxDist,
-            boolean preferRoughTerrain) {
-        BlockPos best = null;
-        int bestScore = Integer.MIN_VALUE;
-        for (int attempt = 0; attempt < 100; attempt++) {
-            double angle = random.nextDouble() * Math.PI * 2;
-            int dist = minDist + random.nextInt(Math.max(1, maxDist - minDist));
-            int x = spawn.getX() + (int) (Math.cos(angle) * dist);
-            int z = spawn.getZ() + (int) (Math.sin(angle) * dist);
-            BlockPos surface = level.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, new BlockPos(x, 0, z));
-            if (!level.getBlockState(surface.below()).isSolidRender(level, surface.below())) {
-                continue;
-            }
-            if (!farEnough(data, surface)) {
-                continue;
-            }
-            if (!farEnoughFromOtherQuestCamp(data, surface, kind)) {
-                continue;
-            }
-            int score = preferRoughTerrain ? terrainVariance(level, surface) : 0;
-            if (score > bestScore || best == null) {
-                bestScore = score;
-                best = surface;
-            }
-            if (!preferRoughTerrain) {
-                placeSite(level, data, surface, kind);
-                return;
-            }
-        }
-        if (best != null) {
-            placeSite(level, data, best, kind);
-        } else {
-            VillagersMod.LOGGER.warn("Failed to place bandit site kind {}", kind);
-        }
-    }
-
-    private static boolean farEnoughFromOtherQuestCamp(BanditWorldSavedData data, BlockPos pos, BanditWorldSavedData.SiteKind kind) {
+    static boolean farEnoughFromOtherQuestCamp(
+            BanditWorldSavedData data, BlockPos pos, BanditWorldSavedData.SiteKind kind) {
         int minSep = Config.QUEST_CAMP_MIN_SEPARATION.get();
         long minSq = (long) minSep * minSep;
         for (var site : data.sites()) {
@@ -120,7 +130,7 @@ public final class BanditSiteGenerator {
         return true;
     }
 
-    private static int terrainVariance(ServerLevel level, BlockPos center) {
+    static int terrainVariance(ServerLevel level, BlockPos center) {
         int min = center.getY();
         int max = center.getY();
         for (int dx = -4; dx <= 4; dx++) {
@@ -133,27 +143,39 @@ public final class BanditSiteGenerator {
         return max - min;
     }
 
-    private static void tryPlaceSite(ServerLevel level, BanditWorldSavedData data, BlockPos spawn, net.minecraft.util.RandomSource random,
-            BanditWorldSavedData.SiteKind kind, int minDist, int maxDist) {
-        for (int attempt = 0; attempt < 80; attempt++) {
-            double angle = random.nextDouble() * Math.PI * 2;
-            int dist = minDist + random.nextInt(Math.max(1, maxDist - minDist));
-            int x = spawn.getX() + (int) (Math.cos(angle) * dist);
-            int z = spawn.getZ() + (int) (Math.sin(angle) * dist);
-            BlockPos surface = level.getHeightmapPos(Heightmap.Types.WORLD_SURFACE, new BlockPos(x, 0, z));
-            if (!level.getBlockState(surface.below()).isSolidRender(level, surface.below())) {
-                continue;
-            }
-            if (!farEnough(data, surface)) {
-                continue;
-            }
-            placeSite(level, data, surface, kind);
-            return;
+    private static BlockPos pickCampSurface(
+            ServerLevel level, int x, int z, BanditGenerationScheduler.ChunkGenBudget chunkBudget) {
+        int chunkX = x >> 4;
+        int chunkZ = z >> 4;
+        if (!chunkBudget.ensureChunk(chunkX, chunkZ)) {
+            return null;
         }
-        VillagersMod.LOGGER.warn("Failed to place bandit site kind {}", kind);
+        BlockPos top = level.getHeightmapPos(Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, new BlockPos(x, 0, z));
+        if (isSupportedCampSurface(level, top)) {
+            return top;
+        }
+        for (int dy = 1; dy <= 12; dy++) {
+            BlockPos up = top.above(dy);
+            if (isSupportedCampSurface(level, up)) {
+                return up;
+            }
+            BlockPos down = top.below(dy);
+            if (isSupportedCampSurface(level, down)) {
+                return down;
+            }
+        }
+        return null;
     }
 
-    private static boolean farEnough(BanditWorldSavedData data, BlockPos pos) {
+    private static boolean isSupportedCampSurface(ServerLevel level, BlockPos surface) {
+        if (!level.getFluidState(surface).isEmpty() || !level.getFluidState(surface.above()).isEmpty()) {
+            return false;
+        }
+        var ground = level.getBlockState(surface.below());
+        return !ground.isAir() && ground.isSolidRender(level, surface.below());
+    }
+
+    static boolean farEnough(BanditWorldSavedData data, BlockPos pos) {
         for (var site : data.sites()) {
             if (site.origin().distSqr(pos) < (long) MIN_SITE_SEPARATION * MIN_SITE_SEPARATION) {
                 return false;
@@ -162,7 +184,8 @@ public final class BanditSiteGenerator {
         return true;
     }
 
-    public static void placeSite(ServerLevel level, BanditWorldSavedData data, BlockPos origin, BanditWorldSavedData.SiteKind kind) {
+    public static void placeSite(
+            ServerLevel level, BanditWorldSavedData data, BlockPos origin, BanditWorldSavedData.SiteKind kind) {
         UUID id = UUID.randomUUID();
         level.getChunk(origin.getX() >> 4, origin.getZ() >> 4);
         level.setBlock(origin, VillagersMod.BANDIT_CAMP.get().defaultBlockState(), 3);
@@ -174,6 +197,9 @@ public final class BanditSiteGenerator {
         placeChestIfAir(level, origin.east());
         if (kind == BanditWorldSavedData.SiteKind.HIDEOUT) {
             BanditHideoutFeatures.dressHideout(level, origin, level.random);
+        }
+        if (kind == BanditWorldSavedData.SiteKind.CORVIN) {
+            BanditCorvinFeatures.dressCorvinTower(level, origin);
         }
         BanditLoot.fillSiteChests(level, origin, kind, level.random);
         data.addSite(new BanditWorldSavedData.SiteRecord(id, kind, origin, true, 0));

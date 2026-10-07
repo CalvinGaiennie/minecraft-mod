@@ -47,6 +47,9 @@ public final class BanditService {
     }
 
     public static void makeBandit(Villager villager, BanditData data, net.minecraft.network.chat.Component name) {
+        villager.removeData(VillagerAttachments.MILITIA_DATA.get());
+        villager.removeData(VillagerAttachments.SOLDIER_DATA.get());
+        com.villagers.mod.gear.VillagerGearRules.clearKitForVanillaEquipmentMob(villager);
         villager.setData(VillagerAttachments.BANDIT_DATA.get(), data);
         villager.setCustomName(name != null ? name : net.minecraft.network.chat.Component.translatable("entity.villagers.bandit"));
         villager.setCustomNameVisible(true);

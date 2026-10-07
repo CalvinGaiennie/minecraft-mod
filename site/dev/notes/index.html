@@ -23,7 +23,48 @@
     <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../start/index.html">Start</a><a href="index.html" class="active">Notes</a><a href="../citadel/index.html">Citadel</a><a href="../order/index.html">Order</a><a href="../necromancer/index.html">Necromancer</a><a href="../armies/index.html">Armies</a><a href="../build/index.html">Build</a><a href="../lore/index.html">Lore</a></nav></div>
     <div class="page-shell has-sidebar">
       <main class="doc-main">
-        <div class="dev-hub"><h1>Notes</h1><p class="dev-group-lede">Dated discussion plans and design intake notes.</p><section class="dev-doc-full" id="2026-10-05-design-notes-intake"><h2>Design intake</h2><p class="source">Source: <code>docs/notes/2026-10-05-design-notes-intake.md</code></p><div class="dev-doc-body"><p><strong>Status:</strong> Raw author notes. Not canon until merged into main docs via section-by-section discussion (<code>2026-10-05-discussion-plan.md</code>).</p>
+        <div class="dev-hub"><h1>Notes</h1><p class="dev-group-lede">Dated discussion plans and design intake notes.</p><section class="dev-doc-full" id="tbd-citadel-biome-placement"><h2>Citadel biome placement (TBD)</h2><p class="source">Source: <code>docs/notes/tbd-citadel-biome-placement.md</code></p><div class="dev-doc-body"><p><strong>Status:</strong> <strong>Discussion only.</strong> Decide <strong>before</strong> final Black Citadel structure export so art direction matches gen rules.</p>
+<p><strong>Today (docs/code):</strong> <strong>One citadel</strong> per overworld, <strong>~1,000–2,000</strong> blocks from <strong>spawn</strong> on the <strong>great road</strong> (<code>endgame.md</code>, <code>citadel-mod-plan.md</code>). <strong>No biome filter</strong> in code yet — only <code>CitadelAnchorSavedData.setCitadelCenter</code> after placement. Intro town <strong>~350</strong> blocks from citadel on the road; Dragon&#x27;s Well <strong>~350</strong> off-road in a copse (<code>necromancer-path.md</code>). Armies <strong>shadow camps</strong> ring <strong>~480</strong> from anchor when set.</p>
+<p>---</p>
+<h2 id="why-this-matters-for-nbt">Why this matters for NBT</h2>
+<table><thead><tr><th>If you build…</th><th>Risk without a biome rule</th></tr></thead><tbody><tr><td><strong>Single fixed palette</strong> (grey stone, oak, dark oak)</td><td>Usually <strong>fine in most overworld biomes</strong>; looks odd in <strong>snow</strong> (no snow on roofs) or <strong>desert</strong> (no sandstone blend).</td></tr><tr><td><strong>Biome-blended skirts</strong> (grass paths, spruce trim, sand bleed)</td><td><strong>Wrong</strong> if citadel spawns in taiga vs plains — need <strong>variants</strong> or <strong>gen overwrites</strong> ground around template.</td></tr><tr><td><strong>Tall gate / 40-block wall</strong></td><td><strong>Terrain variance</strong> (mountain vs flat) changes approach drama; may need <strong>terrace</strong> or <strong>cut/fill</strong> in code.</td></tr></tbody></table>
+<p>---</p>
+<h2 id="strategies-pick-one-primary-for-v1">Strategies (pick one primary for v1)</h2>
+<h3>1. <strong>Same biome every time (recommended default for one NBT)</strong></h3>
+<p><strong>Gen:</strong> When placing citadel, search outward from spawn (within <strong>1k–2k</strong> ring) for chunks whose <strong>dominant biome</strong> matches a <strong>config tag</strong> (e.g. <code>#minecraft:is_overworld</code> + <strong><code>minecraft:plains</code></strong> or <strong><code>#villagers:citadel_biomes</code></strong>).</p>
+<p><strong>Pros:</strong> One authored NBT; predictable art pass; road and intro town can share biome. <strong>Cons:</strong> Some seeds <strong>fail</strong> search → retry other angles / widen ring / fallback biome list (<strong>TBD</strong>).</p>
+<p><strong>Authoring:</strong> Build NBT in <strong>that biome</strong> on a flat world (or superflat matching palette).</p>
+<p>---</p>
+<h3>2. <strong>Biome-agnostic fortress + minimal site prep</strong></h3>
+<p><strong>Gen:</strong> Accept <strong>any</strong> solid overworld site in the ring; before <code>StructureTemplate.place</code>, code <strong>clears</strong> a <strong>footprint</strong> (e.g. 128×128 pad), <strong>levels</strong> gate approach, optional <strong>stone platform</strong> under walls.</p>
+<p><strong>Pros:</strong> One NBT; works on hills; no failed biome search. <strong>Cons:</strong> Surrounding <strong>vanilla biome</strong> still visible beyond pad (snow line, jungle trees); may need <strong>wide clear</strong> or <strong>blending</strong> mask.</p>
+<p>---</p>
+<h3>3. <strong>Multiple NBT variants (biome family)</strong></h3>
+<p><strong>Gen:</strong> Detect biome at anchor → pick <strong><code>citadel_plains</code></strong>, <strong><code>citadel_taiga</code></strong>, <strong><code>citadel_snowy</code></strong>, <strong><code>citadel_arid</code></strong> (desert/badlands).</p>
+<p><strong>Pros:</strong> Best visual fit; same layout, swapped palette blocks in template or separate files. <strong>Cons:</strong> <strong>4×</strong> structure work (or palette block in structure <strong>TBD</strong> in 1.21).</p>
+<p>---</p>
+<h3>4. <strong>Fixed world flavor (not recommended alone)</strong></h3>
+<p>Require custom world preset / single biome world — <strong>breaks</strong> normal survival seeds. Only as <strong>optional</strong> data pack, not default mod behavior.</p>
+<p>---</p>
+<h2 id="linked-systems-must-agree-with-biome-choice">Linked systems (must agree with biome choice)</h2>
+<table><thead><tr><th>System</th><th>Note</th></tr></thead><tbody><tr><td><strong>Great road</strong></td><td>Straight spawn → citadel; road blocks <strong>TBD</strong> (gravel/oak vs stone) — should match chosen biome or be neutral.</td></tr><tr><td><strong>Intro town (~350b)</strong></td><td>On road; likely <strong>same biome</strong> as citadel approach for cohesion.</td></tr><tr><td><strong>Dragon&#x27;s Well copse</strong></td><td><strong>Opposite</strong> road side; can be <strong>dark forest</strong> copse even if citadel is plains <strong>TBD</strong> (intentional contrast).</td></tr><tr><td><strong>10 relic fortresses (~3500 ring)</strong></td><td>Separate ring; <strong>own</strong> biome rules possible (author D1).</td></tr><tr><td><strong>15 refuges</strong></td><td>Scattered; <strong>per-archetype</strong> biomes already planned (<code>citadel-mod-plan</code> E1).</td></tr></tbody></table>
+<p>---</p>
+<h2 id="open-questions-next-discussion">Open questions (next discussion)</h2>
+<ol>
+<li><strong>Target biome for v1 single NBT:</strong> plains, meadow, custom “kingdom heartlands” tag, or <strong>first match</strong> from ordered list?</li>
+<li><strong>Terrain:</strong> max <strong>slope</strong> at gate; allow <strong>hilltop</strong> citadel vs <strong>forced flatten</strong>?</li>
+<li><strong>Snow line:</strong> exclude <strong>snowy</strong> biomes explicitly, or use <strong>snowy variant</strong> NBT?</li>
+<li><strong>Fail placement:</strong> widen ring, pick second biome, or <strong>log error</strong> and skip citadel (bad)?</li>
+<li><strong>Structure void / jigsaw:</strong> single <code>.nbt</code> with <strong><code>structure_void</code></strong> under footprint vs manual pad in code?</li>
+<li><strong>Build workflow:</strong> you build in <strong>Creative matching biome</strong>; we document <strong>anchor block</strong> + <strong>rotation</strong> (0/90/180/270) + <strong>ground Y</strong> rule (gate = <code>MOTION_BLOCKING</code> surface).</li>
+</ol>
+<p>---</p>
+<h2 id="doc-links">Doc links</h2>
+<ul>
+<li><code>citadel-mod-plan.md</code> — scope, open <strong>B3</strong> (post-NBT layout).</li>
+<li><code>citadel-layout.md</code> — shell size, gate height, outside shadow.</li>
+<li><code>endgame.md</code> — distance, road, Well.</li>
+</ul></div></section><section class="dev-doc-full" id="2026-10-05-design-notes-intake"><h2>Design intake</h2><p class="source">Source: <code>docs/notes/2026-10-05-design-notes-intake.md</code></p><div class="dev-doc-body"><p><strong>Status:</strong> Raw author notes. Not canon until merged into main docs via section-by-section discussion (<code>2026-10-05-discussion-plan.md</code>).</p>
 <p><strong>Terminology (2026-10-05):</strong> Intake says “sorcerer” in places; <strong>canon player path = necromancer</strong> only. “Sorcerer” here = draft / historical lore ideas, not a separate player class.</p>
 <p><strong>Source:</strong> User paste, 2026-10-05.</p>
 <p>---</p>
@@ -119,9 +160,205 @@
 <h2 id="current-status">Current status</h2>
 <p><strong>§10:</strong> author decisions merged; close remaining <strong>TBD</strong> rows in <code>citadel-layout.md</code> when answered.</p>
 <p><strong>Citadel mod planning finish line:</strong> <code>citadel-mod-plan.md</code> — scope, locked canon, open decision queue (A–F), implementation phases. Close planning when <strong>A1–A3, B1–B3, B5–B6, C1–C2, D1–D2, E1</strong> are decided.</p>
-<p><strong>Active:</strong> <strong>§7</strong> (necromancer quest items, flutes, god wizard armor, horcrux). <strong>§9</strong> closed. <strong>§10</strong> next after §7.</p></div></section></div>
+<table><thead><tr><th>2026-10-07</th><th><strong>Citadel author batch</strong></th><th>A1 brothers merged; B2 no single lever; B5 break spawners; B6 vanilla spawners; C1/C2; D1 <strong>3500</strong> ring, D2 <strong>20</strong>, D4 v1; E3 explosions hurt; F2 pillagers. <strong>Open:</strong> A3 End-move, B1 tunnel yes/no, E1 refuges confirm, B3 post-NBT.</th><th><code>citadel-mod-plan.md</code>, <code>endgame.md</code>, layout/defenders, necro/acolyte paths</th></tr></thead><tbody><tr><td>2026-10-07</td><td><strong>Garland O2 TBD (author sketch)</strong></td><td><strong>Kidnap → cell/waves</strong> (death <strong>respawns in cell</strong>, capped); <strong>final fight → branching endings</strong>; timeout <strong>ambushes army</strong>; <strong>nicknames</strong> from bandits/troops. Not approved.</td><td><code>notes/tbd-garland-fortress-prison-arena.md</code>, <code>armies-questline.md</code></td></tr></tbody></table>
+<p><strong>Active:</strong> <strong>§7</strong> (necromancer quest items, flutes, god wizard armor, horcrux). <strong>§9</strong> closed. <strong>§10</strong> next after §7. <strong>Garland prison arena</strong> and <strong>citadel biome placement (B7)</strong> queued for dedicated discussion.</p></div></section><section class="dev-doc-full" id="tbd-garland-fortress-prison-arena"><h2>Garland fortress &amp; prison (TBD)</h2><p class="source">Source: <code>docs/notes/tbd-garland-fortress-prison-arena.md</code></p><div class="dev-doc-body"><p><strong>Status:</strong> <strong>Author discussion draft.</strong> Act 2 <strong>detailed</strong> below; surface march (guide, betrayer village) unchanged from prior revision.</p>
+<p>---</p>
+<h2 id="surface-arc-acts-0-1-summary">Surface arc (Acts 0–1) — summary</h2>
+<ul>
+<li><strong>O1</strong> → sent <strong>home</strong> for <strong>D2</strong>.</li>
+<li><strong>D2:</strong> capture a Garland soldier → <strong>guide</strong> to the castle if <strong>≥ N soldiers</strong>; begs you to <strong>recruit more</strong> on the march.</li>
+<li><strong>Approach village</strong> near castle → guide <strong>escapes</strong>.</li>
+<li><strong>Kidnap</strong> soon after → prison interior begins (<strong>Act 2</strong>).</li>
+</ul>
+<p><strong>No compass.</strong> Army mustered for march.</p>
+<p>---</p>
+<h2 id="act-2-prison-author-detail-2026-10-07">Act 2 — Prison (author detail, 2026-10-07)</h2>
+<h3>Opening — cell &amp; fellow prisoner</h3>
+<ul>
+<li>Player wakes in a <strong>cell</strong> with <strong>another prisoner</strong> (named NPC <strong>TBD</strong>).</li>
+<li>Prisoner <strong>recaps</strong>: the march, guide betrayal, capture, where the army was left.</li>
+<li>Establishes tone and <strong>quest hub</strong> for optional prisoner favors later.</li>
+</ul>
+<h3>Garland — plan &amp; the tower</h3>
+<ul>
+<li><strong>Soon after</strong>, Garland (in person or escorted <strong>TBD</strong>): explains <strong>his plan</strong>.</li>
+<li>Player taken to a <strong>tower</strong> (high room in compound NBT) with <strong>clear sightline</strong> to the approach — <strong>literally see</strong> the camp/army in a bad position (“your army is fucked”).</li>
+<li>Emotional anchor for timer/ambush pressure; motivates small fights and main arena.</li>
+</ul>
+<h3>Phase A — warm-ups (main arena)</h3>
+<ul>
+<li>All <strong>warm-up</strong> bouts use the <strong>same main arena</strong> (one blockout room; gates/cells open into it).</li>
+<li>Player <strong>barely kitted</strong>; opponents = <strong>weak prisoner militia/soldiers</strong> (broken kingdom gear).</li>
+<li><strong>Each successful warm-up</strong> grants a <strong>gear upgrade</strong> for the <strong>next</strong> fight (see <strong>gear ladder</strong> below).</li>
+</ul>
+<h3>Phase B — optional prisoner choices (between fights)</h3>
+<p>Not fetch quests only — <strong>meaningful forks</strong>, e.g.:</p>
+<table><thead><tr><th>Option</th><th>Effect (author)</th></tr></thead><tbody><tr><td><strong>Steal from a guard</strong></td><td>Risk/reward item or potion; caught <strong>TBD</strong> penalty.</td></tr><tr><td><strong>Throw a fight</strong> (intentional loss in arena)</td><td><strong>Removes one gear-upgrade opportunity</strong> from the ladder (fixed slot <strong>TBD</strong>).</td></tr><tr><td><strong>Beat up / kill a bad prisoner</strong></td><td>Unlocks benefit or rep shift <strong>TBD</strong>; may close other options.</td></tr></tbody></table>
+<p>Also <strong>food / potions</strong> from allies. None required to reach the <strong>mace fight</strong>; two prisoners <strong>pay off in Act 3</strong> if you helped them (<strong>see below</strong>).</p>
+<h3>Phase C — main arena waves (earn the mace fight)</h3>
+<ul>
+<li>Same <strong>main arena</strong>; escalation after warm-ups:</li>
+</ul>
+<p>- <strong>Hostile mobs:</strong> wolves, skeletons, zombies, spiders (<strong>TBD</strong> per wave). - <strong>Prisoner gladiators:</strong> varied <strong>kits + buffs</strong> (speed, strength, resistance <strong>TBD</strong>).</p>
+<ul>
+<li><strong>Each wave win → gear upgrade</strong> for the next bout (<strong>gear ladder</strong>).</li>
+<li><strong>Death</strong> in a wave → respawn <strong>cell</strong>, retry (<strong>TBD</strong> lose upgrade streak or not).</li>
+<li>Completing the wave schedule <strong>unlocks</strong> the <strong>mace champion</strong>.</li>
+</ul>
+<h3>Gear ladder (after each successful fight)</h3>
+<ul>
+<li>Upgrades are <strong>scripted drops</strong> or <strong>Garland’s “generosity”</strong> chest — quality <strong>varies on purpose</strong>:</li>
+</ul>
+<p>- <strong>Joke tier:</strong> almost broken shield, short wooden sword, cracked helm. - <strong>Helpful tier:</strong> real armor piece, decent weapon, useful potion.</p>
+<ul>
+<li><strong>Throwing a fight</strong> consumes <strong>one</strong> upgrade slot (player never gets that tier’s roll).</li>
+<li>Playtest until warm-ups + waves feel <strong>barely survivable</strong> without every slot being helpful.</li>
+</ul>
+<h3>Phase D — mace champion (final prison duel)</h3>
+<ul>
+<li><strong>Garland’s soldier</strong>, <strong>strong mace</strong>; tuned <strong>very hard to win</strong> (stats, knockback, regen <strong>TBD</strong>).</li>
+<li><strong>No mid-fight beat at 50% HP</strong> on the champion — nothing special at half health.</li>
+<li><strong>Player lose condition:</strong> if <strong>you</strong> drop <strong>below 2 hearts</strong> (under 4 HP), you <strong>lose</strong>; the fight <strong>ends immediately</strong> (no cell respawn for this bout).</li>
+<li><strong>Win</strong> (champion dead <strong>TBD</strong> rules) → <strong>Act 3 — tower + naked escape race</strong> (below).</li>
+<li><strong>Lose</strong> (below 2 hearts <strong>TBD</strong> death too?) → <strong>bad end</strong> <strong>TBD</strong> (no redemption arc); <strong>not</strong> the naked race.</li>
+</ul>
+<p><strong>Garland boss kill / Rookbreaker</strong> — likely after you <strong>lead</strong> saved soldiers <strong>TBD</strong>; not on champion alone.</p>
+<p>---</p>
+<h2 id="act-3-after-you-win-the-mace-duel-author-2026-10-07">Act 3 — After you <strong>win</strong> the mace duel (author, 2026-10-07)</h2>
+<p><strong>No execution scene.</strong> <strong>No</strong> “give up → cell → next-day rescue.”</p>
+<ol>
+<li><strong>Tower again</strong> — Garland brings you <strong>back up</strong> to the <strong>tower</strong> (same vista as Act 2 open).</li>
+<li><strong>Forced watch</strong> — His men <strong>attack your army</strong> on the ground; you <strong>watch</strong> (scripted losses / morale <strong>TBD</strong>).</li>
+<li><strong>Naked escape race</strong> — You are <strong>stripped</strong> (naked + nasty potion effects <strong>TBD</strong>, maybe <strong>wooden sword</strong> or nothing). You must <strong>escape the fortress</strong> and <strong>reach your force in time</strong> to <strong>save who you can</strong> and <strong>lead them to turn the fight</strong>.</li>
+<li><strong>Timed pressure</strong> (~<strong>couple minutes</strong> <strong>TBD</strong>) — Garland’s strike continues while you escape; army state when you arrive depends on <strong>speed</strong> + <strong>prisoner intel</strong>.</li>
+</ol>
+<h3>Prisoner payoffs (Act 2 choices → Act 3 ease)</h3>
+<table><thead><tr><th>Prisoner arc</th><th>If you helped them</th></tr></thead><tbody><tr><td><strong>Prisoner A</strong></td><td>Gives <strong>intel</strong> during escape (weak point, which flank to hit, when to rally) → <strong>save more soldiers</strong> / better start to the surface battle <strong>TBD</strong>.</td></tr><tr><td><strong>Prisoner B</strong></td><td><strong>Direct help</strong> on <strong>final escape</strong> (opens route, distracts guard, short ally <strong>TBD</strong>) → <strong>easier / faster</strong> egress; harder path if skipped.</td></tr></tbody></table>
+<p>Fellow <strong>cellmate</strong> from opening may map to A or B <strong>TBD</strong>. Steal / throw fight / bad prisoner beats can still gate <strong>which</strong> prisoners trust you.</p>
+<h3>Lose the mace duel</h3>
+<ul>
+<li><strong>Below 2 hearts</strong> → fight stops; <strong>fail state</strong> <strong>TBD</strong> (Garland mockery, army wiped or crippled without player-led turnaround — <strong>not</strong> the win-path naked race).</li>
+</ul>
+<h3>Parallel</h3>
+<ul>
+<li>First <strong>tower visit</strong> (Act 2) = threat preview; second <strong>tower visit</strong> (Act 3 win) = assault in progress + escape starts from <strong>inside</strong> fortress, not a friendly release.</li>
+</ul>
+<p>---</p>
+<h2 id="nbt-blockout-zones-updated">NBT blockout zones (updated)</h2>
+<pre><code class="language-text">[ CELL BLOCK + fellow prisoner ]
+        |
+[ GARLAND TOWER — army vista ]  (scripted visit)
+        |
+[ PRISON WING ] — cells, quest NPCs, guard steal routes
+        |
+[ MAIN ARENA ] — warm-ups + mob/prisoner waves + mace champion
+        |
+[ TOWER ] — Act 2 preview + Act 3 forced watch (second visit)
+        |
+[ ESCAPE ROUTE ] — harder default; prisoner B shortcut if helped
+        |
+[ SURFACE / CAMP ] — rally survivors; lead counterattack; Garland **TBD**</code></pre>
+<p><strong>Surface:</strong> army camp visible from tower; <strong>naked race</strong> from fortress → camp <strong>after mace win only</strong>.</p>
+<p>---</p>
+<h2 id="open-questions-when-ready">Open questions (when ready)</h2>
+<ul>
+<li><strong>Champion mace</strong> — does winning here count for quest, or only <strong>Garland</strong> on surface for <strong>Rookbreaker</strong>?</li>
+<li><strong>Mace loss</strong> — army auto-wiped or recoverable on retry?</li>
+<li><strong>MP</strong> — owner-only kidnapping; co-op prisoners <strong>TBD</strong>.</li>
+</ul>
+<p>---</p>
+<h2 id="doc-links">Doc links</h2>
+<ul>
+<li><code>armies-questline.md</code> — D2 guide, O2 draft.</li>
+<li><code>bandit-camp-prefabs.md</code> — <strong>garland_compound</strong> + prison/interior NBT.</li>
+</ul></div></section><section class="dev-doc-full" id="garland-nbt-biome-and-terrain"><h2>Garland NBT, biome &amp; terrain</h2><p class="source">Source: <code>docs/notes/garland-nbt-biome-and-terrain.md</code></p><div class="dev-doc-body"><p><strong>For:</strong> building Garland before code loads it. <strong>Expect multiple <code>.nbt</code> files</strong> if the site includes several mountains or exceeds <strong>48×48×48</strong> per piece (Java Structure Block limit). <strong>Code today:</strong> only a <strong>marker block</strong> at the site anchor — <strong>no</strong> multi-piece paste yet (<code>BanditSiteGenerator.placeSite</code>).</p>
+<p>---</p>
+<h2 id="what-an-nbt-structure-actually-is">What an NBT structure actually is</h2>
+<ul>
+<li>A <strong>saved box of blocks</strong> (and entities, block entities) from a <strong>Structure Block → Save</strong>.</li>
+<li>Everything is stored <strong>relative to a structure origin</strong> (the structure block’s “corner” / save point when you export).</li>
+<li>It is <strong>not</strong> a biome. It does <strong>not</strong> include world noise, caves, or trees unless <strong>you built those blocks into the box</strong>.</li>
+</ul>
+<p>When the mod pastes it later (<code>StructureTemplateManager</code> → <code>placeInWorld</code>):</p>
+<ul>
+<li>Those blocks are <strong>copied into the world</strong> at the chosen <strong>world position + rotation</strong>.</li>
+<li>The <strong>biome at that X/Z</strong> stays whatever Minecraft already generated (plains, taiga, etc.).</li>
+<li><strong>Biome effects</strong> (grass color, rain, mob spawns) come from the <strong>world</strong>, not from the file.</li>
+</ul>
+<p>So: <strong>your build palette</strong> can match a biome; <strong>world biome</strong> still controls the horizon unless you <strong>overwrite</strong> a wide area inside the NBT or in code before paste.</p>
+<p>---</p>
+<h2 id="three-ways-to-tie-fortress-to-a-biome-landscape">Three ways to tie fortress to “a biome / landscape”</h2>
+<h3>A. <strong>Pick the biome in code, build one NBT for it</strong> (simplest)</h3>
+<ol>
+<li>We <strong>decide</strong> Garland always spawns in e.g. <strong>plains / meadow / custom tag</strong> (see <code>tbd-citadel-biome-placement.md</code> — same idea for Garland ring).</li>
+<li>You build in <strong><code>runClient</code></strong> in <strong>that biome</strong> (or superflat with matching ground block).</li>
+<li>Export <strong>fortress only</strong> (walls, prison, tower) — surrounding terrain stays vanilla at paste time.</li>
+</ol>
+<p><strong>Pros:</strong> One file. <strong>Cons:</strong> Edge of paste may clip hills/trees; gate height must tolerate <strong>small</strong> heightmap error (code adjusts Y <strong>TBD</strong>).</p>
+<h3>B. <strong>Bake landscape into the NBT</strong> (best for “on a cliff / ridge / ravine lip”)</h3>
+<ol>
+<li>In Creative, <strong>sculpt</strong> the feature (hill cut, cliff face, dry moat) <strong>inside</strong> the structure box.</li>
+<li>Save <strong>fortress + terrain sculpt</strong> as one template.</li>
+<li>Code picks a <strong>relatively flat</strong> anchor and paste <strong>includes</strong> your fake geology.</li>
+</ol>
+<p><strong>Pros:</strong> Looks authored everywhere; doesn’t depend on finding a real ravine. <strong>Cons:</strong> Bigger file; paste can <strong>bury</strong> natural trees if box is huge; need <strong><code>structure_void</code></strong> for air you don’t want to overwrite (<strong>TBD</strong> in paste settings).</p>
+<h3>C. <strong>Find a real world feature, then paste</strong> (harder, code-heavy)</h3>
+<ol>
+<li>Generator searches for <strong>ravine / plateau / slope</strong> near Garland ring.</li>
+<li>Rotates gate to face <strong>approach road / army camp</strong> direction.</li>
+<li>Paste with <strong>offset Y</strong> so gate meets ground.</li>
+</ol>
+<p><strong>Pros:</strong> Natural drama. <strong>Cons:</strong> Unreliable seeds; more programming; you still author <strong>fortress</strong> mostly without terrain in NBT.</p>
+<p><strong>Garland v1 recommendation:</strong> <strong>A or B</strong> — you control the look before we automate search.</p>
+<p>---</p>
+<h2 id="structure-block-workflow-what-you-do-in-game">Structure block workflow (what you do in-game)</h2>
+<ol>
+<li><strong>Choose test world:</strong> flat <strong>or</strong> target biome <strong>or</strong> hand-built cliff in flat world (option B).</li>
+<li>Mark volume with <strong>Structure Block</strong> (Corner + Corner, or single block Save mode per MC version UI).</li>
+<li>Build <strong>entire compound</strong> inside the box: prison, <strong>main arena</strong>, <strong>tower</strong> with <strong>sightline</strong> toward where the army will sit, gate, escape route.</li>
+<li>Place <strong><code>bandit_camp</code></strong> block at the <strong>mod anchor</strong> — same block the code uses today for spawn/loot (document offset from gate in a sign or <code>authoring/structures/garland-anchor.txt</code> <strong>TBD</strong>).</li>
+<li><strong>Save</strong> → copy <code>.nbt</code> to <code>authoring/structures/garland_compound.nbt</code>.</li>
+<li><strong>Note on paper:</strong> which way is <strong>+Z</strong> from anchor (army camp direction for tower vista), <strong>size</strong> of box, <strong>Y</strong> of gate floor.</li>
+</ol>
+<p><strong>Air blocks:</strong> In paste, air in the template may <strong>erase</strong> world blocks (depending on <code>ignoreEntities</code> / processors). For outdoor parts, use <strong><code>structure_void</code></strong> in modern saves where you want “don’t touch world” — confirm in your MC version when we wire code.</p>
+<p>---</p>
+<h2 id="how-this-connects-to-garland-plot-army-visible-from-tower">How this connects to Garland <strong>plot</strong> (army visible from tower)</h2>
+<ul>
+<li><strong>Army camp</strong> will be <strong>code-spawned</strong> outside the fortress at a <strong>fixed offset</strong> from anchor (not in NBT v1 <strong>TBD</strong> e.g. south 80 blocks).</li>
+<li>When you build the <strong>tower</strong>, align windows/balcony toward that <strong>agreed direction</strong> so “literally see them” works without moving the build each seed.</li>
+<li><strong>Approach village</strong> (guide escape) may be a <strong>vanilla village</strong> the march path hits — separate from NBT or a small pasted hamlet <strong>TBD</strong>.</li>
+</ul>
+<p>---</p>
+<h2 id="multi-piece-garland-mountains-fortress">Multi-piece Garland (mountains + fortress)</h2>
+<p>Garland can be <strong>much larger than the citadel</strong>. Treat the site as a <strong>layout in one Creative world</strong>, then export <strong>tiles</strong> — not one monolithic save.</p>
+<h3>Authoring rules</h3>
+<ol>
+<li><strong>Pick a site origin</strong> (e.g. bedrock marker or gold block at <code>(0, Y, 0)</code> in your build world). <strong>Never move</strong> the finished layout after you start exporting.</li>
+<li><strong>Grid tiles</strong> at <strong>48×48×48</strong> (Structure Block max) or use <strong>WorldEdit</strong> for odd-sized chunks — same idea: each file has a <strong>fixed offset</strong> from site origin.</li>
+<li><strong>Naming:</strong> <code>garland_p_&lt;x&gt;_&lt;y&gt;_&lt;z&gt;.nbt</code> where <strong>p</strong> = piece index optional, <strong>x/y/z</strong> = <strong>block offset</strong> of that piece’s <strong>structure origin</strong> from site origin (e.g. <code>garland_0_0_0.nbt</code>, <code>garland_48_0_0.nbt</code>, <code>garland_0_64_-48.nbt</code>).</li>
+<li><strong>One manifest</strong> in <code>authoring/structures/garland-manifest.json</code> (<strong>TBD</strong> when first pieces exist): list of <code>{ &quot;file&quot;, &quot;offset&quot;: [dx, dy, dz], &quot;rotation&quot;: 0 }</code> and which file contains <strong><code>bandit_camp</code></strong> (site anchor for code).</li>
+<li><strong>Overlap 1–2 blocks</strong> at tile seams (shared mountain ridge) so paste gaps don’t show cracks — or sculpt seams so only one tile owns the ridge (<strong>pick one rule</strong> and stay consistent).</li>
+<li><strong><code>structure_void</code></strong> in outdoor “sky” cells inside a tile so paste doesn’t strip the next tile’s mountain when we paste in order (<strong>TBD</strong> in code: paste back-to-front or void-aware).</li>
+<li><strong>Prison / arena</strong> can live in <strong>one interior tile</strong> (easier quests) even if mountains span many tiles.</li>
+</ol>
+<h3>What code will do later</h3>
+<ul>
+<li>Resolve anchor → paste <strong>every manifest entry</strong> at <code>anchor + offset</code> (same world rotation).</li>
+<li>Load only <strong>chunks that intersect</strong> the bounding box (may need <strong>simulation distance</strong> bump on first visit — <strong>TBD</strong>).</li>
+</ul>
+<p>Citadel uses the <strong>same manifest pattern</strong>; Garland is just a <strong>bigger</strong> bounding box and more terrain pieces.</p>
+<p>---</p>
+<h2 id="what-we-need-from-you-before-coding-paste">What we need from you before coding paste</h2>
+<table><thead><tr><th>Decision</th><th>Why</th></tr></thead><tbody><tr><td><strong>Target biome</strong> (or “biome-agnostic stone”)</td><td>Placement search vs pure paste</td></tr><tr><td><strong>Terrain in NBT?</strong> (yes/no + how deep)</td><td>Pad vs sculpt vs search</td></tr><tr><td><strong>Anchor = bandit_camp block</strong> position</td><td>Gate vs marker; which <strong>tile file</strong> holds it</td></tr><tr><td><strong>Army direction</strong> from anchor</td><td>Tower vista</td></tr><tr><td><strong>Site bounding box</strong> (total X×Y×Z) + <strong>tile list</strong></td><td>Manifest + chunk load</td></tr><tr><td><strong>Seam rule</strong> (overlap vs single-owner ridges)</td><td>Avoid holes at paste</td></tr></tbody></table>
+<p>---</p>
+<h2 id="related-docs">Related docs</h2>
+<ul>
+<li><code>tbd-garland-fortress-prison-arena.md</code> — rooms to blockout inside the compound.</li>
+<li><code>bandit-camp-prefabs.md</code> — pipeline once paste exists.</li>
+<li><code>tbd-citadel-biome-placement.md</code> — same biome ideas for Black Citadel later.</li>
+</ul></div></section></div>
       </main>
-      <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Documents</p><ul><li><a href="2026-10-05-design-notes-intake/index.html">Design intake</a></li><li><a href="2026-10-05-discussion-plan/index.html">Discussion plan</a></li></ul></aside>
+      <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Documents</p><ul><li><a href="tbd-citadel-biome-placement/index.html">Citadel biome placement (TBD)</a></li><li><a href="2026-10-05-design-notes-intake/index.html">Design intake</a></li><li><a href="2026-10-05-discussion-plan/index.html">Discussion plan</a></li><li><a href="tbd-garland-fortress-prison-arena/index.html">Garland fortress &amp; prison (TBD)</a></li><li><a href="garland-nbt-biome-and-terrain/index.html">Garland NBT, biome &amp; terrain</a></li></ul></aside>
     </div>
   </div>
   <footer class="site-footer">

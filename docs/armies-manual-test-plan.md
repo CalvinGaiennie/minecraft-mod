@@ -34,7 +34,7 @@ Generation runs **once per overworld** when the dimension first loads bandit log
 
 | ID | Steps | Expected |
 | --- | --- | --- |
-| S1 | New world, `/locate` or fly rings **800–4000** blocks from spawn | **10** bandit **camps** + **3** **hideouts** (defaults `banditCampCount`, `banditHideoutCount`) |
+| S1 | New world, `/villagers locate list camp` or `/villagers locate camp` (or fly rings **800–4000** blocks from spawn) | **10** bandit **camps** + **3** **hideouts** (defaults `banditCampCount`, `banditHideoutCount`) |
 | S2 | Inspect each camp | **Bandit camp** marker block, **2 chests** (N/E offsets), garrison spawns when chunk loads |
 | S3 | Measure camp-to-camp distance | **≥700** blocks between site origins (`MIN_SITE_SEPARATION`) |
 | S4 | Hideout sites | Caltrop patches + cage marker (MVP dressing); **6–10** bandits when bootstrapped |

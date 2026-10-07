@@ -1,32 +1,34 @@
 # Bandit camp & hideout prefabs (Armies)
 
-**Status:** MVP uses **marker block + chest(s) + spawned bandits**. This doc is the build plan for authored micro-structures.
+**Status:** MVP uses **marker block + chest(s) + spawned bandits**. NBT prefabs will replace block dressing.
 
 ## Design goals (author)
 
 - **Corvin** and **Garland** camps are **not** near each other; **Garland is farther** from the player’s early kingdom.
+- **Corvin** = **watch tower** on an occupied village (NBT: `corvin_tower`).
+- **Garland** = **large authored compound** (NBT TBD — bigger than Corvin; no small MVP shell in code).
 - Long marches are intentional: owners bring **soldiers/camps** for the trip; loot pays off **gear for the army** (owner distributes).
-- **Future:** biome-tagged sites (ravine lip, narrow pass, broken tower) — Garland favors **dramatic terrain**; Corvin favors **approachable** foothills.
 
 ## Phase 1 (current code)
 
 | Kind | Footprint | Contents |
 | --- | --- | --- |
-| **Camp** | 1 marker + 2 chests | Garrison 4, pillager respawn |
-| **Hideout** | 1 marker + 2 chests + caltrops | Garrison 8, tier-up loot |
-| **Corvin** | camp rules + valuables bump | Boss once per world |
-| **Garland** | hideout-tier + treasury | Boss once per world |
+| **Camp** | 1 marker + 2 chests | Garrison 4, **no respawn**; loot scraps (gear on bandits); leader → saddled horse tied at camp |
+| **Hideout** | cave floor + marker + chests + caltrops | Garrison 8, tier-up loot, **no respawn** |
+| **Corvin** | **village** + **placeholder tower** (block stack) | Boss once per world, **no respawn**, rich loot bump |
+| **Garland** | **village or vanilla outpost** (marker only until big NBT) | Hideout-tier loot + treasury, **no respawn** |
+| **Citadel shadow** | **occupies village** on citadel ring | Same as camp (skimpy loot, no respawn) |
 
-## Phase 2 (prefab, no custom NBT art required)
+## Phase 2 (structure NBT)
 
-Use **structure templates** (saved building blueprints the game loads — often called **NBT** files in Minecraft modding) or **jigsaw** 15×15×8 max:
+Use **structure templates** at SavedData origin; **bandit_camp** marker at template anchor.
 
-1. **Corvin’s tally camp** — palisade, single watchtower, **ledger desk** (lectern), 2 loot chests, spawn pad.
-2. **Garland’s roost** — broken tower base (3–4 stories ruin), **treasury room**, outer fires, tighter spawn ring.
-3. **Generic camp** — pillager-outpost scale: fence, 1 tent (wool), chest, hay.
-4. **Cave hideout** — underground room: **caltrop** choke, pit (1 deep water), cage (iron bars), chest niche.
+1. **`corvin_tower`** — watch tower, ledger desk, chest niches, spawn pad (replaces block stack).
+2. **`garland_compound`** — **large** roost / ruin (author scale TBD); treasury, fires, outer ring.
+3. **Generic camp** — pillager-outpost scale: fence, tent, hay.
+4. **Cave hideout** — underground room: caltrop choke, cage, chest niche.
 
-**Pipeline:** `BanditSiteGenerator.placeSite` → `StructureTemplateManager.place` at SavedData origin; marker block at template anchor for garrison tick.
+**Pipeline:** `BanditSiteGenerator.placeSite` → `StructureTemplateManager.place` at origin; then garrison bootstrap.
 
 ## Phase 3 (landmarks)
 

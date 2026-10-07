@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bandit camp &amp; hideout prefabs (Armies) · Minecraft Kingdom</title>
+  <link rel="stylesheet" href="../../../assets/site.css" />
+  
+</head>
+<body class="scope-dev">
+  <header class="site-chrome site-header">
+    <div class="header-inner">
+      <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
+    </div>
+  </header>
+  <div class="page-area">
+    <div class="main-nav-bar">
+      <nav class="main-nav" aria-label="Site">
+        <a href="../../../index.html" class="">Marketing</a>
+        <a href="../../index.html" class="active">Dev docs</a>
+      </nav>
+    </div>
+    <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../index.html" class="active">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav></div>
+    <div class="page-shell has-sidebar">
+      <main class="doc-main">
+        <p class="source">Source: <code>docs/bandit-camp-prefabs.md</code></p><h1>Bandit camp &amp; hideout prefabs (Armies)</h1>
+<p><strong>Status:</strong> MVP uses <strong>marker block + chest(s) + spawned bandits</strong>. NBT prefabs will replace block dressing.</p>
+<h2 id="design-goals-author">Design goals (author)</h2>
+<ul>
+<li><strong>Corvin</strong> and <strong>Garland</strong> camps are <strong>not</strong> near each other; <strong>Garland is farther</strong> from the player’s early kingdom.</li>
+<li><strong>Corvin</strong> = <strong>watch tower</strong> on an occupied village (NBT: <code>corvin_tower</code>).</li>
+<li><strong>Garland</strong> = <strong>large authored compound</strong> (NBT TBD — bigger than Corvin; no small MVP shell in code).</li>
+<li>Long marches are intentional: owners bring <strong>soldiers/camps</strong> for the trip; loot pays off <strong>gear for the army</strong> (owner distributes).</li>
+</ul>
+<h2 id="phase-1-current-code">Phase 1 (current code)</h2>
+<table><thead><tr><th>Kind</th><th>Footprint</th><th>Contents</th></tr></thead><tbody><tr><td><strong>Camp</strong></td><td>1 marker + 2 chests</td><td>Garrison 4, <strong>no respawn</strong>; loot scraps (gear on bandits); leader → saddled horse tied at camp</td></tr><tr><td><strong>Hideout</strong></td><td>cave floor + marker + chests + caltrops</td><td>Garrison 8, tier-up loot, <strong>no respawn</strong></td></tr><tr><td><strong>Corvin</strong></td><td><strong>village</strong> + <strong>placeholder tower</strong> (block stack)</td><td>Boss once per world, <strong>no respawn</strong>, rich loot bump</td></tr><tr><td><strong>Garland</strong></td><td><strong>village or vanilla outpost</strong> (marker only until big NBT)</td><td>Hideout-tier loot + treasury, <strong>no respawn</strong></td></tr><tr><td><strong>Citadel shadow</strong></td><td><strong>occupies village</strong> on citadel ring</td><td>Same as camp (skimpy loot, no respawn)</td></tr></tbody></table>
+<h2 id="phase-2-structure-nbt">Phase 2 (structure NBT)</h2>
+<p>Use <strong>structure templates</strong> at SavedData origin; <strong>bandit_camp</strong> marker at template anchor.</p>
+<ol>
+<li><strong><code>corvin_tower</code></strong> — watch tower, ledger desk, chest niches, spawn pad (replaces block stack).</li>
+<li><strong><code>garland_compound</code></strong> — <strong>large</strong> roost / ruin (author scale TBD); treasury, fires, outer ring.</li>
+<li><strong>Generic camp</strong> — pillager-outpost scale: fence, tent, hay.</li>
+<li><strong>Cave hideout</strong> — underground room: caltrop choke, cage, chest niche.</li>
+</ol>
+<p><strong>Pipeline:</strong> <code>BanditSiteGenerator.placeSite</code> → <code>StructureTemplateManager.place</code> at origin; then garrison bootstrap.</p>
+<h2 id="phase-3-landmarks">Phase 3 (landmarks)</h2>
+<ul>
+<li>Placement scorer: prefer <strong>Garland</strong> sites with high local <strong>height variance</strong> (ravine/pass proxy).</li>
+<li>Optional <strong>surface landmark</strong> block (banner / cracked stone) visible from 64 blocks.</li>
+</ul>
+<h2 id="citadel-shadow">Citadel shadow</h2>
+<p><strong>Citadel shadow</strong> camps only after <strong>Citadel mod</strong> calls <code>CitadelAnchorSavedData.setCitadelCenter</code> — ring at <code>citadelApproachDistance</code> from that point (not world spawn).</p>
+      </main>
+      <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html" class="active">Overview</a></li></ul></aside>
+    </div>
+  </div>
+  <footer class="site-footer">
+    Source: <code>docs/bandit-camp-prefabs.md</code>
+  </footer>
+  
+</body>
+</html>

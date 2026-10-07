@@ -11,7 +11,7 @@ import com.villagers.mod.gear.VillagerGearSlot;
 
 /** All recruit/soldier kit items; synced to clients for rendering and gear menu. */
 public class VillagerKitData {
-    public static final Codec<VillagerKitData> CODEC = ItemStack.CODEC.listOf()
+    public static final Codec<VillagerKitData> CODEC = ItemStack.OPTIONAL_CODEC.listOf()
             .xmap(VillagerKitData::fromList, VillagerKitData::toList);
     public static final StreamCodec<RegistryFriendlyByteBuf, VillagerKitData> STREAM_CODEC =
             ItemStack.STREAM_CODEC.apply(ByteBufCodecs.list(VillagerGearSlot.values().length))

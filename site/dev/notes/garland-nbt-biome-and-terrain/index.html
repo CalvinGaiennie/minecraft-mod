@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Garland fortress NBT — biomes &amp; landscape (author guide) · Minecraft Kingdom</title>
+  <link rel="stylesheet" href="../../../assets/site.css" />
+  
+</head>
+<body class="scope-dev">
+  <header class="site-chrome site-header">
+    <div class="header-inner">
+      <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
+    </div>
+  </header>
+  <div class="page-area">
+    <div class="main-nav-bar">
+      <nav class="main-nav" aria-label="Site">
+        <a href="../../../index.html" class="">Marketing</a>
+        <a href="../../index.html" class="active">Dev docs</a>
+      </nav>
+    </div>
+    <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../index.html" class="active">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav></div>
+    <div class="page-shell has-sidebar">
+      <main class="doc-main">
+        <p class="source">Source: <code>docs/notes/garland-nbt-biome-and-terrain.md</code></p><h1>Garland fortress NBT — biomes &amp; landscape (author guide)</h1>
+<p><strong>For:</strong> building Garland before code loads it. <strong>Expect multiple <code>.nbt</code> files</strong> if the site includes several mountains or exceeds <strong>48×48×48</strong> per piece (Java Structure Block limit). <strong>Code today:</strong> only a <strong>marker block</strong> at the site anchor — <strong>no</strong> multi-piece paste yet (<code>BanditSiteGenerator.placeSite</code>).</p>
+<p>---</p>
+<h2 id="what-an-nbt-structure-actually-is">What an NBT structure actually is</h2>
+<ul>
+<li>A <strong>saved box of blocks</strong> (and entities, block entities) from a <strong>Structure Block → Save</strong>.</li>
+<li>Everything is stored <strong>relative to a structure origin</strong> (the structure block’s “corner” / save point when you export).</li>
+<li>It is <strong>not</strong> a biome. It does <strong>not</strong> include world noise, caves, or trees unless <strong>you built those blocks into the box</strong>.</li>
+</ul>
+<p>When the mod pastes it later (<code>StructureTemplateManager</code> → <code>placeInWorld</code>):</p>
+<ul>
+<li>Those blocks are <strong>copied into the world</strong> at the chosen <strong>world position + rotation</strong>.</li>
+<li>The <strong>biome at that X/Z</strong> stays whatever Minecraft already generated (plains, taiga, etc.).</li>
+<li><strong>Biome effects</strong> (grass color, rain, mob spawns) come from the <strong>world</strong>, not from the file.</li>
+</ul>
+<p>So: <strong>your build palette</strong> can match a biome; <strong>world biome</strong> still controls the horizon unless you <strong>overwrite</strong> a wide area inside the NBT or in code before paste.</p>
+<p>---</p>
+<h2 id="three-ways-to-tie-fortress-to-a-biome-landscape">Three ways to tie fortress to “a biome / landscape”</h2>
+<h3>A. <strong>Pick the biome in code, build one NBT for it</strong> (simplest)</h3>
+<ol>
+<li>We <strong>decide</strong> Garland always spawns in e.g. <strong>plains / meadow / custom tag</strong> (see <code>tbd-citadel-biome-placement.md</code> — same idea for Garland ring).</li>
+<li>You build in <strong><code>runClient</code></strong> in <strong>that biome</strong> (or superflat with matching ground block).</li>
+<li>Export <strong>fortress only</strong> (walls, prison, tower) — surrounding terrain stays vanilla at paste time.</li>
+</ol>
+<p><strong>Pros:</strong> One file. <strong>Cons:</strong> Edge of paste may clip hills/trees; gate height must tolerate <strong>small</strong> heightmap error (code adjusts Y <strong>TBD</strong>).</p>
+<h3>B. <strong>Bake landscape into the NBT</strong> (best for “on a cliff / ridge / ravine lip”)</h3>
+<ol>
+<li>In Creative, <strong>sculpt</strong> the feature (hill cut, cliff face, dry moat) <strong>inside</strong> the structure box.</li>
+<li>Save <strong>fortress + terrain sculpt</strong> as one template.</li>
+<li>Code picks a <strong>relatively flat</strong> anchor and paste <strong>includes</strong> your fake geology.</li>
+</ol>
+<p><strong>Pros:</strong> Looks authored everywhere; doesn’t depend on finding a real ravine. <strong>Cons:</strong> Bigger file; paste can <strong>bury</strong> natural trees if box is huge; need <strong><code>structure_void</code></strong> for air you don’t want to overwrite (<strong>TBD</strong> in paste settings).</p>
+<h3>C. <strong>Find a real world feature, then paste</strong> (harder, code-heavy)</h3>
+<ol>
+<li>Generator searches for <strong>ravine / plateau / slope</strong> near Garland ring.</li>
+<li>Rotates gate to face <strong>approach road / army camp</strong> direction.</li>
+<li>Paste with <strong>offset Y</strong> so gate meets ground.</li>
+</ol>
+<p><strong>Pros:</strong> Natural drama. <strong>Cons:</strong> Unreliable seeds; more programming; you still author <strong>fortress</strong> mostly without terrain in NBT.</p>
+<p><strong>Garland v1 recommendation:</strong> <strong>A or B</strong> — you control the look before we automate search.</p>
+<p>---</p>
+<h2 id="structure-block-workflow-what-you-do-in-game">Structure block workflow (what you do in-game)</h2>
+<ol>
+<li><strong>Choose test world:</strong> flat <strong>or</strong> target biome <strong>or</strong> hand-built cliff in flat world (option B).</li>
+<li>Mark volume with <strong>Structure Block</strong> (Corner + Corner, or single block Save mode per MC version UI).</li>
+<li>Build <strong>entire compound</strong> inside the box: prison, <strong>main arena</strong>, <strong>tower</strong> with <strong>sightline</strong> toward where the army will sit, gate, escape route.</li>
+<li>Place <strong><code>bandit_camp</code></strong> block at the <strong>mod anchor</strong> — same block the code uses today for spawn/loot (document offset from gate in a sign or <code>authoring/structures/garland-anchor.txt</code> <strong>TBD</strong>).</li>
+<li><strong>Save</strong> → copy <code>.nbt</code> to <code>authoring/structures/garland_compound.nbt</code>.</li>
+<li><strong>Note on paper:</strong> which way is <strong>+Z</strong> from anchor (army camp direction for tower vista), <strong>size</strong> of box, <strong>Y</strong> of gate floor.</li>
+</ol>
+<p><strong>Air blocks:</strong> In paste, air in the template may <strong>erase</strong> world blocks (depending on <code>ignoreEntities</code> / processors). For outdoor parts, use <strong><code>structure_void</code></strong> in modern saves where you want “don’t touch world” — confirm in your MC version when we wire code.</p>
+<p>---</p>
+<h2 id="how-this-connects-to-garland-plot-army-visible-from-tower">How this connects to Garland <strong>plot</strong> (army visible from tower)</h2>
+<ul>
+<li><strong>Army camp</strong> will be <strong>code-spawned</strong> outside the fortress at a <strong>fixed offset</strong> from anchor (not in NBT v1 <strong>TBD</strong> e.g. south 80 blocks).</li>
+<li>When you build the <strong>tower</strong>, align windows/balcony toward that <strong>agreed direction</strong> so “literally see them” works without moving the build each seed.</li>
+<li><strong>Approach village</strong> (guide escape) may be a <strong>vanilla village</strong> the march path hits — separate from NBT or a small pasted hamlet <strong>TBD</strong>.</li>
+</ul>
+<p>---</p>
+<h2 id="multi-piece-garland-mountains-fortress">Multi-piece Garland (mountains + fortress)</h2>
+<p>Garland can be <strong>much larger than the citadel</strong>. Treat the site as a <strong>layout in one Creative world</strong>, then export <strong>tiles</strong> — not one monolithic save.</p>
+<h3>Authoring rules</h3>
+<ol>
+<li><strong>Pick a site origin</strong> (e.g. bedrock marker or gold block at <code>(0, Y, 0)</code> in your build world). <strong>Never move</strong> the finished layout after you start exporting.</li>
+<li><strong>Grid tiles</strong> at <strong>48×48×48</strong> (Structure Block max) or use <strong>WorldEdit</strong> for odd-sized chunks — same idea: each file has a <strong>fixed offset</strong> from site origin.</li>
+<li><strong>Naming:</strong> <code>garland_p_&lt;x&gt;_&lt;y&gt;_&lt;z&gt;.nbt</code> where <strong>p</strong> = piece index optional, <strong>x/y/z</strong> = <strong>block offset</strong> of that piece’s <strong>structure origin</strong> from site origin (e.g. <code>garland_0_0_0.nbt</code>, <code>garland_48_0_0.nbt</code>, <code>garland_0_64_-48.nbt</code>).</li>
+<li><strong>One manifest</strong> in <code>authoring/structures/garland-manifest.json</code> (<strong>TBD</strong> when first pieces exist): list of <code>{ &quot;file&quot;, &quot;offset&quot;: [dx, dy, dz], &quot;rotation&quot;: 0 }</code> and which file contains <strong><code>bandit_camp</code></strong> (site anchor for code).</li>
+<li><strong>Overlap 1–2 blocks</strong> at tile seams (shared mountain ridge) so paste gaps don’t show cracks — or sculpt seams so only one tile owns the ridge (<strong>pick one rule</strong> and stay consistent).</li>
+<li><strong><code>structure_void</code></strong> in outdoor “sky” cells inside a tile so paste doesn’t strip the next tile’s mountain when we paste in order (<strong>TBD</strong> in code: paste back-to-front or void-aware).</li>
+<li><strong>Prison / arena</strong> can live in <strong>one interior tile</strong> (easier quests) even if mountains span many tiles.</li>
+</ol>
+<h3>What code will do later</h3>
+<ul>
+<li>Resolve anchor → paste <strong>every manifest entry</strong> at <code>anchor + offset</code> (same world rotation).</li>
+<li>Load only <strong>chunks that intersect</strong> the bounding box (may need <strong>simulation distance</strong> bump on first visit — <strong>TBD</strong>).</li>
+</ul>
+<p>Citadel uses the <strong>same manifest pattern</strong>; Garland is just a <strong>bigger</strong> bounding box and more terrain pieces.</p>
+<p>---</p>
+<h2 id="what-we-need-from-you-before-coding-paste">What we need from you before coding paste</h2>
+<table><thead><tr><th>Decision</th><th>Why</th></tr></thead><tbody><tr><td><strong>Target biome</strong> (or “biome-agnostic stone”)</td><td>Placement search vs pure paste</td></tr><tr><td><strong>Terrain in NBT?</strong> (yes/no + how deep)</td><td>Pad vs sculpt vs search</td></tr><tr><td><strong>Anchor = bandit_camp block</strong> position</td><td>Gate vs marker; which <strong>tile file</strong> holds it</td></tr><tr><td><strong>Army direction</strong> from anchor</td><td>Tower vista</td></tr><tr><td><strong>Site bounding box</strong> (total X×Y×Z) + <strong>tile list</strong></td><td>Manifest + chunk load</td></tr><tr><td><strong>Seam rule</strong> (overlap vs single-owner ridges)</td><td>Avoid holes at paste</td></tr></tbody></table>
+<p>---</p>
+<h2 id="related-docs">Related docs</h2>
+<ul>
+<li><code>tbd-garland-fortress-prison-arena.md</code> — rooms to blockout inside the compound.</li>
+<li><code>bandit-camp-prefabs.md</code> — pipeline once paste exists.</li>
+<li><code>tbd-citadel-biome-placement.md</code> — same biome ideas for Black Citadel later.</li>
+</ul>
+      </main>
+      <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html" class="active">Overview</a></li></ul></aside>
+    </div>
+  </div>
+  <footer class="site-footer">
+    Source: <code>docs/notes/garland-nbt-biome-and-terrain.md</code>
+  </footer>
+  
+</body>
+</html>

@@ -51,6 +51,21 @@ DEV_GROUPS: tuple[DevGroup, ...] = (
         (
             DevDoc("notes/2026-10-05-discussion-plan.md", "Discussion plan"),
             DevDoc("notes/2026-10-05-design-notes-intake.md", "Design intake"),
+            DevDoc(
+                "notes/tbd-garland-fortress-prison-arena.md",
+                "Garland fortress & prison (TBD)",
+                url_slug="tbd-garland-fortress-prison-arena",
+            ),
+            DevDoc(
+                "notes/garland-nbt-biome-and-terrain.md",
+                "Garland NBT, biome & terrain",
+                url_slug="garland-nbt-biome-and-terrain",
+            ),
+            DevDoc(
+                "notes/tbd-citadel-biome-placement.md",
+                "Citadel biome placement (TBD)",
+                url_slug="tbd-citadel-biome-placement",
+            ),
         ),
     ),
     DevGroup(
@@ -86,6 +101,11 @@ DEV_GROUPS: tuple[DevGroup, ...] = (
             DevDoc("war-and-defense.md", "War & defense", split_h2_min=2),
             DevDoc("threats-and-mobs.md", "Threats & mobs", split_h2_min=2),
             DevDoc("armies-manual-test-plan.md", "Armies manual test plan", split_h2_min=2),
+            DevDoc(
+                "bandit-camp-prefabs.md",
+                "Bandit camp prefabs",
+                url_slug="bandit-camp-prefabs",
+            ),
         ),
     ),
     DevGroup(

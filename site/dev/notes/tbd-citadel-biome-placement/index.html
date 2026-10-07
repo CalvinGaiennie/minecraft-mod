@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TBD — Citadel biome &amp; world placement (before NBT) · Minecraft Kingdom</title>
+  <link rel="stylesheet" href="../../../assets/site.css" />
+  
+</head>
+<body class="scope-dev">
+  <header class="site-chrome site-header">
+    <div class="header-inner">
+      <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
+    </div>
+  </header>
+  <div class="page-area">
+    <div class="main-nav-bar">
+      <nav class="main-nav" aria-label="Site">
+        <a href="../../../index.html" class="">Marketing</a>
+        <a href="../../index.html" class="active">Dev docs</a>
+      </nav>
+    </div>
+    <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../index.html" class="active">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav></div>
+    <div class="page-shell has-sidebar">
+      <main class="doc-main">
+        <p class="source">Source: <code>docs/notes/tbd-citadel-biome-placement.md</code></p><h1>TBD — Citadel biome &amp; world placement (before NBT)</h1>
+<p><strong>Status:</strong> <strong>Discussion only.</strong> Decide <strong>before</strong> final Black Citadel structure export so art direction matches gen rules.</p>
+<p><strong>Today (docs/code):</strong> <strong>One citadel</strong> per overworld, <strong>~1,000–2,000</strong> blocks from <strong>spawn</strong> on the <strong>great road</strong> (<code>endgame.md</code>, <code>citadel-mod-plan.md</code>). <strong>No biome filter</strong> in code yet — only <code>CitadelAnchorSavedData.setCitadelCenter</code> after placement. Intro town <strong>~350</strong> blocks from citadel on the road; Dragon&#x27;s Well <strong>~350</strong> off-road in a copse (<code>necromancer-path.md</code>). Armies <strong>shadow camps</strong> ring <strong>~480</strong> from anchor when set.</p>
+<p>---</p>
+<h2 id="why-this-matters-for-nbt">Why this matters for NBT</h2>
+<table><thead><tr><th>If you build…</th><th>Risk without a biome rule</th></tr></thead><tbody><tr><td><strong>Single fixed palette</strong> (grey stone, oak, dark oak)</td><td>Usually <strong>fine in most overworld biomes</strong>; looks odd in <strong>snow</strong> (no snow on roofs) or <strong>desert</strong> (no sandstone blend).</td></tr><tr><td><strong>Biome-blended skirts</strong> (grass paths, spruce trim, sand bleed)</td><td><strong>Wrong</strong> if citadel spawns in taiga vs plains — need <strong>variants</strong> or <strong>gen overwrites</strong> ground around template.</td></tr><tr><td><strong>Tall gate / 40-block wall</strong></td><td><strong>Terrain variance</strong> (mountain vs flat) changes approach drama; may need <strong>terrace</strong> or <strong>cut/fill</strong> in code.</td></tr></tbody></table>
+<p>---</p>
+<h2 id="strategies-pick-one-primary-for-v1">Strategies (pick one primary for v1)</h2>
+<h3>1. <strong>Same biome every time (recommended default for one NBT)</strong></h3>
+<p><strong>Gen:</strong> When placing citadel, search outward from spawn (within <strong>1k–2k</strong> ring) for chunks whose <strong>dominant biome</strong> matches a <strong>config tag</strong> (e.g. <code>#minecraft:is_overworld</code> + <strong><code>minecraft:plains</code></strong> or <strong><code>#villagers:citadel_biomes</code></strong>).</p>
+<p><strong>Pros:</strong> One authored NBT; predictable art pass; road and intro town can share biome. <strong>Cons:</strong> Some seeds <strong>fail</strong> search → retry other angles / widen ring / fallback biome list (<strong>TBD</strong>).</p>
+<p><strong>Authoring:</strong> Build NBT in <strong>that biome</strong> on a flat world (or superflat matching palette).</p>
+<p>---</p>
+<h3>2. <strong>Biome-agnostic fortress + minimal site prep</strong></h3>
+<p><strong>Gen:</strong> Accept <strong>any</strong> solid overworld site in the ring; before <code>StructureTemplate.place</code>, code <strong>clears</strong> a <strong>footprint</strong> (e.g. 128×128 pad), <strong>levels</strong> gate approach, optional <strong>stone platform</strong> under walls.</p>
+<p><strong>Pros:</strong> One NBT; works on hills; no failed biome search. <strong>Cons:</strong> Surrounding <strong>vanilla biome</strong> still visible beyond pad (snow line, jungle trees); may need <strong>wide clear</strong> or <strong>blending</strong> mask.</p>
+<p>---</p>
+<h3>3. <strong>Multiple NBT variants (biome family)</strong></h3>
+<p><strong>Gen:</strong> Detect biome at anchor → pick <strong><code>citadel_plains</code></strong>, <strong><code>citadel_taiga</code></strong>, <strong><code>citadel_snowy</code></strong>, <strong><code>citadel_arid</code></strong> (desert/badlands).</p>
+<p><strong>Pros:</strong> Best visual fit; same layout, swapped palette blocks in template or separate files. <strong>Cons:</strong> <strong>4×</strong> structure work (or palette block in structure <strong>TBD</strong> in 1.21).</p>
+<p>---</p>
+<h3>4. <strong>Fixed world flavor (not recommended alone)</strong></h3>
+<p>Require custom world preset / single biome world — <strong>breaks</strong> normal survival seeds. Only as <strong>optional</strong> data pack, not default mod behavior.</p>
+<p>---</p>
+<h2 id="linked-systems-must-agree-with-biome-choice">Linked systems (must agree with biome choice)</h2>
+<table><thead><tr><th>System</th><th>Note</th></tr></thead><tbody><tr><td><strong>Great road</strong></td><td>Straight spawn → citadel; road blocks <strong>TBD</strong> (gravel/oak vs stone) — should match chosen biome or be neutral.</td></tr><tr><td><strong>Intro town (~350b)</strong></td><td>On road; likely <strong>same biome</strong> as citadel approach for cohesion.</td></tr><tr><td><strong>Dragon&#x27;s Well copse</strong></td><td><strong>Opposite</strong> road side; can be <strong>dark forest</strong> copse even if citadel is plains <strong>TBD</strong> (intentional contrast).</td></tr><tr><td><strong>10 relic fortresses (~3500 ring)</strong></td><td>Separate ring; <strong>own</strong> biome rules possible (author D1).</td></tr><tr><td><strong>15 refuges</strong></td><td>Scattered; <strong>per-archetype</strong> biomes already planned (<code>citadel-mod-plan</code> E1).</td></tr></tbody></table>
+<p>---</p>
+<h2 id="open-questions-next-discussion">Open questions (next discussion)</h2>
+<ol>
+<li><strong>Target biome for v1 single NBT:</strong> plains, meadow, custom “kingdom heartlands” tag, or <strong>first match</strong> from ordered list?</li>
+<li><strong>Terrain:</strong> max <strong>slope</strong> at gate; allow <strong>hilltop</strong> citadel vs <strong>forced flatten</strong>?</li>
+<li><strong>Snow line:</strong> exclude <strong>snowy</strong> biomes explicitly, or use <strong>snowy variant</strong> NBT?</li>
+<li><strong>Fail placement:</strong> widen ring, pick second biome, or <strong>log error</strong> and skip citadel (bad)?</li>
+<li><strong>Structure void / jigsaw:</strong> single <code>.nbt</code> with <strong><code>structure_void</code></strong> under footprint vs manual pad in code?</li>
+<li><strong>Build workflow:</strong> you build in <strong>Creative matching biome</strong>; we document <strong>anchor block</strong> + <strong>rotation</strong> (0/90/180/270) + <strong>ground Y</strong> rule (gate = <code>MOTION_BLOCKING</code> surface).</li>
+</ol>
+<p>---</p>
+<h2 id="doc-links">Doc links</h2>
+<ul>
+<li><code>citadel-mod-plan.md</code> — scope, open <strong>B3</strong> (post-NBT layout).</li>
+<li><code>citadel-layout.md</code> — shell size, gate height, outside shadow.</li>
+<li><code>endgame.md</code> — distance, road, Well.</li>
+</ul>
+      </main>
+      <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html" class="active">Overview</a></li></ul></aside>
+    </div>
+  </div>
+  <footer class="site-footer">
+    Source: <code>docs/notes/tbd-citadel-biome-placement.md</code>
+  </footer>
+  
+</body>
+</html>

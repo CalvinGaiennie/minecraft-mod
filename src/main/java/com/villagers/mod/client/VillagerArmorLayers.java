@@ -1,11 +1,9 @@
 package com.villagers.mod.client;
 
-import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.model.geom.ModelLayers;
-import net.minecraft.client.renderer.entity.LivingEntityRenderer;
-import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
+import net.minecraft.client.model.VillagerModel;
+import net.minecraft.client.renderer.entity.VillagerRenderer;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.npc.Villager;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -21,19 +19,9 @@ public final class VillagerArmorLayers {
 
     @SubscribeEvent
     public static void onAddLayers(EntityRenderersEvent.AddLayers event) {
-        addArmorLayer(event, EntityType.VILLAGER);
-    }
-
-    @SuppressWarnings({"rawtypes", "unchecked"})
-    private static void addArmorLayer(EntityRenderersEvent.AddLayers event, EntityType<?> type) {
-        var renderer = event.getRenderer(type);
-        if (!(renderer instanceof LivingEntityRenderer<?, ?> livingRenderer)) {
+        if (!(event.getRenderer(EntityType.VILLAGER) instanceof VillagerRenderer villagerRenderer)) {
             return;
         }
-        var context = event.getContext();
-        HumanoidModel<LivingEntity> inner = new HumanoidModel<>(context.bakeLayer(ModelLayers.PLAYER_INNER_ARMOR));
-        HumanoidModel<LivingEntity> outer = new HumanoidModel<>(context.bakeLayer(ModelLayers.PLAYER_OUTER_ARMOR));
-        LivingEntityRenderer parent = (LivingEntityRenderer) livingRenderer;
-        parent.addLayer(new HumanoidArmorLayer(parent, inner, outer, context.getModelManager()));
+        villagerRenderer.addLayer(new VillagerArmorRenderLayer(villagerRenderer, event));
     }
 }

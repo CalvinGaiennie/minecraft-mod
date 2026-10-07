@@ -30,7 +30,11 @@ public final class BanditLoot {
         }
         HolderLookup.RegistryLookup<Enchantment> enchants = level.registryAccess().lookupOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT);
         boolean hideoutTier = kind == SiteKind.HIDEOUT || kind == SiteKind.GARLAND;
-        fillCamp(chest, random, enchants, hideoutTier, primary);
+        if (kind == SiteKind.CAMP) {
+            fillSkimpyCampChest(chest, random, primary);
+        } else {
+            fillRichChest(chest, random, enchants, hideoutTier, primary);
+        }
         if (primary && kind == SiteKind.CORVIN) {
             addValuables(chest, random, 1.4);
         }
@@ -49,8 +53,30 @@ public final class BanditLoot {
         }
     }
 
-    private static void fillCamp(ChestBlockEntity chest, RandomSource random, HolderLookup.RegistryLookup<Enchantment> enchants, boolean hideoutTier,
-            boolean primary) {
+    /** Generic camps: gear is on the bandits; chests hold scraps only. */
+    private static void fillSkimpyCampChest(ChestBlockEntity chest, RandomSource random, boolean primary) {
+        if (primary) {
+            insertIfRoom(chest, new ItemStack(Items.IRON_INGOT, 1 + random.nextInt(3)));
+            if (random.nextFloat() < 0.35f) {
+                insertIfRoom(chest, new ItemStack(Items.GOLD_NUGGET, 2 + random.nextInt(6)));
+            }
+            if (random.nextFloat() < 0.2f) {
+                insertIfRoom(chest, new ItemStack(Items.EMERALD, 1));
+            }
+            if (random.nextFloat() < 0.25f) {
+                insertIfRoom(chest, new ItemStack(Items.COAL, 4 + random.nextInt(8)));
+            }
+        } else if (random.nextFloat() < 0.6f) {
+            insertIfRoom(chest, new ItemStack(Items.IRON_NUGGET, 3 + random.nextInt(5)));
+        }
+        insertIfRoom(chest, new ItemStack(Items.BREAD, 2 + random.nextInt(7)));
+        if (random.nextFloat() < 0.4f) {
+            insertIfRoom(chest, new ItemStack(Items.POTATO, 2 + random.nextInt(4)));
+        }
+    }
+
+    private static void fillRichChest(ChestBlockEntity chest, RandomSource random, HolderLookup.RegistryLookup<Enchantment> enchants,
+            boolean hideoutTier, boolean primary) {
         int sets = hideoutTier ? (primary ? 5 : 3) : (primary ? 4 : 2);
         for (int i = 0; i < sets; i++) {
             insertIfRoom(chest, enchantedArmor(random, enchants, hideoutTier));

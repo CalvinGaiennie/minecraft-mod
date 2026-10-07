@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Garland fortress NBT — biomes &amp; landscape (author guide) · Three ways to tie fortress to “a biome / landscape” · Minecraft Kingdom</title>
+  <link rel="stylesheet" href="../../../assets/site.css" />
+  
+</head>
+<body class="scope-dev">
+  <header class="site-chrome site-header">
+    <div class="header-inner">
+      <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
+    </div>
+  </header>
+  <div class="page-area">
+    <div class="main-nav-bar">
+      <nav class="main-nav" aria-label="Site">
+        <a href="../../../index.html" class="">Marketing</a>
+        <a href="../../index.html" class="active">Dev docs</a>
+      </nav>
+    </div>
+    <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../index.html" class="active">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav></div>
+    <div class="page-shell has-sidebar">
+      <main class="doc-main">
+        <p class="source">Source: <code>docs/notes/garland-nbt-biome-and-terrain.md</code> · Garland fortress NBT — biomes &amp; landscape (author guide)</p><h1>Three ways to tie fortress to “a biome / landscape”</h1>
+<h3>A. <strong>Pick the biome in code, build one NBT for it</strong> (simplest)</h3>
+<ol>
+<li>We <strong>decide</strong> Garland always spawns in e.g. <strong>plains / meadow / custom tag</strong> (see <code>tbd-citadel-biome-placement.md</code> — same idea for Garland ring).</li>
+<li>You build in <strong><code>runClient</code></strong> in <strong>that biome</strong> (or superflat with matching ground block).</li>
+<li>Export <strong>fortress only</strong> (walls, prison, tower) — surrounding terrain stays vanilla at paste time.</li>
+</ol>
+<p><strong>Pros:</strong> One file. <strong>Cons:</strong> Edge of paste may clip hills/trees; gate height must tolerate <strong>small</strong> heightmap error (code adjusts Y <strong>TBD</strong>).</p>
+<h3>B. <strong>Bake landscape into the NBT</strong> (best for “on a cliff / ridge / ravine lip”)</h3>
+<ol>
+<li>In Creative, <strong>sculpt</strong> the feature (hill cut, cliff face, dry moat) <strong>inside</strong> the structure box.</li>
+<li>Save <strong>fortress + terrain sculpt</strong> as one template.</li>
+<li>Code picks a <strong>relatively flat</strong> anchor and paste <strong>includes</strong> your fake geology.</li>
+</ol>
+<p><strong>Pros:</strong> Looks authored everywhere; doesn’t depend on finding a real ravine. <strong>Cons:</strong> Bigger file; paste can <strong>bury</strong> natural trees if box is huge; need <strong><code>structure_void</code></strong> for air you don’t want to overwrite (<strong>TBD</strong> in paste settings).</p>
+<h3>C. <strong>Find a real world feature, then paste</strong> (harder, code-heavy)</h3>
+<ol>
+<li>Generator searches for <strong>ravine / plateau / slope</strong> near Garland ring.</li>
+<li>Rotates gate to face <strong>approach road / army camp</strong> direction.</li>
+<li>Paste with <strong>offset Y</strong> so gate meets ground.</li>
+</ol>
+<p><strong>Pros:</strong> Natural drama. <strong>Cons:</strong> Unreliable seeds; more programming; you still author <strong>fortress</strong> mostly without terrain in NBT.</p>
+<p><strong>Garland v1 recommendation:</strong> <strong>A or B</strong> — you control the look before we automate search.</p>
+<p>---</p>
+      </main>
+      <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="what-an-nbt-structure-actually-is.html">What an NBT structure actually is</a></li><li><a href="three-ways-to-tie-fortress-to-a-biome-landscape.html" class="active">Three ways to tie fortress to “a biome / landscape”</a></li><li><a href="structure-block-workflow-what-you-do-in-game.html">Structure block workflow (what you do in-game)</a></li><li><a href="how-this-connects-to-garland-plot-army-visible-from-tower.html">How this connects to Garland **plot** (army visible from tower)</a></li><li><a href="multi-piece-garland-mountains-fortress.html">Multi-piece Garland (mountains + fortress)</a></li><li><a href="what-we-need-from-you-before-coding-paste.html">What we need from you before coding paste</a></li><li><a href="related-docs.html">Related docs</a></li></ul><p class="sidebar-label">Subsections</p><ul><li><a href="#a-pick-the-biome-in-code-build-one-nbt-for-it-simplest">A. **Pick the biome in code, build one NBT for it** (simplest)</a></li><li><a href="#b-bake-landscape-into-the-nbt-best-for-on-a-cliff-ridge-ravine-lip">B. **Bake landscape into the NBT** (best for “on a cliff / ridge / ravine lip”)</a></li><li><a href="#c-find-a-real-world-feature-then-paste-harder-code-heavy">C. **Find a real world feature, then paste** (harder, code-heavy)</a></li></ul></aside>
+    </div>
+  </div>
+  <footer class="site-footer">
+    Source: <code>docs/notes/garland-nbt-biome-and-terrain.md</code>
+  </footer>
+  
+</body>
+</html>

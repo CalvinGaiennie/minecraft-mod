@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Garland fortress NBT — biomes &amp; landscape (author guide) · Multi-piece Garland (mountains + fortress) · Minecraft Kingdom</title>
+  <link rel="stylesheet" href="../../../assets/site.css" />
+  
+</head>
+<body class="scope-dev">
+  <header class="site-chrome site-header">
+    <div class="header-inner">
+      <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
+    </div>
+  </header>
+  <div class="page-area">
+    <div class="main-nav-bar">
+      <nav class="main-nav" aria-label="Site">
+        <a href="../../../index.html" class="">Marketing</a>
+        <a href="../../index.html" class="active">Dev docs</a>
+      </nav>
+    </div>
+    <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../index.html" class="active">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav></div>
+    <div class="page-shell has-sidebar">
+      <main class="doc-main">
+        <p class="source">Source: <code>docs/notes/garland-nbt-biome-and-terrain.md</code> · Garland fortress NBT — biomes &amp; landscape (author guide)</p><h1>Multi-piece Garland (mountains + fortress)</h1>
+<p>Garland can be <strong>much larger than the citadel</strong>. Treat the site as a <strong>layout in one Creative world</strong>, then export <strong>tiles</strong> — not one monolithic save.</p>
+<h3>Authoring rules</h3>
+<ol>
+<li><strong>Pick a site origin</strong> (e.g. bedrock marker or gold block at <code>(0, Y, 0)</code> in your build world). <strong>Never move</strong> the finished layout after you start exporting.</li>
+<li><strong>Grid tiles</strong> at <strong>48×48×48</strong> (Structure Block max) or use <strong>WorldEdit</strong> for odd-sized chunks — same idea: each file has a <strong>fixed offset</strong> from site origin.</li>
+<li><strong>Naming:</strong> <code>garland_p_&lt;x&gt;_&lt;y&gt;_&lt;z&gt;.nbt</code> where <strong>p</strong> = piece index optional, <strong>x/y/z</strong> = <strong>block offset</strong> of that piece’s <strong>structure origin</strong> from site origin (e.g. <code>garland_0_0_0.nbt</code>, <code>garland_48_0_0.nbt</code>, <code>garland_0_64_-48.nbt</code>).</li>
+<li><strong>One manifest</strong> in <code>authoring/structures/garland-manifest.json</code> (<strong>TBD</strong> when first pieces exist): list of <code>{ &quot;file&quot;, &quot;offset&quot;: [dx, dy, dz], &quot;rotation&quot;: 0 }</code> and which file contains <strong><code>bandit_camp</code></strong> (site anchor for code).</li>
+<li><strong>Overlap 1–2 blocks</strong> at tile seams (shared mountain ridge) so paste gaps don’t show cracks — or sculpt seams so only one tile owns the ridge (<strong>pick one rule</strong> and stay consistent).</li>
+<li><strong><code>structure_void</code></strong> in outdoor “sky” cells inside a tile so paste doesn’t strip the next tile’s mountain when we paste in order (<strong>TBD</strong> in code: paste back-to-front or void-aware).</li>
+<li><strong>Prison / arena</strong> can live in <strong>one interior tile</strong> (easier quests) even if mountains span many tiles.</li>
+</ol>
+<h3>What code will do later</h3>
+<ul>
+<li>Resolve anchor → paste <strong>every manifest entry</strong> at <code>anchor + offset</code> (same world rotation).</li>
+<li>Load only <strong>chunks that intersect</strong> the bounding box (may need <strong>simulation distance</strong> bump on first visit — <strong>TBD</strong>).</li>
+</ul>
+<p>Citadel uses the <strong>same manifest pattern</strong>; Garland is just a <strong>bigger</strong> bounding box and more terrain pieces.</p>
+<p>---</p>
+      </main>
+      <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="what-an-nbt-structure-actually-is.html">What an NBT structure actually is</a></li><li><a href="three-ways-to-tie-fortress-to-a-biome-landscape.html">Three ways to tie fortress to “a biome / landscape”</a></li><li><a href="structure-block-workflow-what-you-do-in-game.html">Structure block workflow (what you do in-game)</a></li><li><a href="how-this-connects-to-garland-plot-army-visible-from-tower.html">How this connects to Garland **plot** (army visible from tower)</a></li><li><a href="multi-piece-garland-mountains-fortress.html" class="active">Multi-piece Garland (mountains + fortress)</a></li><li><a href="what-we-need-from-you-before-coding-paste.html">What we need from you before coding paste</a></li><li><a href="related-docs.html">Related docs</a></li></ul></aside>
+    </div>
+  </div>
+  <footer class="site-footer">
+    Source: <code>docs/notes/garland-nbt-biome-and-terrain.md</code>
+  </footer>
+  
+</body>
+</html>

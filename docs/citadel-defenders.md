@@ -22,7 +22,7 @@
 
 | Spawn type | Role (typical placement) |
 | --- | --- |
-| **Citadel undead** | Core “soldier” pressure, gate, keep (`citadel` custom mob when Armies absent **TBD**). |
+| **Citadel undead** | Core pressure via **vanilla spawner types** (zombies, skeletons, etc.); **no** custom undead mob when Armies absent (author **2026-10-07**). |
 | **Skeletons** | Wall walks, overwatch. |
 | **Wither skeletons** | Bridge choke, slow + wither stack in funnels. |
 | **Cave spiders** | Narrow trap corridors (poison in webs). |
@@ -85,7 +85,7 @@ Mockup tags each trap segment with **intended counter** (milk, fire res, ranged 
 | **Seal closed** | Off. |
 | **Seal open, king alive** | Spawners **on** until broken; corridors + **potion/lava redstone traps** + hazards **live**; **main inner gate closed** (`citadel-layout.md`). Attackers may **dismantle traps** and **break spawners** they can reach. |
 | **Both necromancers dead** | Rez stops per `endgame.md`; remaining spawners still run until **mined** or king milestone **TBD** (auto-off for boss-linked reserves **optional** mockup). |
-| **King dead** | Any **leftover** garrison spawners **off** **TBD** vs player-cleared; traps/hazards **stay** until players strip or mine. |
+| **King dead** | Leftover garrison spawners stay **on** until **players break** them (no auto-off, author **2026-10-07**); traps/hazards **stay** until stripped or mined. |
 
 ---
 

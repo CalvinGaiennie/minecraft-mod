@@ -34,7 +34,7 @@ Village military loop, mess/tax/recruiters/supply, defense blocks, horns/camps/c
 
 Wand, hood/robe, minions, crypts, phylactery, bone whistle, mob spawner crafting, citadel + throne rules (`citadel-claim.md`), 17 refuges, player acolyte questline (`acolyte-path.md`), necromancer questline TBD (`necromancer-path.md`), **10 bandit fortresses** (Citadel-only structures, named kings, six with relics), relics/Annals/compass, acolytes, Well, Roost, King’s Horn, golden age **owner** side.
 
-**Bandits:** roaming deserter bands = **Armies**. **Fortress** sites and relic rooms = **Citadel**. With **both** mods, fortress defenders use soldier bandit entities when possible; Citadel-only fallback mobs **TBD**.
+**Bandits:** roaming deserter bands = **Armies**. **Fortress** sites and relic rooms = **Citadel**. With **both** mods, fortress defenders use soldier bandit entities when possible; **Citadel-only** fallback = **pillagers / illagers** (author **2026-10-07**).
 
 **Cut:** kingdom table block, **blessed incense**, separate **kingdom map** item (use Annals, relic compass, citadel war-room burial maps instead).
 

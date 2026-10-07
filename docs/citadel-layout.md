@@ -72,7 +72,7 @@ Difficulty is **mostly** boss kits, spawner placement/type, **geometry**, and **
 | **Approach** | Shadow-ring bandits (Armies); mustering ground outside wall. |
 | **Walls** | Unbreakable ~**40** tall, **too tall for siege ladders** (`endgame.md`). |
 | **One main entrance** | Primary assault path: **large open gate / barbican**: **closable** (see **Assault defensive mode**). |
-| **Secret tunnel** | Optional second route, tighter, not the main claim path **TBD** mockup. |
+| **Secret tunnel** | Optional **second route**: **outside the wall** → **lower keep** — **deferred (not v1)**; author **2026-10-07**. Chronicle hint can wait until a later pass. |
 | **Gate gauntlet** | While outer **citadel doors** are mined, spawners and **ranged overwatch** cover the line, expect **bows/crossbows** (or equivalent) here and on wall walks. |
 | **Chokepoints** | Stairs, bridges, courtyard killsacks, melee vs archer spawners placed for **funnels**. |
 | **Branch routes** | Main push vs **secret tunnel** (shorter, tighter ambush). |
@@ -102,13 +102,13 @@ Mockup decides: tunnel open during defensive mode?, which gates are lever-only v
 
 ## Keep rooms (v1)
 
-Throne, outdoor Hall, library, alchemy + gardens, war room, treasuries (secret = hidden redstone, **undocumented**), armory, **large sparse** banquet/store/guest/chamber wings (**sizes TBD**), dungeon (captives + 2 Order brothers, **lever TBD**), training + joust decor, stables + paddock **inside wall**, Well, Roost, **undead spawners** (sprinkled), beacon basement, **3 boss arenas** (king + 2 necromancers).
+Throne, outdoor Hall, library, alchemy + gardens, war room, treasuries (secret = hidden redstone, **undocumented**), armory, **large sparse** banquet/store/guest/chamber wings (**sizes TBD**), dungeon (captives + 2 Order brothers; **separate cell opens**, **not** one lever for both — author **2026-10-07**), training + joust decor, stables + paddock **inside wall**, Well, Roost, **undead spawners** (sprinkled), beacon basement, **3 boss arenas** (king + 2 necromancers).
 
 ---
 
 ## Trapped Order brothers
 
-War Leader + random craft specialty; **15** overworld refuges; lever **TBD**; Annals **refuge chests only**.
+War Leader + random craft specialty; overworld refuges per **`acolyte-path.md`** (**17** brothers, **2** dungeon-only); **separate** cell opens; Annals **refuge chests only**.
 
 ---
 

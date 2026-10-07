@@ -73,6 +73,31 @@
 
 ---
 
+## Author decisions (2026-10-07)
+
+| ID | Decision |
+| --- | --- |
+| **A1** | The two **bound citadel necromancers** **are** the **founding necromancer brothers** (same pair as End/brother lore; merge with Black Treaty story). |
+| **A2** | Display names **deferred** (not a planning gate). |
+| **A3** | **End-move** (spare second brother → citadel to End) is a **real ending branch** in **v1** (not cut, not optional-only). |
+| **B1** | **Secret tunnel** **out of v1** for now (lower-keep back route deferred). |
+| **B2** | **No** single lever for both Order cells (separate opens **TBD** in mockup). |
+| **B3** | **Defer** until citadel **NBT / blockout** mockup exists. |
+| **B5** | Leftover spawners after king death: **player-mined only** (no auto-off). |
+| **B6** | No custom citadel undead type; **vanilla spawner types** handle garrison. |
+| **C1** | Opt out at commit: **no UI button** — refuse by **not handing in** ingredients. |
+| **C2** | Intro can touch **multiple players**; **only the player who delivers the chestplate** to the mother continues the **committed** quest line. |
+| **D1** | **10 fortresses** on a **~3,500 block** ring from spawn (all directions). |
+| **D2** | **~20** defenders per fortress (+ king **TBD** in mockup). |
+| **D4** | **Thornheart** End island outpost: **v1**. |
+| **E1** | **One overworld refuge per brother** who fled (**15** sites); **2** brothers **dungeon-only**; **17** brothers total. **Each refuge a different archetype** (repurposed witch hut, small cave, house in a village, etc.), not one repeated layout. |
+| **E3** | War Leader: **direct player damage** blocked on own troops unless sneaking; **explosions / lava / fire still hurt** them. |
+| **F2** | Citadel-only fortresses: **pillagers / illagers** (closest vanilla). |
+
+**Still open for planning close:** **B3** (post-NBT inner gates), **A2** (names), **D3** (relic→fort mapping), refuge **archetype list** per brother (assign at world gen).
+
+---
+
 ## Author decisions still open (close these to “finish planning”)
 
 Work **top to bottom**. Mark **Decided** in discussion plan when you call each.
@@ -92,6 +117,7 @@ Work **top to bottom**. Mark **Decided** in discussion plan when you call each.
 | B1 | **Secret tunnel:** include in v1? | **Yes**, one rare chronicle hint |
 | B2 | **Dungeon Order lever:** single lever opens both cells? | **Yes** |
 | B3 | **Inner gate / ward doors:** redstone closable only in defensive mode, or player levers post-claim too? | Defensive = closed; post-claim levers for owner **TBD** |
+| **B7** | **Citadel biome / placement:** one NBT vs variants; **same biome every seed** vs pad/flatten; see `notes/tbd-citadel-biome-placement.md` | **Decide before NBT export** |
 | B4 | Spawner **counts per zone** (gate / keep / basement) | Playtest after Creative blockout |
 | B5 | After **king dead**, leftover spawners **auto-off** or **player-mined only**? | **Player-mined** (doc lean) |
 | B6 | **Citadel undead** mob when Armies absent | Custom zombie variant vs vanilla with tag |

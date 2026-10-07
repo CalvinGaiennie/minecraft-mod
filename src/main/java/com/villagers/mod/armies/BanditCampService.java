@@ -2,12 +2,9 @@ package com.villagers.mod.armies;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.npc.Villager;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.AABB;
 
-import com.villagers.mod.Config;
 import com.villagers.mod.block.entity.BanditCampBlockEntity;
 import com.villagers.mod.entity.BanditData;
 import com.villagers.mod.entity.VillagerAttachments;
@@ -28,23 +25,11 @@ public final class BanditCampService {
             BanditLoot.fillSiteChests(level, camp.getBlockPos(), camp.getKind(), level.random);
             data.updateSite(new BanditWorldSavedData.SiteRecord(record.id(), record.kind(), record.origin(), true, record.nextRespawnGameTime()));
         }
-        trySpawnGarrison(level, camp, record, true);
+        spawnInitialGarrison(level, camp, record);
     }
 
     public static void tickSite(ServerLevel level, BanditCampBlockEntity camp) {
-        BanditWorldSavedData data = BanditWorldSavedData.get(level);
-        BanditWorldSavedData.SiteRecord record = data.findById(camp.getSiteId());
-        if (record == null) {
-            return;
-        }
-        if (!level.hasNearbyAlivePlayer(camp.getBlockPos().getX(), camp.getBlockPos().getY(), camp.getBlockPos().getZ(), 128)) {
-            return;
-        }
-        int alive = countCampBandits(level, camp.getSiteId(), camp.getBlockPos());
-        int target = garrisonSize(camp.getKind());
-        if (alive < target && level.getGameTime() >= record.nextRespawnGameTime()) {
-            trySpawnGarrison(level, camp, record, false);
-        }
+        // Garrison spawns once at bootstrap; bandit sites do not refill after clear.
     }
 
     private static int garrisonSize(BanditWorldSavedData.SiteKind kind) {
@@ -71,10 +56,10 @@ public final class BanditCampService {
         return count;
     }
 
-    private static void trySpawnGarrison(ServerLevel level, BanditCampBlockEntity camp, BanditWorldSavedData.SiteRecord record, boolean initial) {
+    private static void spawnInitialGarrison(ServerLevel level, BanditCampBlockEntity camp, BanditWorldSavedData.SiteRecord record) {
         int target = garrisonSize(camp.getKind());
         int alive = countCampBandits(level, camp.getSiteId(), camp.getBlockPos());
-        int toSpawn = initial ? target : Math.min(2, target - alive);
+        int toSpawn = target - alive;
         if (toSpawn <= 0) {
             return;
         }
@@ -90,19 +75,22 @@ public final class BanditCampService {
             bossName = net.minecraft.network.chat.Component.literal("Garland");
         }
         boolean bossSpawned = alive > 0;
+        boolean spawnedLeader = false;
         for (int i = 0; i < toSpawn; i++) {
             BlockPos spawn = camp.getBlockPos().offset(level.random.nextInt(5) - 2, 0, level.random.nextInt(5) - 2);
             boolean spawnBoss = !bossSpawned && boss != BanditData.BossRole.NONE;
-            BanditSpawnHelper.spawnBandit(level, spawn, camp.getSiteId(), spawnBoss || level.random.nextFloat() < 0.15f,
+            boolean leader = spawnBoss || level.random.nextFloat() < 0.15f;
+            BanditSpawnHelper.spawnBandit(level, spawn, camp.getSiteId(), leader,
                     spawnBoss ? boss : BanditData.BossRole.NONE, questOwner, spawnBoss ? bossName : null);
+            if (leader) {
+                spawnedLeader = true;
+            }
             if (spawnBoss) {
                 bossSpawned = true;
             }
         }
-        if (!initial && alive == 0) {
-            BanditWorldSavedData data = BanditWorldSavedData.get(level);
-            data.updateSite(new BanditWorldSavedData.SiteRecord(record.id(), record.kind(), record.origin(), record.lootFilled(),
-                    level.getGameTime() + Config.BANDIT_CAMP_RESPAWN_TICKS.get()));
+        if (spawnedLeader && camp.getKind() == BanditWorldSavedData.SiteKind.CAMP) {
+            BanditCampFeatures.spawnTiedLeaderHorseIfAbsent(level, camp.getBlockPos(), level.random);
         }
     }
 
@@ -116,7 +104,5 @@ public final class BanditCampService {
         if (record == null) {
             return;
         }
-        data.updateSite(new BanditWorldSavedData.SiteRecord(record.id(), record.kind(), record.origin(), record.lootFilled(),
-                level.getGameTime() + Config.BANDIT_CAMP_RESPAWN_TICKS.get()));
     }
 }

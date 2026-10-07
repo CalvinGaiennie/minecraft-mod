@@ -55,7 +55,7 @@ O2 — hunt and kill the big bandit leader (player finish only)</code></pre>
 <ul>
 <li>Corvin: <strong>player finish only</strong>.</li>
 <li><strong>Death line:</strong> <em>“You absolute mule. I’m not the Rook. I’m what keeps his books. Run home, lordling, before Garland turns your pretty village into ash.”</em></li>
-<li>Sets flag <strong><code>armiesQuestD2Armed</code></strong>.</li>
+<li>Sets flag <strong><code>armiesQuestD2Armed</code></strong> — player is <strong>sent home</strong> to face D2 (not a march to Garland yet).</li>
 </ul>
 <p>---</p>
 <h2 id="d2-the-big-one-hits-home">D2 — <strong>The big one hits home</strong></h2>
@@ -65,11 +65,16 @@ O2 — hunt and kill the big bandit leader (player finish only)</code></pre>
 <p><strong>Success:</strong> Mess <strong>still placed</strong> and <strong>≥1</strong> post bed unbroken. Garland <strong>flees</strong> when <strong>either</strong>: HP <strong>≤30%</strong>, <strong>or</strong> <strong>≥65%</strong> of his assault bandits are dead (<code>armiesQuestD2GarlandFleeBanditLossFraction</code> <strong>0.65</strong>). Drops <strong><code>torn_map_half</code></strong>. <strong>No</strong> timer cap. <strong>Bandits only</strong> (no undead).</p>
 <p><strong>Fail:</strong> Mess broken or no beds: assault ends; <strong>retry</strong> after <strong>rebuilding mess</strong> when you enter largest village again. <strong>No</strong> permanent village delete.</p>
 <p><strong>Garland cannot be fully killed in D2.</strong></p>
+<p><strong>Capture &amp; guide (author draft, not implemented):</strong> During the assault, player may <strong>capture</strong> one Garland soldier alive. He offers to lead the owner to <strong>the Rook’s castle</strong> only if the expedition musters <strong>≥ N soldiers</strong> from <strong>camp</strong>. On the march he <strong>prompts recruiting more</strong> at checkpoints (<strong>TBD</strong>). Route passes a <strong>village near the castle</strong>; the guide <strong>escapes</strong> there. <strong>Kidnap</strong> follows shortly after (<strong>prison arc</strong> — see <code>notes/tbd-garland-fortress-prison-arena.md</code>). <strong><code>torn_map_half</code></strong> may merge with guide intel <strong>TBD</strong>.</p>
 <p>---</p>
 <h2 id="o2-no-more-running">O2 — <strong>No more running</strong></h2>
-<p><strong>Start:</strong> <strong><code>torn_map_half</code></strong> (no fixed villager journal line for now).</p>
-<p><strong>Find:</strong> Shapeless craft <strong><code>torn_map_half</code></strong> + <strong>ledger</strong> + <strong>compass</strong> → <strong>Rook&#x27;s Trail Compass</strong> (points at camp); chat bearing to <strong>Garland’s camp</strong> (SavedData, farther than Corvin’s).</p>
-<p><strong>Goal:</strong> Kill <strong>Garland the Rook</strong>. <strong>Player finish only</strong>.</p>
+<p><strong>Start:</strong> After <strong>O1</strong> (Corvin dead) and <strong>D2</strong> flee item <strong><code>torn_map_half</code></strong>; quest stage <strong>O2 armed</strong> (<strong>TBD</strong> exact flag).</p>
+<p><strong>Find Garland (no compass):</strong> Captured <strong>guide</strong> leads the march after D2; <strong>≥ N soldiers</strong> required to <strong>start</strong> and soft targets to <strong>recruit more</strong> along the way. <strong>No</strong> Rook&#x27;s Trail Compass (<strong>remove</strong> craft if still in data).</p>
+<p><strong>Kidnap gate:</strong> After <strong>guide escapes</strong> at the <strong>approach village</strong>, not on first region visit. Army remains <strong>outside</strong> when owner is taken into the <strong>prison</strong> (Act 2 in draft doc).</p>
+<p><strong>Goal (surface):</strong> Kill <strong>Garland the Rook</strong>. <strong>Player finish only</strong> (after prison arc <strong>TBD</strong>).</p>
+<h3>Draft — Fortress approach &amp; prison arena (not implemented)</h3>
+<p><strong>Discussion doc:</strong> <code>notes/tbd-garland-fortress-prison-arena.md</code>.</p>
+<p><strong>Prison flow (author):</strong> <strong>Cell</strong> + fellow prisoner → <strong>tower</strong> (see army) → <strong>main arena</strong> (warm-ups, waves, gear ladder) → optional prisoner forks (<strong>steal</strong>, <strong>throw fight</strong> = −1 upgrade, <strong>beat/kill bad prisoner</strong>) → <strong>mace champion</strong> (<strong>lose if below 2 hearts</strong>). <strong>Win:</strong> Garland hauls you to <strong>tower</strong> to <strong>watch</strong> his men hit your army → <strong>naked escape race</strong> to camp → <strong>lead survivors</strong> (escape <strong>easier</strong> if two prisoners helped: <strong>intel</strong> saves men, <strong>ally</strong> on final egress). <strong>No execution.</strong> <strong>Lose</strong> mace: bad end <strong>TBD</strong> (not win-path race). <strong>Rookbreaker</strong> <strong>TBD</strong>.</p>
 <p><strong>Rewards:</strong></p>
 <ul>
 <li><strong>Garland’s treasury:</strong> <strong>hideout-tier or better</strong> blocks and enchanted gear (still <strong>no</strong> relic), on top of normal outpost chests — enough to feel like the Rook’s main stash; tune above hideouts in playtest.</li>

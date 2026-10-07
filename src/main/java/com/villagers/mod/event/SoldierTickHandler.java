@@ -65,14 +65,14 @@ public class SoldierTickHandler {
         for (Villager villager : serverLevel.getEntitiesOfClass(Villager.class, LOADED_VILLAGERS)) {
             if (villager.hasData(VillagerAttachments.SOLDIER_DATA.get())) {
                 tickSoldier(villager, level, gameTime, newDay);
-            } else if (villager.hasData(VillagerAttachments.MILITIA_DATA.get())) {
-                tickMilitia(villager, level, gameTime, newDay);
-            } else if (villager.hasData(VillagerAttachments.VETERAN_DATA.get())) {
-                tickVeteran(villager, level, gameTime);
             } else if (villager.hasData(VillagerAttachments.BANDIT_DATA.get())) {
                 if (level.getGameTime() % 10 == villager.getId() % 10) {
                     BanditCombat.tick(villager);
                 }
+            } else if (villager.hasData(VillagerAttachments.MILITIA_DATA.get())) {
+                tickMilitia(villager, level, gameTime, newDay);
+            } else if (villager.hasData(VillagerAttachments.VETERAN_DATA.get())) {
+                tickVeteran(villager, level, gameTime);
             } else if (WanderingNecromancerService.isWanderingNecromancer(villager)) {
                 if (level.getGameTime() % 10 == villager.getId() % 10) {
                     WanderingNecromancerCombat.tick(villager);

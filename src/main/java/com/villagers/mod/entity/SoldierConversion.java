@@ -16,10 +16,15 @@ import com.villagers.mod.combat.SoldierRanks;
 import com.villagers.mod.gear.VillagerGearRules;
 import com.villagers.mod.gear.VillagerGearSlot;
 import com.villagers.mod.util.SoldierStructureHelper;
+import com.villagers.mod.threat.BanditService;
+import com.villagers.mod.threat.WanderingNecromancerService;
 
 public class SoldierConversion {
     public static boolean canBecomeSoldier(Villager villager) {
         if (villager == null || villager.getVillagerData().getProfession() != VillagerProfession.NONE) {
+            return false;
+        }
+        if (BanditService.isBandit(villager) || WanderingNecromancerService.isWanderingNecromancer(villager)) {
             return false;
         }
         if (villager.hasData(VillagerAttachments.SOLDIER_DATA.get())) {

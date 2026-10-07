@@ -29,7 +29,7 @@ When we design necromancer chapters (§6+ in discussion plan), avoid mirroring a
 | **Necromancer commitment (Well)** | End of **intro quest**: player chooses **commit**. Order closed. Main quest + skills unlock (TBD). Does **not** block absolution. |
 | **Necromancer life (horcrux)** | **First player horcrux**: absolution **forever** closed; destroying horcruxes does not reopen it (`necromancy.md`). This is the real **no turning back** beat. |
 | **Opt out** | End of **intro quest**: player refuses the binding. **Necromancer questline permanently unavailable.** Order stays open (through citadel claim at least). **Active necromancer** play and **absolution** still work under `necromancy.md`. |
-| **Intro trigger** | When the player has lost **3 permanent hearts** to the wand (`necromancerQuestHeartThreshold`), the **intro NPC** **always** contacts them, **no refuge distance gate**. **TBD:** multiplayer which player gets the scene. |
+| **Intro trigger** | When the player has lost **3 permanent hearts** to the wand (`necromancerQuestHeartThreshold`), the **intro NPC** **always** contacts them, **no refuge distance gate**. **Multiplayer:** any player can hit the storm/intro; **only the player who delivers the chestplate** to the mother gets the **committed** quest chain (author **2026-10-07**). |
 | **Timing** | Main arc emphasis **pre–citadel claim**; crypts, rogues, citadel pair (`endgame.md`, `threats-and-mobs.md`). |
 
 ## Intro arc → commit or opt out
@@ -102,7 +102,7 @@ When we design necromancer chapters (§6+ in discussion plan), avoid mirroring a
 
   Quest journal UI should mirror **counts**, not recipe names (**TBD** exact dialogue).
 
-- **Return with full list:** before any transfer, she warns: **once you hand these over to me, you are committed** (Order closed, `necromancy.md`). Player may **opt out** here (**TBD**: refuse to hand in vs separate dialogue button).
+- **Return with full list:** before any transfer, she warns: **once you hand these over to me, you are committed** (Order closed, `necromancy.md`). **Opt out:** **no** separate button — refuse by **not handing in** ingredients (author **2026-10-07**).
 - **On commit (hand-in):** she **keeps** the ingredients (NPC crafts off-screen). She gives the player the **full god wizard armor set** (all **four** cursed netherite pieces, assembled from the quest chestplate + her craft), the **Seal-Breaker** sword (**one per world** instance, **TBD** steal rules), and **one** **15-minute** draught (`motherGodWizardWardPotion`) that **suppresses the bad parts** of the god wizard set while active: **no self-rot**, **no extra stigma** from the armor (**binding** and combat bonuses **unchanged**: still cannot manually unequip while ward lasts). **One per player per world**; cannot be re-crafted.
 - **Her story (lie):** her **son** is the **evil second brother**: one of the **two bound necromancers** in the citadel (`endgame.md`). She paints **him** as the **victim** to **protect**. She wants the player to **open the seal** (Seal-Breaker on the gate) and **kill the other two**: the **Corrupted King** and the **other bound necromancer** (the **first brother** / “good” one in her telling), **not** her son. Wording like **set my son free** / **do not harm him** (**TBD** dialogue).
 - **Player belief at commit:** spare **son**, eliminate **king + first brother**. True arc: **second brother** is evil; **brother-choice / betrayal** later (`§6` climax **TBD**).
@@ -123,8 +123,8 @@ When we design necromancer chapters (§6+ in discussion plan), avoid mirroring a
 | Intake idea | Current canon / note |
 | --- | --- |
 | Immortal **founding brothers**, End as one land, mothers, dragon egg history | **`old-kingdom-lore.md`**: Hakon, Oswin, Harren; **§3–5 deferred** |
-| Citadel **two bosses** = those brothers | **`endgame.md`**: two **Black Treaty advisers** who poisoned Maldric; **may merge** with brother myth in lore pass |
-| Ending: **citadel → End**, overworld **crater + mega portal** | **Conflicts** post-claim citadel flow, **§6 decides** MVP vs full fantasy (`citadel-claim.md`) |
+| Citadel **two bosses** = those brothers | **Merged (author 2026-10-07):** bound bosses **are** the **founding necromancer brothers** + Black Treaty roles |
+| Ending: **citadel → End**, overworld **crater + mega portal** | **Real ending branch in v1** (spare second brother + agree to move, author **2026-10-07**); coexists with standard claim/heal/Hall path (`citadel-claim.md`) |
 | Sorcerer **classes** (weather, animals, bard, …) | **Superseded** by **quest flutes + items** (§7); all committed share **`necromancy.md`** debits |
 
 ### Already decided (§1 + §7)

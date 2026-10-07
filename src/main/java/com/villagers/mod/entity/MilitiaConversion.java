@@ -8,6 +8,8 @@ import com.villagers.mod.combat.SoldierCombat;
 import com.villagers.mod.combat.MilitiaStats;
 import com.villagers.mod.gear.VillagerGearRules;
 import com.villagers.mod.gear.VillagerGearSlot;
+import com.villagers.mod.threat.BanditService;
+import com.villagers.mod.threat.WanderingNecromancerService;
 
 public final class MilitiaConversion {
     private MilitiaConversion() {
@@ -16,6 +18,9 @@ public final class MilitiaConversion {
     /** Called after kit changes on non-soldiers. */
     public static void onGearUpdated(Villager villager) {
         if (villager.level().isClientSide || villager.hasData(VillagerAttachments.SOLDIER_DATA.get())) {
+            return;
+        }
+        if (BanditService.isBandit(villager) || WanderingNecromancerService.isWanderingNecromancer(villager)) {
             return;
         }
         if (SoldierConversion.canBecomeSoldier(villager)) {
@@ -41,6 +46,9 @@ public final class MilitiaConversion {
 
     public static boolean canBecomeMilitia(Villager villager) {
         if (villager == null || villager.isBaby()) {
+            return false;
+        }
+        if (BanditService.isBandit(villager) || WanderingNecromancerService.isWanderingNecromancer(villager)) {
             return false;
         }
         if (villager.hasData(VillagerAttachments.SOLDIER_DATA.get())) {
@@ -72,6 +80,9 @@ public final class MilitiaConversion {
 
     public static void convertToMilitia(Villager villager) {
         if (villager.level().isClientSide) {
+            return;
+        }
+        if (BanditService.isBandit(villager) || WanderingNecromancerService.isWanderingNecromancer(villager)) {
             return;
         }
         VillagerGearRules.set(villager, VillagerGearSlot.LEGGINGS, ItemStack.EMPTY);

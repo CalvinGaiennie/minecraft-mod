@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Garland fortress NBT — biomes &amp; landscape (author guide) · What an NBT structure actually is · Minecraft Kingdom</title>
+  <link rel="stylesheet" href="../../../assets/site.css" />
+  
+</head>
+<body class="scope-dev">
+  <header class="site-chrome site-header">
+    <div class="header-inner">
+      <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
+    </div>
+  </header>
+  <div class="page-area">
+    <div class="main-nav-bar">
+      <nav class="main-nav" aria-label="Site">
+        <a href="../../../index.html" class="">Marketing</a>
+        <a href="../../index.html" class="active">Dev docs</a>
+      </nav>
+    </div>
+    <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../index.html" class="active">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav></div>
+    <div class="page-shell has-sidebar">
+      <main class="doc-main">
+        <p class="source">Source: <code>docs/notes/garland-nbt-biome-and-terrain.md</code> · Garland fortress NBT — biomes &amp; landscape (author guide)</p><h1>What an NBT structure actually is</h1>
+<ul>
+<li>A <strong>saved box of blocks</strong> (and entities, block entities) from a <strong>Structure Block → Save</strong>.</li>
+<li>Everything is stored <strong>relative to a structure origin</strong> (the structure block’s “corner” / save point when you export).</li>
+<li>It is <strong>not</strong> a biome. It does <strong>not</strong> include world noise, caves, or trees unless <strong>you built those blocks into the box</strong>.</li>
+</ul>
+<p>When the mod pastes it later (<code>StructureTemplateManager</code> → <code>placeInWorld</code>):</p>
+<ul>
+<li>Those blocks are <strong>copied into the world</strong> at the chosen <strong>world position + rotation</strong>.</li>
+<li>The <strong>biome at that X/Z</strong> stays whatever Minecraft already generated (plains, taiga, etc.).</li>
+<li><strong>Biome effects</strong> (grass color, rain, mob spawns) come from the <strong>world</strong>, not from the file.</li>
+</ul>
+<p>So: <strong>your build palette</strong> can match a biome; <strong>world biome</strong> still controls the horizon unless you <strong>overwrite</strong> a wide area inside the NBT or in code before paste.</p>
+<p>---</p>
+      </main>
+      <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="what-an-nbt-structure-actually-is.html" class="active">What an NBT structure actually is</a></li><li><a href="three-ways-to-tie-fortress-to-a-biome-landscape.html">Three ways to tie fortress to “a biome / landscape”</a></li><li><a href="structure-block-workflow-what-you-do-in-game.html">Structure block workflow (what you do in-game)</a></li><li><a href="how-this-connects-to-garland-plot-army-visible-from-tower.html">How this connects to Garland **plot** (army visible from tower)</a></li><li><a href="multi-piece-garland-mountains-fortress.html">Multi-piece Garland (mountains + fortress)</a></li><li><a href="what-we-need-from-you-before-coding-paste.html">What we need from you before coding paste</a></li><li><a href="related-docs.html">Related docs</a></li></ul></aside>
+    </div>
+  </div>
+  <footer class="site-footer">
+    Source: <code>docs/notes/garland-nbt-biome-and-terrain.md</code>
+  </footer>
+  
+</body>
+</html>

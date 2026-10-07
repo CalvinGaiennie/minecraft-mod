@@ -121,5 +121,17 @@
   "dialog.villagers.wandering_necro_ambush_a": "You left me to rot. Now you join them.",
   "dialog.villagers.wandering_necro_ambush_b": "No mess hall, no mercy — only the dead you earned.",
   "dialog.villagers.wandering_necro_village_a": "Your village %s sleeps light. I sent my friends.",
-  "dialog.villagers.wandering_necro_village_b": "%s will remember the night you starved me."
+  "dialog.villagers.wandering_necro_village_b": "%s will remember the night you starved me.",
+  "commands.villagers.locate.usage": "Use: /villagers locate list [kind] | locate <kind> | locate <kind> tp <#> (tab completes #)",
+  "commands.villagers.locate.list_header": "Bandit sites (%1$s), nearest first — click a line to run /tp:",
+  "commands.villagers.locate.list_line": "%1$s. %2$s [%3$s, %4$s, %5$s] (%6$s blocks)",
+  "commands.villagers.locate.list_tp_hint": "Or: /villagers locate <kind> tp <#> (same order as this list; tab completes #)",
+  "commands.villagers.locate.tp_click": "Click to run /tp to this site",
+  "commands.villagers.locate.tp_hint": "Click the line above, or run: %1$s",
+  "commands.villagers.locate.tp_success": "Teleported to #%1$s %2$s at [%3$s, %4$s, %5$s]",
+  "commands.villagers.locate.tp_bad_index": "No site #%1$s (this filter has %2$s site(s); run locate list first)",
+  "commands.villagers.locate.tp_player_only": "Only players can teleport to bandit sites",
+  "commands.villagers.locate.overworld_only": "Bandit sites exist only in the Overworld.",
+  "commands.villagers.locate.not_found": "No matching bandit site in this world (try a new world or check server logs for placement failures).",
+  "commands.villagers.locate.success": "The nearest %1$s is at [%2$s, %3$s, %4$s] (%5$s blocks away). Fly there — chunks must load for the camp to appear."
 }
