@@ -55,6 +55,17 @@ Raid size is random, not tied to the village's defenses:
 - **Bandits and swarms** are enemies and fight each other.
 - **Bandit camps:** small structures that generate in the world like pillager outposts, each with 3-5 bandits and a leader. Every world has some bands from the start.
 
+### Authored bandit kings (Armies mod)
+
+**Separate from Citadel’s ten relic fortresses** (`endgame.md`, Citadel mod only). Armies adds **authored** bandit bosses with **fixed names** and **bases** (outpost-scale, defenders inside, same broad feel as pillager outposts). Payoff is **loot** and **quest progression** (intel chain **TBD** with the Armies bandit-king questline). Roster, site count, and discovery **TBD**; not the same kings as the six relic fortress lords unless lore explicitly links them.
+
+**Help/hinder bandits** (truce, alliance, bribes): **possible future**; not MVP.
+
+### Enlistment and threats
+
+- **Opt-out** (`/villagers optout`): skips **player-targeted** pressure (e.g. new-moon raids near you, roving swarms rolled on you, **wandering necromancer** grudge strikes on the ex-owner).
+- **Structures and world sites stay dangerous:** bandit camps, hideouts, authored king bases, and Citadel fortresses (when loaded) do **not** respect opt-out.
+
 ### Wandering necromancers (deserters, §9)
 
 - **Source:** **5%** of soldier deserts (`deserterOutcomeNecromancer`, not player necromancers; no Order/wand intro). **Orphan-raised** use the **same 5%**; they hit desert **more often** via hunger/morale multiplier (`soldiers-and-villages.md` § Orphanages).

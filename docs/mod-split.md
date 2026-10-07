@@ -24,7 +24,7 @@ See `integration.md` for cross-mod hooks (no third API jar required at first).
 
 ## Soldier mod (default home for…)
 
-Village military loop, mess/tax/recruiters/supply, defense blocks, horns/camps/campaigns/blockades, **wanted posters** (planned, see `war-and-defense.md`), training dummy, animal farmers, village **map** (muster roll), enlisted threats (raids, swarms, bandits), warlords (large kingdom raids, soldier-only feature).
+Village military loop, mess/tax/recruiters/supply, defense blocks, horns/camps/campaigns/blockades, **wanted posters** (planned, see `war-and-defense.md`), training dummy, animal farmers, village **map** (muster roll), enlisted threats (raids, swarms, bandits), **authored bandit kings** (Armies-only story sites, `threats-and-mobs.md`). **No** ten relic fortresses (Citadel mod). **Warlords:** TBD (`endgame.md`).
 
 **Cut from soldier plan (not deferred):** full siege assault kit (sappers, ladders, boat/bridge plans, laced rations as MVP scope).
 
@@ -32,9 +32,9 @@ Village military loop, mess/tax/recruiters/supply, defense blocks, horns/camps/c
 
 ## Necromancer / endgame mod
 
-Wand, hood/robe, minions, crypts, phylactery, bone whistle, mob spawner crafting, citadel + throne rules (`citadel-claim.md`), 17 refuges, player acolyte questline (`acolyte-path.md`), necromancer questline TBD (`necromancer-path.md`), 10 **bandit fortresses** (structures + relic rooms), relics/Annals/compass, acolytes, Well, Roost, King’s Horn, golden age **owner** side.
+Wand, hood/robe, minions, crypts, phylactery, bone whistle, mob spawner crafting, citadel + throne rules (`citadel-claim.md`), 17 refuges, player acolyte questline (`acolyte-path.md`), necromancer questline TBD (`necromancer-path.md`), **10 bandit fortresses** (Citadel-only structures, named kings, six with relics), relics/Annals/compass, acolytes, Well, Roost, King’s Horn, golden age **owner** side.
 
-**Bandits:** roaming system = soldier. Fortress garrison = soldier bandit entity if loaded; else necro fallback mob in fortress only.
+**Bandits:** roaming deserter bands = **Armies**. **Fortress** sites and relic rooms = **Citadel**. With **both** mods, fortress defenders use soldier bandit entities when possible; Citadel-only fallback mobs **TBD**.
 
 **Cut:** kingdom table block, **blessed incense**, separate **kingdom map** item (use Annals, relic compass, citadel war-room burial maps instead).
 

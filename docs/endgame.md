@@ -1,8 +1,8 @@
 # Endgame
 
-Details still to decide: bandit fortresses, kingdom titles, warlords, monuments, and the Black Citadel with its acolytes and the Blighted Tree. The lore behind it is in the Old kingdom lore part.
+Details still to decide: kingdom titles, warlords (author reviewing), monuments, and fine points of the Black Citadel. The lore behind it is in the Old kingdom lore part.
 
-- **Bandit fortresses:** rare, large fortified structures ruled by a Bandit King over several bands, with walls and a treasury. Taking one is a full campaign: camp, blockade, siege ladders, sappers, and assault. Ten fortresses per world, placed from saved world data like the refuges; six of them each hold one king's relic, and the other four are ordinary bandit fortresses with no relic. They sit in remote, hard-to-reach terrain at least 2,500 blocks from spawn and never appear on village maps, so players find them with the Royal Annals hints, the burial maps, or a relic compass. Only the six relic fortresses are marked by those clues; the other four have the same garrison and a normal treasury, and the relic compass ignores them. They're well defended: a Bandit King and 3 bands (about 30 bandits, 12 of them archers on the walls), with the strongest garrisons guarding the weapon relics (proposed).
+- **Bandit fortresses (Citadel mod only):** **Ten** fixed structures per world, placed from SavedData like refuges. **Do not generate** if only **Minecraft Kingdom: Armies** is installed. Scale and feel: a **defended base** (pillager-outpost class), **not** a full siege-campaign fortress (no ladders/sappers requirement). Clear anytime after worldgen; **not** gated on the Ender Dragon except where relic lore says otherwise. Each fortress has a **named Bandit King**; kings tied to a **relic** (six forts) appear in **lore books** (`old-kingdom-lore.md`, Annals, treatises). Non-relic forts still have named kings and **treasury loot**. Discovery: Royal Annals hints, burial maps, relic compass when Citadel is loaded (Armies-only worlds have **no** fortresses, so no fortress discovery loop). Garrison strength **TBD** (proposed: king + defenders comparable to a tough outpost, tune in playtest).
 - **Kingdom titles:** a player's title depends on how many villages he owns. A village only counts while at least one of his soldiers there is alive. Perks are a chat title, extra recruiter slots, and better odds on rare tax items (gold, diamonds, and netherite) only.
 
 | Title | Villages (proposed) | Extra recruiter slots (proposed) | Rare tax item odds (proposed) |
@@ -12,7 +12,7 @@ Details still to decide: bandit fortresses, kingdom titles, warlords, monuments,
 | Duke | 6 | +2 | +20% |
 | King | 10 | +3 | +30% |
 
-- **Warlords:** once a kingdom reaches a certain size, a Warlord raid arrives every 4 to 8 new moon cycles (random within that range), bringing its own siege equipment and growing with the player's title.
+- **Warlords (TBD, author reviewing):** draft idea was a **named enemy general** who raids **large kingdoms** on a new-moon timer with extra siege gear, scaling with title (Lord→King). **Not decided** whether this ships; if cut, kingdom pressure stays raids + swarms + bandits + Armies-authored kings (`threats-and-mobs.md`).
 - **Monuments:** when a hero or Legend dies, he drops a service record, a paper with his name and stats. Players can craft and place statues in several sizes at any time, but they look rough and unfinished until a service record is applied. Then the statue takes on that soldier's look, name, rank, and kill count. With **Armies** at the citadel, use **scattered plinths** in courts and yards (`citadel-layout.md`); without Armies, monuments stay kingdom-wide only.
 
 ## The Black Citadel
