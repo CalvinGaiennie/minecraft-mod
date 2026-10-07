@@ -60,10 +60,18 @@
 | 2026-10-06 | **6 / path** | Necromancer path **design philosophy:** opposite acolyte — decision + reward/**weakness** together, not grind-then-reward (`necromancer-path.md`). |
 | 2026-10-06 | **§10** (partial) | Layout + **assault defensive mode**: one main entrance, closable inner gate, trap/narrow corridors, MC hazards (web/water/ice/lava); spawners + bosses; spawner mix incl. ravagers (few). Mockup for counts/triggers. **`citadel-layout.md`**, **`citadel-defenders.md`**. |
 | 2026-10-06 | **§7** (partial) | Progression = **quest items + sacrifices**. **Flutes/pipes** (havoc OK, **`necromancerWorldHavocEnabled`**). Horcrux: **relics + kill** (acolyte, **player**, or **defined necromancer roster TBD**). Flute lockout on horcrux **deferred**. Hunt/steal/destroy power items. **`necromancer-path.md`**, **`necromancy.md`**, **`config-and-recipes.md`**. |
-| 2026-10-06 | **§7** (horcrux) | **Hotbar** shard + power item → **kill** valid target → horcrux; **−1 heart** each; **many** jars heart-limited; **chest-stored**. **Immune** poison/harm pots; pseudo-death 3m no clicks (**teleport TBD**). **Destroy jar** = vanilla **hard** hits (ghast, wither, **TBD** whitelist). Binding = no unequip, not vanish on death. Chunk hints **TBD**. |
+| 2026-10-06 | **§7** (horcrux) | **Hotbar** shard + power item → **kill** valid target → horcrux; **−1 heart** each; **many** horcruxes heart-limited; **chest-stored**. **Immune** poison/harm pots; pseudo-death 3m no clicks (**teleport TBD**). **Destroy horcrux item** = vanilla **hard** hits (ghast, wither, **TBD** whitelist). Binding = no unequip, not vanish on death. Chunk hints **TBD**. |
 | 2026-10-06 | **§7** (wild lich) | **Subset** of crypt rogues have **horcrux in chest** — on-ramp for **destroy** (and lore for **create**). Count/placement **TBD**. **`necromancy.md`**, **`threats-and-mobs.md`**, **`necromancer-path.md`**. |
 | 2026-10-06 | **§7** | Pseudo-death: **no teleport** on trigger. | `necromancer-path.md`, `necromancy.md` |
 | 2026-10-06 | **§6** | **Started** — main arc outline + open questions in `necromancer-path.md`; lore brothers **§3–5** still deferred. | `necromancer-path.md`, this plan |
+| 2026-10-06 | **§6** (intro) | **Largest town ~350b**; **great road through town** (**spawners**). Basement gate; **horcrux 4–8 chunks** away. Tombstone **She smote him.** Well off-road copse. | `necromancer-path.md`, `endgame.md`, `config-and-recipes.md` |
+| 2026-10-06 | **§6** (intro flow) | **Horcrux destroy → kill rogue → plate → Well.** No plate = chastise. Plate = **follow-up quest** → **commit/opt out** (not at Well). | `necromancer-path.md` |
+| 2026-10-06 | **§6** (commit) | Takes plate; ingredient list; hand-in = **commit** → **plate + Seal-Breaker**. **Son = evil second brother** (bound). Lie: **open seal**, kill **king + first brother**, **spare son**. | `necromancer-path.md` |
+| 2026-10-06 | **§6** (End / mother / stall / tree) | End spell **teleports** player to End immediately. **Mother** only if **son killed** — spawns **at player**, dialogue, fight; **wrath** = kills **first** then you. **Stall** = brother **swarms** from citadel. **7-day** sit timer from **king death** only. **Blight Heart:** **mine under tree**; Corwin says check **under tree**. | `necromancer-path.md`, `endgame.md`, `citadel-claim.md` |
+| 2026-10-06 | **§9** (partial) | **No** War Leader **1000 candles**. **Orphanages:** largest vanilla village **style**; **top 10%** villages by size. **Deserter → wandering necromancer:** ambush **player** with swarm **or** hit **one of their villages**. | `soldiers-and-villages.md`, `threats-and-mobs.md`, `acolyte-path.md`, `config-and-recipes.md` |
+| 2026-10-06 | **§9** (desert + orphans) | Soldier desert outcomes **50%** villager / **45%** bandit / **5%** wandering necro. Orphans: **+4 HP**, **+15%** dmg, **1.5×** hunger/morale desert only. | `soldiers-and-villages.md`, `config-and-recipes.md`, `threats-and-mobs.md` |
+| 2026-10-06 | **§9** (orphan + wander) | Orphanage: vanilla gen only, **≥21 beds** at gen. Wandering necro: **ex-owner**, **50/50** ambush/village, strike every **2** days, **permanent** death, **shard** loot. | same + `threats-and-mobs.md` |
+| 2026-10-06 | **§7** (partial) | **8** End tyrants on **outer End** (not dragon island); home-bound aggro; **6** use **flutes** in fight; rogue sites = cave crypt / surface crypt / taken village / dark tower; god wizard **full set from mother at commit**; rot **1 heart / 15s**; flute stats closed. | `necromancer-path.md`, `endgame.md`, `config-and-recipes.md` |
 
 ---
 
@@ -71,7 +79,7 @@
 
 **Deferred for later:** §2, §3, §4, §5, §6, §8.
 
-**Active sequence:** **§6** (main necromancer arc) → **§9** → **§7** leftovers, then **§10** / deferred lore **§2–5**.
+**Active sequence:** **§9** → **§7** leftovers, then **§10** / deferred lore **§2–5**. (**§6** author direction merged.)
 
 ---
 
@@ -79,4 +87,4 @@
 
 **§10:** author decisions merged; close remaining **TBD** rows in `citadel-layout.md` when answered.
 
-**Active:** **§6** main quest arc (`necromancer-path.md` **Main quest arc**). **§10** paused. **§8 + Order flow** decided in docs.
+**Active:** **§7** (necromancer quest items, flutes, god wizard armor, horcrux). **§9** closed. **§10** next after §7.

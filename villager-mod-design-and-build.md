@@ -1390,7 +1390,7 @@ The Black Citadel was the seat of a kingdom of twelve kings, who ruled one after
 | Garrick Kingsmaul | The Kingsmaul (mace) | Hunted down and killed the bandit king, then built the outer wall around the tree. |
 | Marek Tidespear | Tidespear (trident) | Sank the drowned fleet and took the ocean monument from its elder guardians. |
 | Valen Dawnbreaker | Dawnbreaker (sword) | Killed the villager-made Wither and lit the citadel beacon from its nether star in a tower on Garrick's wall; Corwin later built the keep around it. |
-| Corwin the Good | Stormstriders (boots) | Hunted the phantoms in their mountain roosts, caged them in the Roost atop the inner keep he built, and sealed the Warden. |
+| Corwin the Good | Stormstriders (boots) | Hunted the phantoms in their mountain roosts, caged them in the Roost atop the inner keep he built, and drove a **Warden** that was **harrying villagers** back to its **ancient city** (not imprisoned in the citadel). |
 | Torvald of the Long March | Greaves of the Long March (leggings) | Laid the Great Road, marched through the Nether and returned with the secret of netherite, and killed the Evoker Lord to end the illager war. |
 | Aldric the Founder | Ironroot Helm (helmet) | Made the walled hill a kingdom, wrote the first charter, and broke the Great Swarm, the last straw that won the villagers over. |
 | Oswin Oathkeeper | Oathkeeper (shield) | Killed a famous necromancer, starting the feud, and kept Aldric's pact by driving the world's scariest necromancer away from his villagers. |

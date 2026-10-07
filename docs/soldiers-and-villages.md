@@ -8,7 +8,7 @@ A villager's job and setup decide whether a weapon makes them a soldier or a mil
 |---|---|---|---|
 | Soldier | Villager with no trade is given a weapon, chestplate, and helmet, and has a free post bed and a stocked mess station | Full armor | Unequipping can turn them into a trader, but a trader can never become a soldier again, unless he served as a soldier before he ever traded (see Veterans) |
 | Militiaman | Trader or unemployed villager is given a weapon. Unemployed villagers who meet every soldier requirement become soldiers instead | Helmet, chestplate, and boots; no leggings or shields | Can't trade while in the militia; sometimes run from enemies |
-| Bandit | Soldier deserts (50% chance to keep their items) | Whatever they kept | See Threats |
+| Bandit | Soldier deserts (**45%** outcome — keeps gear) | Whatever they kept | See Threats |
 | Troubled youth | Born from bandit-occupied villages (80% chance) | n/a | Can never trade; can become soldiers or bandits (see Bandits) |
 
 - Villagers with a trade cannot become soldiers, unless they served as soldiers before they ever traded.
@@ -65,6 +65,23 @@ Fleeing militia drop their weapon, which turns them back into normal villagers u
 - **Members:** villagers whose bed or job block is inside the area belong to the village, including soldiers and militia. Members decide the village's size. Soldiers and militia away on campaign still count as members, since their beds stay reserved at home.
 - **No overlap:** a player can't place a mess station or surveyor's marker inside another player's village area unless he's that owner's co-owner, in which case it counts as the owner's. When a village grows into another's area, its growth stops at the border, and land both could claim belongs to the older village.
 - **Natural villages:** a natural village is a vanilla village bell with at least 3 villagers within 48 blocks and no mess station; its area is 48 blocks around the bell, and it becomes a normal mod village the moment someone claims it with a mess station and a soldier. Natural villages spawn with 2 militiamen (more near spawn while the Black Citadel stands), traders armed for defense. Each gets one random armor piece (helmet, chestplate, or boots; leather, chainmail, or iron) and an iron sword or iron axe. Each has a 25% chance to carry a bow and 16 arrows instead.
+
+### Orphanages (§9 — author direction)
+
+- **Structure style:** orphanage prefab uses the **same village style as vanilla’s largest standard village type** (largest jigsaw / footprint class at implementation — one consistent biome look for the building).
+- **Which villages get one:** **only vanilla world-gen villages** (POI cluster at gen). **Not** mess-only player towns or authored sites (intro town, citadel, etc.). At **world gen** (one-time scan on first load): graft orphanage if cluster has **more than 20 beds** (`orphanageMinBedCount`, default **21** — i.e. **≥21** beds). Large plains/taiga villages often reach that; tune **down** (e.g. **16–18**) in config if a seed has too few. **No** rescan if the village grows later.
+- **Who counts as “orphan-raised”:** any villager whose **home bed** is in the orphanage structure (spawned there or assigned there). Persistent world flag on the villager.
+- **Why they skew “great” (author — §9):** no extra rolls at birth. **Padded combat stats** help orphan-raised **soldiers / militia** survive and earn **real kills** toward Hero / Legend. **Higher desertion odds** push more of them onto the **bandit** / **wandering necromancer** paths (`threats-and-mobs.md`). **Bandit leaders** still = **most kills** in the band — padded stats + more fights before desert can still produce scary leaders.
+
+**Orphan-raised soldiers / militia (while flag active):**
+
+| Boost | Default (config) | Notes |
+| --- | --- | --- |
+| **Max HP** | **+4** flat on top of rank HP (`orphanSoldierBonusHealth`) | Applies at enlist; stacks with Seasoned / Hero / Legend table |
+| **Damage** | **+15%** melee and arrows (`orphanSoldierBonusDamage`) | Same idea as rank bonuses — more likely to secure killing blows |
+| **Desertion** | Hunger / morale desert **probability × 1.5** (`orphanDesertionMultiplier`) | **Same 50 / 45 / 5 outcome split** as everyone when they actually desert. **Does not** bypass rank rules (Seasoned+ still immune to hunger/home desert; Heroes/Legends still immune to morale desert). |
+
+Flag stays on the villager for life (discharge, trader stint, bandit — **TBD** if bandits keep stat padding when re-captured).
 - **Strangers:** by default, soldiers leave non-allied players alone unless they're wanted, steal from the tax box, or are a charge horn target. Servers can turn on an option for soldiers to attack any non-ally on sight.
 - **Village protection:** inside a claimed village's area, from bedrock to the sky, players who aren't the owner or his allies break blocks more slowly. Protection depends on how many of the owner's soldiers are actually inside the village area at the time, so an army away on campaign leaves its home softer: 0 soldiers, normal speed; 1-9, 3 times slower; 10-24, 5 times slower; 25 or more, 10 times slower. This covers walls, gates, and the ground under the walls. Explosions caused by non-allied players do no block damage inside a claimed village.
 - **Kingdom:** all the villages a player owns together make up his kingdom. Kingdom titles count them, and kingdom-wide effects (like the golden age) apply to all of them.
@@ -162,7 +179,7 @@ Soldiers desert when they go hungry, lose their home, or see their squad wiped o
 - **Broken morale:** if more than half of a squad dies in one fight, each survivor has a 10% chance to desert. Seasoned soldiers have 5%; heroes and Legends never desert from morale. This doesn't apply within 128 blocks of the soldier's own post bed.
 - **Ranked soldiers:** seasoned soldiers, heroes, and Legends never get hungry or desert from hunger or homelessness.
 - **Warnings:** hungry or homeless soldiers show angry-villager particles. The player gets a chat message when a soldier becomes hungry or loses his bed, and again the day before he would be forced to desert.
-- **What happens:** 50% drop their gear, walk to the nearest other village, and become regular unemployed villagers there. 50% keep their gear and become bandits, joining the nearest band or starting a new one.
+- **What happens (one roll per desert):** **50%** drop gear, walk to the nearest other village, and become **regular unemployed villagers** there. **45%** **keep gear** and become **bandits** (nearest band or new band). **5%** **keep gear** and become **wandering necromancers** (`threats-and-mobs.md`). Config: `deserterOutcomeVillager` / `deserterOutcomeBandit` / `deserterOutcomeNecromancer` (defaults **0.50 / 0.45 / 0.05**). **Orphan-raised:** same outcome split; **`orphanDesertionMultiplier`** applies only to **hunger / morale** desert **triggers** (§ Orphanages).
 - **Slots open up:** a deserter frees his post bed and recruit slot, so the recruiter can replace him.
 - **Honorable discharge:** the owner (or a co-owner) can take a soldier's weapon to discharge him. He drops the rest of his gear and becomes an unemployed villager, freeing his post bed and recruit slot. He keeps his kill count, so if he's re-enlisted later he comes back at his old rank. Nobody else can discharge another player's soldiers.
 

@@ -19,7 +19,9 @@ NPC acolytes remain the fixed **17** veterans; see **`endgame.md`** for refuges,
 | **Opt out** at end of intro | **Stays open** (intended through **citadel claim** at minimum; post-claim Order role TBD) | **Permanently closed** — no story perks/skills track |
 | **Committed** at end of intro | **Closed** — no Maelor lock, brothers refuse (dialogue TBD) | Open through main arc |
 
-**Commit** is the same beat as **absolution becomes impossible** (`necromancy.md`). **Opt out** does **not** clear necromancer mechanics — you can stay an active necromancer, absolve, and still walk the Order; you only forfeit the **questline**.
+**Commit** closes the Order only. **Creating a horcrux** makes **absolution impossible** (`necromancy.md`). **Opt out** does **not** clear necromancer mechanics — you can stay an active necromancer, absolve, and still walk the Order; you only forfeit the **questline**.
+
+**Active necromancers** cannot use **citadel Order stations** (minor ask or major block use) and cannot gain **Well of Kings** XP or **Kingstree** heal aura (`endgame.md`).
 
 **After citadel claim:** **no new Order progress** — no basic training, light/hard specialty, Maelor lock, or reunite quest for players who were not already a **locked acolyte** before claim. Opt-out necromancers who waited still **lose** the Order path at claim if they never locked.
 
@@ -32,7 +34,7 @@ Brothers **recognize** necromancy on sight. While you carry **`necromancy.md` ne
 - No **basic training**, specialty quests, Maelor chain, **escort handoff**, or Annals-open dialogue until the kit is **gone** (stash away from refuge, absolve and crumble wand, etc.).
 - Acolyte **warns** you: lose the wand and robes or leave. Repeated tries or refusing to leave → **chase off** (hostile or drive away — implementation TBD; should not permakill brothers).
 
-So dabbling and Order **can** coexist, but **not in the same visit** — drop necromancer gear before Order business. This also keeps the **necromancer intro quest** from firing at a refuge (see `necromancer-path.md`: intro only when **≥128** blocks from any refuge acolyte).
+So dabbling and Order **can** coexist, but **not in the same visit** — drop necromancer gear before Order business. The **necromancer intro** can still fire **at a refuge**; if an acolyte is **in sight** during the **intro lightning storm**, the mother’s bolt **kills** him and leaves a **tombstone** inscribed **“She smote him.”** (`necromancer-path.md`). Not the Smite enchantment. That brother is **lost** for the world.
 
 ## Four specialties
 
@@ -294,7 +296,6 @@ Separate from hard lock: hand in **categories** Maelor requests (intake: **every
 | `acolyteArcaneHardProofs` | Fall, Looting, etc. |
 | `acolyteArcaneFallMinBlocks` | 50 (tune toward max fall) |
 | `acolyteWarLeaderHardMobList` | Hostiles requiring 100 kills each |
-| `acolyteWarLeaderCandleMastery` | 1000 optional; 0 disables |
 
 ## Player specialty perks
 
@@ -397,4 +398,3 @@ See **`compatibility-planned-mods.md`**.
 | `acolyteBrothersMinimum` | TBD | Minimum brothers for Maelor’s quest to complete |
 | `acolyteBrothersMaximum` | 16 | Brothers countable toward bonus (excludes Maelor) |
 | `acolyteNecromancerGearBlockRadius` | 32 | No Order dialogue if player has wand/hood/robe within this range of a refuge acolyte |
-| `acolyteWarLeaderCandleMastery` | 1000 | Optional War Leader candle mastery (0 = disable) |

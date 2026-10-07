@@ -10,7 +10,7 @@ The Black Citadel was the seat of a kingdom of twelve kings, who ruled one after
 | Garrick Kingsmaul | The Kingsmaul (mace) | Hunted down and killed the bandit king, then built the outer wall around the tree. |
 | Marek Tidespear | Tidespear (trident) | Sank the drowned fleet and took the ocean monument from its elder guardians. |
 | Valen Dawnbreaker | Dawnbreaker (sword) | Killed the villager-made Wither and lit the citadel beacon from its nether star in a tower on Garrick's wall; Corwin later built the keep around it. |
-| Corwin the Good | Stormstriders (boots) | Hunted the phantoms in their mountain roosts, caged them in the Roost atop the inner keep he built, and sealed the Warden. |
+| Corwin the Good | Stormstriders (boots) | Hunted the phantoms in their mountain roosts, caged them in the Roost atop the inner keep he built, and drove a **Warden** that was **harrying villagers** back to its **ancient city** (not imprisoned in the citadel). |
 | Torvald of the Long March | Greaves of the Long March (leggings) | Laid the Great Road, marched through the Nether and returned with the secret of netherite, and killed the Evoker Lord to end the illager war. |
 | Aldric the Founder | Ironroot Helm (helmet) | Made the walled hill a kingdom, wrote the first charter, and broke the Great Swarm, the last straw that won the villagers over. |
 | Oswin Oathkeeper | Oathkeeper (shield) | Killed a famous necromancer, starting the feud, and kept Aldric's pact by driving the world's scariest necromancer away from his villagers. |
@@ -41,6 +41,14 @@ The kings in the middle, from Marek to Torvald, had a spotty relationship with t
 **Oswin and Hakon:** Oswin had adopted the orphan Hakon as his hunting squire and was starting to treat him as heir, which threatened his friend Lord Harren, next in line for the throne. When the scariest necromancer came for the tree's first sapling, Harren hid and refused to cover Oswin. Oswin died, the sapling jumped out of the ground into Hakon's hand and became his bow, and Harren took the shield from the dirt. Hakon was one of the few witnesses. When Hakon came back from the End and confronted him, the shield wouldn't protect a coward from its own twig arrows. Harren is not one of the twelve.
 
 **The fall:** two of the necromancer's goons returned from the End in disguise and beguiled Thornwald's son Maldric, ending the line of good kings. He signed the Black Treaty on their advice, the tree was poisoned and became the Blighted Tree, and after Maldric died the necromancers raised him and bound the citadel's seal to the dragon. Those **same two** still hold the citadel as **named boss necromancers** until players kill them in the Corrupted King fight — **names TBD**, story roles in `necromancer-path.md` (`endgame.md`).
+
+## The Blight Heart (lore — **draft, user direction**)
+
+The tree was poisoned **on purpose** — part of the **second brother's** plan after the fall (`necromancer-path.md`, intake notes). **Not** an accident and **not** the Ender Dragon's heart.
+
+What the Order calls the **Blight Heart** is a **Warden heart** filled with **distilled Wither essence** and **hidden under the Kingstree** (**where the heart came from — TBD**).
+
+**Cure:** **Spectral Corwin** gives the recipe page when **Stormstriders** are placed on his statue; craft at **Dragon's Well**; **only** the cure affects the Heart. Healer gets title **Savior of the Tree** (`endgame.md`, `citadel-claim.md`).
 
 ## How the god tree made each relic
 

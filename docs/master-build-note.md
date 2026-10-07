@@ -131,7 +131,7 @@ The stages match the build order in the Overview part. Test each before starting
 **Citadel flow, in order:**
 1. Kill the Ender Dragon, craft the Seal-Breaker, and use it on the gate.
 2. Defeat the garrison, the necromancers, and the Corrupted King. Whoever then places a mess station and a soldier claims it.
-3. Healing the tree (kill the Blight Heart, then 7 in-game days) reforms the barrier under the owner's control and wakes the stations, Well of Kings, Roost, safe road, and training grounds.
+3. Healing the tree (cure on the Blight Heart, then 7 in-game days) reforms the barrier under the owner's control and wakes the stations, Well of Kings, Roost, safe road, and training grounds.
 4. Restoring the Hall (all 12 relics, the Crown last) raises the guardians and gives the King's Horn, High King title, the raid drop, and the golden age.
 
 ### Stage 8: Lore

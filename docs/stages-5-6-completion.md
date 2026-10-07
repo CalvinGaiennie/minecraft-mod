@@ -5,7 +5,7 @@
 - **Enlisted players:** placing a mess station enlists you; `/villagers optout` and `/villagers enlist`. Threats skip opted-out players.
 - **New moon raids:** dark-moon window (3 nights per 28-day cycle), horn warning, pillager push toward nearby claimed village when enlisted player is present at night.
 - **Swarms:** 5% nightly roll per enlisted player (max 2 active swarms nearby); zombie/skeleton groups march on stored target.
-- **Bandits:** 50% of deserters become bandits (label + attack nearby soldiers).
+- **Bandits:** 45% of deserters become bandits (50% villager reset, 5% wandering necro — see `soldiers-and-villages.md`).
 
 **Deferred to later polish:** raid dawn loot/leave, swarm merge caps, bandit camps/caves/worldgen, troubled youth, full vanilla mob rebalance.
 

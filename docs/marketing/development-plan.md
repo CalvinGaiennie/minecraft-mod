@@ -54,7 +54,7 @@ flowchart TB
     H -->|Yes| INTRO[Intro NPC arc]
     INTRO --> CH{Final choice}
     CH -->|Opt out| OPT[Necro questline CLOSED forever<br/>Order stays OPEN<br/>Absolution still OK]
-    CH -->|Commit| COM[Order CLOSED forever<br/>Absolution CLOSED<br/>Necro main arc OPEN]
+    CH -->|Commit| COM[Order CLOSED forever<br/>Necro main arc OPEN]
   end
 
   PRE --> CLAIM1{Claim throne<br/>before Order lock?}
@@ -75,7 +75,7 @@ flowchart TB
     T -->|Active necromancer<br/>healthy Kingstree| DEATH[Instant death — cannot own]
     T -->|Active necromancer<br/>blighted tree| BLOCK[Blocked — must absolve first]
     T -->|Absolved / never active| OWN[Can become owner<br/>restoration + perks]
-    T -->|Committed — no absolution| DEATH
+    T -->|Horcrux created — no absolution| DEATH
     WAND[Owner uses wand again] --> FORFEIT[Forfeit claim + 7d window<br/>Permanent citadel ownership ban]
   end
 
@@ -99,12 +99,12 @@ flowchart TB
 | You do this | Order acolyte path | Necromancer questline | Throne ownership |
 | --- | --- | --- | --- |
 | **Opt out** at intro | Open until **claim** (must **lock** pre-claim for full perks) | **Closed** | OK if **not active** necromancer on sit (`citadel-claim.md`) |
-| **Commit** at intro | **Closed** | Open (§6 main arc) | **Blocked** while **active** necromancer — commit removes absolution → effectively **no throne** unless rules change |
+| **Commit** at intro | **Closed** | Open (§6 main arc) | **Blocked** while **active** necromancer; **blighted** tree → absolve if **no horcrux** yet |
 | **Claim citadel** before Maelor lock | **Closed** for new progress | Intro may still trigger if 3 hearts; arc **pre-claim** | Owner perks if sit succeeds |
 | **Locked acolyte** + absolved / non-active necro | Perks + stations after claim | Only if committed before commit lock | **Yes** |
 | **Wand forfeit** as owner | — | — | **Permanent ban** from owning citadel |
 
-**Wild cards:** horcrux pseudo-death (3 min, **no teleport**), relic ban on active necromancers, **horcrux compass** (strong early, noisy after map exploration). Rogue sites ~**half** outpost density; **~4%** wild lich horcruxes.
+**Wild cards:** horcrux pseudo-death (3 min, **no teleport**), relic ban on active necromancers, **horcrux compass** (**no range cap**, always points at nearest horcrux chunk including your own — hunter tool). Rogue sites ~**half** outpost density; **~4%** wild lich horcruxes.
 
 ## How we plan (plans to plan the plans) {#process}
 
@@ -117,7 +117,7 @@ Design is **author-owned**. Implementation follows written docs in `docs/`, not 
 4. **No skip ahead** on canon until the current section is merged (unless you explicitly defer a block, e.g. lore §2–6).
 5. **This section** — high-level goals and process; detail stays in markdown for implementers.
 
-**Status snapshot (2026-10-06):** Order flow + feat gates (§8) merged. **§6 necromancer main arc** active (`necromancer-path.md`). **§7** horcrux/flutes/rogues/compass largely decided; tuning + flute placements TBD. **§10 citadel layout** documented; mockup TBDs paused. Lore §2–6 deferred.
+**Status snapshot (2026-10-06):** Order flow + feat gates (§8) merged. **§6 necromancer main arc** direction merged (`necromancer-path.md`). **§7** closed enough to implement: horcrux hunt loop, compass, **flute charges** (dust + blaze + ender pearl → charge; **1** play per refill for non-commit, **3** for committed necromancers), **8** End tyrants (**512–768** blocks from dragon island). **§10 citadel layout** next — mockup TBDs in `citadel-layout.md`. Lore §2–5 deferred.
 :::
 
 ## Design progress (canon docs) {#progress}
@@ -127,11 +127,13 @@ Design is **author-owned**. Implementation follows written docs in `docs/`, not 
 
 Written to `docs/necromancer-path.md`, `docs/necromancy.md`, `docs/config-and-recipes.md`:
 
-- Progression = **unique quest items + sacrifices** (not Order feat grids). **Flutes** = one per world, relic indestructibility, consumed for horcrux / crafts.
-- **Horcrux:** shard + flute, god-wizard set, or king relic + soul-list kill; chest storage; pseudo-death **without teleport**; destroy at **Dragon’s Well** + whitelist.
-- **Rogues:** ~**half** pillager-outpost density; **80%** surface structures; **~4%** wild lich horcrux; shards from all rogues.
-- **Horcrux compass:** shapeless — compass, phylactery shard, soul sand, wither rose; points to **nearest horcrux chunk**; best **early**, weaker after exploration.
-- **Beast Dirge:** 50% of eligible mobs in loaded chunks take 4–12 hearts blight; flutes never hurt the player.
+- Progression = **unique quest items + sacrifices** (not Order feat grids). **Flutes** = **six types**, **one per world** on **End flute tyrants**; relic indestructibility; consumed for **horcrux** rituals only.
+- **Flute use:** craft **flute charge** (glowstone dust + blaze powder + ender pearl), then shapeless **flute + charge** → full bank. **Non-commit:** **1** play per refill; **committed necromancer:** **3** plays per refill. Looted flutes start **empty**.
+- **Horcrux:** shard + power item (flute, god-wizard set, or king relic) + soul-list kill (**player**, **acolyte**, **End tyrant**); chest storage; environmental **ping** (owner sees it too); pseudo-death **without teleport**; destroy at **Dragon’s Well** + whitelist.
+- **Rogues:** ~**half** pillager-outpost density; sites = cave crypt / surface crypt / dark tower / **taken village** (villagers **board up** in houses); **~4%** wild lich horcrux; shards from all rogues.
+- **Horcrux compass:** shapeless — compass, phylactery shard, soul sand, wither rose; **unlimited range**; **never** hides your horcruxes; points to **nearest horcrux chunk** (noisy after map exploration).
+- **End tyrants:** **8** bosses on **outer End** (not dragon island), **512–768** blocks from island center; **6** drop flutes and use them in fight (**60s** boss cooldown).
+- **Beast Dirge:** 50% of eligible animals in loaded chunks take 4–12 hearts blight; flutes never hurt the player.
 
 ### Necromancer path — story (§6, in discussion)
 
@@ -155,7 +157,8 @@ Items called out in goal-setting that still need specs in `docs/` and then code:
 | Named bandit kings, loot/intel chains, optional bandit alliance, solo-forced quests | Armies (+ Citadel hooks) | Army-side storylines; less "main lore" than citadel, still authored. |
 | Tax / claim loop as soft "farm" replacement | Armies | Empire income without requiring vanilla iron farms for fun. |
 | **§6** intro NPC, mentor, citadel access beats, brother endings | Citadel | Player-facing main necromancer arc. |
-| Per-flute **world placement** (structures / quests) | Citadel | Seven unique sites + Lament of Ash mentor handoff. |
+| **End flute tyrant** camps (8 placements, island template) | Citadel | Six flutes + two shard-only bosses; book clues **TBD**. |
+| Per-flute **player cooldown** after play | Citadel | Tune in playtest. |
 | `necromancerRogueSiteSpacing` playtest value | Citadel | ~400–512 blocks initial target. |
 :::
 

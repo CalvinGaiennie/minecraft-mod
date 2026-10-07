@@ -15,15 +15,16 @@ Rules for first claim, usurpation, barrier, and owner mistakes. **Necromancer mo
 | **Sealwright** | First player to break the seal with Seal-Breaker on the gate (once per world) |
 | **Killing credit** | Player killing blow on Corrupted King |
 | **Contender credit** | Personal damage to Corrupted King during that fight |
+| **Savior of the Tree** (title) | Player who **uses the cure** on the Blight Heart (`endgame.md`) — **any** player, not owner-only; once per world heal |
 
 **Sealwright bonus** (when **anyone** completes a valid claim sit): title **Sealbreaker**; **Seal-Breaker** sword bound to Sealwright — one craft per world, relic persistence, homing to Sealwright’s inventory if not in **any** player inventory for **&gt;60s** (may be stolen while held).
 
 ## First claim (unclaimed citadel)
 
 1. **Act:** occupy **Citadel Throne** **60 seconds** without dying or leaving seat (contestable PvP).
-2. **Days 1–7** after king death: only players with **killing** and/or **contender** credit may complete the sit.
+2. **Days 1–7** after king death: only players with **killing** and/or **contender** credit may complete the sit. The **7-day window starts when the Corrupted King dies**; bound brothers **alive or dead** do not pause or reset it (`necromancer-path.md` stall claim uses the same timer).
 3. **Day 8+** if still unclaimed: **anyone** except rules below.
-4. **Active necromancer:** cannot progress sit. **Blighted tree:** blocked + **chat message** (must absolve). **Healthy tree:** **instant death** (no totem) + **broadcast within 1000 blocks** of Kingstree explaining why.
+4. **Active necromancer:** cannot progress sit. **Blighted tree:** blocked + **chat message** (must absolve — only if player **never created a horcrux**; see `necromancy.md`). **Healthy tree:** **instant death** (no totem) + **broadcast within 1000 blocks** of Kingstree explaining why.
 5. **Citadel ownership ban** (wand forfeit): cannot sit; **blighted:** **damage per tick** while attempting; **healthy tree:** instant death.
 6. After claim: **Maelor roster homecoming** only if reunite completed pre-claim; otherwise acolytes must be **escorted** to citadel by any player (`endgame.md`). Restoration tracks; **only owner** may place **mess station** in citadel (soldier block, necro rule).
 
@@ -50,7 +51,7 @@ Rules for first claim, usurpation, barrier, and owner mistakes. **Necromancer mo
 
 ## Kingslayer perks
 
-- **Well of Kings:** **+100% XP** rate for Kingslayer while **owner or ally** (ally via soldier when loaded).
+- **Well of Kings:** **+100% XP** rate (stacks on base Well rate) for **Kingslayer** only while they are **citadel owner** and **Savior of the Tree**. Base Well XP still works for any barrier-eligible player who is **not** an active necromancer (`endgame.md`).
 - **Spectral kings:** if Hall restored, defend Kingslayer when **someone attacks them** and kings are nearby.
 - **Spectral Thornwald:** when Kingslayer **below 3 hearts** (current), spawn **Thornwald Thornheart** to protect; ends when wearer **above 3 hearts** OR Thornwald dies; **no** trigger if **max HP &lt; 3** from permanent wand loss.
 
