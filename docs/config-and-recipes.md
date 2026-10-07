@@ -68,9 +68,11 @@ Every number a server owner might want to tune, with its default.
 | `orphanSoldierBonusHealth`, flat max HP while orphan-raised soldier/militia | **4** |
 | `orphanSoldierBonusDamage`, damage multiplier (melee + arrows) | **1.15** (+15%) |
 | `orphanDesertionMultiplier`, hunger / morale desert **trigger** rolls only (not outcome split) | **1.5** |
-| `armiesQuestD1SoldierThreshold`, living soldiers in one owned village → start **D1** (`armies-questline.md`) | **30** |
+| `armiesQuestD1SoldierThreshold`, living **Soldiers** (not militia) in one owned village zone → **D1** | **30** |
 | `armiesQuestD1IgnoreMoon`, D1 assault ignores new-moon scheduling | **true** |
+| `armiesQuestD1DelayDays`, in-game days after threshold before D1 assault | **1** |
 | `armiesQuestBossPlayerKillOnly`, quest assault bosses require **player** last hit | **true** |
+| `rookSignetDesertionMultiplier`, owned-village desertion multiplier with **Rook's Signet** (O2 reward) | **0.95** |
 | Squad retreat threshold | 65% killed |
 | Home bed distance | 128 blocks |
 | Horn range outside a village | 256 blocks |
