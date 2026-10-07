@@ -2,7 +2,7 @@
 
 **NeoForge 1.21.1** · **Java 21** · Two mods, one world. Install **Armies**, **Citadel**, or both. No required modpack dependencies.
 
-Recruit villagers. March on horns. Storm a sealed fortress and claim a throne. Or pick up a wand, raise the dead, and pay for it in hearts and reputation. Vanilla survival still works; this is the chapter after the dragon.
+Recruit villagers into soldiers, then **blow war horns** to rally them, hold a wall, or charge. Storm a sealed fortress and claim a throne. Or pick up a **necromancer's wand**, raise the dead, and pay for it in hearts and reputation. Vanilla survival still works; this is the chapter after the dragon.
 
 Design details: **[Dev documentation](dev/index.html)**.
 
@@ -18,7 +18,7 @@ Design details: **[Dev documentation](dev/index.html)**.
 
 **Make soldiers from real villagers.** Unemployed villagers can become militia and ranked soldiers. They wear armor, hold the line, and die on your orders.
 
-**Command from the field.** Horns rally squads, send them to guard a wall, charge a breach, or fall back. You are the general, not a guy clicking one iron golem.
+**Command from the field.** Craftable **war horns** are your orders: wake the camp, send troops to a spot on the map, guard a rampart, or call a charge. You lead squads in the world, not a single iron golem on a leash.
 
 **Turn villages into territory.** Recruit, supply, and defend places you care about. Raids, swarms, and bandits scale with how much land you hold. Grow big enough and the game treats you like a kingdom, titles, pressure, and rewards included.
 
