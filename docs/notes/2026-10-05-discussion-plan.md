@@ -76,6 +76,7 @@
 | 2026-10-07 | **Armies arc + warlords** | **Armies-only** spine: **2 defensive** (hold claim, warlord probe) + **2 offensive** (first king, break the ring). Warlords **stay**, **toned down** (slow timer, medium raid cap, one village). | `armies-questline.md`, `endgame.md` |
 | 2026-10-07 | **Armies arc (revision)** | **D1/D2** = **named scripted defensives** (player triggers D1); **not** generic raids. **O1** = find who hit you in **D1**. **D2** starts after **O1**; intel for **O2**. Warlords separate from D1/D2. | `armies-questline.md` |
 | 2026-10-07 | **Armies arc (story)** | **D1:** **30** soldiers one village → attack (no moon). Leader **player-kill** → **notebook** → **O1**. **O1:** middle manager **player-kill**, taunt, rush home. **D2:** biggest village under **big leader**; repel, he **escapes**. **O2:** hunt and kill big leader. | `armies-questline.md` |
+| 2026-10-07 | **Armies arc (approved)** | Names **Halvek / Corvin / Garland** only. D1 requires owner **in village zone**; **−10%** desertion signet (**0.90**). | `armies-questline.md` |
 
 ---
 
