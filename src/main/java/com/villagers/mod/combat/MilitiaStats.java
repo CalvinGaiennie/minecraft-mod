@@ -7,13 +7,16 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.ItemStack;
 
+import com.villagers.mod.Config;
 import com.villagers.mod.VillagersMod;
 import com.villagers.mod.entity.MilitiaData;
+import com.villagers.mod.entity.OrphanRaised;
 import com.villagers.mod.gear.VillagerGearRules;
 import com.villagers.mod.gear.VillagerGearSlot;
 
 public final class MilitiaStats {
     private static final ResourceLocation HEALTH = ResourceLocation.fromNamespaceAndPath(VillagersMod.MODID, "militia_health");
+    private static final ResourceLocation ORPHAN_HEALTH = ResourceLocation.fromNamespaceAndPath(VillagersMod.MODID, "militia_orphan_health");
     private static final ResourceLocation DAMAGE = ResourceLocation.fromNamespaceAndPath(VillagersMod.MODID, "militia_damage");
     private static final float SEASONED_HP_BONUS = 10f;
 
@@ -27,7 +30,12 @@ public final class MilitiaStats {
         AttributeInstance health = villager.getAttribute(Attributes.MAX_HEALTH);
         if (health != null) {
             health.removeModifier(HEALTH);
+            health.removeModifier(ORPHAN_HEALTH);
             health.addPermanentModifier(new AttributeModifier(HEALTH, seasoned, AttributeModifier.Operation.ADD_VALUE));
+            if (OrphanRaised.is(villager)) {
+                health.addPermanentModifier(new AttributeModifier(
+                        ORPHAN_HEALTH, Config.ORPHAN_SOLDIER_BONUS_HEALTH.get(), AttributeModifier.Operation.ADD_VALUE));
+            }
             if (villager.getHealth() > villager.getMaxHealth()) {
                 villager.setHealth(villager.getMaxHealth());
             }

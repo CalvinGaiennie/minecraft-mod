@@ -188,18 +188,23 @@ public final class BanditSiteGenerator {
             ServerLevel level, BanditWorldSavedData data, BlockPos origin, BanditWorldSavedData.SiteKind kind) {
         UUID id = UUID.randomUUID();
         level.getChunk(origin.getX() >> 4, origin.getZ() >> 4);
-        level.setBlock(origin, VillagersMod.BANDIT_CAMP.get().defaultBlockState(), 3);
+        boolean pasted = BanditStructurePaste.tryPaste(level, origin, kind);
+        if (!pasted) {
+            level.setBlock(origin, VillagersMod.BANDIT_CAMP.get().defaultBlockState(), 3);
+            placeChestIfAir(level, origin.north());
+            placeChestIfAir(level, origin.east());
+            if (kind == BanditWorldSavedData.SiteKind.HIDEOUT) {
+                BanditHideoutFeatures.dressHideout(level, origin, level.random);
+            }
+            if (kind == BanditWorldSavedData.SiteKind.CORVIN) {
+                BanditCorvinFeatures.dressCorvinTower(level, origin);
+            }
+        } else if (level.getBlockState(origin).isAir()) {
+            level.setBlock(origin, VillagersMod.BANDIT_CAMP.get().defaultBlockState(), 3);
+        }
         BlockEntity be = level.getBlockEntity(origin);
         if (be instanceof BanditCampBlockEntity camp) {
             camp.initSite(id, kind);
-        }
-        placeChestIfAir(level, origin.north());
-        placeChestIfAir(level, origin.east());
-        if (kind == BanditWorldSavedData.SiteKind.HIDEOUT) {
-            BanditHideoutFeatures.dressHideout(level, origin, level.random);
-        }
-        if (kind == BanditWorldSavedData.SiteKind.CORVIN) {
-            BanditCorvinFeatures.dressCorvinTower(level, origin);
         }
         BanditLoot.fillSiteChests(level, origin, kind, level.random);
         data.addSite(new BanditWorldSavedData.SiteRecord(id, kind, origin, true, 0));

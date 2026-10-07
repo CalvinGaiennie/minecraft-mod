@@ -29,7 +29,7 @@ public class CaltropsItem extends BlockItem {
         if (village == null) {
             return true;
         }
-        if (VillageProtection.mayBypassProtection(context.getPlayer().getUUID(), village)) {
+        if (VillageProtection.mayBypassProtection(level, context.getPlayer().getUUID(), village)) {
             return true;
         }
         context.getPlayer().displayClientMessage(

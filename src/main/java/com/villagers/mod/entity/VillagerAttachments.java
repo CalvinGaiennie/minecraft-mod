@@ -1,5 +1,7 @@
 package com.villagers.mod.entity;
 
+import com.mojang.serialization.Codec;
+
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
@@ -48,4 +50,12 @@ public class VillagerAttachments {
     public static final net.neoforged.neoforge.registries.DeferredHolder<AttachmentType<?>, AttachmentType<MinionData>> MINION_DATA =
             (net.neoforged.neoforge.registries.DeferredHolder<AttachmentType<?>, AttachmentType<MinionData>>) (Object)
                     ATTACHMENTS.register("minion_data", () -> AttachmentType.builder(() -> new MinionData(java.util.UUID.randomUUID())).build());
+
+    @SuppressWarnings("unchecked")
+    public static final net.neoforged.neoforge.registries.DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>> ORPHAN_RAISED =
+            (net.neoforged.neoforge.registries.DeferredHolder<AttachmentType<?>, AttachmentType<Boolean>>) (Object)
+                    ATTACHMENTS.register("orphan_raised", () -> AttachmentType.builder(() -> Boolean.FALSE)
+                            .serialize(Codec.BOOL)
+                            .copyOnDeath()
+                            .build());
 }

@@ -3,6 +3,7 @@ package com.villagers.mod.entity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.npc.Villager;
 
+import com.villagers.mod.Config;
 import com.villagers.mod.armies.ArmiesQuestService;
 import com.villagers.mod.combat.SoldierCombat;
 import com.villagers.mod.util.SoldierStructureHelper;
@@ -64,6 +65,9 @@ public class SoldierDesertion {
             var village = VillageManager.get(level).findVillageAt(soldier.getBlockX(), soldier.getBlockY(), soldier.getBlockZ());
             if (village != null) {
                 double mult = ArmiesQuestService.desertionMultiplierForOwner(level, village.getOwnerId());
+                if (OrphanRaised.is(soldier)) {
+                    mult /= Config.ORPHAN_DESERTION_MULTIPLIER.get();
+                }
                 if (level.random.nextDouble() > mult) {
                     SoldierData data = soldier.getData(VillagerAttachments.SOLDIER_DATA.get());
                     if (data != null) {

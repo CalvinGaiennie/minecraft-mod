@@ -28,7 +28,7 @@ public class EnemyTerritoryHandler {
         if (village == null || !village.isActive()) {
             return;
         }
-        if (VillageProtection.mayBypassProtection(player.getUUID(), village)) {
+        if (VillageProtection.mayBypassProtection(level, player.getUUID(), village)) {
             return;
         }
         event.setCanceled(true);

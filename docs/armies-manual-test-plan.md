@@ -280,7 +280,10 @@ From design vs code (see `stages-1-3-tests.md`, `soldiers-and-villages.md`):
 
 - Recruiter villager POI AI, full trader tax loot tables, night stumble on rampart  
 - 25-band roaming simulation, warlord probes, bandit alliance  
-- Bandit camp **NBT prefabs** (jigsaw structures)  
+- Bandit **multi-tile** Garland/citadel manifests; NBT files must exist under `data/villagers/structures/` (paste wired; falls back to MVP dressing)  
+- O2 **prison / guide / march** (`tbd-garland-fortress-prison-arena.md`)  
+- Orphanage **structure graft** (orphan stat flag + config exist; no world-gen building yet)  
+- Wanted posters, ally **book** UI, co-owner list  
 - Design doc “switch melee at **4** blocks” vs code **6** (`MELEE_PREFER_MAX_DISTANCE`) — file only if gameplay feels wrong  
 - Citadel shadow requires **external** citadel anchor API  
 

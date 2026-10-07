@@ -20,6 +20,7 @@ public class ArmiesQuestSavedData extends SavedData {
         public UUID d1VillageId;
         public boolean ledgerRead;
         public boolean garlandCompassUnlocked;
+        public boolean tornMapRead;
         public boolean rookbreakerTitle;
         public boolean corvinKilled;
         public boolean garlandKilled;
@@ -46,6 +47,7 @@ public class ArmiesQuestSavedData extends SavedData {
             }
             state.ledgerRead = entry.getBoolean("LedgerRead");
             state.garlandCompassUnlocked = entry.getBoolean("GarlandCompass");
+            state.tornMapRead = entry.getBoolean("TornMapRead");
             state.rookbreakerTitle = entry.getBoolean("Rookbreaker");
             state.corvinKilled = entry.getBoolean("CorvinKilled");
             state.garlandKilled = entry.getBoolean("GarlandKilled");
@@ -67,6 +69,7 @@ public class ArmiesQuestSavedData extends SavedData {
             }
             entry.putBoolean("LedgerRead", state.ledgerRead);
             entry.putBoolean("GarlandCompass", state.garlandCompassUnlocked);
+            entry.putBoolean("TornMapRead", state.tornMapRead);
             entry.putBoolean("Rookbreaker", state.rookbreakerTitle);
             entry.putBoolean("CorvinKilled", state.corvinKilled);
             entry.putBoolean("GarlandKilled", state.garlandKilled);

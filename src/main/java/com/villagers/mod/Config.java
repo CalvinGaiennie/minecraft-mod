@@ -78,5 +78,40 @@ public class Config {
             .comment("In-game days between grudge strikes from a living wandering necromancer")
             .defineInRange("wanderingNecromancerStrikeIntervalDays", 2, 1, 14);
 
+    public static final ModConfigSpec.IntValue NATURAL_VILLAGE_BELL_RADIUS = BUILDER
+            .comment("Horizontal radius around a bell for natural village militia")
+            .defineInRange("naturalVillageBellRadius", 48, 16, 128);
+
+    public static final ModConfigSpec.IntValue NATURAL_MILITIA_BASE_COUNT = BUILDER
+            .defineInRange("naturalMilitiaBaseCount", 2, 0, 8);
+
+    public static final ModConfigSpec.IntValue NATURAL_MILITIA_NEAR_SPAWN_COUNT = BUILDER
+            .comment("Militia count when citadel anchor is set and bell is within nearSpawnDistance of world spawn")
+            .defineInRange("naturalMilitiaNearSpawnCount", 4, 0, 12);
+
+    public static final ModConfigSpec.IntValue NATURAL_MILITIA_MID_COUNT = BUILDER
+            .defineInRange("naturalMilitiaMidCount", 3, 0, 12);
+
+    public static final ModConfigSpec.IntValue NATURAL_MILITIA_NEAR_SPAWN_DISTANCE = BUILDER
+            .defineInRange("naturalMilitiaNearSpawnDistance", 1000, 256, 8000);
+
+    public static final ModConfigSpec.IntValue NATURAL_MILITIA_MID_DISTANCE = BUILDER
+            .defineInRange("naturalMilitiaMidDistance", 3000, 512, 12000);
+
+    public static final ModConfigSpec.BooleanValue NATURAL_MILITIA_USE_CITADEL_TIER_COUNTS = BUILDER
+            .comment("When false, always use naturalMilitiaBaseCount regardless of spawn distance")
+            .define("naturalMilitiaUseCitadelTierCounts", true);
+
+    public static final ModConfigSpec.DoubleValue ORPHAN_SOLDIER_BONUS_HEALTH = BUILDER
+            .defineInRange("orphanSoldierBonusHealth", 4.0, 0.0, 40.0);
+
+    public static final ModConfigSpec.DoubleValue ORPHAN_SOLDIER_BONUS_DAMAGE = BUILDER
+            .comment("Fraction added to melee/ranged damage (0.15 = +15%)")
+            .defineInRange("orphanSoldierBonusDamage", 0.15, 0.0, 2.0);
+
+    public static final ModConfigSpec.DoubleValue ORPHAN_DESERTION_MULTIPLIER = BUILDER
+            .comment("Multiplies desertion likelihood for orphan-raised soldiers/militia (>1 = desert more often)")
+            .defineInRange("orphanDesertionMultiplier", 1.5, 1.0, 4.0);
+
     static final ModConfigSpec SPEC = BUILDER.build();
 }

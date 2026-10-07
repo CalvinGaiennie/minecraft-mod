@@ -24,7 +24,7 @@ public class VillageProtectionHandler {
         }
         BlockPos pos = event.getPosition().orElse(player.blockPosition());
         VillageData village = VillageManager.get(level).findVillageAt(pos.getX(), pos.getY(), pos.getZ());
-        if (village == null || VillageProtection.mayBypassProtection(player.getUUID(), village)) {
+        if (village == null || VillageProtection.mayBypassProtection(level, player.getUUID(), village)) {
             return;
         }
         int soldiers = VillageProtection.soldiersInsideVillage(level, village);
@@ -48,7 +48,7 @@ public class VillageProtectionHandler {
             if (village == null) {
                 return false;
             }
-            return !VillageProtection.mayBypassProtection(source.getUUID(), village);
+            return !VillageProtection.mayBypassProtection(level, source.getUUID(), village);
         });
     }
 }

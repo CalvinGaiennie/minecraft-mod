@@ -284,6 +284,26 @@ public final class ArmiesQuestService {
         }
     }
 
+    /** O2: no Rook's Trail Compass — use torn map + chat bearing to Garland camp. */
+    public static void onTornMapRead(ServerPlayer player) {
+        ArmiesQuestSavedData questData = ArmiesQuestSavedData.get(player.serverLevel());
+        ArmiesQuestSavedData.PlayerQuestState state = questData.getOrCreate(player.getUUID());
+        if (state.stage != ArmiesQuestStage.O2_HUNT && state.stage != ArmiesQuestStage.O2_ACTIVE) {
+            return;
+        }
+        state.stage = ArmiesQuestStage.O2_ACTIVE;
+        state.tornMapRead = true;
+        questData.markDirtySelf();
+        BanditWorldSavedData.SiteRecord garland = BanditWorldSavedData.get(player.serverLevel())
+                .findKind(BanditWorldSavedData.SiteKind.GARLAND);
+        if (garland != null) {
+            player.sendSystemMessage(Component.translatable(
+                    "quest.villagers.garland_bearing", garland.origin().getX(), garland.origin().getZ()));
+        } else {
+            player.sendSystemMessage(Component.translatable("quest.villagers.garland_bearing_unknown"));
+        }
+    }
+
     public static void onGarlandCompassCrafted(ServerPlayer player, net.minecraft.world.item.ItemStack compass) {
         ArmiesQuestSavedData questData = ArmiesQuestSavedData.get(player.serverLevel());
         ArmiesQuestSavedData.PlayerQuestState state = questData.getOrCreate(player.getUUID());

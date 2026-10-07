@@ -5,6 +5,8 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.npc.Villager;
 
+import com.villagers.mod.Config;
+import com.villagers.mod.entity.OrphanRaised;
 import com.villagers.mod.entity.SoldierData;
 import com.villagers.mod.entity.SoldierLabels;
 import com.villagers.mod.gear.VillagerGearRules;
@@ -15,7 +17,9 @@ import com.villagers.mod.VillagersMod;
 
 public final class SoldierRanks {
     private static final ResourceLocation HEALTH_MODIFIER = ResourceLocation.fromNamespaceAndPath(VillagersMod.MODID, "rank_health");
+    private static final ResourceLocation ORPHAN_HEALTH_MODIFIER = ResourceLocation.fromNamespaceAndPath(VillagersMod.MODID, "orphan_health");
     private static final ResourceLocation DAMAGE_MODIFIER = ResourceLocation.fromNamespaceAndPath(VillagersMod.MODID, "rank_damage");
+    private static final ResourceLocation ORPHAN_DAMAGE_MODIFIER = ResourceLocation.fromNamespaceAndPath(VillagersMod.MODID, "orphan_damage");
     private static final ResourceLocation ARMOR_MODIFIER = ResourceLocation.fromNamespaceAndPath(VillagersMod.MODID, "rank_armor");
     private static final float BASE_SOLDIER_HEALTH = 20f;
 
@@ -90,8 +94,15 @@ public final class SoldierRanks {
         AttributeInstance health = villager.getAttribute(Attributes.MAX_HEALTH);
         if (health != null) {
             health.removeModifier(HEALTH_MODIFIER);
+            health.removeModifier(ORPHAN_HEALTH_MODIFIER);
             double healthBonus = rank.maxHealth() - BASE_SOLDIER_HEALTH;
             health.addPermanentModifier(new AttributeModifier(HEALTH_MODIFIER, healthBonus, AttributeModifier.Operation.ADD_VALUE));
+            if (OrphanRaised.is(villager)) {
+                health.addPermanentModifier(new AttributeModifier(
+                        ORPHAN_HEALTH_MODIFIER,
+                        Config.ORPHAN_SOLDIER_BONUS_HEALTH.get(),
+                        AttributeModifier.Operation.ADD_VALUE));
+            }
             if (villager.getHealth() > villager.getMaxHealth()) {
                 villager.setHealth(villager.getMaxHealth());
             }
@@ -100,9 +111,16 @@ public final class SoldierRanks {
         if (damage != null) {
             damage.setBaseValue(weaponDamage);
             damage.removeModifier(DAMAGE_MODIFIER);
+            damage.removeModifier(ORPHAN_DAMAGE_MODIFIER);
             if (rank.damageBonus() > 0) {
                 damage.addPermanentModifier(new AttributeModifier(
                         DAMAGE_MODIFIER, weaponDamage * rank.damageBonus(), AttributeModifier.Operation.ADD_VALUE));
+            }
+            if (OrphanRaised.is(villager)) {
+                damage.addPermanentModifier(new AttributeModifier(
+                        ORPHAN_DAMAGE_MODIFIER,
+                        weaponDamage * Config.ORPHAN_SOLDIER_BONUS_DAMAGE.get(),
+                        AttributeModifier.Operation.ADD_VALUE));
             }
         }
         AttributeInstance armor = villager.getAttribute(Attributes.ARMOR);

@@ -7,6 +7,7 @@ import net.minecraft.world.entity.player.Player;
 
 import com.villagers.mod.entity.SoldierData;
 import com.villagers.mod.entity.VillagerAttachments;
+import com.villagers.mod.player.AllyService;
 
 import java.util.UUID;
 
@@ -58,10 +59,13 @@ public final class VillageProtection {
         if (village == null || !village.isActive()) {
             return false;
         }
-        return !mayBypassProtection(player.getUUID(), village);
+        return !mayBypassProtection(level, player.getUUID(), village);
     }
 
-    public static boolean mayBypassProtection(UUID playerId, VillageData village) {
-        return playerId.equals(village.getOwnerId());
+    public static boolean mayBypassProtection(ServerLevel level, UUID playerId, VillageData village) {
+        if (playerId.equals(village.getOwnerId())) {
+            return true;
+        }
+        return AllyService.isAlly(level, village.getOwnerId(), playerId);
     }
 }

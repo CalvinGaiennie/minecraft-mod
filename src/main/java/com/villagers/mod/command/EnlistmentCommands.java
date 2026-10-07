@@ -7,6 +7,7 @@ import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.ClickEvent;
@@ -24,12 +25,14 @@ import com.villagers.mod.VillagersMod;
 import com.villagers.mod.armies.BanditGenerationScheduler;
 import com.villagers.mod.armies.BanditSiteGenerator;
 import com.villagers.mod.armies.BanditWorldSavedData;
+import com.villagers.mod.player.AllySavedData;
 import com.villagers.mod.player.EnlistmentService;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
 
@@ -52,6 +55,54 @@ public final class EnlistmentCommands {
                             ctx.getSource().sendSuccess(() -> Component.translatable("message.villagers.opted_out"), true);
                             return 1;
                         }))
+                        .then(Commands.literal("ally")
+                                .then(Commands.literal("add")
+                                        .then(Commands.argument("player", EntityArgument.player())
+                                                .executes(ctx -> {
+                                                    ServerPlayer self = ctx.getSource().getPlayerOrException();
+                                                    ServerPlayer other = EntityArgument.getPlayer(ctx, "player");
+                                                    if (AllySavedData.get(self.serverLevel()).addAlly(self.getUUID(), other.getUUID())) {
+                                                        ctx.getSource().sendSuccess(
+                                                                () -> Component.translatable("message.villagers.ally_added", other.getDisplayName()),
+                                                                true);
+                                                        return 1;
+                                                    }
+                                                    ctx.getSource().sendFailure(Component.translatable("message.villagers.ally_already"));
+                                                    return 0;
+                                                })))
+                                .then(Commands.literal("remove")
+                                        .then(Commands.argument("player", EntityArgument.player())
+                                                .executes(ctx -> {
+                                                    ServerPlayer self = ctx.getSource().getPlayerOrException();
+                                                    ServerPlayer other = EntityArgument.getPlayer(ctx, "player");
+                                                    if (AllySavedData.get(self.serverLevel()).removeAlly(self.getUUID(), other.getUUID())) {
+                                                        ctx.getSource().sendSuccess(
+                                                                () -> Component.translatable("message.villagers.ally_removed", other.getDisplayName()),
+                                                                true);
+                                                        return 1;
+                                                    }
+                                                    ctx.getSource().sendFailure(Component.translatable("message.villagers.ally_not_listed"));
+                                                    return 0;
+                                                })))
+                                .then(Commands.literal("list").executes(ctx -> {
+                                    ServerPlayer self = ctx.getSource().getPlayerOrException();
+                                    var allies = AllySavedData.get(self.serverLevel()).getAllies(self.getUUID());
+                                    if (allies.isEmpty()) {
+                                        ctx.getSource().sendSuccess(() -> Component.translatable("message.villagers.ally_list_empty"), false);
+                                        return 0;
+                                    }
+                                    ctx.getSource().sendSuccess(
+                                            () -> Component.translatable("message.villagers.ally_list_header", allies.size()),
+                                            false);
+                                    for (UUID id : allies) {
+                                        var listed = ctx.getSource().getServer().getPlayerList().getPlayer(id);
+                                        Component name = listed != null
+                                                ? listed.getDisplayName()
+                                                : Component.literal(id.toString());
+                                        ctx.getSource().sendSuccess(() -> name, false);
+                                    }
+                                    return allies.size();
+                                })))
                         .then(Commands.literal("locate")
                                 .then(buildLocateKind("camp", k -> k == BanditWorldSavedData.SiteKind.CAMP))
                                 .then(buildLocateKind("hideout", k -> k == BanditWorldSavedData.SiteKind.HIDEOUT))
