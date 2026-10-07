@@ -38,7 +38,7 @@ Design details: **[Dev documentation](dev/index.html)**.
 
 **Necromancy is power with a receipt.** The wand turns hostiles into minions; each use costs permanent hearts. Hood and robe buy peace from monsters and cost you goodwill with everyone else. **Horcruxes** make you nearly impossible to kill, poison-immune, harm-immune, fake death and all, but each one locks away max health forever and closes the path to absolution.
 
-**Optional story, permanent forks.** Train as an **Order acolyte** before claim, or walk the necromancer road, or ignore both and still siege the citadel. Commit to the dark quest and the Order closes. **Create a horcrux to gain great power and the game punishes you.**
+**Optional story, permanent forks.** Train with the **Order of the Well** before claim, or walk the necromancer road, or ignore both and still siege the citadel. Commit to the dark quest and the Order closes. **Create a horcrux to gain great power and the game punishes you.**
 
 ::: future
 **Citadel alone** is a full endgame mod. **Citadel + Armies** adds kingdom titles, shared relic perks, and citadel mess ownership.

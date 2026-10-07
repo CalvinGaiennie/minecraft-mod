@@ -109,7 +109,7 @@ GROUP_BLURBS: dict[str, str] = {
     "start": "Mod goals, split, integration, and the development plan.",
     "notes": "Dated discussion plans and design intake notes.",
     "citadel": "Endgame throne, citadel claim, layout, and defenders.",
-    "order": "Order of the Flame: acolyte questline and specialty tracks.",
+    "order": "Order of the Well: player acolyte questline and specialty tracks.",
     "necromancer": (
         "Player necromancer questline (commit vs opt out), casual wand play, "
         "horcruxes, flutes, and how the path relates to the Order."
