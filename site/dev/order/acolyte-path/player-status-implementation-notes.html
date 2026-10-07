@@ -24,7 +24,7 @@
     <div class="page-shell has-sidebar">
       <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="mutual-exclusion-order-vs-necromancer-questline.html">Mutual exclusion (Order vs necromancer questline)</a></li><li><a href="four-specialties.html">Four specialties</a></li><li><a href="quest-flow-player.html">Quest flow (player)</a></li><li><a href="specialty-feat-gates-8.html">Specialty feat gates (§8)</a></li><li><a href="player-specialty-perks.html">Player specialty perks</a></li><li><a href="player-status-implementation-notes.html" class="active">Player status (implementation notes)</a></li><li><a href="corpse-mod-compatibility.html">Corpse mod compatibility</a></li><li><a href="config-proposed.html">Config (proposed)</a></li></ul></aside>
       <main class="doc-main">
-        <p class="source">Source: <code>docs/acolyte-path.md</code> · <a href="index.html">Player acolyte path</a></p><h1>Player status (implementation notes)</h1>
+        <p class="source">Source: <code>docs/acolyte-path.md</code> · Player acolyte path</p><h1>Player status (implementation notes)</h1>
 <ul>
 <li>Track per-player: basic training done, specialty (pending / locked), Annals progress, brothers delivered, Maelor chapter complete, <strong>necromancer quest</strong> (none / intro / committed / opted_out), <strong>Order blocked</strong> (committed only).</li>
 <li><strong>Citadel owner</strong> and <strong>relic rules</strong> are separate flags; <strong>Order progress</strong> is blocked by <strong>raised dead</strong>, not by owning the throne.</li>

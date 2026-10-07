@@ -197,6 +197,18 @@ body.scope-marketing .doc-main h2#what-vanilla-gets-wrong {
   border-left: 4px solid var(--gold-dim);
   padding-left: 0.75rem;
 }
+
+body.scope-dev .doc-main .doc-ref-url {
+  color: var(--muted);
+  font-weight: 400;
+  font-size: 0.9em;
+}
+body.scope-dev .doc-main a:not(.doc-ref) {
+  color: var(--text);
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+  text-underline-offset: 2px;
+}
 .doc-main h3 { font-size: 1.1rem; margin: 1.35rem 0 0.5rem; color: var(--text); }
 .doc-main h4 { font-size: 1rem; margin: 1rem 0 0.4rem; }
 .doc-main p { margin: 0.65rem 0; }

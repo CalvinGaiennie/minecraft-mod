@@ -27,28 +27,40 @@ def slugify(title: str) -> str:
     return s or "section"
 
 
-def inline_md(text: str) -> str:
+def format_md_link(label: str, url: str, *, plain_internal: bool) -> str:
+    """Dev docs: show link labels as plain text, not blue anchors."""
+    if not plain_internal:
+        return f'<a href="{html.escape(url, quote=True)}">{label}</a>'
+    clean = label.strip()
+    if clean.startswith("`") and clean.endswith("`") and len(clean) >= 2:
+        clean = clean[1:-1]
+    if url.startswith(("http://", "https://", "mailto:")):
+        return f"{clean} <span class=\"doc-ref-url\">({html.escape(url)})</span>"
+    return f"<code>{clean}</code>"
+
+
+def inline_md(text: str, *, plain_internal: bool = False) -> str:
     text = html.escape(text)
-    text = re.sub(
-        r"\[([^\]]+)\]\(([^)]+)\)",
-        lambda m: f'<a href="{html.escape(m.group(2), quote=True)}">{m.group(1)}</a>',
-        text,
-    )
+
+    def repl(m: re.Match[str]) -> str:
+        return format_md_link(m.group(1), m.group(2), plain_internal=plain_internal)
+
+    text = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", repl, text)
     text = re.sub(r"`([^`]+)`", r"<code>\1</code>", text)
     text = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", text)
     text = re.sub(r"\*([^*]+)\*", r"<em>\1</em>", text)
     return text
 
 
-def parse_table(lines: list[str]) -> str:
+def parse_table(lines: list[str], *, plain_internal: bool = False) -> str:
     if len(lines) < 2:
         return ""
-    header = [inline_md(c.strip()) for c in lines[0].strip("|").split("|")]
+    header = [inline_md(c.strip(), plain_internal=plain_internal) for c in lines[0].strip("|").split("|")]
     rows = []
     for line in lines[2:]:
         if not line.strip().startswith("|"):
             break
-        cells = [inline_md(c.strip()) for c in line.strip("|").split("|")]
+        cells = [inline_md(c.strip(), plain_internal=plain_internal) for c in line.strip("|").split("|")]
         rows.append(cells)
     thead = "<tr>" + "".join(f"<th>{c}</th>" for c in header) + "</tr>"
     tbody = ""
@@ -61,7 +73,7 @@ def render_mermaid_block(code: str) -> str:
     return f'<div class="mermaid-wrap"><div class="mermaid">\n{code.strip()}\n</div></div>'
 
 
-def block_to_html(block: str, box_class: str | None) -> str:
+def block_to_html(block: str, box_class: str | None, *, plain_internal: bool = False) -> str:
     lines = block.strip().splitlines()
     out: list[str] = []
     i = 0
@@ -71,19 +83,21 @@ def block_to_html(block: str, box_class: str | None) -> str:
     while i < len(lines):
         line = lines[i]
         if line.startswith("#### "):
-            out.append(f"<h4>{inline_md(line[5:])}</h4>")
+            out.append(f"<h4>{inline_md(line[5:], plain_internal=plain_internal)}</h4>")
             i += 1
             continue
         if line.startswith("### "):
-            out.append(f"<h3>{inline_md(line[4:])}</h3>")
+            out.append(f"<h3>{inline_md(line[4:], plain_internal=plain_internal)}</h3>")
             i += 1
             continue
         if line.startswith("## "):
-            out.append(f"<h2 id=\"{slugify(line[3:])}\">{inline_md(line[3:])}</h2>")
+            out.append(
+                f"<h2 id=\"{slugify(line[3:])}\">{inline_md(line[3:], plain_internal=plain_internal)}</h2>"
+            )
             i += 1
             continue
         if line.startswith("# "):
-            out.append(f"<h1>{inline_md(line[2:])}</h1>")
+            out.append(f"<h1>{inline_md(line[2:], plain_internal=plain_internal)}</h1>")
             i += 1
             continue
         if line.strip() == "```mermaid":
@@ -114,20 +128,20 @@ def block_to_html(block: str, box_class: str | None) -> str:
             while i < len(lines) and lines[i].strip().startswith("|"):
                 table_lines.append(lines[i])
                 i += 1
-            out.append(parse_table(table_lines))
+            out.append(parse_table(table_lines, plain_internal=plain_internal))
             continue
         if re.match(r"^\d+\.\s", line):
             out.append("<ol>")
             while i < len(lines) and re.match(r"^\d+\.\s", lines[i]):
                 item = re.sub(r"^\d+\.\s+", "", lines[i])
-                out.append(f"<li>{inline_md(item)}</li>")
+                out.append(f"<li>{inline_md(item, plain_internal=plain_internal)}</li>")
                 i += 1
             out.append("</ol>")
             continue
         if line.startswith("- "):
             out.append("<ul>")
             while i < len(lines) and lines[i].startswith("- "):
-                out.append(f"<li>{inline_md(lines[i][2:])}</li>")
+                out.append(f"<li>{inline_md(lines[i][2:], plain_internal=plain_internal)}</li>")
                 i += 1
             out.append("</ul>")
             continue
@@ -136,7 +150,9 @@ def block_to_html(block: str, box_class: str | None) -> str:
             while i < len(lines) and lines[i].startswith(">"):
                 quote.append(lines[i].lstrip("> ").strip())
                 i += 1
-            out.append(f"<blockquote><p>{inline_md(' '.join(quote))}</p></blockquote>")
+            out.append(
+                f"<blockquote><p>{inline_md(' '.join(quote), plain_internal=plain_internal)}</p></blockquote>"
+            )
             continue
         if line.strip():
             para: list[str] = []
@@ -145,7 +161,7 @@ def block_to_html(block: str, box_class: str | None) -> str:
             ) and not re.match(r"^\d+\.\s", lines[i]):
                 para.append(lines[i].strip())
                 i += 1
-            out.append(f"<p>{inline_md(' '.join(para))}</p>")
+            out.append(f"<p>{inline_md(' '.join(para), plain_internal=plain_internal)}</p>")
             continue
         i += 1
 
@@ -154,7 +170,9 @@ def block_to_html(block: str, box_class: str | None) -> str:
     return "\n".join(out)
 
 
-def render_markdown(source: str, *, skip_leading_h1: bool = False) -> str:
+def render_markdown(
+    source: str, *, skip_leading_h1: bool = False, plain_internal: bool = False
+) -> str:
     source = re.sub(r"<!--.*?-->", "", source, flags=re.DOTALL)
     lines = source.splitlines()
     out: list[str] = []
@@ -178,11 +196,11 @@ def render_markdown(source: str, *, skip_leading_h1: bool = False) -> str:
                     if not chunk.strip():
                         continue
                     out.append('<div class="box">')
-                    out.append(block_to_html(chunk, None))
+                    out.append(block_to_html(chunk, None, plain_internal=plain_internal))
                     out.append("</div>")
                 out.append("</div>")
             else:
-                out.append(block_to_html("\n".join(inner), spec))
+                out.append(block_to_html("\n".join(inner), spec, plain_internal=plain_internal))
             continue
         if line.startswith("# ") and skip_leading_h1 and not skipped_h1:
             skipped_h1 = True
@@ -205,7 +223,7 @@ def render_markdown(source: str, *, skip_leading_h1: bool = False) -> str:
             chunk_lines.append(lines[i])
             i += 1
         if chunk_lines:
-            out.append(block_to_html("\n".join(chunk_lines), None))
+            out.append(block_to_html("\n".join(chunk_lines), None, plain_internal=plain_internal))
     return "\n".join(out)
 
 
@@ -378,21 +396,6 @@ def write_page(spec: PageSpec) -> None:
     spec.out_path.write_text(body, encoding="utf-8")
 
 
-def marketing_sidebar(parsed: ParsedDoc) -> str:
-    if not parsed.sections:
-        return ""
-    parts = [
-        '<aside class="doc-sidebar" aria-label="On this page">',
-        '<p class="sidebar-label">On this page</p><ul>',
-    ]
-    for sec in parsed.sections:
-        parts.append(
-            f'<li><a href="#{html.escape(sec.sid)}">{html.escape(sec.title)}</a></li>'
-        )
-    parts.append("</ul></aside>")
-    return "".join(parts)
-
-
 def build_marketing() -> None:
     md_path = MARKETING_SRC / Path(MARKETING_SOURCE).name
     md = md_path.read_text(encoding="utf-8")
@@ -405,7 +408,7 @@ def build_marketing() -> None:
         scope="marketing",
         main_active="marketing",
         sub_nav_html="",
-        sidebar_html=marketing_sidebar(parsed),
+        sidebar_html="",
         content_html=content,
         footer_html=(
             "Minecraft Kingdom: Armies & Citadel · "
@@ -449,7 +452,7 @@ def build_dev_doc(group_id: str, doc: "DevDoc") -> list[Path]:
     split = len(parsed.sections) >= doc.split_h2_min
     if not split:
         out = base_dir / "index.html"
-        body = render_markdown(text, skip_leading_h1=True)
+        body = render_markdown(text, skip_leading_h1=True, plain_internal=True)
         h3s = h3_sidebar_items(text)
         content = (
             f'<p class="source">Source: <code>docs/{html.escape(doc.relpath)}</code></p>'
@@ -476,7 +479,9 @@ def build_dev_doc(group_id: str, doc: "DevDoc") -> list[Path]:
     index_out = base_dir / "index.html"
     pages_meta.append(("index", "Overview", index_out))
 
-    intro_html = render_markdown(parsed.intro) if parsed.intro else ""
+    intro_html = (
+        render_markdown(parsed.intro, plain_internal=True) if parsed.intro else ""
+    )
     index_content = (
         f'<p class="source">Source: <code>docs/{html.escape(doc.relpath)}</code></p>'
         f"<h1>{html.escape(parsed.title)}</h1>\n"
@@ -503,7 +508,7 @@ def build_dev_doc(group_id: str, doc: "DevDoc") -> list[Path]:
     for sec in parsed.sections:
         out = base_dir / f"{sec.sid}.html"
         pages_meta.append((sec.sid, sec.title, out))
-        body = render_markdown(sec.body)
+        body = render_markdown(sec.body, plain_internal=True)
         h3s = h3_sidebar_items(sec.body)
         all_pages = [("index", "Overview", index_out)] + [
             (s.sid, s.title, base_dir / f"{s.sid}.html") for s in parsed.sections
@@ -511,7 +516,7 @@ def build_dev_doc(group_id: str, doc: "DevDoc") -> list[Path]:
         sidebar = sidebar_html(out, all_pages, sec.sid, h3s if len(h3s) >= 3 else None)
         content = (
             f'<p class="source">Source: <code>docs/{html.escape(doc.relpath)}</code>'
-            f" · <a href=\"{rel_path(out, index_out)}\">{html.escape(parsed.title)}</a></p>"
+            f" · {html.escape(parsed.title)}</p>"
             f"<h1>{html.escape(sec.title)}</h1>\n{body}"
         )
         write_page(
