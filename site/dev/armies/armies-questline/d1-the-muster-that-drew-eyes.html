@@ -24,9 +24,9 @@
     <div class="page-shell has-sidebar">
       <main class="doc-main">
         <p class="source">Source: <code>docs/armies-questline.md</code> · Armies storyline (player, Armies mod)</p><h1>D1 — **The muster that drew eyes**</h1>
-<p><strong>Trigger:</strong> One <strong>owned village</strong> reaches <strong><code>armiesQuestD1SoldierThreshold</code></strong> living <strong>soldiers</strong> (ranked <strong>Soldier</strong> role only; <strong>militia does not count</strong>) in that village’s tax/claim zone (default <strong>30</strong>, config). Fires <strong>once per player UUID</strong> who owns that mess.</p>
-<p><strong>Not</strong> a new-moon raid. After threshold, wait <strong><code>armiesQuestD1DelayDays</code></strong> (default <strong>1</strong> in-game day), then start the assault <strong>only when the owning player is inside that village’s claim zone</strong>. If you are elsewhere, the quest <strong>waits</strong> until you come home. <strong>You must be there</strong> for the attack to run and to defend it.</p>
-<p><strong>Target village:</strong> The village whose zone <strong>hit 30 soldiers</strong> (same claim as that mess). The assault happens <strong>there</strong>, not at a mess you relocated afterward.</p>
+<p><strong>Trigger:</strong> The <strong>first</strong> owned village where you reach <strong><code>armiesQuestD1SoldierThreshold</code></strong> living <strong>soldiers</strong> (ranked <strong>Soldier</strong> only; <strong>militia does not count</strong>) in the claim zone (default <strong>30</strong>, config). Fires <strong>once per player UUID</strong>.</p>
+<p><strong>Start:</strong> The assault begins <strong>the moment you enter that village’s claim</strong> while it still has <strong>≥30</strong> soldiers (any moon). If you hit 30 while <strong>already inside</strong> the zone, it starts <strong>immediately</strong>. No delay day. If you never enter after hitting 30 elsewhere, nothing happens until you <strong>walk into</strong> that village.</p>
+<p><strong>Target village:</strong> That <strong>first 30-soldier</strong> village (the claim where the count crossed the threshold). Fight happens <strong>there</strong>.</p>
 <p><strong>Assault leader:</strong> <strong>Halvek</strong>. ~<strong>18–22</strong> deserter bandits + Halvek (tune in playtest).</p>
 <p><strong>Rules:</strong></p>
 <ul>

@@ -70,9 +70,8 @@ Every number a server owner might want to tune, with its default.
 | `orphanDesertionMultiplier`, hunger / morale desert **trigger** rolls only (not outcome split) | **1.5** |
 | `armiesQuestD1SoldierThreshold`, living **Soldiers** (not militia) in one owned village zone → **D1** | **30** |
 | `armiesQuestD1IgnoreMoon`, D1 assault ignores new-moon scheduling | **true** |
-| `armiesQuestD1DelayDays`, in-game days after threshold before D1 assault | **1** |
 | `armiesQuestBossPlayerKillOnly`, quest assault bosses require **player** last hit | **true** |
-| `rookSignetDesertionMultiplier`, owned-village desertion multiplier with **Garland's Signet** (O2 reward) | **0.90** (−10%) |
+| `titleRookbreakerDesertionMultiplier`, desertion in owned villages while **Rookbreaker** title (O2) | **0.90** (−10%) |
 | Squad retreat threshold | 65% killed |
 | Home bed distance | 128 blocks |
 | Horn range outside a village | 256 blocks |

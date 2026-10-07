@@ -2,7 +2,7 @@
 
 **Scope:** Main **optional** quest arc when **Minecraft Kingdom: Armies** is installed **without** Citadel. Citadel adds its own spine (`acolyte-path.md`, `necromancer-path.md`, `endgame.md`); this doc is the **kingdom** arc only.
 
-**Design intent:** **Four linked set pieces** with **named** antagonists ( **first names only**, no surnames or fancy titles on NPCs). Normal raids, swarms, and warlords run **beside** this arc.
+**Design intent:** **Four linked set pieces** with **named** antagonists (**first names** on quest bosses; **Garland** may use a **nickname** like **the Rook** in dialogue). Normal raids, swarms, and warlords run **beside** this arc.
 
 **Status:** **Approved** by author (2026-10-07), except tuning numbers in playtest.
 
@@ -22,11 +22,11 @@ O2 — hunt and kill the big bandit leader (player finish only)
 
 ## D1 — **The muster that drew eyes**
 
-**Trigger:** One **owned village** reaches **`armiesQuestD1SoldierThreshold`** living **soldiers** (ranked **Soldier** role only; **militia does not count**) in that village’s tax/claim zone (default **30**, config). Fires **once per player UUID** who owns that mess.
+**Trigger:** The **first** owned village where you reach **`armiesQuestD1SoldierThreshold`** living **soldiers** (ranked **Soldier** only; **militia does not count**) in the claim zone (default **30**, config). Fires **once per player UUID**.
 
-**Not** a new-moon raid. After threshold, wait **`armiesQuestD1DelayDays`** (default **1** in-game day), then start the assault **only when the owning player is inside that village’s claim zone**. If you are elsewhere, the quest **waits** until you come home. **You must be there** for the attack to run and to defend it.
+**Start:** The assault begins **the moment you enter that village’s claim** while it still has **≥30** soldiers (any moon). If you hit 30 while **already inside** the zone, it starts **immediately**. No delay day. If you never enter after hitting 30 elsewhere, nothing happens until you **walk into** that village.
 
-**Target village:** The village whose zone **hit 30 soldiers** (same claim as that mess). The assault happens **there**, not at a mess you relocated afterward.
+**Target village:** That **first 30-soldier** village (the claim where the count crossed the threshold). Fight happens **there**.
 
 **Assault leader:** **Halvek**. ~**18–22** deserter bandits + Halvek (tune in playtest).
 
@@ -48,7 +48,7 @@ O2 — hunt and kill the big bandit leader (player finish only)
 **Rules:**
 
 - Corvin: **player finish only**.
-- **Death line:** *“You absolute mule. I’m not Garland. I’m what keeps his books. Run home, lordling, before Garland turns your pretty village into ash.”*
+- **Death line:** *“You absolute mule. I’m not the Rook. I’m what keeps his books. Run home, lordling, before Garland turns your pretty village into ash.”*
 - Sets flag **`armiesQuestD2Armed`**.
 
 ---
@@ -57,7 +57,7 @@ O2 — hunt and kill the big bandit leader (player finish only)
 
 **Trigger:** **`armiesQuestD2Armed`** and player **enters** their **largest village** by **soldier count in zone** (soldiers only; tie-break: villager population, then mess UUID hash).
 
-**Scene:** Village already in **authored assault**. Leader: **Garland**. ~**24–30** attackers + Garland (tougher than D1, **not** warlord-sized).
+**Scene:** Village already in **authored assault**. Leader: **Garland** (known as **the Rook**). ~**24–30** attackers + Garland (tougher than D1, **not** warlord-sized).
 
 **Goal:** Kill or rout waves until **attack phase ends** (timer cap **TBD**, or all minions dead except Garland).
 
@@ -75,13 +75,13 @@ O2 — hunt and kill the big bandit leader (player finish only)
 
 **Find:** Combine **`torn_map_half`** with **ledger** (crafting grid or anvil **TBD**) → compass unlock to **Garland’s camp** (SavedData outpost, stronger than Corvin’s).
 
-**Goal:** Kill **Garland**. **Player finish only**.
+**Goal:** Kill **Garland the Rook**. **Player finish only**.
 
 **Rewards:**
 
 - Large treasury chest (mixed loot, **no** relic).
-- **Garland’s Signet** (slot **TBD**): **−10% soldier desertion** in owned villages while carried or owned (`rookSignetDesertionMultiplier` **0.90**, config name kept for compatibility).
-- Optional chat title **Rookbreaker** (**TBD** if author wants it removed).
+- **Garland’s Signet** (slot **TBD**): **trophy only**, no stat perks.
+- Permanent chat title **Rookbreaker** (from his nickname **the Rook**). While you hold this title: **−10% soldier desertion** in owned villages (`titleRookbreakerDesertionMultiplier` **0.90**, config). Same perk style as kingdom titles in `endgame.md` (title-gated, not item-gated).
 - Arc **complete**; Halvek, Corvin, Garland **do not** respawn.
 
 ---
@@ -92,7 +92,7 @@ O2 — hunt and kill the big bandit leader (player finish only)
 | --- | --- | --- |
 | Assault leader | **Halvek** | D1 |
 | Middle management | **Corvin** | O1 |
-| Big leader | **Garland** | D2 escape → O2 kill |
+| Big leader | **Garland** (nickname **the Rook**) | D2 escape → O2 kill |
 
 Citadel **relic fortresses** use **different** characters (`endgame.md`).
 
@@ -112,9 +112,8 @@ Citadel **relic fortresses** use **different** characters (`endgame.md`).
 | --- | --- | --- |
 | `armiesQuestD1SoldierThreshold` | **30** | **Soldiers** only, in village zone |
 | `armiesQuestD1IgnoreMoon` | **true** | |
-| `armiesQuestD1DelayDays` | **1** | After threshold; assault waits until owner **in zone** |
 | `armiesQuestBossPlayerKillOnly` | **true** | |
-| `rookSignetDesertionMultiplier` | **0.90** | **−10%** desertion (Garland’s Signet) |
+| `titleRookbreakerDesertionMultiplier` | **0.90** | **−10%** desertion while **Rookbreaker** title active |
 
 ---
 
