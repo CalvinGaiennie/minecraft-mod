@@ -26,6 +26,7 @@ import java.util.UUID;
 
 public final class ArmiesQuestService {
     private static final Map<UUID, List<UUID>> assaultMinions = new HashMap<>();
+    private static final Map<UUID, D2AssaultState> d2Assaults = new HashMap<>();
 
     private ArmiesQuestService() {
     }
@@ -128,6 +129,7 @@ public final class ArmiesQuestService {
         garland.getData(VillagerAttachments.BANDIT_DATA.get()).setD2GarlandFleeImmune(true);
         minions.add(garland.getUUID());
         assaultMinions.put(owner, minions);
+        d2Assaults.put(owner, new D2AssaultState(new ArrayList<>(minions), count, garland.getUUID()));
     }
 
     private static void tickActiveAssault(ServerLevel level, UUID owner, ArmiesQuestSavedData.PlayerQuestState state,
@@ -148,19 +150,41 @@ public final class ArmiesQuestService {
         }
         ids.removeIf(id -> level.getEntity(id) == null || !level.getEntity(id).isAlive());
         if (state.stage == ArmiesQuestStage.D2_ACTIVE) {
-            boolean garlandAlive = false;
-            for (UUID id : ids) {
-                if (level.getEntity(id) instanceof Villager v && v.hasData(VillagerAttachments.BANDIT_DATA.get())) {
-                    BanditData data = v.getData(VillagerAttachments.BANDIT_DATA.get());
-                    if (data != null && data.getBossRole() == BanditData.BossRole.GARLAND) {
-                        garlandAlive = true;
-                        break;
-                    }
-                }
+            var player = level.getServer().getPlayerList().getPlayer(owner);
+            if (player != null) {
+                tryGarlandFleeFromLosses(level, player, state);
             }
-            if (!garlandAlive) {
-                assaultMinions.remove(owner);
+        }
+    }
+
+    /** Garland flees when below 30% HP (damage handler) or when more than half his bandits are gone. Bandits only — no undead. */
+    public static void tryGarlandFleeFromLosses(ServerLevel level, ServerPlayer owner, ArmiesQuestSavedData.PlayerQuestState state) {
+        D2AssaultState d2 = d2Assaults.get(owner.getUUID());
+        if (d2 == null || state.stage != ArmiesQuestStage.D2_ACTIVE) {
+            return;
+        }
+        var largest = VillageSoldierCounts.largestOwnedVillage(level, owner.getUUID());
+        if (largest.isEmpty() || !villageDefended(level, largest.get())) {
+            return;
+        }
+        if (!(level.getEntity(d2.garlandId()) instanceof Villager garland) || !garland.isAlive()) {
+            return;
+        }
+        int aliveBandits = 0;
+        for (UUID id : d2.entityIds()) {
+            if (id.equals(d2.garlandId())) {
+                continue;
             }
+            var entity = level.getEntity(id);
+            if (entity != null && entity.isAlive()) {
+                aliveBandits++;
+            }
+        }
+        double lossFraction = com.villagers.mod.Config.ARMIES_QUEST_D2_GARLAND_FLEE_BANDIT_LOSS_FRACTION.get();
+        int dead = d2.initialBanditCount() - aliveBandits;
+        boolean enoughLoss = d2.initialBanditCount() > 0 && dead >= (int) Math.ceil(d2.initialBanditCount() * lossFraction);
+        if (enoughLoss) {
+            onGarlandFleeD2(owner, garland);
         }
     }
 
@@ -173,6 +197,7 @@ public final class ArmiesQuestService {
             }
         }
         assaultMinions.remove(owner);
+        d2Assaults.remove(owner);
         if (state.stage == ArmiesQuestStage.D2_ACTIVE) {
             state.stage = ArmiesQuestStage.D2_ARMED;
         } else if (state.stage == ArmiesQuestStage.D1_ACTIVE) {
@@ -223,6 +248,7 @@ public final class ArmiesQuestService {
         garland.spawnAtLocation(new ItemStack(VillagersMod.TORN_MAP_HALF.get()));
         garland.discard();
         assaultMinions.remove(owner.getUUID());
+        d2Assaults.remove(owner.getUUID());
         owner.sendSystemMessage(Component.translatable("quest.villagers.garland_fled"));
     }
 

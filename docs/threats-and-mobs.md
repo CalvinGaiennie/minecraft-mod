@@ -65,7 +65,7 @@ Raid size is random, not tied to the village's defenses:
 
 **Separate from Citadel’s ten relic fortresses** (`endgame.md`, Citadel mod only). Armies adds **authored** bandit bosses with **fixed names** and **bases** (outpost-scale, defenders inside, same broad feel as pillager outposts). Payoff is **loot** and **quest progression**; arc **D1→O1→D2→O2** in `armies-questline.md` (**O1** identifies who hit you in **D1**; **D2** after **O1** feeds **O2**). Roster size **TBD** (lean **3–5** kings). Not the same characters as relic fortress lords unless lore explicitly links them.
 
-**Help/hinder bandits** (truce, alliance, bribes): **possible future**; not MVP.
+**Help/hinder bandits** (truce, alliance, bribes): **deferred** to a **later mod version**; not MVP.
 
 ### Warlords
 
@@ -82,7 +82,8 @@ See **`endgame.md`** (kingdom size). Recurring **named** raiders; **medium** rai
 - **Role:** **mobile rogue**: **no** crypt site, **no** new-moon respawn. **Dead forever** when killed.
 - **Grudge target:** **ex-owner only**: the player who **owned the village** they deserted from (UUID saved on desert).
 - **Each strike (50 / 50):** **ambush** the ex-owner (necro + personal undead swarm nearby) **or** send a swarm at **one of the ex-owner’s claimed villages** (weakest by soldiers per villager; same march rules as roving swarms). If they have **no** villages, **ambush** only.
-- **How often (high encounter odds):** while the necro lives and the ex-owner has been online at least once since desert, roll **every 2 in-game days** (`wanderingNecromancerStrikeIntervalDays`, default **2**), then 50/50 ambush vs village. Only runs in **loaded** chunks (stored march when unloaded). Optional **chat line** to ex-owner when a strike is scheduled (**TBD** wording) so it feels personal, not random noise.
+- **Grudge delay:** **no strikes** for **`wanderingNecromancerGrudgeDelayDays`** after desert (default **30** in-game days ≈ one month) even if the ex-owner is online.
+- **How often (high encounter odds):** after that buffer, while the necro lives and the ex-owner has been online at least once since desert, roll **every 2 in-game days** (`wanderingNecromancerStrikeIntervalDays`, default **2**), then 50/50 ambush vs village. Only runs in **loaded** chunks (stored march when unloaded). The necro **speaks** (named chat line) when a strike fires.
 - **Identity:** keeps deserter **name**, **kills**, **gear**; hood/robe; ~bandit-leader combat tier; **not** a player necromancer (no wand hearts).
 - **Loot:** **phylactery shard** on kill (same family as rogue drops, `necromancy.md`); **no** horcrux chest by default.
 
@@ -119,7 +120,8 @@ Troubled youth can never take a trade, so they can never become traders or milit
 
 - **What they are:** bandit lairs built into large caves, rarer than bandit camps, each with 6-10 bandits and a leader. Inside are caltrop corridors and pit traps, so they teach players to watch their footing.
 - **Inside:** sleeping bays, a chest of stolen taxes, and a cell with 1-2 captive villagers who join the player's nearest village as unemployed villagers when freed. A small chance of a rare chronicle.
-- **Loot (author, 2026-10-07):** **one tier above bandit camps** — same categories (blocks, enchanted gear, maps, lore books) but **richer counts and stronger enchants**; still **below** authored quest finales and **far below** Citadel relic fortresses. Garrison **respawn** matches **pillager outpost** rules; chest loot **one-time** like camps.
+- **Loot (author, 2026-10-07):** **one tier above bandit camps** — same categories (blocks, enchanted gear, maps, lore books) but **richer counts and stronger enchants**; still **below** authored quest finales and **far below** Citadel relic fortresses. Garrison **respawn** matches **pillager outpost** rules; chest loot **one-time** like camps. **MVP hideout dressing:** caltrop patches + cage marker until cave templates (`bandit-camp-prefabs.md`).
+- **Citadel shadow (author):** **3** extra camps on a ring at **`citadelApproachDistance`** (default **~480** blocks, just inside typical max render distance) from **citadel center** (`CitadelAnchorSavedData`, set when Citadel mod places the Black Citadel). **No** shadow camps until that anchor exists — requires **Armies + Citadel** loaded and anchor set.
 - **Behavior:** hideout bandits follow normal band rules but travel through caves when they can.
 
 ### Underground villages

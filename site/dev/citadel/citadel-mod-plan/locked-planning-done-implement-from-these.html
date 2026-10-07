@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Citadel mod — planning finish line · Locked (planning done — implement from these) · Minecraft Kingdom</title>
+  <link rel="stylesheet" href="../../../assets/site.css" />
+  
+</head>
+<body class="scope-dev">
+  <header class="site-chrome site-header">
+    <div class="header-inner">
+      <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
+    </div>
+  </header>
+  <div class="page-area">
+    <div class="main-nav-bar">
+      <nav class="main-nav" aria-label="Site">
+        <a href="../../../index.html" class="">Marketing</a>
+        <a href="../../index.html" class="active">Dev docs</a>
+      </nav>
+    </div>
+    <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../../notes/index.html">Notes</a><a href="../index.html" class="active">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav></div>
+    <div class="page-shell has-sidebar">
+      <main class="doc-main">
+        <p class="source">Source: <code>docs/citadel-mod-plan.md</code> · Citadel mod — planning finish line</p><h1>Locked (planning done — implement from these)</h1>
+<h3>World &amp; approach</h3>
+<ul>
+<li><strong>One citadel</strong> per overworld, <strong>1,000–2,000</strong> blocks from spawn; <strong>great road</strong> spawn → intro town → citadel gates (road <strong>outside</strong> bounds).</li>
+<li><strong>Intro town</strong> ~<strong>350</strong> blocks from citadel center on the road; <strong>Dragon&#x27;s Well</strong> ~<strong>350</strong> in copse <strong>opposite</strong> road (<code>necromancer-path.md</code>, <code>endgame.md</code>).</li>
+<li><strong>Shell:</strong> ~<strong>40</strong> block unbreakable walls; <strong>no lava</strong> in layout; main floor = outside grade; <strong>30</strong> blocks soft basement then unbreakable floor (<code>citadel-layout.md</code>).</li>
+<li><strong>Bounds:</strong> inside outer wall only; camp block <strong>allowed</strong> on approach ground outside wall.</li>
+</ul>
+<h3>Seal &amp; assault</h3>
+<ul>
+<li>Dragon dead → barrier <strong>weakens</strong>; <strong>Seal-Breaker</strong> on gate opens ward (recipe in <code>endgame.md</code>).</li>
+<li><strong>Three bosses:</strong> Corrupted King + <strong>two bound necromancers</strong>; kill order <strong>free</strong>; brothers <strong>no respawn</strong> after arc kill.</li>
+<li><strong>Defensive mode:</strong> main inner gate <strong>closed</strong> until king falls; trap corridors + <strong>minable spawners</strong> + hazards (<code>citadel-layout.md</code>, <code>citadel-defenders.md</code>).</li>
+<li><strong>Difficulty intent:</strong> kit + layout + effects, not pure HP soak; <strong>ranged strongly recommended</strong> for gate/wall segments.</li>
+</ul>
+<h3>Claim &amp; owner</h3>
+<ul>
+<li><strong>60s throne sit</strong>; days <strong>1–7</strong> after king death = killing/contender credits only; day <strong>8+</strong> open sit (<code>citadel-claim.md</code>).</li>
+<li><strong>Active necromancer:</strong> cannot own; healthy Kingstree = <strong>death</strong> on sit; blighted = block + absolve message if no horcrux yet.</li>
+<li><strong>Barrier allowlist:</strong> owner + allies (Armies ally list when loaded).</li>
+<li><strong>Usurp:</strong> owner death in bounds → killer <strong>5 min</strong> exclusive sit.</li>
+<li><strong>Wand forfeit:</strong> confirm UI → clear owner, <strong>7-day</strong> reclaim window, <strong>permanent</strong> citadel ownership ban.</li>
+</ul>
+<h3>Necromancer intro (§6 intro — closed)</h3>
+<ul>
+<li><strong>3 hearts lost</strong> → mother storm; <strong>intro chestplate rogue</strong> town; horcrux <strong>4–8 chunks</strong> from town; destroy binding before plate; <strong>Well</strong> meeting; ingredient hand-in = <strong>commit</strong> → god wizard set + ward potion + Seal-Breaker; <strong>lie:</strong> spare <strong>second brother</strong> (evil son).</li>
+</ul>
+<h3>Necromancer climax (§6 — direction merged, dialogue TBD)</h3>
+<ul>
+<li><strong>First hit</strong> on a brother = alignment with the <strong>other</strong>.</li>
+<li><strong>Mother</strong> on son killed: spawn at player, talk, fight; <strong>wrath</strong> if aligned with first → kills first then attacks.</li>
+<li><strong>Endings table</strong> in <code>necromancer-path.md</code> (kill both, agree/refuse/stall End move, etc.).</li>
+<li><strong>7-day claim timer</strong> starts at <strong>king death</strong> only (stall branch).</li>
+</ul>
+<h3>Horcrux &amp; §7 items</h3>
+<ul>
+<li>Flutes (6 End tyrants), charges, compass unlimited range, rogue density ~½ outpost, <strong>4%</strong> wild lich (<code>necromancer-path.md</code>, <code>necromancy.md</code>).</li>
+</ul>
+<h3>Integration hooks (first split)</h3>
+<table><thead><tr><th>Publisher (Citadel)</th><th>Subscriber (Armies)</th></tr></thead><tbody><tr><td><code>CitadelEvents.KING_DEFEATED</code></td><td>Raid/militia near spawn</td></tr><tr><td><code>CitadelQueries.isCitadelFallen</code></td><td>Threat tuning</td></tr><tr><td><code>setCitadelCenter(pos)</code></td><td>Shadow camps ring ~480±24</td></tr></tbody></table>
+<p>---</p>
+      </main>
+      <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="what-citadel-mod-owns.html">What Citadel mod owns</a></li><li><a href="locked-planning-done-implement-from-these.html" class="active">Locked (planning done — implement from these)</a></li><li><a href="author-decisions-still-open-close-these-to-finish-planning.html">Author decisions still open (close these to “finish planning”)</a></li><li><a href="recommended-implementation-phases.html">Recommended implementation phases</a></li><li><a href="testing-plan-citadel.html">Testing plan (Citadel)</a></li><li><a href="doc-map-implementers.html">Doc map (implementers)</a></li><li><a href="next-planning-session-suggested-agenda-45-min.html">Next planning session (suggested agenda, ~45 min)</a></li></ul><p class="sidebar-label">Subsections</p><ul><li><a href="#world-approach">World &amp; approach</a></li><li><a href="#seal-assault">Seal &amp; assault</a></li><li><a href="#claim-owner">Claim &amp; owner</a></li><li><a href="#necromancer-intro-6-intro-closed">Necromancer intro (§6 intro — closed)</a></li><li><a href="#necromancer-climax-6-direction-merged-dialogue-tbd">Necromancer climax (§6 — direction merged, dialogue TBD)</a></li><li><a href="#horcrux-7-items">Horcrux &amp; §7 items</a></li><li><a href="#integration-hooks-first-split">Integration hooks (first split)</a></li></ul></aside>
+    </div>
+  </div>
+  <footer class="site-footer">
+    Source: <code>docs/citadel-mod-plan.md</code>
+  </footer>
+  
+</body>
+</html>

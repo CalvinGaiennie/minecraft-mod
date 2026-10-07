@@ -13,6 +13,15 @@ public final class BanditService {
     }
 
     public static void tryConvertDeserter(Villager villager) {
+        tryConvertDeserter(villager, null, com.villagers.mod.entity.DeserterIdentity.EMPTY);
+    }
+
+    public static void tryConvertDeserter(Villager villager, java.util.UUID exOwnerId) {
+        tryConvertDeserter(villager, exOwnerId, com.villagers.mod.entity.DeserterIdentity.EMPTY);
+    }
+
+    public static void tryConvertDeserter(Villager villager, java.util.UUID exOwnerId,
+            com.villagers.mod.entity.DeserterIdentity identity) {
         if (!(villager.level() instanceof ServerLevel) || villager.level().isClientSide) {
             return;
         }
@@ -25,8 +34,7 @@ public final class BanditService {
         } else if (roll < villagerShare + banditShare) {
             makeBandit(villager, new BanditData(villager.getUUID()), null);
         } else if (roll < villagerShare + banditShare + necroShare) {
-            // Wandering necromancer: stub as bandit with hood for now; full arc deferred.
-            makeBandit(villager, new BanditData(villager.getUUID()), null);
+            WanderingNecromancerService.convertDeserter(villager, exOwnerId, identity);
         } else {
             resetToVillager(villager);
         }

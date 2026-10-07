@@ -60,11 +60,9 @@ public class ArmiesQuestEvents {
                     var state = ArmiesQuestSavedData.get(serverLevel).getOrCreate(owner.getUUID());
                     if (state.stage == ArmiesQuestStage.D2_ACTIVE) {
                         var largest = com.villagers.mod.armies.VillageSoldierCounts.largestOwnedVillage(serverLevel, owner.getUUID());
-                        if (largest.isPresent()) {
-                            if (ArmiesQuestService.villageDefended(serverLevel, largest.get())) {
-                                event.setNewDamage(0);
-                                ArmiesQuestService.onGarlandFleeD2(owner, villager);
-                            }
+                        if (largest.isPresent() && ArmiesQuestService.villageDefended(serverLevel, largest.get())) {
+                            event.setNewDamage(0);
+                            ArmiesQuestService.onGarlandFleeD2(owner, villager);
                         }
                     }
                 }
@@ -134,7 +132,8 @@ public class ArmiesQuestEvents {
             }
         }
         if (data.getHomeCampId() != null && villager.level() instanceof ServerLevel level) {
-            com.villagers.mod.armies.BanditCampService.markCampCleared(level, data.getHomeCampId());
+            ServerPlayer killer = event.getSource().getEntity() instanceof ServerPlayer sp ? sp : null;
+            com.villagers.mod.armies.BanditCampService.markCampCleared(level, data.getHomeCampId(), killer);
         }
     }
 

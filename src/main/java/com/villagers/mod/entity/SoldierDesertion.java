@@ -82,15 +82,21 @@ public class SoldierDesertion {
 
     public static void desert(Villager soldier) {
         SoldierData data = soldier.getData(VillagerAttachments.SOLDIER_DATA.get());
+        DeserterIdentity identity = DeserterIdentity.fromSoldier(data);
+        java.util.UUID exOwnerId = null;
         if (soldier.level() instanceof ServerLevel level) {
             if (data != null) {
                 SoldierStructureHelper.releaseSoldierBed(level, soldier.getUUID(), data.getAssignedPostBed());
             }
             com.villagers.mod.combat.RampartClaims.get(level).releaseDefender(soldier.getUUID());
+            var village = VillageManager.get(level).findVillageAt(soldier.getBlockX(), soldier.getBlockY(), soldier.getBlockZ());
+            if (village != null) {
+                exOwnerId = village.getOwnerId();
+            }
         }
         SoldierCombat.disableCombatGoals(soldier);
         soldier.removeData(VillagerAttachments.SOLDIER_DATA.get());
         SoldierLabels.clear(soldier);
-        com.villagers.mod.threat.BanditService.tryConvertDeserter(soldier);
+        com.villagers.mod.threat.BanditService.tryConvertDeserter(soldier, exOwnerId, identity);
     }
 }

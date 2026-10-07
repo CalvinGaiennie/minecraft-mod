@@ -25,8 +25,7 @@ public final class BanditCampService {
             return;
         }
         if (!record.lootFilled()) {
-            BlockPos chest = camp.getBlockPos().north();
-            BanditLoot.fillSiteChest(level, chest, camp.getKind(), level.random);
+            BanditLoot.fillSiteChests(level, camp.getBlockPos(), camp.getKind(), level.random);
             data.updateSite(new BanditWorldSavedData.SiteRecord(record.id(), record.kind(), record.origin(), true, record.nextRespawnGameTime()));
         }
         trySpawnGarrison(level, camp, record, true);
@@ -108,6 +107,10 @@ public final class BanditCampService {
     }
 
     public static void markCampCleared(ServerLevel level, UUID campId) {
+        markCampCleared(level, campId, null);
+    }
+
+    public static void markCampCleared(ServerLevel level, UUID campId, net.minecraft.server.level.ServerPlayer killer) {
         BanditWorldSavedData data = BanditWorldSavedData.get(level);
         BanditWorldSavedData.SiteRecord record = data.findById(campId);
         if (record == null) {

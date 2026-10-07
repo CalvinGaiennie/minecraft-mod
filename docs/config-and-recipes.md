@@ -64,6 +64,7 @@ Every number a server owner might want to tune, with its default.
 | `deserterOutcomeBandit`, desert → bandit (keeps gear) | **0.45** |
 | `deserterOutcomeNecromancer`, desert → wandering necromancer (keeps gear) | **0.05** |
 | `orphanageMinBedCount`, vanilla world-gen village gets orphanage if beds **≥** this at gen (one-time) | **21** (>20 beds; lower e.g. **16–18** if too rare) |
+| `wanderingNecromancerGrudgeDelayDays`, quiet period after desert before first strike | **30** |
 | `wanderingNecromancerStrikeIntervalDays`, ex-owner strike roll while necro alive | **2** |
 | `orphanSoldierBonusHealth`, flat max HP while orphan-raised soldier/militia | **4** |
 | `orphanSoldierBonusDamage`, damage multiplier (melee + arrows) | **1.15** (+15%) |

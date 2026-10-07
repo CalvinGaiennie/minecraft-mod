@@ -11,6 +11,7 @@ import java.util.Map;
 import com.villagers.mod.VillagersMod;
 import com.villagers.mod.threat.NewMoonRaidService;
 import com.villagers.mod.threat.SwarmService;
+import com.villagers.mod.threat.WanderingNecromancerService;
 
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
@@ -34,6 +35,7 @@ public class ThreatTickHandler {
             for (var player : level.players()) {
                 SwarmService.trySpawnNightly(level, player);
             }
+            WanderingNecromancerService.tryDailyStrikes(level, day);
         }
         if (level.getGameTime() % 100 == 0) {
             for (var player : level.players()) {

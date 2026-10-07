@@ -72,9 +72,15 @@
 <li><strong>Bandits and swarms</strong> are enemies and fight each other.</li>
 <li><strong>Bandit camps:</strong> small structures that generate in the world like pillager outposts, each with 3-5 bandits and a leader. Every world has some bands from the start.</li>
 </ul>
+<p><strong>Camp loot and respawn (author, 2026-10-07):</strong></p>
+<ul>
+<li><strong>Respawn:</strong> defender repop follows <strong>pillager outpost</strong> rules (leave the area, bandits return on the same kind of timer; tune to vanilla parity in playtest). <strong>Chest loot does not refill</strong> when the garrison respawns (same as outpost barrels/chests: one payout per structure generation / first clear).</li>
+<li><strong>Chests:</strong> stolen-kingdom <strong>blocks</strong> (iron, gold, emerald, etc.) plus <strong>enchanted weapons and armor</strong> — enough, spread across camp chests and leader gear, to <strong>decently outfit about three or four players</strong> (mostly iron with some diamond and useful enchants; exact weights <strong>TBD</strong> in loot tables).</li>
+<li><strong>Intel (unchanged):</strong> <strong>village map</strong> (<code>war-and-defense.md</code>); <strong>hero legend</strong> books (~<strong>5%</strong> per camp roll); <strong>Village Chronicles</strong> (<code>old-kingdom-lore.md</code>).</li>
+</ul>
 <h3>Authored bandit kings (Armies mod)</h3>
 <p><strong>Separate from Citadel’s ten relic fortresses</strong> (<code>endgame.md</code>, Citadel mod only). Armies adds <strong>authored</strong> bandit bosses with <strong>fixed names</strong> and <strong>bases</strong> (outpost-scale, defenders inside, same broad feel as pillager outposts). Payoff is <strong>loot</strong> and <strong>quest progression</strong>; arc <strong>D1→O1→D2→O2</strong> in <code>armies-questline.md</code> (<strong>O1</strong> identifies who hit you in <strong>D1</strong>; <strong>D2</strong> after <strong>O1</strong> feeds <strong>O2</strong>). Roster size <strong>TBD</strong> (lean <strong>3–5</strong> kings). Not the same characters as relic fortress lords unless lore explicitly links them.</p>
-<p><strong>Help/hinder bandits</strong> (truce, alliance, bribes): <strong>possible future</strong>; not MVP.</p>
+<p><strong>Help/hinder bandits</strong> (truce, alliance, bribes): <strong>deferred</strong> to a <strong>later mod version</strong>; not MVP.</p>
 <h3>Warlords</h3>
 <p>See <strong><code>endgame.md</code></strong> (kingdom size). Recurring <strong>named</strong> raiders; <strong>medium</strong> raid scale cap; <strong>not</strong> quest <strong>D1/D2</strong> and <strong>not</strong> an insane endgame boss.</p>
 <h3>Enlistment and threats</h3>
@@ -88,7 +94,8 @@
 <li><strong>Role:</strong> <strong>mobile rogue</strong>: <strong>no</strong> crypt site, <strong>no</strong> new-moon respawn. <strong>Dead forever</strong> when killed.</li>
 <li><strong>Grudge target:</strong> <strong>ex-owner only</strong>: the player who <strong>owned the village</strong> they deserted from (UUID saved on desert).</li>
 <li><strong>Each strike (50 / 50):</strong> <strong>ambush</strong> the ex-owner (necro + personal undead swarm nearby) <strong>or</strong> send a swarm at <strong>one of the ex-owner’s claimed villages</strong> (weakest by soldiers per villager; same march rules as roving swarms). If they have <strong>no</strong> villages, <strong>ambush</strong> only.</li>
-<li><strong>How often (high encounter odds):</strong> while the necro lives and the ex-owner has been online at least once since desert, roll <strong>every 2 in-game days</strong> (<code>wanderingNecromancerStrikeIntervalDays</code>, default <strong>2</strong>), then 50/50 ambush vs village. Only runs in <strong>loaded</strong> chunks (stored march when unloaded). Optional <strong>chat line</strong> to ex-owner when a strike is scheduled (<strong>TBD</strong> wording) so it feels personal, not random noise.</li>
+<li><strong>Grudge delay:</strong> <strong>no strikes</strong> for <strong><code>wanderingNecromancerGrudgeDelayDays</code></strong> after desert (default <strong>30</strong> in-game days ≈ one month) even if the ex-owner is online.</li>
+<li><strong>How often (high encounter odds):</strong> after that buffer, while the necro lives and the ex-owner has been online at least once since desert, roll <strong>every 2 in-game days</strong> (<code>wanderingNecromancerStrikeIntervalDays</code>, default <strong>2</strong>), then 50/50 ambush vs village. Only runs in <strong>loaded</strong> chunks (stored march when unloaded). The necro <strong>speaks</strong> (named chat line) when a strike fires.</li>
 <li><strong>Identity:</strong> keeps deserter <strong>name</strong>, <strong>kills</strong>, <strong>gear</strong>; hood/robe; ~bandit-leader combat tier; <strong>not</strong> a player necromancer (no wand hearts).</li>
 <li><strong>Loot:</strong> <strong>phylactery shard</strong> on kill (same family as rogue drops, <code>necromancy.md</code>); <strong>no</strong> horcrux chest by default.</li>
 </ul>
@@ -122,6 +129,8 @@
 <ul>
 <li><strong>What they are:</strong> bandit lairs built into large caves, rarer than bandit camps, each with 6-10 bandits and a leader. Inside are caltrop corridors and pit traps, so they teach players to watch their footing.</li>
 <li><strong>Inside:</strong> sleeping bays, a chest of stolen taxes, and a cell with 1-2 captive villagers who join the player&#x27;s nearest village as unemployed villagers when freed. A small chance of a rare chronicle.</li>
+<li><strong>Loot (author, 2026-10-07):</strong> <strong>one tier above bandit camps</strong> — same categories (blocks, enchanted gear, maps, lore books) but <strong>richer counts and stronger enchants</strong>; still <strong>below</strong> authored quest finales and <strong>far below</strong> Citadel relic fortresses. Garrison <strong>respawn</strong> matches <strong>pillager outpost</strong> rules; chest loot <strong>one-time</strong> like camps. <strong>MVP hideout dressing:</strong> caltrop patches + cage marker until cave templates (<code>bandit-camp-prefabs.md</code>).</li>
+<li><strong>Citadel shadow (author):</strong> <strong>3</strong> extra camps on a ring at <strong><code>citadelApproachDistance</code></strong> (default <strong>~480</strong> blocks, just inside typical max render distance) from <strong>citadel center</strong> (<code>CitadelAnchorSavedData</code>, set when Citadel mod places the Black Citadel). <strong>No</strong> shadow camps until that anchor exists — requires <strong>Armies + Citadel</strong> loaded and anchor set.</li>
 <li><strong>Behavior:</strong> hideout bandits follow normal band rules but travel through caves when they can.</li>
 </ul>
 <h3>Underground villages</h3>

@@ -80,6 +80,7 @@
 | 2026-10-07 | **Armies arc (tweak)** | D1 starts **on enter** first **30**-soldier village; **Garland the Rook** nickname; **Rookbreaker** title **−10%** desertion (not signet). | `armies-questline.md` |
 | 2026-10-07 | **Bandit camp loot** | Camps: **pillager outpost** garrison respawn; chests = blocks + enchants for **~3–4 players**, one-time. Hideouts: **one tier up**. Garland treasury **≥ hideout**. | `threats-and-mobs.md`, `armies-questline.md` |
 | 2026-10-07 | **Corvin camp loot** | **Camp baseline** + extra **diamond/emerald/ore** valuables; not hideout enchant tier. | `armies-questline.md` |
+| 2026-10-07 | **Author batch (Armies)** | Corvin **800–2200**, Garland **2200–4000**, **≥1200** apart; D2 flee **30% HP OR >50% bandits lost**; no O2 villager line; loot for army at **owner discretion**; **2** camp kings; roam bands **deferred**; bandit alliance **later version**; citadel **shadow extra camps**; hideouts **yes** (caltrops MVP). | `armies-questline.md`, `bandit-camp-prefabs.md`, `threats-and-mobs.md` |
 
 ---
 
@@ -94,5 +95,7 @@
 ## Current status
 
 **§10:** author decisions merged; close remaining **TBD** rows in `citadel-layout.md` when answered.
+
+**Citadel mod planning finish line:** `citadel-mod-plan.md` — scope, locked canon, open decision queue (A–F), implementation phases. Close planning when **A1–A3, B1–B3, B5–B6, C1–C2, D1–D2, E1** are decided.
 
 **Active:** **§7** (necromancer quest items, flutes, god wizard armor, horcrux). **§9** closed. **§10** next after §7.

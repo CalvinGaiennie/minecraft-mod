@@ -25,9 +25,9 @@
       <main class="doc-main">
         <p class="source">Source: <code>docs/armies-questline.md</code> · Armies storyline (player, Armies mod)</p><h1>D2 — **The big one hits home**</h1>
 <p><strong>Trigger:</strong> <strong><code>armiesQuestD2Armed</code></strong> and player <strong>enters</strong> their <strong>largest village</strong> by <strong>soldier count in zone</strong> (soldiers only; tie-break: villager population, then mess UUID hash).</p>
-<p><strong>Scene:</strong> Village already in <strong>authored assault</strong>. Leader: <strong>Garland</strong> (known as <strong>the Rook</strong>). ~<strong>24–30</strong> attackers + Garland (tougher than D1, <strong>not</strong> warlord-sized).</p>
-<p><strong>Goal:</strong> Kill or rout waves until <strong>attack phase ends</strong> (timer cap <strong>TBD</strong>, or all minions dead except Garland).</p>
-<p><strong>Success:</strong> Mess <strong>still placed</strong> and <strong>≥1</strong> post bed unbroken. Garland <strong>flees</strong> at <strong>30% HP</strong> (immune, flee script). Drops <strong><code>torn_map_half</code></strong>.</p>
+<p><strong>Scene:</strong> Village already in <strong>authored assault</strong>. Leader: <strong>Garland</strong> (known as <strong>the Rook</strong>). ~<strong>24–30</strong> <strong>bandit</strong> attackers + Garland (<strong>no undead</strong>). Tougher than D1, <strong>not</strong> warlord-sized.</p>
+<p><strong>Goal:</strong> Drive Garland off — <strong>not</strong> a wipe of every bandit.</p>
+<p><strong>Success:</strong> Mess <strong>still placed</strong> and <strong>≥1</strong> post bed unbroken. Garland <strong>flees</strong> when <strong>either</strong>: HP <strong>≤30%</strong>, <strong>or</strong> <strong>≥65%</strong> of his assault bandits are dead (<code>armiesQuestD2GarlandFleeBanditLossFraction</code> <strong>0.65</strong>). Drops <strong><code>torn_map_half</code></strong>. <strong>No</strong> timer cap. <strong>Bandits only</strong> (no undead).</p>
 <p><strong>Fail:</strong> Mess broken or no beds: assault ends; <strong>retry</strong> after <strong>rebuilding mess</strong> when you enter largest village again. <strong>No</strong> permanent village delete.</p>
 <p><strong>Garland cannot be fully killed in D2.</strong></p>
 <p>---</p>

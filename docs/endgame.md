@@ -12,7 +12,7 @@ Details still to decide: fine points of kingdom titles, monuments, and the Black
 | Duke | 6 | +2 | +20% |
 | King | 10 | +3 | +30% |
 
-- **Warlords (Armies mod, toned down):** **Named** generals who hit **large kingdoms** on a **slow** new-moon timer. **Not** a citadel-scale threat. **Proposed:** first warlord event at **Baron+** (see `armies-questline.md` **D2**); recurring rolls every **6–8** new-moon cycles at **Duke+**; **one** village targeted; raid size capped at **medium** new-moon raid **plus** one buffed warlord NPC (**no** extra siege kit beyond normal raids). Losing is painful for **that** village, not a kingdom delete.
+- **Warlords (Armies mod, toned down):** **Named** generals who hit **large kingdoms** on a **slow** new-moon timer. **Not** a citadel-scale threat. **Author:** first warlord probe **any time after Baron title** (not tied to finishing the Halvek→Garland quest); recurring rolls every **6–8** new-moon cycles at **Duke+**; **one** village targeted; raid size capped at **medium** new-moon raid **plus** one buffed warlord NPC (**no** extra siege kit beyond normal raids). Losing is painful for **that** village, not a kingdom delete.
 - **Monuments:** when a hero or Legend dies, he drops a service record, a paper with his name and stats. Players can craft and place statues in several sizes at any time, but they look rough and unfinished until a service record is applied. Then the statue takes on that soldier's look, name, rank, and kill count. With **Armies** at the citadel, use **scattered plinths** in courts and yards (`citadel-layout.md`); without Armies, monuments stay kingdom-wide only.
 
 ## The Black Citadel

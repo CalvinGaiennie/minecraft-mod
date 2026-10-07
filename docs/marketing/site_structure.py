@@ -57,6 +57,7 @@ DEV_GROUPS: tuple[DevGroup, ...] = (
         "citadel",
         "Citadel",
         (
+            DevDoc("citadel-mod-plan.md", "Citadel mod plan", split_h2_min=2),
             DevDoc("endgame.md", "Endgame", split_h2_min=2),
             DevDoc("citadel-claim.md", "Citadel claim"),
             DevDoc("citadel-layout.md", "Citadel layout", split_h2_min=2),
@@ -84,6 +85,7 @@ DEV_GROUPS: tuple[DevGroup, ...] = (
             DevDoc("soldiers-and-villages.md", "Soldiers & villages", split_h2_min=2),
             DevDoc("war-and-defense.md", "War & defense", split_h2_min=2),
             DevDoc("threats-and-mobs.md", "Threats & mobs", split_h2_min=2),
+            DevDoc("armies-manual-test-plan.md", "Armies manual test plan", split_h2_min=2),
         ),
     ),
     DevGroup(

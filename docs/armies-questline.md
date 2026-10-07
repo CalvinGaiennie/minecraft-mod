@@ -41,7 +41,9 @@ O2 — hunt and kill the big bandit leader (player finish only)
 
 **Start:** Player holds **Blood-stained Ledger** with O1 flag unset.
 
-**Goal:** Ledger names **Corvin** and a bearing (flavor text only). **Quest compass** or **journal waypoint** to a **pre-placed outpost** (**Corvin’s camp**, SavedData, one site per world, distance rules **TBD** placement).
+**Goal:** Ledger names **Corvin** and a bearing (flavor text only). Chat **waypoint** to **Corvin’s camp** (SavedData, one site per world).
+
+**Camp placement (author):** **Corvin** **800–2200** blocks from spawn; **Garland** **2200–4000**; **≥1200** blocks apart. Generic camps **800–4000**. Long marches are intentional — bring **campaign/camp** support; loot is sized to **outfit soldiers** (owner distributes). **Future:** biome landmarks (ravine, pass, broken tower); Garland prefers **rough terrain** (height variance). Prefab plan: `bandit-camp-prefabs.md`.
 
 **Middle manager:** **Corvin** (not the big leader). Outpost: **8–12** bandits + Corvin. Chests use **bandit camp loot** (`threats-and-mobs.md`) with a **modest bump** to **ores and valuables** (extra **diamonds, emeralds**, iron/gold ingots and blocks) — bookkeeper’s cut, not hideout-tier enchants. No extra unique drop beyond the quest beat.
 
@@ -57,11 +59,11 @@ O2 — hunt and kill the big bandit leader (player finish only)
 
 **Trigger:** **`armiesQuestD2Armed`** and player **enters** their **largest village** by **soldier count in zone** (soldiers only; tie-break: villager population, then mess UUID hash).
 
-**Scene:** Village already in **authored assault**. Leader: **Garland** (known as **the Rook**). ~**24–30** attackers + Garland (tougher than D1, **not** warlord-sized).
+**Scene:** Village already in **authored assault**. Leader: **Garland** (known as **the Rook**). ~**24–30** **bandit** attackers + Garland (**no undead**). Tougher than D1, **not** warlord-sized.
 
-**Goal:** Kill or rout waves until **attack phase ends** (timer cap **TBD**, or all minions dead except Garland).
+**Goal:** Drive Garland off — **not** a wipe of every bandit.
 
-**Success:** Mess **still placed** and **≥1** post bed unbroken. Garland **flees** at **30% HP** (immune, flee script). Drops **`torn_map_half`**.
+**Success:** Mess **still placed** and **≥1** post bed unbroken. Garland **flees** when **either**: HP **≤30%**, **or** **≥65%** of his assault bandits are dead (`armiesQuestD2GarlandFleeBanditLossFraction` **0.65**). Drops **`torn_map_half`**. **No** timer cap. **Bandits only** (no undead).
 
 **Fail:** Mess broken or no beds: assault ends; **retry** after **rebuilding mess** when you enter largest village again. **No** permanent village delete.
 
@@ -71,9 +73,9 @@ O2 — hunt and kill the big bandit leader (player finish only)
 
 ## O2 — **No more running**
 
-**Start:** **`torn_map_half`** + journal line from a villager (proposed): *“He went to the broken tower beyond the birch swamp!”*
+**Start:** **`torn_map_half`** (no fixed villager journal line for now).
 
-**Find:** Shapeless craft **`torn_map_half`** + **ledger** + **compass** → **Rook's Trail Compass**; journal bearing to **Garland’s camp** (SavedData outpost, stronger than Corvin’s).
+**Find:** Shapeless craft **`torn_map_half`** + **ledger** + **compass** → **Rook's Trail Compass** (points at camp); chat bearing to **Garland’s camp** (SavedData, farther than Corvin’s).
 
 **Goal:** Kill **Garland the Rook**. **Player finish only**.
 
@@ -101,7 +103,7 @@ Citadel **relic fortresses** use **different** characters (`endgame.md`).
 ## Multiplayer
 
 - Quest progress on **mess owner player UUID** at D1 trigger.
-- Allies can fight; **owner** advances quest items unless **party share** added later.
+- Allies can fight; **owner** advances quest items. **Camp chest loot** stays at the site (take it from the chests like a normal clear).
 - **One** active arc per owner per world.
 
 ---
@@ -114,12 +116,22 @@ Citadel **relic fortresses** use **different** characters (`endgame.md`).
 | `armiesQuestD1IgnoreMoon` | **true** | |
 | `armiesQuestBossPlayerKillOnly` | **true** | |
 | `titleRookbreakerDesertionMultiplier` | **0.90** | **−10%** desertion while **Rookbreaker** title active |
+| `corvinCampMinDistance` / `corvinCampMaxDistance` | **800** / **2200** | Corvin camp ring |
+| `garlandCampMinDistance` / `garlandCampMaxDistance` | **2200** / **4000** | Garland camp ring |
+| `questCampMinSeparation` | **1200** | Corvin vs Garland |
+| `citadelShadowExtraCamps` | **3** | Extra camps on citadel approach ring |
+| `armiesQuestD2GarlandFleeBanditLossFraction` | **0.65** | D2 flee when this share of bandits dead |
+| `citadelApproachDistance` | **480** | Shadow camp ring (~just inside max view distance so citadel is barely visible) |
+| `citadelShadowRingJitter` | **24** | ± blocks on that ring |
+| `wanderingNecromancerStrikeIntervalDays` | **2** | Grudge strike cadence |
+
+**Authored camp kings (beyond Halvek assault):** **Corvin** and **Garland** only.
 
 ---
 
 ## Warlords (background)
 
-Recurring **warlords** (`endgame.md`) are **not** D1, D2, or O2.
+Recurring **warlords** (`endgame.md`) are **not** D1, D2, or O2. First probe **any time after Baron title** (not gated on finishing the Garland arc).
 
 ---
 

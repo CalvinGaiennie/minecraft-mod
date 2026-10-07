@@ -59,6 +59,10 @@ public class EnlistmentSavedData extends SavedData {
         }
     }
 
+    public boolean isOptedOut(UUID playerId) {
+        return optedOut.contains(playerId);
+    }
+
     private static void readUuidList(CompoundTag tag, String key, Set<UUID> target) {
         if (!tag.contains(key, Tag.TAG_LIST)) {
             return;

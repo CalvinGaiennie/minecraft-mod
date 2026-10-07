@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Armies mod — manual &amp; integration test plan · 10. Armies quest arc (full matrix) · Minecraft Kingdom</title>
+  <link rel="stylesheet" href="../../../assets/site.css" />
+  
+</head>
+<body class="scope-dev">
+  <header class="site-chrome site-header">
+    <div class="header-inner">
+      <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
+    </div>
+  </header>
+  <div class="page-area">
+    <div class="main-nav-bar">
+      <nav class="main-nav" aria-label="Site">
+        <a href="../../../index.html" class="">Marketing</a>
+        <a href="../../index.html" class="active">Dev docs</a>
+      </nav>
+    </div>
+    <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../index.html" class="active">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav></div>
+    <div class="page-shell has-sidebar">
+      <main class="doc-main">
+        <p class="source">Source: <code>docs/armies-manual-test-plan.md</code> · Armies mod — manual &amp; integration test plan</p><h1>10. Armies quest arc (full matrix)</h1>
+<p>Use <strong><code>armies-questline.md</code></strong>. Boss kills: <strong><code>armiesQuestBossPlayerKillOnly</code></strong> — non-player damage cannot finish bosses.</p>
+<h3>D1</h3>
+<table><thead><tr><th>ID</th><th>Steps</th><th>Expected</th></tr></thead><tbody><tr><td>Q1</td><td>Reach <strong>30</strong> soldiers (<strong>soldiers only</strong>, not militia) in claim</td><td>Stage waits for <strong>enter claim</strong></td></tr><tr><td>Q2</td><td>Enter claim at ≥30</td><td><strong>Halvek</strong> assault (~18–22 bandits); any moon if <code>armiesQuestD1IgnoreMoon</code></td></tr><tr><td>Q3</td><td>Halvek to 1 HP via golem / fall damage</td><td><strong>Cannot</strong> die</td></tr><tr><td>Q4</td><td>Player kills Halvek</td><td><strong>Blood-stained Ledger</strong>; O1 on read</td></tr><tr><td>Q5</td><td>Second player owns different mess</td><td><strong>Per-owner</strong> arc on owner UUID</td></tr></tbody></table>
+<h3>O1</h3>
+<table><thead><tr><th>ID</th><th>Steps</th><th>Expected</th></tr></thead><tbody><tr><td>Q6</td><td>Read ledger</td><td>Chat <strong>bearing</strong> toward Corvin camp</td></tr><tr><td>Q7</td><td>Clear Corvin (<strong>player kill</strong>)</td><td>Dialog line; <strong><code>armiesQuestD2Armed</code></strong></td></tr><tr><td>Q8</td><td>Corvin camp distance</td><td>Within <strong>800–2200</strong> spawn ring</td></tr></tbody></table>
+<h3>D2</h3>
+<table><thead><tr><th>ID</th><th>Steps</th><th>Expected</th></tr></thead><tbody><tr><td>Q9</td><td>Enter <strong>largest</strong> village by soldier count with D2 armed</td><td>Garland assault (<strong>bandits only</strong>, no undead)</td></tr><tr><td>Q10</td><td>Garland <strong>≤30% HP</strong></td><td>Flees; <strong>torn_map_half</strong></td></tr><tr><td>Q11</td><td>Kill <strong>≥65%</strong> assault bandits (not Garland)</td><td>Same flee</td></tr><tr><td>Q12</td><td>Break mess / all post beds</td><td><strong>Fail</strong> state; retry after rebuild + re-enter</td></tr><tr><td>Q13</td><td>Player “kills” Garland in D2</td><td><strong>Cannot</strong> full kill (flee immunity)</td></tr></tbody></table>
+<h3>O2</h3>
+<table><thead><tr><th>ID</th><th>Steps</th><th>Expected</th></tr></thead><tbody><tr><td>Q14</td><td>Craft <strong>ledger + torn map + compass</strong></td><td><strong>Rook&#x27;s Trail Compass</strong> (lodestone to Garland camp)</td></tr><tr><td>Q15</td><td>Kill Garland (<strong>player</strong>)</td><td><strong>Rookbreaker</strong> title; signet trophy; <strong>−10%</strong> desertion</td></tr><tr><td>Q16</td><td>Revisit camps</td><td>Halvek/Corvin/Garland <strong>do not</strong> respawn</td></tr></tbody></table>
+<p>---</p>
+      </main>
+      <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="1-world-generation-bandit-structures.html">1. World generation &amp; bandit structures</a></li><li><a href="2-village-claim-economy-enlistment.html">2. Village claim, economy, enlistment</a></li><li><a href="3-soldier-conversion-kit-ranks.html">3. Soldier conversion, kit, ranks</a></li><li><a href="4-combat-wake-targeting-hold-ground.html">4. Combat — wake, targeting, hold ground</a></li><li><a href="5-ranged-combat-when-they-shoot-how-often-ammo.html">5. Ranged combat — when they shoot, how often, ammo</a></li><li><a href="6-pathfinding-post-return.html">6. Pathfinding &amp; post return</a></li><li><a href="7-militia-contrast-soldiers.html">7. Militia (contrast soldiers)</a></li><li><a href="8-desertion-bandits-wandering-necromancers.html">8. Desertion, bandits, wandering necromancers</a></li><li><a href="9-bandit-camps-combat-non-quest.html">9. Bandit camps &amp; combat (non-quest)</a></li><li><a href="10-armies-quest-arc-full-matrix.html" class="active">10. Armies quest arc (full matrix)</a></li><li><a href="11-threats-parallel-to-quest.html">11. Threats (parallel to quest)</a></li><li><a href="12-multiplayer-permissions.html">12. Multiplayer &amp; permissions</a></li><li><a href="13-regression-smoke-every-build.html">13. Regression smoke (every build)</a></li><li><a href="14-known-gaps-do-not-file-as-bugs-yet.html">14. Known gaps / do not file as bugs yet</a></li><li><a href="bug-report-template.html">Bug report template</a></li></ul><p class="sidebar-label">Subsections</p><ul><li><a href="#d1">D1</a></li><li><a href="#o1">O1</a></li><li><a href="#d2">D2</a></li><li><a href="#o2">O2</a></li></ul></aside>
+    </div>
+  </div>
+  <footer class="site-footer">
+    Source: <code>docs/armies-manual-test-plan.md</code>
+  </footer>
+  
+</body>
+</html>

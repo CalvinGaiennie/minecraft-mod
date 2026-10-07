@@ -115,5 +115,11 @@
   "quest.villagers.garland_fled": "Garland fled, leaving half a map behind.",
   "quest.villagers.garland_bearing": "Combine the ledger, torn map, and a compass. Garland hides near X=%s Z=%s.",
   "quest.villagers.rookbreaker": "Title earned: Rookbreaker. Desertion in your villages is reduced.",
-  "quest.villagers.d2_failed": "Garland broke your village. Rebuild the mess and beds, then return to your largest village."
+  "quest.villagers.d2_failed": "Garland broke your village. Rebuild the mess and beds, then return to your largest village.",
+  "entity.villagers.wandering_necromancer": "Wandering Necromancer",
+  "entity.villagers.necro_swarm_minion": "Raised Dead",
+  "dialog.villagers.wandering_necro_ambush_a": "You left me to rot. Now you join them.",
+  "dialog.villagers.wandering_necro_ambush_b": "No mess hall, no mercy — only the dead you earned.",
+  "dialog.villagers.wandering_necro_village_a": "Your village %s sleeps light. I sent my friends.",
+  "dialog.villagers.wandering_necro_village_b": "%s will remember the night you starved me."
 }

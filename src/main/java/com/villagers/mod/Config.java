@@ -15,6 +15,10 @@ public class Config {
     public static final ModConfigSpec.BooleanValue ARMIES_QUEST_BOSS_PLAYER_KILL_ONLY = BUILDER
             .define("armiesQuestBossPlayerKillOnly", true);
 
+    public static final ModConfigSpec.DoubleValue ARMIES_QUEST_D2_GARLAND_FLEE_BANDIT_LOSS_FRACTION = BUILDER
+            .comment("Garland flees D2 when this fraction of his assault bandits (not counting him) are dead")
+            .defineInRange("armiesQuestD2GarlandFleeBanditLossFraction", 0.65, 0.1, 1.0);
+
     public static final ModConfigSpec.DoubleValue TITLE_ROOKBREAKER_DESERTION_MULTIPLIER = BUILDER
             .comment("Multiplier on desertion rolls while owner has Rookbreaker title (0.90 = -10%)")
             .defineInRange("titleRookbreakerDesertionMultiplier", 0.90, 0.0, 1.0);
@@ -37,6 +41,42 @@ public class Config {
     public static final ModConfigSpec.IntValue BANDIT_CAMP_RESPAWN_TICKS = BUILDER
             .comment("Garrison respawn delay after clear (pillager-outpost class)")
             .defineInRange("banditCampRespawnTicks", 6000, 600, 72000);
+
+    public static final ModConfigSpec.IntValue CORVIN_CAMP_MIN_DISTANCE = BUILDER
+            .defineInRange("corvinCampMinDistance", 800, 256, 8000);
+
+    public static final ModConfigSpec.IntValue CORVIN_CAMP_MAX_DISTANCE = BUILDER
+            .defineInRange("corvinCampMaxDistance", 2200, 512, 10000);
+
+    public static final ModConfigSpec.IntValue GARLAND_CAMP_MIN_DISTANCE = BUILDER
+            .defineInRange("garlandCampMinDistance", 2200, 512, 12000);
+
+    public static final ModConfigSpec.IntValue GARLAND_CAMP_MAX_DISTANCE = BUILDER
+            .defineInRange("garlandCampMaxDistance", 4000, 1024, 16000);
+
+    public static final ModConfigSpec.IntValue QUEST_CAMP_MIN_SEPARATION = BUILDER
+            .comment("Corvin and Garland camps must be at least this far apart")
+            .defineInRange("questCampMinSeparation", 1200, 512, 8000);
+
+    public static final ModConfigSpec.IntValue CITADEL_SHADOW_EXTRA_CAMPS = BUILDER
+            .comment("Extra bandit camps placed on the citadel approach ring (Armies-only uses spawn-relative ring)")
+            .defineInRange("citadelShadowExtraCamps", 3, 0, 12);
+
+    public static final ModConfigSpec.IntValue CITADEL_APPROACH_DISTANCE = BUILDER
+            .comment("Citadel shadow camp ring radius from citadel center — just inside max view distance so the citadel is barely visible")
+            .defineInRange("citadelApproachDistance", 480, 128, 512);
+
+    public static final ModConfigSpec.IntValue CITADEL_SHADOW_RING_JITTER = BUILDER
+            .comment("Random +/- blocks added to citadelApproachDistance for each shadow camp")
+            .defineInRange("citadelShadowRingJitter", 24, 0, 64);
+
+    public static final ModConfigSpec.IntValue WANDERING_NECROMANCER_GRUDGE_DELAY_DAYS = BUILDER
+            .comment("In-game days after desert before the first grudge strike can roll (~30 = one month)")
+            .defineInRange("wanderingNecromancerGrudgeDelayDays", 30, 0, 120);
+
+    public static final ModConfigSpec.IntValue WANDERING_NECROMANCER_STRIKE_INTERVAL_DAYS = BUILDER
+            .comment("In-game days between grudge strikes from a living wandering necromancer")
+            .defineInRange("wanderingNecromancerStrikeIntervalDays", 2, 1, 14);
 
     static final ModConfigSpec SPEC = BUILDER.build();
 }

@@ -39,6 +39,12 @@ public class VillagerAttachments {
                     ATTACHMENTS.register("bandit_data", () -> AttachmentType.builder(() -> new BanditData(java.util.UUID.randomUUID())).build());
 
     @SuppressWarnings("unchecked")
+    public static final net.neoforged.neoforge.registries.DeferredHolder<AttachmentType<?>, AttachmentType<WanderingNecromancerData>> WANDERING_NECROMANCER_DATA =
+            (net.neoforged.neoforge.registries.DeferredHolder<AttachmentType<?>, AttachmentType<WanderingNecromancerData>>) (Object)
+                    ATTACHMENTS.register("wandering_necromancer_data",
+                            () -> AttachmentType.builder(() -> new WanderingNecromancerData(java.util.UUID.randomUUID())).build());
+
+    @SuppressWarnings("unchecked")
     public static final net.neoforged.neoforge.registries.DeferredHolder<AttachmentType<?>, AttachmentType<MinionData>> MINION_DATA =
             (net.neoforged.neoforge.registries.DeferredHolder<AttachmentType<?>, AttachmentType<MinionData>>) (Object)
                     ATTACHMENTS.register("minion_data", () -> AttachmentType.builder(() -> new MinionData(java.util.UUID.randomUUID())).build());

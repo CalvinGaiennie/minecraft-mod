@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Citadel mod — planning finish line · Recommended implementation phases · Minecraft Kingdom</title>
+  <link rel="stylesheet" href="../../../assets/site.css" />
+  
+</head>
+<body class="scope-dev">
+  <header class="site-chrome site-header">
+    <div class="header-inner">
+      <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
+    </div>
+  </header>
+  <div class="page-area">
+    <div class="main-nav-bar">
+      <nav class="main-nav" aria-label="Site">
+        <a href="../../../index.html" class="">Marketing</a>
+        <a href="../../index.html" class="active">Dev docs</a>
+      </nav>
+    </div>
+    <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../../notes/index.html">Notes</a><a href="../index.html" class="active">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav></div>
+    <div class="page-shell has-sidebar">
+      <main class="doc-main">
+        <p class="source">Source: <code>docs/citadel-mod-plan.md</code> · Citadel mod — planning finish line</p><h1>Recommended implementation phases</h1>
+<p>Planning is <strong>finished</strong> when <strong>A1–A3</strong>, <strong>B1–B3</strong>, <strong>B5–B6</strong>, <strong>C1–C2</strong>, <strong>D1–D2</strong>, <strong>E1</strong> have answers. Everything else can tune in playtest.</p>
+<pre><code class="language-text">Phase 0 — Split prep (can stay monolith folder first)
+  Mod id, SavedData keys, integration events, CitadelAnchor API
+
+Phase 1 — World skeleton
+  Citadel template place + road + setCitadelCenter
+  Intro town placeholder + Well copse marker
+  17 refuge SavedData + 10 fortress SavedData (empty shells OK)
+
+Phase 2 — Seal &amp; barrier
+  Ender barrier volume, dragon gate, Seal-Breaker use
+
+Phase 3 — Assault MVP
+  3 boss entities (clamp + player kill), defensive mode gates
+  Spawner blocks + 2–3 trap corridor templates
+  Beacon basement (breakable)
+
+Phase 4 — Claim loop
+  Throne sit, credits, usurp, wand forfeit, barrier allowlist
+
+Phase 5 — Restoration
+  Kingstree + Blight Heart, Hall relic pedestals, stations wake
+  Well XP, Roost cage, golden age / shadow flags
+
+Phase 6 — Necromancer intro
+  Hearts threshold, intro town rogue, horcrux chest, Well commit
+
+Phase 7 — Necromancer citadel arc
+  Brother alignment, mother fights, ending branches (End move last)
+
+Phase 8 — Meta progression
+  Relics, fortresses, Annals, compass, acolyte path feats
+
+Phase 9 — Armies integration polish
+  citadelFallen events, ally list, mess placement rule, shadow camps</code></pre>
+<p><strong>MVP ship candidate:</strong> Phases <strong>0–5</strong> + <strong>6</strong> (intro only) + minimal <strong>8</strong> (1–2 relics for test). <strong>Full v1:</strong> through <strong>7</strong> + all fortresses + Order feats.</p>
+<p>---</p>
+      </main>
+      <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="what-citadel-mod-owns.html">What Citadel mod owns</a></li><li><a href="locked-planning-done-implement-from-these.html">Locked (planning done — implement from these)</a></li><li><a href="author-decisions-still-open-close-these-to-finish-planning.html">Author decisions still open (close these to “finish planning”)</a></li><li><a href="recommended-implementation-phases.html" class="active">Recommended implementation phases</a></li><li><a href="testing-plan-citadel.html">Testing plan (Citadel)</a></li><li><a href="doc-map-implementers.html">Doc map (implementers)</a></li><li><a href="next-planning-session-suggested-agenda-45-min.html">Next planning session (suggested agenda, ~45 min)</a></li></ul></aside>
+    </div>
+  </div>
+  <footer class="site-footer">
+    Source: <code>docs/citadel-mod-plan.md</code>
+  </footer>
+  
+</body>
+</html>

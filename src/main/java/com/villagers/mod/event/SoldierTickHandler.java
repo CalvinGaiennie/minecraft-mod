@@ -27,7 +27,9 @@ import com.villagers.mod.combat.CombatDoorOpening;
 import com.villagers.mod.gear.GearReplacement;
 import com.villagers.mod.gear.VillagerGearRules;
 import com.villagers.mod.combat.BanditCombat;
+import com.villagers.mod.combat.WanderingNecromancerCombat;
 import com.villagers.mod.threat.BanditService;
+import com.villagers.mod.threat.WanderingNecromancerService;
 import com.villagers.mod.war.CampaignService;
 import com.villagers.mod.war.MutinyService;
 import net.minecraft.world.entity.Mob;
@@ -70,6 +72,10 @@ public class SoldierTickHandler {
             } else if (villager.hasData(VillagerAttachments.BANDIT_DATA.get())) {
                 if (level.getGameTime() % 10 == villager.getId() % 10) {
                     BanditCombat.tick(villager);
+                }
+            } else if (WanderingNecromancerService.isWanderingNecromancer(villager)) {
+                if (level.getGameTime() % 10 == villager.getId() % 10) {
+                    WanderingNecromancerCombat.tick(villager);
                 }
             } else if (tryConversion) {
                 GearReplacement.tryPullEnlistGearFromNearestRecruiter(villager);

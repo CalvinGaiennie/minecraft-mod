@@ -18,36 +18,40 @@ public final class BanditLoot {
     private BanditLoot() {
     }
 
-    public static void fillSiteChest(ServerLevel level, BlockPos chestPos, SiteKind kind, RandomSource random) {
+    public static void fillSiteChests(ServerLevel level, BlockPos origin, SiteKind kind, RandomSource random) {
+        fillSiteChest(level, origin.north(), kind, random, true);
+        fillSiteChest(level, origin.east(), kind, random, false);
+    }
+
+    private static void fillSiteChest(ServerLevel level, BlockPos chestPos, SiteKind kind, RandomSource random, boolean primary) {
         BlockEntity be = level.getBlockEntity(chestPos);
         if (!(be instanceof ChestBlockEntity chest)) {
             return;
         }
         HolderLookup.RegistryLookup<Enchantment> enchants = level.registryAccess().lookupOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT);
-        switch (kind) {
-            case CAMP -> fillCamp(chest, random, enchants, false);
-            case HIDEOUT -> fillCamp(chest, random, enchants, true);
-            case CORVIN -> {
-                fillCamp(chest, random, enchants, false);
-                addValuables(chest, random, 1.4);
-            }
-            case GARLAND -> {
-                fillCamp(chest, random, enchants, true);
-                addValuables(chest, random, 2.0);
-            }
+        boolean hideoutTier = kind == SiteKind.HIDEOUT || kind == SiteKind.GARLAND;
+        fillCamp(chest, random, enchants, hideoutTier, primary);
+        if (primary && kind == SiteKind.CORVIN) {
+            addValuables(chest, random, 1.4);
         }
-        float mapRoll = kind == SiteKind.HIDEOUT ? 0.08f : 0.05f;
-        if (random.nextFloat() < mapRoll) {
-            insertIfRoom(chest, new ItemStack(VillagersMod.VILLAGE_MAP.get()));
+        if (primary && kind == SiteKind.GARLAND) {
+            addValuables(chest, random, 2.0);
         }
-        float chronicleRoll = kind == SiteKind.HIDEOUT ? 0.08f : 0.05f;
-        if (random.nextFloat() < chronicleRoll) {
-            insertIfRoom(chest, new ItemStack(VillagersMod.VILLAGE_CHRONICLE.get()));
+        if (primary) {
+            float mapRoll = hideoutTier ? 0.08f : 0.05f;
+            if (random.nextFloat() < mapRoll) {
+                insertIfRoom(chest, new ItemStack(VillagersMod.VILLAGE_MAP.get()));
+            }
+            float chronicleRoll = hideoutTier ? 0.08f : 0.05f;
+            if (random.nextFloat() < chronicleRoll) {
+                insertIfRoom(chest, new ItemStack(VillagersMod.VILLAGE_CHRONICLE.get()));
+            }
         }
     }
 
-    private static void fillCamp(ChestBlockEntity chest, RandomSource random, HolderLookup.RegistryLookup<Enchantment> enchants, boolean hideoutTier) {
-        int sets = hideoutTier ? 5 : 4;
+    private static void fillCamp(ChestBlockEntity chest, RandomSource random, HolderLookup.RegistryLookup<Enchantment> enchants, boolean hideoutTier,
+            boolean primary) {
+        int sets = hideoutTier ? (primary ? 5 : 3) : (primary ? 4 : 2);
         for (int i = 0; i < sets; i++) {
             insertIfRoom(chest, enchantedArmor(random, enchants, hideoutTier));
             insertIfRoom(chest, enchantedWeapon(random, enchants, hideoutTier));
@@ -71,10 +75,12 @@ public final class BanditLoot {
 
     private static ItemStack enchantedWeapon(RandomSource random, HolderLookup.RegistryLookup<Enchantment> enchants, boolean hideoutTier) {
         ItemStack stack = new ItemStack(random.nextBoolean() ? Items.IRON_SWORD : Items.BOW);
-        int level = hideoutTier ? 2 + random.nextInt(2) : 1 + random.nextInt(2);
+        int level = hideoutTier ? 2 + random.nextInt(3) : 2 + random.nextInt(2);
         stack.enchant(enchants.getOrThrow(Enchantments.SHARPNESS), level);
         if (stack.is(Items.BOW)) {
             stack.enchant(enchants.getOrThrow(Enchantments.POWER), level);
+        } else if (random.nextFloat() < 0.25f) {
+            stack.enchant(enchants.getOrThrow(Enchantments.UNBREAKING), 1 + random.nextInt(2));
         }
         return stack;
     }
@@ -95,7 +101,7 @@ public final class BanditLoot {
                         new ItemStack(Items.IRON_BOOTS)
                 };
         ItemStack stack = pool[random.nextInt(pool.length)].copy();
-        int prot = hideoutTier ? 2 + random.nextInt(2) : 1 + random.nextInt(2);
+        int prot = hideoutTier ? 3 + random.nextInt(2) : 2 + random.nextInt(2);
         stack.enchant(enchants.getOrThrow(Enchantments.PROTECTION), prot);
         return stack;
     }

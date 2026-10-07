@@ -48,8 +48,9 @@ O2 — hunt and kill the big bandit leader (player finish only)</code></pre>
 <p>---</p>
 <h2 id="o1-what-the-ledger-names">O1 — <strong>What the ledger names</strong></h2>
 <p><strong>Start:</strong> Player holds <strong>Blood-stained Ledger</strong> with O1 flag unset.</p>
-<p><strong>Goal:</strong> Ledger names <strong>Corvin</strong> and a bearing (flavor text only). <strong>Quest compass</strong> or <strong>journal waypoint</strong> to a <strong>pre-placed outpost</strong> (<strong>Corvin’s camp</strong>, SavedData, one site per world, distance rules <strong>TBD</strong> placement).</p>
-<p><strong>Middle manager:</strong> <strong>Corvin</strong> (not the big leader). Outpost: <strong>8–12</strong> bandits + Corvin.</p>
+<p><strong>Goal:</strong> Ledger names <strong>Corvin</strong> and a bearing (flavor text only). Chat <strong>waypoint</strong> to <strong>Corvin’s camp</strong> (SavedData, one site per world).</p>
+<p><strong>Camp placement (author):</strong> <strong>Corvin</strong> <strong>800–2200</strong> blocks from spawn; <strong>Garland</strong> <strong>2200–4000</strong>; <strong>≥1200</strong> blocks apart. Generic camps <strong>800–4000</strong>. Long marches are intentional — bring <strong>campaign/camp</strong> support; loot is sized to <strong>outfit soldiers</strong> (owner distributes). <strong>Future:</strong> biome landmarks (ravine, pass, broken tower); Garland prefers <strong>rough terrain</strong> (height variance). Prefab plan: <code>bandit-camp-prefabs.md</code>.</p>
+<p><strong>Middle manager:</strong> <strong>Corvin</strong> (not the big leader). Outpost: <strong>8–12</strong> bandits + Corvin. Chests use <strong>bandit camp loot</strong> (<code>threats-and-mobs.md</code>) with a <strong>modest bump</strong> to <strong>ores and valuables</strong> (extra <strong>diamonds, emeralds</strong>, iron/gold ingots and blocks) — bookkeeper’s cut, not hideout-tier enchants. No extra unique drop beyond the quest beat.</p>
 <p><strong>Rules:</strong></p>
 <ul>
 <li>Corvin: <strong>player finish only</strong>.</li>
@@ -59,20 +60,20 @@ O2 — hunt and kill the big bandit leader (player finish only)</code></pre>
 <p>---</p>
 <h2 id="d2-the-big-one-hits-home">D2 — <strong>The big one hits home</strong></h2>
 <p><strong>Trigger:</strong> <strong><code>armiesQuestD2Armed</code></strong> and player <strong>enters</strong> their <strong>largest village</strong> by <strong>soldier count in zone</strong> (soldiers only; tie-break: villager population, then mess UUID hash).</p>
-<p><strong>Scene:</strong> Village already in <strong>authored assault</strong>. Leader: <strong>Garland</strong> (known as <strong>the Rook</strong>). ~<strong>24–30</strong> attackers + Garland (tougher than D1, <strong>not</strong> warlord-sized).</p>
-<p><strong>Goal:</strong> Kill or rout waves until <strong>attack phase ends</strong> (timer cap <strong>TBD</strong>, or all minions dead except Garland).</p>
-<p><strong>Success:</strong> Mess <strong>still placed</strong> and <strong>≥1</strong> post bed unbroken. Garland <strong>flees</strong> at <strong>30% HP</strong> (immune, flee script). Drops <strong><code>torn_map_half</code></strong>.</p>
+<p><strong>Scene:</strong> Village already in <strong>authored assault</strong>. Leader: <strong>Garland</strong> (known as <strong>the Rook</strong>). ~<strong>24–30</strong> <strong>bandit</strong> attackers + Garland (<strong>no undead</strong>). Tougher than D1, <strong>not</strong> warlord-sized.</p>
+<p><strong>Goal:</strong> Drive Garland off — <strong>not</strong> a wipe of every bandit.</p>
+<p><strong>Success:</strong> Mess <strong>still placed</strong> and <strong>≥1</strong> post bed unbroken. Garland <strong>flees</strong> when <strong>either</strong>: HP <strong>≤30%</strong>, <strong>or</strong> <strong>≥65%</strong> of his assault bandits are dead (<code>armiesQuestD2GarlandFleeBanditLossFraction</code> <strong>0.65</strong>). Drops <strong><code>torn_map_half</code></strong>. <strong>No</strong> timer cap. <strong>Bandits only</strong> (no undead).</p>
 <p><strong>Fail:</strong> Mess broken or no beds: assault ends; <strong>retry</strong> after <strong>rebuilding mess</strong> when you enter largest village again. <strong>No</strong> permanent village delete.</p>
 <p><strong>Garland cannot be fully killed in D2.</strong></p>
 <p>---</p>
 <h2 id="o2-no-more-running">O2 — <strong>No more running</strong></h2>
-<p><strong>Start:</strong> <strong><code>torn_map_half</code></strong> + journal line from a villager (proposed): <em>“He went to the broken tower beyond the birch swamp!”</em></p>
-<p><strong>Find:</strong> Combine <strong><code>torn_map_half</code></strong> with <strong>ledger</strong> (crafting grid or anvil <strong>TBD</strong>) → compass unlock to <strong>Garland’s camp</strong> (SavedData outpost, stronger than Corvin’s).</p>
+<p><strong>Start:</strong> <strong><code>torn_map_half</code></strong> (no fixed villager journal line for now).</p>
+<p><strong>Find:</strong> Shapeless craft <strong><code>torn_map_half</code></strong> + <strong>ledger</strong> + <strong>compass</strong> → <strong>Rook&#x27;s Trail Compass</strong> (points at camp); chat bearing to <strong>Garland’s camp</strong> (SavedData, farther than Corvin’s).</p>
 <p><strong>Goal:</strong> Kill <strong>Garland the Rook</strong>. <strong>Player finish only</strong>.</p>
 <p><strong>Rewards:</strong></p>
 <ul>
-<li>Large treasury chest (mixed loot, <strong>no</strong> relic).</li>
-<li><strong>Garland’s Signet</strong> (slot <strong>TBD</strong>): <strong>trophy only</strong>, no stat perks.</li>
+<li><strong>Garland’s treasury:</strong> <strong>hideout-tier or better</strong> blocks and enchanted gear (still <strong>no</strong> relic), on top of normal outpost chests — enough to feel like the Rook’s main stash; tune above hideouts in playtest.</li>
+<li><strong>Garland’s Signet</strong>: <strong>trophy only</strong> (normal inventory item), no stat perks.</li>
 <li>Permanent chat title <strong>Rookbreaker</strong> (from his nickname <strong>the Rook</strong>). While you hold this title: <strong>−10% soldier desertion</strong> in owned villages (<code>titleRookbreakerDesertionMultiplier</code> <strong>0.90</strong>, config). Same perk style as kingdom titles in <code>endgame.md</code> (title-gated, not item-gated).</li>
 <li>Arc <strong>complete</strong>; Halvek, Corvin, Garland <strong>do not</strong> respawn.</li>
 </ul>
@@ -84,15 +85,16 @@ O2 — hunt and kill the big bandit leader (player finish only)</code></pre>
 <h2 id="multiplayer">Multiplayer</h2>
 <ul>
 <li>Quest progress on <strong>mess owner player UUID</strong> at D1 trigger.</li>
-<li>Allies can fight; <strong>owner</strong> advances quest items unless <strong>party share</strong> added later.</li>
+<li>Allies can fight; <strong>owner</strong> advances quest items. <strong>Camp chest loot</strong> stays at the site (take it from the chests like a normal clear).</li>
 <li><strong>One</strong> active arc per owner per world.</li>
 </ul>
 <p>---</p>
 <h2 id="config">Config</h2>
-<table><thead><tr><th>Key</th><th>Default</th><th>Notes</th></tr></thead><tbody><tr><td><code>armiesQuestD1SoldierThreshold</code></td><td><strong>30</strong></td><td><strong>Soldiers</strong> only, in village zone</td></tr><tr><td><code>armiesQuestD1IgnoreMoon</code></td><td><strong>true</strong></td><td></td></tr><tr><td><code>armiesQuestBossPlayerKillOnly</code></td><td><strong>true</strong></td><td></td></tr><tr><td><code>titleRookbreakerDesertionMultiplier</code></td><td><strong>0.90</strong></td><td><strong>−10%</strong> desertion while <strong>Rookbreaker</strong> title active</td></tr></tbody></table>
+<table><thead><tr><th>Key</th><th>Default</th><th>Notes</th></tr></thead><tbody><tr><td><code>armiesQuestD1SoldierThreshold</code></td><td><strong>30</strong></td><td><strong>Soldiers</strong> only, in village zone</td></tr><tr><td><code>armiesQuestD1IgnoreMoon</code></td><td><strong>true</strong></td><td></td></tr><tr><td><code>armiesQuestBossPlayerKillOnly</code></td><td><strong>true</strong></td><td></td></tr><tr><td><code>titleRookbreakerDesertionMultiplier</code></td><td><strong>0.90</strong></td><td><strong>−10%</strong> desertion while <strong>Rookbreaker</strong> title active</td></tr><tr><td><code>corvinCampMinDistance</code> / <code>corvinCampMaxDistance</code></td><td><strong>800</strong> / <strong>2200</strong></td><td>Corvin camp ring</td></tr><tr><td><code>garlandCampMinDistance</code> / <code>garlandCampMaxDistance</code></td><td><strong>2200</strong> / <strong>4000</strong></td><td>Garland camp ring</td></tr><tr><td><code>questCampMinSeparation</code></td><td><strong>1200</strong></td><td>Corvin vs Garland</td></tr><tr><td><code>citadelShadowExtraCamps</code></td><td><strong>3</strong></td><td>Extra camps on citadel approach ring</td></tr><tr><td><code>armiesQuestD2GarlandFleeBanditLossFraction</code></td><td><strong>0.65</strong></td><td>D2 flee when this share of bandits dead</td></tr><tr><td><code>citadelApproachDistance</code></td><td><strong>480</strong></td><td>Shadow camp ring (~just inside max view distance so citadel is barely visible)</td></tr><tr><td><code>citadelShadowRingJitter</code></td><td><strong>24</strong></td><td>± blocks on that ring</td></tr><tr><td><code>wanderingNecromancerStrikeIntervalDays</code></td><td><strong>2</strong></td><td>Grudge strike cadence</td></tr></tbody></table>
+<p><strong>Authored camp kings (beyond Halvek assault):</strong> <strong>Corvin</strong> and <strong>Garland</strong> only.</p>
 <p>---</p>
 <h2 id="warlords-background">Warlords (background)</h2>
-<p>Recurring <strong>warlords</strong> (<code>endgame.md</code>) are <strong>not</strong> D1, D2, or O2.</p>
+<p>Recurring <strong>warlords</strong> (<code>endgame.md</code>) are <strong>not</strong> D1, D2, or O2. First probe <strong>any time after Baron title</strong> (not gated on finishing the Garland arc).</p>
 <p>---</p>
 <h2 id="with-citadel-installed">With Citadel installed</h2>
 <p>Arc <strong>still runs</strong>. Garland is <strong>not</strong> a relic-fortress king.</p>

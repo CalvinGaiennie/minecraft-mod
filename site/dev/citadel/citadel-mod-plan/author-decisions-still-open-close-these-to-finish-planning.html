@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Citadel mod — planning finish line · Author decisions still open (close these to “finish planning”) · Minecraft Kingdom</title>
+  <link rel="stylesheet" href="../../../assets/site.css" />
+  
+</head>
+<body class="scope-dev">
+  <header class="site-chrome site-header">
+    <div class="header-inner">
+      <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
+    </div>
+  </header>
+  <div class="page-area">
+    <div class="main-nav-bar">
+      <nav class="main-nav" aria-label="Site">
+        <a href="../../../index.html" class="">Marketing</a>
+        <a href="../../index.html" class="active">Dev docs</a>
+      </nav>
+    </div>
+    <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../../notes/index.html">Notes</a><a href="../index.html" class="active">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav></div>
+    <div class="page-shell has-sidebar">
+      <main class="doc-main">
+        <p class="source">Source: <code>docs/citadel-mod-plan.md</code> · Citadel mod — planning finish line</p><h1>Author decisions still open (close these to “finish planning”)</h1>
+<p>Work <strong>top to bottom</strong>. Mark <strong>Decided</strong> in discussion plan when you call each.</p>
+<h3>A. Lore identity (blocks naming &amp; VO)</h3>
+<table><thead><tr><th>#</th><th>Question</th><th>Options / notes</th><th>Canon impact</th></tr></thead><tbody><tr><td>A1</td><td>Are the <strong>two bound necromancers</strong> the same people as the <strong>founding brothers</strong> myth (Hakon/Oswin/Harren)?</td><td>Merge in lore §3–5 vs keep “Black Treaty advisers” only</td><td>Dialogue, Annals, mother lie</td></tr><tr><td>A2</td><td><strong>Display names</strong> for king, both brothers, mother, intro rogue</td><td>First pass list</td><td>All quest lines</td></tr><tr><td>A3</td><td><strong>End-move ending:</strong> citadel <strong>relocates to End</strong> with overworld crater portal — still a <strong>full</strong> ending or <strong>optional</strong> branch only?</td><td>MVP can ship <strong>without</strong> move ritual if too heavy</td><td>Structure gen, save data</td></tr></tbody></table>
+<h3>B. Citadel structure mockup (§10 — closes layout TBDs)</h3>
+<table><thead><tr><th>#</th><th>Question</th><th>Default if silent</th></tr></thead><tbody><tr><td>B1</td><td><strong>Secret tunnel:</strong> include in v1?</td><td><strong>Yes</strong>, one rare chronicle hint</td></tr><tr><td>B2</td><td><strong>Dungeon Order lever:</strong> single lever opens both cells?</td><td><strong>Yes</strong></td></tr><tr><td>B3</td><td><strong>Inner gate / ward doors:</strong> redstone closable only in defensive mode, or player levers post-claim too?</td><td>Defensive = closed; post-claim levers for owner <strong>TBD</strong></td></tr><tr><td>B4</td><td>Spawner <strong>counts per zone</strong> (gate / keep / basement)</td><td>Playtest after Creative blockout</td></tr><tr><td>B5</td><td>After <strong>king dead</strong>, leftover spawners <strong>auto-off</strong> or <strong>player-mined only</strong>?</td><td><strong>Player-mined</strong> (doc lean)</td></tr><tr><td>B6</td><td><strong>Citadel undead</strong> mob when Armies absent</td><td>Custom zombie variant vs vanilla with tag</td></tr></tbody></table>
+<h3>C. Necromancer §6 polish</h3>
+<table><thead><tr><th>#</th><th>Question</th></tr></thead><tbody><tr><td>C1</td><td><strong>Opt out</strong> at hand-in: separate button vs “don’t hand items”?</td></tr><tr><td>C2</td><td><strong>Multiplayer:</strong> one intro per world vs per player; brother <strong>first-hit</strong> alignment per player?</td></tr><tr><td>C3</td><td><strong>End Anchor</strong> recipe detail (pearl count, consumed on place?)</td></tr><tr><td>C4</td><td><strong>Wither</strong> after Heart kill: despawn vs fight vs banish</td></tr><tr><td>C5</td><td>Full <strong>dialogue pass</strong> stubs → final lines (mother, brothers, Corwin tree)</td></tr></tbody></table>
+<h3>D. Fortresses &amp; relics</h3>
+<table><thead><tr><th>#</th><th>Question</th></tr></thead><tbody><tr><td>D1</td><td><strong>10 fortress</strong> placement rings (distances, min separation)</td></tr><tr><td>D2</td><td>Garrison size target (“tough outpost”) — numbers</td></tr><tr><td>D3</td><td><strong>Six relic forts:</strong> fixed king names + which relic each holds</td></tr><tr><td>D4</td><td>Thornheart <strong>End island</strong> outpost — in v1 or later?</td></tr></tbody></table>
+<h3>E. Acolytes &amp; Order</h3>
+<table><thead><tr><th>#</th><th>Question</th></tr></thead><tbody><tr><td>E1</td><td><strong>15 vs 17</strong> refuges — doc drift (<code>endgame</code> vs <code>citadel-claim</code>); pick one</td></tr><tr><td>E2</td><td>Refuge <strong>layout count</strong> (4 templates?)</td></tr><tr><td>E3</td><td>War Leader <strong>friendly fire</strong> rule — confirm explosions exception</td></tr></tbody></table>
+<h3>F. Config &amp; solo Citadel</h3>
+<table><thead><tr><th>#</th><th>Question</th></tr></thead><tbody><tr><td>F1</td><td>Publish <strong><code>citadelFallen</code></strong> default raid table in config when no Armies</td></tr><tr><td>F2</td><td><strong>Fortress defender</strong> fallback entity id when no Armies</td></tr></tbody></table>
+<p>---</p>
+      </main>
+      <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="what-citadel-mod-owns.html">What Citadel mod owns</a></li><li><a href="locked-planning-done-implement-from-these.html">Locked (planning done — implement from these)</a></li><li><a href="author-decisions-still-open-close-these-to-finish-planning.html" class="active">Author decisions still open (close these to “finish planning”)</a></li><li><a href="recommended-implementation-phases.html">Recommended implementation phases</a></li><li><a href="testing-plan-citadel.html">Testing plan (Citadel)</a></li><li><a href="doc-map-implementers.html">Doc map (implementers)</a></li><li><a href="next-planning-session-suggested-agenda-45-min.html">Next planning session (suggested agenda, ~45 min)</a></li></ul><p class="sidebar-label">Subsections</p><ul><li><a href="#a-lore-identity-blocks-naming-vo">A. Lore identity (blocks naming &amp; VO)</a></li><li><a href="#b-citadel-structure-mockup-10-closes-layout-tbds">B. Citadel structure mockup (§10 — closes layout TBDs)</a></li><li><a href="#c-necromancer-6-polish">C. Necromancer §6 polish</a></li><li><a href="#d-fortresses-relics">D. Fortresses &amp; relics</a></li><li><a href="#e-acolytes-order">E. Acolytes &amp; Order</a></li><li><a href="#f-config-solo-citadel">F. Config &amp; solo Citadel</a></li></ul></aside>
+    </div>
+  </div>
+  <footer class="site-footer">
+    Source: <code>docs/citadel-mod-plan.md</code>
+  </footer>
+  
+</body>
+</html>
