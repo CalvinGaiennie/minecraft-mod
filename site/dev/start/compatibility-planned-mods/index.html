@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Planned modpack compatibility (1.21.1 NeoForge) — Minecraft Kingdom</title>
+  <title>Planned modpack compatibility (1.21.1 NeoForge) · Minecraft Kingdom</title>
   <link rel="stylesheet" href="../../../assets/site.css" />
   
 </head>
@@ -25,18 +25,18 @@
       
       <main class="doc-main">
         <p class="source">Source: <code>docs/compatibility-planned-mods.md</code></p><h1>Planned modpack compatibility (1.21.1 NeoForge)</h1>
-<p><strong>Short answer:</strong> Yes — <strong>compatibility is a design goal</strong>, not a guarantee on day one. The project <strong>targets 1.21.1 NeoForge</strong> specifically so it can sit beside <strong>Create</strong> and <strong>Ice and Fire: Community Edition</strong> in modpacks (<code>overview.md</code>, <code>master-build-note.md</code>). There is <strong>no hard dependency</strong> on any of these mods.</p>
+<p><strong>Short answer:</strong> Yes, <strong>compatibility is a design goal</strong>, not a guarantee on day one. The project <strong>targets 1.21.1 NeoForge</strong> specifically so it can sit beside <strong>Create</strong> and <strong>Ice and Fire: Community Edition</strong> in modpacks (<code>overview.md</code>, <code>master-build-note.md</code>). There is <strong>no hard dependency</strong> on any of these mods.</p>
 <p><strong>How we stay compatible</strong></p>
 <ul>
-<li><strong>Optional integration only</strong> — no <code>@Mod</code> dependency; soft checks via <code>ModList</code> / events (<code>integration.md</code>).</li>
+<li><strong>Optional integration only</strong>: no <code>@Mod</code> dependency; soft checks via <code>ModList</code> / events (<code>integration.md</code>).</li>
 <li><strong>Mixins disabled</strong> in the current template (reduces cross-mod bytecode conflicts); villager work uses attachments + events first.</li>
-<li><strong>Soldiers = vanilla villagers</strong> — not a custom mob type that fights other mods’ entity registries.</li>
-<li><strong>Enlisted-player rule</strong> — mod raids/swarm rolls can skip players who opt out, so packs aren’t forced into our threat loop.</li>
-<li><strong>Cut siege MVP</strong> — no custom ladder/sapper assault AI that would fight <strong>Medieval Siege Machines</strong> for the same job.</li>
-<li><strong>Separate test instance</strong> — master build note: test our JAR with Create + IAF CE before claiming “modpack ready.”</li>
+<li><strong>Soldiers = vanilla villagers</strong>: not a custom mob type that fights other mods’ entity registries.</li>
+<li><strong>Enlisted-player rule</strong>: mod raids/swarm rolls can skip players who opt out, so packs aren’t forced into our threat loop.</li>
+<li><strong>Cut siege MVP</strong>: no custom ladder/sapper assault AI that would fight <strong>Medieval Siege Machines</strong> for the same job.</li>
+<li><strong>Separate test instance</strong>: master build note: test our JAR with Create + IAF CE before claiming “modpack ready.”</li>
 </ul>
 <p><strong>Verdict by mod</strong></p>
-<table><thead><tr><th>Mod</th><th>1.21.1 NeoForge</th><th>Compatibility expectation</th><th>Main risks to test</th></tr></thead><tbody><tr><td>Create <span class="doc-ref-url">(https://modrinth.com/mod/create)</span></td><td>Yes (official)</td><td><strong>High</strong> — platform choice was partly for Create modpacks</td><td>Village protection vs contraption breaking; claim borders vs machines</td></tr><tr><td>Ice and Fire: Community Edition</td><td>Yes (project target; use pack’s CE build)</td><td><strong>Medium–high</strong> — dragons/endgame parallel to Citadel, not merged</td><td>Soldier targeting on IAF mobs; structures vs citadel/refuge placement; dragon vs custom raids</td></tr><tr><td>Epic Knights: Shields, Armor and Weapons <span class="doc-ref-url">(https://modrinth.com/mod/epic-knights-shields-armor-and-weapons)</span></td><td>Yes</td><td><strong>High</strong> — player gear; soldiers keep their own kits</td><td>Low technical conflict; balance is gameplay</td></tr><tr><td>Small Ships <span class="doc-ref-url">(https://modrinth.com/mod/small-ships)</span></td><td>Yes</td><td><strong>High</strong> — naval layer orthogonal to village war</td><td>Low; our boat-assault content is cut from scope</td></tr><tr><td>Medieval Siege Machines <span class="doc-ref-url">(https://modrinth.com/mod/medieval-siege-machines)</span> (catapult/trebuchet/etc.)</td><td>Yes</td><td><strong>Medium</strong> — player siege vs village claims</td><td>Explosions/projectiles vs village protection; <code>mobGriefing</code></td></tr><tr><td>Corpse <span class="doc-ref-url">(https://modrinth.com/mod/corpse)</span></td><td>Yes (1.21.1 NeoForge builds)</td><td><strong>High</strong> — acolyte questline</td><td>Player/acolyte death + loot retention; quest items must not soft-lock (<code>acolyte-path.md</code>)</td></tr></tbody></table>
+<table><thead><tr><th>Mod</th><th>1.21.1 NeoForge</th><th>Compatibility expectation</th><th>Main risks to test</th></tr></thead><tbody><tr><td>Create <span class="doc-ref-url">(https://modrinth.com/mod/create)</span></td><td>Yes (official)</td><td><strong>High</strong>: platform choice was partly for Create modpacks</td><td>Village protection vs contraption breaking; claim borders vs machines</td></tr><tr><td>Ice and Fire: Community Edition</td><td>Yes (project target; use pack’s CE build)</td><td><strong>Medium–high</strong>: dragons/endgame parallel to Citadel, not merged</td><td>Soldier targeting on IAF mobs; structures vs citadel/refuge placement; dragon vs custom raids</td></tr><tr><td>Epic Knights: Shields, Armor and Weapons <span class="doc-ref-url">(https://modrinth.com/mod/epic-knights-shields-armor-and-weapons)</span></td><td>Yes</td><td><strong>High</strong>: player gear; soldiers keep their own kits</td><td>Low technical conflict; balance is gameplay</td></tr><tr><td>Small Ships <span class="doc-ref-url">(https://modrinth.com/mod/small-ships)</span></td><td>Yes</td><td><strong>High</strong>: naval layer orthogonal to village war</td><td>Low; our boat-assault content is cut from scope</td></tr><tr><td>Medieval Siege Machines <span class="doc-ref-url">(https://modrinth.com/mod/medieval-siege-machines)</span> (catapult/trebuchet/etc.)</td><td>Yes</td><td><strong>Medium</strong>: player siege vs village claims</td><td>Explosions/projectiles vs village protection; <code>mobGriefing</code></td></tr><tr><td>Corpse <span class="doc-ref-url">(https://modrinth.com/mod/corpse)</span></td><td>Yes (1.21.1 NeoForge builds)</td><td><strong>High</strong>: acolyte questline</td><td>Player/acolyte death + loot retention; quest items must not soft-lock (<code>acolyte-path.md</code>)</td></tr></tbody></table>
 <p>*<em>What we will </em>not<em> claim without testing</em>*</p>
 <ul>
 <li>“Officially compatible” or CurseForge “compatible with X” badges until a <strong>fixed mod list + version pins</strong> pass smoke tests (load, 30 min SP, claim village, citadel flag, Create contraption in claim, IAF mob near soldiers).</li>
@@ -46,7 +46,7 @@
 <ul>
 <li>“Built for <strong>1.21.1 NeoForge</strong> modpacks.”</li>
 <li>“<strong>Play-tested target:</strong> Create, Ice and Fire: Community Edition, Epic Knights, Small Ships, Medieval Siege Machines.”</li>
-<li>“<strong>No required mods</strong> — works alone; other mods enhance the sandbox.”</li>
+<li>“<strong>No required mods</strong>: works alone; other mods enhance the sandbox.”</li>
 </ul>
 <p><strong>Ice and Fire CE link:</strong> use the exact file your pack pins (often CurseForge <strong>Ice and Fire: Community Edition</strong> by the community port team). Modrinth mirrors vary; verify <code>game_versions</code> includes <strong>1.21.1</strong> and <strong>NeoForge</strong> on the download you ship.</p>
       </main>

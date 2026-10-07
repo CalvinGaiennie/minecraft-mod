@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Black Citadel — layout and rooms — Minecraft Kingdom</title>
+  <title>Black Citadel, layout and rooms · Minecraft Kingdom</title>
   <link rel="stylesheet" href="../../../assets/site.css" />
   
 </head>
@@ -24,34 +24,34 @@
     <div class="page-shell has-sidebar">
       <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html" class="active">Overview</a></li></ul></aside>
       <main class="doc-main">
-        <p class="source">Source: <code>docs/citadel-layout.md</code></p><h1>Black Citadel — layout and rooms</h1>
-<p><strong>§10 (in progress):</strong> Template fortress — <strong>strong shell</strong>, <strong>deep floor</strong>, <strong>guttable interiors</strong>, protected story anchors. Defenders: <strong><code>citadel-defenders.md</code></strong>. Claim: <code>citadel-claim.md</code>.</p>
+        <p class="source">Source: <code>docs/citadel-layout.md</code></p><h1>Black Citadel, layout and rooms</h1>
+<p><strong>§10 (in progress):</strong> Template fortress, <strong>strong shell</strong>, <strong>deep floor</strong>, <strong>guttable interiors</strong>, protected story anchors. Defenders: <strong><code>citadel-defenders.md</code></strong>. Claim: <code>citadel-claim.md</code>.</p>
 <p><strong>Design intent:</strong> Powerful <strong>template</strong> players <strong>remodel</strong> (Create, storage, farms). Protected story blocks stay; most interior is <strong>soft</strong>.</p>
 <p><strong>Lava:</strong> <strong>None</strong> (scrapped).</p>
 <p>---</p>
 <h2 id="how-deep-is-the-citadel-plain-language">How deep is the citadel? (plain language)</h2>
 <p>Use <strong>ground height at the gate</strong> as the reference (same Y as <strong>main citadel floors</strong>).</p>
 <ol>
-<li><strong>Main floors</strong> (courtyard, outdoor Hall, keep ground level) are <strong>level with the outside world</strong> — you are not walking down a cliff to enter; the fortress spreads <strong>out and down</strong> from that plane.</li>
-<li><strong>Basements</strong> (dungeon, beacon crypt, horn tunnels) are <strong>below</strong> those main floors — dug downward inside the walls.</li>
-<li>From main floor level down to the <strong>unbreakable bottom</strong> is <strong>30 blocks</strong> total. Everything in that <strong>30-block column</strong> (inside the footprint) that is <strong>not</strong> a protected story block is <strong>soft</strong> — you can mine and expand cellars after the seal is open.</li>
+<li><strong>Main floors</strong> (courtyard, outdoor Hall, keep ground level) are <strong>level with the outside world</strong>: you are not walking down a cliff to enter; the fortress spreads <strong>out and down</strong> from that plane.</li>
+<li><strong>Basements</strong> (dungeon, beacon crypt, horn tunnels) are <strong>below</strong> those main floors, dug downward inside the walls.</li>
+<li>From main floor level down to the <strong>unbreakable bottom</strong> is <strong>30 blocks</strong> total. Everything in that <strong>30-block column</strong> (inside the footprint) that is <strong>not</strong> a protected story block is <strong>soft</strong>: you can mine and expand cellars after the seal is open.</li>
 <li>At <strong>30 blocks below main floor</strong>, the <strong>unbreakable bottom</strong> stops all downward digging under the citadel.</li>
 </ol>
 <p>So: <strong>main floor = outside grade → down 30 blocks breakable (soft) → unbreakable floor</strong>. Exact room placement is structure JSON.</p>
 <p>---</p>
 <h2 id="citadel-bounds">Citadel bounds</h2>
 <table><thead><tr><th>Inside outer wall</th><th>Outside</th></tr></thead><tbody><tr><td>Kingstree, outdoor Hall, paddock, stables, keep, yards, basements to unbreakable bottom</td><td><strong>Great road</strong> only</td></tr></tbody></table>
-<p><strong>Outside the wall:</strong> <strong>no special citadel rules</strong> — normal overworld + Armies systems. <strong>Camp block</strong> on approach/mustering ground <strong>allowed</strong> for siege staging.</p>
+<p><strong>Outside the wall:</strong> <strong>no special citadel rules</strong>: normal overworld + Armies systems. <strong>Camp block</strong> on approach/mustering ground <strong>allowed</strong> for siege staging.</p>
 <p>---</p>
 <h2 id="unbreakable">Unbreakable</h2>
 <ul>
 <li><strong>Outer walls / towers / gate frames</strong> (~40 tall).</li>
 <li><strong>Unbreakable bottom</strong> under the whole footprint.</li>
-<li><strong>Inner keep “box” shell</strong> — silhouette stays; <strong>everything inside</strong> the box is soft (author §10).</li>
-<li><strong>Throne</strong>, <strong>12 king statues + bases</strong>, <strong>royal stations + lecterns</strong>, <strong>Well</strong>, <strong>dummies</strong>, <strong>Roost</strong> cage + <strong>phantom spawner</strong> (post-claim farm — not garrison spawners), <strong>main treasury</strong>, <strong>horn vault shell</strong> (quest opens), <strong>secret treasury shell</strong>.</li>
+<li><strong>Inner keep “box” shell</strong>: silhouette stays; <strong>everything inside</strong> the box is soft (author §10).</li>
+<li><strong>Throne</strong>, <strong>12 king statues + bases</strong>, <strong>royal stations + lecterns</strong>, <strong>Well</strong>, <strong>dummies</strong>, <strong>Roost</strong> cage + <strong>phantom spawner</strong> (post-claim farm, not garrison spawners), <strong>main treasury</strong>, <strong>horn vault shell</strong> (quest opens), <strong>secret treasury shell</strong>.</li>
 <li><strong>Kingstree:</strong> <strong>tree + Blight Heart</strong> protected; <strong>landscaping</strong> around it <strong>breakable</strong>.</li>
 <li><strong>Citadel doors:</strong> special player-minable doors (soldiers can&#x27;t).</li>
-<li><strong>Beacon blocks:</strong> <strong>not</strong> protected — <strong>guards only</strong> (<code>citadel-defenders.md</code>).</li>
+<li><strong>Beacon blocks:</strong> <strong>not</strong> protected, <strong>guards only</strong> (<code>citadel-defenders.md</code>).</li>
 </ul>
 <p>---</p>
 <h2 id="breakable-remodel">Breakable / remodel</h2>
@@ -62,23 +62,23 @@
 <li><strong>Armies inside bounds after king dies:</strong> owner/allies place freely; non-allies use <strong>village protection</strong> slowdown (<code>soldiers-and-villages.md</code>).</li>
 </ul>
 <p>---</p>
-<h2 id="outside-the-wall-citadel-shadow-armies">Outside the wall — citadel shadow (Armies)</h2>
+<h2 id="outside-the-wall-citadel-shadow-armies">Outside the wall, citadel shadow (Armies)</h2>
 <p>Within <strong>~256–512 blocks</strong> of the citadel (<code>threats-and-mobs.md</code>):</p>
 <ul>
-<li><strong>Ruined hamlets</strong> — abandoned village-style layouts (broken mess halls, empty beds, cracked walls).</li>
-<li><strong>Bandit-occupied ruins</strong> — <strong>bandits live there</strong>; may include <strong>surviving villagers</strong> (traders scared, few nitwits — not a healthy village).</li>
-<li><strong>Classic bandit camps</strong> — smaller outpost structures <strong>in addition</strong> to ruins (same band rules as elsewhere).</li>
+<li><strong>Ruined hamlets</strong>: abandoned village-style layouts (broken mess halls, empty beds, cracked walls).</li>
+<li><strong>Bandit-occupied ruins</strong>: <strong>bandits live there</strong>; may include <strong>surviving villagers</strong> (traders scared, few nitwits, not a healthy village).</li>
+<li><strong>Classic bandit camps</strong>: smaller outpost structures <strong>in addition</strong> to ruins (same band rules as elsewhere).</li>
 <li>Lore: settlements that <strong>sheltered in the citadel’s shadow</strong> <strong>fell</strong> when the kingdom did.</li>
 </ul>
 <p>---</p>
 <h2 id="siege-difficulty-layout-encounters">Siege difficulty (layout + encounters)</h2>
-<p>Difficulty is <strong>mostly</strong> boss kits, spawner placement/type, <strong>geometry</strong>, and <strong>status / kit pressure</strong> (<code>citadel-defenders.md</code> <strong>Siege prep &amp; effects</strong>) — chokepoints, funnels, sightlines — <strong>not</strong> a pure armor-and-HP soak.</p>
-<table><thead><tr><th>Layer</th><th>Design job</th></tr></thead><tbody><tr><td><strong>Approach</strong></td><td>Shadow-ring bandits (Armies); mustering ground outside wall.</td></tr><tr><td><strong>Walls</strong></td><td>Unbreakable ~<strong>40</strong> tall — <strong>too tall for siege ladders</strong> (<code>endgame.md</code>).</td></tr><tr><td><strong>One main entrance</strong></td><td>Primary assault path: <strong>large open gate / barbican</strong> — <strong>closable</strong> (see <strong>Assault defensive mode</strong>).</td></tr><tr><td><strong>Secret tunnel</strong></td><td>Optional second route — tighter, not the main claim path <strong>TBD</strong> mockup.</td></tr><tr><td><strong>Gate gauntlet</strong></td><td>While outer <strong>citadel doors</strong> are mined, spawners and <strong>ranged overwatch</strong> cover the line — expect <strong>bows/crossbows</strong> (or equivalent) here and on wall walks.</td></tr><tr><td><strong>Chokepoints</strong></td><td>Stairs, bridges, courtyard killsacks — melee vs archer spawners placed for <strong>funnels</strong>.</td></tr><tr><td><strong>Branch routes</strong></td><td>Main push vs <strong>secret tunnel</strong> (shorter, tighter ambush).</td></tr><tr><td><strong>Boss arenas</strong></td><td>King + necromancers; cover, elevation, add alcoves <strong>TBD</strong> in blockout.</td></tr><tr><td><strong>Beacon basement</strong></td><td>Side objective; cramped deadly funnel.</td></tr><tr><td><strong>Vertical</strong></td><td>Basements add down-stack chokes (30-block soft column above unbreakable bottom).</td></tr></tbody></table>
+<p>Difficulty is <strong>mostly</strong> boss kits, spawner placement/type, <strong>geometry</strong>, and <strong>status / kit pressure</strong> (<code>citadel-defenders.md</code> <strong>Siege prep &amp; effects</strong>), chokepoints, funnels, sightlines, <strong>not</strong> a pure armor-and-HP soak.</p>
+<table><thead><tr><th>Layer</th><th>Design job</th></tr></thead><tbody><tr><td><strong>Approach</strong></td><td>Shadow-ring bandits (Armies); mustering ground outside wall.</td></tr><tr><td><strong>Walls</strong></td><td>Unbreakable ~<strong>40</strong> tall, <strong>too tall for siege ladders</strong> (<code>endgame.md</code>).</td></tr><tr><td><strong>One main entrance</strong></td><td>Primary assault path: <strong>large open gate / barbican</strong>: <strong>closable</strong> (see <strong>Assault defensive mode</strong>).</td></tr><tr><td><strong>Secret tunnel</strong></td><td>Optional second route, tighter, not the main claim path <strong>TBD</strong> mockup.</td></tr><tr><td><strong>Gate gauntlet</strong></td><td>While outer <strong>citadel doors</strong> are mined, spawners and <strong>ranged overwatch</strong> cover the line, expect <strong>bows/crossbows</strong> (or equivalent) here and on wall walks.</td></tr><tr><td><strong>Chokepoints</strong></td><td>Stairs, bridges, courtyard killsacks, melee vs archer spawners placed for <strong>funnels</strong>.</td></tr><tr><td><strong>Branch routes</strong></td><td>Main push vs <strong>secret tunnel</strong> (shorter, tighter ambush).</td></tr><tr><td><strong>Boss arenas</strong></td><td>King + necromancers; cover, elevation, add alcoves <strong>TBD</strong> in blockout.</td></tr><tr><td><strong>Beacon basement</strong></td><td>Side objective; cramped deadly funnel.</td></tr><tr><td><strong>Vertical</strong></td><td>Basements add down-stack chokes (30-block soft column above unbreakable bottom).</td></tr></tbody></table>
 <p><strong>Blockout:</strong> tag each spawner with role (gate pressure, tower overlook, keep reserve, necromancer adds).</p>
 <p>---</p>
 <h2 id="assault-defensive-mode-initial-assault-until-king-dead">Assault defensive mode (initial assault / until king dead)</h2>
-<p>While the <strong>Corrupted King lives</strong> (and through <strong>first claim sit</strong> if needed — <strong>exact off-trigger TBD</strong> mockup):</p>
-<table><thead><tr><th>Element</th><th>Behavior</th></tr></thead><tbody><tr><td><strong>Main inner gate</strong></td><td><strong>Closed</strong> — huge entrance into inner ward <strong>not</strong> walk-through until defensive mode ends (redstone / custom gate <strong>TBD</strong>). Attackers use <strong>outer breach</strong> + <strong>kill corridors</strong>, not a straight rush to throne.</td></tr><tr><td><strong>Corridors</strong></td><td><strong>Narrow</strong> funnels + <strong>trap</strong> segments: <strong>tripwire</strong> + <strong>pressure plates</strong> → <strong>dispensers</strong> (splash/lingering <strong>debuff + damage</strong> potions — see <code>citadel-defenders.md</code>), <strong>lava</strong> releases/drops, gravel/drop pits <strong>TBD</strong>. Rotate <strong>different effect mixes</strong> per segment so the push feels like <strong>several puzzles</strong>, not one repeated choke.</td></tr><tr><td><strong>Terrain hazards</strong></td><td>Native Minecraft <strong>siege friction</strong>: <strong>cobwebs</strong>, <strong>water</strong> / <strong>waterfalls</strong>, <strong>packed ice</strong>, <strong>lava</strong> sections (intentional trap lanes — <strong>not</strong> the scrapped lava-in-walls moat). Requires buckets, boats, fire res, careful movement.</td></tr><tr><td><strong>Mid-assault dismantling</strong></td><td><strong>Redstone trap parts</strong> and <strong>garrison spawner blocks</strong> are <strong>breakable</strong> if attackers can reach them — tower clears, side-room saps, and corridor trap stripping are all valid siege play (<code>citadel-defenders.md</code>).</td></tr><tr><td><strong>After king + claim</strong></td><td><strong>No full auto strip</strong>. <strong>Player-driven</strong> remodel: <strong>levers</strong> to open gates, <strong>remove</strong> leftover tripwires/plates, <strong>mine</strong> any spawners/hazards still in place. Citadel becomes <strong>remodelable</strong> template.</td></tr></tbody></table>
+<p>While the <strong>Corrupted King lives</strong> (and through <strong>first claim sit</strong> if needed, <strong>exact off-trigger TBD</strong> mockup):</p>
+<table><thead><tr><th>Element</th><th>Behavior</th></tr></thead><tbody><tr><td><strong>Main inner gate</strong></td><td><strong>Closed</strong>: huge entrance into inner ward <strong>not</strong> walk-through until defensive mode ends (redstone / custom gate <strong>TBD</strong>). Attackers use <strong>outer breach</strong> + <strong>kill corridors</strong>, not a straight rush to throne.</td></tr><tr><td><strong>Corridors</strong></td><td><strong>Narrow</strong> funnels + <strong>trap</strong> segments: <strong>tripwire</strong> + <strong>pressure plates</strong> → <strong>dispensers</strong> (splash/lingering <strong>debuff + damage</strong> potions, see <code>citadel-defenders.md</code>), <strong>lava</strong> releases/drops, gravel/drop pits <strong>TBD</strong>. Rotate <strong>different effect mixes</strong> per segment so the push feels like <strong>several puzzles</strong>, not one repeated choke.</td></tr><tr><td><strong>Terrain hazards</strong></td><td>Native Minecraft <strong>siege friction</strong>: <strong>cobwebs</strong>, <strong>water</strong> / <strong>waterfalls</strong>, <strong>packed ice</strong>, <strong>lava</strong> sections (intentional trap lanes, <strong>not</strong> the scrapped lava-in-walls moat). Requires buckets, boats, fire res, careful movement.</td></tr><tr><td><strong>Mid-assault dismantling</strong></td><td><strong>Redstone trap parts</strong> and <strong>garrison spawner blocks</strong> are <strong>breakable</strong> if attackers can reach them, tower clears, side-room saps, and corridor trap stripping are all valid siege play (<code>citadel-defenders.md</code>).</td></tr><tr><td><strong>After king + claim</strong></td><td><strong>No full auto strip</strong>. <strong>Player-driven</strong> remodel: <strong>levers</strong> to open gates, <strong>remove</strong> leftover tripwires/plates, <strong>mine</strong> any spawners/hazards still in place. Citadel becomes <strong>remodelable</strong> template.</td></tr></tbody></table>
 <p>Mockup decides: tunnel open during defensive mode?, which gates are lever-only vs still redstone-locked until claim, default lever locations.</p>
 <p>---</p>
 <h2 id="keep-rooms-v1">Keep rooms (v1)</h2>

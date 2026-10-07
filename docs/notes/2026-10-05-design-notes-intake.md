@@ -1,4 +1,4 @@
-# Design notes intake — 2026-10-05
+# Design notes intake, 2026-10-05
 
 **Status:** Raw author notes. Not canon until merged into main docs via section-by-section discussion (`2026-10-05-discussion-plan.md`).
 

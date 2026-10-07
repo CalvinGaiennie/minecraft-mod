@@ -121,7 +121,7 @@ The stages match the build order in the Overview part. Test each before starting
 - **Enlistment:** mess-station claim + `/villagers enlist|optout`; threat ticks respect enlisted/opt-out state where wired.
 - **Threats:** new-moon raid window, nightly swarm spawn hooks, bandit data + deserter conversion stubs, bandit camp marker block.
 - **Stage 6 blocks/items:** crypt, ranch, farmer station, spawner cap (BE tick), training dummy (practice kills), grave/effigy markers, necromancy gear + village map/chronicle, root advancement.
-- **Art:** run `python3 scripts/generate_vanilla_assets.py` after adding IDs — all registered blocks/items use vanilla-parent models/textures (no missing purple-black cubes).
+- **Art:** run `python3 scripts/generate_vanilla_assets.py` after adding IDs, all registered blocks/items use vanilla-parent models/textures (no missing purple-black cubes).
 - **Still deferred past Stage 6:** full raid waves, swarm merge AI, farmer job AI, grave/effigy behavior, bandit camps as structures, citadel/endgame structures (necro mod).
 
 ### Stage 7: Endgame

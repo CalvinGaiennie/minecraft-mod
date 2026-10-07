@@ -12,7 +12,7 @@ The necromancer's hood and robe keep hostile mobs off the player; the wand turns
 | **Non-necromancer** (incl. absolved) | Undead won't attack; undead **swarms** ignore wearer | Other hostiles won't attack **except Wither and Warden** |
 | **Active necromancer** | Same undead rule | All hostiles won't attack, **including Wither and Warden** |
 
-- The Ender Dragon, guardians, and elder guardians always attack. **Bandits** are not hostiles — robes don't stop them.
+- The Ender Dragon, guardians, and elder guardians always attack. **Bandits** are not hostiles, robes don't stop them.
 - **Durability:** about the same as leather (hood 55, robe 80). Repaired with phantom membranes.
 - **Stigma (anyone in hood/robe):** ~**half** of necromancer social penalties (config `stigmaRobeFraction`, default 0.5): e.g. +25% villager trades, 1.25× soldier desertion, **3×** slower recruiters for **necromancers only** (see penalties), 50% chance villagers flee / others' soldiers attack per check.
 - **Necromancer-only penalties** while active (full strength, not half): +50% trades in robes, **double fear tax** in **your** villages (robes alone do **not** add fear tax), **3×** recruiter interval, double desertion, mutiny double-roll (soldier mod).
@@ -84,7 +84,7 @@ A 100-minion army costs about 3 hearts to build, then about 3 more each month to
 
 A player becomes an **active necromancer** the first time he uses a wand (convert or renew), unless the questline gates the wand until later (**TBD**). Penalties below apply while active.
 
-**Absolution:** clears **active** necromancer status **only if** the player has **never created a horcrux** (player horcrux ritual below). **Commit** to the necromancer quest at the Well does **not** block absolution. **First horcrux = commitment to the necromancer life:** absolution **forever impossible** afterward (potion fails — **TBD** UX). **Destroying** horcruxes does **not** restore eligibility. A committed quest necromancer who **never** made a horcrux may still **retake the citadel**, **heal the tree**, **absolve**, and **sit the throne** as a non-active necromancer (`citadel-claim.md`).
+**Absolution:** clears **active** necromancer status **only if** the player has **never created a horcrux** (player horcrux ritual below). **Commit** to the necromancer quest at the Well does **not** block absolution. **First horcrux = commitment to the necromancer life:** absolution **forever impossible** afterward (potion fails, **TBD** UX). **Destroying** horcruxes does **not** restore eligibility. A committed quest necromancer who **never** made a horcrux may still **retake the citadel**, **heal the tree**, **absolve**, and **sit the throne** as a non-active necromancer (`citadel-claim.md`).
 
 While active and **eligible** for absolution:
 
@@ -95,7 +95,7 @@ While active and **eligible** for absolution:
 
 ### Potion of absolution
 
-Drinking it (when still **eligible** — no player horcrux ever created) clears active necromancer status: penalties end. **Permanently lost hearts stay lost.** His **wand crumbles.** **Minions** revert to **hostile** and stop following. Using a new wand makes him active again. Hood/robe **combat** rules stay as for any non-necromancer wearer (Wither/Warden can attack).
+Drinking it (when still **eligible**: no player horcrux ever created) clears active necromancer status: penalties end. **Permanently lost hearts stay lost.** His **wand crumbles.** **Minions** revert to **hostile** and stop following. Using a new wand makes him active again. Hood/robe **combat** rules stay as for any non-necromancer wearer (Wither/Warden can attack).
 
 After the player **creates a horcrux**, the potion fails or has no effect (**TBD**).
 
@@ -161,22 +161,22 @@ Cursed effigy (carved pumpkin, bone, hay bale, stick), a scarecrow shape:
 Hunting **rogue necromancers** earns rewards found nowhere else.
 
 - **Sites (author):** **~half** as dense as **pillager outposts** (~2× spacing). **Rogues = necromancer NPCs**, not bandits. **Site roll:** cave crypt, **surface-entrance crypt**, **taken village**, or **dark tower** (`necromancer-path.md`). Killing the rogue clears the site; a new one moves in after the next **new moon** (proposed).
-- **Horcrux compass:** **craft many**; **no range cap**; **always** includes **your own** horcruxes; points to **nearest horcrux** chunk (player or wild lich). **Stronger early** (few wild decoys), **weaker late** as exploration adds closer rogue horcruxes — chunk-level only (`necromancer-path.md`).
-- **Wild lich (term):** a rogue with **one horcrux** (item) in a **hidden chest** — **very rare**; almost all rogues have **none** (`necromancer-path.md`).
-- **Optional preview:** if you find one, same pseudo-death / ping / destroy rules as player liches — **not** a required tutorial step.
+- **Horcrux compass:** **craft many**; **no range cap**; **always** includes **your own** horcruxes; points to **nearest horcrux** chunk (player or wild lich). **Stronger early** (few wild decoys), **weaker late** as exploration adds closer rogue horcruxes, chunk-level only (`necromancer-path.md`).
+- **Wild lich (term):** a rogue with **one horcrux** (item) in a **hidden chest**: **very rare**; almost all rogues have **none** (`necromancer-path.md`).
+- **Optional preview:** if you find one, same pseudo-death / ping / destroy rules as player liches, **not** a required tutorial step.
 - **Phylactery shard:** dropped by rogue necromancers (1–2 each) and the **two named bound necromancers** in the citadel (`endgame.md`, names TBD). A player necromancer killed by another player drops 1, at most once per in-game day.
 - **Horcrux on rogues:** **~4%**, **max one** horcrux each; config `necromancerRogueHorcruxChance`. No fixed tutorial site.
 - **Bone whistle:** 2 phylactery shards + a bone + a goat horn. Blowing it summons 3 wolves that fight for the player for 3 minutes, once per in-game day; 20 uses (proposed). **Not** the same as committed-quest **flutes/pipes** (`necromancer-path.md`).
 
 ### Horcrux (player-created)
 
-**Not quest-gated** — any player may attempt the ritual **when they have** the ingredients (`necromancer-path.md`). **Many horcruxes** allowed; each costs **1 permanent heart** until the **1-heart floor**. **Casual** necromancers often use shards for the **bone whistle** only; **quest flutes / god wizard set / relics** are optional power-item fuels. **Wild liches** in crypts demonstrate destroy flow first (see crypts above).
+**Not quest-gated**: any player may attempt the ritual **when they have** the ingredients (`necromancer-path.md`). **Many horcruxes** allowed; each costs **1 permanent heart** until the **1-heart floor**. **Casual** necromancers often use shards for the **bone whistle** only; **quest flutes / god wizard set / relics** are optional power-item fuels. **Wild liches** in crypts demonstrate destroy flow first (see crypts above).
 
 **Ritual:** **Phylactery shard** + **any quest flute**, **full god wizard armor set**, or **any kings’ relic** (consumed) in **hotbar** while killing a **soul** on the closed list: **any player**, **any acolyte** (NPC or Order player), or **any End flute tyrant** (`necromancer-path.md`). On **first successful** ritual, the player **permanently** loses **absolution** eligibility (`Potion of absolution` above).
 
-**Storage:** Each horcrux in a **chest** anywhere; passives while **≥1** exists. **Ping:** environmental — dark particles, **poisoned animals** in horcrux chunk (`necromancer-path.md`).
+**Storage:** Each horcrux in a **chest** anywhere; passives while **≥1** exists. **Ping:** environmental, dark particles, **poisoned animals** in horcrux chunk (`necromancer-path.md`).
 
-**Quest flutes:** **never damage the player** who plays them; **one per type per world** on **End flute tyrants**; **any player** may loot and use; **relic-style** indestructibility; **1 charge per play** — **non-necromancers** refill after **every** use; **committed necromancers** get **3** plays per refill; **recharge** = craft **flute charge** (glowstone dust + blaze powder + ender pearl), then shapeless **flute + charge** (`necromancer-path.md`); removed only by **ritual consumption**.
+**Quest flutes:** **never damage the player** who plays them; **one per type per world** on **End flute tyrants**; **any player** may loot and use; **relic-style** indestructibility; **1 charge per play**: **non-necromancers** refill after **every** use; **committed necromancers** get **3** plays per refill; **recharge** = craft **flute charge** (glowstone dust + blaze powder + ender pearl), then shapeless **flute + charge** (`necromancer-path.md`); removed only by **ritual consumption**.
 
 **Passives:**
 
@@ -184,8 +184,8 @@ Hunting **rogue necromancers** earns rewards found nowhere else.
 - **Lethal damage** → **pseudo-death** (3 min no clicks, move, keep inv). **No teleport** on trigger.
 - **True death** only when **all** horcruxes are **destroyed** (not merely dropped or stolen).
 
-**Destroy horcrux:** survives normal mining/fire. **Primary (hunter finish):** **throw into the Dragon’s Well** — **anytime** (dragon alive or dead). **Also:** ghast fireball, wither, lightning (rod/channeling), optional **breath bottle** splash. Config `necromancerHorcruxDestroyers`. **Intro quest:** the mother’s hint covers **monster / storm** methods only — **not** the Well (`necromancer-path.md`). **God wizard armor:** **indestructible** like relics; **binding** — no manual unequip; **pseudo-death keeps armor**; consumable only via **horcrux** (or **TBD** rituals). True death drops pieces normally.
+**Destroy horcrux:** survives normal mining/fire. **Primary (hunter finish):** **throw into the Dragon’s Well**: **anytime** (dragon alive or dead). **Also:** ghast fireball, wither, lightning (rod/channeling), optional **breath bottle** splash. Config `necromancerHorcruxDestroyers`. **Intro quest:** the mother’s hint covers **monster / storm** methods only, **not** the Well (`necromancer-path.md`). **God wizard armor:** **indestructible** like relics; **binding**: no manual unequip; **pseudo-death keeps armor**; consumable only via **horcrux** (or **TBD** rituals). True death drops pieces normally.
 
-**Consider:** active horcrux **corrupts weak nearby units** (soldiers, etc.) — **`necromancer-path.md`**; not implemented.
+**Consider:** active horcrux **corrupts weak nearby units** (soldiers, etc.), **`necromancer-path.md`**; not implemented.
 
 **Config:** **`necromancerHorcruxEnabled`** (default **true**). Must not bypass **relic ban** or throne rules.

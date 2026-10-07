@@ -52,7 +52,7 @@ See [stage-1-tests.md](stage-1-tests.md) for M1–M9 (mess stock/GUI, recruit ge
 | M13 | Soldier **within 128** of post bed, low HP. | Does **not** retreat to fallback for that rule. |
 | M14 | Place **Tax box**, mess + soldiers **in tax zone**, civilians in zone. Skip days without opening, then **open** the box. | Action bar shows days due + collection; bread/items appear (up to 30 days back-tax). |
 | M15 | Open **Recruiter box** / **Supply depot** GUIs. | 27-slot recruiter / 9-slot depot GUIs open; weekly supply (near player) adds sword/bow/chestplate to the **nearest recruiter box within 48 blocks**, or the depot if no recruiter exists. |
-| M16 | **Discharge** soldier. Place a **vanilla bed**; let veteran claim/sleep if needed. Give **Veteran’s sword**. | Fights hostiles within **128** of **that villager bed** only—not the post bed. |
+| M16 | **Discharge** soldier. Place a **vanilla bed**; let veteran claim/sleep if needed. Give **Veteran’s sword**. | Fights hostiles within **128** of **that villager bed** only, not the post bed. |
 | M17 | Kill monsters as soldier; watch name/rank after kills. | At 5+ kills, rank/health bump (Seasoned). |
 | M18 | Soldier kills mobs repeatedly. | Melee weapon **loses durability** over time. |
 

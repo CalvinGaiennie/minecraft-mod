@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Start — Minecraft Kingdom</title>
+  <title>Start · Minecraft Kingdom</title>
   <link rel="stylesheet" href="../../assets/site.css" />
   
 </head>
@@ -24,18 +24,18 @@
     <div class="page-shell has-sidebar">
       <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Documents</p><ul><li><a href="compatibility-planned-mods/index.html">Compatibility targets</a></li><li><a href="development-plan/index.html">Development plan</a></li><li><a href="integration/index.html">Integration</a></li><li><a href="marketing-readme/index.html">Marketing site (README)</a></li><li><a href="mod-goals/index.html">Mod goals</a></li><li><a href="mod-split/index.html">Mod split</a></li><li><a href="overview/index.html">Overview</a></li></ul></aside>
       <main class="doc-main">
-        <div class="dev-hub"><h1>Start</h1><p class="dev-group-lede">Mod goals, split, integration, and the development plan.</p><section class="dev-doc-full" id="compatibility-planned-mods"><h2>Compatibility targets</h2><p class="source">Source: <code>docs/compatibility-planned-mods.md</code></p><div class="dev-doc-body"><p><strong>Short answer:</strong> Yes — <strong>compatibility is a design goal</strong>, not a guarantee on day one. The project <strong>targets 1.21.1 NeoForge</strong> specifically so it can sit beside <strong>Create</strong> and <strong>Ice and Fire: Community Edition</strong> in modpacks (<code>overview.md</code>, <code>master-build-note.md</code>). There is <strong>no hard dependency</strong> on any of these mods.</p>
+        <div class="dev-hub"><h1>Start</h1><p class="dev-group-lede">Mod goals, split, integration, and the development plan.</p><section class="dev-doc-full" id="compatibility-planned-mods"><h2>Compatibility targets</h2><p class="source">Source: <code>docs/compatibility-planned-mods.md</code></p><div class="dev-doc-body"><p><strong>Short answer:</strong> Yes, <strong>compatibility is a design goal</strong>, not a guarantee on day one. The project <strong>targets 1.21.1 NeoForge</strong> specifically so it can sit beside <strong>Create</strong> and <strong>Ice and Fire: Community Edition</strong> in modpacks (<code>overview.md</code>, <code>master-build-note.md</code>). There is <strong>no hard dependency</strong> on any of these mods.</p>
 <p><strong>How we stay compatible</strong></p>
 <ul>
-<li><strong>Optional integration only</strong> — no <code>@Mod</code> dependency; soft checks via <code>ModList</code> / events (<code>integration.md</code>).</li>
+<li><strong>Optional integration only</strong>: no <code>@Mod</code> dependency; soft checks via <code>ModList</code> / events (<code>integration.md</code>).</li>
 <li><strong>Mixins disabled</strong> in the current template (reduces cross-mod bytecode conflicts); villager work uses attachments + events first.</li>
-<li><strong>Soldiers = vanilla villagers</strong> — not a custom mob type that fights other mods’ entity registries.</li>
-<li><strong>Enlisted-player rule</strong> — mod raids/swarm rolls can skip players who opt out, so packs aren’t forced into our threat loop.</li>
-<li><strong>Cut siege MVP</strong> — no custom ladder/sapper assault AI that would fight <strong>Medieval Siege Machines</strong> for the same job.</li>
-<li><strong>Separate test instance</strong> — master build note: test our JAR with Create + IAF CE before claiming “modpack ready.”</li>
+<li><strong>Soldiers = vanilla villagers</strong>: not a custom mob type that fights other mods’ entity registries.</li>
+<li><strong>Enlisted-player rule</strong>: mod raids/swarm rolls can skip players who opt out, so packs aren’t forced into our threat loop.</li>
+<li><strong>Cut siege MVP</strong>: no custom ladder/sapper assault AI that would fight <strong>Medieval Siege Machines</strong> for the same job.</li>
+<li><strong>Separate test instance</strong>: master build note: test our JAR with Create + IAF CE before claiming “modpack ready.”</li>
 </ul>
 <p><strong>Verdict by mod</strong></p>
-<table><thead><tr><th>Mod</th><th>1.21.1 NeoForge</th><th>Compatibility expectation</th><th>Main risks to test</th></tr></thead><tbody><tr><td>Create <span class="doc-ref-url">(https://modrinth.com/mod/create)</span></td><td>Yes (official)</td><td><strong>High</strong> — platform choice was partly for Create modpacks</td><td>Village protection vs contraption breaking; claim borders vs machines</td></tr><tr><td>Ice and Fire: Community Edition</td><td>Yes (project target; use pack’s CE build)</td><td><strong>Medium–high</strong> — dragons/endgame parallel to Citadel, not merged</td><td>Soldier targeting on IAF mobs; structures vs citadel/refuge placement; dragon vs custom raids</td></tr><tr><td>Epic Knights: Shields, Armor and Weapons <span class="doc-ref-url">(https://modrinth.com/mod/epic-knights-shields-armor-and-weapons)</span></td><td>Yes</td><td><strong>High</strong> — player gear; soldiers keep their own kits</td><td>Low technical conflict; balance is gameplay</td></tr><tr><td>Small Ships <span class="doc-ref-url">(https://modrinth.com/mod/small-ships)</span></td><td>Yes</td><td><strong>High</strong> — naval layer orthogonal to village war</td><td>Low; our boat-assault content is cut from scope</td></tr><tr><td>Medieval Siege Machines <span class="doc-ref-url">(https://modrinth.com/mod/medieval-siege-machines)</span> (catapult/trebuchet/etc.)</td><td>Yes</td><td><strong>Medium</strong> — player siege vs village claims</td><td>Explosions/projectiles vs village protection; <code>mobGriefing</code></td></tr><tr><td>Corpse <span class="doc-ref-url">(https://modrinth.com/mod/corpse)</span></td><td>Yes (1.21.1 NeoForge builds)</td><td><strong>High</strong> — acolyte questline</td><td>Player/acolyte death + loot retention; quest items must not soft-lock (<code>acolyte-path.md</code>)</td></tr></tbody></table>
+<table><thead><tr><th>Mod</th><th>1.21.1 NeoForge</th><th>Compatibility expectation</th><th>Main risks to test</th></tr></thead><tbody><tr><td>Create <span class="doc-ref-url">(https://modrinth.com/mod/create)</span></td><td>Yes (official)</td><td><strong>High</strong>: platform choice was partly for Create modpacks</td><td>Village protection vs contraption breaking; claim borders vs machines</td></tr><tr><td>Ice and Fire: Community Edition</td><td>Yes (project target; use pack’s CE build)</td><td><strong>Medium–high</strong>: dragons/endgame parallel to Citadel, not merged</td><td>Soldier targeting on IAF mobs; structures vs citadel/refuge placement; dragon vs custom raids</td></tr><tr><td>Epic Knights: Shields, Armor and Weapons <span class="doc-ref-url">(https://modrinth.com/mod/epic-knights-shields-armor-and-weapons)</span></td><td>Yes</td><td><strong>High</strong>: player gear; soldiers keep their own kits</td><td>Low technical conflict; balance is gameplay</td></tr><tr><td>Small Ships <span class="doc-ref-url">(https://modrinth.com/mod/small-ships)</span></td><td>Yes</td><td><strong>High</strong>: naval layer orthogonal to village war</td><td>Low; our boat-assault content is cut from scope</td></tr><tr><td>Medieval Siege Machines <span class="doc-ref-url">(https://modrinth.com/mod/medieval-siege-machines)</span> (catapult/trebuchet/etc.)</td><td>Yes</td><td><strong>Medium</strong>: player siege vs village claims</td><td>Explosions/projectiles vs village protection; <code>mobGriefing</code></td></tr><tr><td>Corpse <span class="doc-ref-url">(https://modrinth.com/mod/corpse)</span></td><td>Yes (1.21.1 NeoForge builds)</td><td><strong>High</strong>: acolyte questline</td><td>Player/acolyte death + loot retention; quest items must not soft-lock (<code>acolyte-path.md</code>)</td></tr></tbody></table>
 <p>*<em>What we will </em>not<em> claim without testing</em>*</p>
 <ul>
 <li>“Officially compatible” or CurseForge “compatible with X” badges until a <strong>fixed mod list + version pins</strong> pass smoke tests (load, 30 min SP, claim village, citadel flag, Create contraption in claim, IAF mob near soldiers).</li>
@@ -45,19 +45,19 @@
 <ul>
 <li>“Built for <strong>1.21.1 NeoForge</strong> modpacks.”</li>
 <li>“<strong>Play-tested target:</strong> Create, Ice and Fire: Community Edition, Epic Knights, Small Ships, Medieval Siege Machines.”</li>
-<li>“<strong>No required mods</strong> — works alone; other mods enhance the sandbox.”</li>
+<li>“<strong>No required mods</strong>: works alone; other mods enhance the sandbox.”</li>
 </ul>
 <p><strong>Ice and Fire CE link:</strong> use the exact file your pack pins (often CurseForge <strong>Ice and Fire: Community Edition</strong> by the community port team). Modrinth mirrors vary; verify <code>game_versions</code> includes <strong>1.21.1</strong> and <strong>NeoForge</strong> on the download you ship.</p></div></section><section class="dev-doc-full" id="development-plan"><h2>Development plan</h2><p class="source">Source: <code>docs/marketing/development-plan.md</code></p><div class="dev-doc-body"><h2 id="mod-goals">Mod goals {#goals}</h2>
 <div class="box want">
 <h3>What we want players to feel</h3>
 <ul>
-<li><strong>More interactive Minecraft</strong> — better NPCs: named followers, named enemies, factions that react to you.</li>
-<li><strong>Decisions that stick</strong> — choices that <em>permanently</em> open or close paths (Order vs committed necromancer, opt-out, no Order after citadel claim, etc.).</li>
-<li><strong>Objectives that matter</strong> — goals that feel necessary or worth it to unlock places, gear, stations, and story — not checklist busywork for its own sake.</li>
-<li><strong>A longer game than the dragon</strong> — meaningful <strong>pre-dragon</strong> and <strong>post-dragon</strong> arcs. The citadel seal, kingdom play, and army campaigns are part of the real timeline.</li>
-<li><strong>Vanilla still works</strong> — never block the normal loop: build, farm, trade hall, redstone, explore your way. Mods <em>encourage</em> quests, empires, and story; they don&#x27;t replace survival.</li>
-<li><strong>Two kinds of story</strong> — <strong>Citadel</strong>: main lore, citadel, Order, necromancer path, relics, Minecraft tie-ins (TBD). <strong>Armies</strong>: your emergent kingdom <em>plus</em> authored bandit kings, named foes, loot and intel that unlocks the next threat — optional alliance with bandits, forced solo beats, emotional strife.</li>
-<li><strong>Progression that feels different</strong> — not just better gear: titles, taxes, stations, paths, and <strong>character stats</strong> (see backlog).</li>
+<li><strong>More interactive Minecraft</strong>: better NPCs: named followers, named enemies, factions that react to you.</li>
+<li><strong>Decisions that stick</strong>: choices that <em>permanently</em> open or close paths (Order vs committed necromancer, opt-out, no Order after citadel claim, etc.).</li>
+<li><strong>Objectives that matter</strong>: goals that feel necessary or worth it to unlock places, gear, stations, and story, not checklist busywork for its own sake.</li>
+<li><strong>A longer game than the dragon</strong>: meaningful <strong>pre-dragon</strong> and <strong>post-dragon</strong> arcs. The citadel seal, kingdom play, and army campaigns are part of the real timeline.</li>
+<li><strong>Vanilla still works</strong>: never block the normal loop: build, farm, trade hall, redstone, explore your way. Mods <em>encourage</em> quests, empires, and story; they don&#x27;t replace survival.</li>
+<li><strong>Two kinds of story</strong>: <strong>Citadel</strong>: main lore, citadel, Order, necromancer path, relics, Minecraft tie-ins (TBD). <strong>Armies</strong>: your emergent kingdom <em>plus</em> authored bandit kings, named foes, loot and intel that unlocks the next threat, optional alliance with bandits, forced solo beats, emotional strife.</li>
+<li><strong>Progression that feels different</strong>: not just better gear: titles, taxes, stations, paths, and <strong>character stats</strong> (see backlog).</li>
 </ul>
 </div>
 
@@ -65,16 +65,16 @@
 <h3>What we do not want</h3>
 <ul>
 <li>Minecraft feeling <strong>broken</strong> or &quot;wrong&quot; if you ignore our quests.</li>
-<li>Optimal play being <strong>only</strong> vanilla farms and trading halls — they should stay viable, but feel <strong>less mandatory</strong> when the mod&#x27;s stories and empire loop are engaging.</li>
-<li>Armies becoming a spreadsheet that kills roleplay — or Citadel becoming a gate that hard-blocks creative builders.</li>
-<li>Copy-paste quest design — Order is <strong>work → reward</strong>; necromancer path is <strong>decision → reward + weakness</strong> (see <code>docs/necromancer-path.md</code>).</li>
+<li>Optimal play being <strong>only</strong> vanilla farms and trading halls, they should stay viable, but feel <strong>less mandatory</strong> when the mod&#x27;s stories and empire loop are engaging.</li>
+<li>Armies becoming a spreadsheet that kills roleplay, or Citadel becoming a gate that hard-blocks creative builders.</li>
+<li>Copy-paste quest design, Order is <strong>work → reward</strong>; necromancer path is <strong>decision → reward + weakness</strong> (see <code>docs/necromancer-path.md</code>).</li>
 </ul>
 </div>
 <h2 id="two-mods-one-vision">Two mods, one vision {#mods}</h2>
 <div class="two">
 <div class="box">
 <h3>Minecraft Kingdom: Armies</h3>
-<p>Villages, soldiers, taxes, horns, campaigns, bandits. Build towns and cities that <strong>behave a bit like farms</strong> — recurring tax and supply — while generating <strong>your</strong> story.</p>
+<p>Villages, soldiers, taxes, horns, campaigns, bandits. Build towns and cities that <strong>behave a bit like farms</strong>: recurring tax and supply, while generating <strong>your</strong> story.</p>
 <p>Planned: named bandit leaders, chained intel/loot, moral grey (help or hinder bandits), moments where you leave the army behind.</p>
 </div>
 <div class="box">
@@ -83,9 +83,9 @@
 <p>Optional with Armies; kingdom scope amplifies when both are loaded.</p>
 </div>
 </div>
-<h2 id="solo-player-permanent-forks">Solo player — permanent forks {#solo-paths}</h2>
+<h2 id="solo-player-permanent-forks">Solo player, permanent forks {#solo-paths}</h2>
 <p>Citadel solo design assumes <strong>one player UUID</strong> making irreversible calls. Multiplayer adds PvP and race-for-claim; the <strong>locks below still apply per player</strong>.</p>
-<p><strong>Diagram:</strong> green = still available; red = closed; gold = citadel throne / owner perks; purple = necromancer quest; blue = Order. <strong>§6 brother endings</strong> (partner vs betrayal) are <strong>in discussion</strong> — dashed in chart.</p>
+<p><strong>Diagram:</strong> green = still available; red = closed; gold = citadel throne / owner perks; purple = necromancer quest; blue = Order. <strong>§6 brother endings</strong> (partner vs betrayal) are <strong>in discussion</strong>: dashed in chart.</p>
 <div class="mermaid-wrap"><div class="mermaid">
 flowchart TB
   subgraph entry["Before paths lock"]
@@ -101,22 +101,22 @@ flowchart TB
   PRE --> CLAIM1{Claim throne<br/>before Order lock?}
   OPT --> ORD[Order: basic → light → hard → Maelor lock<br/>must finish BEFORE claim]
   ORD --> LOCK{Specialty locked<br/>pre-claim?}
-  LOCK -->|Yes| ORDOK[Locked acolyte — can claim throne<br/>if not active necromancer on sit]
+  LOCK -->|Yes| ORDOK[Locked acolyte, can claim throne<br/>if not active necromancer on sit]
   LOCK -->|No| ORDMIS[Claim without lock → Order progress CLOSED<br/>No Maelor lock / homecoming perks]
   CLAIM1 -->|Yes| ORDMIS
 
-  COM --> NECRO[Committed arc: flutes, horcrux, citadel assault<br/>Emphasis pre-claim — §6 TBD post-claim]
+  COM --> NECRO[Committed arc: flutes, horcrux, citadel assault<br/>Emphasis pre-claim, §6 TBD post-claim]
   NECRO --> ASSAULT[Kill both bound necromancers + Corrupted King]
   ASSAULT --> BR{§6 brother choice<br/>TBD names}
-  BR -->|Trust seeming-good brother| ENDG[Ending A TBD — partner]
-  BR -->|Trust seeming-bad brother| ENDB[Ending B TBD — betrayal later]
+  BR -->|Trust seeming-good brother| ENDG[Ending A TBD, partner]
+  BR -->|Trust seeming-bad brother| ENDB[Ending B TBD, betrayal later]
 
-  subgraph throne["Citadel throne sit — owner"]
+  subgraph throne["Citadel throne sit, owner"]
     T{Attempt 60s throne sit}
-    T -->|Active necromancer<br/>healthy Kingstree| DEATH[Instant death — cannot own]
-    T -->|Active necromancer<br/>blighted tree| BLOCK[Blocked — must absolve first]
+    T -->|Active necromancer<br/>healthy Kingstree| DEATH[Instant death, cannot own]
+    T -->|Active necromancer<br/>blighted tree| BLOCK[Blocked, must absolve first]
     T -->|Absolved / never active| OWN[Can become owner<br/>restoration + perks]
-    T -->|Horcrux created — no absolution| DEATH
+    T -->|Horcrux created, no absolution| DEATH
     WAND[Owner uses wand again] --> FORFEIT[Forfeit claim + 7d window<br/>Permanent citadel ownership ban]
   end
 
@@ -135,52 +135,52 @@ flowchart TB
   style ENDB fill:#fef6d8
 </div></div>
 <h3>Fork cheat sheet (canon today)</h3>
-<table><thead><tr><th>You do this</th><th>Order acolyte path</th><th>Necromancer questline</th><th>Throne ownership</th></tr></thead><tbody><tr><td><strong>Opt out</strong> at intro</td><td>Open until <strong>claim</strong> (must <strong>lock</strong> pre-claim for full perks)</td><td><strong>Closed</strong></td><td>OK if <strong>not active</strong> necromancer on sit (<code>citadel-claim.md</code>)</td></tr><tr><td><strong>Commit</strong> at intro</td><td><strong>Closed</strong></td><td>Open (§6 main arc)</td><td><strong>Blocked</strong> while <strong>active</strong> necromancer; <strong>blighted</strong> tree → absolve if <strong>no horcrux</strong> yet</td></tr><tr><td><strong>Claim citadel</strong> before Maelor lock</td><td><strong>Closed</strong> for new progress</td><td>Intro may still trigger if 3 hearts; arc <strong>pre-claim</strong></td><td>Owner perks if sit succeeds</td></tr><tr><td><strong>Locked acolyte</strong> + absolved / non-active necro</td><td>Perks + stations after claim</td><td>Only if committed before commit lock</td><td><strong>Yes</strong></td></tr><tr><td><strong>Wand forfeit</strong> as owner</td><td>—</td><td>—</td><td><strong>Permanent ban</strong> from owning citadel</td></tr></tbody></table>
-<p><strong>Wild cards:</strong> horcrux pseudo-death (3 min, <strong>no teleport</strong>), relic ban on active necromancers, <strong>horcrux compass</strong> (<strong>no range cap</strong>, always points at nearest horcrux chunk including your own — hunter tool). Rogue sites ~<strong>half</strong> outpost density; <strong>~4%</strong> wild lich horcruxes.</p>
+<table><thead><tr><th>You do this</th><th>Order acolyte path</th><th>Necromancer questline</th><th>Throne ownership</th></tr></thead><tbody><tr><td><strong>Opt out</strong> at intro</td><td>Open until <strong>claim</strong> (must <strong>lock</strong> pre-claim for full perks)</td><td><strong>Closed</strong></td><td>OK if <strong>not active</strong> necromancer on sit (<code>citadel-claim.md</code>)</td></tr><tr><td><strong>Commit</strong> at intro</td><td><strong>Closed</strong></td><td>Open (§6 main arc)</td><td><strong>Blocked</strong> while <strong>active</strong> necromancer; <strong>blighted</strong> tree → absolve if <strong>no horcrux</strong> yet</td></tr><tr><td><strong>Claim citadel</strong> before Maelor lock</td><td><strong>Closed</strong> for new progress</td><td>Intro may still trigger if 3 hearts; arc <strong>pre-claim</strong></td><td>Owner perks if sit succeeds</td></tr><tr><td><strong>Locked acolyte</strong> + absolved / non-active necro</td><td>Perks + stations after claim</td><td>Only if committed before commit lock</td><td><strong>Yes</strong></td></tr><tr><td><strong>Wand forfeit</strong> as owner</td><td>-</td><td>,</td><td><strong>Permanent ban</strong> from owning citadel</td></tr></tbody></table>
+<p><strong>Wild cards:</strong> horcrux pseudo-death (3 min, <strong>no teleport</strong>), relic ban on active necromancers, <strong>horcrux compass</strong> (<strong>no range cap</strong>, always points at nearest horcrux chunk including your own, hunter tool). Rogue sites ~<strong>half</strong> outpost density; <strong>~4%</strong> wild lich horcruxes.</p>
 <h2 id="how-we-plan-plans-to-plan-the-plans">How we plan (plans to plan the plans) {#process}</h2>
 <div class="box process">
 <p>Design is <strong>author-owned</strong>. Implementation follows written docs in <code>docs/</code>, not the other way around.</p>
 <ol>
-<li><strong>Intake</strong> — raw notes land in dated files under <code>docs/notes/</code> (not canon until merged).</li>
-<li><strong>Section order</strong> — <code>docs/notes/2026-10-05-discussion-plan.md</code> lists topics (lore, paths, feats, layout). We do <strong>one section at a time</strong>.</li>
-<li><strong>Discuss → decide → merge</strong> — you call the shot; we update the real doc (<code>acolyte-path.md</code>, <code>endgame.md</code>, etc.) and log the row in the discussion plan.</li>
+<li><strong>Intake</strong>: raw notes land in dated files under <code>docs/notes/</code> (not canon until merged).</li>
+<li><strong>Section order</strong>: <code>docs/notes/2026-10-05-discussion-plan.md</code> lists topics (lore, paths, feats, layout). We do <strong>one section at a time</strong>.</li>
+<li><strong>Discuss → decide → merge</strong>: you call the shot; we update the real doc (<code>acolyte-path.md</code>, <code>endgame.md</code>, etc.) and log the row in the discussion plan.</li>
 <li><strong>No skip ahead</strong> on canon until the current section is merged (unless you explicitly defer a block, e.g. lore §2–6).</li>
-<li><strong>This section</strong> — high-level goals and process; detail stays in markdown for implementers.</li>
+<li><strong>This section</strong>: high-level goals and process; detail stays in markdown for implementers.</li>
 </ol>
-<p><strong>Status snapshot (2026-10-06):</strong> Order flow + feat gates (§8) merged. <strong>§6 necromancer main arc</strong> direction merged (<code>necromancer-path.md</code>). <strong>§7</strong> closed enough to implement: horcrux hunt loop, compass, <strong>flute charges</strong> (dust + blaze + ender pearl → charge; <strong>1</strong> play per refill for non-commit, <strong>3</strong> for committed necromancers), <strong>8</strong> End tyrants (<strong>512–768</strong> blocks from dragon island). <strong>§10 citadel layout</strong> next — mockup TBDs in <code>citadel-layout.md</code>. Lore §2–5 deferred.</p>
+<p><strong>Status snapshot (2026-10-06):</strong> Order flow + feat gates (§8) merged. <strong>§6 necromancer main arc</strong> direction merged (<code>necromancer-path.md</code>). <strong>§7</strong> closed enough to implement: horcrux hunt loop, compass, <strong>flute charges</strong> (dust + blaze + ender pearl → charge; <strong>1</strong> play per refill for non-commit, <strong>3</strong> for committed necromancers), <strong>8</strong> End tyrants (<strong>512–768</strong> blocks from dragon island). <strong>§10 citadel layout</strong> next, mockup TBDs in <code>citadel-layout.md</code>. Lore §2–5 deferred.</p>
 </div>
 <h2 id="design-progress-canon-docs">Design progress (canon docs) {#progress}</h2>
 <div class="box process">
-<h3>Necromancer path — items, hunt, rogues (§7)</h3>
+<h3>Necromancer path, items, hunt, rogues (§7)</h3>
 <p>Written to <code>docs/necromancer-path.md</code>, <code>docs/necromancy.md</code>, <code>docs/config-and-recipes.md</code>:</p>
 <ul>
 <li>Progression = <strong>unique quest items + sacrifices</strong> (not Order feat grids). <strong>Flutes</strong> = <strong>six types</strong>, <strong>one per world</strong> on <strong>End flute tyrants</strong>; relic indestructibility; consumed for <strong>horcrux</strong> rituals only.</li>
 <li><strong>Flute use:</strong> craft <strong>flute charge</strong> (glowstone dust + blaze powder + ender pearl), then shapeless <strong>flute + charge</strong> → full bank. <strong>Non-commit:</strong> <strong>1</strong> play per refill; <strong>committed necromancer:</strong> <strong>3</strong> plays per refill. Looted flutes start <strong>empty</strong>.</li>
 <li><strong>Horcrux:</strong> shard + power item (flute, god-wizard set, or king relic) + soul-list kill (<strong>player</strong>, <strong>acolyte</strong>, <strong>End tyrant</strong>); chest storage; environmental <strong>ping</strong> (owner sees it too); pseudo-death <strong>without teleport</strong>; destroy at <strong>Dragon’s Well</strong> + whitelist.</li>
 <li><strong>Rogues:</strong> ~<strong>half</strong> pillager-outpost density; sites = cave crypt / surface crypt / dark tower / <strong>taken village</strong> (villagers <strong>board up</strong> in houses); <strong>~4%</strong> wild lich horcrux; shards from all rogues.</li>
-<li><strong>Horcrux compass:</strong> shapeless — compass, phylactery shard, soul sand, wither rose; <strong>unlimited range</strong>; <strong>never</strong> hides your horcruxes; points to <strong>nearest horcrux chunk</strong> (noisy after map exploration).</li>
+<li><strong>Horcrux compass:</strong> shapeless, compass, phylactery shard, soul sand, wither rose; <strong>unlimited range</strong>; <strong>never</strong> hides your horcruxes; points to <strong>nearest horcrux chunk</strong> (noisy after map exploration).</li>
 <li><strong>End tyrants:</strong> <strong>8</strong> bosses on <strong>outer End</strong> (not dragon island), <strong>512–768</strong> blocks from island center; <strong>6</strong> drop flutes and use them in fight (<strong>60s</strong> boss cooldown).</li>
 <li><strong>Beast Dirge:</strong> 50% of eligible animals in loaded chunks take 4–12 hearts blight; flutes never hurt the player.</li>
 </ul>
-<h3>Necromancer path — story (§6, in discussion)</h3>
+<h3>Necromancer path, story (§6, in discussion)</h3>
 <p>Outline in <code>necromancer-path.md</code> <strong>Main quest arc</strong>: intro → mentor → citadel climax → <strong>misleading brother choice</strong> → branch endings (mega End portal ending <strong>TBD</strong> vs post-claim citadel).</p>
-<h3>Black Citadel — layout &amp; assault (§10, paused)</h3>
-<p>Written to <code>docs/citadel-layout.md</code> and <code>docs/citadel-defenders.md</code> — siege ladder <strong>20</strong> blocks; defensive mode, spawners, traps. Remaining TBDs wait on Creative mockup debrief.</p>
+<h3>Black Citadel, layout &amp; assault (§10, paused)</h3>
+<p>Written to <code>docs/citadel-layout.md</code> and <code>docs/citadel-defenders.md</code>, siege ladder <strong>20</strong> blocks; defensive mode, spawners, traps. Remaining TBDs wait on Creative mockup debrief.</p>
 </div>
-<h2 id="design-backlog-from-goals-not-all-implemented">Design backlog (from goals — not all implemented) {#backlog}</h2>
+<h2 id="design-backlog-from-goals-not-all-implemented">Design backlog (from goals, not all implemented) {#backlog}</h2>
 <div class="box planned">
 <p>Items called out in goal-setting that still need specs in <code>docs/</code> and then code:</p>
-<table><thead><tr><th>Item</th><th>Mod</th><th>Intent</th></tr></thead><tbody><tr><td><strong>Permanent max-health boost</strong> when Maelor locks Order specialty</td><td>Citadel</td><td>Progression reward for acolyte commit; tune in config.</td></tr><tr><td><strong>Larger permanent max-HP boost</strong> for locked <strong>War Leader</strong> acolyte</td><td>Citadel (Order)</td><td>Bigger than other three specialties; amount TBD config.</td></tr><tr><td><strong>War Leader acolyte: no damage to own troops unless sneaking</strong></td><td>Citadel (Order)</td><td>See callout below — locked War Leader specialty only.</td></tr><tr><td>Named bandit kings, loot/intel chains, optional bandit alliance, solo-forced quests</td><td>Armies (+ Citadel hooks)</td><td>Army-side storylines; less &quot;main lore&quot; than citadel, still authored.</td></tr><tr><td>Tax / claim loop as soft &quot;farm&quot; replacement</td><td>Armies</td><td>Empire income without requiring vanilla iron farms for fun.</td></tr><tr><td><strong>§6</strong> intro NPC, mentor, citadel access beats, brother endings</td><td>Citadel</td><td>Player-facing main necromancer arc.</td></tr><tr><td><strong>End flute tyrant</strong> camps (8 placements, island template)</td><td>Citadel</td><td>Six flutes + two shard-only bosses; book clues <strong>TBD</strong>.</td></tr><tr><td>Per-flute <strong>player cooldown</strong> after play</td><td>Citadel</td><td>Tune in playtest.</td></tr><tr><td><code>necromancerRogueSiteSpacing</code> playtest value</td><td>Citadel</td><td>~400–512 blocks initial target.</td></tr></tbody></table>
+<table><thead><tr><th>Item</th><th>Mod</th><th>Intent</th></tr></thead><tbody><tr><td><strong>Permanent max-health boost</strong> when Maelor locks Order specialty</td><td>Citadel</td><td>Progression reward for acolyte commit; tune in config.</td></tr><tr><td><strong>Larger permanent max-HP boost</strong> for locked <strong>War Leader</strong> acolyte</td><td>Citadel (Order)</td><td>Bigger than other three specialties; amount TBD config.</td></tr><tr><td><strong>War Leader acolyte: no damage to own troops unless sneaking</strong></td><td>Citadel (Order)</td><td>See callout below, locked War Leader specialty only.</td></tr><tr><td>Named bandit kings, loot/intel chains, optional bandit alliance, solo-forced quests</td><td>Armies (+ Citadel hooks)</td><td>Army-side storylines; less &quot;main lore&quot; than citadel, still authored.</td></tr><tr><td>Tax / claim loop as soft &quot;farm&quot; replacement</td><td>Armies</td><td>Empire income without requiring vanilla iron farms for fun.</td></tr><tr><td><strong>§6</strong> intro NPC, mentor, citadel access beats, brother endings</td><td>Citadel</td><td>Player-facing main necromancer arc.</td></tr><tr><td><strong>End flute tyrant</strong> camps (8 placements, island template)</td><td>Citadel</td><td>Six flutes + two shard-only bosses; book clues <strong>TBD</strong>.</td></tr><tr><td>Per-flute <strong>player cooldown</strong> after play</td><td>Citadel</td><td>Tune in playtest.</td></tr><tr><td><code>necromancerRogueSiteSpacing</code> playtest value</td><td>Citadel</td><td>~400–512 blocks initial target.</td></tr></tbody></table>
 </div>
 
 <div class="box planned">
-<h3>War Leader acolyte — friendly-fire rule (design intent)</h3>
+<h3>War Leader acolyte, friendly-fire rule (design intent)</h3>
 <p>A player whose Order specialty is <strong>locked as War Leader</strong> (<code>acolyte-path.md</code>) <strong>cannot hurt their own soldiers or militia</strong> with direct player damage (melee, arrows, tridents, etc.) while <strong>not sneaking</strong>.</p>
 <ul>
 <li><strong>Default:</strong> hits against <em>your</em> soldiers/militia do not apply (cancelled or no damage).</li>
-<li><strong>Sneaking:</strong> you <em>can</em> damage your own troops — intentional only (discipline, mutiny edge cases per Armies rules).</li>
+<li><strong>Sneaking:</strong> you <em>can</em> damage your own troops, intentional only (discipline, mutiny edge cases per Armies rules).</li>
 <li><strong>Other specialties</strong> (Arcane, Alchemist, Smith) follow normal Armies friendly-fire rules.</li>
-<li><strong>Not</strong> kingdom NPC &quot;Warlords&quot; raids or a separate kingdom title — Order War Leader only.</li>
+<li><strong>Not</strong> kingdom NPC &quot;Warlords&quot; raids or a separate kingdom title, Order War Leader only.</li>
 <li>Explosions, lava, and fire may still harm troops unless we add exceptions later (TBD).</li>
 </ul>
 </div>
@@ -188,22 +188,22 @@ flowchart TB
 <div class="box process">
 <p><strong>Not dependencies.</strong> Armies and Citadel must run on their own. When other mods are in the pack we aim for two levels:</p>
 <ul>
-<li><strong>Coexist</strong> — verify claims, quests, spawns, death/loot, and UI don&#x27;t fight each other (smoke-test per release).</li>
-<li><strong>Extend</strong> — optional integration that wakes <strong>dormant</strong> content in our mobs, quests, or abilities only when that mod is loaded (no crash if absent).</li>
+<li><strong>Coexist</strong>: verify claims, quests, spawns, death/loot, and UI don&#x27;t fight each other (smoke-test per release).</li>
+<li><strong>Extend</strong>: optional integration that wakes <strong>dormant</strong> content in our mobs, quests, or abilities only when that mod is loaded (no crash if absent).</li>
 </ul>
 <p>Pack makers pin versions we test against; nothing here is required to play.</p>
 </div>
-<p>Priority list (initial — expand in <code>docs/integration.md</code> when specced):</p>
-<table><thead><tr><th>Mod</th><th>Kind</th><th>Intent</th></tr></thead><tbody><tr><td>Small Ships <span class="doc-ref-url">(https://modrinth.com/mod/small-ships)</span></td><td>Coexist + extend</td><td>Naval campaigns; future soldier crew aboard ship entities (not vanilla boats).</td></tr><tr><td>Ice and Fire: Community Edition <span class="doc-ref-url">(https://www.curseforge.com/minecraft/mc-mods/ice-and-fire-community-edition)</span></td><td>Coexist + extend</td><td>Mythic mobs and dragons alongside citadel lore; parallel fantasy, not a hard gate.</td></tr><tr><td>Mowzie&#x27;s Mobs <span class="doc-ref-url">(https://www.curseforge.com/minecraft/mc-mods/mowzies-mobs)</span></td><td>Extend</td><td>Selected bosses/mobs feed quests or unlock abilities in our content when present.</td></tr><tr><td>Alex&#x27;s Mobs <span class="doc-ref-url">(https://www.curseforge.com/minecraft/mc-mods/alexs-mobs)</span></td><td>Extend</td><td>Same pattern — optional encounter/quest hooks, not replacements for our roster.</td></tr><tr><td>Corpse <span class="doc-ref-url">(https://modrinth.com/mod/corpse)</span></td><td>Coexist</td><td>Death body / loot recovery compatible with army wipes and citadel defeats.</td></tr><tr><td>Comforts <span class="doc-ref-url">(https://modrinth.com/mod/comforts)</span></td><td>Coexist</td><td>Sleeping bags/hammocks don&#x27;t break campaign pacing or claim rules.</td></tr><tr><td>Grappling Hooks <span class="doc-ref-url">(https://modrinth.com/mod/grappling-hooks)</span></td><td>Coexist</td><td>Traversal during citadel exploration and siege prep.</td></tr><tr><td>World map mod (<strong>TBD</strong>)</td><td>Coexist</td><td>Waypoints/markers for refuges, claims, citadel — <strong>confirm Xaero&#x27;s vs JourneyMap</strong> with author.</td></tr><tr><td>Biomes O&#x27; Plenty <span class="doc-ref-url">(https://modrinth.com/mod/biomes-o-plenty)</span></td><td>Coexist</td><td>Extra biomes for worldgen; quest placement and structures must still find valid terrain.</td></tr><tr><td>Create <span class="doc-ref-url">(https://modrinth.com/mod/create)</span></td><td>Coexist</td><td>Village protection vs moving contraptions; factory bases beside claims.</td></tr><tr><td>Epic Knights: Shields, Armor and Weapons <span class="doc-ref-url">(https://modrinth.com/mod/epic-knights-shields-armor-and-weapons)</span></td><td>Coexist + gear</td><td>Soldier kits and supply accept modded medieval gear.</td></tr><tr><td>Medieval Siege Machines <span class="doc-ref-url">(https://modrinth.com/mod/medieval-siege-machines)</span></td><td>Coexist + extend (planned)</td><td>Player siege complements walls; soldier-operated siege is integration target, not day-one AI.</td></tr></tbody></table>
+<p>Priority list (initial, expand in <code>docs/integration.md</code> when specced):</p>
+<table><thead><tr><th>Mod</th><th>Kind</th><th>Intent</th></tr></thead><tbody><tr><td>Small Ships <span class="doc-ref-url">(https://modrinth.com/mod/small-ships)</span></td><td>Coexist + extend</td><td>Naval campaigns; future soldier crew aboard ship entities (not vanilla boats).</td></tr><tr><td>Ice and Fire: Community Edition <span class="doc-ref-url">(https://www.curseforge.com/minecraft/mc-mods/ice-and-fire-community-edition)</span></td><td>Coexist + extend</td><td>Mythic mobs and dragons alongside citadel lore; parallel fantasy, not a hard gate.</td></tr><tr><td>Mowzie&#x27;s Mobs <span class="doc-ref-url">(https://www.curseforge.com/minecraft/mc-mods/mowzies-mobs)</span></td><td>Extend</td><td>Selected bosses/mobs feed quests or unlock abilities in our content when present.</td></tr><tr><td>Alex&#x27;s Mobs <span class="doc-ref-url">(https://www.curseforge.com/minecraft/mc-mods/alexs-mobs)</span></td><td>Extend</td><td>Same pattern, optional encounter/quest hooks, not replacements for our roster.</td></tr><tr><td>Corpse <span class="doc-ref-url">(https://modrinth.com/mod/corpse)</span></td><td>Coexist</td><td>Death body / loot recovery compatible with army wipes and citadel defeats.</td></tr><tr><td>Comforts <span class="doc-ref-url">(https://modrinth.com/mod/comforts)</span></td><td>Coexist</td><td>Sleeping bags/hammocks don&#x27;t break campaign pacing or claim rules.</td></tr><tr><td>Grappling Hooks <span class="doc-ref-url">(https://modrinth.com/mod/grappling-hooks)</span></td><td>Coexist</td><td>Traversal during citadel exploration and siege prep.</td></tr><tr><td>World map mod (<strong>TBD</strong>)</td><td>Coexist</td><td>Waypoints/markers for refuges, claims, citadel, <strong>confirm Xaero&#x27;s vs JourneyMap</strong> with author.</td></tr><tr><td>Biomes O&#x27; Plenty <span class="doc-ref-url">(https://modrinth.com/mod/biomes-o-plenty)</span></td><td>Coexist</td><td>Extra biomes for worldgen; quest placement and structures must still find valid terrain.</td></tr><tr><td>Create <span class="doc-ref-url">(https://modrinth.com/mod/create)</span></td><td>Coexist</td><td>Village protection vs moving contraptions; factory bases beside claims.</td></tr><tr><td>Epic Knights: Shields, Armor and Weapons <span class="doc-ref-url">(https://modrinth.com/mod/epic-knights-shields-armor-and-weapons)</span></td><td>Coexist + gear</td><td>Soldier kits and supply accept modded medieval gear.</td></tr><tr><td>Medieval Siege Machines <span class="doc-ref-url">(https://modrinth.com/mod/medieval-siege-machines)</span></td><td>Coexist + extend (planned)</td><td>Player siege complements walls; soldier-operated siege is integration target, not day-one AI.</td></tr></tbody></table>
 <h3>Canonical doc index (implementers)</h3>
 <ul>
-<li><code>docs/overview.md</code> — scope and build order</li>
-<li><code>docs/acolyte-path.md</code> — Order quest + feats</li>
-<li><code>docs/necromancer-path.md</code> — dark path philosophy, §6 arc, §7 items</li>
-<li><code>docs/endgame.md</code>, <code>docs/citadel-claim.md</code>, <code>docs/citadel-layout.md</code>, <code>docs/citadel-defenders.md</code> — citadel loop &amp; siege</li>
-<li><code>docs/necromancy.md</code> — wand, rogues, horcrux design</li>
-<li><code>docs/soldiers-and-villages.md</code>, <code>docs/war-and-defense.md</code> — Armies</li>
-<li><code>docs/notes/2026-10-05-discussion-plan.md</code> — section queue + decision log</li>
+<li><code>docs/overview.md</code>, scope and build order</li>
+<li><code>docs/acolyte-path.md</code>, Order quest + feats</li>
+<li><code>docs/necromancer-path.md</code>, dark path philosophy, §6 arc, §7 items</li>
+<li><code>docs/endgame.md</code>, <code>docs/citadel-claim.md</code>, <code>docs/citadel-layout.md</code>, <code>docs/citadel-defenders.md</code>, citadel loop &amp; siege</li>
+<li><code>docs/necromancy.md</code>, wand, rogues, horcrux design</li>
+<li><code>docs/soldiers-and-villages.md</code>, <code>docs/war-and-defense.md</code>, Armies</li>
+<li><code>docs/notes/2026-10-05-discussion-plan.md</code>, section queue + decision log</li>
 </ul></div></section><section class="dev-doc-full" id="integration"><h2>Integration</h2><p class="source">Source: <code>docs/integration.md</code></p><div class="dev-doc-body"><p>Implement with <strong><code>ModList.get().isLoaded(&quot;other_mod_id&quot;)</code></strong> or NeoForge <strong>InterModComms</strong> / <strong>events</strong> on a shared bus. Prefer <strong>necromancer publishes world state</strong>, <strong>soldier subscribes</strong> (and vice versa for village data).</p>
 <p>Mod IDs: <strong><code>minecraft_kingdom_armies</code></strong>, <strong><code>minecraft_kingdom_citadel</code></strong>. Display: <strong>Minecraft Kingdom: Armies</strong> / <strong>Citadel</strong>. Monolith today: <strong><code>villagers</code></strong>.</p>
 <h2 id="necromancer-soldier-optional">Necromancer → Soldier (optional)</h2>
@@ -218,7 +218,7 @@ flowchart TB
 <li><strong>Citadel mess:</strong> soldier registers block; necro cancel placement if <code>!isCitadelOwner(uuid)</code> in citadel bounds.</li>
 </ul>
 <h2 id="versioning">Versioning</h2>
-<p>Document breaking changes to payloads in <code>mod-split.md</code> decisions log. First split may invalidate old <code>villagers_*</code> SavedData keys — migration note in release notes.</p></div></section><section class="dev-doc-full" id="marketing-readme"><h2>Marketing site (README)</h2><p class="source">Source: <code>docs/marketing/README.md</code></p><div class="dev-doc-body"><p>Built output is published from <strong><code>site/</code></strong> at the repo root (Netlify <code>publish</code> directory).</p>
+<p>Document breaking changes to payloads in <code>mod-split.md</code> decisions log. First split may invalidate old <code>villagers_*</code> SavedData keys, migration note in release notes.</p></div></section><section class="dev-doc-full" id="marketing-readme"><h2>Marketing site (README)</h2><p class="source">Source: <code>docs/marketing/README.md</code></p><div class="dev-doc-body"><p>Built output is published from <strong><code>site/</code></strong> at the repo root (Netlify <code>publish</code> directory).</p>
 <table><thead><tr><th>Role</th><th>Path</th></tr></thead><tbody><tr><td>Templates + markdown</td><td><code>docs/marketing/</code> (here)</td></tr><tr><td>Deployable HTML</td><td><code>site/index.html</code> (marketing), <code>site/dev/**</code></td></tr><tr><td>Netlify config</td><td><code>netlify.toml</code></td></tr></tbody></table>
 <h2 id="build">Build</h2>
 <pre><code class="language-bash">python3 docs/marketing/build_marketing.py</code></pre>
@@ -226,38 +226,38 @@ flowchart TB
 <p>Implementer mirror: <strong><code>docs/mod-goals.md</code></strong>.</p></div></section><section class="dev-doc-full" id="mod-goals"><h2>Mod goals</h2><p class="source">Source: <code>docs/mod-goals.md</code></p><div class="dev-doc-body"><p>Authoritative prose for implementers. Static site: <code>site/development-plan.html</code> (built from <code>docs/marketing/development-plan.md</code>). Marketing: <code>site/index.html</code>.</p>
 <h2 id="what-we-want">What we want</h2>
 <ul>
-<li><strong>More interactive world</strong> — named followers and enemies, factions, NPCs that matter.</li>
-<li><strong>Permanent decisions</strong> — paths that open or close optionality (Order, necromancer commit, etc.).</li>
-<li><strong>Worthwhile objectives</strong> — exploration and quests that gate important things without feeling like fake gates.</li>
-<li><strong>Longer than the dragon</strong> — strong pre- and post-dragon play; citadel and kingdom arcs are real chapters.</li>
-<li><strong>Vanilla-compatible</strong> — building, farms, trading halls, and redstone remain valid; mods <strong>encourage</strong> empires and story, not <strong>require</strong> them for basic survival.</li>
-<li><strong>Two story layers</strong> — <strong>Citadel</strong>: main lore and citadel arc. <strong>Armies</strong>: your kingdom story plus named bandits, intel chains, grey choices (ally bandits?), solo beats and strife.</li>
-<li><strong>Distinct progression</strong> — titles, taxes, stations, paths, and stat rewards (see backlog below).</li>
+<li><strong>More interactive world</strong>: named followers and enemies, factions, NPCs that matter.</li>
+<li><strong>Permanent decisions</strong>: paths that open or close optionality (Order, necromancer commit, etc.).</li>
+<li><strong>Worthwhile objectives</strong>: exploration and quests that gate important things without feeling like fake gates.</li>
+<li><strong>Longer than the dragon</strong>: strong pre- and post-dragon play; citadel and kingdom arcs are real chapters.</li>
+<li><strong>Vanilla-compatible</strong>: building, farms, trading halls, and redstone remain valid; mods <strong>encourage</strong> empires and story, not <strong>require</strong> them for basic survival.</li>
+<li><strong>Two story layers</strong>: <strong>Citadel</strong>: main lore and citadel arc. <strong>Armies</strong>: your kingdom story plus named bandits, intel chains, grey choices (ally bandits?), solo beats and strife.</li>
+<li><strong>Distinct progression</strong>: titles, taxes, stations, paths, and stat rewards (see backlog below).</li>
 </ul>
 <h2 id="what-we-avoid">What we avoid</h2>
 <ul>
 <li>Feeling like Minecraft is <strong>broken</strong> without mod quests.</li>
-<li>Making vanilla-style farms the <strong>only</strong> optimal path, or making them <strong>useless</strong> — they should be <strong>less necessary</strong>, not forbidden.</li>
-<li>Order and necromancer paths feeling identical (Order: <strong>work then reward</strong>; necromancer: <strong>decision then reward + weakness</strong> — <code>necromancer-path.md</code>).</li>
+<li>Making vanilla-style farms the <strong>only</strong> optimal path, or making them <strong>useless</strong>: they should be <strong>less necessary</strong>, not forbidden.</li>
+<li>Order and necromancer paths feeling identical (Order: <strong>work then reward</strong>; necromancer: <strong>decision then reward + weakness</strong>: <code>necromancer-path.md</code>).</li>
 </ul>
 <h2 id="design-backlog-from-goals">Design backlog (from goals)</h2>
-<table><thead><tr><th>Item</th><th>Notes</th></tr></thead><tbody><tr><td><strong>+max HP on Order specialty lock</strong></td><td>All locked acolytes; amount TBD config</td></tr><tr><td><strong>Larger +max HP for War Leader lock</strong></td><td>Citadel Order specialty only (not kingdom Warlord title)</td></tr><tr><td><strong>War Leader acolyte: can&#x27;t hurt own soldiers/militia unless sneaking</strong></td><td>Citadel Order — locked <strong>War Leader</strong> specialty only (<code>acolyte-path.md</code>)</td></tr><tr><td><strong>Army storylines</strong></td><td>Named bandit kings, loot/intel chains, optional alliance, leave-army-alone quests</td></tr><tr><td><strong>Taxes as soft “empire farm”</strong></td><td>Documented in soldiers/villages; reinforce in story design</td></tr></tbody></table>
+<table><thead><tr><th>Item</th><th>Notes</th></tr></thead><tbody><tr><td><strong>+max HP on Order specialty lock</strong></td><td>All locked acolytes; amount TBD config</td></tr><tr><td><strong>Larger +max HP for War Leader lock</strong></td><td>Citadel Order specialty only (not kingdom Warlord title)</td></tr><tr><td><strong>War Leader acolyte: can&#x27;t hurt own soldiers/militia unless sneaking</strong></td><td>Citadel Order, locked <strong>War Leader</strong> specialty only (<code>acolyte-path.md</code>)</td></tr><tr><td><strong>Army storylines</strong></td><td>Named bandit kings, loot/intel chains, optional alliance, leave-army-alone quests</td></tr><tr><td><strong>Taxes as soft “empire farm”</strong></td><td>Documented in soldiers/villages; reinforce in story design</td></tr></tbody></table>
 <h2 id="how-design-is-decided">How design is decided</h2>
-<p>See <code>docs/notes/2026-10-05-discussion-plan.md</code> — intake → one section → merge to <code>docs/*.md</code> → decision log.</p></div></section><section class="dev-doc-full" id="mod-split"><h2>Mod split</h2><p class="source">Source: <code>docs/mod-split.md</code></p><div class="dev-doc-body"><p>Two optional NeoForge mods from this repo long-term. <strong>Soldier</strong> = villages, economy, war, threats, farmers. <strong>Necromancer</strong> = wand, citadel, relics, acolytes, fortress endgame. Neither hard-depends on the other; <strong>integration</strong> enhances both.</p>
+<p>See <code>docs/notes/2026-10-05-discussion-plan.md</code>, intake → one section → merge to <code>docs/*.md</code> → decision log.</p></div></section><section class="dev-doc-full" id="mod-split"><h2>Mod split</h2><p class="source">Source: <code>docs/mod-split.md</code></p><div class="dev-doc-body"><p>Two optional NeoForge mods from this repo long-term. <strong>Soldier</strong> = villages, economy, war, threats, farmers. <strong>Necromancer</strong> = wand, citadel, relics, acolytes, fortress endgame. Neither hard-depends on the other; <strong>integration</strong> enhances both.</p>
 <h2 id="mod-packaging-plain-language">Mod packaging (plain language)</h2>
 <p><strong>Brand:</strong> <strong>Minecraft Kingdom</strong> (two optional mods in one series).</p>
 <table><thead><tr><th>Jar</th><th>Mod ID</th><th>Display name</th></tr></thead><tbody><tr><td>Armies</td><td><code>minecraft_kingdom_armies</code></td><td><strong>Minecraft Kingdom: Armies</strong></td></tr><tr><td>Citadel</td><td><code>minecraft_kingdom_citadel</code></td><td><strong>Minecraft Kingdom: Citadel</strong></td></tr></tbody></table>
 <p>Short IDs (<code>mk_armies</code> / <code>mk_citadel</code>) are fine for code if the long IDs feel heavy.</p>
-<p><strong>Current monolith</strong> (until Gradle split): <code>villagers</code> / <strong>Villagers Mod</strong> — <code>gradle.properties</code> unchanged.</p>
+<p><strong>Current monolith</strong> (until Gradle split): <code>villagers</code> / <strong>Villagers Mod</strong>: <code>gradle.properties</code> unchanged.</p>
 <ul>
 <li><strong>One repo, two Gradle subprojects</strong> (future): two JARs, shared docs, e.g. <code>minecraft_kingdom_armies-1.0.0</code> / <code>minecraft_kingdom_citadel-1.0.0</code>.</li>
-<li><strong>Naming note:</strong> “Minecraft Kingdoms” (plural) is an existing <strong>modpack</strong> on CurseForge/Modrinth; “Minecraft: Kingdom” is a <strong>resource pack</strong>. This series is <strong>Minecraft Kingdom</strong> (singular) + subtitle — distinct enough for listings, but use consistent spelling in descriptions to reduce search confusion.</li>
+<li><strong>Naming note:</strong> “Minecraft Kingdoms” (plural) is an existing <strong>modpack</strong> on CurseForge/Modrinth; “Minecraft: Kingdom” is a <strong>resource pack</strong>. This series is <strong>Minecraft Kingdom</strong> (singular) + subtitle, distinct enough for listings, but use consistent spelling in descriptions to reduce search confusion.</li>
 <li><strong>Save data</strong> splits by domain: village claims / enlistment → soldier; citadel owner, credits, ban list → necromancer.</li>
 <li><strong>Players</strong> install one or both; modpacks list soldier alone, or both with optional dependency metadata.</li>
 </ul>
 <p>See <code>integration.md</code> for cross-mod hooks (no third API jar required at first).</p>
 <h2 id="soldier-mod-default-home-for">Soldier mod (default home for…)</h2>
-<p>Village military loop, mess/tax/recruiters/supply, defense blocks, horns/camps/campaigns/blockades, <strong>wanted posters</strong> (planned — see <code>war-and-defense.md</code>), training dummy, animal farmers, village <strong>map</strong> (muster roll), enlisted threats (raids, swarms, bandits), warlords (large kingdom raids — soldier-only feature).</p>
+<p>Village military loop, mess/tax/recruiters/supply, defense blocks, horns/camps/campaigns/blockades, <strong>wanted posters</strong> (planned, see <code>war-and-defense.md</code>), training dummy, animal farmers, village <strong>map</strong> (muster roll), enlisted threats (raids, swarms, bandits), warlords (large kingdom raids, soldier-only feature).</p>
 <p><strong>Cut from soldier plan (not deferred):</strong> full siege assault kit (sappers, ladders, boat/bridge plans, laced rations as MVP scope).</p>
 <p><strong>Still deferred on soldier side:</strong> allies co-owner list, full recruiter POI, client kit sync polish.</p>
 <h2 id="necromancer-endgame-mod">Necromancer / endgame mod</h2>
@@ -266,7 +266,7 @@ flowchart TB
 <p><strong>Cut:</strong> kingdom table block, <strong>blessed incense</strong>, separate <strong>kingdom map</strong> item (use Annals, relic compass, citadel war-room burial maps instead).</p>
 <p><strong>Maps:</strong> <strong>Village map</strong> (soldier) opens muster roll / owned villages. No second map item in necro until a clear purpose exists.</p>
 <h2 id="both-mods-integration">Both mods (integration)</h2>
-<table><thead><tr><th>Feature</th><th>Soldier</th><th>Necromancer</th></tr></thead><tbody><tr><td>Kingdom titles (Lord→King)</td><td>Village + living soldier counts</td><td>—</td></tr><tr><td>High King / golden age</td><td>Villages in kingdom</td><td>Citadel owner</td></tr><tr><td>Ironroot / Oathkeeper / Crown (full)</td><td>Recruits, tax, soldiers, raids</td><td>Relic items + wear rules</td></tr><tr><td>Citadel mess placement</td><td>Block</td><td>Owner-only rule in citadel</td></tr><tr><td>Royal training grounds</td><td>Royal soldier tag</td><td>Citadel blocks</td></tr><tr><td><code>citadelFallen</code> flag</td><td>Raid/militia near spawn</td><td>Set on Corrupted King death</td></tr><tr><td>Phantom Roost access</td><td>Ally UUIDs if loaded</td><td>Owner + cage spawner</td></tr><tr><td>Enlistment</td><td>Mess + <code>/enlist</code></td><td>— (wand does not enlist)</td></tr></tbody></table>
+<table><thead><tr><th>Feature</th><th>Soldier</th><th>Necromancer</th></tr></thead><tbody><tr><td>Kingdom titles (Lord→King)</td><td>Village + living soldier counts</td><td>-</td></tr><tr><td>High King / golden age</td><td>Villages in kingdom</td><td>Citadel owner</td></tr><tr><td>Ironroot / Oathkeeper / Crown (full)</td><td>Recruits, tax, soldiers, raids</td><td>Relic items + wear rules</td></tr><tr><td>Citadel mess placement</td><td>Block</td><td>Owner-only rule in citadel</td></tr><tr><td>Royal training grounds</td><td>Royal soldier tag</td><td>Citadel blocks</td></tr><tr><td><code>citadelFallen</code> flag</td><td>Raid/militia near spawn</td><td>Set on Corrupted King death</td></tr><tr><td>Phantom Roost access</td><td>Ally UUIDs if loaded</td><td>Owner + cage spawner</td></tr><tr><td>Enlistment</td><td>Mess + <code>/enlist</code></td><td>, (wand does not enlist)</td></tr></tbody></table>
 <h2 id="relics-wear-solo-fallbacks">Relics (wear + solo fallbacks)</h2>
 <ul>
 <li><strong>Active necromancers cannot wear any of the 12 relics.</strong></li>
@@ -278,10 +278,10 @@ flowchart TB
 <table><thead><tr><th>Setting</th><th>Default</th></tr></thead><tbody><tr><td>Necromancer recruit interval multiplier</td><td><strong>3×</strong> (vs normal)</td></tr><tr><td>Robe stigma fraction (non-necromancer in hood/robe)</td><td><strong>0.5</strong> of necromancer penalties</td></tr><tr><td>Citadel ban: sit damage on blighted tree</td><td><strong>Per tick</strong></td></tr><tr><td>Citadel ban: sit on healthy tree</td><td><strong>Instant death</strong> (no totem)</td></tr><tr><td>Spectral Thornwald</td><td>Despawn when wearer <strong>above 3 hearts</strong> OR Thornwald <strong>dies</strong>; no trigger if max HP <strong>&amp;lt; 3</strong> from wand heart loss</td></tr></tbody></table>
 <h2 id="doc-index">Doc index</h2>
 <ul>
-<li><code>citadel-claim.md</code> — throne, credits, barrier, usurp, wand forfeit</li>
-<li><code>integration.md</code> — events and optional hooks</li>
-<li><code>necromancy.md</code> — wand, robes, absolution</li>
-<li><code>endgame.md</code> — citadel content, relics, acolytes, Roost</li>
+<li><code>citadel-claim.md</code>, throne, credits, barrier, usurp, wand forfeit</li>
+<li><code>integration.md</code>, events and optional hooks</li>
+<li><code>necromancy.md</code>, wand, robes, absolution</li>
+<li><code>endgame.md</code>, citadel content, relics, acolytes, Roost</li>
 </ul></div></section><section class="dev-doc-full" id="overview"><h2>Overview</h2><p class="source">Source: <code>docs/overview.md</code></p><div class="dev-doc-body"><p>A Minecraft mod that turns villagers into soldiers and militia, backed by a village economy, horn commands, and new threats.</p>
 <h2 id="performance">Performance</h2>
 <p>Big fights stay playable by cutting the heaviest AI work, mostly invisibly to players.</p>

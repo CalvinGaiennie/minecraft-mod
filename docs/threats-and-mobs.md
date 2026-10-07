@@ -44,7 +44,7 @@ Raid size is random, not tied to the village's defenses:
 
 ### Bandits
 
-- Formed from deserting soldiers — **45%** of all deserters (`deserterOutcomeBandit`); they **keep their items**. Outcomes on every soldier desert: **50%** villager reset, **45%** bandit, **5%** wandering necromancer (`config-and-recipes.md`).
+- Formed from deserting soldiers, **45%** of all deserters (`deserterOutcomeBandit`); they **keep their items**. Outcomes on every soldier desert: **50%** villager reset, **45%** bandit, **5%** wandering necromancer (`config-and-recipes.md`).
 - Band together and roam like swarms, but stay at a captured village until its mess stations are empty.
 - Kill only soldiers, not villagers, and destroy tax boxes.
 - A band without a leader forms one: after 1 day, the bandit with the most kills takes over.
@@ -55,28 +55,28 @@ Raid size is random, not tied to the village's defenses:
 - **Bandits and swarms** are enemies and fight each other.
 - **Bandit camps:** small structures that generate in the world like pillager outposts, each with 3-5 bandits and a leader. Every world has some bands from the start.
 
-### Wandering necromancers (deserters — §9)
+### Wandering necromancers (deserters, §9)
 
-- **Source:** **5%** of soldier deserts (`deserterOutcomeNecromancer` — not player necromancers; no Order/wand intro). **Orphan-raised** use the **same 5%**; they hit desert **more often** via hunger/morale multiplier (`soldiers-and-villages.md` § Orphanages).
-- **Role:** **mobile rogue** — **no** crypt site, **no** new-moon respawn. **Dead forever** when killed.
-- **Grudge target:** **ex-owner only** — the player who **owned the village** they deserted from (UUID saved on desert).
+- **Source:** **5%** of soldier deserts (`deserterOutcomeNecromancer`, not player necromancers; no Order/wand intro). **Orphan-raised** use the **same 5%**; they hit desert **more often** via hunger/morale multiplier (`soldiers-and-villages.md` § Orphanages).
+- **Role:** **mobile rogue**: **no** crypt site, **no** new-moon respawn. **Dead forever** when killed.
+- **Grudge target:** **ex-owner only**: the player who **owned the village** they deserted from (UUID saved on desert).
 - **Each strike (50 / 50):** **ambush** the ex-owner (necro + personal undead swarm nearby) **or** send a swarm at **one of the ex-owner’s claimed villages** (weakest by soldiers per villager; same march rules as roving swarms). If they have **no** villages, **ambush** only.
-- **How often (high encounter odds):** while the necro lives and the ex-owner has been online at least once since desert, roll **every 2 in-game days** (`wanderingNecromancerStrikeIntervalDays`, default **2**) — then 50/50 ambush vs village. Only runs in **loaded** chunks (stored march when unloaded). Optional **chat line** to ex-owner when a strike is scheduled (**TBD** wording) so it feels personal, not random noise.
+- **How often (high encounter odds):** while the necro lives and the ex-owner has been online at least once since desert, roll **every 2 in-game days** (`wanderingNecromancerStrikeIntervalDays`, default **2**), then 50/50 ambush vs village. Only runs in **loaded** chunks (stored march when unloaded). Optional **chat line** to ex-owner when a strike is scheduled (**TBD** wording) so it feels personal, not random noise.
 - **Identity:** keeps deserter **name**, **kills**, **gear**; hood/robe; ~bandit-leader combat tier; **not** a player necromancer (no wand hearts).
-- **Loot:** **phylactery shard** on kill (same family as rogue drops — `necromancy.md`); **no** horcrux chest by default.
+- **Loot:** **phylactery shard** on kill (same family as rogue drops, `necromancy.md`); **no** horcrux chest by default.
 
 ### Rogue necromancers and wild liches
 
 **Not bandits:** overworld **rogues** are **necromancer NPCs** (camps/crypts). **Bandits** = deserter soldiers (`Bandits` above). **Wandering necromancers** = **5%** deserter outcome (§9).
 
-- **Rogue sites:** **~half** pillager-outpost density (~2× spacing). **Necromancer** camps only — **cave crypt**, **crypt + surface entrance**, **taken village**, or **dark tower** (`necromancy.md`). Clear on **new moon** respawn (proposed).
-- **Wild lich:** rogue + **one horcrux** in a hidden chest — **~4%** of rogues (most **none**). Optional lich-hunt preview (ping, unmake horcrux, then kill).
-- **Rewards:** phylactery **shards**, gear, lore — **not** quest **flutes** (unique world items — `necromancer-path.md`).
-- **Citadel shadow (Armies loaded — proposed):** within **~256–512 blocks** of the Black Citadel:
-  - **Ruined hamlets** — village-scale wrecks (mess hall, beds, walls broken); **bandits occupy** them; **some villagers** may remain (few traders / nitwits, not a healthy economy).
-  - **Bandit camps** — smaller outpost structures **in addition** to ruins (same band rules as normal camps).
+- **Rogue sites:** **~half** pillager-outpost density (~2× spacing). **Necromancer** camps only, **cave crypt**, **crypt + surface entrance**, **taken village**, or **dark tower** (`necromancy.md`). Clear on **new moon** respawn (proposed).
+- **Wild lich:** rogue + **one horcrux** in a hidden chest, **~4%** of rogues (most **none**). Optional lich-hunt preview (ping, unmake horcrux, then kill).
+- **Rewards:** phylactery **shards**, gear, lore, **not** quest **flutes** (unique world items, `necromancer-path.md`).
+- **Citadel shadow (Armies loaded, proposed):** within **~256–512 blocks** of the Black Citadel:
+  - **Ruined hamlets**: village-scale wrecks (mess hall, beds, walls broken); **bandits occupy** them; **some villagers** may remain (few traders / nitwits, not a healthy economy).
+  - **Bandit camps**: smaller outpost structures **in addition** to ruins (same band rules as normal camps).
   - **Higher** bandit camp/band density than the rest of the overworld (multiplier **TBD**).
-  - Lore: places that **sheltered in the citadel’s shadow** **fell** when the kingdom did — danger on the approach before the seal breaks. **No** shadow content if Armies absent.
+  - Lore: places that **sheltered in the citadel’s shadow** **fell** when the kingdom did, danger on the approach before the seal breaks. **No** shadow content if Armies absent.
 - **Lone recruiting:** a lone bandit can turn a nitwit or unemployed villager in an unguarded village (no soldiers) into a bandit, once a day.
 - **Runaways:** every adult non-soldier villager has a 0.1% daily chance to leave home and become a wandering bandit. A 20-villager village loses about one every 50 in-game days.
 - **Leader buffs:** 50 HP, +25% damage, and 50% knockback resistance. Bandits near him get +10% damage.

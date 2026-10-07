@@ -39,8 +39,8 @@ Recipes for blocks and items not covered in their own sections. All use vanilla 
 | Flute charge | Glowstone dust + blaze powder + ender pearl (shapeless) → **1** flute charge. |
 | Quest flute recharge | Quest flute + **1 flute charge** (shapeless) → same flute, full charge bank (**3** committed necromancer, **1** otherwise). `necromancer-path.md`. |
 
-| Kingstree cure | **Shaped 3×3** at **Dragon's Well** after **Corwin**'s statue is restored (spectral page unlock — `endgame.md`). **Top:** dragon's breath, nether star, dragon's breath. **Middle:** echo shard, heart of the sea, echo shard. **Bottom:** echo shard ×3 (**5 echo shards** total). Use on **Blight Heart** under the Kingstree. |
-| End Anchor | **Shaped 3×3** (End-move branch — `necromancer-path.md`). **Unlock:** second brother **gives the recipe** when you **spare him** and **agree** to move the citadel (**not** in JEI/recipe book before that). **Bottom row:** end crystal ×3. **Middle row:** ender pearl, **beacon**, ender pearl. **Top row:** ender pearl ×3. (**TBD:** pearls = 1 per slot vs **16** per slot.) Return with **wither supplies** (3 skulls + 4 soul sand) + crafted anchor; see ritual sequence in `necromancer-path.md`. |
+| Kingstree cure | **Shaped 3×3** at **Dragon's Well** after **Corwin**'s statue is restored (spectral page unlock, `endgame.md`). **Top:** dragon's breath, nether star, dragon's breath. **Middle:** echo shard, heart of the sea, echo shard. **Bottom:** echo shard ×3 (**5 echo shards** total). Use on **Blight Heart** under the Kingstree. |
+| End Anchor | **Shaped 3×3** (End-move branch, `necromancer-path.md`). **Unlock:** second brother **gives the recipe** when you **spare him** and **agree** to move the citadel (**not** in JEI/recipe book before that). **Bottom row:** end crystal ×3. **Middle row:** ender pearl, **beacon**, ender pearl. **Top row:** ender pearl ×3. (**TBD:** pearls = 1 per slot vs **16** per slot.) Return with **wither supplies** (3 skulls + 4 soul sand) + crafted anchor; see ritual sequence in `necromancer-path.md`. |
 
 ## Config settings
 
@@ -60,14 +60,14 @@ Every number a server owner might want to tune, with its default.
 | Supply rate (blacksmith, fletcher, armorer) | 1 load per week |
 | Hunger desertion chance (days 3-6) | 10% / 20% / 35% / 50%, forced on day 7 |
 | Morale desertion chance | 10% (seasoned soldiers 5%) |
-| `deserterOutcomeVillager` — desert → unemployed villager elsewhere (drops gear) | **0.50** |
-| `deserterOutcomeBandit` — desert → bandit (keeps gear) | **0.45** |
-| `deserterOutcomeNecromancer` — desert → wandering necromancer (keeps gear) | **0.05** |
-| `orphanageMinBedCount` — vanilla world-gen village gets orphanage if beds **≥** this at gen (one-time) | **21** (>20 beds; lower e.g. **16–18** if too rare) |
-| `wanderingNecromancerStrikeIntervalDays` — ex-owner strike roll while necro alive | **2** |
-| `orphanSoldierBonusHealth` — flat max HP while orphan-raised soldier/militia | **4** |
-| `orphanSoldierBonusDamage` — damage multiplier (melee + arrows) | **1.15** (+15%) |
-| `orphanDesertionMultiplier` — hunger / morale desert **trigger** rolls only (not outcome split) | **1.5** |
+| `deserterOutcomeVillager`, desert → unemployed villager elsewhere (drops gear) | **0.50** |
+| `deserterOutcomeBandit`, desert → bandit (keeps gear) | **0.45** |
+| `deserterOutcomeNecromancer`, desert → wandering necromancer (keeps gear) | **0.05** |
+| `orphanageMinBedCount`, vanilla world-gen village gets orphanage if beds **≥** this at gen (one-time) | **21** (>20 beds; lower e.g. **16–18** if too rare) |
+| `wanderingNecromancerStrikeIntervalDays`, ex-owner strike roll while necro alive | **2** |
+| `orphanSoldierBonusHealth`, flat max HP while orphan-raised soldier/militia | **4** |
+| `orphanSoldierBonusDamage`, damage multiplier (melee + arrows) | **1.15** (+15%) |
+| `orphanDesertionMultiplier`, hunger / morale desert **trigger** rolls only (not outcome split) | **1.5** |
 | Squad retreat threshold | 65% killed |
 | Home bed distance | 128 blocks |
 | Horn range outside a village | 256 blocks |
@@ -81,38 +81,38 @@ Every number a server owner might want to tune, with its default.
 | Wand permanent heart loss chance | 3% |
 | Wand side effect chance | 5% |
 | Necromancer recruiter interval multiplier | 3× |
-| `necromancerWorldHavocEnabled` — if **false**, **quest flutes** won’t mass-harm the world (e.g. **Beast Dirge** skips other players’ farms; big summons clamped). **Wand** minions unchanged. | **true** |
-| `necromancerHorcruxEnabled` — poison/pot immunity, pseudo-death instead of dying | **true** (set **false** to disable lich rules) |
-| `necromancerHorcruxDestroyers` — ways to destroy a horcrux item | **dragons_well**, **ghast_fireball**, **wither**, **wither_skull**, **lightning**, **dragon_breath_bottle** (proposed; servers may extend) |
-| `necromancerHorcruxPingRadiusChunks` — hunter “near horcrux chunk” particle ping (**circular**, chunk-center distance) | **10** |
-| `necromancerHorcruxPingInChunkMultiplier` — in-chunk dark-air particle density vs near-ring (all horcruxes) | **2.5** |
-| `necromancerGodWizardMeleeBonus` — bonus melee damage with full cursed netherite set | **0.25** (+25%) |
-| `godWizardDamageReduction` — flat DR with full four-piece set | **0.30** |
-| `godWizardRotDamage` — hearts lost per rot tick (partial set scales) | **1** heart |
-| `godWizardRotIntervalSeconds` — rot interval while any god wizard piece worn | **15** |
-| `motherGodWizardWardDurationMinutes` — one-time commit potion: negates armor rot + extra stigma | **15** |
-| `endFluteTyrantCount` — fixed End boss necromancers | **8** (**6** with flutes) |
-| `necromancerRogueHorcruxChance` — rogue spawns with one horcrux in hidden chest | **0.04** (~4%) |
+| `necromancerWorldHavocEnabled`, if **false**, **quest flutes** won’t mass-harm the world (e.g. **Beast Dirge** skips other players’ farms; big summons clamped). **Wand** minions unchanged. | **true** |
+| `necromancerHorcruxEnabled`, poison/pot immunity, pseudo-death instead of dying | **true** (set **false** to disable lich rules) |
+| `necromancerHorcruxDestroyers`, ways to destroy a horcrux item | **dragons_well**, **ghast_fireball**, **wither**, **wither_skull**, **lightning**, **dragon_breath_bottle** (proposed; servers may extend) |
+| `necromancerHorcruxPingRadiusChunks`, hunter “near horcrux chunk” particle ping (**circular**, chunk-center distance) | **10** |
+| `necromancerHorcruxPingInChunkMultiplier`, in-chunk dark-air particle density vs near-ring (all horcruxes) | **2.5** |
+| `necromancerGodWizardMeleeBonus`, bonus melee damage with full cursed netherite set | **0.25** (+25%) |
+| `godWizardDamageReduction`, flat DR with full four-piece set | **0.30** |
+| `godWizardRotDamage`, hearts lost per rot tick (partial set scales) | **1** heart |
+| `godWizardRotIntervalSeconds`, rot interval while any god wizard piece worn | **15** |
+| `motherGodWizardWardDurationMinutes`, one-time commit potion: negates armor rot + extra stigma | **15** |
+| `endFluteTyrantCount`, fixed End boss necromancers | **8** (**6** with flutes) |
+| `necromancerRogueHorcruxChance`, rogue spawns with one horcrux in hidden chest | **0.04** (~4%) |
 | `necromancerRogueSiteWeightCaveCrypt` | **0.30** |
 | `necromancerRogueSiteWeightSurfaceCrypt` | **0.25** |
 | `necromancerRogueSiteWeightDarkTower` | **0.25** |
 | `necromancerRogueSiteWeightTakenVillage` | **0.20** |
-| `endFluteTyrantMinDistanceFromDragonIsland` — camps must be **≥** this from main dragon island center | **512** blocks |
-| `endFluteTyrantMaxDistanceFromDragonIsland` — camps must be **≤** this (tight ring near outer End) | **768** blocks |
-| `questFluteMaxChargesCommitted` — charges per recharge for **committed** necromancers | **3** |
-| `questFluteMaxChargesOther` — charges per recharge for **everyone else** (one play per fill) | **1** |
-| `questFluteChargeYield` — flute charges crafted per dust+blaze+third recipe | **1** |
-| `questFluteChargeThirdIngredient` — third slot in charge recipe (vanilla id; **not** soul sand / redstone / gunpowder) | **`ender_pearl`** |
-| `endFluteTyrantFluteCooldownSeconds` — boss reuses assigned flute in combat | **60** |
-| `necromancerRogueSiteSpacing` — average distance between rogue sites (~**2×** pillager outpost spacing = **half** as many) | **TBD** (~**400–512** blocks; tune in playtest) |
-| `necromancerHorcruxCompassEnabled` — craftable compass to nearest horcrux chunk (stackable, unlimited crafts) | **true** |
-| `necromancerQuestHeartThreshold` — hearts lost before intro NPC | **3** |
-| `necromancerIntroMinDistanceFromAcolyte` — **deprecated**; intro fires anywhere (keep key **0** = disabled) | **0** |
-| `necromancerIntroChestplateRogueEnabled` — fixed intro town + chestplate rogue (spawners, basement gate) | **true** |
-| `necromancerIntroChestplateRogueDistanceBlocks` — occupied town on great road from citadel center (road **through** town) | **350** |
-| `necromancerIntroHorcruxMinChunkOffset` — horcrux chest min distance from town (chunk centers) | **4** |
-| `necromancerIntroHorcruxMaxChunkOffset` — horcrux chest max distance from town (chunk centers) | **8** |
-| `necromancerDragonsWellDistanceBlocks` — Dragon's Well in copse, opposite side from great road | **350** |
+| `endFluteTyrantMinDistanceFromDragonIsland`, camps must be **≥** this from main dragon island center | **512** blocks |
+| `endFluteTyrantMaxDistanceFromDragonIsland`, camps must be **≤** this (tight ring near outer End) | **768** blocks |
+| `questFluteMaxChargesCommitted`, charges per recharge for **committed** necromancers | **3** |
+| `questFluteMaxChargesOther`, charges per recharge for **everyone else** (one play per fill) | **1** |
+| `questFluteChargeYield`, flute charges crafted per dust+blaze+third recipe | **1** |
+| `questFluteChargeThirdIngredient`, third slot in charge recipe (vanilla id; **not** soul sand / redstone / gunpowder) | **`ender_pearl`** |
+| `endFluteTyrantFluteCooldownSeconds`, boss reuses assigned flute in combat | **60** |
+| `necromancerRogueSiteSpacing`, average distance between rogue sites (~**2×** pillager outpost spacing = **half** as many) | **TBD** (~**400–512** blocks; tune in playtest) |
+| `necromancerHorcruxCompassEnabled`, craftable compass to nearest horcrux chunk (stackable, unlimited crafts) | **true** |
+| `necromancerQuestHeartThreshold`, hearts lost before intro NPC | **3** |
+| `necromancerIntroMinDistanceFromAcolyte`, **deprecated**; intro fires anywhere (keep key **0** = disabled) | **0** |
+| `necromancerIntroChestplateRogueEnabled`, fixed intro town + chestplate rogue (spawners, basement gate) | **true** |
+| `necromancerIntroChestplateRogueDistanceBlocks`, occupied town on great road from citadel center (road **through** town) | **350** |
+| `necromancerIntroHorcruxMinChunkOffset`, horcrux chest min distance from town (chunk centers) | **4** |
+| `necromancerIntroHorcruxMaxChunkOffset`, horcrux chest max distance from town (chunk centers) | **8** |
+| `necromancerDragonsWellDistanceBlocks`, Dragon's Well in copse, opposite side from great road | **350** |
 | Robe stigma fraction (non-necromancer in hood/robe) | 0.5 |
 | Minion decay | 30 in-game days |
 | Simplified AI distance | 48 blocks |
@@ -148,23 +148,23 @@ Every number a server owner might want to tune, with its default.
 | Acolyte soldier aura (War Leader) | 15% DR, 1 heart / 8s OOC within 16 blocks |
 | Acolyte escort regen (base + per nearby brother within 8 blocks) | ½ heart / 15s each, +½ heart / 15s per other brother |
 | Acolyte zombie-villager cure range | 2 blocks, presence over a few seconds |
-| Player acolyte — Maelor brothers minimum | TBD (`acolyteBrothersMinimum`) |
-| Order quest — block if owner's soldiers within | 32 blocks (`acolyteSoldierBlockRadius`) |
+| Player acolyte, Maelor brothers minimum | TBD (`acolyteBrothersMinimum`) |
+| Order quest, block if owner's soldiers within | 32 blocks (`acolyteSoldierBlockRadius`) |
 | Player War Leader aura radius | 16 blocks (you, citadel allies, your soldiers/militia) |
 | Player War Leader aura (pre-tree) | 15% DR, 1 heart / 8s OOC |
 | Player War Leader aura (post-tree) | 20% DR, 1 heart / 6s OOC |
 | Player War Leader escort regen bonus | +25% to brother escort regen within 16 blocks |
-| Player Smith pre-tree — repair durability | +50% per material (`steadyHand`) |
-| Player Smith pre-tree — anvil XP cost | −1 level, min 0 (`frugalRepair`) |
-| Player Smith pre-tree — gear wear | −10% durability loss on worn gear (`hardWear`) |
-| Player Smith pre-tree — smithing template | not consumed on player upgrades (`temperedUpgrade`) |
-| Royal station — ask smith repair material discount | 40% |
-| Royal station — ask smith repair XP discount | 50% |
-| Royal station — major smith repair material discount | 70% |
-| Royal station — major smith repair XP discount | 75% |
-| Royal station — major Arcane enchant | 0 levels, 0 lapis; chosen level = vanilla max + 2 (gear or book) |
-| Royal station — minor Arcane enchant | random roll, up to vanilla max + 1 (gear or book) |
-| Royal station — major Alchemist duration multiplier | 3× (minor ask 2×; pre-tree alchemist 1.5× on own brews) |
+| Player Smith pre-tree, repair durability | +50% per material (`steadyHand`) |
+| Player Smith pre-tree, anvil XP cost | −1 level, min 0 (`frugalRepair`) |
+| Player Smith pre-tree, gear wear | −10% durability loss on worn gear (`hardWear`) |
+| Player Smith pre-tree, smithing template | not consumed on player upgrades (`temperedUpgrade`) |
+| Royal station, ask smith repair material discount | 40% |
+| Royal station, ask smith repair XP discount | 50% |
+| Royal station, major smith repair material discount | 70% |
+| Royal station, major smith repair XP discount | 75% |
+| Royal station, major Arcane enchant | 0 levels, 0 lapis; chosen level = vanilla max + 2 (gear or book) |
+| Royal station, minor Arcane enchant | random roll, up to vanilla max + 1 (gear or book) |
+| Royal station, major Alchemist duration multiplier | 3× (minor ask 2×; pre-tree alchemist 1.5× on own brews) |
 | Abandoned kingdom threshold | 60 in-game days since the owner last logged in |
 | King's Horn duration | 1 minute, once per in-game day |
 | Sapper time on obsidian (diamond or netherite pickaxe) | 12 minutes per block |

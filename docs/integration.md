@@ -33,4 +33,4 @@ Mod IDs: **`minecraft_kingdom_armies`**, **`minecraft_kingdom_citadel`**. Displa
 
 ## Versioning
 
-Document breaking changes to payloads in `mod-split.md` decisions log. First split may invalidate old `villagers_*` SavedData keys — migration note in release notes.
+Document breaking changes to payloads in `mod-split.md` decisions log. First split may invalidate old `villagers_*` SavedData keys, migration note in release notes.

@@ -13,10 +13,10 @@ Two optional NeoForge mods from this repo long-term. **Soldier** = villages, eco
 
 Short IDs (`mk_armies` / `mk_citadel`) are fine for code if the long IDs feel heavy.
 
-**Current monolith** (until Gradle split): `villagers` / **Villagers Mod** — `gradle.properties` unchanged.
+**Current monolith** (until Gradle split): `villagers` / **Villagers Mod**: `gradle.properties` unchanged.
 
 - **One repo, two Gradle subprojects** (future): two JARs, shared docs, e.g. `minecraft_kingdom_armies-1.0.0` / `minecraft_kingdom_citadel-1.0.0`.
-- **Naming note:** “Minecraft Kingdoms” (plural) is an existing **modpack** on CurseForge/Modrinth; “Minecraft: Kingdom” is a **resource pack**. This series is **Minecraft Kingdom** (singular) + subtitle — distinct enough for listings, but use consistent spelling in descriptions to reduce search confusion.
+- **Naming note:** “Minecraft Kingdoms” (plural) is an existing **modpack** on CurseForge/Modrinth; “Minecraft: Kingdom” is a **resource pack**. This series is **Minecraft Kingdom** (singular) + subtitle, distinct enough for listings, but use consistent spelling in descriptions to reduce search confusion.
 - **Save data** splits by domain: village claims / enlistment → soldier; citadel owner, credits, ban list → necromancer.
 - **Players** install one or both; modpacks list soldier alone, or both with optional dependency metadata.
 
@@ -24,7 +24,7 @@ See `integration.md` for cross-mod hooks (no third API jar required at first).
 
 ## Soldier mod (default home for…)
 
-Village military loop, mess/tax/recruiters/supply, defense blocks, horns/camps/campaigns/blockades, **wanted posters** (planned — see `war-and-defense.md`), training dummy, animal farmers, village **map** (muster roll), enlisted threats (raids, swarms, bandits), warlords (large kingdom raids — soldier-only feature).
+Village military loop, mess/tax/recruiters/supply, defense blocks, horns/camps/campaigns/blockades, **wanted posters** (planned, see `war-and-defense.md`), training dummy, animal farmers, village **map** (muster roll), enlisted threats (raids, swarms, bandits), warlords (large kingdom raids, soldier-only feature).
 
 **Cut from soldier plan (not deferred):** full siege assault kit (sappers, ladders, boat/bridge plans, laced rations as MVP scope).
 
@@ -44,14 +44,14 @@ Wand, hood/robe, minions, crypts, phylactery, bone whistle, mob spawner crafting
 
 | Feature | Soldier | Necromancer |
 |---------|---------|-------------|
-| Kingdom titles (Lord→King) | Village + living soldier counts | — |
+| Kingdom titles (Lord→King) | Village + living soldier counts | - |
 | High King / golden age | Villages in kingdom | Citadel owner |
 | Ironroot / Oathkeeper / Crown (full) | Recruits, tax, soldiers, raids | Relic items + wear rules |
 | Citadel mess placement | Block | Owner-only rule in citadel |
 | Royal training grounds | Royal soldier tag | Citadel blocks |
 | `citadelFallen` flag | Raid/militia near spawn | Set on Corrupted King death |
 | Phantom Roost access | Ally UUIDs if loaded | Owner + cage spawner |
-| Enlistment | Mess + `/enlist` | — (wand does not enlist) |
+| Enlistment | Mess + `/enlist` |, (wand does not enlist) |
 
 ## Relics (wear + solo fallbacks)
 
@@ -76,7 +76,7 @@ Wand, hood/robe, minions, crypts, phylactery, bone whistle, mob spawner crafting
 
 ## Doc index
 
-- `citadel-claim.md` — throne, credits, barrier, usurp, wand forfeit
-- `integration.md` — events and optional hooks
-- `necromancy.md` — wand, robes, absolution
-- `endgame.md` — citadel content, relics, acolytes, Roost
+- `citadel-claim.md`, throne, credits, barrier, usurp, wand forfeit
+- `integration.md`, events and optional hooks
+- `necromancy.md`, wand, robes, absolution
+- `endgame.md`, citadel content, relics, acolytes, Roost

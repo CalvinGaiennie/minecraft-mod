@@ -425,7 +425,7 @@ def sidebar_html(
 
 
 def strip_links_in_doc_main(html: str) -> str:
-    """Dev canon pages: no hyperlinks in article body — show labels only."""
+    """Dev canon pages: no hyperlinks in article body (labels only)."""
 
     def repl_main(match: re.Match[str]) -> str:
         inner = match.group(1)
@@ -578,7 +578,7 @@ def build_dev_doc(group_id: str, doc: "DevDoc") -> list[Path]:
         write_page(
             PageSpec(
                 out_path=out,
-                page_title=f"{parsed.title} — {sec.title}",
+                page_title=f"{parsed.title} · {sec.title}",
                 scope="dev",
                 main_active="dev",
                 sub_nav_html=build_sub_nav_dev(group_id, out),
@@ -672,7 +672,7 @@ def build_dev_root() -> None:
             sub_nav_html=build_sub_nav_dev("", out),
             sidebar_html=sidebar,
             content_html=content,
-            footer_html="Not a substitute for implementer markdown — keep docs/ authoritative",
+            footer_html="Not a substitute for implementer markdown. Keep docs/ authoritative.",
             needs_mermaid=needs_mermaid,
         )
     )

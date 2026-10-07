@@ -41,7 +41,7 @@ Prerequisites: `./gradlew runClient`, Creative, **Villagers** tab.
 | M6 | Use **Muster Roll** near soldiers. | Action bar: soldier count and total kills. |
 | M7 | Place **Surveyor's Marker** and second player's mess in overlapping claim (second player or test with friend). | Overlapping mess/marker placement blocked when rules apply. |
 | M8 | Place **Rampart** blocks; observe soldier pathing near walls (informal). | No crash; soldiers path normally. |
-| M9 | Remove soldier's **sword** (discharge trigger). | Soldier data cleared; veteran record kept (no easy UI—check muster roll / behavior). |
+| M9 | Remove soldier's **sword** (discharge trigger). | Soldier data cleared; veteran record kept (no easy UI, check muster roll / behavior). |
 
 ## Not covered in Stage 1 (defer)
 

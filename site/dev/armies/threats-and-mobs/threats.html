@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Threats and mobs — Threats — Minecraft Kingdom</title>
+  <title>Threats and mobs · Threats · Minecraft Kingdom</title>
   <link rel="stylesheet" href="../../../assets/site.css" />
   
 </head>
@@ -22,7 +22,7 @@
     </div>
     <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../index.html" class="active">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav></div>
     <div class="page-shell has-sidebar">
-      <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="threats.html" class="active">Threats</a></li><li><a href="animal-farmers.html">Animal farmers</a></li><li><a href="vanilla-mob-changes.html">Vanilla mob changes</a></li><li><a href="effect-on-players-who-ignore-the-mod.html">Effect on players who ignore the mod</a></li></ul><p class="sidebar-label">Subsections</p><ul><li><a href="#new-moon-raids">New moon raids</a></li><li><a href="#roving-swarms">Roving swarms</a></li><li><a href="#bandits">Bandits</a></li><li><a href="#wandering-necromancers-deserters-9">Wandering necromancers (deserters — §9)</a></li><li><a href="#rogue-necromancers-and-wild-liches">Rogue necromancers and wild liches</a></li><li><a href="#cave-hideouts">Cave hideouts</a></li><li><a href="#underground-villages">Underground villages</a></li></ul></aside>
+      <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="threats.html" class="active">Threats</a></li><li><a href="animal-farmers.html">Animal farmers</a></li><li><a href="vanilla-mob-changes.html">Vanilla mob changes</a></li><li><a href="effect-on-players-who-ignore-the-mod.html">Effect on players who ignore the mod</a></li></ul><p class="sidebar-label">Subsections</p><ul><li><a href="#new-moon-raids">New moon raids</a></li><li><a href="#roving-swarms">Roving swarms</a></li><li><a href="#bandits">Bandits</a></li><li><a href="#wandering-necromancers-deserters-9">Wandering necromancers (deserters, §9)</a></li><li><a href="#rogue-necromancers-and-wild-liches">Rogue necromancers and wild liches</a></li><li><a href="#cave-hideouts">Cave hideouts</a></li><li><a href="#underground-villages">Underground villages</a></li></ul></aside>
       <main class="doc-main">
         <p class="source">Source: <code>docs/threats-and-mobs.md</code> · Threats and mobs</p><h1>Threats</h1>
 <p>Three new enemy systems pressure villages: raids, roving swarms, and bandits.</p>
@@ -61,7 +61,7 @@
 </ul>
 <h3>Bandits</h3>
 <ul>
-<li>Formed from deserting soldiers — <strong>45%</strong> of all deserters (<code>deserterOutcomeBandit</code>); they <strong>keep their items</strong>. Outcomes on every soldier desert: <strong>50%</strong> villager reset, <strong>45%</strong> bandit, <strong>5%</strong> wandering necromancer (<code>config-and-recipes.md</code>).</li>
+<li>Formed from deserting soldiers, <strong>45%</strong> of all deserters (<code>deserterOutcomeBandit</code>); they <strong>keep their items</strong>. Outcomes on every soldier desert: <strong>50%</strong> villager reset, <strong>45%</strong> bandit, <strong>5%</strong> wandering necromancer (<code>config-and-recipes.md</code>).</li>
 <li>Band together and roam like swarms, but stay at a captured village until its mess stations are empty.</li>
 <li>Kill only soldiers, not villagers, and destroy tax boxes.</li>
 <li>A band without a leader forms one: after 1 day, the bandit with the most kills takes over.</li>
@@ -72,25 +72,25 @@
 <li><strong>Bandits and swarms</strong> are enemies and fight each other.</li>
 <li><strong>Bandit camps:</strong> small structures that generate in the world like pillager outposts, each with 3-5 bandits and a leader. Every world has some bands from the start.</li>
 </ul>
-<h3>Wandering necromancers (deserters — §9)</h3>
+<h3>Wandering necromancers (deserters, §9)</h3>
 <ul>
-<li><strong>Source:</strong> <strong>5%</strong> of soldier deserts (<code>deserterOutcomeNecromancer</code> — not player necromancers; no Order/wand intro). <strong>Orphan-raised</strong> use the <strong>same 5%</strong>; they hit desert <strong>more often</strong> via hunger/morale multiplier (<code>soldiers-and-villages.md</code> § Orphanages).</li>
-<li><strong>Role:</strong> <strong>mobile rogue</strong> — <strong>no</strong> crypt site, <strong>no</strong> new-moon respawn. <strong>Dead forever</strong> when killed.</li>
-<li><strong>Grudge target:</strong> <strong>ex-owner only</strong> — the player who <strong>owned the village</strong> they deserted from (UUID saved on desert).</li>
+<li><strong>Source:</strong> <strong>5%</strong> of soldier deserts (<code>deserterOutcomeNecromancer</code>, not player necromancers; no Order/wand intro). <strong>Orphan-raised</strong> use the <strong>same 5%</strong>; they hit desert <strong>more often</strong> via hunger/morale multiplier (<code>soldiers-and-villages.md</code> § Orphanages).</li>
+<li><strong>Role:</strong> <strong>mobile rogue</strong>: <strong>no</strong> crypt site, <strong>no</strong> new-moon respawn. <strong>Dead forever</strong> when killed.</li>
+<li><strong>Grudge target:</strong> <strong>ex-owner only</strong>: the player who <strong>owned the village</strong> they deserted from (UUID saved on desert).</li>
 <li><strong>Each strike (50 / 50):</strong> <strong>ambush</strong> the ex-owner (necro + personal undead swarm nearby) <strong>or</strong> send a swarm at <strong>one of the ex-owner’s claimed villages</strong> (weakest by soldiers per villager; same march rules as roving swarms). If they have <strong>no</strong> villages, <strong>ambush</strong> only.</li>
-<li><strong>How often (high encounter odds):</strong> while the necro lives and the ex-owner has been online at least once since desert, roll <strong>every 2 in-game days</strong> (<code>wanderingNecromancerStrikeIntervalDays</code>, default <strong>2</strong>) — then 50/50 ambush vs village. Only runs in <strong>loaded</strong> chunks (stored march when unloaded). Optional <strong>chat line</strong> to ex-owner when a strike is scheduled (<strong>TBD</strong> wording) so it feels personal, not random noise.</li>
+<li><strong>How often (high encounter odds):</strong> while the necro lives and the ex-owner has been online at least once since desert, roll <strong>every 2 in-game days</strong> (<code>wanderingNecromancerStrikeIntervalDays</code>, default <strong>2</strong>), then 50/50 ambush vs village. Only runs in <strong>loaded</strong> chunks (stored march when unloaded). Optional <strong>chat line</strong> to ex-owner when a strike is scheduled (<strong>TBD</strong> wording) so it feels personal, not random noise.</li>
 <li><strong>Identity:</strong> keeps deserter <strong>name</strong>, <strong>kills</strong>, <strong>gear</strong>; hood/robe; ~bandit-leader combat tier; <strong>not</strong> a player necromancer (no wand hearts).</li>
-<li><strong>Loot:</strong> <strong>phylactery shard</strong> on kill (same family as rogue drops — <code>necromancy.md</code>); <strong>no</strong> horcrux chest by default.</li>
+<li><strong>Loot:</strong> <strong>phylactery shard</strong> on kill (same family as rogue drops, <code>necromancy.md</code>); <strong>no</strong> horcrux chest by default.</li>
 </ul>
 <h3>Rogue necromancers and wild liches</h3>
 <p><strong>Not bandits:</strong> overworld <strong>rogues</strong> are <strong>necromancer NPCs</strong> (camps/crypts). <strong>Bandits</strong> = deserter soldiers (<code>Bandits</code> above). <strong>Wandering necromancers</strong> = <strong>5%</strong> deserter outcome (§9).</p>
 <ul>
-<li><strong>Rogue sites:</strong> <strong>~half</strong> pillager-outpost density (~2× spacing). <strong>Necromancer</strong> camps only — <strong>cave crypt</strong>, <strong>crypt + surface entrance</strong>, <strong>taken village</strong>, or <strong>dark tower</strong> (<code>necromancy.md</code>). Clear on <strong>new moon</strong> respawn (proposed).</li>
-<li><strong>Wild lich:</strong> rogue + <strong>one horcrux</strong> in a hidden chest — <strong>~4%</strong> of rogues (most <strong>none</strong>). Optional lich-hunt preview (ping, unmake horcrux, then kill).</li>
-<li><strong>Rewards:</strong> phylactery <strong>shards</strong>, gear, lore — <strong>not</strong> quest <strong>flutes</strong> (unique world items — <code>necromancer-path.md</code>).</li>
-<li><strong>Citadel shadow (Armies loaded — proposed):</strong> within <strong>~256–512 blocks</strong> of the Black Citadel:</li>
+<li><strong>Rogue sites:</strong> <strong>~half</strong> pillager-outpost density (~2× spacing). <strong>Necromancer</strong> camps only, <strong>cave crypt</strong>, <strong>crypt + surface entrance</strong>, <strong>taken village</strong>, or <strong>dark tower</strong> (<code>necromancy.md</code>). Clear on <strong>new moon</strong> respawn (proposed).</li>
+<li><strong>Wild lich:</strong> rogue + <strong>one horcrux</strong> in a hidden chest, <strong>~4%</strong> of rogues (most <strong>none</strong>). Optional lich-hunt preview (ping, unmake horcrux, then kill).</li>
+<li><strong>Rewards:</strong> phylactery <strong>shards</strong>, gear, lore, <strong>not</strong> quest <strong>flutes</strong> (unique world items, <code>necromancer-path.md</code>).</li>
+<li><strong>Citadel shadow (Armies loaded, proposed):</strong> within <strong>~256–512 blocks</strong> of the Black Citadel:</li>
 </ul>
-<p>- <strong>Ruined hamlets</strong> — village-scale wrecks (mess hall, beds, walls broken); <strong>bandits occupy</strong> them; <strong>some villagers</strong> may remain (few traders / nitwits, not a healthy economy). - <strong>Bandit camps</strong> — smaller outpost structures <strong>in addition</strong> to ruins (same band rules as normal camps). - <strong>Higher</strong> bandit camp/band density than the rest of the overworld (multiplier <strong>TBD</strong>). - Lore: places that <strong>sheltered in the citadel’s shadow</strong> <strong>fell</strong> when the kingdom did — danger on the approach before the seal breaks. <strong>No</strong> shadow content if Armies absent.</p>
+<p>- <strong>Ruined hamlets</strong>: village-scale wrecks (mess hall, beds, walls broken); <strong>bandits occupy</strong> them; <strong>some villagers</strong> may remain (few traders / nitwits, not a healthy economy). - <strong>Bandit camps</strong>: smaller outpost structures <strong>in addition</strong> to ruins (same band rules as normal camps). - <strong>Higher</strong> bandit camp/band density than the rest of the overworld (multiplier <strong>TBD</strong>). - Lore: places that <strong>sheltered in the citadel’s shadow</strong> <strong>fell</strong> when the kingdom did, danger on the approach before the seal breaks. <strong>No</strong> shadow content if Armies absent.</p>
 <ul>
 <li><strong>Lone recruiting:</strong> a lone bandit can turn a nitwit or unemployed villager in an unguarded village (no soldiers) into a bandit, once a day.</li>
 <li><strong>Runaways:</strong> every adult non-soldier villager has a 0.1% daily chance to leave home and become a wandering bandit. A 20-villager village loses about one every 50 in-game days.</li>
