@@ -24,6 +24,31 @@ body {
 a { color: var(--link); }
 a:hover { text-decoration: underline; }
 
+/* Dev site chrome: navigation reads as text, not default blue */
+body.scope-dev a {
+  color: var(--text);
+  text-decoration: none;
+}
+body.scope-dev a:hover {
+  text-decoration: underline;
+  color: var(--nav-active);
+}
+body.scope-dev .site-title a .brand {
+  color: var(--gold);
+}
+body.scope-dev .main-nav a.active {
+  color: var(--nav-active);
+  font-weight: 700;
+  border-color: var(--nav-active);
+}
+body.scope-dev .sub-nav a.active {
+  color: #fff;
+}
+body.scope-dev .doc-sidebar a.active {
+  color: var(--nav-active);
+  font-weight: 700;
+}
+
 .site-chrome {
   position: sticky;
   top: 0;
@@ -203,11 +228,10 @@ body.scope-dev .doc-main .doc-ref-url {
   font-weight: 400;
   font-size: 0.9em;
 }
-body.scope-dev .doc-main a:not(.doc-ref) {
-  color: var(--text);
-  text-decoration: underline;
-  text-decoration-color: var(--border);
-  text-underline-offset: 2px;
+body.scope-dev .doc-main a {
+  color: inherit;
+  text-decoration: none;
+  pointer-events: none;
 }
 .doc-main h3 { font-size: 1.1rem; margin: 1.35rem 0 0.5rem; color: var(--text); }
 .doc-main h4 { font-size: 1rem; margin: 1rem 0 0.4rem; }

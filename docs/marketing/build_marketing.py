@@ -384,6 +384,23 @@ def sidebar_html(
     return "".join(parts)
 
 
+def strip_links_in_doc_main(html: str) -> str:
+    """Dev canon pages: no hyperlinks in article body — show labels only."""
+
+    def repl_main(match: re.Match[str]) -> str:
+        inner = match.group(1)
+        inner = re.sub(r"<a[^>]*>(.*?)</a>", r"\1", inner, flags=re.DOTALL)
+        return f'<main class="doc-main">{inner}</main>'
+
+    return re.sub(
+        r'<main class="doc-main">(.*?)</main>',
+        repl_main,
+        html,
+        count=1,
+        flags=re.DOTALL,
+    )
+
+
 def write_page(spec: PageSpec) -> None:
     spec.out_path.parent.mkdir(parents=True, exist_ok=True)
     body = render_layout(spec)
@@ -393,6 +410,8 @@ def write_page(spec: PageSpec) -> None:
             '<div class="page-shell has-sidebar">',
             1,
         )
+    if spec.scope == "dev":
+        body = strip_links_in_doc_main(body)
     spec.out_path.write_text(body, encoding="utf-8")
 
 
@@ -485,8 +504,7 @@ def build_dev_doc(group_id: str, doc: "DevDoc") -> list[Path]:
     index_content = (
         f'<p class="source">Source: <code>docs/{html.escape(doc.relpath)}</code></p>'
         f"<h1>{html.escape(parsed.title)}</h1>\n"
-        f"{intro_html}\n"
-        f"{section_toc_html(parsed.sections, base_dir, index_out)}"
+        f"{intro_html}"
     )
     sidebar = sidebar_html(index_out, pages_meta, "index", None)
     write_page(
@@ -541,9 +559,7 @@ def build_dev_group_index(group_id: str, title: str, doc_links: list[tuple[str, 
     out = SITE_DIR / "dev" / group_id / "index.html"
     items = []
     for label, path in sorted(doc_links, key=lambda x: x[0].lower()):
-        items.append(
-            f'<li><a href="{rel_path(out, path)}">{html.escape(label)}</a></li>'
-        )
+        items.append(f"<li>{html.escape(label)}</li>")
     content = (
         f'<div class="dev-hub"><h1>{html.escape(title)}</h1>'
         f"<p>Canon markdown exported from <code>docs/</code>.</p>"
@@ -569,14 +585,14 @@ def build_dev_root() -> None:
     out = SITE_DIR / "dev" / "index.html"
     sections = []
     for group in DEV_GROUPS:
-        ghref = rel_path(out, SITE_DIR / "dev" / group.id / "index.html")
         doc_items = []
         for doc in group.docs:
-            dslug = doc_slug(doc.relpath)
-            dh = rel_path(out, SITE_DIR / "dev" / group.id / dslug / "index.html")
-            doc_items.append(f'<li><a href="{dh}">{html.escape(doc.title)}</a></li>')
+            doc_items.append(
+                f"<li>{html.escape(doc.title)} — "
+                f"<code>docs/{html.escape(doc.relpath)}</code></li>"
+            )
         sections.append(
-            f"<section><h2><a href=\"{ghref}\">{html.escape(group.title)}</a></h2>"
+            f"<section><h2>{html.escape(group.title)}</h2>"
             f"<ul>{''.join(doc_items)}</ul></section>"
         )
     content = (
