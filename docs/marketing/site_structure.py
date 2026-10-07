@@ -8,12 +8,8 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 DOCS_DIR = REPO_ROOT / "docs"
 
-MARKETING_PAGES = [
-    ("home", "Home", "pages/home.md"),
-    ("vanilla", "Vanilla gaps", "pages/vanilla.md"),
-    ("armies", "Armies", "pages/armies.md"),
-    ("citadel", "Citadel", "pages/citadel.md"),
-]
+# Single marketing page → site/index.html
+MARKETING_SOURCE = "pages/marketing.md"
 
 
 @dataclass(frozen=True)

@@ -8,25 +8,27 @@
   
 </head>
 <body class="scope-dev">
-  <header class="site-header">
+  <header class="site-chrome site-header">
     <div class="header-inner">
-      <div class="header-top">
-        <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
-        <nav class="main-nav" aria-label="Site">
-          <a href="../../../index.html" class="">Marketing</a>
-          <a href="../../index.html" class="active">Dev docs</a>
-        </nav>
-      </div>
-      <nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../index.html" class="active">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav>
+      <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
     </div>
   </header>
-  <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="defense-blocks.html" class="active">Defense blocks</a></li><li><a href="housing-and-field-blocks.html">Housing and field blocks</a></li><li><a href="horns-and-signals.html">Horns and signals</a></li><li><a href="gear-and-special-items.html">Gear and special items</a></li><li><a href="player-tools.html">Player tools</a></li></ul></aside>
+  <div class="page-area">
+    <div class="main-nav-bar">
+      <nav class="main-nav" aria-label="Site">
+        <a href="../../../index.html" class="">Marketing</a>
+        <a href="../../index.html" class="active">Dev docs</a>
+      </nav>
+    </div>
+    <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../index.html" class="active">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav></div>
     <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="defense-blocks.html" class="active">Defense blocks</a></li><li><a href="housing-and-field-blocks.html">Housing and field blocks</a></li><li><a href="horns-and-signals.html">Horns and signals</a></li><li><a href="gear-and-special-items.html">Gear and special items</a></li><li><a href="player-tools.html">Player tools</a></li></ul></aside>
-    <main class="doc-main">
-      <p class="source">Source: <code>docs/war-and-defense.md</code> · <a href="index.html">War and defense</a></p><h1>Defense blocks</h1>
+      <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="defense-blocks.html" class="active">Defense blocks</a></li><li><a href="housing-and-field-blocks.html">Housing and field blocks</a></li><li><a href="horns-and-signals.html">Horns and signals</a></li><li><a href="gear-and-special-items.html">Gear and special items</a></li><li><a href="player-tools.html">Player tools</a></li></ul></aside>
+      <main class="doc-main">
+        <p class="source">Source: <code>docs/war-and-defense.md</code> · <a href="index.html">War and defense</a></p><h1>Defense blocks</h1>
 <p>These blocks tell soldiers and villagers where to stand guard or retreat.</p>
 <table><thead><tr><th>Block</th><th>What it does</th></tr></thead><tbody><tr><td>Arrow bin</td><td>Restocks arrows for soldiers and militiamen. When turned on, the nearest one with a bow guards it. Holds up to 1 stack of arrows, refilled by players or nearby fletchers. A fletcher adds arrows at the same rate he supplies recruiter boxes (one load a week, see Fletcher supply)</td></tr><tr><td>Rampart</td><td>A single block that marks a guard spot. Soldiers pathfind here when not eating or sleeping.</td></tr><tr><td>Fallback block</td><td>Soldiers go to the nearest one when the fallback horn blows</td></tr><tr><td>Haven block</td><td>Attracts retreating non-soldier villagers</td></tr><tr><td>Castle gate</td><td>A thick door, 4 blocks wide and 8 tall, meant to be placed in pairs for an 8-wide gateway. Opens and closes with redstone, so it works with levers, buttons, and lever horns. Comes in wood (axemen can break it during assaults) and iron (only sappers can). Players break castle gates about as slowly as obsidian, using an axe for wood gates or an iron pickaxe or better for iron gates (village protection slows non-allies further). For soldiers, each gate breaks as one piece and takes a long time: about 3 minutes for a wood gate and 6 minutes for an iron gate (proposed), with permanent progress like other sapper work. Recipes (proposed): wood gate is 6 logs, 2 iron blocks, and a chain in the center (about 19 iron each); iron gate is 8 iron blocks around an obsidian block (72 iron each, 144 for a pair)</td></tr></tbody></table>
-    </main>
+      </main>
+    </div>
   </div>
   <footer class="site-footer">
     Source: <code>docs/war-and-defense.md</code>

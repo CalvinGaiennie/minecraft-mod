@@ -8,22 +8,23 @@
   
 </head>
 <body class="scope-dev">
-  <header class="site-header">
+  <header class="site-chrome site-header">
     <div class="header-inner">
-      <div class="header-top">
-        <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
-        <nav class="main-nav" aria-label="Site">
-          <a href="../../../index.html" class="">Marketing</a>
-          <a href="../../index.html" class="active">Dev docs</a>
-        </nav>
-      </div>
-      <nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../index.html" class="active">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav>
+      <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
     </div>
   </header>
-  <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="performance.html" class="active">Performance</a></li><li><a href="platform.html">Platform</a></li><li><a href="build-order.html">Build order</a></li></ul></aside>
+  <div class="page-area">
+    <div class="main-nav-bar">
+      <nav class="main-nav" aria-label="Site">
+        <a href="../../../index.html" class="">Marketing</a>
+        <a href="../../index.html" class="active">Dev docs</a>
+      </nav>
+    </div>
+    <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../index.html" class="active">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav></div>
     <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="performance.html" class="active">Performance</a></li><li><a href="platform.html">Platform</a></li><li><a href="build-order.html">Build order</a></li></ul></aside>
-    <main class="doc-main">
-      <p class="source">Source: <code>docs/overview.md</code> · <a href="index.html">Overview</a></p><h1>Performance</h1>
+      <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="performance.html" class="active">Performance</a></li><li><a href="platform.html">Platform</a></li><li><a href="build-order.html">Build order</a></li></ul></aside>
+      <main class="doc-main">
+        <p class="source">Source: <code>docs/overview.md</code> · <a href="index.html">Overview</a></p><h1>Performance</h1>
 <p>Big fights stay playable by cutting the heaviest AI work, mostly invisibly to players.</p>
 <ul>
 <li><strong>Squad pathfinding:</strong> soldiers moving together share one path calculated by a squad leader; the rest follow him.</li>
@@ -42,7 +43,8 @@
 <li><strong>Measure from day one:</strong> use the spark profiler mod while building, set a performance target (for example, 100 soldiers fighting a 30-mob swarm stays under a fixed share of each tick), and test it after every build stage.</li>
 <li><strong>Cleanup timers:</strong> arrows that missed vanish after 30 seconds (vanilla: 1 minute). Mob drops from swarms, raids, and bandits use vanilla&#x27;s 5 minutes. Soldier and militia death drops last 10 minutes, so there&#x27;s time to recover gear after a battle.</li>
 </ul>
-    </main>
+      </main>
+    </div>
   </div>
   <footer class="site-footer">
     Source: <code>docs/overview.md</code>

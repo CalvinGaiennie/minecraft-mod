@@ -8,22 +8,23 @@
   
 </head>
 <body class="scope-dev">
-  <header class="site-header">
+  <header class="site-chrome site-header">
     <div class="header-inner">
-      <div class="header-top">
-        <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
-        <nav class="main-nav" aria-label="Site">
-          <a href="../../../index.html" class="">Marketing</a>
-          <a href="../../index.html" class="active">Dev docs</a>
-        </nav>
-      </div>
-      <nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../index.html" class="active">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav>
+      <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
     </div>
   </header>
-  <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="defense-blocks.html">Defense blocks</a></li><li><a href="housing-and-field-blocks.html">Housing and field blocks</a></li><li><a href="horns-and-signals.html">Horns and signals</a></li><li><a href="gear-and-special-items.html" class="active">Gear and special items</a></li><li><a href="player-tools.html">Player tools</a></li></ul></aside>
+  <div class="page-area">
+    <div class="main-nav-bar">
+      <nav class="main-nav" aria-label="Site">
+        <a href="../../../index.html" class="">Marketing</a>
+        <a href="../../index.html" class="active">Dev docs</a>
+      </nav>
+    </div>
+    <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../index.html" class="active">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav></div>
     <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="defense-blocks.html">Defense blocks</a></li><li><a href="housing-and-field-blocks.html">Housing and field blocks</a></li><li><a href="horns-and-signals.html">Horns and signals</a></li><li><a href="gear-and-special-items.html" class="active">Gear and special items</a></li><li><a href="player-tools.html">Player tools</a></li></ul></aside>
-    <main class="doc-main">
-      <p class="source">Source: <code>docs/war-and-defense.md</code> · <a href="index.html">War and defense</a></p><h1>Gear and special items</h1>
+      <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="defense-blocks.html">Defense blocks</a></li><li><a href="housing-and-field-blocks.html">Housing and field blocks</a></li><li><a href="horns-and-signals.html">Horns and signals</a></li><li><a href="gear-and-special-items.html" class="active">Gear and special items</a></li><li><a href="player-tools.html">Player tools</a></li></ul></aside>
+      <main class="doc-main">
+        <p class="source">Source: <code>docs/war-and-defense.md</code> · <a href="index.html">War and defense</a></p><h1>Gear and special items</h1>
 <p>Armor changes what a villager does; items give the player extra control.</p>
 <h3>Armor</h3>
 <table><thead><tr><th>Gear</th><th>Who it affects</th><th>Effect on the wearer</th><th>Recipe</th></tr></thead><tbody><tr><td>Nightwatch armor</td><td>Soldiers and militia</td><td>Sleeps in his post bed during the day, patrols between ramparts and arrow bins at night</td><td>Any helmet or chestplate + black dye (shapeless); keeps its armor value</td></tr><tr><td>Royal guard armor</td><td>Soldiers</td><td>Follows the player everywhere like a tamed wolf, teleporting to him if more than 16 blocks behind (with limits, see below). Never stays at a camp</td><td>Any helmet or chestplate + gold ingot (shapeless); keeps its armor value, adds gold trim</td></tr><tr><td>Campaign boots</td><td>Soldiers</td><td>Follows the player until a camp block is placed, then stays there</td><td>Any boots + compass (shapeless)</td></tr></tbody></table>
@@ -45,7 +46,8 @@
 <li><strong>Kingdom map (item):</strong> shows every village a player owns in one place. Right-clicking opens a screen with a top-down dot map of his kingdom and a list beside it. Each village shows as its banner with its name, size, and soldier count; allied villages show in a second color, and his camp is marked. Villages under attack flash, and the list flags hungry or homeless soldiers, full tax boxes, and blockades. The map always shows the kingdom of whoever made it, so a stolen one is real intelligence for the thief.</li>
 <li><strong>Getting one:</strong> when a player claims his second village, he receives the chronicle <em>The Royal Surveyor</em>. From then on, every cartographer in his villages offers one extra trade: a royal charter for 16 emeralds, a village map, and a compass (proposed). A royal charter, a cartography table, and a gold block (shapeless) make a kingdom table. A kingdom table turns an empty map and a gold ingot into a kingdom map; copies work like vanilla map copies.</li>
 </ul>
-    </main>
+      </main>
+    </div>
   </div>
   <footer class="site-footer">
     Source: <code>docs/war-and-defense.md</code>

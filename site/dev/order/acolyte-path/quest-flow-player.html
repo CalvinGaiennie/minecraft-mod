@@ -8,22 +8,23 @@
   
 </head>
 <body class="scope-dev">
-  <header class="site-header">
+  <header class="site-chrome site-header">
     <div class="header-inner">
-      <div class="header-top">
-        <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
-        <nav class="main-nav" aria-label="Site">
-          <a href="../../../index.html" class="">Marketing</a>
-          <a href="../../index.html" class="active">Dev docs</a>
-        </nav>
-      </div>
-      <nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../index.html" class="active">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav>
+      <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
     </div>
   </header>
-  <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="mutual-exclusion-order-vs-necromancer-questline.html">Mutual exclusion (Order vs necromancer questline)</a></li><li><a href="four-specialties.html">Four specialties</a></li><li><a href="quest-flow-player.html" class="active">Quest flow (player)</a></li><li><a href="specialty-feat-gates-8.html">Specialty feat gates (§8)</a></li><li><a href="player-specialty-perks.html">Player specialty perks</a></li><li><a href="player-status-implementation-notes.html">Player status (implementation notes)</a></li><li><a href="corpse-mod-compatibility.html">Corpse mod compatibility</a></li><li><a href="config-proposed.html">Config (proposed)</a></li></ul><p class="sidebar-label">Subsections</p><ul><li><a href="#1-first-contact">1. First contact</a></li><li><a href="#2-light-training-first-brother">2. Light training (first brother)</a></li><li><a href="#3-find-maelor">3. Find Maelor</a></li><li><a href="#4-maelor-breadth-light-three">4. Maelor — breadth (light three)</a></li><li><a href="#5-maelor-choose-and-hard-mastery">5. Maelor — choose and hard mastery</a></li><li><a href="#6-maelor-reunite-the-order-after-lock">6. Maelor — reunite the Order (after lock)</a></li><li><a href="#citadel-trapped-brothers-10">Citadel-trapped brothers (§10)</a></li><li><a href="#escort-homecoming-model-a-chosen">Escort → homecoming (**model A — chosen**)</a></li><li><a href="#annals-chests">Annals chests</a></li><li><a href="#escort-brothers">Escort brothers</a></li><li><a href="#open-design-tbd">Open design (TBD)</a></li></ul></aside>
+  <div class="page-area">
+    <div class="main-nav-bar">
+      <nav class="main-nav" aria-label="Site">
+        <a href="../../../index.html" class="">Marketing</a>
+        <a href="../../index.html" class="active">Dev docs</a>
+      </nav>
+    </div>
+    <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../index.html" class="active">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav></div>
     <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="mutual-exclusion-order-vs-necromancer-questline.html">Mutual exclusion (Order vs necromancer questline)</a></li><li><a href="four-specialties.html">Four specialties</a></li><li><a href="quest-flow-player.html" class="active">Quest flow (player)</a></li><li><a href="specialty-feat-gates-8.html">Specialty feat gates (§8)</a></li><li><a href="player-specialty-perks.html">Player specialty perks</a></li><li><a href="player-status-implementation-notes.html">Player status (implementation notes)</a></li><li><a href="corpse-mod-compatibility.html">Corpse mod compatibility</a></li><li><a href="config-proposed.html">Config (proposed)</a></li></ul><p class="sidebar-label">Subsections</p><ul><li><a href="#1-first-contact">1. First contact</a></li><li><a href="#2-light-training-first-brother">2. Light training (first brother)</a></li><li><a href="#3-find-maelor">3. Find Maelor</a></li><li><a href="#4-maelor-breadth-light-three">4. Maelor — breadth (light three)</a></li><li><a href="#5-maelor-choose-and-hard-mastery">5. Maelor — choose and hard mastery</a></li><li><a href="#6-maelor-reunite-the-order-after-lock">6. Maelor — reunite the Order (after lock)</a></li><li><a href="#citadel-trapped-brothers-10">Citadel-trapped brothers (§10)</a></li><li><a href="#escort-homecoming-model-a-chosen">Escort → homecoming (**model A — chosen**)</a></li><li><a href="#annals-chests">Annals chests</a></li><li><a href="#escort-brothers">Escort brothers</a></li><li><a href="#open-design-tbd">Open design (TBD)</a></li></ul></aside>
-    <main class="doc-main">
-      <p class="source">Source: <code>docs/acolyte-path.md</code> · <a href="index.html">Player acolyte path</a></p><h1>Quest flow (player)</h1>
+      <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="mutual-exclusion-order-vs-necromancer-questline.html">Mutual exclusion (Order vs necromancer questline)</a></li><li><a href="four-specialties.html">Four specialties</a></li><li><a href="quest-flow-player.html" class="active">Quest flow (player)</a></li><li><a href="specialty-feat-gates-8.html">Specialty feat gates (§8)</a></li><li><a href="player-specialty-perks.html">Player specialty perks</a></li><li><a href="player-status-implementation-notes.html">Player status (implementation notes)</a></li><li><a href="corpse-mod-compatibility.html">Corpse mod compatibility</a></li><li><a href="config-proposed.html">Config (proposed)</a></li></ul><p class="sidebar-label">Subsections</p><ul><li><a href="#1-first-contact">1. First contact</a></li><li><a href="#2-light-training-first-brother">2. Light training (first brother)</a></li><li><a href="#3-find-maelor">3. Find Maelor</a></li><li><a href="#4-maelor-breadth-light-three">4. Maelor — breadth (light three)</a></li><li><a href="#5-maelor-choose-and-hard-mastery">5. Maelor — choose and hard mastery</a></li><li><a href="#6-maelor-reunite-the-order-after-lock">6. Maelor — reunite the Order (after lock)</a></li><li><a href="#citadel-trapped-brothers-10">Citadel-trapped brothers (§10)</a></li><li><a href="#escort-homecoming-model-a-chosen">Escort → homecoming (**model A — chosen**)</a></li><li><a href="#annals-chests">Annals chests</a></li><li><a href="#escort-brothers">Escort brothers</a></li><li><a href="#open-design-tbd">Open design (TBD)</a></li></ul></aside>
+      <main class="doc-main">
+        <p class="source">Source: <code>docs/acolyte-path.md</code> · <a href="index.html">Player acolyte path</a></p><h1>Quest flow (player)</h1>
 <pre><code class="language-text">Save a refuge acolyte → basic training
   → that brother: **light** training in **his** specialty only
   → he sends you to find **Maelor**
@@ -103,7 +104,8 @@
 <ul>
 <li>Post-escort <strong>ongoing duties</strong> and <strong>reward scaling</strong> for brother count.</li>
 </ul>
-    </main>
+      </main>
+    </div>
   </div>
   <footer class="site-footer">
     Source: <code>docs/acolyte-path.md</code>

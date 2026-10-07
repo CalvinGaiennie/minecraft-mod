@@ -8,22 +8,23 @@
   
 </head>
 <body class="scope-dev">
-  <header class="site-header">
+  <header class="site-chrome site-header">
     <div class="header-inner">
-      <div class="header-top">
-        <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
-        <nav class="main-nav" aria-label="Site">
-          <a href="../../../index.html" class="">Marketing</a>
-          <a href="../../index.html" class="active">Dev docs</a>
-        </nav>
-      </div>
-      <nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../index.html" class="active">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav>
+      <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
     </div>
   </header>
-  <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="villager-roles.html" class="active">Villager roles</a></li><li><a href="ownership-and-allies.html">Ownership and allies</a></li><li><a href="soldier-behavior.html">Soldier behavior</a></li><li><a href="village-economy.html">Village economy</a></li></ul></aside>
+  <div class="page-area">
+    <div class="main-nav-bar">
+      <nav class="main-nav" aria-label="Site">
+        <a href="../../../index.html" class="">Marketing</a>
+        <a href="../../index.html" class="active">Dev docs</a>
+      </nav>
+    </div>
+    <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../index.html" class="active">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav></div>
     <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="villager-roles.html" class="active">Villager roles</a></li><li><a href="ownership-and-allies.html">Ownership and allies</a></li><li><a href="soldier-behavior.html">Soldier behavior</a></li><li><a href="village-economy.html">Village economy</a></li></ul></aside>
-    <main class="doc-main">
-      <p class="source">Source: <code>docs/soldiers-and-villages.md</code> · <a href="index.html">Soldiers and villages</a></p><h1>Villager roles</h1>
+      <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="villager-roles.html" class="active">Villager roles</a></li><li><a href="ownership-and-allies.html">Ownership and allies</a></li><li><a href="soldier-behavior.html">Soldier behavior</a></li><li><a href="village-economy.html">Village economy</a></li></ul></aside>
+      <main class="doc-main">
+        <p class="source">Source: <code>docs/soldiers-and-villages.md</code> · <a href="index.html">Soldiers and villages</a></p><h1>Villager roles</h1>
 <p>A villager&#x27;s job and setup decide whether a weapon makes them a soldier or a militiaman.</p>
 <table><thead><tr><th>Role</th><th>How they get it</th><th>Gear allowed</th><th>Notes</th></tr></thead><tbody><tr><td>Soldier</td><td>Villager with no trade is given a weapon, chestplate, and helmet, and has a free post bed and a stocked mess station</td><td>Full armor</td><td>Unequipping can turn them into a trader, but a trader can never become a soldier again, unless he served as a soldier before he ever traded (see Veterans)</td></tr><tr><td>Militiaman</td><td>Trader or unemployed villager is given a weapon. Unemployed villagers who meet every soldier requirement become soldiers instead</td><td>Helmet, chestplate, and boots; no leggings or shields</td><td>Can&#x27;t trade while in the militia; sometimes run from enemies</td></tr><tr><td>Bandit</td><td>Soldier deserts (<strong>45%</strong> outcome — keeps gear)</td><td>Whatever they kept</td><td>See Threats</td></tr><tr><td>Troubled youth</td><td>Born from bandit-occupied villages (80% chance)</td><td>n/a</td><td>Can never trade; can become soldiers or bandits (see Bandits)</td></tr></tbody></table>
 <ul>
@@ -62,7 +63,8 @@
 <li><strong>Mounted enemies:</strong> 92% chance, as before.</li>
 </ul>
 <p>Fleeing militia drop their weapon, which turns them back into normal villagers until a player re-arms them. They flee to their camp block on campaign, or to the nearest fallback block at home. If there&#x27;s neither, they just run away from the enemy. None of this applies within 128 blocks of their home bed: there, militia never flee.</p>
-    </main>
+      </main>
+    </div>
   </div>
   <footer class="site-footer">
     Source: <code>docs/soldiers-and-villages.md</code>

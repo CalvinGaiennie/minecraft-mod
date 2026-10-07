@@ -10,13 +10,7 @@ import sys
 from dataclasses import dataclass
 from pathlib import Path
 
-from site_structure import (
-    DEV_GROUPS,
-    DOCS_DIR,
-    MARKETING_PAGES,
-    REPO_ROOT,
-    doc_slug,
-)
+from site_structure import DEV_GROUPS, DOCS_DIR, MARKETING_SOURCE, REPO_ROOT, doc_slug
 
 ROOT = Path(__file__).resolve().parent
 SITE_DIR = REPO_ROOT / "site"
@@ -295,33 +289,14 @@ class PageSpec:
     needs_mermaid: bool
 
 
-def build_sub_nav_marketing(active_slug: str, page_path: Path) -> str:
-    links = []
-    for slug, label, _ in MARKETING_PAGES:
-        if slug == "home":
-            href = rel_path(page_path, SITE_DIR / "index.html")
-        else:
-            href = rel_path(page_path, SITE_DIR / "marketing" / f"{slug}.html")
-        cls = "active"
-        extra = ""
-        if slug == "armies":
-            extra = " armies"
-        elif slug == "citadel":
-            extra = " citadel"
-        ac = f' class="{extra.strip()} active"' if slug == active_slug else (
-            f' class="{extra.strip()}"' if extra else ""
-        )
-        links.append(f'<a href="{href}"{ac}>{label}</a>')
-    return f'<nav class="sub-nav scope-marketing" aria-label="Marketing">{"".join(links)}</nav>'
-
-
 def build_sub_nav_dev(active_group: str, page_path: Path) -> str:
     links = []
     for group in DEV_GROUPS:
         href = rel_path(page_path, SITE_DIR / "dev" / group.id / "index.html")
         ac = ' class="active"' if group.id == active_group else ""
         links.append(f'<a href="{href}"{ac}>{group.title}</a>')
-    return f'<nav class="sub-nav scope-dev" aria-label="Dev sections">{"".join(links)}</nav>'
+    inner = f'<nav class="sub-nav scope-dev" aria-label="Dev sections">{"".join(links)}</nav>'
+    return f'<div class="sub-nav-strip">{inner}</div>'
 
 
 def render_layout(spec: PageSpec) -> str:
@@ -348,7 +323,7 @@ def render_layout(spec: PageSpec) -> str:
             "active" if spec.main_active == "marketing" else "",
         )
         .replace("{{MAIN_DEV_ACTIVE}}", "active" if spec.main_active == "dev" else "")
-        .replace("{{SUB_NAV}}", spec.sub_nav_html)
+        .replace("{{SUB_NAV}}", spec.sub_nav_html or "")
         .replace("{{SIDEBAR}}", spec.sidebar_html)
         .replace("{{CONTENT}}", spec.content_html)
         .replace("{{FOOTER}}", spec.footer_html)
@@ -405,35 +380,49 @@ def write_page(spec: PageSpec) -> None:
     spec.out_path.write_text(body, encoding="utf-8")
 
 
-def build_marketing() -> None:
-    for slug, label, relpath in MARKETING_PAGES:
-        md = (MARKETING_SRC / Path(relpath).name).read_text(encoding="utf-8")
-        parsed = parse_document(md)
-        if slug == "home":
-            out = SITE_DIR / "index.html"
-        else:
-            out = SITE_DIR / "marketing" / f"{slug}.html"
-        content = render_markdown(md, skip_leading_h1=True)
-        if slug == "home":
-            content = f"<h1>{html.escape(parsed.title)}</h1>\n{content}"
-        else:
-            content = f"<h1>{html.escape(parsed.title)}</h1>\n{content}"
-        spec = PageSpec(
-            out_path=out,
-            page_title=parsed.title,
-            scope="marketing",
-            main_active="marketing",
-            sub_nav_html=build_sub_nav_marketing(slug, out),
-            sidebar_html="",
-            content_html=content,
-            footer_html=(
-                "Minecraft Kingdom: Armies & Citadel · "
-                '<a href="' + rel_path(out, SITE_DIR / "dev" / "index.html") + '">Dev docs</a> · WIP'
-            ),
-            needs_mermaid=False,
+def marketing_sidebar(parsed: ParsedDoc) -> str:
+    if not parsed.sections:
+        return ""
+    parts = [
+        '<div class="page-shell has-sidebar">',
+        '<aside class="doc-sidebar" aria-label="On this page">',
+        '<p class="sidebar-label">On this page</p><ul>',
+    ]
+    for sec in parsed.sections:
+        parts.append(
+            f'<li><a href="#{html.escape(sec.sid)}">{html.escape(sec.title)}</a></li>'
         )
-        write_page(spec)
-        print(f"Wrote {out}")
+    parts.append("</ul></aside>")
+    return "".join(parts)
+
+
+def build_marketing() -> None:
+    md_path = MARKETING_SRC / Path(MARKETING_SOURCE).name
+    md = md_path.read_text(encoding="utf-8")
+    parsed = parse_document(md)
+    out = SITE_DIR / "index.html"
+    content = f"<h1>{html.escape(parsed.title)}</h1>\n{render_markdown(md, skip_leading_h1=True)}"
+    spec = PageSpec(
+        out_path=out,
+        page_title=parsed.title,
+        scope="marketing",
+        main_active="marketing",
+        sub_nav_html="",
+        sidebar_html=marketing_sidebar(parsed),
+        content_html=content,
+        footer_html=(
+            "Minecraft Kingdom: Armies & Citadel · "
+            '<a href="' + rel_path(out, SITE_DIR / "dev" / "index.html") + '">Dev docs</a> · WIP'
+        ),
+        needs_mermaid=False,
+    )
+    write_page(spec)
+    print(f"Wrote {out}")
+
+    legacy_dir = SITE_DIR / "marketing"
+    if legacy_dir.is_dir():
+        shutil.rmtree(legacy_dir)
+        print(f"Removed legacy {legacy_dir}")
 
 
 def section_toc_html(sections: list[DocSection], base_path: Path, page_path: Path) -> str:

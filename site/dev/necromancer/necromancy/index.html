@@ -8,22 +8,23 @@
   
 </head>
 <body class="scope-dev">
-  <header class="site-header">
+  <header class="site-chrome site-header">
     <div class="header-inner">
-      <div class="header-top">
-        <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
-        <nav class="main-nav" aria-label="Site">
-          <a href="../../../index.html" class="">Marketing</a>
-          <a href="../../index.html" class="active">Dev docs</a>
-        </nav>
-      </div>
-      <nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../index.html" class="active">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav>
+      <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
     </div>
   </header>
-  <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Subsections</p><ul><li><a href="#hood-and-robe">Hood and robe</a></li><li><a href="#wand">Wand</a></li><li><a href="#charging-the-wand">Charging the wand</a></li><li><a href="#minions">Minions</a></li><li><a href="#commanding-minions">Commanding minions</a></li><li><a href="#risks">Risks</a></li><li><a href="#necromancer-penalties">Necromancer penalties</a></li><li><a href="#potion-of-absolution">Potion of absolution</a></li><li><a href="#recipes">Recipes</a></li><li><a href="#rogue-necromancers-and-phylactery-shards">Rogue necromancers and phylactery shards</a></li><li><a href="#horcrux-player-created">Horcrux (player-created)</a></li></ul></aside>
+  <div class="page-area">
+    <div class="main-nav-bar">
+      <nav class="main-nav" aria-label="Site">
+        <a href="../../../index.html" class="">Marketing</a>
+        <a href="../../index.html" class="active">Dev docs</a>
+      </nav>
+    </div>
+    <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../../start/index.html">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../index.html" class="active">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav></div>
     <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Subsections</p><ul><li><a href="#hood-and-robe">Hood and robe</a></li><li><a href="#wand">Wand</a></li><li><a href="#charging-the-wand">Charging the wand</a></li><li><a href="#minions">Minions</a></li><li><a href="#commanding-minions">Commanding minions</a></li><li><a href="#risks">Risks</a></li><li><a href="#necromancer-penalties">Necromancer penalties</a></li><li><a href="#potion-of-absolution">Potion of absolution</a></li><li><a href="#recipes">Recipes</a></li><li><a href="#rogue-necromancers-and-phylactery-shards">Rogue necromancers and phylactery shards</a></li><li><a href="#horcrux-player-created">Horcrux (player-created)</a></li></ul></aside>
-    <main class="doc-main">
-      <p class="source">Source: <code>docs/necromancy.md</code></p><h1>Necromancy</h1>
+      <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Subsections</p><ul><li><a href="#hood-and-robe">Hood and robe</a></li><li><a href="#wand">Wand</a></li><li><a href="#charging-the-wand">Charging the wand</a></li><li><a href="#minions">Minions</a></li><li><a href="#commanding-minions">Commanding minions</a></li><li><a href="#risks">Risks</a></li><li><a href="#necromancer-penalties">Necromancer penalties</a></li><li><a href="#potion-of-absolution">Potion of absolution</a></li><li><a href="#recipes">Recipes</a></li><li><a href="#rogue-necromancers-and-phylactery-shards">Rogue necromancers and phylactery shards</a></li><li><a href="#horcrux-player-created">Horcrux (player-created)</a></li></ul></aside>
+      <main class="doc-main">
+        <p class="source">Source: <code>docs/necromancy.md</code></p><h1>Necromancy</h1>
 <p>The necromancer&#x27;s hood and robe keep hostile mobs off the player; the wand turns hostile mobs into minions at a cost in hearts.</p>
 <p><strong>Planned player questline:</strong> <strong><code>docs/necromancer-path.md</code></strong>. Wand use and rules below apply <strong>independently</strong> of the quest until the intro arc’s <strong>commit</strong> choice. <strong>Commit</strong> closes the Order path only. <strong>Opt out</strong> keeps the Order (see acolyte doc); you can remain an active necromancer either way. <strong>Absolution</strong> is blocked by <strong>creating a horcrux</strong> (see below), not by commit.</p>
 <h3>Hood and robe</h3>
@@ -133,7 +134,8 @@
 <p><strong>Destroy horcrux:</strong> survives normal mining/fire. <strong>Primary (hunter finish):</strong> <strong>throw into the Dragon’s Well</strong> — <strong>anytime</strong> (dragon alive or dead). <strong>Also:</strong> ghast fireball, wither, lightning (rod/channeling), optional <strong>breath bottle</strong> splash. Config <code>necromancerHorcruxDestroyers</code>. <strong>Intro quest:</strong> the mother’s hint covers <strong>monster / storm</strong> methods only — <strong>not</strong> the Well (<code>necromancer-path.md</code>). <strong>God wizard armor:</strong> <strong>indestructible</strong> like relics; <strong>binding</strong> — no manual unequip; <strong>pseudo-death keeps armor</strong>; consumable only via <strong>horcrux</strong> (or <strong>TBD</strong> rituals). True death drops pieces normally.</p>
 <p><strong>Consider:</strong> active horcrux <strong>corrupts weak nearby units</strong> (soldiers, etc.) — <strong><code>necromancer-path.md</code></strong>; not implemented.</p>
 <p><strong>Config:</strong> <strong><code>necromancerHorcruxEnabled</code></strong> (default <strong>true</strong>). Must not bypass <strong>relic ban</strong> or throne rules.</p>
-    </main>
+      </main>
+    </div>
   </div>
   <footer class="site-footer">
     Source: <code>docs/necromancy.md</code>

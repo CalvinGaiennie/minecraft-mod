@@ -5,7 +5,7 @@ Built output is published from **`site/`** at the repo root (Netlify `publish` d
 | Role | Path |
 | --- | --- |
 | Templates + markdown | `docs/marketing/` (here) |
-| Deployable HTML | `site/index.html`, `site/marketing/*`, `site/dev/**` |
+| Deployable HTML | `site/index.html` (marketing), `site/dev/**` |
 | Netlify config | `netlify.toml` |
 
 ## Build

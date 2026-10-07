@@ -8,24 +8,26 @@
   
 </head>
 <body class="scope-dev">
-  <header class="site-header">
+  <header class="site-chrome site-header">
     <div class="header-inner">
-      <div class="header-top">
-        <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
-        <nav class="main-nav" aria-label="Site">
-          <a href="../../../index.html" class="">Marketing</a>
-          <a href="../../index.html" class="active">Dev docs</a>
-        </nav>
-      </div>
-      <nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../index.html" class="active">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav>
+      <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
     </div>
   </header>
-  <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="mod-packaging-plain-language.html">Mod packaging (plain language)</a></li><li><a href="soldier-mod-default-home-for.html">Soldier mod (default home for…)</a></li><li><a href="necromancer-endgame-mod.html">Necromancer / endgame mod</a></li><li><a href="both-mods-integration.html" class="active">Both mods (integration)</a></li><li><a href="relics-wear-solo-fallbacks.html">Relics (wear + solo fallbacks)</a></li><li><a href="config-proposed-defaults-from-design-chat.html">Config (proposed defaults from design chat)</a></li><li><a href="doc-index.html">Doc index</a></li></ul></aside>
+  <div class="page-area">
+    <div class="main-nav-bar">
+      <nav class="main-nav" aria-label="Site">
+        <a href="../../../index.html" class="">Marketing</a>
+        <a href="../../index.html" class="active">Dev docs</a>
+      </nav>
+    </div>
+    <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../index.html" class="active">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav></div>
     <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="mod-packaging-plain-language.html">Mod packaging (plain language)</a></li><li><a href="soldier-mod-default-home-for.html">Soldier mod (default home for…)</a></li><li><a href="necromancer-endgame-mod.html">Necromancer / endgame mod</a></li><li><a href="both-mods-integration.html" class="active">Both mods (integration)</a></li><li><a href="relics-wear-solo-fallbacks.html">Relics (wear + solo fallbacks)</a></li><li><a href="config-proposed-defaults-from-design-chat.html">Config (proposed defaults from design chat)</a></li><li><a href="doc-index.html">Doc index</a></li></ul></aside>
-    <main class="doc-main">
-      <p class="source">Source: <code>docs/mod-split.md</code> · <a href="index.html">Mod split (soldier vs necromancer/endgame)</a></p><h1>Both mods (integration)</h1>
+      <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="mod-packaging-plain-language.html">Mod packaging (plain language)</a></li><li><a href="soldier-mod-default-home-for.html">Soldier mod (default home for…)</a></li><li><a href="necromancer-endgame-mod.html">Necromancer / endgame mod</a></li><li><a href="both-mods-integration.html" class="active">Both mods (integration)</a></li><li><a href="relics-wear-solo-fallbacks.html">Relics (wear + solo fallbacks)</a></li><li><a href="config-proposed-defaults-from-design-chat.html">Config (proposed defaults from design chat)</a></li><li><a href="doc-index.html">Doc index</a></li></ul></aside>
+      <main class="doc-main">
+        <p class="source">Source: <code>docs/mod-split.md</code> · <a href="index.html">Mod split (soldier vs necromancer/endgame)</a></p><h1>Both mods (integration)</h1>
 <table><thead><tr><th>Feature</th><th>Soldier</th><th>Necromancer</th></tr></thead><tbody><tr><td>Kingdom titles (Lord→King)</td><td>Village + living soldier counts</td><td>—</td></tr><tr><td>High King / golden age</td><td>Villages in kingdom</td><td>Citadel owner</td></tr><tr><td>Ironroot / Oathkeeper / Crown (full)</td><td>Recruits, tax, soldiers, raids</td><td>Relic items + wear rules</td></tr><tr><td>Citadel mess placement</td><td>Block</td><td>Owner-only rule in citadel</td></tr><tr><td>Royal training grounds</td><td>Royal soldier tag</td><td>Citadel blocks</td></tr><tr><td><code>citadelFallen</code> flag</td><td>Raid/militia near spawn</td><td>Set on Corrupted King death</td></tr><tr><td>Phantom Roost access</td><td>Ally UUIDs if loaded</td><td>Owner + cage spawner</td></tr><tr><td>Enlistment</td><td>Mess + <code>/enlist</code></td><td>— (wand does not enlist)</td></tr></tbody></table>
-    </main>
+      </main>
+    </div>
   </div>
   <footer class="site-footer">
     Source: <code>docs/mod-split.md</code>

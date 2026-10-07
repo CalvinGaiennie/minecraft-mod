@@ -8,22 +8,23 @@
   
 </head>
 <body class="scope-dev">
-  <header class="site-header">
+  <header class="site-chrome site-header">
     <div class="header-inner">
-      <div class="header-top">
-        <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
-        <nav class="main-nav" aria-label="Site">
-          <a href="../../../index.html" class="">Marketing</a>
-          <a href="../../index.html" class="active">Dev docs</a>
-        </nav>
-      </div>
-      <nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../index.html" class="active">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav>
+      <p class="site-title"><a href="../../../index.html"><span class="brand">Minecraft Kingdom</span></a><span class="dev-tag">· design canon</span></p>
     </div>
   </header>
-  <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="mod-goals.html">Mod goals</a></li><li><a href="two-mods-one-vision.html">Two mods, one vision</a></li><li><a href="solo-player-permanent-forks.html" class="active">Solo player — permanent forks</a></li><li><a href="how-we-plan-plans-to-plan-the-plans.html">How we plan (plans to plan the plans)</a></li><li><a href="design-progress-canon-docs.html">Design progress (canon docs)</a></li><li><a href="design-backlog-from-goals-not-all-implemented.html">Design backlog (from goals — not all implemented)</a></li><li><a href="mod-compatibility-targets.html">Mod compatibility targets</a></li></ul></aside>
+  <div class="page-area">
+    <div class="main-nav-bar">
+      <nav class="main-nav" aria-label="Site">
+        <a href="../../../index.html" class="">Marketing</a>
+        <a href="../../index.html" class="active">Dev docs</a>
+      </nav>
+    </div>
+    <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../index.html" class="active">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav></div>
     <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="mod-goals.html">Mod goals</a></li><li><a href="two-mods-one-vision.html">Two mods, one vision</a></li><li><a href="solo-player-permanent-forks.html" class="active">Solo player — permanent forks</a></li><li><a href="how-we-plan-plans-to-plan-the-plans.html">How we plan (plans to plan the plans)</a></li><li><a href="design-progress-canon-docs.html">Design progress (canon docs)</a></li><li><a href="design-backlog-from-goals-not-all-implemented.html">Design backlog (from goals — not all implemented)</a></li><li><a href="mod-compatibility-targets.html">Mod compatibility targets</a></li></ul></aside>
-    <main class="doc-main">
-      <p class="source">Source: <code>docs/marketing/development-plan.md</code> · <a href="index.html">Document</a></p><h1>Solo player — permanent forks</h1>
+      <div class="page-shell has-sidebar"><aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="mod-goals.html">Mod goals</a></li><li><a href="two-mods-one-vision.html">Two mods, one vision</a></li><li><a href="solo-player-permanent-forks.html" class="active">Solo player — permanent forks</a></li><li><a href="how-we-plan-plans-to-plan-the-plans.html">How we plan (plans to plan the plans)</a></li><li><a href="design-progress-canon-docs.html">Design progress (canon docs)</a></li><li><a href="design-backlog-from-goals-not-all-implemented.html">Design backlog (from goals — not all implemented)</a></li><li><a href="mod-compatibility-targets.html">Mod compatibility targets</a></li></ul></aside>
+      <main class="doc-main">
+        <p class="source">Source: <code>docs/marketing/development-plan.md</code> · <a href="index.html">Document</a></p><h1>Solo player — permanent forks</h1>
 <p>Citadel solo design assumes <strong>one player UUID</strong> making irreversible calls. Multiplayer adds PvP and race-for-claim; the <strong>locks below still apply per player</strong>.</p>
 <p><strong>Diagram:</strong> green = still available; red = closed; gold = citadel throne / owner perks; purple = necromancer quest; blue = Order. <strong>§6 brother endings</strong> (partner vs betrayal) are <strong>in discussion</strong> — dashed in chart.</p>
 <div class="mermaid-wrap"><div class="mermaid">
@@ -77,7 +78,8 @@ flowchart TB
 <h3>Fork cheat sheet (canon today)</h3>
 <table><thead><tr><th>You do this</th><th>Order acolyte path</th><th>Necromancer questline</th><th>Throne ownership</th></tr></thead><tbody><tr><td><strong>Opt out</strong> at intro</td><td>Open until <strong>claim</strong> (must <strong>lock</strong> pre-claim for full perks)</td><td><strong>Closed</strong></td><td>OK if <strong>not active</strong> necromancer on sit (<code>citadel-claim.md</code>)</td></tr><tr><td><strong>Commit</strong> at intro</td><td><strong>Closed</strong></td><td>Open (§6 main arc)</td><td><strong>Blocked</strong> while <strong>active</strong> necromancer; <strong>blighted</strong> tree → absolve if <strong>no horcrux</strong> yet</td></tr><tr><td><strong>Claim citadel</strong> before Maelor lock</td><td><strong>Closed</strong> for new progress</td><td>Intro may still trigger if 3 hearts; arc <strong>pre-claim</strong></td><td>Owner perks if sit succeeds</td></tr><tr><td><strong>Locked acolyte</strong> + absolved / non-active necro</td><td>Perks + stations after claim</td><td>Only if committed before commit lock</td><td><strong>Yes</strong></td></tr><tr><td><strong>Wand forfeit</strong> as owner</td><td>—</td><td>—</td><td><strong>Permanent ban</strong> from owning citadel</td></tr></tbody></table>
 <p><strong>Wild cards:</strong> horcrux pseudo-death (3 min, <strong>no teleport</strong>), relic ban on active necromancers, <strong>horcrux compass</strong> (<strong>no range cap</strong>, always points at nearest horcrux chunk including your own — hunter tool). Rogue sites ~<strong>half</strong> outpost density; <strong>~4%</strong> wild lich horcruxes.</p>
-    </main>
+      </main>
+    </div>
   </div>
   <footer class="site-footer">
     Source: <code>docs/marketing/development-plan.md</code>

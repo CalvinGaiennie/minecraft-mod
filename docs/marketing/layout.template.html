@@ -8,23 +8,25 @@
   {{MERMAID_HEAD}}
 </head>
 <body class="{{BODY_CLASS}}">
-  <header class="site-header">
+  <header class="site-chrome site-header">
     <div class="header-inner">
-      <div class="header-top">
-        <p class="site-title"><a href="{{ROOT_HREF}}"><span class="brand">Minecraft Kingdom</span></a>{{DEV_TAG}}</p>
-        <nav class="main-nav" aria-label="Site">
-          <a href="{{MARKETING_HOME_HREF}}" class="{{MAIN_MARKETING_ACTIVE}}">Marketing</a>
-          <a href="{{DEV_HOME_HREF}}" class="{{MAIN_DEV_ACTIVE}}">Dev docs</a>
-        </nav>
-      </div>
-      {{SUB_NAV}}
+      <p class="site-title"><a href="{{ROOT_HREF}}"><span class="brand">Minecraft Kingdom</span></a>{{DEV_TAG}}</p>
     </div>
   </header>
-  <div class="page-shell">
-    {{SIDEBAR}}
-    <main class="doc-main">
-      {{CONTENT}}
-    </main>
+  <div class="page-area">
+    <div class="main-nav-bar">
+      <nav class="main-nav" aria-label="Site">
+        <a href="{{MARKETING_HOME_HREF}}" class="{{MAIN_MARKETING_ACTIVE}}">Marketing</a>
+        <a href="{{DEV_HOME_HREF}}" class="{{MAIN_DEV_ACTIVE}}">Dev docs</a>
+      </nav>
+    </div>
+    {{SUB_NAV}}
+    <div class="page-shell">
+      {{SIDEBAR}}
+      <main class="doc-main">
+        {{CONTENT}}
+      </main>
+    </div>
   </div>
   <footer class="site-footer">
     {{FOOTER}}
