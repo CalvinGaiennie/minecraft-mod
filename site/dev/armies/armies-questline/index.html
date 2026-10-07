@@ -25,49 +25,74 @@
       <main class="doc-main">
         <p class="source">Source: <code>docs/armies-questline.md</code></p><h1>Armies storyline (player, Armies mod)</h1>
 <p><strong>Scope:</strong> Main <strong>optional</strong> quest arc when <strong>Minecraft Kingdom: Armies</strong> is installed <strong>without</strong> Citadel. Citadel adds its own spine (<code>acolyte-path.md</code>, <code>necromancer-path.md</code>, <code>endgame.md</code>); this doc is the <strong>kingdom</strong> arc only.</p>
-<p><strong>Design intent:</strong> <strong>Four linked set pieces</strong> with <strong>named</strong> antagonists. <strong>Not</strong> “a harder raid night”: each defensive beat is a <strong>quest you deliberately start</strong> (specific player action → specific attack with a <strong>fixed name</strong> and script). Normal raids, swarms, and warlords continue <strong>beside</strong> this arc, not as substitutes for D1/D2.</p>
-<p><strong>Status:</strong> <strong>Author direction, 2026-10-07.</strong> Antagonist names, exact triggers, and scene text <strong>TBD</strong>.</p>
+<p><strong>Design intent:</strong> <strong>Four linked set pieces</strong> with <strong>named</strong> antagonists. Normal raids, swarms, and warlords run <strong>beside</strong> this arc, not as substitutes.</p>
+<p><strong>Status:</strong> <strong>Author direction, 2026-10-07.</strong> Display names and dialogue <strong>TBD</strong>; structure below is <strong>locked</strong> unless author revises.</p>
 <p>---</p>
 <h2 id="chain-order-is-fixed">Chain (order is fixed)</h2>
-<pre><code class="language-text">D1 (named defensive, player-triggered)
-  → O1 (offense: identify who hit you in D1)
-    → D2 (named defensive; starts when O1 completes; yields intel for O2)
-      → O2 (offense: capstone strike using D2 intel)</code></pre>
-<table><thead><tr><th>Step</th><th>Type</th><th>Role</th></tr></thead><tbody><tr><td><strong>D1</strong></td><td>Defensive</td><td><strong>Authored assault</strong> on your kingdom. You <strong>cause</strong> it by doing a <strong>specific thing</strong> (TBD: e.g. claim + mess ritual, tax milestone, horn at wrong place). Attacker has a <strong>fixed name</strong> and <strong>custom wave</strong> (not a random new-moon roll).</td></tr><tr><td><strong>O1</strong></td><td>Offensive</td><td><strong>Investigation:</strong> find <strong>who ordered or led</strong> the D1 hit. Tracks, witnesses, camp intel → first <strong>authored bandit king</strong> base → kill or capture beat <strong>TBD</strong>. Confirms the link to D1’s name.</td></tr><tr><td><strong>D2</strong></td><td>Defensive</td><td><strong>Auto-starts when O1 completes.</strong> A <strong>second named</strong> enemy (ally of O1’s target, or the same network) hits <strong>one</strong> village with a <strong>scripted</strong> siege (still outpost-scale pressure, <strong>not</strong> kingdom wipe). <strong>Reward:</strong> concrete <strong>intel</strong> (map, confession, item) required for <strong>O2</strong>.</td></tr><tr><td><strong>O2</strong></td><td>Offensive</td><td><strong>Capstone:</strong> use D2 intel to locate and <strong>break</strong> the <strong>ring leader’s</strong> base (strongest authored king in this arc). Closes the Armies-only bandit-king thread.</td></tr></tbody></table>
-<p><strong>Emergent threats</strong> (deserter bands, swarms, routine new-moon raids, <strong>toned-down warlords</strong>) do <strong>not</strong> count as D1 or D2.</p>
+<pre><code class="language-text">D1 — village size trigger → scripted assault (any moon)
+  → kill assault leader (player finish only) → notebook
+O1 — hunt “the boss” from the notebook (player finish only) → middle-management twist
+D2 — biggest village already under attack by the real big leader → repel; he escapes
+O2 — hunt and kill the big bandit leader (player finish only, TBD)</code></pre>
 <p>---</p>
-<h2 id="d1-d2-vs-normal-gameplay">D1 / D2 vs normal gameplay</h2>
-<table><thead><tr><th></th><th><strong>Quest defensive (D1, D2)</strong></th><th><strong>Normal mod pressure</strong></th></tr></thead><tbody><tr><td>Start</td><td><strong>Player action</strong> or <strong>quest flag</strong> (O1 done → D2)</td><td>Time, enlistment, moon, title</td></tr><tr><td>Enemy</td><td><strong>Named</strong> NPC + authored script</td><td>Generic raiders / bands</td></tr><tr><td>Purpose</td><td>Story beat</td><td>Ongoing difficulty</td></tr></tbody></table>
-<p>Working titles only until names are chosen: <strong>D1 attacker <code>[Name TBD]</code></strong>, <strong>D2 attacker <code>[Name TBD]</code></strong>, <strong>O1 king <code>[Name TBD]</code></strong>, <strong>O2 ring leader <code>[Name TBD]</code></strong>.</p>
-<p>---</p>
-<h2 id="authored-bandit-kings-armies">Authored bandit kings (Armies)</h2>
+<h2 id="d1-the-muster-that-drew-eyes">D1 — <strong>The muster that drew eyes</strong></h2>
+<p><strong>Trigger:</strong> One <strong>owned village</strong> reaches <strong><code>armiesQuestD1SoldierThreshold</code></strong> living soldiers in that village’s claim (default <strong>30</strong>, config). Fires <strong>once per player</strong> (or once per world, <strong>TBD</strong> multiplayer).</p>
+<p><strong>Not</strong> a new-moon raid: the attack <strong>starts on its own schedule</strong> when the threshold is met (ignore moon phase for this beat).</p>
+<p><strong>Assault:</strong> <strong>Named attack leader</strong> <strong><code>[Name TBD]</code></strong> leads an <strong>authored wave</strong> against <strong>that village</strong> (or the village that crossed the threshold, <strong>TBD</strong> if player moved mess).</p>
+<p><strong>Rules:</strong></p>
 <ul>
-<li><strong>Separate</strong> from Citadel’s <strong>ten relic fortresses</strong> (<code>endgame.md</code>).</li>
-<li><strong>O1</strong> and <strong>O2</strong> use <strong>outpost-scale bases</strong> (pillager-outpost class), fixed names, defenders inside.</li>
-<li><strong>O1</strong> payoff: identity of D1’s patron + quest progress.</li>
-<li><strong>O2</strong> payoff: loot, arc closure, optional unique item (not a relic).</li>
+<li>The <strong>assault leader</strong> cannot be <strong>finished off</strong> except by a <strong>direct player kill</strong> (soldiers may soften him; last hit must be player). Exact immunity / regen while non-player damage <strong>TBD</strong> implementation.</li>
+<li>On death he drops <strong><code>[Notebook item TBD]</code></strong> (quest item). Looting it <strong>starts O1</strong>.</li>
 </ul>
-<p>Smaller named lieutenants <strong>TBD</strong> (optional sites between O1 and O2).</p>
 <p>---</p>
-<h2 id="warlords-background-not-d1-d2">Warlords (background, not D1/D2)</h2>
-<p><strong>Warlords</strong> stay as <strong>optional recurring</strong> kingdom pressure (<code>endgame.md</code>), <strong>toned down</strong> (slow timer, medium raid cap, one village). They are <strong>not</strong> the D1 or D2 set pieces unless a future rewrite explicitly merges them (<strong>not planned</strong>).</p>
+<h2 id="o1-what-the-notebook-names">O1 — <strong>What the notebook names</strong></h2>
+<p><strong>Start:</strong> Player has the <strong>notebook</strong> from D1’s leader.</p>
+<p><strong>Goal:</strong> Track the <strong>boss the notebook points at</strong> to an <strong>outpost base</strong>, fight through, kill <strong><code>[Middle management name TBD]</code></strong>.</p>
+<p><strong>Rules:</strong></p>
+<ul>
+<li><strong><code>[Middle management]</code></strong> is <strong>player finish only</strong> (same last-hit rule as D1 leader).</li>
+<li>On death: <strong>dialogue</strong> (paraphrase locked): he <strong>laughs</strong>, says you’re a <strong>fool</strong>, he’s <strong>not</strong> the big leader, only <strong>middle management</strong>, and you’d better <strong>run home</strong> before there’s <strong>nothing left to run back to</strong>.</li>
+<li>That line <strong>arms D2</strong>: next time the player <strong>enters their largest village</strong> (by soldier count or population, <strong>TBD</strong> tie-break), <strong>D2</strong> is active.</li>
+</ul>
+<p><strong>Fantasy:</strong> Player thought O1 was the capstone kill; it’s the <strong>misdirect</strong>.</p>
+<p>---</p>
+<h2 id="d2-the-big-one-hits-home">D2 — <strong>The big one hits home</strong></h2>
+<p><strong>Trigger:</strong> After O1 completes, when the player <strong>arrives at their biggest village</strong>, the village is <strong>already in an active authored attack</strong> led by <strong><code>[Big bandit leader name TBD]</code></strong> (not a random band merge).</p>
+<p><strong>Goal:</strong> <strong>Push off</strong> the attackers and <strong>save the village</strong> (mess intact, <strong>TBD</strong> fail conditions).</p>
+<p><strong>Outcome on success:</strong> The <strong>big leader escapes</strong> (cannot be killed during D2; despawn / flee script <strong>TBD</strong>). That escape <strong>starts O2</strong>.</p>
+<p><strong>Not</strong> moon-gated; this is a <strong>quest state</strong>, not routine pressure.</p>
+<p>---</p>
+<h2 id="o2-no-more-running">O2 — <strong>No more running</strong></h2>
+<p><strong>Start:</strong> Big leader <strong>escaped D2</strong>.</p>
+<p><strong>Goal:</strong> <strong>Find</strong> his hideout (intel from D2 scene, notebook epilogue, survivor line, <strong>TBD</strong>), assault <strong>outpost-scale base</strong>, <strong>kill <code>[Big bandit leader name TBD]</code></strong>.</p>
+<p><strong>Rules:</strong></p>
+<ul>
+<li><strong>Player finish only</strong> for the big leader (<strong>TBD</strong>, same as prior bosses).</li>
+<li>Completing O2 <strong>closes</strong> the Armies-only bandit-king arc (rewards <strong>TBD</strong>).</li>
+</ul>
+<p>---</p>
+<h2 id="three-bosses-names-tbd">Three bosses (names TBD)</h2>
+<table><thead><tr><th>Role</th><th>Beat</th><th>Player-only finish</th></tr></thead><tbody><tr><td>Assault leader</td><td>D1</td><td>Yes</td></tr><tr><td>Middle management</td><td>O1</td><td>Yes</td></tr><tr><td>Big bandit leader</td><td>D2 escapes → O2 kill</td><td>O2 yes</td></tr></tbody></table>
+<p>Citadel <strong>relic fortresses</strong> remain separate (<code>endgame.md</code>).</p>
+<p>---</p>
+<h2 id="config-proposed">Config (proposed)</h2>
+<table><thead><tr><th>Key</th><th>Default</th><th>Notes</th></tr></thead><tbody><tr><td><code>armiesQuestD1SoldierThreshold</code></td><td><strong>30</strong></td><td>Same-village living soldiers</td></tr><tr><td><code>armiesQuestD1IgnoreMoon</code></td><td><strong>true</strong></td><td>D1 scheduling</td></tr><tr><td><code>armiesQuestBossPlayerKillOnly</code></td><td><strong>true</strong></td><td>Quest bosses need player last hit</td></tr></tbody></table>
+<p>---</p>
+<h2 id="warlords-background">Warlords (background)</h2>
+<p>Recurring <strong>warlords</strong> (<code>endgame.md</code>) are <strong>not</strong> D1, D2, or O2. Toned-down ambient pressure only.</p>
 <p>---</p>
 <h2 id="with-citadel-installed">With Citadel installed</h2>
-<ul>
-<li>This arc <strong>still runs</strong> (no exclusion rule yet).</li>
-<li>Citadel <strong>fortresses</strong> remain Citadel’s endgame; <strong>O2</strong> does not require them.</li>
-<li>Cross-lore <strong>TBD</strong>.</li>
-</ul>
+<p>Arc <strong>still runs</strong> unless author adds exclusion later. No relic requirement for O2.</p>
 <p>---</p>
 <h2 id="still-to-decide">Still to decide</h2>
 <ul>
-<li><strong>D1 trigger:</strong> what specific player action starts it (and minimum kingdom state).</li>
-<li><strong>D1/D2 scripts:</strong> force size, duration, fail/retry, which village is targeted.</li>
-<li><strong>O1 investigation UX:</strong> journal, villager lines, physical clues.</li>
-<li><strong>Multiplayer:</strong> quest owner per player vs per kingdom.</li>
-<li><strong>Four names</strong> and whether D1 attacker appears again in D2 or only by reference.</li>
+<li><strong>Four display names</strong> and notebook item id.</li>
+<li><strong>D1/D2 target village</strong> rules if mess moves.</li>
+<li><strong>Multiplayer:</strong> quest state per UUID vs per kingdom.</li>
+<li><strong>Failure:</strong> D2 village lost, retry, or permanent scar.</li>
+<li><strong>O2 discovery</strong> UX after D2 escape.</li>
 </ul>
-<p>Cross-links: <code>threats-and-mobs.md</code>, <code>endgame.md</code>, <code>soldiers-and-villages.md</code>, <code>mod-split.md</code>.</p>
+<p>Cross-links: <code>threats-and-mobs.md</code>, <code>endgame.md</code>, <code>config-and-recipes.md</code>, <code>mod-split.md</code>.</p>
       </main>
       <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html" class="active">Overview</a></li></ul></aside>
     </div>
