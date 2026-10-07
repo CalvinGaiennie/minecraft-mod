@@ -21,16 +21,58 @@
       </nav>
     </div>
     <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="index.html" class="active">Start</a><a href="../notes/index.html">Notes</a><a href="../citadel/index.html">Citadel</a><a href="../order/index.html">Order</a><a href="../necromancer/index.html">Necromancer</a><a href="../armies/index.html">Armies</a><a href="../build/index.html">Build</a><a href="../lore/index.html">Lore</a></nav></div>
-    <div class="page-shell">
-      
+    <div class="page-shell has-sidebar">
+      <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Documents</p><ul><li><a href="compatibility-planned-mods/index.html">Compatibility targets</a></li><li><a href="development-plan/index.html">Development plan</a></li><li><a href="integration/index.html">Integration</a></li><li><a href="mod-goals/index.html">Mod goals</a></li><li><a href="mod-split/index.html">Mod split</a></li><li><a href="overview/index.html">Overview</a></li></ul></aside>
       <main class="doc-main">
-        <div class="dev-hub"><h1>Start</h1><p>Canon markdown exported from <code>docs/</code>.</p><ul><li>Compatibility targets</li><li>Development plan</li><li>Integration</li><li>Mod goals</li><li>Mod split</li><li>Overview</li></ul></div>
+        <div class="dev-hub"><h1>Start</h1><p class="dev-group-lede">Mod goals, split, integration, and the development plan.</p><section class="dev-doc-preview" id="compatibility-planned-mods"><h2>Compatibility targets</h2><p class="source">Source: <code>docs/compatibility-planned-mods.md</code></p><div class="dev-doc-excerpt"><p><strong>Short answer:</strong> Yes — <strong>compatibility is a design goal</strong>, not a guarantee on day one. The project <strong>targets 1.21.1 NeoForge</strong> specifically so it can sit beside <strong>Create</strong> and <strong>Ice and Fire: Community Edition</strong> in modpacks (<code>overview.md</code>, <code>master-build-note.md</code>). There is <strong>no hard dependency</strong> on any of these mods.</p>
+<p><strong>How we stay compatible</strong></p>
+<ul>
+<li><strong>Optional integration only</strong> — no <code>@Mod</code> dependency; soft checks via <code>ModList</code> / events (<code>integration.md</code>).</li>
+<li><strong>Mixins disabled</strong> in the current template (reduces cross-mod bytecode conflicts); villager work uses attachments + events first.</li>
+<li><strong>Soldiers = vanilla villagers</strong> — not a custom mob type that fights other mods’ entity registries.</li>
+<li><strong>Enlisted-player rule</strong> — mod raids/swarm rolls can skip players who opt out, so packs aren’t forced into our threat loop.</li>
+<li><strong>Cut siege MVP</strong> — no custom ladder/sapper assault AI that would fight <strong>Medieval Siege Machines</strong> for the same job.</li>
+<li><strong>Separate test instance</strong> — master build note: test our JAR with Create + IAF CE before claiming “modpack ready.”</li>
+</ul>
+<p><strong>Verdict by mod</strong></p>
+<table><thead><tr><th>Mod</th><th>1.21.1 NeoForge</th><th>Compatibility expectation</th><th>Main risks to test</th></tr></thead><tbody><tr><td>Create <span class="doc-ref-url">(https://modrinth.com/mod/create)</span></td><td>Yes (official)</td><td><strong>High</strong> — platform choice was partly for Create modpacks</td><td>Village protection vs contraption breaking; claim borders vs machines</td></tr><tr><td>Ice and Fire: Community Edition</td><td>Yes (project target; use pack’s CE build)</td><td><strong>Medium–high</strong> — dragons/endgame parallel to Citadel, not merged</td><td>Soldier targeting on IAF mobs; structures vs citadel/refuge placement; dragon vs custom raids</td></tr><tr><td>Epic Knights: Shields, Armor and Weapons <span class="doc-ref-url">(https://modrinth.com/mod/epic-knights-shields-armor-and-weapons)</span></td><td>Yes</td><td><strong>High</strong> — player gear; soldiers keep their own kits</td><td>Low technical conflict; balance is gameplay</td></tr><tr><td>Small Ships <span class="doc-ref-url">(https://modrinth.com/mod/small-ships)</span></td><td>Yes</td><td><strong>High</strong> — naval layer orthogonal to village war</td><td>Low; our boat-assault content is cut from scope</td></tr><tr><td>Medieval Siege Machines <span class="doc-ref-url">(https://modrinth.com/mod/medieval-siege-machines)</span> (catapult/trebuchet/etc.)</td><td>Yes</td><td><strong>Medium</strong> — player siege vs village claims</td><td>Explosions/projectiles vs village protection; <code>mobGriefing</code></td></tr><tr><td>Corpse <span class="doc-ref-url">(https://modrinth.com/mod/corpse)</span></td><td>Yes (1.21.1 NeoForge builds)</td><td><strong>High</strong> — acolyte questline</td><td>Player/acolyte death + loot retention; quest items must not soft-lock (<code>acolyte-path.md</code>)</td></tr></tbody></table>
+<p>*<em>What we will </em>not<em> claim without testing</em>*</p>
+<ul>
+<li>“Officially compatible” or CurseForge “compatible with X” badges until a <strong>fixed mod list + version pins</strong> pass smoke tests (load, 30 min SP, claim village, citadel flag, Create contraption in claim, IAF mob near soldiers).</li>
+</ul>
+<p>…</p></div></section><section class="dev-doc-preview" id="development-plan"><h2>Development plan</h2><p class="source">Source: <code>docs/marketing/development-plan.md</code></p><div class="dev-doc-excerpt"><h3>Mod goals</h3>
+<div class="box want">
+<h3>What we want players to feel</h3>
+<ul>
+<li><strong>More interactive Minecraft</strong> — better NPCs: named followers, named enemies, factions that react to you.</li>
+<li><strong>Decisions that stick</strong> — choices that <em>permanently</em> open or close paths (Order vs committed necromancer, opt-out, no Order after citadel claim, etc.).</li>
+<li><strong>Objectives that matter</strong> — goals that feel necessary or worth it to unlock places, gear, stations, and story — not checklist busywork for its own sake.</li>
+<li><strong>A longer game than the dragon</strong> — meaningful <strong>pre-dragon</strong> and <strong>post-dragon</strong> arcs. The citadel seal, kingdom play, and army campaigns are part of the real timeline.</li>
+<li><strong>Vanilla still works</strong> — never block the normal loop: build, farm, trade hall, redstone, explore your way. Mods <em>encourage</em> quests, empires, and story; they don&#x27;t replace survival.</li>
+<li><strong>Two kinds of story</strong> — <strong>Citadel</strong>: main lore, citadel, Order, necromancer path, relics, Minecraft tie-ins (TBD). <strong>Armies</strong>: your emergent kingdom <em>plus</em> authored bandit kings, named foes, loot and intel that unlocks the next threat — optional alliance with bandits, forced solo beats, emotional strife.</li>
+<li><strong>Progression that feels different</strong> — not just better gear: titles, taxes, stations, paths, and <strong>character stats</strong> (see backlog).</li>
+</ul>
+</div>
+
+<div class="box avoid">
+<h3>What we do not want</h3>
+<ul>
+<li>Minecraft feeling <strong>broken</strong> or &quot;wrong&quot; if you ignore our quests.</li>
+<li>Optimal play being <strong>only</strong> vanilla farms and trading halls — they should stay viable, but feel <strong>less mandatory</strong> when the mod&#x27;s stories and empire loop are engaging.</li>
+<li>Armies becoming a spreadsheet that kills roleplay — or Citadel becoming a gate that hard-blocks creative builders.</li>
+<li>Copy-paste quest design — Order is <strong>work → reward</strong>; necromancer path is <strong>decision → reward + weakness</strong> (see <code>docs/necromancer-path.md</code>).</li>
+</ul>
+</div></div></section><section class="dev-doc-preview" id="integration"><h2>Integration</h2><p class="source">Source: <code>docs/integration.md</code></p><div class="dev-doc-excerpt"><p>Implement with <strong><code>ModList.get().isLoaded(&quot;other_mod_id&quot;)</code></strong> or NeoForge <strong>InterModComms</strong> / <strong>events</strong> on a shared bus. Prefer <strong>necromancer publishes world state</strong>, <strong>soldier subscribes</strong> (and vice versa for village data).</p>
+<p>Mod IDs: <strong><code>minecraft_kingdom_armies</code></strong>, <strong><code>minecraft_kingdom_citadel</code></strong>. Display: <strong>Minecraft Kingdom: Armies</strong> / <strong>Citadel</strong>. Monolith today: <strong><code>villagers</code></strong>.</p></div></section><section class="dev-doc-preview" id="mod-goals"><h2>Mod goals</h2><p class="source">Source: <code>docs/mod-goals.md</code></p><div class="dev-doc-excerpt"><p>Authoritative prose for implementers. Static site: <code>site/development-plan.html</code> (built from <code>docs/marketing/development-plan.md</code>). Marketing: <code>site/index.html</code>.</p></div></section><section class="dev-doc-preview" id="mod-split"><h2>Mod split</h2><p class="source">Source: <code>docs/mod-split.md</code></p><div class="dev-doc-excerpt"><p>Two optional NeoForge mods from this repo long-term. <strong>Soldier</strong> = villages, economy, war, threats, farmers. <strong>Necromancer</strong> = wand, citadel, relics, acolytes, fortress endgame. Neither hard-depends on the other; <strong>integration</strong> enhances both.</p></div></section><section class="dev-doc-preview" id="overview"><h2>Overview</h2><p class="source">Source: <code>docs/overview.md</code></p><div class="dev-doc-excerpt"><p>A Minecraft mod that turns villagers into soldiers and militia, backed by a village economy, horn commands, and new threats.</p></div></section></div>
       </main>
     </div>
   </div>
   <footer class="site-footer">
     Full design canon · regenerated from markdown
   </footer>
-  
+    <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true, theme: "neutral", securityLevel: "loose" });
+  </script>
 </body>
 </html>

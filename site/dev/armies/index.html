@@ -21,10 +21,58 @@
       </nav>
     </div>
     <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../start/index.html">Start</a><a href="../notes/index.html">Notes</a><a href="../citadel/index.html">Citadel</a><a href="../order/index.html">Order</a><a href="../necromancer/index.html">Necromancer</a><a href="index.html" class="active">Armies</a><a href="../build/index.html">Build</a><a href="../lore/index.html">Lore</a></nav></div>
-    <div class="page-shell">
-      
+    <div class="page-shell has-sidebar">
+      <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Documents</p><ul><li><a href="soldiers-and-villages/index.html">Soldiers &amp; villages</a></li><li><a href="threats-and-mobs/index.html">Threats &amp; mobs</a></li><li><a href="war-and-defense/index.html">War &amp; defense</a></li></ul></aside>
       <main class="doc-main">
-        <div class="dev-hub"><h1>Armies</h1><p>Canon markdown exported from <code>docs/</code>.</p><ul><li>Soldiers &amp; villages</li><li>Threats &amp; mobs</li><li>War &amp; defense</li></ul></div>
+        <div class="dev-hub"><h1>Armies</h1><p class="dev-group-lede">Soldiers, villages, war, defense, and hostile threats.</p><section class="dev-doc-preview" id="soldiers-and-villages"><h2>Soldiers &amp; villages</h2><p class="source">Source: <code>docs/soldiers-and-villages.md</code></p><div class="dev-doc-excerpt"><h3>Villager roles</h3>
+<p>A villager&#x27;s job and setup decide whether a weapon makes them a soldier or a militiaman.</p>
+<table><thead><tr><th>Role</th><th>How they get it</th><th>Gear allowed</th><th>Notes</th></tr></thead><tbody><tr><td>Soldier</td><td>Villager with no trade is given a weapon, chestplate, and helmet, and has a free post bed and a stocked mess station</td><td>Full armor</td><td>Unequipping can turn them into a trader, but a trader can never become a soldier again, unless he served as a soldier before he ever traded (see Veterans)</td></tr><tr><td>Militiaman</td><td>Trader or unemployed villager is given a weapon. Unemployed villagers who meet every soldier requirement become soldiers instead</td><td>Helmet, chestplate, and boots; no leggings or shields</td><td>Can&#x27;t trade while in the militia; sometimes run from enemies</td></tr><tr><td>Bandit</td><td>Soldier deserts (<strong>45%</strong> outcome — keeps gear)</td><td>Whatever they kept</td><td>See Threats</td></tr><tr><td>Troubled youth</td><td>Born from bandit-occupied villages (80% chance)</td><td>n/a</td><td>Can never trade; can become soldiers or bandits (see Bandits)</td></tr></tbody></table>
+<ul>
+<li>Villagers with a trade cannot become soldiers, unless they served as soldiers before they ever traded.</li>
+<li>Soldiers cannot breed with soldiers, bandits cannot breed with bandits, and soldiers and bandits cannot breed with each other.</li>
+<li>Out of combat, soldiers and militiamen pick up any item they&#x27;re allowed to use if that slot is empty and the item is on the ground. They never take items from chests.</li>
+</ul>
+<h3>Inventory</h3>
+<table><thead><tr><th>Slot</th><th>Soldier</th><th>Militia</th></tr></thead><tbody><tr><td>Weapon</td><td>Melee weapon (sword or axe)</td><td>Either a melee weapon or a bow, not both</td></tr><tr><td>Shield</td><td>Shield</td><td>None</td></tr><tr><td>Bow</td><td>Bow, crossbow, or pickaxe (sappers)</td><td>(uses the weapon slot)</td></tr><tr><td>Arrows</td><td>Up to 16</td><td>Up to 16 (bow militia only)</td></tr><tr><td>Utility</td><td>One boat, only while carrying out a boat plan</td><td>One boat, only while carrying out a boat plan</td></tr><tr><td>Armor</td><td>Helmet, chestplate, leggings, boots</td><td>Helmet, chestplate, boots</td></tr></tbody></table>
+<ul>
+<li><strong>Switching:</strong> soldiers use their bow at range and switch to melee weapon and shield when an enemy gets within 4 blocks, or when they run out of arrows. If a soldier has to switch away from the item in his bow slot during combat, he drops it: an archer switching to melee drops his bow, and a sapper drawing his sword drops his pickaxe. Switching from his melee weapon to his bow never drops anything. Dropped items can be picked back up after the fight.</li>
+<li><strong>Bow militia</strong> have no melee weapon, so they back away to keep their distance; near their home bed, they fight with their fists.</li>
+<li><strong>Refilling arrows:</strong> at 16 arrows max, archers refill often from arrow bins at home or the camp block on campaign, and by picking up shot arrows.</li>
+<li>Special armor (campaign boots, nightwatch, royal guard) uses the normal armor slots.</li>
+</ul>
+<p>…</p></div></section><section class="dev-doc-preview" id="threats-and-mobs"><h2>Threats &amp; mobs</h2><p class="source">Source: <code>docs/threats-and-mobs.md</code></p><div class="dev-doc-excerpt"><h3>Threats</h3>
+<p>Three new enemy systems pressure villages: raids, roving swarms, and bandits.</p>
+<h3>New moon raids</h3>
+<ul>
+<li>Raids can happen on the 3 darkest nights: the new moon and the nights before and after it. Each village near a player has a 40% chance of a raid on new moon night and 15% on the nights either side (higher near spawn until the Black Citadel falls), rolled separately, so a village can get none, one, or several.</li>
+<li>Only hit villages a player is currently near.</li>
+<li>Work differently from vanilla raids.</li>
+</ul>
+<ul>
+<li><strong>Warning:</strong> about 1 minute before a raid arrives, a distant war horn sounds.</li>
+<li><strong>One big push:</strong> raiders spawn 64-96 blocks out and march in together from one direction, instead of coming in waves.</li>
+<li><strong>Raiders (kept weak):</strong> mostly pillagers and vindicators, led by a raid captain with modest buffs (40 HP, +20% damage). Witches: 0-2 per raid. Evokers and ravagers only in large raids, at most 1 of each.</li>
+<li><strong>Targets:</strong> soldiers and iron golems first, then civilians. Raiders also try to wreck post beds and mess stations.</li>
+<li><strong>Ending:</strong> the raid ends when every raider is dead, or at dawn. Raiders still alive at dawn loot the tax box and leave.</li>
+<li><strong>Winning:</strong> soldiers earn kills toward rank-ups, making raids the main way seasoned soldiers and heroes are made. The raid captain drops emeralds, a raid banner, and gear.</li>
+<li><strong>No Bad Omen:</strong> these raids come from the moon, not from killing pillager captains. Vanilla raids still work as normal alongside them.</li>
+<li><strong>Leaving mid-raid:</strong> if the player leaves and the village unloads, the raid pauses. It picks up where it left off when a player returns, even if dawn has passed in the meantime.</li>
+</ul>
+<p>Raid size is random, not tied to the village&#x27;s defenses:</p>
+<table><thead><tr><th>Raid size</th><th>Raiders</th><th>Chance</th></tr></thead><tbody><tr><td>Small</td><td>3-6</td><td>60%</td></tr><tr><td>Medium</td><td>7-10</td><td>30%</td></tr><tr><td>Large</td><td>11-14</td><td>10%</td></tr></tbody></table>
+<h3>Roving swarms</h3>
+<ul>
+<li>Travel village to village killing villagers.</li>
+<li>When two swarms meet, they merge.</li>
+<li>Any hostile mob type can swarm with its own type: zombie swarms, skeleton swarms, spider swarms, and so on. Swarms only merge with swarms of the same type.</li>
+<li><strong>Spawning:</strong> each night, every player gets one roll with about a 5% chance of a swarm spawning in the area around him: 5-10 mobs of one type. A player gets no new swarm while 2 of his swarms are still alive (proposed).</li>
+<li><strong>Size cap:</strong> swarms max out at 30. Extra mobs from a merge stay as a second swarm. Creeper swarms max out at 8.</li>
+<li><strong>Growth:</strong> zombie swarms grow by turning villagers they kill into zombie villagers. Other types only grow by merging.</li>
+<li><strong>Movement:</strong> a swarm heads for the nearest village within 256 blocks, and moves on once that village has no villagers left.</li>
+</ul>
+<p>…</p></div></section><section class="dev-doc-preview" id="war-and-defense"><h2>War &amp; defense</h2><p class="source">Source: <code>docs/war-and-defense.md</code></p><div class="dev-doc-excerpt"><h3>Defense blocks</h3>
+<p>These blocks tell soldiers and villagers where to stand guard or retreat.</p>
+<table><thead><tr><th>Block</th><th>What it does</th></tr></thead><tbody><tr><td>Arrow bin</td><td>Restocks arrows for soldiers and militiamen. When turned on, the nearest one with a bow guards it. Holds up to 1 stack of arrows, refilled by players or nearby fletchers. A fletcher adds arrows at the same rate he supplies recruiter boxes (one load a week, see Fletcher supply)</td></tr><tr><td>Rampart</td><td>A single block that marks a guard spot. Soldiers pathfind here when not eating or sleeping.</td></tr><tr><td>Fallback block</td><td>Soldiers go to the nearest one when the fallback horn blows</td></tr><tr><td>Haven block</td><td>Attracts retreating non-soldier villagers</td></tr><tr><td>Castle gate</td><td>A thick door, 4 blocks wide and 8 tall, meant to be placed in pairs for an 8-wide gateway. Opens and closes with redstone, so it works with levers, buttons, and lever horns. Comes in wood (axemen can break it during assaults) and iron (only sappers can). Players break castle gates about as slowly as obsidian, using an axe for wood gates or an iron pickaxe or better for iron gates (village protection slows non-allies further). For soldiers, each gate breaks as one piece and takes a long time: about 3 minutes for a wood gate and 6 minutes for an iron gate (proposed), with permanent progress like other sapper work. Recipes (proposed): wood gate is 6 logs, 2 iron blocks, and a chain in the center (about 19 iron each); iron gate is 8 iron blocks around an obsidian block (72 iron each, 144 for a pair)</td></tr></tbody></table></div></section></div>
       </main>
     </div>
   </div>

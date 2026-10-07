@@ -306,6 +306,22 @@ body.scope-dev .doc-main a {
 .dev-hub h2 { font-size: 1.2rem; border: none; margin: 0 0 0.5rem; }
 .dev-hub ul { columns: 2; gap: 2rem; }
 @media (max-width: 640px) { .dev-hub ul { columns: 1; } }
+.dev-group-lede { font-size: 1.05rem; max-width: 42rem; margin-bottom: 1.75rem; }
+.dev-doc-preview {
+  margin: 2rem 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border, #ddd);
+}
+.dev-doc-preview:first-of-type { border-top: none; padding-top: 0; }
+.dev-doc-preview h2 { font-size: 1.35rem; margin-bottom: 0.35rem; }
+.dev-doc-excerpt { max-width: 42rem; }
+.dev-doc-excerpt table { font-size: 0.92rem; }
+.dev-hub-root .dev-group-section {
+  margin: 2.5rem 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border, #ddd);
+}
+.dev-hub-root .dev-group-section h2 { font-size: 1.5rem; margin-bottom: 0.35rem; }
 
 .site-footer {
   max-width: 1200px;

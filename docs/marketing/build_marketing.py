@@ -10,7 +10,15 @@ import sys
 from dataclasses import dataclass
 from pathlib import Path
 
-from site_structure import DEV_GROUPS, DOCS_DIR, MARKETING_SOURCE, REPO_ROOT, doc_slug
+from site_structure import (
+    DEV_GROUPS,
+    DOCS_DIR,
+    GROUP_BLURBS,
+    MARKETING_SOURCE,
+    REPO_ROOT,
+    DevDoc,
+    doc_slug,
+)
 
 ROOT = Path(__file__).resolve().parent
 SITE_DIR = REPO_ROOT / "site"
@@ -357,17 +365,110 @@ def render_layout(spec: PageSpec) -> str:
     )
 
 
+def _truncate_markdown_chunk(chunk: str, *, max_chars: int = 2800) -> str:
+    chunk = chunk.strip()
+    if len(chunk) > max_chars:
+        chunk = chunk[:max_chars].rsplit("\n", 1)[0] + "\n\n…"
+    return chunk
+
+
+def _take_markdown_lines(
+    lines: list[str],
+    *,
+    max_paragraphs: int,
+    stop_at_h2: bool = True,
+) -> str:
+    out_lines: list[str] = []
+    skipped_h1 = False
+    para_count = 0
+    for line in lines:
+        if line.startswith("# ") and not skipped_h1:
+            skipped_h1 = True
+            continue
+        if stop_at_h2 and line.startswith("## "):
+            break
+        if line.strip().startswith("```"):
+            break
+        out_lines.append(line)
+        if line.strip() == "" and any(l.strip() for l in out_lines):
+            para_count += 1
+            if para_count >= max_paragraphs:
+                break
+    return "\n".join(out_lines).strip()
+
+
+def doc_intro_excerpt(relpath: str, *, max_paragraphs: int = 8) -> str:
+    """Intro or opening of first ## section, for group / dev hub previews."""
+    raw = (DOCS_DIR / relpath).read_text(encoding="utf-8")
+    cleaned = re.sub(r"<!--.*?-->", "", raw, flags=re.DOTALL)
+    chunk = _take_markdown_lines(
+        cleaned.splitlines(), max_paragraphs=max_paragraphs, stop_at_h2=True
+    )
+    if not chunk:
+        parsed = parse_document(cleaned)
+        if parsed.intro.strip():
+            chunk = _take_markdown_lines(
+                parsed.intro.splitlines(),
+                max_paragraphs=max_paragraphs,
+                stop_at_h2=False,
+            )
+        elif parsed.sections:
+            sec = parsed.sections[0]
+            body_bit = _take_markdown_lines(
+                sec.body.splitlines(),
+                max_paragraphs=max_paragraphs,
+                stop_at_h2=True,
+            )
+            chunk = f"### {sec.title}\n\n{body_bit}".strip()
+    chunk = _truncate_markdown_chunk(chunk)
+    if not chunk:
+        return ""
+    return render_markdown(chunk, plain_internal=True)
+
+
+def dev_doc_preview_html(doc: DevDoc, *, max_paragraphs: int = 8) -> str:
+    excerpt = doc_intro_excerpt(doc.relpath, max_paragraphs=max_paragraphs)
+    return (
+        f'<section class="dev-doc-preview" id="{html.escape(doc_slug(doc.relpath))}">'
+        f"<h2>{html.escape(doc.title)}</h2>"
+        f'<p class="source">Source: <code>docs/{html.escape(doc.relpath)}</code></p>'
+        f'<div class="dev-doc-excerpt">{excerpt}</div>'
+        f"</section>"
+    )
+
+
+def dev_hub_body_html(
+    title: str,
+    lede: str,
+    docs: list[DevDoc],
+    *,
+    max_paragraphs: int = 8,
+) -> str:
+    previews = [
+        dev_doc_preview_html(doc, max_paragraphs=max_paragraphs)
+        for doc in sorted(docs, key=lambda d: d.title.lower())
+    ]
+    return (
+        f'<div class="dev-hub"><h1>{html.escape(title)}</h1>'
+        f'<p class="dev-group-lede">{html.escape(lede)}</p>'
+        + "".join(previews)
+        + "</div>"
+    )
+
+
 def sidebar_html(
     page_path: Path,
     doc_pages: list[tuple[str, str, Path]],
     current_sid: str,
     h3_items: list[tuple[str, str]] | None,
+    *,
+    doc_list_label: str = "Sections",
 ) -> str:
     if not doc_pages and not h3_items:
         return ""
     parts = ['<aside class="doc-sidebar" aria-label="On this page">']
     if doc_pages:
-        parts.append('<p class="sidebar-label">Sections</p><ul>')
+        parts.append(f'<p class="sidebar-label">{html.escape(doc_list_label)}</p><ul>')
         for sid, title, path in doc_pages:
             href = rel_path(page_path, path)
             ac = ' class="active"' if sid == current_sid else ""
@@ -555,16 +656,25 @@ def build_dev_doc(group_id: str, doc: "DevDoc") -> list[Path]:
     return written
 
 
-def build_dev_group_index(group_id: str, title: str, doc_links: list[tuple[str, Path]]) -> None:
+def build_dev_group_index(
+    group_id: str, title: str, entries: list[tuple[DevDoc, Path]]
+) -> None:
     out = SITE_DIR / "dev" / group_id / "index.html"
-    items = []
-    for label, path in sorted(doc_links, key=lambda x: x[0].lower()):
-        items.append(f"<li>{html.escape(label)}</li>")
-    content = (
-        f'<div class="dev-hub"><h1>{html.escape(title)}</h1>'
-        f"<p>Canon markdown exported from <code>docs/</code>.</p>"
-        f"<ul>{''.join(items)}</ul></div>"
+    lede = GROUP_BLURBS.get(group_id, "Design docs in this section.")
+    docs = [doc for doc, _ in entries]
+    sidebar_pages = [
+        (doc_slug(doc.relpath), doc.title, path)
+        for doc, path in sorted(entries, key=lambda x: x[0].title.lower())
+    ]
+    sidebar = sidebar_html(
+        out,
+        sidebar_pages,
+        "",
+        None,
+        doc_list_label="Documents",
     )
+    content = dev_hub_body_html(title, lede, docs)
+    needs_mermaid = any("```mermaid" in (DOCS_DIR / d.relpath).read_text() for d in docs)
     write_page(
         PageSpec(
             out_path=out,
@@ -572,10 +682,10 @@ def build_dev_group_index(group_id: str, title: str, doc_links: list[tuple[str, 
             scope="dev",
             main_active="dev",
             sub_nav_html=build_sub_nav_dev(group_id, out),
-            sidebar_html="",
+            sidebar_html=sidebar,
             content_html=content,
             footer_html="Full design canon · regenerated from markdown",
-            needs_mermaid=False,
+            needs_mermaid=needs_mermaid,
         )
     )
     print(f"Wrote {out}")
@@ -583,20 +693,33 @@ def build_dev_group_index(group_id: str, title: str, doc_links: list[tuple[str, 
 
 def build_dev_root() -> None:
     out = SITE_DIR / "dev" / "index.html"
-    sections = []
+    sidebar_pages = [
+        (group.id, group.title, SITE_DIR / "dev" / group.id / "index.html")
+        for group in DEV_GROUPS
+    ]
+    sidebar = sidebar_html(
+        out, sidebar_pages, "", None, doc_list_label="Sections"
+    )
+    sections: list[str] = []
+    needs_mermaid = False
     for group in DEV_GROUPS:
-        doc_items = []
-        for doc in group.docs:
-            doc_items.append(
-                f"<li>{html.escape(doc.title)} — "
-                f"<code>docs/{html.escape(doc.relpath)}</code></li>"
-            )
+        lede = GROUP_BLURBS.get(group.id, "")
+        previews = [
+            dev_doc_preview_html(doc, max_paragraphs=5)
+            for doc in sorted(group.docs, key=lambda d: d.title.lower())
+        ]
         sections.append(
-            f"<section><h2>{html.escape(group.title)}</h2>"
-            f"<ul>{''.join(doc_items)}</ul></section>"
+            f'<section class="dev-group-section" id="{html.escape(group.id)}">'
+            f"<h2>{html.escape(group.title)}</h2>"
+            f'<p class="dev-group-lede">{html.escape(lede)}</p>'
+            + "".join(previews)
+            + "</section>"
         )
+        for doc in group.docs:
+            if "```mermaid" in (DOCS_DIR / doc.relpath).read_text(encoding="utf-8"):
+                needs_mermaid = True
     content = (
-        "<div class=\"dev-hub\"><h1>Development documentation</h1>"
+        '<div class="dev-hub dev-hub-root"><h1>Development documentation</h1>'
         "<p>Every merged design doc and dated note under <code>docs/</code>, "
         "exported for reading in the browser. Edit markdown in the repo; run "
         "<code>python3 docs/marketing/build_marketing.py</code> to refresh.</p>"
@@ -610,28 +733,28 @@ def build_dev_root() -> None:
             scope="dev",
             main_active="dev",
             sub_nav_html=build_sub_nav_dev("", out),
-            sidebar_html="",
+            sidebar_html=sidebar,
             content_html=content,
             footer_html="Not a substitute for implementer markdown — keep docs/ authoritative",
-            needs_mermaid=False,
+            needs_mermaid=needs_mermaid,
         )
     )
     print(f"Wrote {out}")
 
 
 def build_dev() -> None:
-    group_doc_index: dict[str, list[tuple[str, Path]]] = {
+    group_doc_index: dict[str, list[tuple[DevDoc, Path]]] = {
         g.id: [] for g in DEV_GROUPS
     }
     for group in DEV_GROUPS:
         for doc in group.docs:
             paths = build_dev_doc(group.id, doc)
             if paths:
-                group_doc_index[group.id].append((doc.title, paths[0]))
+                group_doc_index[group.id].append((doc, paths[0]))
     for group in DEV_GROUPS:
-        links = group_doc_index[group.id]
-        if links:
-            build_dev_group_index(group.id, group.title, links)
+        entries = group_doc_index[group.id]
+        if entries:
+            build_dev_group_index(group.id, group.title, entries)
     build_dev_root()
 
 

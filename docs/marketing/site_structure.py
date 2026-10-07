@@ -98,6 +98,21 @@ DEV_GROUPS: tuple[DevGroup, ...] = (
     ),
 )
 
+# Short lede on dev group hub pages (site/dev/{id}/index.html).
+GROUP_BLURBS: dict[str, str] = {
+    "start": "Mod goals, split, integration, and the development plan.",
+    "notes": "Dated discussion plans and design intake notes.",
+    "citadel": "Endgame throne, citadel claim, layout, and defenders.",
+    "order": "Order of the Flame — acolyte questline and specialty tracks.",
+    "necromancer": (
+        "Player necromancer questline (commit vs opt out), casual wand play, "
+        "horcruxes, flutes, and how the path relates to the Order."
+    ),
+    "armies": "Soldiers, villages, war, defense, and hostile threats.",
+    "build": "Implementation notes for builders and mod structure.",
+    "lore": "Old kingdom background and narrative canon.",
+}
+
 
 def doc_slug(relpath: str) -> str:
     name = Path(relpath).name

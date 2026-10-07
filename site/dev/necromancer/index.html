@@ -21,10 +21,28 @@
       </nav>
     </div>
     <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../start/index.html">Start</a><a href="../notes/index.html">Notes</a><a href="../citadel/index.html">Citadel</a><a href="../order/index.html">Order</a><a href="index.html" class="active">Necromancer</a><a href="../armies/index.html">Armies</a><a href="../build/index.html">Build</a><a href="../lore/index.html">Lore</a></nav></div>
-    <div class="page-shell">
-      
+    <div class="page-shell has-sidebar">
+      <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Documents</p><ul><li><a href="necromancer-path/index.html">Necromancer path</a></li><li><a href="necromancy/index.html">Necromancy</a></li></ul></aside>
       <main class="doc-main">
-        <div class="dev-hub"><h1>Necromancer</h1><p>Canon markdown exported from <code>docs/</code>.</p><ul><li>Necromancer path</li><li>Necromancy</li></ul></div>
+        <div class="dev-hub"><h1>Necromancer</h1><p class="dev-group-lede">Player necromancer questline (commit vs opt out), casual wand play, horcruxes, flutes, and how the path relates to the Order.</p><section class="dev-doc-preview" id="necromancer-path"><h2>Necromancer path</h2><p class="source">Source: <code>docs/necromancer-path.md</code></p><div class="dev-doc-excerpt"><p><strong>Design in progress</strong> — owner: you.</p>
+<p>Pre–citadel optional <strong>story arc</strong> parallel to the Order (<code>acolyte-path.md</code>). Player-facing term is <strong>necromancer</strong> only (no separate “sorcerer” guild).</p>
+<p><strong>Casual necromancy</strong> (<code>necromancy.md</code> — wand, hearts, minions, stigma) is <strong>not</strong> the same as this questline. You can play as an active necromancer without ever committing; you can <strong>opt out</strong> of the quest and stay eligible for the Order.</p>
+<p>Mechanical identity for committed players stays <strong><code>necromancy.md</code></strong>, plus quest <strong>skills/tracks</strong> (TBD). Commitment does not replace the power/weakness loop with generic mage fantasy.</p></div></section><section class="dev-doc-preview" id="necromancy"><h2>Necromancy</h2><p class="source">Source: <code>docs/necromancy.md</code></p><div class="dev-doc-excerpt"><p>The necromancer&#x27;s hood and robe keep hostile mobs off the player; the wand turns hostile mobs into minions at a cost in hearts.</p>
+<p><strong>Planned player questline:</strong> <strong><code>docs/necromancer-path.md</code></strong>. Wand use and rules below apply <strong>independently</strong> of the quest until the intro arc’s <strong>commit</strong> choice. <strong>Commit</strong> closes the Order path only. <strong>Opt out</strong> keeps the Order (see acolyte doc); you can remain an active necromancer either way. <strong>Absolution</strong> is blocked by <strong>creating a horcrux</strong> (see below), not by commit.</p>
+<h3>Hood and robe</h3>
+<table><thead><tr><th>Wearer</th><th>One piece (hood or robe)</th><th>Full set (hood + robe)</th></tr></thead><tbody><tr><td><strong>Non-necromancer</strong> (incl. absolved)</td><td>Undead won&#x27;t attack; undead <strong>swarms</strong> ignore wearer</td><td>Other hostiles won&#x27;t attack <strong>except Wither and Warden</strong></td></tr><tr><td><strong>Active necromancer</strong></td><td>Same undead rule</td><td>All hostiles won&#x27;t attack, <strong>including Wither and Warden</strong></td></tr></tbody></table>
+<ul>
+<li>The Ender Dragon, guardians, and elder guardians always attack. <strong>Bandits</strong> are not hostiles — robes don&#x27;t stop them.</li>
+<li><strong>Durability:</strong> about the same as leather (hood 55, robe 80). Repaired with phantom membranes.</li>
+<li><strong>Stigma (anyone in hood/robe):</strong> ~<strong>half</strong> of necromancer social penalties (config <code>stigmaRobeFraction</code>, default 0.5): e.g. +25% villager trades, 1.25× soldier desertion, <strong>3×</strong> slower recruiters for <strong>necromancers only</strong> (see penalties), 50% chance villagers flee / others&#x27; soldiers attack per check.</li>
+<li><strong>Necromancer-only penalties</strong> while active (full strength, not half): +50% trades in robes, <strong>double fear tax</strong> in <strong>your</strong> villages (robes alone do <strong>not</strong> add fear tax), <strong>3×</strong> recruiter interval, double desertion, mutiny double-roll (soldier mod).</li>
+</ul>
+<h3>Wand</h3>
+<ul>
+<li>Hitting a hostile mob with a charged wand turns it into a minion that fights for the player, including spiders and creepers.</li>
+<li>The wand holds up to 20 charges.</li>
+<li>Each conversion costs charges by mob:</li>
+</ul></div></section></div>
       </main>
     </div>
   </div>
