@@ -2,62 +2,75 @@
 
 **Scope:** Main **optional** quest arc when **Minecraft Kingdom: Armies** is installed **without** Citadel. Citadel adds its own spine (`acolyte-path.md`, `necromancer-path.md`, `endgame.md`); this doc is the **kingdom** arc only.
 
-**Design intent:** A few **big set-piece quests**, not a checklist grid. Mix **defense** (hold what you built) and **offense** (hunt named bandit kings). Emergent play (raids, swarms, deserters) continues between beats.
+**Design intent:** **Four linked set pieces** with **named** antagonists. **Not** “a harder raid night”: each defensive beat is a **quest you deliberately start** (specific player action → specific attack with a **fixed name** and script). Normal raids, swarms, and warlords continue **beside** this arc, not as substitutes for D1/D2.
 
-**Status:** **Author direction, 2026-10-07.** Counts, names, triggers, and rewards **TBD**.
+**Status:** **Author direction, 2026-10-07.** Antagonist names, exact triggers, and scene text **TBD**.
 
 ---
 
-## Shape: two defensive, two offensive
+## Chain (order is fixed)
 
-| # | Type | Working title | Fantasy |
-| --- | --- | --- | --- |
-| **D1** | Defensive | **Hold the claim** | Your first real kingdom moment: a **coordinated hit** on an **owned village** (band + raid pressure). Win by **keeping the mess up** and soldiers alive through one bad night. Teaches horns, havens, supply. |
-| **D2** | Defensive | **Warlord probe** | After the realm grows (**Baron+**, TBD), a **named Warlord** (see `endgame.md`) strikes **one** village. Bigger than a normal new-moon raid, **not** a server-wipe. Goal: **repel** without losing the village economy. |
-| **O1** | Offensive | **First crowned thief** | First **authored bandit king** (`threats-and-mobs.md`): intel from camp loot / village rumor → **outpost base** → kill the named king, recover loot + **lead on the network**. |
-| **O2** | Offensive | **Break the ring** | Capstone **authored king** (strongest base, TBD roster size). Closes the **Armies-only** bandit-king thread; leaves room for Citadel fortresses if both mods are loaded later. |
+```text
+D1 (named defensive, player-triggered)
+  → O1 (offense: identify who hit you in D1)
+    → D2 (named defensive; starts when O1 completes; yields intel for O2)
+      → O2 (offense: capstone strike using D2 intel)
+```
 
-**Order (proposed):** D1 early (first or second village). O1 mid (after Lord/Baron). D2 mid-late (Baron/Duke). O2 late (Duke/King). Exact gates **TBD**; should follow **kingdom titles** and enlistment, not grind walls.
+| Step | Type | Role |
+| --- | --- | --- |
+| **D1** | Defensive | **Authored assault** on your kingdom. You **cause** it by doing a **specific thing** (TBD: e.g. claim + mess ritual, tax milestone, horn at wrong place). Attacker has a **fixed name** and **custom wave** (not a random new-moon roll). |
+| **O1** | Offensive | **Investigation:** find **who ordered or led** the D1 hit. Tracks, witnesses, camp intel → first **authored bandit king** base → kill or capture beat **TBD**. Confirms the link to D1’s name. |
+| **D2** | Defensive | **Auto-starts when O1 completes.** A **second named** enemy (ally of O1’s target, or the same network) hits **one** village with a **scripted** siege (still outpost-scale pressure, **not** kingdom wipe). **Reward:** concrete **intel** (map, confession, item) required for **O2**. |
+| **O2** | Offensive | **Capstone:** use D2 intel to locate and **break** the **ring leader’s** base (strongest authored king in this arc). Closes the Armies-only bandit-king thread. |
+
+**Emergent threats** (deserter bands, swarms, routine new-moon raids, **toned-down warlords**) do **not** count as D1 or D2.
+
+---
+
+## D1 / D2 vs normal gameplay
+
+| | **Quest defensive (D1, D2)** | **Normal mod pressure** |
+| --- | --- | --- |
+| Start | **Player action** or **quest flag** (O1 done → D2) | Time, enlistment, moon, title |
+| Enemy | **Named** NPC + authored script | Generic raiders / bands |
+| Purpose | Story beat | Ongoing difficulty |
+
+Working titles only until names are chosen: **D1 attacker `[Name TBD]`**, **D2 attacker `[Name TBD]`**, **O1 king `[Name TBD]`**, **O2 ring leader `[Name TBD]`**.
 
 ---
 
 ## Authored bandit kings (Armies)
 
 - **Separate** from Citadel’s **ten relic fortresses** (`endgame.md`).
-- Each king: **fixed name**, **outpost-scale base**, **defenders inside** (pillager-outpost feel).
-- **Intel chain** for O1→O2 lives here (drops, books, NPC lines), **TBD** detail.
-- Payoff: **loot**, quest flags, maybe a **unique horn/item** (not a relic).
+- **O1** and **O2** use **outpost-scale bases** (pillager-outpost class), fixed names, defenders inside.
+- **O1** payoff: identity of D1’s patron + quest progress.
+- **O2** payoff: loot, arc closure, optional unique item (not a relic).
 
-**Roster size:** **TBD** (author leaning: **3–5** kings total, with **2** as the “big” offensive beats O1/O2 and smaller optional sites **TBD**).
+Smaller named lieutenants **TBD** (optional sites between O1 and O2).
 
 ---
 
-## Warlords (ongoing pressure, not a fifth mega-quest)
+## Warlords (background, not D1/D2)
 
-Warlords stay as **recurring kingdom pressure**, tuned **down** from early drafts:
-
-- Trigger only at **Duke+** (or **Baron+**, TBD), not while learning the loop.
-- **Every 6–8 new-moon cycles** (not 4–8), one **named** general targets **one** claimed village near an enlisted player.
-- **Size cap:** at most a **medium** new-moon raid plus the warlord NPC (modest buffs), **no** extra sappers/ladders/siege engines beyond normal raids.
-- **Not** a parallel citadel; losing should hurt **one** village, not delete the kingdom.
-
-D2 is the **scripted intro** to warlords; later hits use the same rules.
+**Warlords** stay as **optional recurring** kingdom pressure (`endgame.md`), **toned down** (slow timer, medium raid cap, one village). They are **not** the D1 or D2 set pieces unless a future rewrite explicitly merges them (**not planned**).
 
 ---
 
 ## With Citadel installed
 
-- This arc **still runs** unless we add explicit mutual exclusion later (**none now**).
-- **No** relic fortresses in Armies-only logic; Citadel fortresses are **discovery/endgame**, not replacements for O2.
-- Optional cross-links **TBD** (e.g. chronicle mentions a king who fled toward the great road).
+- This arc **still runs** (no exclusion rule yet).
+- Citadel **fortresses** remain Citadel’s endgame; **O2** does not require them.
+- Cross-lore **TBD**.
 
 ---
 
 ## Still to decide
 
-- Exact **trigger** conditions per beat (title, soldier count, quest flags).
-- **Failure** rules (retry, permanent stain, village loss).
-- **Multiplayer** which player owns quest state.
-- Whether **D1** fires once per world or once per player.
+- **D1 trigger:** what specific player action starts it (and minimum kingdom state).
+- **D1/D2 scripts:** force size, duration, fail/retry, which village is targeted.
+- **O1 investigation UX:** journal, villager lines, physical clues.
+- **Multiplayer:** quest owner per player vs per kingdom.
+- **Four names** and whether D1 attacker appears again in D2 or only by reference.
 
-Cross-links: `threats-and-mobs.md`, `endgame.md` (titles, warlords), `soldiers-and-villages.md`, `mod-split.md`.
+Cross-links: `threats-and-mobs.md`, `endgame.md`, `soldiers-and-villages.md`, `mod-split.md`.
