@@ -22,11 +22,11 @@
     </div>
     <div class="sub-nav-strip"><nav class="sub-nav scope-dev" aria-label="Dev sections"><a href="../index.html" class="active">Start</a><a href="../../notes/index.html">Notes</a><a href="../../citadel/index.html">Citadel</a><a href="../../order/index.html">Order</a><a href="../../necromancer/index.html">Necromancer</a><a href="../../armies/index.html">Armies</a><a href="../../build/index.html">Build</a><a href="../../lore/index.html">Lore</a></nav></div>
     <div class="page-shell has-sidebar">
-      <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="necromancer-soldier-optional.html" class="active">Necromancer → Soldier (optional)</a></li><li><a href="soldier-necromancer-optional.html">Soldier → Necromancer (optional)</a></li><li><a href="shared-conventions.html">Shared conventions</a></li><li><a href="versioning.html">Versioning</a></li></ul></aside>
       <main class="doc-main">
         <p class="source">Source: <code>docs/integration.md</code> · Cross-mod integration</p><h1>Necromancer → Soldier (optional)</h1>
 <table><thead><tr><th>Event / query</th><th>Payload</th><th>Soldier use</th></tr></thead><tbody><tr><td><code>CitadelEvents.KING_DEFEATED</code></td><td>ServerLevel, game time</td><td>Raise/lower spawn raid odds &amp; natural militia near spawn</td></tr><tr><td><code>CitadelQueries.isCitadelFallen(level)</code></td><td>boolean</td><td>Threat tuning</td></tr><tr><td><code>CitadelQueries.getOwner(level)</code></td><td>UUID or empty</td><td>Display, warlords (if owner kingdom size)</td></tr><tr><td><code>CitadelQueries.isOwnerOrAlly(level, playerUuid)</code></td><td>boolean</td><td>Rarely needed on soldier side</td></tr></tbody></table>
       </main>
+      <aside class="doc-sidebar" aria-label="On this page"><p class="sidebar-label">Sections</p><ul><li><a href="index.html">Overview</a></li><li><a href="necromancer-soldier-optional.html" class="active">Necromancer → Soldier (optional)</a></li><li><a href="soldier-necromancer-optional.html">Soldier → Necromancer (optional)</a></li><li><a href="shared-conventions.html">Shared conventions</a></li><li><a href="versioning.html">Versioning</a></li></ul></aside>
     </div>
   </div>
   <footer class="site-footer">

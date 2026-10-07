@@ -142,7 +142,7 @@ body.scope-dev .doc-sidebar a.active {
 }
 @media (min-width: 900px) {
   .page-shell.has-sidebar {
-    grid-template-columns: 200px minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) 200px;
     align-items: start;
   }
 }
