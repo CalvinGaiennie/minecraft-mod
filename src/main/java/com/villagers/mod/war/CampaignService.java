@@ -10,14 +10,11 @@ import com.villagers.mod.VillagersMod;
 import com.villagers.mod.block.entity.CampBlockEntity;
 import com.villagers.mod.entity.SoldierData;
 import com.villagers.mod.entity.VillagerAttachments;
-import com.villagers.mod.gear.VillagerGearRules;
-import com.villagers.mod.gear.VillagerGearSlot;
-import com.villagers.mod.item.CampaignBootsItem;
 import com.villagers.mod.util.SoldierStructureHelper;
 
 public final class CampaignService {
     private static final int FOLLOW_RANGE = 48;
-    private static final int CAMP_HOLD_RANGE = 16;
+    private static final int CAMP_HOLD_RANGE = 32;
 
     private CampaignService() {
     }
@@ -26,17 +23,9 @@ public final class CampaignService {
         if (soldier.level().isClientSide || !(soldier.level() instanceof ServerLevel level)) {
             return;
         }
-        ItemStack boots = VillagerGearRules.get(soldier, VillagerGearSlot.BOOTS);
-        boolean wearingCampaignBoots = CampaignBootsItem.isCampaignBoots(boots);
-        if (!wearingCampaignBoots) {
-            if (data.isOnCampaign()) {
-                data.setOnCampaign(false);
-                data.setCampaignCamp(null);
-                data.setFollowPlayerId(null);
-            }
+        if (!data.isOnCampaign()) {
             return;
         }
-        data.setOnCampaign(true);
         if (data.getCampaignCamp() != null && level.isLoaded(data.getCampaignCamp())) {
             holdNearCamp(soldier, data.getCampaignCamp());
             return;
@@ -47,6 +36,19 @@ public final class CampaignService {
             if (soldier.getNavigation().isDone() || soldier.distanceToSqr(follow) > 12 * 12) {
                 soldier.getNavigation().moveTo(follow, 1.0);
             }
+        }
+    }
+
+    public static void onSquadCampaignStarted(ServerLevel level, BlockPos squadBox, ServerPlayer owner) {
+        for (var villager : level.getEntitiesOfClass(Villager.class,
+                new net.minecraft.world.phys.AABB(squadBox).inflate(FOLLOW_RANGE))) {
+            SoldierData data = villager.getData(VillagerAttachments.SOLDIER_DATA.get());
+            if (data == null || !squadBox.equals(data.getSquadBoxPos())) {
+                continue;
+            }
+            data.setOnCampaign(true);
+            data.setFollowPlayerId(owner.getUUID());
+            data.setCampaignCamp(null);
         }
     }
 

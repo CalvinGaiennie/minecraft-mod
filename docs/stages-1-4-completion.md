@@ -30,7 +30,7 @@ Also: recruiter/supply weekly tick, gear replacement, ranks (incl. **Sergeant** 
 - **Village protection**: non-owners break blocks slower (3× / 5× / 10× by home soldiers present); non-owner explosions don't break blocks in claim
 - **Arrow recovery**: soldiers pick up nearby ground arrows
 - **Beacon buffs**: soldiers/militia near active beacons get tiered speed/haste/resistance/strength
-- Alerts: awaken horn (64), vanilla bell (64). **Flares** (firework/crossbow command flares) remain a later defense feature per design doc, not a standalone item yet.
+- Alerts: awaken horn (64), vanilla bell (64). **Flares** and **signal rockets** (crossbow) implemented.
 
 ## Stage 4, War (complete MVP)
 
@@ -45,13 +45,12 @@ Also: recruiter/supply weekly tick, gear replacement, ranks (incl. **Sergeant** 
 
 Full design-doc scope not in 1–4 MVP:
 
-- **Wanted posters** (soldier mod, planned; see `war-and-defense.md`)
-- **Allies** co-owner list (protection uses owner UUID only today)
-- Recruiter villager profession POI, emerald bed purchase, tax box tier upgrades
+- **Wanted posters**, **ally book GUI**, **co-owner tax open**, **lever horns**, **kingdom map** — shipped (see `armies-code-vs-design.md`)
+- Recruiter villager **AI** (emerald bed purchase, mess routing), tax box tier upgrades
 
 **Cut from MVP scope (not deferred):** siege assault kit (sappers, ladders, boat/bridge plans, laced rations).
 - Client kit sync packets, zombie soldier world events
-- Caltrop AI pathing avoidance, banner shield rendering, 8-wide castle gate blocks
+- Banner shield rendering, 8-wide castle gate blocks
 - Squad pathfinding, lazy idle AI at full spec (partial stagger/tick opts only)
 
 Manual checklists: [stage-1-tests.md](stage-1-tests.md), [stages-1-3-tests.md](stages-1-3-tests.md).

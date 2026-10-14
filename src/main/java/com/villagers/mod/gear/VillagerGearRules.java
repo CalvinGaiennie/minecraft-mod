@@ -17,7 +17,6 @@ import com.villagers.mod.entity.MilitiaData;
 import com.villagers.mod.entity.SoldierData;
 import com.villagers.mod.entity.VillagerAttachments;
 import com.villagers.mod.entity.VillagerKitData;
-import com.villagers.mod.item.CampaignBootsItem;
 import com.villagers.mod.threat.BanditService;
 import com.villagers.mod.threat.WanderingNecromancerService;
 
@@ -239,8 +238,7 @@ public final class VillagerGearRules {
     }
 
     private static boolean isHelmet(ItemStack item) {
-        return equipsInSlot(item, EquipmentSlot.HEAD)
-                || item.is(VillagersMod.NIGHTWATCH_HELMET.get());
+        return equipsInSlot(item, EquipmentSlot.HEAD);
     }
 
     private static boolean isChestplate(ItemStack item) {
@@ -253,7 +251,7 @@ public final class VillagerGearRules {
     }
 
     private static boolean isBoots(ItemStack item) {
-        return equipsInSlot(item, EquipmentSlot.FEET) || CampaignBootsItem.isCampaignBoots(item);
+        return equipsInSlot(item, EquipmentSlot.FEET);
     }
 
     /** Iron-tier or better sword/axe (wood and stone do not qualify). */

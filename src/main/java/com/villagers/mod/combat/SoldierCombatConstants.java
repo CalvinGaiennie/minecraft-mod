@@ -11,13 +11,13 @@ public final class SoldierCombatConstants {
     /** Hold ground: drop chase and return toward anchor if the soldier runs farther than this from it. */
     public static final double HOLD_GROUND_MAX_CHASE = 64.0;
     /** Switch to bow at or beyond this distance (blocks) on open ground. */
-    public static final double RANGED_PREFER_MIN_DISTANCE = 8.0;
+    public static final double RANGED_PREFER_MIN_DISTANCE = 4.0;
     /** Minimum horizontal range when shooting from a rampart (wall-huggers are often closer). */
     public static final double RAMPART_RANGED_MIN_DISTANCE = 2.0;
     /** Switch to melee at or below this distance (blocks). */
-    public static final double MELEE_PREFER_MAX_DISTANCE = 6.0;
+    public static final double MELEE_PREFER_MAX_DISTANCE = 3.5;
     /** Max bow shot distance (blocks). */
-    public static final double RANGED_ATTACK_MAX_DISTANCE = 32.0;
+    public static final double RANGED_ATTACK_MAX_DISTANCE = 40.0;
     /** Home post bed radius for home bonus and holding ground (no retreat). */
     public static final double HOME_BED_RADIUS = 128.0;
     /** Veterans with a veteran's sword defend threats within this range of home bed. */
@@ -26,6 +26,8 @@ public final class SoldierCombatConstants {
     public static final float RETREAT_HEALTH_FRACTION = 0.30f;
     /** Enemies within this range block post bed healing (Stage 3 combat rule). */
     public static final double OUT_OF_COMBAT_ENEMY_RANGE = 16.0;
+    /** Preferred standoff when kiting creepers with a bow (blocks). */
+    public static final double CREEPER_KITE_MIN_DISTANCE = 6.0;
 
     private SoldierCombatConstants() {
     }

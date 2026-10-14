@@ -4,9 +4,11 @@ import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.item.ItemStack;
 
-import com.villagers.mod.combat.SoldierCombat;
 import com.villagers.mod.combat.MilitiaStats;
+import com.villagers.mod.combat.SoldierCombat;
+import com.villagers.mod.combat.SoldierMovement;
 import com.villagers.mod.gear.VillagerGearRules;
+import com.villagers.mod.performance.CombatVillagerIndex;
 import com.villagers.mod.gear.VillagerGearSlot;
 import com.villagers.mod.threat.BanditService;
 import com.villagers.mod.threat.WanderingNecromancerService;
@@ -24,9 +26,7 @@ public final class MilitiaConversion {
             return;
         }
         if (SoldierConversion.canBecomeSoldier(villager)) {
-            if (villager.hasData(VillagerAttachments.MILITIA_DATA.get())) {
-                disarm(villager, false);
-            }
+            releaseMilitiaRoleForSoldierPromotion(villager);
             SoldierConversion.tryConvert(villager);
             return;
         }
@@ -89,6 +89,7 @@ public final class MilitiaConversion {
         MilitiaData data = new MilitiaData(villager.getUUID());
         data.setDisplayName(VillagerPersonalNames.captureAtEnlist(villager));
         data.setTraderAtEnlist(villager.getVillagerData().getProfession() != VillagerProfession.NONE);
+        SoldierProfessionGuard.stripCommerceForCombatRole(villager);
         long day = villager.level().getDayTime() / 24000L;
         data.setLastFoodDay(day);
         MilitiaHomeSync.syncHomeBedFromVillager(villager, data);
@@ -97,6 +98,28 @@ public final class MilitiaConversion {
         MilitiaStats.sync(villager, data);
         MilitiaLabels.apply(villager, data);
         SoldierCombat.enableCombatGoals(villager);
+        CombatVillagerIndex.track(villager);
+    }
+
+    /** Strip militia role and convert when full soldier requirements are met (squad enlist, etc.). */
+    public static boolean promoteToSoldier(Villager villager) {
+        if (!SoldierConversion.canBecomeSoldier(villager)) {
+            return false;
+        }
+        releaseMilitiaRoleForSoldierPromotion(villager);
+        return SoldierConversion.tryConvert(villager);
+    }
+
+    /** Drop militia attachment only (keep kit); fixes soldier UI rules after promotion paths that skipped disarm. */
+    public static void releaseMilitiaRoleForSoldierPromotion(Villager villager) {
+        if (villager.level().isClientSide || !villager.hasData(VillagerAttachments.MILITIA_DATA.get())) {
+            return;
+        }
+        if (villager.level() instanceof net.minecraft.server.level.ServerLevel level) {
+            com.villagers.mod.combat.RampartClaims.get(level).releaseDefender(villager.getUUID());
+        }
+        villager.removeData(VillagerAttachments.MILITIA_DATA.get());
+        MilitiaLabels.clear(villager);
     }
 
     public static void disarm(Villager villager, boolean dropWeapon) {
@@ -115,6 +138,7 @@ public final class MilitiaConversion {
         }
         villager.removeData(VillagerAttachments.MILITIA_DATA.get());
         MilitiaLabels.clear(villager);
+        SoldierMovement.resetVillagerWalkSpeed(villager);
     }
 
     private static void dropKitWeapons(Villager villager) {

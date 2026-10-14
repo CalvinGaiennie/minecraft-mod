@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "tag": "minecraft:buttons"
+    },
+    {
+      "item": "minecraft:light_blue_dye"
+    }
+  ],
+  "result": {
+    "components": {
+      "minecraft:custom_data": {
+        "SignalColor": "light_blue"
+      }
+    },
+    "count": 1,
+    "id": "villagers:soldier_button"
+  }
+}

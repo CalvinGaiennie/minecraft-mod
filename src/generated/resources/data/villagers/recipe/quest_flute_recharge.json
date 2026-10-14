@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "villagers:quest_flute"
+    },
+    {
+      "item": "villagers:flute_charge"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "villagers:quest_flute"
+  }
+}

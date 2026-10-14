@@ -29,6 +29,13 @@ public class SoldierDesertion {
     }
 
     public static void recordNightWithoutBed(Villager soldier, SoldierData data) {
+        if (data == null) {
+            return;
+        }
+        if (data.isOnCampaign() || data.getSquadBoxPos() == null) {
+            data.setHomelessNights(0);
+            return;
+        }
         if (!(soldier.level() instanceof ServerLevel level)) {
             return;
         }

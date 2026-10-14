@@ -66,7 +66,7 @@ public class Stage1GameTests {
     public static void soldierConversion_noVanillaBedFails(GameTestHelper helper) {
         helper.setBlock(new BlockPos(1, 1, 0), VillagersMod.MESS_STATION.get());
         Stage1GameTestSupport.stockMessStation(helper, new BlockPos(1, 1, 0));
-        helper.setBlock(new BlockPos(0, 1, 1), VillagersMod.POST_BLOCK.get());
+        helper.setBlock(new BlockPos(0, 1, 1), VillagersMod.RECRUITER_BOX.get());
         Villager villager = Stage1GameTestSupport.spawnEquippedVillager(helper, BlockPos.ZERO);
 
         var reason = SoldierConversion.blockReason(villager);
@@ -164,7 +164,7 @@ public class Stage1GameTests {
 
     @GameTest(template = "empty")
     public static void village_noOverlappingClaims(GameTestHelper helper) {
-        VillageManager.clearAllForTests();
+        VillageManager.clearForLevel(helper.getLevel());
         UUID ownerA = UUID.randomUUID();
         UUID ownerB = UUID.randomUUID();
 
@@ -178,6 +178,25 @@ public class Stage1GameTests {
         helper.assertTrue(
                 VillageManager.get(helper.getLevel()).canClaim(ownerB, 100, 0, VillageManager.HAMLET_RADIUS),
                 "Distant claim should be allowed");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public static void village_sameOwnerOverlappingClaimsMerge(GameTestHelper helper) {
+        VillageManager.clearForLevel(helper.getLevel());
+        UUID owner = UUID.randomUUID();
+        VillageData first = new VillageData("A", owner, 0, 64, 0);
+        first.setRadius(VillageManager.HAMLET_RADIUS);
+        VillageData second = new VillageData("B", owner, 40, 64, 0);
+        second.setRadius(VillageManager.HAMLET_RADIUS);
+        VillageManager manager = VillageManager.get(helper.getLevel());
+        manager.registerVillage(first, helper.getLevel());
+        manager.registerVillage(second, helper.getLevel());
+        com.villagers.mod.village.VillageClaimMerge.consolidateOwnedVillages(helper.getLevel(), owner);
+        helper.assertValueEqual(
+                1,
+                manager.getVillagesOwnedBy(owner).size(),
+                "Touching same-owner hamlets should merge to one village");
         helper.succeed();
     }
 

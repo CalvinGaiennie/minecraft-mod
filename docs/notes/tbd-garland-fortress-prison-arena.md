@@ -1,140 +1,121 @@
-# O2 — Garland prison arena (plot & structure, draft)
+# O2 — Garland prison arena (plot & structure)
 
-**Status:** **Author discussion draft.** Act 2 **detailed** below; surface march (guide, betrayer village) unchanged from prior revision.
+**Status:** **Author decisions in progress** (2026-10-08). Wave schedule, gear ladder counts, warm-up count (~**7**), N, MP, mace-loss quest state, escape timer, and several fork penalties **deferred**.
 
 ---
 
-## Surface arc (Acts 0–1) — summary
+## Surface arc (Acts 0–1)
 
 - **O1** → sent **home** for **D2**.
-- **D2:** capture a Garland soldier → **guide** to the castle if **≥ N soldiers**; begs you to **recruit more** on the march.
+- **D2:** capture a Garland soldier → **guide** to the castle if **≥ N soldiers** from camp (**N TBD**).
+- **March:** guide leads the route; **no soft recruit target** and **no checkpoint “recruit more” prompts** (author **2026-10-08**).
 - **Approach village** near castle → guide **escapes**.
-- **Kidnap** soon after → prison interior begins (**Act 2**).
+- **Kidnap:** after escape, player enters a **specific authored trigger** (volume / block spot in NBT — **exact coords with structure**). Not chunk-wide or sleep-based.
+- Army stays **outside** during prison (Act 2).
 
-**No compass.** Army mustered for march.
+**No compass.** **`torn_map_half` not required** for O2 start (author **2026-10-08**; D2 drop may stay flavor only).
+
+**Multiplayer:** owner-only prison vs party — **TBD**.
 
 ---
 
-## Act 2 — Prison (author detail, 2026-10-07)
+## Capture & gear (author, 2026-10-08)
 
-### Opening — cell & fellow prisoner
+- **No item wipe:** whatever you carry at capture is **stripped and stored** in a **chest in Garland’s quarters** (recover when you **take the castle** / win the arc).
+- **No** torture visuals or other hard-no tone limits; **no** permanent item loss from prison mechanics.
 
-- Player wakes in a **cell** with **another prisoner** (named NPC **TBD**).
-- Prisoner **recaps**: the march, guide betrayal, capture, where the army was left.
-- Establishes tone and **quest hub** for optional prisoner favors later.
+---
+
+## Act 2 — Prison wing (whole compound)
+
+**Not** a single cell + one roommate only. Authored **prison wing**: **multiple cells**, yard / time **outside your cell**, and/or a **rumor mill** (NPC gossip hub for forks and prisoner payoffs — **design TBD**).
 
 ### Garland — plan & the tower
 
-- **Soon after**, Garland (in person or escorted **TBD**): explains **his plan**.
-- Player taken to a **tower** (high room in compound NBT) with **clear sightline** to the approach — **literally see** the camp/army in a bad position (“your army is fucked”).
-- Emotional anchor for timer/ambush pressure; motivates small fights and main arena.
+**First tower visit (Act 2):** **Garland in person** walks you to the tower, explains the plan, **sightline to your army** (“bad position”). (Author **2026-10-08**.)
+
+- Player **barely kitted** in arena; emotional pressure from vista + later timed escape.
 
 ### Phase A — warm-ups (main arena)
 
-- All **warm-up** bouts use the **same main arena** (one blockout room; gates/cells open into it).
-- Player **barely kitted**; opponents = **weak prisoner militia/soldiers** (broken kingdom gear).
-- **Each successful warm-up** grants a **gear upgrade** for the **next** fight (see **gear ladder** below).
+- Same **main arena**; ~**7** warm-up bouts (exact count **TBD** when authored).
+- **Gear ladder** slot count and joke/helpful ratio **TBD**.
 
-### Phase B — optional prisoner choices (between fights)
-
-Not fetch quests only — **meaningful forks**, e.g.:
+### Phase B — optional forks (between fights)
 
 | Option | Effect (author) |
 | --- | --- |
-| **Steal from a guard** | Risk/reward item or potion; caught **TBD** penalty. |
-| **Throw a fight** (intentional loss in arena) | **Removes one gear-upgrade opportunity** from the ladder (fixed slot **TBD**). |
-| **Beat up / kill a bad prisoner** | Unlocks benefit or rep shift **TBD**; may close other options. |
+| **Steal from a guard** | Risk/reward; if **caught**, guards **take something from you** (what item/category **TBD**). |
+| **Throw a fight** | Penalty **similar to steal** (detail **TBD**); gear-ladder slot rule **TBD**. |
+| **Beat up / kill a bad prisoner** | **Potion** reward; ties to **escape help** in Act 3 (see payoffs). |
 
-Also **food / potions** from allies. None required to reach the **mace fight**; two prisoners **pay off in Act 3** if you helped them (**see below**).
+**Prisoner payoffs (Act 2 → Act 3):** **Independent** — you can finish with **intel only**, **escape help only**, or **both** (two separate NPC arcs, not mutually exclusive).
 
-### Phase C — main arena waves (earn the mace fight)
-
-- Same **main arena**; escalation after warm-ups:
-  - **Hostile mobs:** wolves, skeletons, zombies, spiders (**TBD** per wave).
-  - **Prisoner gladiators:** varied **kits + buffs** (speed, strength, resistance **TBD**).
-- **Each wave win → gear upgrade** for the next bout (**gear ladder**).
-- **Death** in a wave → respawn **cell**, retry (**TBD** lose upgrade streak or not).
-- Completing the wave schedule **unlocks** the **mace champion**.
-
-### Gear ladder (after each successful fight)
-
-- Upgrades are **scripted drops** or **Garland’s “generosity”** chest — quality **varies on purpose**:
-  - **Joke tier:** almost broken shield, short wooden sword, cracked helm.
-  - **Helpful tier:** real armor piece, decent weapon, useful potion.
-- **Throwing a fight** consumes **one** upgrade slot (player never gets that tier’s roll).
-- Playtest until warm-ups + waves feel **barely survivable** without every slot being helpful.
-
-### Phase D — mace champion (final prison duel)
-
-- **Garland’s soldier**, **strong mace**; tuned **very hard to win** (stats, knockback, regen **TBD**).
-- **No mid-fight beat at 50% HP** on the champion — nothing special at half health.
-- **Player lose condition:** if **you** drop **below 2 hearts** (under 4 HP), you **lose**; the fight **ends immediately** (no cell respawn for this bout).
-- **Win** (champion dead **TBD** rules) → **Act 3 — tower + naked escape race** (below).
-- **Lose** (below 2 hearts **TBD** death too?) → **bad end** **TBD** (no redemption arc); **not** the naked race.
-
-**Garland boss kill / Rookbreaker** — likely after you **lead** saved soldiers **TBD**; not on champion alone.
-
----
-
-## Act 3 — After you **win** the mace duel (author, 2026-10-07)
-
-**No execution scene.** **No** “give up → cell → next-day rescue.”
-
-1. **Tower again** — Garland brings you **back up** to the **tower** (same vista as Act 2 open).
-2. **Forced watch** — His men **attack your army** on the ground; you **watch** (scripted losses / morale **TBD**).
-3. **Naked escape race** — You are **stripped** (naked + nasty potion effects **TBD**, maybe **wooden sword** or nothing). You must **escape the fortress** and **reach your force in time** to **save who you can** and **lead them to turn the fight**.
-4. **Timed pressure** (~**couple minutes** **TBD**) — Garland’s strike continues while you escape; army state when you arrive depends on **speed** + **prisoner intel**.
-
-### Prisoner payoffs (Act 2 choices → Act 3 ease)
-
-| Prisoner arc | If you helped them |
+| Arc | If helped |
 | --- | --- |
-| **Prisoner A** | Gives **intel** during escape (weak point, which flank to hit, when to rally) → **save more soldiers** / better start to the surface battle **TBD**. |
-| **Prisoner B** | **Direct help** on **final escape** (opens route, distracts guard, short ally **TBD**) → **easier / faster** egress; harder path if skipped. |
+| **Intel (A)** | Better rally / save more soldiers — numbers **TBD**. |
+| **Escape (B)** | Easier/faster final egress — mechanic **TBD**. |
 
-Fellow **cellmate** from opening may map to A or B **TBD**. Steal / throw fight / bad prisoner beats can still gate **which** prisoners trust you.
+### Phase C — waves
 
-### Lose the mace duel
+- Schedule (mob vs gladiator mix) **TBD** (author to send later).
+- **Death in a wave:** **keep inventory**; **respawn in cell**; **retry that fight** (no full ladder reset decided yet).
+- Completing waves **unlocks mace champion**.
 
-- **Below 2 hearts** → fight stops; **fail state** **TBD** (Garland mockery, army wiped or crippled without player-led turnaround — **not** the win-path naked race).
+### Phase D — mace champion
 
-### Parallel
+- Must **die** (no yield).
+- **Player lose (knockout):** drop **below 2 hearts** → **knockout only** (no death screen); **no** cell respawn for this bout.
+- **Knockout path (author, 2026-10-08):** **One-way** — **no** rematch with the mace champion. Garland brings you to the **tower** to **watch** his men attack your army, then you **must try to escape** (timing/debuff **TBD**).
+- **Failed escape:** Garland **releases you** once **≥ 95%** of **your marched soldiers** are dead — you rejoin a **crippled** force (surface fight / finish Garland **TBD** tuning).
+- **Win path:** champion **dies** → tower watch → escape → timely return **helps** the surface fight (unchanged intent).
 
-- First **tower visit** (Act 2) = threat preview; second **tower visit** (Act 3 win) = assault in progress + escape starts from **inside** fortress, not a friendly release.
+**Champion kill ≠ arc complete.** **Rookbreaker** title + **Garland’s Signet** = **player kill Garland the Rook on the surface** after prison (same as `armies-questline.md`), **not** the mace soldier alone.
 
 ---
 
-## NBT blockout zones (updated)
+## Act 3 — After mace **win**
+
+1. **Tower** — forced watch while Garland’s men hit your army (losses **TBD**).
+2. **Escape race** — stripped / debuffed; reach camp. **Time cap TBD** (depends on escape route terrain in NBT).
+3. **Surface:** if you **return in time**, you get an **opportunity to help** your force win — **not** an auto-win; late arrival = weaker rally (**details TBD**).
+
+**v1 scope:** **Full** prison arc in one implementation pass (author **2026-10-08**).
+
+---
+
+## NBT blockout zones
 
 ```text
-[ CELL BLOCK + fellow prisoner ]
+[ PRISON WING — cells, yard/rumor mill, quest NPCs ]
         |
 [ GARLAND TOWER — army vista ]  (scripted visit)
         |
-[ PRISON WING ] — cells, quest NPCs, guard steal routes
+[ GARLAND QUARTERS — stored player gear chest ]
         |
-[ MAIN ARENA ] — warm-ups + mob/prisoner waves + mace champion
+[ MAIN ARENA ] — ~7 warm-ups + waves + mace champion
         |
-[ TOWER ] — Act 2 preview + Act 3 forced watch (second visit)
+[ ESCAPE ROUTE ] — terrain sets timer TBD
         |
-[ ESCAPE ROUTE ] — harder default; prisoner B shortcut if helped
-        |
-[ SURFACE / CAMP ] — rally survivors; lead counterattack; Garland **TBD**
+[ SURFACE / CAMP ] — optional help if timely; kill Garland for Rookbreaker
 ```
 
-**Surface:** army camp visible from tower; **naked race** from fortress → camp **after mace win only**.
+**Kidnap trigger:** marked **volume** on approach (paired with `garland_compound` NBT).
 
 ---
 
-## Open questions (when ready)
+## Still open (short list)
 
-- **Champion mace** — does winning here count for quest, or only **Garland** on surface for **Rookbreaker**?
-- **Mace loss** — army auto-wiped or recoverable on retry?
-- **MP** — owner-only kidnapping; co-op prisoners **TBD**.
+- **N** (minimum soldiers to start march).
+- **Garland in person** at first tower vs lieutenant.
+- **Steal / throw fight** — what is taken on failure.
+- **Wave list**, **gear ladder** count & joke ratio.
+- **N**, wave schedule, gear ladder, **MP**, surface tuning after **95%** release.
+- **Forced watch** loss %, **Prisoner B** escape mechanic, **MP** kidnapping.
 
 ---
 
 ## Doc links
 
-- `armies-questline.md` — D2 guide, O2 draft.
-- `bandit-camp-prefabs.md` — **garland_compound** + prison/interior NBT.
+- `armies-questline.md` — D2 guide, O2 rewards.
+- `bandit-camp-prefabs.md` — **garland_compound** + prison interior NBT.

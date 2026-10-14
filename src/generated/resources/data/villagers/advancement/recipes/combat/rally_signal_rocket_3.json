@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_firework": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:firework_rocket"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "villagers:rally_signal_rocket_3"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_firework"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "villagers:rally_signal_rocket_3"
+    ]
+  }
+}

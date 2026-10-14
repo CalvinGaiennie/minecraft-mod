@@ -17,6 +17,17 @@ public final class VillagerPersonalNames {
         return trimmed.isEmpty() ? "" : trimmed;
     }
 
+    public static String soldierLabel(SoldierData data) {
+        String base = labelWithKills(data.getRank(), data.getDisplayName(), data.getKills());
+        if (data.isSquadLeader()) {
+            return "Leader · " + base;
+        }
+        if (data.isActingLeader()) {
+            return "Acting leader · " + base;
+        }
+        return base;
+    }
+
     public static String soldierLabel(String rank, String storedPersonalName, int kills) {
         return labelWithKills(rank, storedPersonalName, kills);
     }

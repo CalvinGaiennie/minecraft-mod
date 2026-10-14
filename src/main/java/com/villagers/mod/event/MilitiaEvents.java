@@ -6,8 +6,6 @@ import net.minecraft.world.entity.npc.Villager;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-
 import com.villagers.mod.VillagersMod;
 import com.villagers.mod.combat.MilitiaFlee;
 import com.villagers.mod.combat.MilitiaStats;
@@ -47,19 +45,6 @@ public class MilitiaEvents {
         MilitiaStats.sync(killer, data);
         MilitiaLabels.apply(killer, data);
         wearWeapon(killer);
-    }
-
-    @SubscribeEvent
-    public static void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
-        if (event.getLevel().isClientSide() || !(event.getTarget() instanceof Villager villager)) {
-            return;
-        }
-        if (!villager.hasData(VillagerAttachments.MILITIA_DATA.get())) {
-            return;
-        }
-        if (villager.getOffers() != null && !event.getItemStack().isEmpty()) {
-            event.setCanceled(true);
-        }
     }
 
     public static float applyOutgoingDamage(Villager attacker, float amount) {

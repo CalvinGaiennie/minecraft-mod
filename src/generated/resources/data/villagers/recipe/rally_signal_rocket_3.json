@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "minecraft:firework_rocket"
+    },
+    {
+      "item": "minecraft:gunpowder"
+    },
+    {
+      "item": "minecraft:gunpowder"
+    },
+    {
+      "item": "minecraft:white_dye"
+    }
+  ],
+  "result": {
+    "components": {
+      "minecraft:custom_data": {
+        "Signal": "RALLY"
+      },
+      "minecraft:fireworks": {
+        "flight_duration": 3
+      }
+    },
+    "count": 1,
+    "id": "villagers:rally_signal_rocket"
+  }
+}

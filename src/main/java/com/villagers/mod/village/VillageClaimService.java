@@ -21,6 +21,15 @@ public final class VillageClaimService {
         if (manager.findVillageAt(messPos.getX(), messPos.getY(), messPos.getZ()) != null) {
             return false;
         }
+        VillageData touching = VillageClaimMerge.findOwnedClaimTouching(
+                level, ownerId, messPos.getX(), messPos.getZ(), VillageManager.HAMLET_RADIUS);
+        if (touching != null) {
+            VillageClaimMerge.expandToIncludePoint(touching, messPos);
+            VillageManager.refreshRadiusFromPopulation(level, touching);
+            VillageSavedData.get(level).markDirty();
+            VillageClaimMerge.consolidateOwnedVillages(level, ownerId);
+            return false;
+        }
         if (!manager.canClaim(ownerId, messPos.getX(), messPos.getZ(), VillageManager.HAMLET_RADIUS)) {
             return false;
         }
@@ -28,6 +37,7 @@ public final class VillageClaimService {
         VillageData village = new VillageData(villageName, ownerId, messPos.getX(), messPos.getY(), messPos.getZ());
         village.setRadius(VillageManager.HAMLET_RADIUS);
         manager.registerVillage(village, level);
+        VillageClaimMerge.consolidateOwnedVillages(level, ownerId);
         return true;
     }
 
@@ -44,5 +54,6 @@ public final class VillageClaimService {
             }
             tryCreateHamletAtMess(level, ownerId, name, pos);
         }
+        VillageClaimMerge.consolidateOwnedVillages(level, ownerId);
     }
 }

@@ -1,6 +1,5 @@
 package com.villagers.mod.event;
 
-import net.minecraft.world.phys.AABB;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
@@ -14,8 +13,10 @@ import com.villagers.mod.combat.MilitiaStats;
 import com.villagers.mod.entity.MilitiaBehavior;
 import com.villagers.mod.entity.MilitiaConversion;
 import com.villagers.mod.entity.MilitiaData;
+import com.villagers.mod.entity.SoldierBedSleep;
 import com.villagers.mod.entity.SoldierBehavior;
 import com.villagers.mod.entity.SoldierData;
+import com.villagers.mod.entity.SoldierProfessionGuard;
 import com.villagers.mod.entity.SoldierConversion;
 import com.villagers.mod.entity.SoldierDesertion;
 import com.villagers.mod.entity.VeteranBedSync;
@@ -28,10 +29,15 @@ import com.villagers.mod.gear.GearReplacement;
 import com.villagers.mod.gear.VillagerGearRules;
 import com.villagers.mod.combat.BanditCombat;
 import com.villagers.mod.combat.WanderingNecromancerCombat;
-import com.villagers.mod.threat.BanditService;
 import com.villagers.mod.threat.WanderingNecromancerService;
+import com.villagers.mod.performance.CombatTickPolicy;
+import com.villagers.mod.performance.CombatVillagerIndex;
+import com.villagers.mod.squad.SquadCombatScan;
+import com.villagers.mod.squad.SquadPathing;
+import com.villagers.mod.squad.SquadService;
 import com.villagers.mod.war.CampaignService;
 import com.villagers.mod.war.MutinyService;
+import com.villagers.mod.war.SoldierRedstoneInteract;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.level.Level;
@@ -42,8 +48,6 @@ import java.util.Map;
 @EventBusSubscriber(modid = VillagersMod.MODID)
 public class SoldierTickHandler {
     private static final Map<Level, Long> lastProcessedDay = new HashMap<>();
-    /** Only villagers in loaded chunks; avoids scanning items, arrows, mobs, etc. */
-    private static final AABB LOADED_VILLAGERS = new AABB(-3.0E7, -64, -3.0E7, 3.0E7, 320, 3.0E7);
 
     @SubscribeEvent
     public static void onLevelTick(LevelTickEvent.Post event) {
@@ -60,16 +64,22 @@ public class SoldierTickHandler {
         }
 
         long gameTime = level.getGameTime();
-        boolean tryConversion = gameTime % 20 == 0;
+        SquadCombatScan.tickLevel(serverLevel);
 
-        for (Villager villager : serverLevel.getEntitiesOfClass(Villager.class, LOADED_VILLAGERS)) {
+        CombatVillagerIndex.forEachAlive(serverLevel, villager -> {
             if (villager.hasData(VillagerAttachments.SOLDIER_DATA.get())) {
+                if (level.getGameTime() % 80 == villager.getId() % 80) {
+                    SoldierProfessionGuard.enforceForCombatRole(villager);
+                }
                 tickSoldier(villager, level, gameTime, newDay);
             } else if (villager.hasData(VillagerAttachments.BANDIT_DATA.get())) {
                 if (level.getGameTime() % 10 == villager.getId() % 10) {
                     BanditCombat.tick(villager);
                 }
             } else if (villager.hasData(VillagerAttachments.MILITIA_DATA.get())) {
+                if (level.getGameTime() % 80 == villager.getId() % 80) {
+                    SoldierProfessionGuard.enforceForCombatRole(villager);
+                }
                 tickMilitia(villager, level, gameTime, newDay);
             } else if (villager.hasData(VillagerAttachments.VETERAN_DATA.get())) {
                 tickVeteran(villager, level, gameTime);
@@ -77,30 +87,29 @@ public class SoldierTickHandler {
                 if (level.getGameTime() % 10 == villager.getId() % 10) {
                     WanderingNecromancerCombat.tick(villager);
                 }
-            } else if (tryConversion) {
-                GearReplacement.tryPullEnlistGearFromNearestRecruiter(villager);
-                if (!SoldierConversion.tryConvert(villager)) {
-                    MilitiaConversion.onGearUpdated(villager);
-                }
             }
-        }
+        });
     }
 
     private static boolean shouldRunHeavyCombat(Villager villager, long gameTime) {
-        if (villager instanceof Mob mob && mob.getTarget() != null && mob.getTarget().isAlive()) {
-            return true;
+        if (villager.hasData(VillagerAttachments.SOLDIER_DATA.get())) {
+            SoldierData data = villager.getData(VillagerAttachments.SOLDIER_DATA.get());
+            if (data != null && SoldierBedSleep.restsUndisturbedByHostiles(villager, data)) {
+                return false;
+            }
         }
-        return ((gameTime + villager.getId()) & 1L) == 0L;
+        boolean hasTarget = villager instanceof Mob mob && mob.getTarget() != null && mob.getTarget().isAlive();
+        return CombatTickPolicy.shouldRunHeavyCombat(villager, gameTime, hasTarget);
     }
 
     private static void tickSoldier(Villager villager, Level level, long gameTime, boolean newDay) {
-        if (level.getGameTime() % 100 == 0) {
+        if (level.getGameTime() % 100 == villager.getId() % 100) {
             GearReplacement.tryReplaceBrokenGear(villager);
         }
         if (level.getGameTime() % 40 == villager.getId() % 40) {
             VillagerGearRules.refreshVisibleEquipment(villager);
         }
-        if (level.getGameTime() % 200 == 0) {
+        if (level.getGameTime() % 200 == villager.getId() % 200) {
             ArrowResupply.tryResupply(villager);
         }
         if (level.getGameTime() % 20 == villager.getId() % 20) {
@@ -120,18 +129,34 @@ public class SoldierTickHandler {
             SoldierRetreat.tick(villager);
         }
         SoldierData soldierData = villager.getData(VillagerAttachments.SOLDIER_DATA.get());
+        if (soldierData != null && level instanceof net.minecraft.server.level.ServerLevel serverLevel
+                && level.getGameTime() % 40 == villager.getId() % 40
+                && SquadService.isStandingSquad(soldierData)) {
+            SquadService.tickStandingRecruitFill(serverLevel, villager, soldierData);
+        }
         if (soldierData != null && heavy) {
-            if (level.getGameTime() % 40 == 0) {
+            if (level.getGameTime() % 40 == villager.getId() % 40) {
                 SoldierRanks.syncRank(villager, soldierData);
             }
-            CampaignService.tickSoldier(villager, soldierData);
-            MutinyService.tick(villager, soldierData);
+            if (level.getGameTime() % 20 == villager.getId() % 20) {
+                CampaignService.tickSoldier(villager, soldierData);
+                MutinyService.tick(villager, soldierData);
+            }
             if (level instanceof net.minecraft.server.level.ServerLevel serverLevel
                     && level.getGameTime() % 40 == villager.getId() % 40) {
+                SquadPathing.tickFollowLeader(serverLevel, villager, soldierData);
                 BeaconSoldierBuffs.tick(serverLevel, villager);
             }
         }
-        if (heavy || level.getGameTime() % 4 == villager.getId() % 4) {
+        if (soldierData != null && level instanceof net.minecraft.server.level.ServerLevel serverLevel
+                && level.getGameTime() % 10 == villager.getId() % 10) {
+            SoldierRedstoneInteract.tick(serverLevel, villager, soldierData);
+        }
+        if (soldierData != null && villager.isSleeping()
+                && level.getGameTime() % 20 == villager.getId() % 20) {
+            SoldierBedSleep.applyRestHeal(villager, soldierData);
+        }
+        if (CombatTickPolicy.shouldRunBehavior(villager, gameTime, heavy)) {
             SoldierBehavior.updateDailyRoutine(villager);
         }
     }
@@ -142,11 +167,11 @@ public class SoldierTickHandler {
             if (newDay) {
                 MilitiaBehavior.tickDaily(villager, militiaData, true);
             }
-            if (level.getGameTime() % 40 == 0) {
+            if (level.getGameTime() % 40 == villager.getId() % 40) {
                 MilitiaStats.sync(villager, militiaData);
             }
             if (!militiaData.wasTraderAtEnlist() && SoldierConversion.canBecomeSoldier(villager)) {
-                MilitiaConversion.disarm(villager, false);
+                MilitiaConversion.releaseMilitiaRoleForSoldierPromotion(villager);
                 SoldierConversion.tryConvert(villager);
                 return;
             }
@@ -161,16 +186,19 @@ public class SoldierTickHandler {
             CombatDoorOpening.tick(villager);
             MilitiaFlee.tick(villager);
         }
-        if (level.getGameTime() % 20 == 0) {
+        if (level.getGameTime() % 40 == villager.getId() % 40) {
             MilitiaBehavior.tickGuard(villager);
+            if (level instanceof net.minecraft.server.level.ServerLevel serverLevel) {
+                SquadService.tickMilitiaSquadRecruit(serverLevel, villager);
+            }
         }
-        if (level.getGameTime() % 200 == 0) {
+        if (level.getGameTime() % 200 == villager.getId() % 200) {
             ArrowResupply.tryResupply(villager);
         }
     }
 
     private static void tickVeteran(Villager villager, Level level, long gameTime) {
-        if (level.getGameTime() % 40 == 0) {
+        if (level.getGameTime() % 40 == villager.getId() % 40) {
             VeteranBedSync.syncHomeBedFromVillager(villager);
         }
         if (shouldRunHeavyCombat(villager, gameTime)) {

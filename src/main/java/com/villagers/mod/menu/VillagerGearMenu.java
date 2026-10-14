@@ -12,6 +12,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
+import com.villagers.mod.entity.MilitiaConversion;
 import com.villagers.mod.entity.SoldierConversion;
 import com.villagers.mod.entity.VillagerAttachments;
 import com.villagers.mod.gear.VillagerGearRules;
@@ -34,6 +35,9 @@ public class VillagerGearMenu extends AbstractContainerMenu {
         this.villager = villager;
 
         if (villager != null && !playerInventory.player.level().isClientSide()) {
+            if (villager.hasData(VillagerAttachments.SOLDIER_DATA.get())) {
+                MilitiaConversion.releaseMilitiaRoleForSoldierPromotion(villager);
+            }
             VillagerGearRules.loadIntoContainer(villager, gearInventory);
             gearInventory.addListener(container -> VillagerGearRules.saveFromContainer(villager, gearInventory));
         }
@@ -147,7 +151,10 @@ public class VillagerGearMenu extends AbstractContainerMenu {
 
         @Override
         public boolean mayPlace(ItemStack stack) {
-            if (villager != null && villager.hasData(VillagerAttachments.MILITIA_DATA.get()) && gearSlot == VillagerGearSlot.LEGGINGS) {
+            if (villager != null
+                    && gearSlot == VillagerGearSlot.LEGGINGS
+                    && villager.hasData(VillagerAttachments.MILITIA_DATA.get())
+                    && !villager.hasData(VillagerAttachments.SOLDIER_DATA.get())) {
                 return false;
             }
             return VillagerGearRules.accepts(gearSlot, stack);

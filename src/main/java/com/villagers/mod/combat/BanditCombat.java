@@ -1,5 +1,6 @@
 package com.villagers.mod.combat;
 
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
@@ -7,10 +8,15 @@ import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 
+import com.villagers.mod.entity.BanditData;
 import com.villagers.mod.entity.MilitiaLabels;
+import com.villagers.mod.entity.SoldierBedSleep;
 import com.villagers.mod.entity.VillagerAttachments;
 import com.villagers.mod.gear.VillagerGearRules;
+import com.villagers.mod.threat.BanditRaidService;
 import com.villagers.mod.threat.BanditService;
+
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -38,14 +44,42 @@ public final class BanditCombat {
             return;
         }
         sanitizeBanditIdentity(villager);
+        if (villager.level().getGameTime() % 80 == villager.getId() % 80) {
+            SoldierMovement.applyCombatWalkSpeed(villager);
+        }
         enableCombatGoals(villager);
         SoldierCombat.suppressPanic(villager);
+        BanditData data = villager.getData(VillagerAttachments.BANDIT_DATA.get());
+        if (villager.level() instanceof ServerLevel server && data != null) {
+            BanditRaidService.tickBandit(server, villager, mob, data);
+        }
         if (mob.getTarget() == null || !mob.getTarget().isAlive()) {
-            LivingEntity soldier = findNearestSoldier(villager, 32);
-            if (soldier != null) {
-                mob.setTarget(soldier);
+            if (villager.level().getGameTime() % 20 == villager.getId() % 20) {
+                LivingEntity soldier = pickDefenderTarget(villager, data);
+                if (soldier != null) {
+                    if (soldier instanceof Villager defender && defender.isSleeping()) {
+                        SoldierBedSleep.wakeNow(defender);
+                    }
+                    mob.setTarget(soldier);
+                }
+            }
+        } else if (mob.getTarget() instanceof Villager defender && defender.isSleeping()) {
+            SoldierBedSleep.wakeNow(defender);
+        }
+    }
+
+    @Nullable
+    private static LivingEntity pickDefenderTarget(Villager bandit, @Nullable BanditData data) {
+        if (bandit.level() instanceof ServerLevel server && data != null) {
+            BanditRaidService.RaidOrder order = BanditRaidService.orderFor(data);
+            if (order != null) {
+                Villager inVillage = BanditRaidService.findDefenderInVillage(server, bandit, order.villageId());
+                if (inVillage != null) {
+                    return inVillage;
+                }
             }
         }
+        return findNearestSoldier(bandit, 48);
     }
 
     private static LivingEntity findNearestSoldier(Villager villager, double range) {

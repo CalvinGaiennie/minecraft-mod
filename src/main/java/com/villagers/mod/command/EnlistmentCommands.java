@@ -1,6 +1,7 @@
 package com.villagers.mod.command;
 
 import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
@@ -23,10 +24,16 @@ import net.neoforged.neoforge.event.RegisterCommandsEvent;
 
 import com.villagers.mod.VillagersMod;
 import com.villagers.mod.armies.BanditGenerationScheduler;
+import com.villagers.mod.block.entity.RecruiterBlockEntity;
+import com.villagers.mod.squad.SquadMode;
+import com.villagers.mod.squad.SquadService;
 import com.villagers.mod.armies.BanditSiteGenerator;
 import com.villagers.mod.armies.BanditWorldSavedData;
+import com.villagers.mod.player.AllyRank;
 import com.villagers.mod.player.AllySavedData;
+import com.villagers.mod.armies.ArmiesQuestService;
 import com.villagers.mod.player.EnlistmentService;
+import com.villagers.mod.threat.NewMoonRaidService;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -55,6 +62,19 @@ public final class EnlistmentCommands {
                             ctx.getSource().sendSuccess(() -> Component.translatable("message.villagers.opted_out"), true);
                             return 1;
                         }))
+                        .then(Commands.literal("quest")
+                                .then(Commands.literal("status").executes(ctx -> {
+                                    ArmiesQuestService.sendQuestStatus(ctx.getSource().getPlayerOrException());
+                                    return 1;
+                                }))
+                                .then(Commands.literal("reset")
+                                        .requires(source -> source.hasPermission(2))
+                                        .executes(ctx -> {
+                                            ArmiesQuestService.resetQuestProgress(ctx.getSource().getPlayerOrException());
+                                            ctx.getSource().sendSuccess(
+                                                    () -> Component.translatable("message.villagers.quest_reset"), true);
+                                            return 1;
+                                        })))
                         .then(Commands.literal("ally")
                                 .then(Commands.literal("add")
                                         .then(Commands.argument("player", EntityArgument.player())
@@ -84,6 +104,28 @@ public final class EnlistmentCommands {
                                                     ctx.getSource().sendFailure(Component.translatable("message.villagers.ally_not_listed"));
                                                     return 0;
                                                 })))
+                                .then(Commands.literal("rank")
+                                        .then(Commands.argument("player", EntityArgument.player())
+                                                .then(Commands.argument("rank", StringArgumentType.word())
+                                                        .executes(ctx -> {
+                                                            ServerPlayer self = ctx.getSource().getPlayerOrException();
+                                                            ServerPlayer other = EntityArgument.getPlayer(ctx, "player");
+                                                            AllyRank rank = AllyRank.fromString(
+                                                                    StringArgumentType.getString(ctx, "rank"));
+                                                            if (AllySavedData.get(self.serverLevel())
+                                                                    .setRank(self.getUUID(), other.getUUID(), rank)) {
+                                                                ctx.getSource().sendSuccess(
+                                                                        () -> Component.translatable(
+                                                                                "message.villagers.ally_rank_set",
+                                                                                other.getDisplayName(),
+                                                                                rank.name()),
+                                                                        true);
+                                                                return 1;
+                                                            }
+                                                            ctx.getSource().sendFailure(
+                                                                    Component.translatable("message.villagers.ally_not_listed"));
+                                                            return 0;
+                                                        }))))
                                 .then(Commands.literal("list").executes(ctx -> {
                                     ServerPlayer self = ctx.getSource().getPlayerOrException();
                                     var allies = AllySavedData.get(self.serverLevel()).getAllies(self.getUUID());
@@ -103,6 +145,26 @@ public final class EnlistmentCommands {
                                     }
                                     return allies.size();
                                 })))
+                        .then(Commands.literal("squad")
+                                .then(Commands.literal("mode")
+                                        .then(Commands.literal("recruit").executes(ctx -> setSquadMode(ctx, true)))
+                                        .then(Commands.literal("standard").executes(ctx -> setSquadMode(ctx, false))))
+                                .then(Commands.literal("nightwatch")
+                                        .then(Commands.literal("on").executes(ctx -> setSquadNightwatch(ctx, true)))
+                                        .then(Commands.literal("off").executes(ctx -> setSquadNightwatch(ctx, false)))))
+                        .then(Commands.literal("raid")
+                                .requires(src -> src.hasPermission(2))
+                                .executes(ctx -> {
+                                    ServerPlayer player = ctx.getSource().getPlayerOrException();
+                                    int count = NewMoonRaidService.triggerRaid(player.serverLevel(), player);
+                                    if (count <= 0) {
+                                        return 0;
+                                    }
+                                    ctx.getSource().sendSuccess(
+                                            () -> Component.translatable("message.villagers.raid_command_ok", count),
+                                            true);
+                                    return count;
+                                }))
                         .then(Commands.literal("locate")
                                 .then(buildLocateKind("camp", k -> k == BanditWorldSavedData.SiteKind.CAMP))
                                 .then(buildLocateKind("hideout", k -> k == BanditWorldSavedData.SiteKind.HIDEOUT))
@@ -120,6 +182,46 @@ public final class EnlistmentCommands {
                                     ctx.getSource().sendFailure(Component.translatable("commands.villagers.locate.usage"));
                                     return 0;
                                 })));
+    }
+
+    private static int setSquadMode(CommandContext<CommandSourceStack> ctx, boolean recruit) {
+        ServerPlayer player;
+        try {
+            player = ctx.getSource().getPlayerOrException();
+        } catch (Exception e) {
+            return 0;
+        }
+        BlockPos boxPos = SquadService.findNearestSquadBox(player.serverLevel(), player.blockPosition(), 8);
+        if (boxPos == null || !(player.serverLevel().getBlockEntity(boxPos) instanceof RecruiterBlockEntity box)) {
+            ctx.getSource().sendFailure(Component.translatable("message.villagers.squad_no_box"));
+            return 0;
+        }
+        box.setSquadMode(recruit ? SquadMode.RECRUIT : SquadMode.STANDARD);
+        ctx.getSource().sendSuccess(
+                () -> Component.translatable(
+                        recruit ? "message.villagers.squad_mode_recruit" : "message.villagers.squad_mode_standard"),
+                true);
+        return 1;
+    }
+
+    private static int setSquadNightwatch(CommandContext<CommandSourceStack> ctx, boolean enabled) {
+        ServerPlayer player;
+        try {
+            player = ctx.getSource().getPlayerOrException();
+        } catch (Exception e) {
+            return 0;
+        }
+        BlockPos boxPos = SquadService.findNearestSquadBox(player.serverLevel(), player.blockPosition(), 8);
+        if (boxPos == null || !(player.serverLevel().getBlockEntity(boxPos) instanceof RecruiterBlockEntity box)) {
+            ctx.getSource().sendFailure(Component.translatable("message.villagers.squad_no_box"));
+            return 0;
+        }
+        box.setNightwatchEnabled(enabled);
+        ctx.getSource().sendSuccess(
+                () -> Component.translatable(
+                        enabled ? "message.villagers.squad_nightwatch_on" : "message.villagers.squad_nightwatch_off"),
+                true);
+        return 1;
     }
 
     private static com.mojang.brigadier.builder.LiteralArgumentBuilder<CommandSourceStack> buildLocateKind(

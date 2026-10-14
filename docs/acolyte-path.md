@@ -102,7 +102,7 @@ Maelor offers the **hard** path for **one** specialty of your choice (Arcane, Al
 
 - **Hard** = feat-grade training and quests for that specialty only (**difficulty tables TBD**: relaxed vs strict config).
 - **Hard training** is done with **field brothers** of that specialty (Maelor gives the quest; they teach **hard** only in their craft). Return to Maelor to **lock**.
-- If you **fail or abandon** hard training before lock, you may **pick a different hard specialty** (Maelor allows retrial, limits TBD).
+- If you **fail or abandon** hard training before lock, you may **pick a different hard specialty** and try again — **any specialty**, repeat until you **complete one** hard path (**decided 2026-10-08**).
 - When **hard** is complete, **Maelor locks** your specialty. **Only Maelor** can lock.
 
 ### 6. Maelor, reunite the Order (after lock)
@@ -215,32 +215,12 @@ Turn in to the Alchemist master:
 1. **One potion** (any vessel type) for **each distinct effect** in config `acolyteAlchemistHardEffects` (all brewable/obtainable effects in survival for this version).
 2. **Vessel proof:** among the turn-in set, include **at least one** **normal (drink)**, **one splash**, and **one lingering** (three different bottles; effects may differ, e.g. drink healing, splash poison, lingering slowness).
 
-#### Arcane (hard), agreed (books) + proposed (proofs)
+#### Arcane (hard), agreed (books only)
 
-Turn-in + proofs to the Arcane master:
+Turn-in to the Arcane master:
 
-1. **Enchanted books (agreed):** turn in **one enchanted book of each enchantment type** on config **`acolyteArcaneHardEnchantList`**: every distinct **enchantment** that can appear on an **enchanted book** from a **vanilla enchanting table** in **1.21.1** (one book per type; level on the book = any level you obtained for that type). **Treasure-only** enchants (Mending, Frost Walker, Soul Speed, Swift Sneak, Wind Burst, curses) are **not** on this list unless we extend a separate optional museum turn-in.
-2. **Proof feats (proposed, confirm or cut):** complete **each** row below while holding/wearing the stated enchant (vanilla table levels). Config `acolyteArcaneHardProofs` mirrors this list.
-
-| # | Proof (you must…) | Enchant on gear |
-| --- | --- | --- |
-| 1 | Fall **≥ 40** blocks and survive without totem | **Feather Falling IV** boots |
-| 2 | Kill **1** hostile mob | **Looting III** sword |
-| 3 | Pick up **grass block** or **deepslate** as item | **Silk Touch** tool |
-| 4 | Kill **1** undead (zombie/skeleton/drowned/husk/stray) | **Smite V** sword *(not same sword as Sharpness)* |
-| 5 | Kill **1** spider or cave spider | **Bane of Arthropods V** sword |
-| 6 | Kill **1** mob from **≥ 20** blocks away | **Power V** bow |
-| 7 | Kill **1** mob while it is on fire from your **bow** | **Flame** bow |
-| 8 | During **thunder**, hit a mob with a **thrown trident** (lightning strike) | **Channeling** trident *(needs storm, not thunderless)* |
-| 9 | **Throw** trident and catch it on return | **Loyalty III** trident *(clear weather; separate trident from #8)* |
-| 10 | Break blocks **underwater** continuously **30** seconds without surfacing | **Aqua Affinity** + **Respiration III** helmet |
-| 11 | Travel **40** blocks in **water** in under **25** seconds | **Depth Strider III** boots |
-| 12 | Hit **2+** hostiles with **one** sweep attack (Java sweep) | **Sweeping Edge III** sword |
-| 13 | **Catch 3** fish | **Lure III** or **Luck of the Sea III** rod |
-| 14 | **Fire** a crossbow shot after full Quick Charge | **Quick Charge III** crossbow |
-| 15 | With **Density V** mace, kill a mob after you fell **≥ 4** blocks this tick **or** with **Breach IV** mace, hit a mob wearing **iron+** armor | **Density V** or **Breach IV** mace *(mace + breeze rod from Trial Chambers, 1.21)* |
-
-**Not proofs:** Knockback, Punch, Infinity, Impaling, Riptide, Thorns, Unbreaking, and the extra Protection variants, those are satisfied by the **book turn-in** only. **Riptide** optional swap for proof #9, TBD.
+1. **Enchanted books only (decided 2026-10-08):** turn in **one enchanted book of each enchantment type** on config **`acolyteArcaneHardEnchantList`**: every distinct **enchantment** that can appear on an **enchanted book** from a **vanilla enchanting table** in **1.21.1** (one book per type; level on the book = any level you obtained for that type). **Treasure-only** enchants (Mending, Frost Walker, Soul Speed, Swift Sneak, Wind Burst, curses) are **not** on this list unless we extend a separate optional museum turn-in.
+2. **Proof feats:** **cut** — no separate wear-and-demo challenges (`acolyteArcaneHardProofs` **not** used).
 
 #### War Leader (hard), agreed
 
@@ -272,7 +252,7 @@ After all **four** lights → Maelor offers **hard** → field master → **lock
 | --- | --- | --- |
 | **Smith** | **Craft** a **netherite helmet** and **netherite chestplate** (smithing upgrade counts). Turn in to brother/Maelor. | **Helmet** + **chestplate** types; **netherite** material on hard matrix (`acolyteSmithHardTurnIn`). |
 | **Alchemist** | Brew and turn in **Turtle Master II** and **Regeneration II** (see below). | Those **two effects** on `acolyteAlchemistHardEffects`; vessel types can count toward hard **drink / splash / lingering** proof if you use different forms. |
-| **Arcane** | Turn in one **perfect mace** (**Density V** + **Unbreaking III**) and one **perfect shield** (**Unbreaking III**, full durability), see below. | Credits **two** enchant **types** on the hard book list from the enchants on those items. If **proof feats** are enabled, mace can satisfy **Density** proof row when rules match. |
+| **Arcane** | Turn in one **perfect mace** (**Density V** + **Unbreaking III**) and one **perfect shield** (**Unbreaking III**, full durability), see below. | Credits **two** enchant **types** on the hard book list from the enchants on those items (**decided 2026-10-08**: keep light task). |
 | **War Leader** | Turn in **one sword** and **one shield** (diamond recommended) with **less than one-fifth durability left** (**< 20%** remaining; combat wear, not broken). | Credits **sword** + **1 shield** toward hard turn-in set; hard still requires the **full** kit at **≤ 20%** (light slots count, do not re-craft; wear down or deliver same categories at hard completion). |
 
 #### Alchemist light, agreed
@@ -300,8 +280,7 @@ Separate from hard lock: hand in **categories** Maelor requests (intake: **every
 | `acolyteSmithHardCraftList` | Data-driven craft checklist for Smith hard |
 | `acolyteAlchemistHardEffects` | All required potion effect IDs |
 | `acolyteArcaneHardEnchantList` | All required enchant book types |
-| `acolyteArcaneHardProofs` | Fall, Looting, etc. |
-| `acolyteArcaneFallMinBlocks` | 50 (tune toward max fall) |
+| `acolyteArcaneHardProofs` | **Unused** (proof feats cut 2026-10-08) |
 | `acolyteWarLeaderHardMobList` | Hostiles requiring 100 kills each |
 
 ## Player specialty perks

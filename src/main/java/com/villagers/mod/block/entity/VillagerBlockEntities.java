@@ -48,4 +48,8 @@ public class VillagerBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BanditCampBlockEntity>> BANDIT_CAMP =
             BLOCK_ENTITIES.register("bandit_camp", () ->
                     BlockEntityType.Builder.of(BanditCampBlockEntity::new, VillagersMod.BANDIT_CAMP.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<WantedPosterBlockEntity>> WANTED_POSTER =
+            BLOCK_ENTITIES.register("wanted_poster", () ->
+                    BlockEntityType.Builder.of(WantedPosterBlockEntity::new, VillagersMod.WANTED_POSTER.get()).build(null));
 }

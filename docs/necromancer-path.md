@@ -53,12 +53,12 @@ When we design necromancer chapters (§6+ in discussion plan), avoid mirroring a
 
 ### Intro NPC, the mother (author §6)
 
-- **Identity:** the **second brother’s mother** in lore (**§3–5 TBD**); to the player she is **anonymous**: hood, storm, no name until much later (**display name TBD**, e.g. “Stranger in the rain”).
+- **Identity:** the **second brother’s mother** in lore (**§3–5 TBD**); to the player she is **anonymous**: hood, storm, **no display name** until much later.
 - **Arrival:** **lightning storm** wraps her spawn; she **always** appears once the heart threshold is met (refuge proximity **does not** block).
 - **Intro lightning smite (not the Smite enchant):** during **this cutscene only**, if any **refuge acolyte** is **in the player’s line of sight**, the storm **kills** him with lightning. A **tombstone** (grave marker or quest block **TBD**) replaces the body, inscribed: **“She smote him.”** That brother is **gone for the world**: permanent loss for Order players who had him in sight during intro.
 - **Opening line (paraphrase):** notices your dark arts, you will need **guidance** if you keep this path.
 - **Quest briefing (author, brief):** when she sends you to the road-town rogue, she **also** tells you:
-  1. **Where:** near the village, in **the chunk where the blight gathers** (sick animals / dark air, horcrux **ping**), a **chest** holds his **binding** (the **horcrux** item, display name **TBD**). The **binding** must be **destroyed**: **not** the chest; the **item** is unmade.
+  1. **Where:** near the village, in **the chunk where the blight gathers** (sick animals / dark air, horcrux **ping**), a **chest** holds his **binding** (horcrux item **“Horcrux of the Road Thief”**). The **binding** must be **destroyed**: **not** the chest; the **item** is unmade.
   2. **Destroy hint, not the Well:** she does **not** mention the Dragon’s Well or any fountain. One line like: **only the worst creatures this world has can unmake a binding like that**: steers to **wither**, **ghast fireball**, **lightning** in thunder (`necromancerHorcruxDestroyers`, **excluding** `dragons_well` / `dragon_breath_bottle` from her speech). No picks, no lava, no crafting grid.
   3. **Finding the chunk:** she describes **the blighted chunk near the town** in plain language, **never** chunk numbers or coordinates. Player finds it via **horcrux ping** (heavy blight **in** the chunk vs weaker **near** ring, all horcruxes).
 
@@ -221,7 +221,7 @@ Commit → hunt/craft **quest items** (wearables, flutes/pipes, reagents)
 
 Quest **flutes** are **not** the **bone whistle** (`necromancy.md`). **Any player** who loots one may **use** it (no commit gate on flutes). **`necromancy.md`** wand/hearts/stigma still apply only to **active necromancers**; flutes are world loot like relics. **Inventory:** hold **as many different flutes as you find**: no exclusivity cap.
 
-**Flutes never hurt the player** who plays them, no self-damage from the effect. **Each play consumes 1 charge** (see **Charging**). Per-flute **cooldown** after use **TBD**. Havoc flutes respect **`necromancerWorldHavocEnabled`**.
+**Flutes never hurt the player** who plays them, no self-damage from the effect. **Each play consumes 1 charge** (see **Charging**). **5-minute cooldown** per flute after each play (`questFlutePlayerCooldownSeconds` **300**). **`necromancerWorldHavocEnabled` false** still allows **full-strength** summons on **Hivepipe** / **Bone Choir**; **Beast Dirge** and other world-havoc effects respect the flag.
 
 **Charging (author, §7):**
 
@@ -242,6 +242,10 @@ Quest **flutes** are **not** the **bone whistle** (`necromancy.md`). **Any playe
 
 #### End flute tyrants (author, §7)
 
+**Plain language:** **End tyrants** are **eight fixed boss necromancers** on **small End islands** around the main dragon island (not on the dragon fight platform). **Six** each guard **one unique quest flute** and **use that flute in combat**; **two** are extra bosses (**shards/gear only**, no flute). Killing them counts for **horcrux creation** (soul list). **Discovery (closed 2026-10-08):** **no** map markers, **no** book clues, **no** map fragments — players **find camps by exploring** the outer End only.
+
+#### End flute tyrants — detail (author, §7)
+
 **What “outer End” means:** the End dimension **outside the main dragon island**: the **outer ring islands** and distant End landmasses you reach after the dragon fight (not the central obsidian pillars / dragon arena). Tyrants are placed **far enough** that they **do not interfere** with the **Ender Dragon** battle. **No** requirement that the dragon be dead for them to **exist**; they are just **not** on the main island.
 
 Like **bandit fortresses** for relics: **fixed placements** from saved world data on those **outer** islands.
@@ -260,27 +264,27 @@ Like **bandit fortresses** for relics: **fixed placements** from saved world dat
 
 | Topic | Rule |
 | --- | --- |
-| **Leash** | Boss **won’t chase** outside the **structure bounds** + **16 blocks**; resets **TBD** on leash. |
+| **Leash** | Boss **won’t chase** outside the **structure bounds** + **16 blocks**. If you run away, he **walks back**; **no heal** on reset (**decided 2026-10-08**). |
 | **Boss power** | ~**Bandit King** toughness + **2–4** minion waves; flute tyrants **reuse their flute** every **60 seconds** in combat (`endFluteTyrantFluteCooldownSeconds` **60**). |
-| **Lament (no Armies)** | Same **32-block** box; **Slowness II + Weakness I** **8s** on players/soldiers/bandits (no morale fear). |
-| **Hints** | **No** map markers; **shard loot** on the **2** non-flute bosses + **TBD** End book clues. |
+| **Lament (Armies)** | **32-block** box: **Slowness II + Weakness I** **8s** **and** soldier/militia/bandit **morale fear**. |
+| **Hints** | **None** — pure exploration (`decided 2026-10-08`). Shard/gear on the **2** non-flute bosses only. |
 
 **Usable by whoever kills them**: flute to killer’s inventory; stealable thereafter. **Horcrux soul list:** killing a tyrant counts (**§ Horcrux**).
 
 | Flute (v1 name) | Effect (player) | Boss use |
 | --- | --- | --- |
-| **Beast Dirge** | **Animals only** in loaded chunks near you: **50%** of passive/neutral animals take **4–12** hearts blight/poison (rolled). Never hurts flutist. | Same vs **your animals** / any animals in chunk (**TBD** cooldown). |
+| **Beast Dirge** | **Animals only** in loaded chunks near you: **50%** of passive/neutral animals take **4–12** hearts blight/poison (rolled). **Includes tamed/owned** in range. Never hurts flutist. | Same vs intruder’s farms and wild stock in range. |
 | **Hivepipe** | Spawns ~**100 bees** that guard you until **all bees are killed**. | Same vs intruder until bees gone. |
 | **Bone Choir** | **5 wither skeletons** guard you for **10 minutes** (or until destroyed). | Same vs intruder. |
 | **Gale Flute** | Thunder + lightning in **10 blocks** of the player (**every direction**). | Boss casts at **you** in home. |
-| **Lament of Ash** | **Fear** / flee on **soldiers, militia, and bandits** within **32 blocks** of the player (**TBD** Armies vs vanilla fallback). | Same vs **you + your allies** in range. |
+| **Lament of Ash** | **Always** **Slowness II + Weakness I** **8s** on hostiles in **32 blocks**. **With Armies installed, also** **morale fear** on **soldiers, militia, bandits** (both effects stack). **No Armies:** debuff only on players/bandit-like hostiles in radius. | Same vs **you + your allies** in range (debuff + fear if Armies). |
 | **Crucible Whistle** | **Debuff cloud** at feet: **Slowness + Weakness + Poison** + **Blindness or Nausea** **1–2 seconds** (author: brief **blindness** or **nausea** roll). | Boss casts under **your** feet in home. |
 
 **God wizard armor:** **four** cursed **netherite** pieces. **Intro:** loot **chestplate** from road-town rogue → mother **holds** it through ingredient hunt → on **commit** she gives the **complete set** (all four) + **Seal-Breaker**. **Not** crafted at the Well; Well is for **breath**, **horcrux destroy**, and **Kingstree cure** craft.
 
 ### Sacrifice (no exclusivity)
 
-- **Horcrux ritual** **consumes** a flute, **full god wizard set**, or **relic**: deliberate only. **No** separate god-wizard craft cost.
+- **Horcrux ritual** **consumes** a **quest flute** or **one Ashbound piece** (deliberate only). **No** king relics in v1.
 - **Horcrux does not lock out flutes**: you may still carry and play flutes while horcruxed; flutes are only lost when fed into a ritual.
 
 ### Havoc, hunting, and loot (author intent)
@@ -291,9 +295,9 @@ Like **bandit fortresses** for relics: **fixed placements** from saved world dat
 
 ### Cursed wearables
 
-Quest **cursed netherite, full four pieces** (helmet, chest, legs, boots). Author name: **god wizard armor** (display name **TBD**). Real **netherite armor** with quest enchants/attributes, **not** a robe reskin. Hood/robe (`necromancy.md`) stays separate casual gear. **Upside = combat power; downside = self-rot**: horcrux handles **poison/harm pots + fake death**.
+Quest **cursed netherite, full four pieces** (helmet, chest, legs, boots). Internal id **god wizard armor**; player-facing prefix **Ashbound** (e.g. **Ashbound Helm**). **No** in-game lore tooltip or quest speech explaining the name (**decided 2026-10-08**); deeper meaning waits for **§3–5** if ever. Real **netherite armor** with quest enchants/attributes, **not** a robe reskin. Hood/robe (`necromancy.md`) stays separate casual gear. **Upside = combat power; downside = self-rot**: horcrux handles **poison/harm pots + fake death**.
 
-**Indestructible (author):** Same durability rules as **kings’ relics** and quest **flutes**: no lava/cactus/void destruction, never despawn, void return **TBD** like relics. **Only** leaves the world when **consumed** in a ritual: **horcrux creation** (full set counts as **one item of power** in hotbar, **TBD** UI) and **TBD** other quest forks. Still **binding** while worn.
+**Indestructible (author):** Same durability rules as **kings’ relics** and quest **flutes**: no lava/cactus/void destruction, never despawn, void return **TBD** like relics. **Only** leaves the world when **consumed** in a ritual: **horcrux creation** (**one** Ashbound piece or flute in hotbar, **TBD** UI) and **TBD** other quest forks. Still **binding** while worn until consumed or unbind beats.
 
 #### Good parts (author, proposed defaults; tune in playtest)
 
@@ -313,7 +317,7 @@ Quest **cursed netherite, full four pieces** (helmet, chest, legs, boots). Autho
 
 - **Self-DoT:** **1 heart every 15 seconds** (`godWizardRotIntervalSeconds` **15**) while **any** cursed piece is worn. Long fights need regen/food or horcrux; much gentler than burst rot.
 - **Stigma visible:** hood/robe rules stack; full cursed netherite reads as **lich** on sight (**TBD** extra villager/soldier penalties).
-- **Binding (yes):** **cannot manually unequip** except **mother’s citadel unbind** beats ( **first brother dead** = she **helps** remove; **Mother’s wrath** = she **strips** you before the fight). **Pseudo-death keeps the set on.** **True death** drops the set like normal gear (pieces stay **indestructible** on ground). Plan around **3-minute click lockout** in full kit.
+- **Binding (yes):** **cannot manually unequip** except **mother’s citadel unbind** beats ( **first brother dead** = she **helps** remove; **Mother’s wrath** = she **strips** you before the fight). **Pseudo-death keeps the set on.** **True death** drops the set like normal gear (pieces stay **indestructible** on ground). Plan around **3-minute pseudo-death** (no interaction, then respawn at nearest horcrux).
 
 ### Horcrux (quest capstone, see `necromancy.md`)
 
@@ -321,17 +325,24 @@ Quest **cursed netherite, full four pieces** (helmet, chest, legs, boots). Autho
 
 #### Creation ritual (all at once)
 
-1. **Hotbar** must contain: **one phylactery shard** + **one item of power**: **any quest flute**, **full god wizard armor set** (all four pieces, consumed as one ritual), **or** **any of the 12 kings’ relics** (`endgame.md`). The power item is **consumed** on success (relic gone from world unless you recover another copy, relics are normally unique).
-2. While those stay in the hotbar, the player **kills** one valid **soul** target (**same moment**: not a past kill). **Soul list (closed):**
-   - **Any player** (PvP),
-   - **Any acolyte**: NPC Order brother **or** player on the Order path,
-   - **Any End flute tyrant** (all **8** bosses; flute-holders and shard-only).
-   **Not** on the list: overworld **rogue** necromancers, **wild liches**, citadel bound brothers, Corrupted King, wandering deserter necros.
-3. On success, the shard + power item combine into a **horcrux item** (**consumes** hotbar reagents, **TBD** exact recipe UI).
+1. **Hotbar** must contain: **one phylactery shard** + **one item of power** (consumed on success). **Allowed fuels (author):**
+   - **Any quest flute** (one per type per world),
+   - **One Ashbound piece** (helmet, chest, legs, or boots),
+   - **One nether star** (vanilla item; **decided 2026-10-08**),
+   - **One elytra** (**decided 2026-10-08**).
+   **Not allowed:** **kings’ relics** (`endgame.md`), **totems**, **custom mod craft fuels** (vanilla + quest items only). **Dragon egg** not a fuel unless added later in lore pass.
+2. While those stay in the hotbar, the player **kills** one valid **soul** target (**same moment**: not a past kill). **Soul list (closed 2026-10-08):**
+   - **Any player** (PvP) — **no** Order path, commit, or faction required on the **victim**,
+   - **Any acolyte** — **NPC Order brother** (refuge / citadel); **not** “Order player” as a special case (players are covered above),
+   - **Any End flute tyrant** (all **8** outer-End bosses),
+   - **Any named story villain** at death: e.g. **Halvek / Corvin / Garland**, **Corrupted King**, **both bound citadel necromancers**, other scripted boss IDs.
+   **Not** souls: generic **rogue** necromancers, **wild lich** bodies, **wandering deserter necromancers**.
+3. **Quest gate:** **none** — ritual allowed **any time** the player has ingredients (`necromancer-path.md` intro is tutorial only).
+4. On success, the shard + power item combine into a **horcrux item** (**consumes** hotbar reagents, **TBD** exact recipe UI).
 
 #### Wild liches, tutorial for everyone
 
-**Term, wild lich:** mod/docs name for a **rogue necromancer** who hid **one horcrux** (item in a **hidden chest** at their site), **very rare**; almost all rogues have **none**. Teaches **destroy** flow; **not** a horcrux-creation **soul**.
+**Term, wild lich:** mod/docs name for a **rogue necromancer** who hid **one horcrux** (item in a **hidden chest**), **very rare**; almost all rogues have **none**. Chest is **never at the rogue home site** — always **5–15 chunks** away (`necromancerWildLichHorcruxMinChunkOffset` / **Max**). Teaches **destroy** flow; **not** a horcrux-creation **soul**.
 
 #### Rogue necromancer sites (author, §7)
 
@@ -365,14 +376,25 @@ Quest **cursed netherite, full four pieces** (helmet, chest, legs, boots). Autho
 
 | Tier | When (chunk loaded) | What you see / feel |
 | --- | --- | --- |
-| **Near** | Hunter within a **circle** of **10 chunks** radius (Euclidean on chunk centers, config `necromancerHorcruxPingRadiusChunks`) of any chunk that **contains** one of the lich’s horcrux chests | **Dark air:** **soul/smoke/wither** particles at head height, **lighter** than in-chunk; ramps toward the horcrux chunk, **no** block highlight, **no** ground ash. Optional low **ambient sound** (wind, whisper) **TBD**. |
-| **In chunk** | Hunter standing in a chunk that **contains** a horcrux | **Heavy blight:** **noticeably** denser dark **air particles** than the near ring (config `necromancerHorcruxPingInChunkMultiplier` default **2.5×** vs near-tier density). Optional **dimming** in that chunk only (fog / slight darkness at head height, **not** full blindness; **TBD**). **All** horcruxes (player + wild lich), not intro-only. **Animals** in that chunk show **poison**: confirms “this chunk,” **not** the chest block. |
+| **Near** | Hunter within a **circle** of **10 chunks** radius (Euclidean on chunk centers, config `necromancerHorcruxPingRadiusChunks`) of any chunk that **contains** one of the lich’s horcrux chests | **Dark air:** **soul/smoke/wither** particles at head height, **lighter** than in-chunk; ramps toward the horcrux chunk, **no** block highlight, **no** ground ash. Low **ambient sound** (wind, whisper). |
+| **In chunk** | Hunter standing in a chunk that **contains** a horcrux | **Heavy blight:** **noticeably** denser dark **air particles** than the near ring (config `necromancerHorcruxPingInChunkMultiplier` default **2.5×** vs near-tier density). **Slight dimming** at head height only (**not** full blindness; tune `necromancerHorcruxChunkDimming` low). **All** horcruxes (player + wild lich), not intro-only. **Animals** in that chunk show **poison**: confirms “this chunk,” **not** the chest block. |
 | **Find chest** | Same chunk | Manual search, x-ray-proof hides, detector item **TBD** (Order / late quest). |
 
 - **Same chunk ≠ same block:** ping confirms **chunk only**; multiple horcruxes in one chunk still mean “dig/search here.”
 - **Unloaded chunks:** no particle ping until someone loads the area.
-- **Horcrux compass (craftable):** **PvP hunt tool**: so **other players** (and you) can **find horcrux chunks** and break the lich’s immortality. Needle points to the **nearest horcrux item**’s **chunk** (X/Z) in the **same dimension**: chest-stored player horcrux or wild-lich chest. **No exact block**; use **ping + dig** in that chunk. **No maximum range**: if any horcrux exists in that dimension, the needle always works. **Never** filters out **your own** horcruxes (no self-hide). **Early vs late:** many wild lich chests = needle often snaps to **closer** noise, **by design**.
-  - **Crafting:** shapeless, **compass**, **phylactery shard**, **soul sand**, **wither rose** → 1 compass; **craft many** (`necromancy.md`).
+- **Horcrux compass:** **PvP hunt tool** — needle points to the **nearest horcrux item**’s **chunk** (X/Z) in the **same dimension** (chest-stored player horcrux or wild-lich chest). **No exact block**; use **ping + dig**. **No maximum range**; **never** hides **your own** horcruxes.
+  - **Crafting:** always available — shapeless **compass**, **phylactery shard**, **soul sand**, **wither rose** → 1 compass; **craft many** (`necromancy.md`).
+  - **Loot (proposed tables — tune in playtest):**
+
+  | Structure | Chests rolled | Compass chance (per chest) | Notes |
+  | --- | --- | --- | --- |
+  | **Bandit camp** (generic) | 2 | **4%** | Hunt tool, not camp routine. |
+  | **Hideout** | 2 | **1%** | Middle tier. |
+  | **Corvin / king camp** | 2+ | **8%** | Story camps. |
+  | **Garland compound** | treasury + wing | **16%** once per site | Rook stash vibe. |
+  | **Citadel bandit fortress** | treasury | **12%** | If Armies+Citadel both loaded. |
+
+  Always **craftable** so loot is bonus, not sole source.
 
 #### Destroying a horcrux (author, §7)
 
@@ -380,19 +402,19 @@ Horcrux items are **not** unmade in a crafting grid or by normal player fire. De
 
 **Rules (chosen direction):**
 
-- Horcrux **drops from chests** like any item when the chest breaks; **mining the item entity** or **player inventory delete** does **not** destroy it (item **immune** to despawn/pickup abuse **TBD**: e.g. always drops on break, cannot `/kill` item away).
-- The **horcrux item** (on ground, in item frame, or on **lightning rod** / block **TBD**) must be destroyed by **vanilla** sources only, **v1 whitelist (author):**
+- Horcrux **drops from chests** when the chest breaks. The **item entity** is **not** destroyed by **lava, fire, cactus, or creeper explosions** (including charged creepers) — only the **whitelist** below unmakes it.
+- **v1 destroyers (author, 2026-10-08):**
 
 | Destroyer | How hunters use it |
 | --- | --- |
-| **Dragon’s Well (primary)** | **Throw / drop** the **horcrux item** into the well (**TBD** interaction). **Unmakes** it **anytime** (dragon alive or dead). Hunt loop: find chunk → steal horcrux → **find hidden well copse** (~350 blocks off road past citadel) → dunk. |
-| **Ghast fireball** | Nether stash; fireball hits item entity. |
-| **Wither** (boss or **skull projectile**) | Summon fight over the horcrux when you can’t reach the well. |
-| **Lightning** | During **thunder**: **Channeling** trident on/near the item **or** lightning strikes a **lightning rod** the horcrux is bound to. |
-| **Dragon’s breath bottle** | **Optional alternate**: splash bottle on the horcrux on the ground (**TBD**); same well lore, for hunters who already have breath but can’t move the item. |
+| **Dragon’s Well (primary)** | **Throw** the **horcrux item** into the well pool. **Unmakes** it **anytime** (dragon alive or dead). |
+| **Ghast fireball** | Fireball hits item entity. |
+| **Wither** (boss or **skull projectile**) | Wither damage on the item entity. |
+| **Lightning** | During **thunder**, a bolt that strikes **within ~2 blocks** of the item on the **ground** unmakes it (rod optional). |
+| **Dragon’s breath bottle** | **Optional alternate**: splash on item on ground (**TBD** implementation). |
 
-- **Not** trivial: no crafting-grid delete, no lava bucket, no normal fire (**TBD** edge cases).
-- **Config:** `necromancerHorcruxDestroyers`, default the four rows above; servers can add/remove (e.g. charged creeper **off** by default).
+- **Not** trivial: no crafting-grid delete, no lava bucket kill, no normal fire.
+- **Config:** `necromancerHorcruxDestroyers`; **creeper** sources **never** valid.
 
 **When one horcrux breaks:** **Decided**: **every** horcrux tied to you must be **destroyed** before you can **die for real**.
 
@@ -406,7 +428,7 @@ While **≥1 horcrux** exists for you:
 | --- | --- |
 | **Poison** | **Immune** |
 | **Damage / harming potions** | **Immune** (includes splash/lingering harm, **TBD** edge cases) |
-| **Would-be death** | Player **does not die**. **3 minutes:** no **left/right click**; **can move**; **keeps inventory**. **No teleport** on trigger, you stay where you fell. |
+| **Would-be death** | Player **does not die**. **3 minutes** (fixed, not stacked per horcrux): **no interaction** (no block/entity use, no combat clicks); **can walk**. **Keeps inventory**. Then **respawn at the stored location of your nearest horcrux** (chest anchor). |
 | **True kill** | **All** horcruxes **destroyed** → normal death rules. |
 
 **Config:** servers may disable horcrux passives (`necromancerHorcruxEnabled`, **TBD** in `config-and-recipes.md`) for low-PvP worlds; default **true** for author intent.
@@ -419,9 +441,9 @@ Order acolytes who **unlock the tree** get **major** perks at **royal stations**
 
 Necromancer quest items can feel **spikier** and **world-altering** (100 bees, 5 wither skeletons, mass animal sacrifice), **tradeoffs** (sacrificed crafts, self-damage armor, ritual murder for horcrux, hearts, stigma, hunt-me loot, no citadel king relics). Not a straight upgrade to Order **major** station buffs in every scenario. Exact tuning **TBD** playtest.
 
-### Superseded (discussion only)
+### Progression shape (closed 2026-10-08)
 
-Earlier draft **Model A** (one primary affinity + one cross-track), replaced by **item lattice + sacrifice** unless we re-merge themes as **flute families** later.
+**Item lattice + sacrifice** only — **no** primary/cross-track affinity pick (supersedes draft Model A).
 
 ### Progress gates (§7)
 
@@ -434,16 +456,14 @@ Not Order feat walls. Gates = **find item**, **choose sacrifice**, **survive rit
 - **NPCs**: roster; **two named bound necromancers** in citadel (`endgame.md`, names TBD).
 - **Feat gates**: achievement-style gates (TBD; parallel to Order discussion).
 - **Config keys**: e.g. `necromancerQuestHeartThreshold` default **3**, `necromancerIntroMinDistanceFromAcolyte` default **128**, `necromancerWorldHavocEnabled` default **true** (`config-and-recipes.md`), intro NPC cooldown (TBD).
-- **Multi-horcrux** pseudo-death rule (**TBD**).
-- **Soul-target roster** (full necromancer NPC list **TBD**).
+- **Soul-target roster:** extend **named villain** list as new bosses ship.
 - **Ping:** particle types, animal poison strength (**TBD** config). Radius = **10-chunk circle** (set).
 - **Cursed netherite** final numbers, partial-set rules (**TBD**).
 - **Binding cursed armor**: **yes**; **indestructible** + horcrux-sacrifice, documented above.
-- **Multi-horcrux:** **all** must be **destroyed** before true kill, **decided**. **No** pseudo-death teleport, **decided**.
+- **Multi-horcrux:** **all** must be **destroyed** before true kill; pseudo-death **always 3 min** then **nearest-horcrux** respawn (**decided 2026-10-08**).
 - **Horcrux item placement**: on rod vs frame vs ground for lightning/breath hit tests (**TBD**).
 - **End flute tyrants:** eight fixed coords / structure anchors (**TBD** names on burial-style map **TBD**).
 - **Rogue horcrux spawn rate**: default **~4%** (`config-and-recipes.md`).
-- **Pseudo-death** interaction with soldiers, throne sit, dungeon (**TBD**).
 
 ## Lore language
 

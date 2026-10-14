@@ -35,7 +35,7 @@ Recipes for blocks and items not covered in their own sections. All use vanilla 
 
 | Necromancer item | Recipe |
 |---|---|
-| Horcrux compass | Compass + phylactery shard + soul sand + wither rose (shapeless). Full detail: `necromancy.md`. |
+| Horcrux compass | Compass + phylactery shard + soul sand + wither rose (shapeless). Optional bandit chest loot: camp **4%**, hideout **1%**, king camp **8%**, Garland **16%**, citadel fortress **12%** per chest (`necromancer-path.md`). Full detail: `necromancy.md`. |
 | Flute charge | Glowstone dust + blaze powder + ender pearl (shapeless) → **1** flute charge. |
 | Quest flute recharge | Quest flute + **1 flute charge** (shapeless) → same flute, full charge bank (**3** committed necromancer, **1** otherwise). `necromancer-path.md`. |
 
@@ -69,7 +69,7 @@ Every number a server owner might want to tune, with its default.
 | `orphanSoldierBonusHealth`, flat max HP while orphan-raised soldier/militia | **4** |
 | `orphanSoldierBonusDamage`, damage multiplier (melee + arrows) | **1.15** (+15%) |
 | `orphanDesertionMultiplier`, hunger / morale desert **trigger** rolls only (not outcome split) | **1.5** |
-| `armiesQuestD1SoldierThreshold`, living **Soldiers** (not militia) in one owned village zone → **D1** | **30** |
+| `armiesQuestD1SoldierThreshold`, living **Soldiers** (not militia) in one owned village zone → **D1** | **15** |
 | `armiesQuestD1IgnoreMoon`, D1 assault ignores new-moon scheduling | **true** |
 | `armiesQuestBossPlayerKillOnly`, quest assault bosses require **player** last hit | **true** |
 | `titleRookbreakerDesertionMultiplier`, desertion in owned villages while **Rookbreaker** title (O2) | **0.90** (−10%) |
@@ -86,11 +86,15 @@ Every number a server owner might want to tune, with its default.
 | Wand permanent heart loss chance | 3% |
 | Wand side effect chance | 5% |
 | Necromancer recruiter interval multiplier | 3× |
-| `necromancerWorldHavocEnabled`, if **false**, **quest flutes** won’t mass-harm the world (e.g. **Beast Dirge** skips other players’ farms; big summons clamped). **Wand** minions unchanged. | **true** |
+| `necromancerWorldHavocEnabled`, if **false**, **Beast Dirge**-style **world harm** is clamped (e.g. skip other players’ farms). **Hivepipe / Bone Choir** stay **full strength**. **Wand** minions unchanged. | **true** |
 | `necromancerHorcruxEnabled`, poison/pot immunity, pseudo-death instead of dying | **true** (set **false** to disable lich rules) |
-| `necromancerHorcruxDestroyers`, ways to destroy a horcrux item | **dragons_well**, **ghast_fireball**, **wither**, **wither_skull**, **lightning**, **dragon_breath_bottle** (proposed; servers may extend) |
+| `necromancerHorcruxDestroyers`, ways to destroy a horcrux item (**creeper never**) | **dragons_well**, **ghast_fireball**, **wither**, **wither_skull**, **lightning**, **dragon_breath_bottle** (servers may extend) |
 | `necromancerHorcruxPingRadiusChunks`, hunter “near horcrux chunk” particle ping (**circular**, chunk-center distance) | **10** |
 | `necromancerHorcruxPingInChunkMultiplier`, in-chunk dark-air particle density vs near-ring (all horcruxes) | **2.5** |
+| `necromancerHorcruxChunkDimming`, subtle darkness in horcrux chunk only (0 = off) | **low TBD** (~0.1) |
+| `necromancerWildLichHorcruxMinChunkOffset`, wild lich chest min distance from **rogue site** (never at home) | **5** |
+| `necromancerWildLichHorcruxMaxChunkOffset`, wild lich chest max distance from rogue site | **15** |
+| `questFlutePlayerCooldownSeconds`, cooldown after playing any quest flute | **300** (5 min) |
 | `necromancerGodWizardMeleeBonus`, bonus melee damage with full cursed netherite set | **0.25** (+25%) |
 | `godWizardDamageReduction`, flat DR with full four-piece set | **0.30** |
 | `godWizardRotDamage`, hearts lost per rot tick (partial set scales) | **1** heart |

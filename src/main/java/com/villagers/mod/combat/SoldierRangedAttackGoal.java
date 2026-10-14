@@ -13,7 +13,11 @@ import java.util.EnumSet;
 
 /** Keeps distance and triggers {@link SoldierCombatArms} bow shots (villagers are not {@code RangedAttackMob}). */
 public class SoldierRangedAttackGoal extends Goal {
+    private static final int CONTINUE_RECHECK_INTERVAL = 5;
+
     private final PathfinderMob mob;
+    private final CombatRangedMotion rangedMotion = new CombatRangedMotion();
+    private int continueRecheckCooldown;
 
     public SoldierRangedAttackGoal(PathfinderMob mob) {
         this.mob = mob;
@@ -32,12 +36,23 @@ public class SoldierRangedAttackGoal extends Goal {
         if (!SoldierCombatArms.hasRangedReady(villager)) {
             return false;
         }
-        return SoldierCombatArms.inRangedAttackBand(villager, target);
+        return SoldierCombatArms.canShootTarget(villager, target);
     }
 
     @Override
     public boolean canContinueToUse() {
+        if (continueRecheckCooldown > 0) {
+            continueRecheckCooldown--;
+            LivingEntity target = mob.getTarget();
+            return target != null && target.isAlive();
+        }
+        continueRecheckCooldown = CONTINUE_RECHECK_INTERVAL;
         return canUse();
+    }
+
+    @Override
+    public void start() {
+        continueRecheckCooldown = 0;
     }
 
     @Override
@@ -47,7 +62,9 @@ public class SoldierRangedAttackGoal extends Goal {
             return;
         }
         mob.getLookControl().setLookAt(target, 30.0f, 30.0f);
-        SoldierCombatArms.syncHandsForTarget(villager, target);
+        if (mob.tickCount % 3 == 0) {
+            SoldierCombatArms.syncHandsForTarget(villager, target);
+        }
 
         if (SoldierRampartShooting.shouldUseRampartArchery(villager, target)) {
             tickRampartArchery(villager, target);
@@ -69,17 +86,16 @@ public class SoldierRangedAttackGoal extends Goal {
             return;
         }
 
-        mob.getNavigation().stop();
         SoldierCombatArms.tickBowShot(villager, target);
 
-        double dist = combatDistanceSqr(villager, target);
+        double distBlocks = Math.sqrt(combatDistanceSqr(villager, target));
         double max = SoldierCombatConstants.RANGED_ATTACK_MAX_DISTANCE;
         double min = SoldierCombatArms.rangedMinDistance(villager, target);
-        if (dist > max * max && mob.getNavigation().isDone()) {
+        if (distBlocks > max && mob.getNavigation().isDone()) {
             BlockPos anchor = resolveAnchor(villager);
             SoldierRampartShooting.pathToShootPosition(mob, villager, target, anchor);
-        } else if (dist < min * min) {
-            mob.getNavigation().stop();
+        } else {
+            rangedMotion.tickRampartHold(mob, target, distBlocks, min, max);
         }
     }
 
@@ -96,7 +112,9 @@ public class SoldierRangedAttackGoal extends Goal {
                     return;
                 }
             }
-            mob.getNavigation().stop();
+            if (mob.getNavigation().isInProgress()) {
+                mob.getNavigation().stop();
+            }
             return;
         }
 
@@ -106,18 +124,15 @@ public class SoldierRangedAttackGoal extends Goal {
             }
         }
 
-        double dist = combatDistanceSqr(villager, target);
+        double distBlocks = Math.sqrt(combatDistanceSqr(villager, target));
         double max = SoldierCombatConstants.RANGED_ATTACK_MAX_DISTANCE;
         double min = SoldierCombatArms.rangedMinDistance(villager, target);
-        if (dist > max * max) {
-            if (!wallArcher || mob.getY() <= target.getY() + 2.0) {
-                mob.getNavigation().moveTo(target, 0.9);
-            }
-        } else if (dist < min * min) {
-            mob.getNavigation().stop();
-        } else if (mob.getNavigation().isDone() && (!wallArcher || mob.hasLineOfSight(target))) {
-            mob.getNavigation().moveTo(target, 0.65);
+        boolean allowChase = !wallArcher || mob.getY() <= target.getY() + 2.0;
+        if (wallArcher && mob.hasLineOfSight(target)) {
+            allowChase = false;
         }
+        boolean kiteCreeper = SoldierHostileTargets.requiresRangedKiting(target);
+        rangedMotion.tickGround(mob, target, distBlocks, min, max, allowChase, kiteCreeper);
     }
 
     private static double combatDistanceSqr(Villager villager, LivingEntity target) {

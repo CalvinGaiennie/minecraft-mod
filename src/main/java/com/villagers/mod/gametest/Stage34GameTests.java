@@ -13,7 +13,8 @@ import com.villagers.mod.entity.SoldierData;
 import com.villagers.mod.entity.VillagerAttachments;
 import com.villagers.mod.gear.VillagerGearRules;
 import com.villagers.mod.gear.VillagerGearSlot;
-import com.villagers.mod.item.CampaignBootsItem;
+import com.villagers.mod.block.entity.RecruiterBlockEntity;
+import com.villagers.mod.squad.SquadService;
 import com.villagers.mod.war.BlockadeService;
 import com.villagers.mod.war.MutinyService;
 
@@ -31,10 +32,13 @@ public class Stage34GameTests {
     }
 
     @GameTest(template = "empty")
-    public static void stage3_nightwatchHelmetAccepted(GameTestHelper helper) {
-        helper.assertTrue(
-                VillagerGearRules.accepts(VillagerGearSlot.HELMET, VillagersMod.NIGHTWATCH_HELMET.get().getDefaultInstance()),
-                "Nightwatch helmet is valid soldier helmet");
+    public static void stage3_squadNightwatchToggle(GameTestHelper helper) {
+        BlockPos boxPos = BlockPos.ZERO;
+        helper.setBlock(boxPos, VillagersMod.RECRUITER_BOX.get());
+        var be = helper.getLevel().getBlockEntity(boxPos);
+        helper.assertTrue(be instanceof RecruiterBlockEntity, "Squad box present");
+        ((RecruiterBlockEntity) be).setNightwatchEnabled(true);
+        helper.assertTrue(SquadService.squadNightwatch(helper.getLevel(), boxPos), "Squad nightwatch enabled");
         helper.succeed();
     }
 
@@ -46,12 +50,14 @@ public class Stage34GameTests {
     }
 
     @GameTest(template = "empty")
-    public static void stage4_campaignBootsFlag(GameTestHelper helper) {
-        Villager villager = Stage1GameTestSupport.spawnEquippedVillager(helper, BlockPos.ZERO);
-        villager.setData(VillagerAttachments.SOLDIER_DATA.get(), new SoldierData(villager.getUUID()));
-        VillagerGearRules.set(villager, VillagerGearSlot.BOOTS, VillagersMod.CAMPAIGN_BOOTS.get().getDefaultInstance());
-        helper.assertTrue(CampaignBootsItem.isCampaignBoots(
-                VillagerGearRules.get(villager, VillagerGearSlot.BOOTS)), "Campaign boots equipped");
+    public static void stage4_squadCampaignToggle(GameTestHelper helper) {
+        BlockPos boxPos = BlockPos.ZERO;
+        helper.setBlock(boxPos, VillagersMod.RECRUITER_BOX.get());
+        var be = helper.getLevel().getBlockEntity(boxPos);
+        helper.assertTrue(be instanceof RecruiterBlockEntity, "Squad box present");
+        RecruiterBlockEntity squadBox = (RecruiterBlockEntity) be;
+        squadBox.setSquadOnCampaign(true);
+        helper.assertTrue(squadBox.isSquadOnCampaign(), "Squad campaign flag");
         helper.succeed();
     }
 
@@ -93,6 +99,24 @@ public class Stage34GameTests {
     @GameTest(template = "empty")
     public static void stage3_villageProtectionSlowdown(GameTestHelper helper) {
         helper.assertValueEqual(10.0f, com.villagers.mod.village.VillageProtection.breakSlowdownFactor(25), "Max slowdown");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public static void squadBox_assignRampartViaWritLogic(GameTestHelper helper) {
+        BlockPos boxPos = new BlockPos(0, 1, 0);
+        BlockPos rampartPos = new BlockPos(4, 1, 0);
+        helper.setBlock(boxPos, VillagersMod.RECRUITER_BOX.get());
+        helper.setBlock(rampartPos, VillagersMod.RAMPART.get());
+        helper.assertTrue(
+                SquadService.assignRampartToBox(helper.getLevel(), helper.absolutePos(boxPos), helper.absolutePos(rampartPos)),
+                "Rampart links to squad box");
+        var be = helper.getLevel().getBlockEntity(helper.absolutePos(boxPos));
+        helper.assertTrue(be instanceof RecruiterBlockEntity, "Squad box block entity");
+        helper.assertValueEqual(1, ((RecruiterBlockEntity) be).getSquadRamparts().size(), "One linked rampart");
+        helper.assertFalse(
+                SquadService.assignRampartToBox(helper.getLevel(), helper.absolutePos(boxPos), helper.absolutePos(rampartPos)),
+                "Duplicate rampart rejected");
         helper.succeed();
     }
 }

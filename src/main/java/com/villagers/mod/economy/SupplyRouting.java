@@ -21,7 +21,9 @@ public final class SupplyRouting {
 
     public static Optional<RecruiterBlockEntity> findNearestRecruiterBox(Level level, BlockPos origin) {
         RecruiterBlockEntity nearest = null;
+        RecruiterBlockEntity nearestWithWorker = null;
         double nearestDist = Double.MAX_VALUE;
+        double nearestWorkerDist = Double.MAX_VALUE;
         for (BlockPos pos : BlockPos.betweenClosed(
                 origin.offset(-VILLAGE_SCAN, -8, -VILLAGE_SCAN),
                 origin.offset(VILLAGE_SCAN, 8, VILLAGE_SCAN))) {
@@ -37,6 +39,13 @@ public final class SupplyRouting {
                 nearestDist = dist;
                 nearest = recruiter;
             }
+            if (recruiter.hasAssignedSupplyWorker() && dist < nearestWorkerDist) {
+                nearestWorkerDist = dist;
+                nearestWithWorker = recruiter;
+            }
+        }
+        if (nearestWithWorker != null && nearestWorkerDist <= nearestDist + 16) {
+            return Optional.of(nearestWithWorker);
         }
         return Optional.ofNullable(nearest);
     }

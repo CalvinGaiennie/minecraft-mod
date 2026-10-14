@@ -48,7 +48,8 @@ public class MessStationPlacementHandler {
             VillageClaimService.tryCreateHamletAtMess(
                     serverLevel, playerId, player.getName().getString(), pos);
         } else if (existingVillage.getOwnerId().equals(playerId)) {
-            // Same owner expanding an existing claim is allowed.
+            com.villagers.mod.village.VillageClaimMerge.expandToIncludePoint(existingVillage, pos);
+            com.villagers.mod.village.VillageClaimMerge.consolidateOwnedVillages(serverLevel, playerId);
         } else {
             placeEvent.setCanceled(true);
         }

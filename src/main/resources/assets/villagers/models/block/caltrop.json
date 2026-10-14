@@ -1,7 +1,60 @@
 {
-  "parent": "minecraft:block/cube_all",
   "textures": {
-    "all": "minecraft:block/iron_block"
-  }
-
+    "spike": "minecraft:block/iron_bars",
+    "particle": "minecraft:block/iron_bars"
+  },
+  "elements": [
+    {
+      "from": [7, 0, 0],
+      "to": [9, 1, 16],
+      "rotation": { "angle": 45, "axis": "y", "origin": [8, 0, 8] },
+      "faces": {
+        "north": { "texture": "#spike", "uv": [0, 0, 2, 1] },
+        "south": { "texture": "#spike", "uv": [0, 0, 2, 1] },
+        "east": { "texture": "#spike", "uv": [0, 0, 16, 1] },
+        "west": { "texture": "#spike", "uv": [0, 0, 16, 1] },
+        "up": { "texture": "#spike", "uv": [0, 0, 2, 16] },
+        "down": { "texture": "#spike", "uv": [0, 0, 2, 16] }
+      }
+    },
+    {
+      "from": [7, 0, 0],
+      "to": [9, 1, 16],
+      "rotation": { "angle": -45, "axis": "y", "origin": [8, 0, 8] },
+      "faces": {
+        "north": { "texture": "#spike", "uv": [0, 0, 2, 1] },
+        "south": { "texture": "#spike", "uv": [0, 0, 2, 1] },
+        "east": { "texture": "#spike", "uv": [0, 0, 16, 1] },
+        "west": { "texture": "#spike", "uv": [0, 0, 16, 1] },
+        "up": { "texture": "#spike", "uv": [0, 0, 2, 16] },
+        "down": { "texture": "#spike", "uv": [0, 0, 2, 16] }
+      }
+    },
+    {
+      "from": [0, 0, 7],
+      "to": [16, 1, 9],
+      "rotation": { "angle": 45, "axis": "y", "origin": [8, 0, 8] },
+      "faces": {
+        "north": { "texture": "#spike", "uv": [0, 0, 16, 1] },
+        "south": { "texture": "#spike", "uv": [0, 0, 16, 1] },
+        "east": { "texture": "#spike", "uv": [0, 0, 2, 1] },
+        "west": { "texture": "#spike", "uv": [0, 0, 2, 1] },
+        "up": { "texture": "#spike", "uv": [0, 0, 16, 2] },
+        "down": { "texture": "#spike", "uv": [0, 0, 16, 2] }
+      }
+    },
+    {
+      "from": [0, 0, 7],
+      "to": [16, 1, 9],
+      "rotation": { "angle": -45, "axis": "y", "origin": [8, 0, 8] },
+      "faces": {
+        "north": { "texture": "#spike", "uv": [0, 0, 16, 1] },
+        "south": { "texture": "#spike", "uv": [0, 0, 16, 1] },
+        "east": { "texture": "#spike", "uv": [0, 0, 2, 1] },
+        "west": { "texture": "#spike", "uv": [0, 0, 2, 1] },
+        "up": { "texture": "#spike", "uv": [0, 0, 16, 2] },
+        "down": { "texture": "#spike", "uv": [0, 0, 16, 2] }
+      }
+    }
+  ]
 }

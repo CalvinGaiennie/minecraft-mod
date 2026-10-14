@@ -18,7 +18,7 @@ public class VillageMapItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (!level.isClientSide && player instanceof ServerPlayer serverPlayer) {
-            VillagersModNetwork.sendMusterRoll(serverPlayer);
+            VillagersModNetwork.sendVillageAtlas(serverPlayer);
         }
         return InteractionResultHolder.success(player.getItemInHand(hand));
     }

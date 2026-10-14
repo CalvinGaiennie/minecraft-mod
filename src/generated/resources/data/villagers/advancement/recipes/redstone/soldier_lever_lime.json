@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_lever": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:lever"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "villagers:soldier_lever_lime"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_lever"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "villagers:soldier_lever_lime"
+    ]
+  }
+}

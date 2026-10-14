@@ -7,21 +7,19 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 
 import com.villagers.mod.block.RecruiterBlock;
 import com.villagers.mod.block.entity.RecruiterBlockEntity;
-import com.villagers.mod.entity.SoldierConversion;
-import com.villagers.mod.entity.VillagerAttachments;
-import com.villagers.mod.gear.GearReplacement;
+import com.villagers.mod.squad.SquadService;
 import com.villagers.mod.util.SoldierStructureHelper;
 
 public final class RecruiterService {
-    private static final int SCAN = 48;
+    public static final int SCAN = 48;
+    public static final long TICKS_PER_DAY = 24000L;
 
     private RecruiterService() {
     }
 
-    public static void tickLevel(ServerLevel level) {
-        for (var player : level.players()) {
-            tickNearRecruiters(level, player.blockPosition());
-        }
+    /** One player origin — used by {@link com.villagers.mod.performance.DayEconomyWorkQueue}. */
+    public static void tickNearPlayer(ServerLevel level, BlockPos origin) {
+        tickNearRecruiters(level, origin);
     }
 
     private static void tickNearRecruiters(ServerLevel level, BlockPos origin) {
@@ -34,37 +32,27 @@ public final class RecruiterService {
             if (!(level.getBlockState(pos).getBlock() instanceof RecruiterBlock)) {
                 continue;
             }
-            if (!SoldierStructureHelper.hasPostBlockNear(level, pos)) {
+            recruiter.syncActiveRecruitsFromWorld(level);
+            SquadSupplyService.tickDailySupply(level, recruiter);
+            if (!recruiter.canAcceptRecruit()) {
                 continue;
             }
-            syncActiveRecruits(level, pos, recruiter);
-            if (recruiter.canAcceptRecruit()) {
+            if (recruiter.getSquadMode() == com.villagers.mod.squad.SquadMode.RECRUIT) {
                 tryRecruitNear(level, pos, recruiter);
             }
         }
     }
 
-    private static void syncActiveRecruits(ServerLevel level, BlockPos recruiterPos, RecruiterBlockEntity recruiter) {
-        int count = 0;
-        for (var villager : level.getEntitiesOfClass(Villager.class,
-                new net.minecraft.world.phys.AABB(recruiterPos).inflate(SCAN))) {
-            if (villager.hasData(VillagerAttachments.SOLDIER_DATA.get())) {
-                count++;
-            }
-        }
-        recruiter.setActiveRecruits(Math.min(count, RecruiterBlockEntity.MAX_RECRUITS));
-    }
-
     private static void tryRecruitNear(ServerLevel level, BlockPos recruiterPos, RecruiterBlockEntity recruiter) {
+        if (recruiter.getSquadLeaderId() == null) {
+            return;
+        }
         for (var villager : level.getEntitiesOfClass(Villager.class,
                 new net.minecraft.world.phys.AABB(recruiterPos).inflate(SoldierStructureHelper.SCAN_RADIUS))) {
             if (recruiter.getActiveRecruits() >= RecruiterBlockEntity.MAX_RECRUITS) {
                 return;
             }
-            GearReplacement.tryPullEnlistGear(villager, recruiter);
-            if (SoldierConversion.tryConvert(villager)) {
-                recruiter.setActiveRecruits(recruiter.getActiveRecruits() + 1);
-            }
+            SquadService.tryEnlistAndAssign(level, recruiter, villager);
         }
     }
 

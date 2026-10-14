@@ -154,7 +154,7 @@ Cursed effigy (carved pumpkin, bone, hay bale, stick), a scarecrow shape:
 | Bone | Hay bale | Bone |
 |  | Stick |  |
 
-**Horcrux compass** (shapeless): **compass**, **phylactery shard**, **soul sand**, **wither rose** → 1 horcrux compass. Craftable in unlimited quantity; points to nearest horcrux chunk (`necromancer-path.md`).
+**Horcrux compass** (shapeless): **compass**, **phylactery shard**, **soul sand**, **wither rose** → 1 horcrux compass. **Always craftable**; also **super rare loot** in bandit-related structures. Unlimited crafts; points to nearest horcrux chunk (`necromancer-path.md`).
 
 ### Rogue necromancers and phylactery shards
 
@@ -170,9 +170,9 @@ Hunting **rogue necromancers** earns rewards found nowhere else.
 
 ### Horcrux (player-created)
 
-**Not quest-gated**: any player may attempt the ritual **when they have** the ingredients (`necromancer-path.md`). **Many horcruxes** allowed; each costs **1 permanent heart** until the **1-heart floor**. **Casual** necromancers often use shards for the **bone whistle** only; **quest flutes / god wizard set / relics** are optional power-item fuels. **Wild liches** in crypts demonstrate destroy flow first (see crypts above).
+**Not quest-gated**: any player may attempt the ritual **when they have** the ingredients (`necromancer-path.md`). **Many horcruxes** allowed; each costs **1 permanent heart** until the **1-heart floor**. **Casual** necromancers often use shards for the **bone whistle** only; horcrux fuels include **flute**, **one Ashbound piece**, **nether star**, **elytra** (more **TBD**). **Wild liches** in crypts demonstrate destroy flow first (see crypts above).
 
-**Ritual:** **Phylactery shard** + **any quest flute**, **full god wizard armor set**, or **any kings’ relic** (consumed) in **hotbar** while killing a **soul** on the closed list: **any player**, **any acolyte** (NPC or Order player), or **any End flute tyrant** (`necromancer-path.md`). On **first successful** ritual, the player **permanently** loses **absolution** eligibility (`Potion of absolution` above).
+**Ritual:** **Not quest-gated** — anytime with ingredients. **Phylactery shard** + **power item** in **hotbar**: **quest flute**, **one Ashbound piece**, **nether star**, or **elytra** (**not** king relics). Kill a **soul** in the same moment: **any player** (no faction required), **NPC acolyte**, **End flute tyrant**, or **named story villain** — **not** rogues/wild liches/wandering deserter necros (`necromancer-path.md`). **First successful** ritual **permanently** blocks absolution. **Totems** are **not** valid fuel.
 
 **Storage:** Each horcrux in a **chest** anywhere; passives while **≥1** exists. **Ping:** environmental, dark particles, **poisoned animals** in horcrux chunk (`necromancer-path.md`).
 
@@ -181,10 +181,10 @@ Hunting **rogue necromancers** earns rewards found nowhere else.
 **Passives:**
 
 - **Immune** to **poison** and **harm / damage potions** (long **cursed armor** wear).
-- **Lethal damage** → **pseudo-death** (3 min no clicks, move, keep inv). **No teleport** on trigger.
+- **Lethal damage** → **pseudo-death** (**3 min**, always): **no interaction**, can walk, keep inventory; then **respawn at nearest horcrux** chest location.
 - **True death** only when **all** horcruxes are **destroyed** (not merely dropped or stolen).
 
-**Destroy horcrux:** survives normal mining/fire. **Primary (hunter finish):** **throw into the Dragon’s Well**: **anytime** (dragon alive or dead). **Also:** ghast fireball, wither, lightning (rod/channeling), optional **breath bottle** splash. Config `necromancerHorcruxDestroyers`. **Intro quest:** the mother’s hint covers **monster / storm** methods only, **not** the Well (`necromancer-path.md`). **God wizard armor:** **indestructible** like relics; **binding**: no manual unequip; **pseudo-death keeps armor**; consumable only via **horcrux** (or **TBD** rituals). True death drops pieces normally.
+**Destroy horcrux:** item entity **immune** to lava, fire, and **creeper** explosions. **Primary:** **throw into Dragon’s Well**. **Also:** ghast fireball, wither, **lightning within ~2 blocks** of item on ground, optional breath bottle. **Not** creepers. Config `necromancerHorcruxDestroyers`. **Intro quest:** mother hints **wither/ghast/lightning** only, **not** Well. **Ashbound armor:** indestructible; binding; pseudo-death keeps armor; **one piece** consumed per horcrux ritual.
 
 **Consider:** active horcrux **corrupts weak nearby units** (soldiers, etc.), **`necromancer-path.md`**; not implemented.
 

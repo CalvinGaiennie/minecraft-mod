@@ -10,9 +10,9 @@ import java.util.Map;
 
 import com.villagers.mod.VillagersMod;
 import com.villagers.mod.armies.BanditGenerationScheduler;
-import com.villagers.mod.threat.NewMoonRaidService;
-import com.villagers.mod.threat.SwarmService;
-import com.villagers.mod.threat.WanderingNecromancerService;
+import com.villagers.mod.village.NaturalVillageMilitiaService;
+import com.villagers.mod.performance.ServerPerformance;
+import com.villagers.mod.performance.ThreatWorkScheduler;
 
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.Level;
@@ -26,23 +26,17 @@ public class ThreatTickHandler {
         if (event.getLevel().isClientSide || !(event.getLevel() instanceof ServerLevel level)) {
             return;
         }
-        BanditGenerationScheduler.tick(level);
-        if (level.getGameTime() % 20 == 0) {
-            SwarmService.tick(level);
+        NaturalVillageMilitiaService.tick(level);
+        if (NaturalVillageMilitiaService.pendingScanCount(level) == 0
+                && ServerPerformance.hasTickBudget(level)) {
+            BanditGenerationScheduler.tick(level);
         }
         long day = level.getDayTime() / 24000L;
         long lastSwarmDay = lastSwarmDayByDimension.getOrDefault(level.dimension(), -1L);
         if (day != lastSwarmDay && level.getDayTime() % 24000L < 100) {
             lastSwarmDayByDimension.put(level.dimension(), day);
-            for (var player : level.players()) {
-                SwarmService.trySpawnNightly(level, player);
-            }
-            WanderingNecromancerService.tryDailyStrikes(level, day);
+            ThreatWorkScheduler.onNewDay(level, day);
         }
-        if (level.getGameTime() % 100 == 0) {
-            for (var player : level.players()) {
-                NewMoonRaidService.tickForPlayer(level, player);
-            }
-        }
+        ThreatWorkScheduler.tick(level, level.getGameTime());
     }
 }

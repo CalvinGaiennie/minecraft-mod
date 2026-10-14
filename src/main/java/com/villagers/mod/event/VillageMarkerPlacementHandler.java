@@ -46,5 +46,6 @@ public class VillageMarkerPlacementHandler {
             }
             marker.setChanged();
         }
+        com.villagers.mod.village.VillageClaimMerge.consolidateOwnedVillages(serverLevel, playerId);
     }
 }

@@ -11,6 +11,7 @@ import com.villagers.mod.VillagersMod;
 import com.villagers.mod.block.RecruiterBlock;
 import com.villagers.mod.block.entity.ArrowBinBlockEntity;
 import com.villagers.mod.block.entity.RecruiterBlockEntity;
+import com.villagers.mod.gear.GearReplacement;
 import com.villagers.mod.gear.VillagerGearRules;
 import com.villagers.mod.gear.VillagerGearSlot;
 import com.villagers.mod.util.SoldierStructureHelper;
@@ -34,24 +35,11 @@ public final class ArrowResupply {
             return;
         }
         int need = VillagerGearRules.MAX_ARROWS - (arrows.isEmpty() ? 0 : arrows.getCount());
-        BlockPos origin = soldier.blockPosition();
-        BlockPos nearest = null;
-        double best = Double.MAX_VALUE;
-        for (BlockPos pos : BlockPos.betweenClosed(
-                origin.offset(-SCAN, -5, -SCAN), origin.offset(SCAN, 5, SCAN))) {
-            if (!canResupplyFrom(level, pos)) {
-                continue;
-            }
-            double dist = origin.distSqr(pos);
-            if (dist < best) {
-                best = dist;
-                nearest = pos.immutable();
-            }
-        }
+        BlockPos nearest = findResupplyPos(level, soldier);
         if (nearest == null) {
             return;
         }
-        int pulled = pullArrows(level, nearest, need);
+        int pulled = pullArrows(level, soldier, nearest, need);
         if (pulled <= 0) {
             return;
         }
@@ -62,7 +50,30 @@ public final class ArrowResupply {
         VillagerGearRules.set(soldier, VillagerGearSlot.ARROWS, updated);
     }
 
-    private static boolean canResupplyFrom(ServerLevel level, BlockPos pos) {
+    @org.jetbrains.annotations.Nullable
+    private static BlockPos findResupplyPos(ServerLevel level, Villager soldier) {
+        BlockPos origin = soldier.blockPosition();
+        RecruiterBlockEntity squadBox = GearReplacement.findSquadBoxForSoldier(level, soldier);
+        if (squadBox != null && squadBox.hasArrows()) {
+            return squadBox.getBlockPos();
+        }
+        BlockPos nearest = null;
+        double best = Double.MAX_VALUE;
+        for (BlockPos pos : BlockPos.betweenClosed(
+                origin.offset(-SCAN, -5, -SCAN), origin.offset(SCAN, 5, SCAN))) {
+            if (!canResupplyFrom(level, pos, soldier)) {
+                continue;
+            }
+            double dist = origin.distSqr(pos);
+            if (dist < best) {
+                best = dist;
+                nearest = pos.immutable();
+            }
+        }
+        return nearest;
+    }
+
+    private static boolean canResupplyFrom(ServerLevel level, BlockPos pos, Villager soldier) {
         if (level.getBlockState(pos).is(VillagersMod.ARROW_BIN.get())) {
             BlockEntity be = level.getBlockEntity(pos);
             if (be instanceof ArrowBinBlockEntity bin) {
@@ -76,15 +87,17 @@ public final class ArrowResupply {
         }
         if (level.getBlockState(pos).getBlock() instanceof RecruiterBlock) {
             BlockEntity be = level.getBlockEntity(pos);
-            return be instanceof RecruiterBlockEntity recruiter && recruiter.hasArrows();
+            return be instanceof RecruiterBlockEntity recruiter
+                    && recruiter.hasArrows()
+                    && recruiter.mayWithdrawGear(soldier);
         }
         return false;
     }
 
-    private static int pullArrows(ServerLevel level, BlockPos pos, int max) {
+    private static int pullArrows(ServerLevel level, Villager soldier, BlockPos pos, int max) {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof RecruiterBlockEntity recruiter) {
-            return recruiter.withdrawArrows(max);
+            return recruiter.withdrawArrows(soldier, max);
         }
         if (be instanceof ArrowBinBlockEntity bin) {
             int taken = 0;

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "minecraft:blaze_rod"
+    },
+    "E": {
+      "item": "minecraft:echo_shard"
+    },
+    "W": {
+      "item": "minecraft:wither_skeleton_skull"
+    }
+  },
+  "pattern": [
+    "  E",
+    " W ",
+    "B  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "villagers:necromancer_wand"
+  }
+}

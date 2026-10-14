@@ -4,13 +4,14 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import com.villagers.mod.entity.SoldierData;
+import com.villagers.mod.block.RampartBlock;
+import com.villagers.mod.squad.SquadService;
 import com.villagers.mod.util.SoldierStructureHelper;
 
 import org.jetbrains.annotations.Nullable;
@@ -29,6 +30,16 @@ public final class SoldierHoldGround {
 
     @Nullable
     public static BlockPos resolveAnchor(ServerLevel level, Villager soldier, SoldierData data) {
+        BlockPos personal = data.getAssignedRampart();
+        if (personal != null && level.getBlockState(personal).getBlock() instanceof RampartBlock) {
+            return personal;
+        }
+        if (data.getSquadBoxPos() != null) {
+            BlockPos linked = SquadService.nearestLinkedRampart(level, data.getSquadBoxPos(), soldier.blockPosition());
+            if (linked != null) {
+                return linked;
+            }
+        }
         return SoldierStructureHelper.findNearestRampart(
                         level, soldier.blockPosition(), RampartPathing.RAMPART_SEEK_RADIUS)
                 .orElse(data.getAssignedPostBed());
@@ -51,7 +62,7 @@ public final class SoldierHoldGround {
         double bestVisibleDist = soldierRange * soldierRange;
         LivingEntity bestHidden = null;
         double bestHiddenDist = soldierRange * soldierRange;
-        for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, box, e -> e instanceof Monster && e.isAlive())) {
+        for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, box, SoldierHostileTargets::isEngageable)) {
             if (entity == soldier) {
                 continue;
             }

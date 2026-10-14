@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": {
+      "item": "minecraft:soul_sand"
+    },
+    "W": {
+      "item": "minecraft:black_wool"
+    }
+  },
+  "pattern": [
+    "WWW",
+    "WSW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "villagers:grave_shroud"
+  }
+}

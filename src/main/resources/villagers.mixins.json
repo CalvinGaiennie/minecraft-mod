@@ -1,0 +1,9 @@
+{
+  "required": true,
+  "package": "com.villagers.mod.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": ["CrossbowItemMixin", "FireworkRocketEntityMixin"],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

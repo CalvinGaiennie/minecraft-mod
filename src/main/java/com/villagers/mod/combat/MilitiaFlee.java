@@ -12,6 +12,7 @@ import com.villagers.mod.entity.MilitiaData;
 import com.villagers.mod.entity.VillagerAttachments;
 import com.villagers.mod.util.SoldierStructureHelper;
 import com.villagers.mod.war.CampaignService;
+import com.villagers.mod.war.HornCommandService;
 
 public final class MilitiaFlee {
     private static final double FLEE_RANGE = 16.0;
@@ -23,6 +24,9 @@ public final class MilitiaFlee {
     public static void tick(Villager villager) {
         MilitiaData data = villager.getData(VillagerAttachments.MILITIA_DATA.get());
         if (data == null || villager.level().isClientSide) {
+            return;
+        }
+        if (HornCommandService.isRallyActive(villager, villager.level().getGameTime())) {
             return;
         }
         if (isWithinHomeSafeZone(villager, data)) {

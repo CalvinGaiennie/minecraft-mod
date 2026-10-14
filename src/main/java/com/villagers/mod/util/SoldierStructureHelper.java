@@ -12,7 +12,6 @@ import com.villagers.mod.block.CampBlock;
 import com.villagers.mod.block.FallbackBlock;
 import com.villagers.mod.block.HavenBlock;
 import com.villagers.mod.block.MessStationBlock;
-import com.villagers.mod.block.PostBlock;
 import com.villagers.mod.combat.RampartPathing;
 import com.villagers.mod.block.RecruiterBlock;
 import com.villagers.mod.block.RampartBlock;
@@ -23,6 +22,7 @@ import com.villagers.mod.bed.SoldierBedClaims;
 import com.villagers.mod.bed.VanillaBedHelper;
 import com.villagers.mod.bed.VillagerBedOccupancy;
 import com.villagers.mod.entity.SoldierData;
+import com.villagers.mod.performance.SoldierStructureCache;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -70,34 +70,30 @@ public final class SoldierStructureHelper {
         return Optional.ofNullable(best);
     }
 
-    /** Post blocks mark where recruiters should place beds — not beds themselves. */
-    public static boolean hasPostBlockNear(Level level, BlockPos origin) {
-        for (BlockPos pos : BlockPos.betweenClosed(
-                origin.offset(-SCAN_RADIUS, -5, -SCAN_RADIUS),
-                origin.offset(SCAN_RADIUS, 5, SCAN_RADIUS))) {
-            if (level.getBlockState(pos).getBlock() instanceof PostBlock) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public static boolean hasStockedMessStation(Level level, BlockPos origin) {
         return findStockedMessStation(level, origin).isPresent();
     }
 
     public static Optional<BlockPos> findStockedMessStation(Level level, BlockPos origin) {
+        long gameTime = level.getGameTime();
+        Optional<BlockPos> cached = SoldierStructureCache.getMess(level, origin, gameTime);
+        if (cached != null) {
+            return cached;
+        }
+        Optional<BlockPos> found = Optional.empty();
         for (BlockPos pos : BlockPos.betweenClosed(
                 origin.offset(-SCAN_RADIUS, -5, -SCAN_RADIUS),
                 origin.offset(SCAN_RADIUS, 5, SCAN_RADIUS))) {
             if (level.getBlockState(pos).getBlock() instanceof MessStationBlock) {
                 BlockEntity be = level.getBlockEntity(pos);
                 if (be instanceof MessStationBlockEntity mess && mess.hasSoldierFood()) {
-                    return Optional.of(pos.immutable());
+                    found = Optional.of(pos.immutable());
+                    break;
                 }
             }
         }
-        return Optional.empty();
+        SoldierStructureCache.putMess(level, origin, gameTime, found);
+        return found;
     }
 
     public static Optional<BlockPos> findNearestArrowBin(Level level, BlockPos origin) {
@@ -106,6 +102,11 @@ public final class SoldierStructureHelper {
 
     /** Nearest arrow bin or recruiter box that currently holds arrows. */
     public static Optional<BlockPos> findNearestArrowResupply(Level level, BlockPos origin) {
+        long gameTime = level.getGameTime();
+        Optional<BlockPos> cached = SoldierStructureCache.getArrowResupply(level, origin, gameTime);
+        if (cached != null) {
+            return cached;
+        }
         BlockPos nearest = null;
         double nearestDist = Double.MAX_VALUE;
         for (BlockPos pos : BlockPos.betweenClosed(
@@ -120,7 +121,9 @@ public final class SoldierStructureHelper {
                 nearest = pos.immutable();
             }
         }
-        return Optional.ofNullable(nearest);
+        Optional<BlockPos> found = Optional.ofNullable(nearest);
+        SoldierStructureCache.putArrowResupply(level, origin, gameTime, found);
+        return found;
     }
 
     private static boolean hasArrowResupplyAt(Level level, BlockPos pos) {
@@ -139,6 +142,26 @@ public final class SoldierStructureHelper {
     }
 
     public static Optional<BlockPos> findNearestRampart(Level level, BlockPos origin, int radius) {
+        long gameTime = level.getGameTime();
+        if (radius <= SCAN_RADIUS) {
+            Optional<BlockPos> cached = SoldierStructureCache.getRampart(level, origin, gameTime);
+            if (cached != null) {
+                return cached;
+            }
+            Optional<BlockPos> found = scanNearestRampart(level, origin, radius);
+            SoldierStructureCache.putRampart(level, origin, gameTime, found);
+            return found;
+        }
+        Optional<BlockPos> wideCached = SoldierStructureCache.getRampartWide(level, origin, gameTime);
+        if (wideCached != null) {
+            return wideCached;
+        }
+        Optional<BlockPos> wideFound = scanNearestRampart(level, origin, radius);
+        SoldierStructureCache.putRampartWide(level, origin, gameTime, wideFound);
+        return wideFound;
+    }
+
+    private static Optional<BlockPos> scanNearestRampart(Level level, BlockPos origin, int radius) {
         BlockPos nearest = null;
         double nearestDist = Double.MAX_VALUE;
         for (BlockPos pos : BlockPos.betweenClosed(

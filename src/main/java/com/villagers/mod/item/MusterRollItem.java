@@ -16,7 +16,7 @@ public class MusterRollItem extends Item {
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (!level.isClientSide && player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
-            VillagersModNetwork.sendMusterRoll(serverPlayer);
+            VillagersModNetwork.sendMusterRollBook(serverPlayer);
         }
         return InteractionResultHolder.success(player.getItemInHand(hand));
     }

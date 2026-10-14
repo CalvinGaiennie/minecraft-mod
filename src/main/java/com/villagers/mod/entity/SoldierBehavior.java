@@ -8,15 +8,16 @@ import net.minecraft.world.entity.npc.Villager;
 import com.villagers.mod.entity.VillagerAttachments;
 
 import com.villagers.mod.block.entity.MessStationBlockEntity;
-import com.villagers.mod.combat.SoldierCombat;
-import com.villagers.mod.combat.SoldierCombatConstants;
 import com.villagers.mod.defense.NightwatchGear;
 import com.villagers.mod.combat.RampartPathing;
 import com.villagers.mod.util.SoldierStructureHelper;
 import com.villagers.mod.war.CampaignService;
+import com.villagers.mod.war.HornCommandService;
+import com.villagers.mod.war.SoldierSignalType;
 
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.phys.Vec3;
 
 public class SoldierBehavior {
     private static final int MEALS_PER_DAY = 2;
@@ -40,6 +41,23 @@ public class SoldierBehavior {
             return;
         }
 
+        if (soldier.isSleeping()) {
+            SoldierBedSleep.applyRestHeal(soldier, data);
+            if (SoldierBedSleep.restsUndisturbedByHostiles(soldier, data)) {
+                return;
+            }
+            SoldierBedSleep.wakeNow(soldier);
+        }
+
+        long gameTime = soldier.level().getGameTime();
+        if (HornCommandService.isRallyActive(soldier, gameTime)) {
+            Vec3 rally = HornCommandService.getRallyDestination(soldier, gameTime);
+            if (rally != null) {
+                soldier.getNavigation().moveTo(rally.x, rally.y, rally.z, 1.0);
+            }
+            return;
+        }
+
         if (data.isOnCampaign()) {
             if (shouldEat(soldier.level().getDayTime() % TICKS_PER_DAY)) {
                 eatMealCampaign(soldier, data);
@@ -48,8 +66,9 @@ public class SoldierBehavior {
             }
             return;
         }
-
-        long gameTime = soldier.level().getGameTime();
+        if (data.getActiveSignal() == SoldierSignalType.GUARD_CHIEF && data.getSignalUntilGameTime() > gameTime) {
+            return;
+        }
         if (data.getAwakenUntilGameTime() > gameTime) {
             SoldierBedSleep.wakeIfNeeded(soldier, false);
             GuardDutyPathing.tick(soldier);
@@ -58,37 +77,33 @@ public class SoldierBehavior {
 
         long dayTime = soldier.level().getDayTime() % TICKS_PER_DAY;
         boolean night = dayTime >= 13000 && dayTime < 23000;
+        boolean nightwatch = NightwatchGear.hasSquadNightwatch(soldier);
+
+        if (night && nightwatch) {
+            patrolAtNight(soldier);
+            return;
+        }
+
+        if (SoldierBedSleep.restsUndisturbedByHostiles(soldier, data)) {
+            SoldierBedSleep.tryRestSleep(soldier, data);
+            if (soldier.isSleeping()) {
+                SoldierBedSleep.applyRestHeal(soldier, data);
+            }
+            return;
+        }
 
         if (shouldEat(dayTime)) {
             eatMeal(soldier, data);
             return;
         }
 
-        if (night && NightwatchGear.hasNightwatchHelmet(soldier)) {
-            patrolAtNight(soldier);
-            return;
-        }
-
-        // Nightwatch: sleep by day, patrol at night (inverse of regular soldiers).
-        if (!night && NightwatchGear.hasNightwatchHelmet(soldier)) {
-            if (shouldStayAwakeForCombat(soldier)) {
-                SoldierBedSleep.wakeNow(soldier);
-                GuardDutyPathing.tick(soldier);
-                return;
-            }
-            SoldierBedSleep.trySleepAtAssignedBed(soldier, data);
-            return;
-        }
-
         SoldierBedSleep.wakeIfNeeded(soldier, shouldSleep(dayTime));
 
         if (shouldSleep(dayTime)) {
-            if (shouldStayAwakeForCombat(soldier)) {
-                SoldierBedSleep.wakeNow(soldier);
-                GuardDutyPathing.tick(soldier);
-                return;
+            SoldierBedSleep.tryRestSleep(soldier, data);
+            if (soldier.isSleeping()) {
+                SoldierBedSleep.applyRestHeal(soldier, data);
             }
-            SoldierBedSleep.trySleepAtAssignedBed(soldier, data);
             return;
         }
 
@@ -154,13 +169,6 @@ public class SoldierBehavior {
         if (soldier.getNavigation().isDone()) {
             soldier.getNavigation().moveTo(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0.65);
         }
-    }
-
-    private static boolean shouldStayAwakeForCombat(Villager soldier) {
-        if (soldier instanceof Mob mob && mob.getTarget() != null && mob.getTarget().isAlive()) {
-            return true;
-        }
-        return SoldierCombat.findVisibleHostile(soldier, SoldierCombatConstants.WAKE_HOSTILE_RANGE) != null;
     }
 
 }

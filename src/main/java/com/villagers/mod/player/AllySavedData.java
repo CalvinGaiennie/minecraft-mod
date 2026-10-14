@@ -17,7 +17,7 @@ import java.util.UUID;
 /** One-way ally lists per player (design: ally book persists on player, not item). */
 public final class AllySavedData extends SavedData {
     private static final String DATA_ID = "villagers_allies";
-    private final Map<UUID, Set<UUID>> alliesByOwner = new HashMap<>();
+    private final Map<UUID, Map<UUID, AllyRank>> alliesByOwner = new HashMap<>();
 
     public static AllySavedData get(ServerLevel level) {
         return level.getDataStorage()
@@ -29,10 +29,19 @@ public final class AllySavedData extends SavedData {
         CompoundTag owners = tag.getCompound("Owners");
         for (String key : owners.getAllKeys()) {
             UUID owner = UUID.fromString(key);
-            Set<UUID> allies = new HashSet<>();
-            ListTag list = owners.getCompound(key).getList("Allies", Tag.TAG_COMPOUND);
-            for (int i = 0; i < list.size(); i++) {
-                allies.add(NbtUtils.loadUUID(list.getCompound(i)));
+            Map<UUID, AllyRank> allies = new HashMap<>();
+            CompoundTag ownerTag = owners.getCompound(key);
+            if (ownerTag.contains("RankedAllies", Tag.TAG_LIST)) {
+                ListTag list = ownerTag.getList("RankedAllies", Tag.TAG_COMPOUND);
+                for (int i = 0; i < list.size(); i++) {
+                    CompoundTag one = list.getCompound(i);
+                    allies.put(one.getUUID("Id"), AllyRank.fromString(one.getString("Rank")));
+                }
+            } else {
+                ListTag list = ownerTag.getList("Allies", Tag.TAG_COMPOUND);
+                for (int i = 0; i < list.size(); i++) {
+                    allies.put(NbtUtils.loadUUID(list.getCompound(i)), AllyRank.FRIEND);
+                }
             }
             data.alliesByOwner.put(owner, allies);
         }
@@ -44,11 +53,14 @@ public final class AllySavedData extends SavedData {
         CompoundTag owners = new CompoundTag();
         for (var entry : alliesByOwner.entrySet()) {
             ListTag list = new ListTag();
-            for (UUID ally : entry.getValue()) {
-                list.add(NbtUtils.createUUID(ally));
+            for (var allyEntry : entry.getValue().entrySet()) {
+                CompoundTag one = new CompoundTag();
+                one.putUUID("Id", allyEntry.getKey());
+                one.putString("Rank", allyEntry.getValue().name());
+                list.add(one);
             }
             CompoundTag one = new CompoundTag();
-            one.put("Allies", list);
+            one.put("RankedAllies", list);
             owners.put(entry.getKey().toString(), one);
         }
         tag.put("Owners", owners);
@@ -56,22 +68,50 @@ public final class AllySavedData extends SavedData {
     }
 
     public Set<UUID> getAllies(UUID owner) {
-        return alliesByOwner.computeIfAbsent(owner, k -> new HashSet<>());
+        return new HashSet<>(alliesByOwner.computeIfAbsent(owner, k -> new HashMap<>()).keySet());
     }
 
-    public boolean addAlly(UUID owner, UUID ally) {
+    public AllyRank getRank(UUID owner, UUID ally) {
+        if (owner.equals(ally)) {
+            return AllyRank.CO_OWNER;
+        }
+        Map<UUID, AllyRank> map = alliesByOwner.get(owner);
+        if (map == null) {
+            return null;
+        }
+        return map.get(ally);
+    }
+
+    public boolean addAlly(UUID owner, UUID ally, AllyRank rank) {
         if (owner.equals(ally)) {
             return false;
         }
-        if (getAllies(owner).add(ally)) {
+        Map<UUID, AllyRank> map = alliesByOwner.computeIfAbsent(owner, k -> new HashMap<>());
+        AllyRank previous = map.put(ally, rank);
+        if (previous == null || previous != rank) {
             setDirty();
             return true;
         }
         return false;
     }
 
+    public boolean addAlly(UUID owner, UUID ally) {
+        return addAlly(owner, ally, AllyRank.FRIEND);
+    }
+
+    public boolean setRank(UUID owner, UUID ally, AllyRank rank) {
+        Map<UUID, AllyRank> map = alliesByOwner.get(owner);
+        if (map == null || !map.containsKey(ally)) {
+            return false;
+        }
+        map.put(ally, rank);
+        setDirty();
+        return true;
+    }
+
     public boolean removeAlly(UUID owner, UUID ally) {
-        if (getAllies(owner).remove(ally)) {
+        Map<UUID, AllyRank> map = alliesByOwner.get(owner);
+        if (map != null && map.remove(ally) != null) {
             setDirty();
             return true;
         }
@@ -80,6 +120,10 @@ public final class AllySavedData extends SavedData {
 
     public boolean isAlly(UUID owner, UUID other) {
         return owner.equals(other) || getAllies(owner).contains(other);
+    }
+
+    public Map<UUID, AllyRank> rankedAllies(UUID owner) {
+        return Map.copyOf(alliesByOwner.computeIfAbsent(owner, k -> new HashMap<>()));
     }
 
     public void markDirtySelf() {

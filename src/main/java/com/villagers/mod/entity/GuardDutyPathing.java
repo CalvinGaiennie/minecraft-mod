@@ -5,6 +5,7 @@ import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.Items;
 
 import com.villagers.mod.combat.ArrowResupply;
+import com.villagers.mod.entity.VillagerAttachments;
 import com.villagers.mod.gear.VillagerGearRules;
 import com.villagers.mod.gear.VillagerGearSlot;
 
@@ -15,6 +16,15 @@ public final class GuardDutyPathing {
     public static void tick(Villager villager) {
         if (villager.level().isClientSide) {
             return;
+        }
+        if (villager.isSleeping()) {
+            return;
+        }
+        if (villager.hasData(VillagerAttachments.SOLDIER_DATA.get())) {
+            SoldierData data = villager.getData(VillagerAttachments.SOLDIER_DATA.get());
+            if (data != null && SoldierBedSleep.restsUndisturbedByHostiles(villager, data)) {
+                return;
+            }
         }
         if (needsArrows(villager)) {
             var resupply = ArrowResupply.nearestResupplyPos(

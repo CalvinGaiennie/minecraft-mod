@@ -28,10 +28,11 @@ public final class SoldierRetreat {
             CampaignService.pathRetreatToCamp(soldier, data);
             return;
         }
-        SoldierStructureHelper.findNearestFallback(soldier.level(), soldier.blockPosition()).ifPresent(fallback -> {
-            if (soldier.getNavigation().isDone()) {
-                soldier.getNavigation().moveTo(fallback.getX() + 0.5, fallback.getY(), fallback.getZ() + 0.5, 1.0);
-            }
-        });
+        retreatToFallback(soldier);
+    }
+
+    public static void retreatToFallback(Villager soldier) {
+        SoldierStructureHelper.findNearestFallback(soldier.level(), soldier.blockPosition()).ifPresent(fallback ->
+                soldier.getNavigation().moveTo(fallback.getX() + 0.5, fallback.getY(), fallback.getZ() + 0.5, 1.2));
     }
 }

@@ -10,6 +10,8 @@ import net.neoforged.neoforge.event.level.ChunkEvent;
 
 import com.villagers.mod.VillagersMod;
 import com.villagers.mod.village.NaturalVillageMilitiaService;
+import com.villagers.mod.village.VillageClaimMerge;
+import com.villagers.mod.village.VillageClaimService;
 
 @EventBusSubscriber(modid = VillagersMod.MODID)
 public final class NaturalVillageEvents {
@@ -25,9 +27,12 @@ public final class NaturalVillageEvents {
             return;
         }
         ChunkPos center = player.chunkPosition();
+        ServerLevel level = player.serverLevel();
+        VillageClaimMerge.consolidateOwnedVillages(level, player.getUUID());
+        VillageClaimService.backfillNearbyMessClaims(level, player);
         for (int dx = -4; dx <= 4; dx++) {
             for (int dz = -4; dz <= 4; dz++) {
-                NaturalVillageMilitiaService.scanChunkForBells(player.serverLevel(), new ChunkPos(center.x + dx, center.z + dz));
+                NaturalVillageMilitiaService.requestChunkScan(level, new ChunkPos(center.x + dx, center.z + dz));
             }
         }
     }
@@ -40,6 +45,6 @@ public final class NaturalVillageEvents {
         if (!level.dimension().location().getPath().equals("overworld")) {
             return;
         }
-        NaturalVillageMilitiaService.scanChunkForBells(level, event.getChunk().getPos());
+        NaturalVillageMilitiaService.requestChunkScan(level, event.getChunk().getPos());
     }
 }

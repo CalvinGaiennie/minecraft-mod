@@ -51,9 +51,11 @@ public class TaxBoxBlock extends BaseEntityBlock {
             BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (!level.isClientSide && level instanceof ServerLevel serverLevel
                 && level.getBlockEntity(pos) instanceof TaxBoxBlockEntity taxBox) {
-            TaxCollection.processOpen(serverLevel, pos, taxBox, player);
-            player.openMenu(taxBox);
+            if (TaxCollection.processOpen(serverLevel, pos, taxBox, player)) {
+                player.openMenu(taxBox);
+            }
+            return net.minecraft.world.InteractionResult.CONSUME;
         }
-        return level.isClientSide ? net.minecraft.world.InteractionResult.SUCCESS : net.minecraft.world.InteractionResult.CONSUME;
+        return net.minecraft.world.InteractionResult.SUCCESS;
     }
 }

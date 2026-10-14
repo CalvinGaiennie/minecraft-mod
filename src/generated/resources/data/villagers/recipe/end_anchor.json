@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:beacon"
+    },
+    "C": {
+      "item": "minecraft:end_crystal"
+    },
+    "P": {
+      "item": "minecraft:ender_pearl"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "PBP",
+    "CCC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "villagers:end_anchor"
+  }
+}

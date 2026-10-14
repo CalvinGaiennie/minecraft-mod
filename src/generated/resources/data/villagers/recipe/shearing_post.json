@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:oak_fence"
+    },
+    {
+      "item": "minecraft:shears"
+    },
+    {
+      "item": "minecraft:emerald_block"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "villagers:shearing_post"
+  }
+}

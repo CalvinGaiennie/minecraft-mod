@@ -12,6 +12,7 @@ public class MilitiaData {
     private long lastFoodDay = -1;
     private String displayName = "";
     private boolean traderAtEnlist;
+    private long lastDamageGameTime = -1L;
     @Nullable
     private BlockPos homeBed;
 
@@ -32,6 +33,10 @@ public class MilitiaData {
 
     public void addKill() {
         kills++;
+    }
+
+    public void setKills(int kills) {
+        this.kills = Math.max(0, kills);
     }
 
     public boolean isSeasoned() {
@@ -60,6 +65,14 @@ public class MilitiaData {
 
     public void setTraderAtEnlist(boolean traderAtEnlist) {
         this.traderAtEnlist = traderAtEnlist;
+    }
+
+    public long getLastDamageGameTime() {
+        return lastDamageGameTime;
+    }
+
+    public void setLastDamageGameTime(long lastDamageGameTime) {
+        this.lastDamageGameTime = lastDamageGameTime;
     }
 
     @Nullable

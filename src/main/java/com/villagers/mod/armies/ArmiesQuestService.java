@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.BedBlock;
 import com.villagers.mod.Config;
 import com.villagers.mod.VillagersMod;
 import com.villagers.mod.block.MessStationBlock;
-import com.villagers.mod.block.PostBlock;
+import com.villagers.mod.block.RecruiterBlock;
 import com.villagers.mod.entity.BanditData;
 import com.villagers.mod.entity.VillagerAttachments;
 import com.villagers.mod.village.VillageData;
@@ -41,9 +41,78 @@ public final class ArmiesQuestService {
         ArmiesQuestSavedData.PlayerQuestState state = questData.getOrCreate(owner);
 
         checkD1Threshold(level, owner, state, questData);
+        recoverStaleD1Assault(level, player, state, questData);
         tryStartD1OnEnter(level, player, state, questData);
         tryStartD2OnEnter(level, player, state, questData);
         tickActiveAssault(level, owner, state, questData);
+    }
+
+    /** Quest assault mobs are in-memory only; after reload D1 can look "stuck" with no spawn. */
+    private static void recoverStaleD1Assault(ServerLevel level, ServerPlayer player,
+            ArmiesQuestSavedData.PlayerQuestState state, ArmiesQuestSavedData questData) {
+        if (state.stage != ArmiesQuestStage.D1_ACTIVE) {
+            return;
+        }
+        UUID owner = player.getUUID();
+        List<UUID> ids = assaultMinions.get(owner);
+        if (ids != null && ids.stream().anyMatch(id -> {
+            var entity = level.getEntity(id);
+            return entity != null && entity.isAlive();
+        })) {
+            return;
+        }
+        assaultMinions.remove(owner);
+        VillageData village = state.d1VillageId != null
+                ? VillageManager.get(level).getVillage(state.d1VillageId)
+                : null;
+        if (village == null) {
+            state.stage = ArmiesQuestStage.NOT_STARTED;
+            state.d1VillageId = null;
+            questData.markDirtySelf();
+            return;
+        }
+        int threshold = Config.ARMIES_QUEST_D1_SOLDIER_THRESHOLD.get();
+        if (VillageSoldierCounts.playerInVillage(level, owner, village)
+                && VillageSoldierCounts.countSoldiersInVillage(level, village) >= threshold) {
+            spawnD1Assault(level, owner, village);
+            player.sendSystemMessage(Component.translatable("quest.villagers.d1_start"));
+            return;
+        }
+        state.stage = ArmiesQuestStage.D1_WAITING_ENTER;
+        questData.markDirtySelf();
+    }
+
+    public static void sendQuestStatus(ServerPlayer player) {
+        ServerLevel level = player.serverLevel();
+        UUID owner = player.getUUID();
+        ArmiesQuestSavedData.PlayerQuestState state = ArmiesQuestSavedData.get(level).getOrCreate(owner);
+        int threshold = Config.ARMIES_QUEST_D1_SOLDIER_THRESHOLD.get();
+        player.sendSystemMessage(Component.translatable(
+                "message.villagers.quest_status_header",
+                state.stage.name(),
+                EnlistmentService.isEnlisted(player) ? "yes" : "no",
+                threshold));
+        for (VillageData village : VillageManager.get(level).getVillagesOwnedBy(owner)) {
+            int questSoldiers = VillageSoldierCounts.countSoldiersInVillage(level, village);
+            boolean inside = VillageSoldierCounts.playerInVillage(level, owner, village);
+            player.sendSystemMessage(Component.translatable(
+                    "message.villagers.quest_status_village",
+                    village.getVillageName(),
+                    questSoldiers,
+                    inside ? "yes" : "no"));
+        }
+    }
+
+    public static void resetQuestProgress(ServerPlayer player) {
+        ServerLevel level = player.serverLevel();
+        UUID owner = player.getUUID();
+        ArmiesQuestSavedData questData = ArmiesQuestSavedData.get(level);
+        ArmiesQuestSavedData.PlayerQuestState state = questData.getOrCreate(owner);
+        state.stage = ArmiesQuestStage.NOT_STARTED;
+        state.d1VillageId = null;
+        assaultMinions.remove(owner);
+        d2Assaults.remove(owner);
+        questData.markDirtySelf();
     }
 
     private static void checkD1Threshold(ServerLevel level, UUID owner, ArmiesQuestSavedData.PlayerQuestState state,
@@ -330,7 +399,7 @@ public final class ArmiesQuestService {
             if (!bedOk && level.getBlockState(pos).getBlock() instanceof BedBlock) {
                 bedOk = true;
             }
-            if (!bedOk && level.getBlockState(pos).getBlock() instanceof PostBlock) {
+            if (!bedOk && level.getBlockState(pos).getBlock() instanceof RecruiterBlock) {
                 bedOk = true;
             }
         }

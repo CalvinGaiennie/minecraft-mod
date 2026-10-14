@@ -7,7 +7,7 @@ public class Config {
 
     public static final ModConfigSpec.IntValue ARMIES_QUEST_D1_SOLDIER_THRESHOLD = BUILDER
             .comment("Living soldiers (not militia) in claim to qualify for D1")
-            .defineInRange("armiesQuestD1SoldierThreshold", 30, 1, 500);
+            .defineInRange("armiesQuestD1SoldierThreshold", 15, 1, 500);
 
     public static final ModConfigSpec.BooleanValue ARMIES_QUEST_D1_IGNORE_MOON = BUILDER
             .define("armiesQuestD1IgnoreMoon", true);
@@ -102,6 +102,10 @@ public class Config {
             .comment("When false, always use naturalMilitiaBaseCount regardless of spawn distance")
             .define("naturalMilitiaUseCitadelTierCounts", true);
 
+    public static final ModConfigSpec.IntValue NATURAL_MILITIA_CHUNKS_SCANNED_PER_TICK = BUILDER
+            .comment("Spread bell scans across ticks (lower = less lag on login/chunk load)")
+            .defineInRange("naturalMilitiaChunksScannedPerTick", 1, 1, 16);
+
     public static final ModConfigSpec.DoubleValue ORPHAN_SOLDIER_BONUS_HEALTH = BUILDER
             .defineInRange("orphanSoldierBonusHealth", 4.0, 0.0, 40.0);
 
@@ -112,6 +116,9 @@ public class Config {
     public static final ModConfigSpec.DoubleValue ORPHAN_DESERTION_MULTIPLIER = BUILDER
             .comment("Multiplies desertion likelihood for orphan-raised soldiers/militia (>1 = desert more often)")
             .defineInRange("orphanDesertionMultiplier", 1.5, 1.0, 4.0);
+
+    public static final ModConfigSpec.BooleanValue RELICS_ENABLED = BUILDER
+            .define("relicsEnabled", true);
 
     static final ModConfigSpec SPEC = BUILDER.build();
 }

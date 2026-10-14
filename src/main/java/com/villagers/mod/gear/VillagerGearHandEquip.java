@@ -39,7 +39,9 @@ public final class VillagerGearHandEquip {
         if (slot == null) {
             return false;
         }
-        if (villager.hasData(VillagerAttachments.MILITIA_DATA.get()) && slot == VillagerGearSlot.LEGGINGS) {
+        if (slot == VillagerGearSlot.LEGGINGS
+                && villager.hasData(VillagerAttachments.MILITIA_DATA.get())
+                && !villager.hasData(VillagerAttachments.SOLDIER_DATA.get())) {
             return false;
         }
         ItemStack previous = VillagerGearRules.get(villager, slot).copy();

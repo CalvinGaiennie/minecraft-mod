@@ -5,8 +5,10 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Blocks;
@@ -16,8 +18,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 
 import com.villagers.mod.block.entity.CaltropBlockEntity;
-import com.villagers.mod.block.entity.VillagerBlockEntities;
-
+import com.villagers.mod.combat.CaltropPathing;
 import org.jetbrains.annotations.Nullable;
 
 public class CaltropBlock extends BaseEntityBlock {
@@ -49,6 +50,18 @@ public class CaltropBlock extends BaseEntityBlock {
             return;
         }
         if (!(entity instanceof LivingEntity living) || !living.isAlive()) {
+            return;
+        }
+        if (entity instanceof Villager villager && CaltropPathing.shouldPathAround(villager, level, pos)) {
+            if (entity.tickCount % 10 == 0) {
+                Direction away = Direction.getRandom(level.random);
+                villager.getNavigation()
+                        .moveTo(
+                                pos.getX() + away.getStepX() + 0.5,
+                                pos.getY(),
+                                pos.getZ() + away.getStepZ() + 0.5,
+                                1.0);
+            }
             return;
         }
         if (entity.tickCount % 10 != 0) {

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:oak_fence"
+    },
+    {
+      "item": "minecraft:lead"
+    },
+    {
+      "item": "minecraft:gold_block"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "villagers:hitching_post"
+  }
+}

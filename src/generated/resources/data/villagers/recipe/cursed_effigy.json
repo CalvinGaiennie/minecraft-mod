@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:bone"
+    },
+    "H": {
+      "item": "minecraft:hay_block"
+    },
+    "P": {
+      "item": "minecraft:carved_pumpkin"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    " P ",
+    "BHB",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "villagers:cursed_effigy"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "textures": {
+    "particle": "minecraft:block/oak_planks",
+    "face": "minecraft:block/oak_planks"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 15.5],
+      "to": [16, 16, 16],
+      "faces": {
+        "north": { "texture": "#face" },
+        "south": { "texture": "#face" }
+      }
+    }
+  ]
+}

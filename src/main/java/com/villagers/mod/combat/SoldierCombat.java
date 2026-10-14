@@ -10,6 +10,7 @@ import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.level.Level;
@@ -20,7 +21,15 @@ import com.villagers.mod.entity.SoldierBedSleep;
 import com.villagers.mod.entity.SoldierData;
 import com.villagers.mod.entity.VeteranData;
 import com.villagers.mod.entity.VillagerAttachments;
+import com.villagers.mod.player.AllyService;
 import com.villagers.mod.threat.BanditService;
+import com.villagers.mod.village.VillageData;
+import com.villagers.mod.village.VillageManager;
+import com.villagers.mod.squad.SquadCombatScan;
+import com.villagers.mod.war.HornCommandService;
+import com.villagers.mod.war.WantedPosterSavedData;
+
+import net.minecraft.world.entity.player.Player;
 import com.villagers.mod.item.VeteranSwordItem;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,6 +50,7 @@ public final class SoldierCombat {
         mob.goalSelector.addGoal(2, new SoldierRangedAttackGoal(mob));
         mob.goalSelector.addGoal(3, new SoldierMeleeAttackGoal(mob));
         mob.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(mob, Monster.class, true));
+        mob.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(mob, Slime.class, true));
     }
 
     public static void disableCombatGoals(Villager villager) {
@@ -48,18 +58,28 @@ public final class SoldierCombat {
             return;
         }
         COMBAT_GOALS.remove(villager.getUUID());
-        mob.setTarget(null);
+        SoldierCombatArms.clearCombatStance(villager.getUUID());
+        CombatTargetAssign.assign(mob, null);
     }
 
     public static void tick(Villager villager) {
         if (villager.level().isClientSide || !(villager instanceof Mob mob)) {
             return;
         }
+        if (HornCommandService.tickRallyOverride(villager, mob)) {
+            suppressPanic(villager);
+            return;
+        }
+        SoldierData soldierDataEarly = villager.getData(VillagerAttachments.SOLDIER_DATA.get());
+        if (soldierDataEarly != null && SoldierBedSleep.restsUndisturbedByHostiles(villager, soldierDataEarly)) {
+            CombatTargetAssign.assign(mob, null);
+            return;
+        }
         if (villager.hasData(VillagerAttachments.MILITIA_DATA.get())) {
             enableCombatGoals(villager);
             LivingEntity hostile = findVisibleHostile(villager, SoldierCombatConstants.WAKE_HOSTILE_RANGE);
             if (hostile != null) {
-                mob.setTarget(hostile);
+                CombatTargetAssign.assign(mob, hostile);
             } else {
                 com.villagers.mod.entity.PostReturnPathing.returnToRampart(villager);
             }
@@ -68,7 +88,7 @@ public final class SoldierCombat {
         }
         if (!shouldEngageHostiles(villager)) {
             if (isVeteranCivilian(villager)) {
-                mob.setTarget(null);
+                CombatTargetAssign.assign(mob, null);
             }
             return;
         }
@@ -87,14 +107,27 @@ public final class SoldierCombat {
                 hostile = SoldierHoldGround.findHostileInEngageZone(villager, anchor);
             }
         }
-        if (hostile == null) {
+        if (soldierData != null
+                && soldierData.getSquadBoxPos() != null
+                && villager.level() instanceof ServerLevel serverLevel) {
+            SquadCombatScan.applySharedTarget(villager, soldierData);
+            if (mob.getTarget() != null && mob.getTarget().isAlive()) {
+                hostile = mob.getTarget();
+            }
+        }
+        if (hostile == null && (mob.getTarget() == null || !mob.getTarget().isAlive())) {
+            hostile = findWantedPlayer(villager, SoldierCombatConstants.WAKE_HOSTILE_RANGE);
+        }
+        if (hostile == null && (mob.getTarget() == null || !mob.getTarget().isAlive())) {
             hostile = findVisibleHostile(villager, SoldierCombatConstants.WAKE_HOSTILE_RANGE);
+        } else if (hostile == null && mob.getTarget() instanceof LivingEntity living && living.isAlive()) {
+            hostile = living;
         }
         if (hostile != null) {
             SoldierBedSleep.wakeIfNeeded(villager, false);
-            mob.setTarget(hostile);
+            CombatTargetAssign.assign(mob, hostile);
         } else {
-            mob.setTarget(null);
+            CombatTargetAssign.assign(mob, null);
             if (soldierData != null && !soldierData.isOnCampaign()
                     && soldierData.getAwakenUntilGameTime() <= gameTime) {
                 com.villagers.mod.entity.PostReturnPathing.returnToRampart(villager);
@@ -126,12 +159,54 @@ public final class SoldierCombat {
     }
 
     @Nullable
+    private static LivingEntity findWantedPlayer(Villager villager, double range) {
+        if (!villager.hasData(VillagerAttachments.SOLDIER_DATA.get())) {
+            return null;
+        }
+        if (!(villager.level() instanceof ServerLevel server)) {
+            return null;
+        }
+        VillageData village = VillageManager.get(server).findVillageAt(
+                villager.blockPosition().getX(),
+                villager.blockPosition().getY(),
+                villager.blockPosition().getZ());
+        if (village == null) {
+            return null;
+        }
+        WantedPosterSavedData wantedData = WantedPosterSavedData.get(server);
+        if (wantedData.wantedInVillage(village.getVillageId()).isEmpty()) {
+            return null;
+        }
+        UUID ownerId = village.getOwnerId();
+        AABB box = villager.getBoundingBox().inflate(range);
+        LivingEntity best = null;
+        double bestDist = range * range;
+        for (Player player : villager.level().getEntitiesOfClass(Player.class, box)) {
+            if (!player.isAlive() || AllyService.isAlly(server, ownerId, player.getUUID())) {
+                continue;
+            }
+            if (!wantedData.isWanted(village.getVillageId(), player.getUUID())) {
+                continue;
+            }
+            if (!villager.hasLineOfSight(player)) {
+                continue;
+            }
+            double dist = villager.distanceToSqr(player);
+            if (dist < bestDist) {
+                bestDist = dist;
+                best = player;
+            }
+        }
+        return best;
+    }
+
+    @Nullable
     public static LivingEntity findVisibleHostile(Villager villager, double range) {
         Level level = villager.level();
         AABB box = villager.getBoundingBox().inflate(range);
         LivingEntity best = null;
         double bestDist = range * range;
-        for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, box, e -> e instanceof Monster && e.isAlive())) {
+        for (LivingEntity entity : level.getEntitiesOfClass(LivingEntity.class, box, SoldierHostileTargets::isEngageable)) {
             if (entity == villager || !villager.hasLineOfSight(entity)) {
                 continue;
             }

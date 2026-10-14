@@ -15,17 +15,26 @@ public class VillagerAttachments {
     @SuppressWarnings("unchecked")
     public static final net.neoforged.neoforge.registries.DeferredHolder<AttachmentType<?>, AttachmentType<SoldierData>> SOLDIER_DATA =
             (net.neoforged.neoforge.registries.DeferredHolder<AttachmentType<?>, AttachmentType<SoldierData>>) (Object)
-                    ATTACHMENTS.register("soldier_data", () -> AttachmentType.builder(() -> new SoldierData()).build());
+                    ATTACHMENTS.register("soldier_data", () -> AttachmentType.builder(() -> new SoldierData())
+                            .serialize(CombatAttachmentCodecs.SOLDIER_DATA)
+                            .copyOnDeath()
+                            .build());
 
     @SuppressWarnings("unchecked")
     public static final net.neoforged.neoforge.registries.DeferredHolder<AttachmentType<?>, AttachmentType<VeteranData>> VETERAN_DATA =
             (net.neoforged.neoforge.registries.DeferredHolder<AttachmentType<?>, AttachmentType<VeteranData>>) (Object)
-                    ATTACHMENTS.register("veteran_data", () -> AttachmentType.builder(() -> new VeteranData()).build());
+                    ATTACHMENTS.register("veteran_data", () -> AttachmentType.builder(() -> new VeteranData())
+                            .serialize(CombatAttachmentCodecs.VETERAN_DATA)
+                            .copyOnDeath()
+                            .build());
 
     @SuppressWarnings("unchecked")
     public static final net.neoforged.neoforge.registries.DeferredHolder<AttachmentType<?>, AttachmentType<MilitiaData>> MILITIA_DATA =
             (net.neoforged.neoforge.registries.DeferredHolder<AttachmentType<?>, AttachmentType<MilitiaData>>) (Object)
-                    ATTACHMENTS.register("militia_data", () -> AttachmentType.builder(() -> new MilitiaData()).build());
+                    ATTACHMENTS.register("militia_data", () -> AttachmentType.builder(() -> new MilitiaData())
+                            .serialize(CombatAttachmentCodecs.MILITIA_DATA)
+                            .copyOnDeath()
+                            .build());
 
     @SuppressWarnings("unchecked")
     public static final net.neoforged.neoforge.registries.DeferredHolder<AttachmentType<?>, AttachmentType<VillagerKitData>> VILLAGER_KIT =

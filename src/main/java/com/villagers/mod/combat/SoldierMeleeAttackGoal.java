@@ -26,7 +26,10 @@ public class SoldierMeleeAttackGoal extends MeleeAttackGoal {
         if (target == null) {
             return true;
         }
-        if (mob.getY() > target.getY() + 2.0) {
+        if (SoldierHostileTargets.requiresRangedKiting(target) && SoldierCombatArms.hasRangedReady(villager)) {
+            return false;
+        }
+        if (mob.getY() > target.getY() + 2.0 && SoldierCombatArms.inRangedAttackBand(villager, target)) {
             return false;
         }
         return SoldierRampartShooting.horizontalDistanceSqr(mob, target)

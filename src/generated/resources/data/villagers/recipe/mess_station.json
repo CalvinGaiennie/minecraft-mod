@@ -4,12 +4,14 @@
   "key": {
     "B": {
       "item": "minecraft:barrel"
+    },
+    "S": {
+      "tag": "minecraft:wooden_slabs"
     }
   },
   "pattern": [
-    "B B",
-    "BBB",
-    "BBB"
+    "SSS",
+    " B "
   ],
   "result": {
     "count": 1,

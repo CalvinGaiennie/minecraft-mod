@@ -1,15 +1,21 @@
 package com.villagers.mod.combat;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.npc.Villager;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
 
 import com.villagers.mod.VillagersMod;
 import com.villagers.mod.block.RampartBlock;
+import com.villagers.mod.block.entity.RecruiterBlockEntity;
+import com.villagers.mod.entity.SoldierData;
+import com.villagers.mod.entity.VillagerAttachments;
+import com.villagers.mod.squad.SquadService;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -26,10 +32,20 @@ public final class RampartPathing {
     public static final int Y_BELOW = 8;
     public static final int Y_ABOVE = 16;
     private static final int MAX_PATHFIND_TRIES = 8;
-    private static final int CACHE_TICKS = 40;
+    private static final int CACHE_TICKS = 80;
+    private static final int RAMPART_LIST_CACHE_TICKS = 50;
+    /** How often idle soldiers re-issue rampart paths (was 20 = ~1 Hz, too stuttery on foot). */
+    private static final int SEEK_INTERVAL_TICKS = 5;
     private static final Map<UUID, CachedRampartTarget> pathCache = new HashMap<>();
+    private static final Map<RampartListKey, CachedRampartList> rampartListCache = new HashMap<>();
 
     private record CachedRampartTarget(BlockPos rampart, long gameTime) {
+    }
+
+    private record RampartListKey(ResourceKey<Level> dimension, ChunkPos chunk, int radius) {
+    }
+
+    private record CachedRampartList(List<BlockPos> ramparts, long gameTime) {
     }
 
     private RampartPathing() {
@@ -41,6 +57,10 @@ public final class RampartPathing {
 
     public static void tickSeekNearestRampart(Villager villager, double speed) {
         if (!(villager.level() instanceof ServerLevel level)) {
+            return;
+        }
+        if ((level.getGameTime() + villager.getId()) % SEEK_INTERVAL_TICKS != 0L
+                && !SoldierRampartShooting.isOnRampart(villager)) {
             return;
         }
         if (SoldierRampartShooting.isOnRampart(villager)) {
@@ -63,7 +83,7 @@ public final class RampartPathing {
             return;
         }
         PathNavigation nav = villager.getNavigation();
-        int repathInterval = speed >= 0.95 ? 8 : 15;
+        int repathInterval = speed >= 0.95 ? 4 : 8;
         if (nav.isDone() || villager.tickCount % repathInterval == 0) {
             nav.moveTo(stand.x, stand.y, stand.z, speed);
         }
@@ -81,7 +101,7 @@ public final class RampartPathing {
             return Optional.of(cached.rampart());
         }
 
-        List<BlockPos> ramparts = collectRamparts(villager.level(), villager.blockPosition(), radius);
+        List<BlockPos> ramparts = collectRampartsForSoldier(villager, radius);
         if (ramparts.isEmpty()) {
             return Optional.empty();
         }
@@ -124,7 +144,51 @@ public final class RampartPathing {
         return Optional.empty();
     }
 
-    private static List<BlockPos> collectRamparts(Level level, BlockPos origin, int radius) {
+    private static List<BlockPos> collectRampartsForSoldier(Villager villager, int radius) {
+        Level level = villager.level();
+        BlockPos origin = villager.blockPosition();
+        if (level instanceof ServerLevel server && villager.hasData(VillagerAttachments.SOLDIER_DATA.get())) {
+            SoldierData data = villager.getData(VillagerAttachments.SOLDIER_DATA.get());
+            if (data != null) {
+                BlockPos personal = data.getAssignedRampart();
+                if (personal != null && level.getBlockState(personal).getBlock() instanceof RampartBlock) {
+                    return List.of(personal);
+                }
+                if (data.getSquadBoxPos() != null) {
+                    RecruiterBlockEntity box = SquadService.squadBox(server, data.getSquadBoxPos());
+                    if (box != null && !box.getSquadRamparts().isEmpty()) {
+                        List<BlockPos> linked = new ArrayList<>();
+                        for (BlockPos rampart : box.getSquadRamparts()) {
+                            if (level.getBlockState(rampart).getBlock() instanceof RampartBlock) {
+                                linked.add(rampart.immutable());
+                            }
+                        }
+                        if (!linked.isEmpty()) {
+                            return linked;
+                        }
+                    }
+                }
+            }
+        }
+        return collectRampartsInRadius(level, origin, radius);
+    }
+
+    private static List<BlockPos> collectRampartsInRadius(Level level, BlockPos origin, int radius) {
+        if (level instanceof ServerLevel server) {
+            long now = server.getGameTime();
+            RampartListKey key = new RampartListKey(server.dimension(), new ChunkPos(origin), radius);
+            CachedRampartList cached = rampartListCache.get(key);
+            if (cached != null && now - cached.gameTime() < RAMPART_LIST_CACHE_TICKS) {
+                return cached.ramparts();
+            }
+            List<BlockPos> list = scanRampartsInRadius(level, origin, radius);
+            rampartListCache.put(key, new CachedRampartList(list, now));
+            return list;
+        }
+        return scanRampartsInRadius(level, origin, radius);
+    }
+
+    private static List<BlockPos> scanRampartsInRadius(Level level, BlockPos origin, int radius) {
         List<BlockPos> list = new ArrayList<>();
         for (BlockPos pos : BlockPos.betweenClosed(
                 origin.offset(-radius, -Y_BELOW, -radius),

@@ -9,8 +9,13 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import com.villagers.mod.block.RecruiterBlock;
 import com.villagers.mod.block.entity.RecruiterBlockEntity;
 import com.villagers.mod.entity.SoldierConversion;
+import com.villagers.mod.entity.SoldierData;
 import com.villagers.mod.entity.VillagerAttachments;
+import com.villagers.mod.squad.SquadMode;
+import com.villagers.mod.squad.SquadService;
 import com.villagers.mod.threat.BanditService;
+
+import org.jetbrains.annotations.Nullable;
 
 public final class GearReplacement {
     private static final int SCAN = 32;
@@ -30,7 +35,7 @@ public final class GearReplacement {
         if (!lacksEnlistGear(villager)) {
             return;
         }
-        RecruiterBlockEntity recruiter = findNearestRecruiter(level, villager.blockPosition());
+        RecruiterBlockEntity recruiter = findNearestRecruiterForEnlist(level, villager.blockPosition());
         if (recruiter == null) {
             return;
         }
@@ -50,7 +55,7 @@ public final class GearReplacement {
             return;
         }
         BlockPos origin = soldier.blockPosition();
-        RecruiterBlockEntity recruiter = findNearestRecruiter(level, origin);
+        RecruiterBlockEntity recruiter = findSquadBoxForSoldier(level, soldier);
         if (recruiter == null) {
             return;
         }
@@ -61,7 +66,7 @@ public final class GearReplacement {
             if (!needsRecruiterGear(slot, current)) {
                 continue;
             }
-            ItemStack replacement = recruiter.withdrawMatchingGear(slot);
+            ItemStack replacement = recruiter.withdrawMatchingGear(soldier, slot);
             if (!replacement.isEmpty()) {
                 VillagerGearRules.set(soldier, slot, replacement);
             }
@@ -69,6 +74,9 @@ public final class GearReplacement {
     }
 
     private static void pullEnlistGear(Villager villager, RecruiterBlockEntity recruiter) {
+        if (!recruiter.mayWithdrawGear(villager)) {
+            return;
+        }
         for (VillagerGearSlot slot : new VillagerGearSlot[] {
                 VillagerGearSlot.HELMET, VillagerGearSlot.CHESTPLATE, VillagerGearSlot.MELEE }) {
             pullSlotIfNeeded(villager, recruiter, slot);
@@ -87,7 +95,7 @@ public final class GearReplacement {
         if (!needsRecruiterGear(slot, current)) {
             return;
         }
-        ItemStack pulled = recruiter.withdrawMatchingGear(slot);
+        ItemStack pulled = recruiter.withdrawMatchingGear(villager, slot);
         if (!pulled.isEmpty()) {
             VillagerGearRules.set(villager, slot, pulled);
         }
@@ -114,7 +122,24 @@ public final class GearReplacement {
         return !VillagerGearRules.accepts(slot, current);
     }
 
-    public static RecruiterBlockEntity findNearestRecruiter(ServerLevel level, BlockPos origin) {
+    @Nullable
+    public static RecruiterBlockEntity findSquadBoxForSoldier(ServerLevel level, Villager soldier) {
+        if (!soldier.hasData(VillagerAttachments.SOLDIER_DATA.get())) {
+            return null;
+        }
+        SoldierData data = soldier.getData(VillagerAttachments.SOLDIER_DATA.get());
+        if (data == null || data.getSquadBoxPos() == null) {
+            return null;
+        }
+        BlockEntity be = level.getBlockEntity(data.getSquadBoxPos());
+        if (be instanceof RecruiterBlockEntity recruiter && recruiter.mayWithdrawGear(soldier)) {
+            return recruiter;
+        }
+        return null;
+    }
+
+    @Nullable
+    public static RecruiterBlockEntity findNearestRecruiterForEnlist(ServerLevel level, BlockPos origin) {
         RecruiterBlockEntity nearest = null;
         double best = Double.MAX_VALUE;
         for (BlockPos pos : BlockPos.betweenClosed(
@@ -124,6 +149,12 @@ public final class GearReplacement {
             }
             BlockEntity be = level.getBlockEntity(pos);
             if (be instanceof RecruiterBlockEntity recruiter) {
+                if (recruiter.getSquadMode() != SquadMode.RECRUIT || recruiter.getSquadLeaderId() == null) {
+                    continue;
+                }
+                if (SquadService.memberCount(level, pos) >= SquadService.MAX_MEMBERS) {
+                    continue;
+                }
                 double dist = origin.distSqr(pos);
                 if (dist < best) {
                     best = dist;
@@ -132,5 +163,11 @@ public final class GearReplacement {
             }
         }
         return nearest;
+    }
+
+    /** @deprecated use {@link #findSquadBoxForSoldier} or {@link #findNearestRecruiterForEnlist} */
+    @Deprecated
+    public static RecruiterBlockEntity findNearestRecruiter(ServerLevel level, BlockPos origin) {
+        return findNearestRecruiterForEnlist(level, origin);
     }
 }

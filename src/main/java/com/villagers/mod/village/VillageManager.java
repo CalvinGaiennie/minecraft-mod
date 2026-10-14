@@ -65,6 +65,7 @@ public class VillageManager {
     }
 
     public VillageData findVillageAt(int x, int y, int z) {
+        VillageData oldest = null;
         for (VillageData village : villages.values()) {
             if (!village.isActive()) {
                 continue;
@@ -72,11 +73,12 @@ public class VillageManager {
             int dx = x - village.getMarkerX();
             int dz = z - village.getMarkerZ();
             double distance = Math.sqrt(dx * dx + dz * dz);
-            if (distance <= village.getRadius()) {
-                return village;
+            if (distance <= village.getRadius()
+                    && (oldest == null || village.getCreatedTime() < oldest.getCreatedTime())) {
+                oldest = village;
             }
         }
-        return null;
+        return oldest;
     }
 
     public boolean canClaim(UUID ownerId, int x, int z, int radius) {

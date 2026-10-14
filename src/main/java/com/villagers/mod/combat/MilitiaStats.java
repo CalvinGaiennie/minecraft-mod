@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import com.villagers.mod.Config;
 import com.villagers.mod.VillagersMod;
 import com.villagers.mod.entity.MilitiaData;
+import com.villagers.mod.entity.MilitiaLabels;
 import com.villagers.mod.entity.OrphanRaised;
 import com.villagers.mod.gear.VillagerGearRules;
 import com.villagers.mod.gear.VillagerGearSlot;
@@ -47,6 +48,8 @@ public final class MilitiaStats {
             damage.setBaseValue(weaponDamage);
             damage.removeModifier(DAMAGE);
         }
+        SoldierMovement.applyCombatWalkSpeed(villager);
+        MilitiaLabels.apply(villager, data);
     }
 
     private static double weaponDamage(Villager villager) {

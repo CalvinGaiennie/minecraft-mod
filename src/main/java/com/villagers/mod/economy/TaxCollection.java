@@ -11,6 +11,9 @@ import net.minecraft.world.item.Items;
 import com.villagers.mod.block.entity.TaxBoxBlockEntity;
 import com.villagers.mod.entity.SoldierData;
 import com.villagers.mod.entity.VillagerAttachments;
+import com.villagers.mod.player.VillageOpsPermission;
+import com.villagers.mod.village.VillageData;
+import com.villagers.mod.village.VillageManager;
 import com.villagers.mod.village.VillageZone;
 import com.villagers.mod.war.BlockadeService;
 
@@ -26,11 +29,25 @@ public final class TaxCollection {
     private TaxCollection() {
     }
 
-    /** Runs when a player opens a tax box anywhere in the world. */
-    public static void processOpen(ServerLevel level, BlockPos taxBoxPos, TaxBoxBlockEntity taxBox, Player player) {
+    /** Runs when a player opens a tax box anywhere in the world. @return false if the chest must stay closed */
+    public static boolean processOpen(ServerLevel level, BlockPos taxBoxPos, TaxBoxBlockEntity taxBox, Player player) {
+        VillageData village = VillageManager.get(level).findVillageAt(
+                taxBoxPos.getX(), taxBoxPos.getY(), taxBoxPos.getZ());
+        if (village != null && !VillageOpsPermission.mayManageVillage(level, player.getUUID(), village)) {
+            player.displayClientMessage(Component.translatable("message.villagers.tax_not_owner"), true);
+            return false;
+        }
         long day = level.getDayTime() / TICKS_PER_DAY;
         long lastDay = taxBox.getLastTaxDay();
-        int daysDue = lastDay < 0 ? 1 : (int) Math.min(MAX_ACCUMULATED_DAYS, Math.max(1, day - lastDay));
+        int members = TaxSchedule.membersNearTaxBox(level, taxBoxPos);
+        int interval = TaxSchedule.minDaysBetweenCollections(members);
+        int daysSince = lastDay < 0 ? interval : (int) (day - lastDay);
+        if (daysSince < interval) {
+            player.displayClientMessage(
+                    Component.translatable("message.villagers.tax_open_too_soon", interval - daysSince), true);
+            return true;
+        }
+        int daysDue = lastDay < 0 ? 1 : (int) Math.min(MAX_ACCUMULATED_DAYS, Math.max(1, daysSince / Math.max(1, interval)));
 
         List<VillageZone.Circle> zone = VillageZone.taxCircles(level, taxBoxPos);
         int zoneRadius = VillageZone.primaryTaxRadius(level, taxBoxPos);
@@ -59,6 +76,7 @@ public final class TaxCollection {
             summary = summary.append(Component.translatable("message.villagers.tax_open_no_soldiers"));
         }
         player.displayClientMessage(summary, true);
+        return true;
     }
 
     /** @deprecated Use {@link #processOpen}; kept for tests. */

@@ -5,8 +5,10 @@ import net.minecraft.world.entity.npc.Villager;
 
 import com.villagers.mod.Config;
 import com.villagers.mod.combat.BanditCombat;
+import com.villagers.mod.combat.SoldierMovement;
 import com.villagers.mod.entity.BanditData;
 import com.villagers.mod.entity.VillagerAttachments;
+import com.villagers.mod.performance.CombatVillagerIndex;
 
 public final class BanditService {
     private BanditService() {
@@ -50,10 +52,13 @@ public final class BanditService {
         villager.removeData(VillagerAttachments.MILITIA_DATA.get());
         villager.removeData(VillagerAttachments.SOLDIER_DATA.get());
         com.villagers.mod.gear.VillagerGearRules.clearKitForVanillaEquipmentMob(villager);
+        com.villagers.mod.entity.SoldierProfessionGuard.stripCommerceForCombatRole(villager);
         villager.setData(VillagerAttachments.BANDIT_DATA.get(), data);
         villager.setCustomName(name != null ? name : net.minecraft.network.chat.Component.translatable("entity.villagers.bandit"));
         villager.setCustomNameVisible(true);
+        SoldierMovement.applyCombatWalkSpeed(villager);
         BanditCombat.enableCombatGoals(villager);
+        CombatVillagerIndex.track(villager);
     }
 
     public static boolean isBandit(Villager villager) {

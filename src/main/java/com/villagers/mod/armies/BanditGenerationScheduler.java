@@ -7,13 +7,14 @@ import net.minecraft.world.level.Level;
 
 import com.villagers.mod.Config;
 import com.villagers.mod.VillagersMod;
+import com.villagers.mod.performance.ServerPerformance;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public final class BanditGenerationScheduler {
     /** Small budget: each attempt can force one distant chunk to generate. */
-    private static final int PLACEMENT_ATTEMPTS_PER_TICK = 2;
+    private static final int PLACEMENT_ATTEMPTS_PER_TICK = 1;
     private static final int MAX_CHUNK_GENS_PER_TICK = 1;
     private static final int MAX_ATTEMPTS_PER_SITE = 80;
 
@@ -31,7 +32,7 @@ public final class BanditGenerationScheduler {
     }
 
     public static void tick(ServerLevel level) {
-        if (level.players().isEmpty()) {
+        if (level.players().isEmpty() || !ServerPerformance.hasTickBudget(level)) {
             return;
         }
         Job job = JOBS.get(level.dimension());

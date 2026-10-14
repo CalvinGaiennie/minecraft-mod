@@ -22,9 +22,9 @@ O2 — hunt and kill the big bandit leader (player finish only)
 
 ## D1 — **The muster that drew eyes**
 
-**Trigger:** The **first** owned village where you reach **`armiesQuestD1SoldierThreshold`** living **soldiers** (ranked **Soldier** only; **militia does not count**) in the claim zone (default **30**, config). Fires **once per player UUID**.
+**Trigger:** The **first** owned village where you reach **`armiesQuestD1SoldierThreshold`** living **soldiers** (ranked **Soldier** only; **militia does not count**) in the claim zone (default **15**, config). Fires **once per player UUID**.
 
-**Start:** The assault begins **the moment you enter that village’s claim** while it still has **≥30** soldiers (any moon). If you hit 30 while **already inside** the zone, it starts **immediately**. No delay day. If you never enter after hitting 30 elsewhere, nothing happens until you **walk into** that village.
+**Start:** The assault begins **the moment you enter that village’s claim** while it still has **≥15** soldiers (any moon). If you hit 15 while **already inside** the zone, it starts **immediately**. No delay day. If you never enter after hitting 15 elsewhere, nothing happens until you **walk into** that village.
 
 **Target village:** That **first 30-soldier** village (the claim where the count crossed the threshold). Fight happens **there**.
 
@@ -69,25 +69,25 @@ O2 — hunt and kill the big bandit leader (player finish only)
 
 **Garland cannot be fully killed in D2.**
 
-**Capture & guide (author draft, not implemented):** During the assault, player may **capture** one Garland soldier alive. He offers to lead the owner to **the Rook’s castle** only if the expedition musters **≥ N soldiers** from **camp**. On the march he **prompts recruiting more** at checkpoints (**TBD**). Route passes a **village near the castle**; the guide **escapes** there. **Kidnap** follows shortly after (**prison arc** — see `notes/tbd-garland-fortress-prison-arena.md`). **`torn_map_half`** may merge with guide intel **TBD**.
+**Capture & guide (author draft, not implemented):** During the assault, player may **capture** one Garland soldier alive. He offers to lead the owner to **the Rook’s castle** only if the expedition musters **≥ N soldiers** from **camp** (**N TBD**). **No** extra “recruit to target X” on the march (author **2026-10-08**). Route passes a **village near the castle**; the guide **escapes** there. **Kidnap** when the owner enters an **authored trigger spot** near the compound (**prison arc** — `notes/tbd-garland-fortress-prison-arena.md`). **`torn_map_half`** **not** required to start O2.
 
 ---
 
 ## O2 — **No more running**
 
-**Start:** After **O1** (Corvin dead) and **D2** flee item **`torn_map_half`**; quest stage **O2 armed** (**TBD** exact flag).
+**Start:** After **O1** (Corvin dead) and **D2** (captured guide path); **`torn_map_half` optional** (not O2 gate). Quest stage **O2 armed** (**TBD** exact flag).
 
-**Find Garland (no compass):** Captured **guide** leads the march after D2; **≥ N soldiers** required to **start** and soft targets to **recruit more** along the way. **No** Rook's Trail Compass (**remove** craft if still in data).
+**Find Garland (no compass):** Captured **guide** leads the march after D2; **≥ N soldiers** required to **start** (**N TBD**). **No** Rook's Trail Compass (**remove** craft if still in data).
 
-**Kidnap gate:** After **guide escapes** at the **approach village**, not on first region visit. Army remains **outside** when owner is taken into the **prison** (Act 2 in draft doc).
+**Kidnap gate:** After **guide escapes**, entering the **marked kidnap volume** at the fortress approach. Army remains **outside** during prison.
 
-**Goal (surface):** Kill **Garland the Rook**. **Player finish only** (after prison arc **TBD**).
+**Goal (surface):** Kill **Garland the Rook** (**player finish**). **Rookbreaker** title + **signet** on **Garland** kill, **not** the prison mace champion.
 
 ### Draft — Fortress approach & prison arena (not implemented)
 
 **Discussion doc:** [`notes/tbd-garland-fortress-prison-arena.md`](notes/tbd-garland-fortress-prison-arena.md).
 
-**Prison flow (author):** **Cell** + fellow prisoner → **tower** (see army) → **main arena** (warm-ups, waves, gear ladder) → optional prisoner forks (**steal**, **throw fight** = −1 upgrade, **beat/kill bad prisoner**) → **mace champion** (**lose if below 2 hearts**). **Win:** Garland hauls you to **tower** to **watch** his men hit your army → **naked escape race** to camp → **lead survivors** (escape **easier** if two prisoners helped: **intel** saves men, **ally** on final egress). **No execution.** **Lose** mace: bad end **TBD** (not win-path race). **Rookbreaker** **TBD**.
+**Prison flow (author, see full doc):** **Prison wing** → **Garland** walks you to **tower** → **~7 warm-ups** + waves **TBD** → forks → **mace champion** (must **die** to **win** branch). **Knockout** under 2 hearts → **one-way** (no mace rematch) → **tower watch** + **escape**; **failed escape** → released when **≥ 95%** of your soldiers dead. **Capture:** gear in **Garland’s quarters** chest. **Rookbreaker** on **Garland** surface kill only. **MP** **TBD**.
 
 **Rewards:**
 
@@ -122,7 +122,7 @@ Citadel **relic fortresses** use **different** characters (`endgame.md`).
 
 | Key | Default | Notes |
 | --- | --- | --- |
-| `armiesQuestD1SoldierThreshold` | **30** | **Soldiers** only, in village zone |
+| `armiesQuestD1SoldierThreshold` | **15** | **Soldiers** only, in village zone |
 | `armiesQuestD1IgnoreMoon` | **true** | |
 | `armiesQuestBossPlayerKillOnly` | **true** | |
 | `titleRookbreakerDesertionMultiplier` | **0.90** | **−10%** desertion while **Rookbreaker** title active |

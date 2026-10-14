@@ -2,6 +2,8 @@ package com.villagers.mod.entity;
 
 import net.minecraft.core.BlockPos;
 
+import com.villagers.mod.war.SoldierSignalType;
+
 import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
@@ -24,6 +26,21 @@ public class SoldierData {
     private int practiceKills;
     @Nullable
     private BlockPos assignedPostBed;
+    @Nullable
+    private BlockPos squadBoxPos;
+    private boolean squadLeader;
+    private boolean actingLeader;
+    @Nullable
+    private BlockPos assignedRampart;
+    private SoldierSignalType activeSignal = SoldierSignalType.NONE;
+    private long signalUntilGameTime;
+    private double signalX;
+    private double signalY;
+    private double signalZ;
+    private int signalRadius;
+    @Nullable
+    private BlockPos redstoneTargetPos;
+    private long redstoneTargetUntil;
 
     public SoldierData() {
     }
@@ -101,6 +118,46 @@ public class SoldierData {
         this.assignedPostBed = assignedPostBed == null ? null : assignedPostBed.immutable();
     }
 
+    @Nullable
+    public BlockPos getSquadBoxPos() {
+        return squadBoxPos;
+    }
+
+    public void setSquadBoxPos(@Nullable BlockPos squadBoxPos) {
+        this.squadBoxPos = squadBoxPos == null ? null : squadBoxPos.immutable();
+    }
+
+    public boolean isSquadLeader() {
+        return squadLeader;
+    }
+
+    public void setSquadLeader(boolean squadLeader) {
+        this.squadLeader = squadLeader;
+        if (squadLeader) {
+            this.actingLeader = false;
+        }
+    }
+
+    public boolean isActingLeader() {
+        return actingLeader;
+    }
+
+    public void setActingLeader(boolean actingLeader) {
+        this.actingLeader = actingLeader;
+        if (actingLeader) {
+            this.squadLeader = false;
+        }
+    }
+
+    @Nullable
+    public BlockPos getAssignedRampart() {
+        return assignedRampart;
+    }
+
+    public void setAssignedRampart(@Nullable BlockPos assignedRampart) {
+        this.assignedRampart = assignedRampart == null ? null : assignedRampart.immutable();
+    }
+
     public long getLastDamageGameTime() {
         return lastDamageGameTime;
     }
@@ -155,5 +212,79 @@ public class SoldierData {
         if (practiceKills < 5) {
             practiceKills++;
         }
+    }
+
+    public SoldierSignalType getActiveSignal() {
+        return activeSignal;
+    }
+
+    public void setActiveSignal(SoldierSignalType activeSignal) {
+        this.activeSignal = activeSignal == null ? SoldierSignalType.NONE : activeSignal;
+    }
+
+    public long getSignalUntilGameTime() {
+        return signalUntilGameTime;
+    }
+
+    public void setSignalUntilGameTime(long signalUntilGameTime) {
+        this.signalUntilGameTime = signalUntilGameTime;
+    }
+
+    public double getSignalX() {
+        return signalX;
+    }
+
+    public double getSignalY() {
+        return signalY;
+    }
+
+    public double getSignalZ() {
+        return signalZ;
+    }
+
+    public int getSignalRadius() {
+        return signalRadius;
+    }
+
+    public void setSignalX(double signalX) {
+        this.signalX = signalX;
+    }
+
+    public void setSignalY(double signalY) {
+        this.signalY = signalY;
+    }
+
+    public void setSignalZ(double signalZ) {
+        this.signalZ = signalZ;
+    }
+
+    public void setSignalRadius(int signalRadius) {
+        this.signalRadius = signalRadius;
+    }
+
+    public void clearSignalTarget() {
+        this.signalRadius = 0;
+    }
+
+    @Nullable
+    public BlockPos getRedstoneTargetPos() {
+        return redstoneTargetPos;
+    }
+
+    public void setRedstoneTargetPos(@Nullable BlockPos redstoneTargetPos) {
+        this.redstoneTargetPos = redstoneTargetPos == null ? null : redstoneTargetPos.immutable();
+    }
+
+    public long getRedstoneTargetUntil() {
+        return redstoneTargetUntil;
+    }
+
+    public void setRedstoneTargetUntil(long redstoneTargetUntil) {
+        this.redstoneTargetUntil = redstoneTargetUntil;
+    }
+
+    public void clearRedstoneTarget() {
+        this.redstoneTargetPos = null;
+        this.redstoneTargetUntil = 0L;
     }
 }

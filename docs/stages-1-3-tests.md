@@ -81,7 +81,7 @@ Covered partly by B5, B7, B9; bell/retreat/ranks exercised in code paths above.
 
 **Stage 3–4 MVP:** haven, royal guard post/armor, nightwatch helmet, village gate, camp block, campaign boots, blockade stub, mutiny stub, reassignment writ, caltrops/banner items. See [stages-1-4-completion.md](stages-1-4-completion.md).
 
-**Stage 3–4 extras (see completion doc):** village protection, arrow pickup, beacon buffs, caltrops, enemy build block, banner on mess, visible armor. **Still deferred:** firework/crossbow flares, lever horns, full bow/melee switch, 8-wide castle gates, caltrop path avoidance.
+**Stage 3–4 extras (see completion doc):** village protection, arrow pickup, beacon buffs, caltrops (with path avoidance), enemy build block, banner on mess, visible armor, flares/signal rockets, lever horns. **Still deferred:** full bow/melee switch, 8-wide castle gates.
 
 ---
 

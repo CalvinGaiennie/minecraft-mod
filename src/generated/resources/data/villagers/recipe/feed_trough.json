@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "minecraft:wooden_slabs"
+    },
+    {
+      "tag": "minecraft:wooden_slabs"
+    },
+    {
+      "tag": "minecraft:wooden_slabs"
+    },
+    {
+      "item": "minecraft:hay_block"
+    },
+    {
+      "item": "minecraft:emerald_block"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "villagers:feed_trough"
+  }
+}

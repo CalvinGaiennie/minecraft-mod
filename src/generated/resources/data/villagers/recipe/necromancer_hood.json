@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "minecraft:bone"
+    },
+    "M": {
+      "item": "minecraft:phantom_membrane"
+    },
+    "W": {
+      "item": "minecraft:black_wool"
+    }
+  },
+  "pattern": [
+    "WMW",
+    "WBW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "villagers:necromancer_hood"
+  }
+}

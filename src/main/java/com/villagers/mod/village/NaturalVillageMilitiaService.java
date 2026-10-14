@@ -19,15 +19,67 @@ import com.villagers.mod.gear.VillagerGearRules;
 import com.villagers.mod.gear.VillagerGearSlot;
 import com.villagers.mod.integration.CitadelAnchorSavedData;
 
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.Level;
+
+import java.util.ArrayDeque;
 import java.util.Comparator;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public final class NaturalVillageMilitiaService {
+    private static final Map<ResourceKey<Level>, Deque<net.minecraft.world.level.ChunkPos>> PENDING_SCANS = new HashMap<>();
+    private static final Map<ResourceKey<Level>, Set<Long>> QUEUED_CHUNK_KEYS = new HashMap<>();
+
     private NaturalVillageMilitiaService() {
     }
 
-    /** Scan a newly loaded chunk for village bells and arm natural militia once per bell. */
+    /** Queue a chunk for bell scan (never runs synchronously on chunk load / login). */
+    public static void requestChunkScan(ServerLevel level, net.minecraft.world.level.ChunkPos chunkPos) {
+        if (!level.dimension().location().getPath().equals("overworld")) {
+            return;
+        }
+        ResourceKey<Level> dim = level.dimension();
+        Set<Long> queued = QUEUED_CHUNK_KEYS.computeIfAbsent(dim, k -> new HashSet<>());
+        long key = chunkPos.toLong();
+        if (!queued.add(key)) {
+            return;
+        }
+        PENDING_SCANS.computeIfAbsent(dim, k -> new ArrayDeque<>()).addLast(chunkPos);
+    }
+
+    public static int pendingScanCount(ServerLevel level) {
+        Deque<net.minecraft.world.level.ChunkPos> q = PENDING_SCANS.get(level.dimension());
+        return q == null ? 0 : q.size();
+    }
+
+    /** Called once per overworld tick from {@link com.villagers.mod.event.ThreatTickHandler}. */
+    public static void tick(ServerLevel level) {
+        if (!level.dimension().location().getPath().equals("overworld")) {
+            return;
+        }
+        Deque<net.minecraft.world.level.ChunkPos> queue = PENDING_SCANS.get(level.dimension());
+        if (queue == null || queue.isEmpty()) {
+            return;
+        }
+        Set<Long> queued = QUEUED_CHUNK_KEYS.getOrDefault(level.dimension(), Set.of());
+        int budget = Config.NATURAL_MILITIA_CHUNKS_SCANNED_PER_TICK.get();
+        while (budget-- > 0 && !queue.isEmpty()) {
+            net.minecraft.world.level.ChunkPos pos = queue.pollFirst();
+            queued.remove(pos.toLong());
+            scanChunkForBells(level, pos);
+        }
+    }
+
+    /** Scan a chunk for village bells and arm natural militia once per bell. */
     public static void scanChunkForBells(ServerLevel level, net.minecraft.world.level.ChunkPos chunkPos) {
+        if (!level.getChunkSource().hasChunk(chunkPos.x, chunkPos.z)) {
+            return;
+        }
         int minX = chunkPos.getMinBlockX();
         int minZ = chunkPos.getMinBlockZ();
         for (int dx = 0; dx < 16; dx++) {

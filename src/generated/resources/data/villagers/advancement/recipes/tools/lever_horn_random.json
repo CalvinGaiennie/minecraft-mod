@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_lever_horn": {
+      "conditions": {
+        "items": [
+          {
+            "items": "villagers:lever_horn"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "villagers:lever_horn_random"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_lever_horn"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "villagers:lever_horn_random"
+    ]
+  }
+}

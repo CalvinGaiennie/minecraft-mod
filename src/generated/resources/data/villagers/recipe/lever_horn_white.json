@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "villagers:war_horn"
+    },
+    {
+      "item": "minecraft:white_dye"
+    }
+  ],
+  "result": {
+    "components": {
+      "minecraft:custom_data": {
+        "LeverColor": "white",
+        "RandomOnly": 0
+      }
+    },
+    "count": 1,
+    "id": "villagers:lever_horn"
+  }
+}

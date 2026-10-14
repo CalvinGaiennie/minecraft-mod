@@ -51,6 +51,10 @@ public final class SoldierRanks {
             return label;
         }
 
+        public int minKills() {
+            return minKills;
+        }
+
         public float maxHealth() {
             return maxHealth;
         }
@@ -131,6 +135,7 @@ public final class SoldierRanks {
                         ARMOR_MODIFIER, rank.damageResistance() * 20.0, AttributeModifier.Operation.ADD_VALUE));
             }
         }
+        SoldierMovement.applyCombatWalkSpeed(villager);
     }
 
     public static double homeDamageMultiplier(Villager villager) {

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "minecraft:compass"
+    },
+    {
+      "item": "villagers:phylactery_shard"
+    },
+    {
+      "item": "minecraft:soul_sand"
+    },
+    {
+      "item": "minecraft:wither_rose"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "villagers:horcrux_compass"
+  }
+}

@@ -21,25 +21,37 @@ import com.villagers.mod.block.MobSpawnerCapBlock;
 import com.villagers.mod.block.SimpleModBlock;
 import com.villagers.mod.block.TrainingDummyBlock;
 import com.villagers.mod.block.VillageMarkerBlock;
+import com.villagers.mod.block.WantedPosterBlock;
 import com.villagers.mod.block.entity.VillagerBlockEntities;
 import com.villagers.mod.entity.VillagerAttachments;
 import com.villagers.mod.event.VillagerAttributeSetup;
+import com.villagers.mod.item.AllyBookItem;
+import com.villagers.mod.item.AttackPlanItem;
 import com.villagers.mod.item.AwakenHornItem;
+import com.villagers.mod.item.LeverHornItem;
+import com.villagers.mod.item.SignalRocketItem;
+import com.villagers.mod.item.SoldierHornItem;
+import com.villagers.mod.item.KingdomMapItem;
+import com.villagers.mod.item.SoldierButtonItem;
+import com.villagers.mod.item.SoldierLeverItem;
+import com.villagers.mod.item.WarHornItem;
+import com.villagers.mod.war.SoldierSignalType;
 import com.villagers.mod.item.BanditLedgerItem;
 import com.villagers.mod.item.GarlandQuestCompassItem;
 import com.villagers.mod.item.GarlandSignetItem;
 import com.villagers.mod.item.TornMapHalfItem;
 import com.villagers.mod.item.CaltropsItem;
-import com.villagers.mod.item.CampaignBootsItem;
 import com.villagers.mod.item.VillageBannerItem;
 import com.villagers.mod.item.MusterRollItem;
-import com.villagers.mod.item.NightwatchHelmetItem;
+import com.villagers.mod.combat.SoldierRanks;
 import com.villagers.mod.item.ReassignmentWritItem;
+import com.villagers.mod.item.SoldierRankSpawnEggItem;
 import com.villagers.mod.item.RoyalGuardChestplateItem;
 import com.villagers.mod.item.NecromancerWandItem;
 import com.villagers.mod.item.VillageChronicleItem;
 import com.villagers.mod.item.VillageMapItem;
 import com.villagers.mod.item.VeteranSwordItem;
+import com.villagers.mod.item.WantedPosterItem;
 import com.villagers.mod.item.NecromancerHoodItem;
 import com.villagers.mod.item.NecromancerRobeItem;
 import com.villagers.mod.menu.VillagerMenus;
@@ -87,7 +99,8 @@ public class VillagersMod {
     public static final DeferredItem<BlockItem> MESS_STATION_ITEM = ITEMS.register("mess_station", () -> new BlockItem(MESS_STATION.get(), new Item.Properties()));
 
     public static final DeferredBlock<Block> POST_BLOCK = BLOCKS.register("post_block", PostBlock::new);
-    public static final DeferredItem<BlockItem> POST_BLOCK_ITEM = ITEMS.register("post_block", () -> new BlockItem(POST_BLOCK.get(), new Item.Properties()));
+    public static final DeferredItem<BlockItem> POST_BLOCK_ITEM =
+            ITEMS.register("post_block", () -> new BlockItem(POST_BLOCK.get(), new Item.Properties()));
 
     public static final DeferredBlock<Block> VILLAGE_MARKER = BLOCKS.register("village_marker", () -> new VillageMarkerBlock());
     public static final DeferredItem<BlockItem> VILLAGE_MARKER_ITEM = ITEMS.register("village_marker", () -> new BlockItem(VILLAGE_MARKER.get(), new Item.Properties()));
@@ -122,21 +135,56 @@ public class VillagersMod {
     public static final DeferredBlock<Block> CALTROP_BLOCK = BLOCKS.register("caltrop", () -> new CaltropBlock());
     public static final DeferredItem<BlockItem> CALTROPS = ITEMS.register("caltrops", () -> new CaltropsItem(CALTROP_BLOCK.get(), new Item.Properties().stacksTo(64)));
 
+    public static final DeferredBlock<Block> WANTED_POSTER = BLOCKS.register("wanted_poster", () -> new WantedPosterBlock());
+    public static final DeferredItem<BlockItem> WANTED_POSTER_ITEM =
+            ITEMS.register("wanted_poster", () -> new WantedPosterItem(WANTED_POSTER.get(), new Item.Properties()));
+
     public static final DeferredItem<VeteranSwordItem> VETERAN_SWORD = ITEMS.register("veteran_sword", () -> new VeteranSwordItem(new Item.Properties()));
 
-    public static final DeferredItem<NightwatchHelmetItem> NIGHTWATCH_HELMET =
-            ITEMS.register("nightwatch_helmet", () -> new NightwatchHelmetItem(new Item.Properties()));
     public static final DeferredItem<RoyalGuardChestplateItem> ROYAL_GUARD_CHESTPLATE =
             ITEMS.register("royal_guard_chestplate", () -> new RoyalGuardChestplateItem(new Item.Properties()));
-    public static final DeferredItem<CampaignBootsItem> CAMPAIGN_BOOTS =
-            ITEMS.register("campaign_boots", () -> new CampaignBootsItem(new Item.Properties()));
     public static final DeferredItem<ReassignmentWritItem> REASSIGNMENT_WRIT =
             ITEMS.register("reassignment_writ", () -> new ReassignmentWritItem(new Item.Properties().stacksTo(16)));
+    public static final DeferredItem<AttackPlanItem> ATTACK_PLAN =
+            ITEMS.register("attack_plan", () -> new AttackPlanItem(new Item.Properties().stacksTo(16)));
     public static final DeferredItem<VillageBannerItem> VILLAGE_BANNER =
             ITEMS.register("village_banner", () -> new VillageBannerItem(new Item.Properties().stacksTo(16)));
 
+    public static final DeferredItem<WarHornItem> WAR_HORN =
+            ITEMS.register("war_horn", () -> new WarHornItem(new Item.Properties().stacksTo(8)));
+    public static final DeferredItem<LeverHornItem> LEVER_HORN =
+            ITEMS.register("lever_horn", () -> new LeverHornItem(new Item.Properties().stacksTo(8)));
+    public static final DeferredItem<SoldierLeverItem> SOLDIER_LEVER_ITEM =
+            ITEMS.register("soldier_lever", () -> new SoldierLeverItem(new Item.Properties().stacksTo(16)));
+    public static final DeferredItem<SoldierButtonItem> SOLDIER_BUTTON_ITEM =
+            ITEMS.register("soldier_button", () -> new SoldierButtonItem(new Item.Properties().stacksTo(16)));
+    public static final DeferredItem<SignalRocketItem> RALLY_SIGNAL_ROCKET = ITEMS.register(
+            "rally_signal_rocket", () -> new SignalRocketItem(false, new Item.Properties().stacksTo(16)));
+    public static final DeferredItem<SignalRocketItem> STRIKE_SIGNAL_ROCKET = ITEMS.register(
+            "strike_signal_rocket", () -> new SignalRocketItem(true, new Item.Properties().stacksTo(16)));
     public static final DeferredItem<AwakenHornItem> AWAKEN_HORN = ITEMS.register("awaken_horn", () -> new AwakenHornItem(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<SoldierHornItem> FALLBACK_HORN =
+            ITEMS.register("fallback_horn", () -> new SoldierHornItem(SoldierSignalType.FALLBACK, new Item.Properties().stacksTo(8)));
+    public static final DeferredItem<SoldierHornItem> CHARGE_HORN =
+            ITEMS.register("charge_horn", () -> new SoldierHornItem(SoldierSignalType.CHARGE, new Item.Properties().stacksTo(8)));
+    public static final DeferredItem<SoldierHornItem> GUARD_CHIEF_HORN =
+            ITEMS.register("guard_chief_horn", () -> new SoldierHornItem(SoldierSignalType.GUARD_CHIEF, new Item.Properties().stacksTo(8)));
+    public static final DeferredItem<AllyBookItem> ALLY_BOOK =
+            ITEMS.register("ally_book", () -> new AllyBookItem(new Item.Properties().stacksTo(1)));
     public static final DeferredItem<MusterRollItem> MUSTER_ROLL = ITEMS.register("muster_roll", () -> new MusterRollItem(new Item.Properties().stacksTo(1)));
+
+    public static final DeferredItem<SoldierRankSpawnEggItem> SEASONED_SOLDIER_SPAWN_EGG = ITEMS.register(
+            "seasoned_soldier_spawn_egg",
+            () -> new SoldierRankSpawnEggItem(SoldierRanks.Rank.SEASONED, new Item.Properties().stacksTo(64)));
+    public static final DeferredItem<SoldierRankSpawnEggItem> SERGEANT_SOLDIER_SPAWN_EGG = ITEMS.register(
+            "sergeant_soldier_spawn_egg",
+            () -> new SoldierRankSpawnEggItem(SoldierRanks.Rank.SERGEANT, new Item.Properties().stacksTo(64)));
+    public static final DeferredItem<SoldierRankSpawnEggItem> HERO_SOLDIER_SPAWN_EGG = ITEMS.register(
+            "hero_soldier_spawn_egg",
+            () -> new SoldierRankSpawnEggItem(SoldierRanks.Rank.HERO, new Item.Properties().stacksTo(64)));
+    public static final DeferredItem<SoldierRankSpawnEggItem> LEGEND_SOLDIER_SPAWN_EGG = ITEMS.register(
+            "legend_soldier_spawn_egg",
+            () -> new SoldierRankSpawnEggItem(SoldierRanks.Rank.LEGEND, new Item.Properties().stacksTo(64)));
 
     public static final DeferredBlock<Block> BANDIT_CAMP = BLOCKS.register("bandit_camp",
             () -> new BanditCampBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.RED_WOOL)));
@@ -155,6 +203,22 @@ public class VillagersMod {
     public static final DeferredItem<BlockItem> WILD_RANCH_ITEM = ITEMS.register("wild_ranch", () -> new BlockItem(WILD_RANCH.get(), new Item.Properties()));
     public static final DeferredBlock<Block> FARMER_STATION = BLOCKS.register("farmer_station", () -> new SimpleModBlock(Blocks.COMPOSTER));
     public static final DeferredItem<BlockItem> FARMER_STATION_ITEM = ITEMS.register("farmer_station", () -> new BlockItem(FARMER_STATION.get(), new Item.Properties()));
+
+    public static final DeferredBlock<Block> FEED_TROUGH = BLOCKS.register("feed_trough", () -> new SimpleModBlock(Blocks.OAK_SLAB));
+    public static final DeferredItem<BlockItem> FEED_TROUGH_ITEM =
+            ITEMS.register("feed_trough", () -> new BlockItem(FEED_TROUGH.get(), new Item.Properties()));
+    public static final DeferredBlock<Block> SHEARING_POST = BLOCKS.register("shearing_post", () -> new SimpleModBlock(Blocks.OAK_FENCE));
+    public static final DeferredItem<BlockItem> SHEARING_POST_ITEM =
+            ITEMS.register("shearing_post", () -> new BlockItem(SHEARING_POST.get(), new Item.Properties()));
+    public static final DeferredBlock<Block> NESTING_BOX = BLOCKS.register("nesting_box", () -> new SimpleModBlock(Blocks.BARREL));
+    public static final DeferredItem<BlockItem> NESTING_BOX_ITEM =
+            ITEMS.register("nesting_box", () -> new BlockItem(NESTING_BOX.get(), new Item.Properties()));
+    public static final DeferredBlock<Block> SLOP_BUCKET = BLOCKS.register("slop_bucket", () -> new SimpleModBlock(Blocks.CAULDRON));
+    public static final DeferredItem<BlockItem> SLOP_BUCKET_ITEM =
+            ITEMS.register("slop_bucket", () -> new BlockItem(SLOP_BUCKET.get(), new Item.Properties()));
+    public static final DeferredBlock<Block> HITCHING_POST = BLOCKS.register("hitching_post", () -> new SimpleModBlock(Blocks.OAK_FENCE));
+    public static final DeferredItem<BlockItem> HITCHING_POST_ITEM =
+            ITEMS.register("hitching_post", () -> new BlockItem(HITCHING_POST.get(), new Item.Properties()));
     public static final DeferredBlock<Block> MOB_SPAWNER_CAP = BLOCKS.register("mob_spawner_cap", () -> new MobSpawnerCapBlock());
     public static final DeferredItem<BlockItem> MOB_SPAWNER_CAP_ITEM = ITEMS.register("mob_spawner_cap", () -> new BlockItem(MOB_SPAWNER_CAP.get(), new Item.Properties()));
     public static final DeferredBlock<Block> TRAINING_DUMMY = BLOCKS.register("training_dummy", () -> new TrainingDummyBlock());
@@ -175,10 +239,22 @@ public class VillagersMod {
             ITEMS.register("soul_bottle", () -> new Item(new Item.Properties().stacksTo(16)));
     public static final DeferredItem<Item> GRAVE_SHROUD =
             ITEMS.register("grave_shroud", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> HORCRUX_COMPASS =
+            ITEMS.register("horcrux_compass", () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final DeferredItem<Item> FLUTE_CHARGE =
+            ITEMS.register("flute_charge", () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final DeferredItem<Item> QUEST_FLUTE =
+            ITEMS.register("quest_flute", () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<Item> KINGSTREE_CURE =
+            ITEMS.register("kingstree_cure", () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final DeferredItem<Item> END_ANCHOR =
+            ITEMS.register("end_anchor", () -> new Item(new Item.Properties().stacksTo(1)));
     public static final DeferredItem<VillageChronicleItem> VILLAGE_CHRONICLE =
             ITEMS.register("village_chronicle", () -> new VillageChronicleItem(new Item.Properties().stacksTo(16)));
     public static final DeferredItem<VillageMapItem> VILLAGE_MAP =
             ITEMS.register("village_map", () -> new VillageMapItem(new Item.Properties().stacksTo(1)));
+    public static final DeferredItem<KingdomMapItem> KINGDOM_MAP =
+            ITEMS.register("kingdom_map", () -> new KingdomMapItem(new Item.Properties().stacksTo(1)));
 
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> VILLAGERS_TAB = CREATIVE_MODE_TABS.register("villagers_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.villagers"))
@@ -196,19 +272,38 @@ public class VillagersMod {
                 output.accept(HAVEN_BLOCK_ITEM.get());
                 output.accept(ROYAL_GUARD_POST_ITEM.get());
                 output.accept(CAMP_BLOCK_ITEM.get());
-                output.accept(NIGHTWATCH_HELMET.get());
                 output.accept(ROYAL_GUARD_CHESTPLATE.get());
-                output.accept(CAMPAIGN_BOOTS.get());
                 output.accept(REASSIGNMENT_WRIT.get());
+                output.accept(ATTACK_PLAN.get());
                 output.accept(VILLAGE_BANNER.get());
                 output.accept(CALTROPS.get());
+                output.accept(WANTED_POSTER_ITEM.get());
                 output.accept(VETERAN_SWORD.get());
+                output.accept(WAR_HORN.get());
                 output.accept(AWAKEN_HORN.get());
+                output.accept(FALLBACK_HORN.get());
+                output.accept(CHARGE_HORN.get());
+                output.accept(GUARD_CHIEF_HORN.get());
+                output.accept(LEVER_HORN.get());
+                output.accept(SOLDIER_LEVER_ITEM.get());
+                output.accept(SOLDIER_BUTTON_ITEM.get());
+                SignalRocketItem.acceptCreativeTiers(output::accept, false);
+                SignalRocketItem.acceptCreativeTiers(output::accept, true);
+                output.accept(ALLY_BOOK.get());
                 output.accept(MUSTER_ROLL.get());
+                output.accept(SEASONED_SOLDIER_SPAWN_EGG.get());
+                output.accept(SERGEANT_SOLDIER_SPAWN_EGG.get());
+                output.accept(HERO_SOLDIER_SPAWN_EGG.get());
+                output.accept(LEGEND_SOLDIER_SPAWN_EGG.get());
                 output.accept(BANDIT_CAMP_ITEM.get());
                 output.accept(NECROMANCER_CRYPT_ITEM.get());
                 output.accept(WILD_RANCH_ITEM.get());
                 output.accept(FARMER_STATION_ITEM.get());
+                output.accept(FEED_TROUGH_ITEM.get());
+                output.accept(SHEARING_POST_ITEM.get());
+                output.accept(NESTING_BOX_ITEM.get());
+                output.accept(SLOP_BUCKET_ITEM.get());
+                output.accept(HITCHING_POST_ITEM.get());
                 output.accept(MOB_SPAWNER_CAP_ITEM.get());
                 output.accept(TRAINING_DUMMY_ITEM.get());
                 output.accept(GRAVE_MARKER_ITEM.get());
@@ -219,12 +314,19 @@ public class VillagersMod {
                 output.accept(NECROMANCER_ROBE.get());
                 output.accept(SOUL_BOTTLE.get());
                 output.accept(GRAVE_SHROUD.get());
+                output.accept(HORCRUX_COMPASS.get());
+                output.accept(FLUTE_CHARGE.get());
+                output.accept(QUEST_FLUTE.get());
+                output.accept(KINGSTREE_CURE.get());
+                output.accept(END_ANCHOR.get());
                 output.accept(VILLAGE_CHRONICLE.get());
                 output.accept(VILLAGE_MAP.get());
+                output.accept(KINGDOM_MAP.get());
                 output.accept(BANDIT_LEDGER.get());
                 output.accept(TORN_MAP_HALF.get());
                 output.accept(GARLAND_SIGNET.get());
                 output.accept(GARLAND_QUEST_COMPASS.get());
+                com.villagers.mod.relic.KingRelicItems.fillCreative(null, output::accept);
             })
             .withTabsAfter(CreativeModeTabs.SEARCH)
             .build());
@@ -232,6 +334,9 @@ public class VillagersMod {
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public VillagersMod(IEventBus modEventBus, ModContainer modContainer) {
+        // Relic items register on ITEMS in KingRelicItems static init; load before binding ITEMS to the bus.
+        com.villagers.mod.relic.KingRelicItems.ensureRegisteredOnItems();
+
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(VillagerAttributeSetup::onModifyAttributes);
@@ -263,12 +368,17 @@ public class VillagersMod {
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
             event.accept(MESS_STATION_ITEM);
-            event.accept(POST_BLOCK_ITEM);
             event.accept(VILLAGE_MARKER_ITEM);
             event.accept(RAMPART_ITEM);
         }
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             event.accept(AWAKEN_HORN);
+            event.accept(FALLBACK_HORN);
+            event.accept(CHARGE_HORN);
+            event.accept(GUARD_CHIEF_HORN);
+            SignalRocketItem.acceptCreativeTiers(event::accept, false);
+            SignalRocketItem.acceptCreativeTiers(event::accept, true);
+            event.accept(ALLY_BOOK);
             event.accept(MUSTER_ROLL);
         }
     }

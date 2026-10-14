@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "villagers:lever_horn"
+    },
+    {
+      "item": "minecraft:iron_ingot"
+    }
+  ],
+  "result": {
+    "components": {
+      "minecraft:custom_data": {
+        "LeverColor": "white",
+        "RandomOnly": 1
+      }
+    },
+    "count": 1,
+    "id": "villagers:lever_horn"
+  }
+}

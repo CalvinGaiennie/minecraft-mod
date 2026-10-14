@@ -13,10 +13,12 @@ import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 
 import com.villagers.mod.VillagersMod;
 import com.villagers.mod.combat.SoldierRanks;
+import com.villagers.mod.entity.MilitiaData;
 import com.villagers.mod.entity.SoldierBehavior;
 import com.villagers.mod.entity.SoldierData;
 import com.villagers.mod.entity.SoldierBedSleep;
 import com.villagers.mod.entity.VillagerAttachments;
+import com.villagers.mod.squad.SquadService;
 import com.villagers.mod.util.SoldierStructureHelper;
 import com.villagers.mod.gear.VillagerGearRules;
 import com.villagers.mod.gear.VillagerGearSlot;
@@ -39,12 +41,19 @@ public class SoldierCombatEvents {
 
     @SubscribeEvent
     public static void onLivingDamagePost(LivingDamageEvent.Post event) {
-        if (event.getEntity() instanceof Villager villager && villager.hasData(VillagerAttachments.SOLDIER_DATA.get())) {
-            SoldierData data = villager.getData(VillagerAttachments.SOLDIER_DATA.get());
-            if (data != null && event.getNewDamage() > 0) {
-                data.setLastDamageGameTime(villager.level().getGameTime());
-                SoldierBedSleep.wakeNow(villager);
-                SoldierBehavior.signalAwaken(villager, villager.level().getGameTime());
+        if (event.getEntity() instanceof Villager villager && event.getNewDamage() > 0) {
+            if (villager.hasData(VillagerAttachments.SOLDIER_DATA.get())) {
+                SoldierData data = villager.getData(VillagerAttachments.SOLDIER_DATA.get());
+                if (data != null) {
+                    data.setLastDamageGameTime(villager.level().getGameTime());
+                    SoldierBedSleep.wakeNow(villager);
+                    SoldierBehavior.signalAwaken(villager, villager.level().getGameTime());
+                }
+            } else if (villager.hasData(VillagerAttachments.MILITIA_DATA.get())) {
+                MilitiaData data = villager.getData(VillagerAttachments.MILITIA_DATA.get());
+                if (data != null) {
+                    data.setLastDamageGameTime(villager.level().getGameTime());
+                }
             }
         }
     }
@@ -71,6 +80,9 @@ public class SoldierCombatEvents {
                         serverLevel, deadSoldier.getUUID(), bedData, deadSoldier.blockPosition());
                 SoldierStructureHelper.releaseSoldierBed(
                         serverLevel, deadSoldier.getUUID(), bedData.getAssignedPostBed());
+                if (bedData.getSquadBoxPos() != null) {
+                    SquadService.onLeaderDeath(serverLevel, bedData.getSquadBoxPos(), deadSoldier.getUUID());
+                }
             }
         }
         if (event.getEntity() instanceof Villager deadSoldier

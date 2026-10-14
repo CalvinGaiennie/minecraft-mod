@@ -27,9 +27,31 @@ import java.util.UUID;
 
 /** Syncs kit bow/melee to entity hands and fires ranged shots using kit arrows. */
 public final class SoldierCombatArms {
-    private static final int BOW_COOLDOWN_TICKS = 22;
-    private static final int CROSSBOW_COOLDOWN_TICKS = 28;
+    private static final int BOW_COOLDOWN_TICKS = 14;
+    private static final int CROSSBOW_COOLDOWN_TICKS = 18;
+    /** Hysteresis around {@link SoldierCombatConstants#MELEE_PREFER_MAX_DISTANCE} / ranged min. */
+    private static final double STANCE_MELEE_ENTER = SoldierCombatConstants.MELEE_PREFER_MAX_DISTANCE;
+    private static final double STANCE_MELEE_EXIT = SoldierCombatConstants.MELEE_PREFER_MAX_DISTANCE + 0.75;
+    private static final double STANCE_RANGED_ENTER = SoldierCombatConstants.RANGED_PREFER_MIN_DISTANCE + 1.0;
+
+    private enum CombatStance {
+        MELEE,
+        RANGED
+    }
+
+    private static final int COMBAT_ANCHOR_CACHE_TICKS = 40;
+    private static final int WALL_ARCHERY_CACHE_TICKS = 30;
+
     private static final Map<UUID, Long> nextRangedShotGameTime = new HashMap<>();
+    private static final Map<UUID, CombatStance> combatStance = new HashMap<>();
+    private static final Map<UUID, CachedCombatAnchor> combatAnchorCache = new HashMap<>();
+    private static final Map<UUID, CachedWallArchery> wallArcheryCache = new HashMap<>();
+
+    private record CachedCombatAnchor(@Nullable BlockPos pos, long gameTime) {
+    }
+
+    private record CachedWallArchery(boolean prefers, long gameTime) {
+    }
 
     private SoldierCombatArms() {
     }
@@ -38,16 +60,50 @@ public final class SoldierCombatArms {
         nextRangedShotGameTime.remove(villagerId);
     }
 
+    public static void clearCombatStance(UUID villagerId) {
+        combatStance.remove(villagerId);
+        combatAnchorCache.remove(villagerId);
+        wallArcheryCache.remove(villagerId);
+        SoldierRampartShooting.clearShootPositionCache(villagerId);
+    }
+
     @Nullable
     public static BlockPos resolveCombatAnchor(Villager villager) {
         if (!(villager.level() instanceof ServerLevel level)) {
             return null;
         }
+        UUID id = villager.getUUID();
+        long now = level.getGameTime();
+        CachedCombatAnchor cached = combatAnchorCache.get(id);
+        if (cached != null && now - cached.gameTime() < COMBAT_ANCHOR_CACHE_TICKS) {
+            return cached.pos();
+        }
+        BlockPos resolved;
         SoldierData data = villager.getData(VillagerAttachments.SOLDIER_DATA.get());
         if (data != null) {
-            return SoldierHoldGround.resolveAnchor(level, villager, data);
+            resolved = SoldierHoldGround.resolveAnchor(level, villager, data);
+        } else {
+            resolved = SoldierStructureHelper.findNearestRampart(level, villager.blockPosition()).orElse(null);
         }
-        return SoldierStructureHelper.findNearestRampart(level, villager.blockPosition()).orElse(null);
+        combatAnchorCache.put(id, new CachedCombatAnchor(resolved, now));
+        return resolved;
+    }
+
+    /** Cached {@link SoldierRampartShooting#prefersWallArchery} probe (avoids repeated rampart scans). */
+    public static boolean prefersWallArcheryForCombat(Villager villager, ServerLevel level) {
+        BlockPos anchor = resolveCombatAnchor(villager);
+        if (anchor != null && SoldierRampartShooting.isRampartAnchor(level, anchor)) {
+            return true;
+        }
+        UUID id = villager.getUUID();
+        long now = level.getGameTime();
+        CachedWallArchery cached = wallArcheryCache.get(id);
+        if (cached != null && now - cached.gameTime() < WALL_ARCHERY_CACHE_TICKS) {
+            return cached.prefers();
+        }
+        boolean prefers = SoldierStructureHelper.findNearestRampart(level, villager.blockPosition()).isPresent();
+        wallArcheryCache.put(id, new CachedWallArchery(prefers, now));
+        return prefers;
     }
 
     public static boolean hasRangedReady(Villager villager) {
@@ -60,6 +116,9 @@ public final class SoldierCombatArms {
     }
 
     public static double rangedMinDistance(Villager villager, LivingEntity target) {
+        if (SoldierHostileTargets.requiresRangedKiting(target) && hasRangedReady(villager)) {
+            return SoldierCombatConstants.CREEPER_KITE_MIN_DISTANCE;
+        }
         if (usesRampartRangedRules(villager, target)) {
             return SoldierCombatConstants.RAMPART_RANGED_MIN_DISTANCE;
         }
@@ -75,39 +134,83 @@ public final class SoldierCombatArms {
                 && dist <= SoldierCombatConstants.RANGED_ATTACK_MAX_DISTANCE;
     }
 
+    /** Includes close-range shots when kiting creepers (inside normal melee band). */
+    public static boolean canShootTarget(Villager villager, LivingEntity target) {
+        double dist = horizontalCombatDistance(villager, target);
+        if (dist > SoldierCombatConstants.RANGED_ATTACK_MAX_DISTANCE) {
+            return false;
+        }
+        if (hasRangedReady(villager) && SoldierHostileTargets.requiresRangedKiting(target)) {
+            return true;
+        }
+        return inRangedAttackBand(villager, target);
+    }
+
     public static void syncHandsForTarget(Villager villager, @Nullable LivingEntity target) {
         syncKitFromHands(villager);
+        UUID id = villager.getUUID();
         if (target == null || !target.isAlive()) {
+            combatStance.remove(id);
             equipMelee(villager);
             return;
         }
-        if (hasRangedReady(villager) && inRangedAttackBand(villager, target)) {
-            equipRanged(villager);
+        CombatStance stance = combatStance.getOrDefault(id, CombatStance.MELEE);
+        CombatStance next = chooseStance(villager, target, stance);
+        if (next == stance && handsMatchStance(villager, next)) {
             return;
         }
-        double dist = horizontalCombatDistance(villager, target);
-        boolean elevatedArcher = villager.getY() > target.getY() + 2.0 && hasRangedReady(villager);
-        if (elevatedArcher
-                && dist <= SoldierCombatConstants.RANGED_ATTACK_MAX_DISTANCE
-                && usesRampartRangedRules(villager, target)) {
+        combatStance.put(id, next);
+        if (next == CombatStance.RANGED) {
             equipRanged(villager);
-        } else if (!elevatedArcher
-                && dist <= SoldierCombatConstants.MELEE_PREFER_MAX_DISTANCE
-                && !VillagerGearRules.get(villager, VillagerGearSlot.MELEE).isEmpty()) {
+        } else {
             equipMelee(villager);
-        } else if (hasRangedReady(villager)
-                && VillagerGearRules.get(villager, VillagerGearSlot.MELEE).isEmpty()
-                && dist <= SoldierCombatConstants.RANGED_ATTACK_MAX_DISTANCE) {
-            equipRanged(villager);
         }
     }
 
-    static double horizontalCombatDistance(Villager villager, LivingEntity target) {
-        if (villager.level() instanceof ServerLevel level) {
-            BlockPos anchor = resolveCombatAnchor(villager);
-            if (SoldierRampartShooting.prefersWallArchery(villager, level, anchor)) {
-                return Math.sqrt(SoldierRampartShooting.horizontalDistanceSqr(villager, target));
+    private static boolean handsMatchStance(Villager villager, CombatStance stance) {
+        ItemStack main = villager.getMainHandItem();
+        return switch (stance) {
+            case RANGED -> main.is(Items.BOW) || main.is(Items.CROSSBOW);
+            case MELEE -> !main.is(Items.BOW) && !main.is(Items.CROSSBOW);
+        };
+    }
+
+    private static CombatStance chooseStance(Villager villager, LivingEntity target, CombatStance current) {
+        if (!hasRangedReady(villager)) {
+            return CombatStance.MELEE;
+        }
+        if (SoldierHostileTargets.requiresRangedKiting(target)) {
+            return CombatStance.RANGED;
+        }
+        if (VillagerGearRules.get(villager, VillagerGearSlot.MELEE).isEmpty()) {
+            return CombatStance.RANGED;
+        }
+        double dist = horizontalCombatDistance(villager, target);
+        if (dist > SoldierCombatConstants.RANGED_ATTACK_MAX_DISTANCE) {
+            return CombatStance.MELEE;
+        }
+        boolean elevatedArcher = villager.getY() > target.getY() + 2.0 && usesRampartRangedRules(villager, target);
+        if (elevatedArcher) {
+            return CombatStance.RANGED;
+        }
+        if (current == CombatStance.RANGED) {
+            if (dist <= STANCE_MELEE_EXIT) {
+                return CombatStance.MELEE;
             }
+            return CombatStance.RANGED;
+        }
+        if (dist >= STANCE_RANGED_ENTER) {
+            return CombatStance.RANGED;
+        }
+        if (dist <= STANCE_MELEE_ENTER) {
+            return CombatStance.MELEE;
+        }
+        return current;
+    }
+
+    static double horizontalCombatDistance(Villager villager, LivingEntity target) {
+        if (villager.level() instanceof ServerLevel level && prefersWallArcheryForCombat(villager, level)) {
+            return Math.sqrt(SoldierRampartShooting.horizontalDistanceSqr(villager, target));
         }
         return villager.distanceTo(target);
     }
@@ -116,7 +219,7 @@ public final class SoldierCombatArms {
         if (!hasRangedReady(villager)) {
             return;
         }
-        if (!inRangedAttackBand(villager, target)) {
+        if (!canShootTarget(villager, target)) {
             return;
         }
         syncKitFromHands(villager);
@@ -149,8 +252,7 @@ public final class SoldierCombatArms {
         if (!(villager.level() instanceof ServerLevel level)) {
             return false;
         }
-        BlockPos anchor = resolveCombatAnchor(villager);
-        if (!SoldierRampartShooting.prefersWallArchery(villager, level, anchor)) {
+        if (!prefersWallArcheryForCombat(villager, level)) {
             return false;
         }
         return villager.getY() >= target.getY() + 1.0
@@ -159,7 +261,7 @@ public final class SoldierCombatArms {
     }
 
     private static void fireBow(Villager shooter, LivingEntity target, ItemStack bow) {
-        fireArrow(shooter, target, bow, 1.6f, 3.0f);
+        fireArrow(shooter, target, bow, 1.65f, 1.5f);
     }
 
     private static void fireCrossbow(Villager shooter, LivingEntity target, ItemStack crossbow) {

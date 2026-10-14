@@ -1,6 +1,17 @@
 # TBD — Citadel biome & world placement (before NBT)
 
-**Status:** **Discussion only.** Decide **before** final Black Citadel structure export so art direction matches gen rules.
+**Status:** **Partially decided** (2026-10-08). Still need strategy #1–9, authoring anchor/Y, and fail-placement rules before final NBT export.
+
+## Decided (2026-10-08)
+
+| # | Decision |
+| --- | --- |
+| **10** | Citadel **always faces spawn** (rotation from spawn → citadel anchor). |
+| **11** | Great road surface for now: **cobblestone** (intro town / full road gen deferred with v1 scope). |
+| **12** | Intro town **does not** need same biome as citadel — **distance-on-road** placement only. |
+| **13** | **Dragon's Well:** OK as **dark forest copse** contrast even when citadel is plains/other. |
+| **14** | **Shadow camps (~480):** **no** biome constraint. |
+| **18** | **v1 test scope:** place **citadel NBT only** — no bundled intro town / well / full road pass in first implementation. |
 
 **Today (docs/code):** **One citadel** per overworld, **~1,000–2,000** blocks from **spawn** on the **great road** (`endgame.md`, `citadel-mod-plan.md`). **No biome filter** in code yet — only `CitadelAnchorSavedData.setCitadelCenter` after placement. Intro town **~350** blocks from citadel on the road; Dragon's Well **~350** off-road in a copse (`necromancer-path.md`). Armies **shadow camps** ring **~480** from anchor when set.
 
@@ -57,9 +68,9 @@ Require custom world preset / single biome world — **breaks** normal survival 
 
 | System | Note |
 | --- | --- |
-| **Great road** | Straight spawn → citadel; road blocks **TBD** (gravel/oak vs stone) — should match chosen biome or be neutral. |
-| **Intro town (~350b)** | On road; likely **same biome** as citadel approach for cohesion. |
-| **Dragon's Well copse** | **Opposite** road side; can be **dark forest** copse even if citadel is plains **TBD** (intentional contrast). |
+| **Great road** | Straight spawn → citadel; **cobblestone** for v1 when road is wired; citadel-only test may skip road strip initially. |
+| **Intro town (~350b)** | On road by **distance**; **no** strict biome match with citadel. |
+| **Dragon's Well copse** | **Opposite** road side; **dark forest** copse for contrast (**decided**). |
 | **10 relic fortresses (~3500 ring)** | Separate ring; **own** biome rules possible (author D1). |
 | **15 refuges** | Scattered; **per-archetype** biomes already planned (`citadel-mod-plan` E1). |
 
@@ -72,7 +83,20 @@ Require custom world preset / single biome world — **breaks** normal survival 
 3. **Snow line:** exclude **snowy** biomes explicitly, or use **snowy variant** NBT?
 4. **Fail placement:** widen ring, pick second biome, or **log error** and skip citadel (bad)?
 5. **Structure void / jigsaw:** single `.nbt` with **`structure_void`** under footprint vs manual pad in code?
-6. **Build workflow:** you build in **Creative matching biome**; we document **anchor block** + **rotation** (0/90/180/270) + **ground Y** rule (gate = `MOTION_BLOCKING` surface).
+6. **Build workflow:** you build in **Creative matching biome**; we document **anchor block** + **rotation** (faces spawn — **decided**) + **ground Y** rule (gate = `MOTION_BLOCKING` surface).
+
+### Still need (from full questionnaire)
+
+- **1–3, 7–9:** primary placement strategy, biome list, snow handling, spawn ring, fail behavior.
+- **15–17:** Creative build biome, anchor block convention, gate Y rule.
+
+### Specific tradeoffs (replacing vague “hard no”)
+
+**A.** If citadel spawns on a **steep hill**, OK to **cut a 128×128 terrace** (trees/grass gone, stone rim) vs **only** fill air under walls (leave wild slope outside)?  
+**B.** If search finds **only jungle/swamp** in the 1k–2k ring, **accept** grey stone citadel there vs **keep searching** up to 3k vs **force pad on nearest plains** (teleport-y)?  
+**C.** **Snowy taiga** at anchor: **exclude** from candidate sites for v1, or **allow** (visual mismatch until snowy NBT exists)?  
+**D.** **Ocean / river** chunk at intended anchor: **skip** and pick next angle along ring, or **allow** if pad bridges shallow water?  
+**E.** For **citadel-only test**, placement trigger: **on world create**, **`/villagers` debug command**, or **first player join** only?
 
 ---
 

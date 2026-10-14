@@ -8,6 +8,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 
 import com.villagers.mod.VillagersMod;
+import com.villagers.mod.entity.SoldierBedSleep;
 import com.villagers.mod.entity.SoldierBehavior;
 import com.villagers.mod.entity.VillagerAttachments;
 
@@ -31,6 +32,7 @@ public class VillageBellHandler {
             if (entity instanceof net.minecraft.world.entity.npc.Villager villager
                     && villager.distanceToSqr(pos.getX(), pos.getY(), pos.getZ()) <= radiusSq
                     && villager.hasData(VillagerAttachments.SOLDIER_DATA.get())) {
+                SoldierBedSleep.wakeNow(villager);
                 SoldierBehavior.signalAwaken(villager, gameTime);
                 awakened++;
             }

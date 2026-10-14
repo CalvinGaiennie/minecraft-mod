@@ -10,13 +10,28 @@ import net.minecraft.world.phys.Vec3;
 
 import com.villagers.mod.VillagersMod;
 import com.villagers.mod.block.RampartBlock;
-import com.villagers.mod.util.SoldierStructureHelper;
-
 import org.jetbrains.annotations.Nullable;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 /** Finds rampart walk positions with line of sight instead of pathing down to ground-level targets. */
 public final class SoldierRampartShooting {
+    private static final int PATH_ATTEMPT_INTERVAL_TICKS = 5;
+    private static final int SHOOT_POS_CACHE_TICKS = 20;
+    private static final int SHOOT_POS_RESCAN_INTERVAL_TICKS = 10;
+
+    private record CachedShootPos(@Nullable BlockPos pos, int targetId, long gameTime) {
+    }
+
+    private static final Map<UUID, CachedShootPos> shootPositionCache = new HashMap<>();
+
     private SoldierRampartShooting() {
+    }
+
+    public static void clearShootPositionCache(UUID soldierId) {
+        shootPositionCache.remove(soldierId);
     }
 
     public static boolean isRampartAnchor(Level level, BlockPos anchor) {
@@ -27,7 +42,7 @@ public final class SoldierRampartShooting {
         if (anchor != null && isRampartAnchor(level, anchor)) {
             return true;
         }
-        return SoldierStructureHelper.findNearestRampart(level, soldier.blockPosition()).isPresent();
+        return SoldierCombatArms.prefersWallArcheryForCombat(soldier, level);
     }
 
     public static double horizontalDistanceSqr(LivingEntity from, LivingEntity to) {
@@ -47,8 +62,7 @@ public final class SoldierRampartShooting {
         if (!(soldier.level() instanceof ServerLevel level)) {
             return false;
         }
-        BlockPos anchor = SoldierCombatArms.resolveCombatAnchor(soldier);
-        return prefersWallArchery(soldier, level, anchor);
+        return SoldierCombatArms.prefersWallArcheryForCombat(soldier, level);
     }
 
     public static boolean isOnRampart(Villager soldier) {
@@ -72,11 +86,19 @@ public final class SoldierRampartShooting {
         if (!(soldier.level() instanceof ServerLevel level)) {
             return false;
         }
+        long now = level.getGameTime();
+        if (mob.getNavigation().isInProgress()
+                && (now + soldier.getId()) % PATH_ATTEMPT_INTERVAL_TICKS != 0L) {
+            return true;
+        }
         BlockPos anchor = SoldierCombatArms.resolveCombatAnchor(soldier);
         if (pathToShootPosition(mob, soldier, target, anchor)) {
             return true;
         }
         if (!isOnRampart(soldier)) {
+            if ((now + soldier.getId()) % PATH_ATTEMPT_INTERVAL_TICKS != 0L) {
+                return true;
+            }
             RampartPathing.findBestRampartToStandOn(soldier, RampartPathing.RAMPART_SEEK_RADIUS)
                     .ifPresent(rampart -> RampartPathing.navigateToStand(
                             soldier, standOnRampart(rampart), 0.85));
@@ -101,8 +123,21 @@ public final class SoldierRampartShooting {
 
     @Nullable
     private static BlockPos findBestShootPosition(ServerLevel level, Villager soldier, LivingEntity target, BlockPos anchor) {
+        UUID self = soldier.getUUID();
+        long now = level.getGameTime();
+        CachedShootPos cached = shootPositionCache.get(self);
+        if (cached != null && cached.targetId() == target.getId()) {
+            long age = now - cached.gameTime();
+            if (cached.pos() != null && age < SHOOT_POS_CACHE_TICKS && shootPosStillValid(level, soldier, target, cached.pos())) {
+                return cached.pos();
+            }
+            if (age < SHOOT_POS_RESCAN_INTERVAL_TICKS && cached.pos() != null) {
+                return cached.pos();
+            }
+        }
+
         int r = (int) SoldierCombatConstants.HOLD_GROUND_ENGAGE_RADIUS;
-        BlockPos center = isRampartAnchor(level, anchor) ? anchor : soldier.blockPosition();
+        BlockPos center = anchor != null && isRampartAnchor(level, anchor) ? anchor : soldier.blockPosition();
         BlockPos best = null;
         double bestScore = Double.MAX_VALUE;
         for (BlockPos pos : BlockPos.betweenClosed(
@@ -130,7 +165,26 @@ public final class SoldierRampartShooting {
                 best = pos.immutable();
             }
         }
+        shootPositionCache.put(self, new CachedShootPos(best, target.getId(), now));
         return best;
+    }
+
+    private static boolean shootPosStillValid(ServerLevel level, Villager soldier, LivingEntity target, BlockPos pos) {
+        if (!level.getBlockState(pos).is(VillagersMod.RAMPART.get())) {
+            return false;
+        }
+        if (!canStandOn(level, pos)) {
+            return false;
+        }
+        if (!RampartClaims.get(level).isAvailableFor(level, pos, soldier.getUUID())) {
+            return false;
+        }
+        Vec3 eye = standOnRampart(pos).add(0, soldier.getEyeHeight() - 1, 0);
+        if (!hasClearShot(level, soldier, eye, target)) {
+            return false;
+        }
+        double horizToTarget = horizontalDistanceSqrAt(pos, target);
+        return horizToTarget <= SoldierCombatConstants.RANGED_ATTACK_MAX_DISTANCE * SoldierCombatConstants.RANGED_ATTACK_MAX_DISTANCE;
     }
 
     private static double horizontalDistanceSqrAt(BlockPos rampart, LivingEntity target) {

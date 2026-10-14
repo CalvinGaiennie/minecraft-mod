@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": {
+      "item": "minecraft:phantom_membrane"
+    },
+    "S": {
+      "item": "minecraft:soul_sand"
+    },
+    "W": {
+      "item": "minecraft:black_wool"
+    }
+  },
+  "pattern": [
+    "W W",
+    "MSM",
+    "WWW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "villagers:necromancer_robe"
+  }
+}
